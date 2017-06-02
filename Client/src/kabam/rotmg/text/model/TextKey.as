@@ -663,6 +663,7 @@ public class TextKey {
     public static const DELETE_PICTURE_DIALOG_TITLE:String = "DeletePictureDialog.title";
     public static const ARENA_PORTAL_PANEL_TITLE:String = "ArenaPortalPanel.title";
     public static const ARENA_QUERY_PANEL_TITLE:String = "ArenaQueryPanel.title";
+    public static const INFORMER_PANEL_TITLE:String = "InformerPanel.title";
     public static const ARENA_QUERY_PANEL_LEADERBOARD:String = "ArenaQueryPanel.leaderboard";
     public static const CONTINUE_OR_QUIT_EXIT:String = "ContinueOrQuitDialog.exit";
     public static const CONTINUE_OR_QUIT_TITLE:String = "ContinueOrQuitDialog.title";

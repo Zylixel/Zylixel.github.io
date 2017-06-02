@@ -28,7 +28,7 @@ public class ChoiceBox extends Sprite {
     public var labelText_:TextFieldDisplayConcrete;
     private var over_:Boolean = false;
     private var color:Number = 0xFFFFFF;
-    private var internalFill_:GraphicsSolidFill = new GraphicsSolidFill(0x333333, 1);
+    private var internalFill_:GraphicsSolidFill = new GraphicsSolidFill(0x006666, 1);
     private var overLineFill_:GraphicsSolidFill = new GraphicsSolidFill(0xB3B3B3, 1);
     private var normalLineFill_:GraphicsSolidFill = new GraphicsSolidFill(0x444444, 1);
     private var path_:GraphicsPath = new GraphicsPath(new Vector.<int>(), new Vector.<Number>());

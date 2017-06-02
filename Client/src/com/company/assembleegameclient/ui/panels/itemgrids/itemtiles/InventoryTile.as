@@ -27,7 +27,7 @@ public class InventoryTile extends InteractiveItemTile {
 
     public function buildHotKeyBMP():void {
         var _local_1:BitmapTextFactory = StaticInjectorContext.getInjector().getInstance(BitmapTextFactory);
-        var _local_2:BitmapData = _local_1.make(new StaticStringBuilder(String(this.hotKey)), 26, 0x363636, true, IDENTITY_MATRIX, false);
+        var _local_2:BitmapData = _local_1.make(new StaticStringBuilder(String(this.hotKey)), 26, 0x187A61, true, IDENTITY_MATRIX, false);
         this.hotKeyBMP = new Bitmap(_local_2);
         this.hotKeyBMP.x = ((WIDTH / 2) - (this.hotKeyBMP.width / 2));
         this.hotKeyBMP.y = ((HEIGHT / 2) - 14);

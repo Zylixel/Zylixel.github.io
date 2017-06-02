@@ -80,8 +80,8 @@ public class HUDView extends Sprite implements UnFocusAble {
 
     public function setPlayerDependentAssets(_arg_1:GameSprite):void {
         this.player = _arg_1.map.player_;
-        this.createEquippedGrid();
         this.createEquippedGridBackground();
+        this.createEquippedGrid();
         this.createInteractPanel(_arg_1);
     }
 
@@ -102,7 +102,7 @@ public class HUDView extends Sprite implements UnFocusAble {
 
     private function createEquippedGridBackground():void {
         var _local_3:Vector.<IGraphicsData>;
-        var _local_1:GraphicsSolidFill = new GraphicsSolidFill(0x187A62, 1);
+        var _local_1:GraphicsSolidFill = new GraphicsSolidFill(0x187a61, 1);
         var _local_2:GraphicsPath = new GraphicsPath(new Vector.<int>(), new Vector.<Number>());
         _local_3 = new <IGraphicsData>[_local_1, _local_2, GraphicsUtil.END_FILL];
         GraphicsUtil.drawCutEdgeRect(0, 0, 178, 46, 6, [1, 1, 1, 1], _local_2);

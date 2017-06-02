@@ -20,7 +20,7 @@ import org.osflash.signals.Signal;
 
 public class DateField extends Sprite {
 
-    private static const BACKGROUND_COLOR:uint = 0x333333;
+    private static const BACKGROUND_COLOR:uint = 0x006666;
     private static const ERROR_BORDER_COLOR:uint = 16549442;
     private static const NORMAL_BORDER_COLOR:uint = 0x454545;
     private static const TEXT_COLOR:uint = 0xB3B3B3;

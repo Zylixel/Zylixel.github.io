@@ -84,7 +84,7 @@ public class LegendListItem extends Sprite {
             _local_2.setInteractive(false);
         }
         this.inventoryGrid.setItems(this.legend.equipment);
-        this.inventoryGrid.x = 400;
+        this.inventoryGrid.x = 600;
         this.inventoryGrid.y = ((HEIGHT / 2) - (Slot.HEIGHT / 2));
         addChild(this.inventoryGrid);
     }

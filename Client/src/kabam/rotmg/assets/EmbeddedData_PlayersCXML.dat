@@ -30,8 +30,6 @@
       <LevelIncrease min="1" max="2">Dexterity</LevelIncrease>
       <LevelIncrease min="0" max="1">HpRegen</LevelIncrease>
       <LevelIncrease min="0" max="2">MpRegen</LevelIncrease>
-      <UnlockLevel level="5" type="0x0307">Archer</UnlockLevel>
-      <UnlockCost>199</UnlockCost>
       <DisplayId>{players.Rogue}</DisplayId>
    </Object>
    <Object type="0x0307" id="Archer">
@@ -63,8 +61,6 @@
       <LevelIncrease min="0" max="2">Dexterity</LevelIncrease>
       <LevelIncrease min="0" max="1">HpRegen</LevelIncrease>
       <LevelIncrease min="0" max="2">MpRegen</LevelIncrease>
-      <UnlockLevel level="5" type="0x0310">Priest</UnlockLevel>
-      <UnlockCost>199</UnlockCost>
       <DisplayId>{players.Archer}</DisplayId>
    </Object>
    <Object type="0x030e" id="Wizard">
@@ -95,8 +91,6 @@
       <LevelIncrease min="0" max="2">Speed</LevelIncrease>
       <LevelIncrease min="1" max="2">Dexterity</LevelIncrease>
       <LevelIncrease min="0" max="1">HpRegen</LevelIncrease>
-      <LevelIncrease min="0" max="2">MpRegen</LevelIncrease>
-      <UnlockCost>0</UnlockCost>
       <DisplayId>{players.Wizard}</DisplayId>
    </Object>
    <Object type="0x0310" id="Priest">
@@ -128,8 +122,6 @@
       <LevelIncrease min="0" max="2">Dexterity</LevelIncrease>
       <LevelIncrease min="0" max="1">HpRegen</LevelIncrease>
       <LevelIncrease min="1" max="2">MpRegen</LevelIncrease>
-      <UnlockLevel level="5" type="0x030e">Wizard</UnlockLevel>
-      <UnlockCost>50</UnlockCost>
       <DisplayId>{players.Priest}</DisplayId>
    </Object>
    <Object type="0x031d" id="Warrior">
@@ -161,8 +153,6 @@
       <LevelIncrease min="0" max="2">Dexterity</LevelIncrease>
       <LevelIncrease min="1" max="2">HpRegen</LevelIncrease>
       <LevelIncrease min="0" max="2">MpRegen</LevelIncrease>
-      <UnlockLevel level="5" type="0x0300">Rogue</UnlockLevel>
-      <UnlockCost>199</UnlockCost>
       <DisplayId>{players.Warrior}</DisplayId>
    </Object>
    <Object type="0x031e" id="Knight">
@@ -194,8 +184,6 @@
       <LevelIncrease min="0" max="2">Dexterity</LevelIncrease>
       <LevelIncrease min="1" max="2">HpRegen</LevelIncrease>
       <LevelIncrease min="0" max="2">MpRegen</LevelIncrease>
-      <UnlockLevel level="20" type="0x031d">Warrior</UnlockLevel>
-      <UnlockCost>499</UnlockCost>
       <DisplayId>{players.Knight}</DisplayId>
    </Object>
    <Object type="0x031f" id="Paladin">
@@ -227,9 +215,6 @@
       <LevelIncrease min="0" max="2">Dexterity</LevelIncrease>
       <LevelIncrease min="0" max="1">HpRegen</LevelIncrease>
       <LevelIncrease min="1" max="2">MpRegen</LevelIncrease>
-      <UnlockLevel level="20" type="0x031e">Knight</UnlockLevel>
-      <UnlockLevel level="20" type="0x0310">Priest</UnlockLevel>
-      <UnlockCost>499</UnlockCost>
       <DisplayId>{players.Paladin}</DisplayId>
    </Object>
    <Object type="0x0320" id="Assassin">
@@ -261,9 +246,6 @@
       <LevelIncrease min="1" max="2">Dexterity</LevelIncrease>
       <LevelIncrease min="0" max="1">HpRegen</LevelIncrease>
       <LevelIncrease min="1" max="2">MpRegen</LevelIncrease>
-      <UnlockLevel level="20" type="0x0300">Rogue</UnlockLevel>
-      <UnlockLevel level="20" type="0x030e">Wizard</UnlockLevel>
-      <UnlockCost>499</UnlockCost>
       <DisplayId>{players.Assassin}</DisplayId>
    </Object>
    <Object type="0x0321" id="Necromancer">
@@ -295,9 +277,6 @@
       <LevelIncrease min="1" max="2">Dexterity</LevelIncrease>
       <LevelIncrease min="0" max="1">HpRegen</LevelIncrease>
       <LevelIncrease min="1" max="2">MpRegen</LevelIncrease>
-      <UnlockLevel level="20" type="0x030e">Wizard</UnlockLevel>
-      <UnlockLevel level="20" type="0x0310">Priest</UnlockLevel>
-      <UnlockCost>499</UnlockCost>
       <DisplayId>{players.Necromancer}</DisplayId>
    </Object>
    <Object type="0x0322" id="Huntress">
@@ -329,9 +308,6 @@
       <LevelIncrease min="0" max="2">Dexterity</LevelIncrease>
       <LevelIncrease min="0" max="1">HpRegen</LevelIncrease>
       <LevelIncrease min="0" max="2">MpRegen</LevelIncrease>
-      <UnlockLevel level="20" type="0x0300">Rogue</UnlockLevel>
-      <UnlockLevel level="20" type="0x0307">Archer</UnlockLevel>
-      <UnlockCost>499</UnlockCost>
       <DisplayId>{players.Huntress}</DisplayId>
    </Object>
    <Object type="0x0323" id="Mystic">
@@ -363,9 +339,6 @@
       <LevelIncrease min="0" max="2">Dexterity</LevelIncrease>
       <LevelIncrease min="0" max="1">HpRegen</LevelIncrease>
       <LevelIncrease min="1" max="2">MpRegen</LevelIncrease>
-      <UnlockLevel level="20" type="0x0322">Huntress</UnlockLevel>
-      <UnlockLevel level="20" type="0x0321">Necromancer</UnlockLevel>
-      <UnlockCost>999</UnlockCost>
       <DisplayId>{players.Mystic}</DisplayId>
    </Object>
    <Object type="0x0324" id="Trickster">
@@ -397,9 +370,6 @@
       <LevelIncrease min="1" max="2">Dexterity</LevelIncrease>
       <LevelIncrease min="0" max="1">HpRegen</LevelIncrease>
       <LevelIncrease min="0" max="2">MpRegen</LevelIncrease>
-      <UnlockLevel level="20" type="0x0320">Assassin</UnlockLevel>
-      <UnlockLevel level="20" type="0x031f">Paladin</UnlockLevel>
-      <UnlockCost>999</UnlockCost>
       <DisplayId>{players.Trickster}</DisplayId>
    </Object>
    <Object type="0x0325" id="Sorcerer">
@@ -431,9 +401,6 @@
       <LevelIncrease min="0" max="2">Dexterity</LevelIncrease>
       <LevelIncrease min="1" max="2">HpRegen</LevelIncrease>
       <LevelIncrease min="1" max="2">MpRegen</LevelIncrease>
-      <UnlockLevel level="20" type="0x0321">Necromancer</UnlockLevel>
-      <UnlockLevel level="20" type="0x0320">Assassin</UnlockLevel>
-      <UnlockCost>999</UnlockCost>
       <DisplayId>{players.Sorcerer}</DisplayId>
    </Object>
    <Object type="0x0326" id="Ninja">
@@ -465,40 +432,6 @@
       <LevelIncrease min="1" max="2">Dexterity</LevelIncrease>
       <LevelIncrease min="0" max="1">HpRegen</LevelIncrease>
       <LevelIncrease min="1" max="2">MpRegen</LevelIncrease>
-      <UnlockLevel level="20" type="0x0300">Rogue</UnlockLevel>
-      <UnlockLevel level="20" type="0x031d">Warrior</UnlockLevel>
-      <UnlockCost>999</UnlockCost>
       <DisplayId>{players.Ninja}</DisplayId>
-   </Object>
-   <Object type="0x0327" id="Ranger">
-      <Class>Player</Class>
-      <Description>This Class uses stealth and knowledge to its advantage.</Description>
-      <AnimatedTexture>
-         <File>playerskins</File>
-         <Index>44</Index>
-      </AnimatedTexture>
-      <HitSound>player/rogue_hit</HitSound>
-      <DeathSound>player/rogue_death</DeathSound>
-      <Player/>
-      <BloodProb>1.0</BloodProb>
-      <SlotTypes>3, 27, 6, 9, 0, 0, 0, 0, 0, 0, 0, 0</SlotTypes>
-      <Equipment>0xa14, 0xa56, -1, -1, 0xa22, -1, -1, -1, -1, -1, -1, -1</Equipment>
-      <MaxHitPoints max="720">150</MaxHitPoints>
-      <MaxMagicPoints max="252">100</MaxMagicPoints>
-      <Attack max="100">20</Attack>
-      <Defense max="15">0</Defense>
-      <Speed max="75">15</Speed>
-      <Dexterity max="25">7</Dexterity>
-      <HpRegen max="40">15</HpRegen>
-      <MpRegen max="50">10</MpRegen>
-      <LevelIncrease min="20" max="30">MaxHitPoints</LevelIncrease>
-      <LevelIncrease min="2" max="8">MaxMagicPoints</LevelIncrease>
-      <LevelIncrease min="0" max="2">Attack</LevelIncrease>
-      <LevelIncrease min="0" max="0">Defense</LevelIncrease>
-      <LevelIncrease min="1" max="2">Speed</LevelIncrease>
-      <LevelIncrease min="1" max="2">Dexterity</LevelIncrease>
-      <LevelIncrease min="0" max="1">HpRegen</LevelIncrease>
-      <LevelIncrease min="0" max="2">MpRegen</LevelIncrease>
-      <DisplayId>Ranger</DisplayId>
    </Object>
 </Objects>

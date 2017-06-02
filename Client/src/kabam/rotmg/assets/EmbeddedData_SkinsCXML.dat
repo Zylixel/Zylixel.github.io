@@ -31,7 +31,6 @@
          <Index>2</Index>
       </AnimatedTexture>
       <PlayerClassType>0x030e</PlayerClassType>
-      <UnlockLevel>10</UnlockLevel>
       <DisplayId>{skins.Merlin}</DisplayId>
    </Object>
    <Object type="0x0345" id="Traditional">

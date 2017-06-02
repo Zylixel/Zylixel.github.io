@@ -6276,6 +6276,7 @@
          <File>lofiObj2</File>
          <Index>0x6e</Index>
       </Texture>
+      <Event></Event>
       <SlotType>12</SlotType>
       <Description>{equip.A_seal_that_is_said_to_briefly_borrow_the_power_of_the_Gods}</Description>
       <Sound>spell/light_heal</Sound>
@@ -7142,6 +7143,7 @@
    <Object type="0xc08" id="Helm of the Juggernaut">
       <Class>Equipment</Class>
       <Item/>
+      <Event></Event>
       <Texture>
          <File>lofiObj2</File>
          <Index>0x52</Index>
@@ -7158,7 +7160,6 @@
       <Activate effect="Armored" duration="4.5">ConditionEffectSelf</Activate>
       <Cooldown>6</Cooldown>
       <feedPower>1250</feedPower>
-      
       <DisplayId>{equip.Helm_of_the_Juggernaut}</DisplayId>
    </Object>
    <Object type="0xa97" id="Energy Staff">
@@ -16375,5 +16376,16 @@
                       <Index>0x07</Index>
                     </AnimatedTexture>
                   </Object>
-
+    <Object id="NiceZylixel" type ="6093">
+        <Class>Character</Class>
+        <Texture>
+          <File>lofiObj5</File>
+          <Index>0x8c</Index>
+        </Texture>
+        <HitSound>monster/slimes_death</HitSound>
+        <DeathSound>monster/flying_brain_death</DeathSound>
+        <Size>125</Size>
+        <ShadowSize>50</ShadowSize>
+        <DisplayId>Zylixel</DisplayId>
+      </Object>
 </Objects>
