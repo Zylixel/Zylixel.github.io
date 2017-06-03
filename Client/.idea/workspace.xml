@@ -26,21 +26,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EmbeddedData_EquipCXML.dat" pinned="false" current-in-tab="false">
+      <file leaf-file-name="EmbeddedData_EquipCXML.dat" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedData_EquipCXML.dat">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="281588">
-              <caret line="16564" column="31" lean-forward="false" selection-start-line="16564" selection-start-column="31" selection-end-line="16564" selection-end-column="31" />
+            <state relative-caret-position="272">
+              <caret line="16457" column="17" lean-forward="true" selection-start-line="16457" selection-start-column="17" selection-end-line="16457" selection-end-column="17" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EmbeddedData_SkinsCXML.dat" pinned="false" current-in-tab="true">
+      <file leaf-file-name="EmbeddedData_SkinsCXML.dat" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedData_SkinsCXML.dat">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="679">
-              <caret line="1390" column="12" lean-forward="false" selection-start-line="1390" selection-start-column="12" selection-end-line="1390" selection-end-column="12" />
+            <state relative-caret-position="1907">
+              <caret line="976" column="39" lean-forward="true" selection-start-line="976" selection-start-column="39" selection-end-line="976" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -205,8 +205,8 @@
         <option value="$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedAssets_playersSkinsEmbed2_.as" />
         <option value="$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedAssets_playersSkinsMaskEmbed2_.as" />
         <option value="$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedAssets.as" />
-        <option value="$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedData_EquipCXML.dat" />
         <option value="$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedData_SkinsCXML.dat" />
+        <option value="$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedData_EquipCXML.dat" />
       </list>
     </option>
   </component>
@@ -852,15 +852,16 @@
       <workItem from="1496519160985" duration="1713000" />
       <workItem from="1496522293884" duration="1252000" />
       <workItem from="1496524125379" duration="1828000" />
-      <workItem from="1496526057294" duration="273000" />
+      <workItem from="1496526057294" duration="1428000" />
+      <workItem from="1496528068815" duration="998000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="71475000" />
+    <option name="totallyTimeSpent" value="73628000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1932" height="1056" extended-state="1" />
+    <frame x="-8" y="-8" width="1932" height="1056" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1276,18 +1277,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedData_EquipCXML.dat">
+    <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedData_SkinsCXML.dat">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281588">
-          <caret line="16564" column="31" lean-forward="false" selection-start-line="16564" selection-start-column="31" selection-end-line="16564" selection-end-column="31" />
+        <state relative-caret-position="1907">
+          <caret line="976" column="39" lean-forward="true" selection-start-line="976" selection-start-column="39" selection-end-line="976" selection-end-column="39" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedData_SkinsCXML.dat">
+    <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedData_EquipCXML.dat">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="679">
-          <caret line="1390" column="12" lean-forward="false" selection-start-line="1390" selection-start-column="12" selection-end-line="1390" selection-end-column="12" />
+        <state relative-caret-position="272">
+          <caret line="16457" column="17" lean-forward="true" selection-start-line="16457" selection-start-column="17" selection-end-line="16457" selection-end-column="17" />
           <folding />
         </state>
       </provider>

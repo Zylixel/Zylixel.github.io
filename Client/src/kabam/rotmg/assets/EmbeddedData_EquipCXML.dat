@@ -16453,7 +16453,7 @@
     </AnimatedTexture>
     <SlotType>10</SlotType>
     <Description>Looks a lot less cute once its sword is in your eye.\n\nSprite Credits: Beige</Description>
-    <Activate skinType="5860">UnlockSkin</Activate>
+    <Activate skinType="24728">UnlockSkin</Activate>
     <Consumable />
     <Soulbound />
     <BagType>4</BagType>
