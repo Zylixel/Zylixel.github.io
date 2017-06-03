@@ -49,6 +49,8 @@ public class EmbeddedAssets {
     public static var playersMaskEmbed_:Class = EmbeddedAssets_playersMaskEmbed_;
     public static var playersSkinsEmbed_:Class = EmbeddedAssets_playersSkinsEmbed_;
     public static var playersSkinsMaskEmbed_:Class = EmbeddedAssets_playersSkinsMaskEmbed_;
+    public static var playersSkinsEmbed2_:Class = EmbeddedAssets_playersSkinsEmbed2_;
+    public static var playersSkinsMaskEmbed2_:Class = EmbeddedAssets_playersSkinsMaskEmbed2_;
     public static var playersSkins16Embed_:Class = EmbeddedAssets_playersSkins16Embed_;
     public static var playersSkins16MaskEmbed_:Class = EmbeddedAssets_playersSkins16MaskEmbed_;
     public static var chars8x8rPets1Embed_:Class = EmbeddedAssets_chars8x8rPets1Embed_;

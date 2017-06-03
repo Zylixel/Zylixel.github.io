@@ -1973,31 +1973,31 @@
       <DisplayId>{equip.Wand_of_Retribution}</DisplayId>
    </Object>
    <Object type="0xb3f" id="Crystal Wand">
-      <Class>Equipment</Class>
-      <Item/>
-      <Texture>
-         <File>lofiObj2</File>
-         <Index>0x63</Index>
-      </Texture>
-      <SlotType>8</SlotType>
-      <Description>{equip.A_sound_almost_like_a_wind_chime_emanates_softly_from_this_}</Description>
-      <RateOfFire>1</RateOfFire>
-      <Sound>weapon/wand_of_death</Sound>
-      <Projectile>
-         <ObjectId>Aqua Missile</ObjectId>
-         <Speed>120</Speed>
-         <LifetimeMS>750</LifetimeMS>
-         <MinDamage>75</MinDamage>
-         <MaxDamage>95</MaxDamage>
-         <ArmorPiercing/>
-      </Projectile>
-      <BagType>6</BagType>
-      <FameBonus>4</FameBonus>
-      <OldSound>magicShoot</OldSound>
-      <feedPower>500</feedPower>
-      
-      <DisplayId>{equip.Crystal_Wand}</DisplayId>
-   </Object>
+         <Class>Equipment</Class>
+         <Item/>
+         <Texture>
+            <File>lofiObj2</File>
+            <Index>0x63</Index>
+         </Texture>
+         <SlotType>8</SlotType>
+         <Description>{equip.A_sound_almost_like_a_wind_chime_emanates_softly_from_this_}</Description>
+         <RateOfFire>1</RateOfFire>
+         <Sound>weapon/wand_of_death</Sound>
+         <Projectile>
+            <ObjectId>Aqua Missile</ObjectId>
+            <Speed>120</Speed>
+            <LifetimeMS>750</LifetimeMS>
+            <MinDamage>75</MinDamage>
+            <MaxDamage>100</MaxDamage>
+            <ArmorPiercing/>
+         </Projectile>
+         <BagType>6</BagType>
+         <FameBonus>4</FameBonus>
+         <OldSound>magicShoot</OldSound>
+         <feedPower>500</feedPower>
+
+         <DisplayId>{equip.Crystal_Wand}</DisplayId>
+      </Object>
    <Object type="0xc04" id="Wand of the Bulwark">
       <Class>Equipment</Class>
       <Item/>
@@ -10434,41 +10434,43 @@
       <DisplayId>{equip.Ice_Star}</DisplayId>
    </Object>
    <Object type="0xc59" id="Doom Circle">
-      <Class>Equipment</Class>
-      <Item/>
-      <Texture>
-         <File>lofiObj3</File>
-         <Index>0x231</Index>
-      </Texture>
-      <SlotType>25</SlotType>
-      <Tier>6</Tier>
-      <Description>{equip.An_ancient_weapon_that_spells_destruction_for_all_who_oppos}</Description>
-      <Sound>spell/fire_spray</Sound>
-      <ExtraTooltipData>
-         <EffectInfo name="{equip.While_Key_Held}" description=""/>
-         <EffectInfo name="" description="{equip.Speedy_on_self}"/>
-         <EffectInfo name="" description="{equip.Drain_10_MP/sec}"/>
-         <EffectInfo name="{equip.When_Key_Released}" description=""/>
-      </ExtraTooltipData>
-      <Projectile>
-         <ObjectId>Ninja Star Doom</ObjectId>
-         <Speed>150</Speed>
-         <MinDamage>850</MinDamage>
-         <MaxDamage>950</MaxDamage>
-         <LifetimeMS>1000</LifetimeMS>
-         <Size>120</Size>
-         <PassesCover/>
-      </Projectile>
-      <Usable/>
-      <BagType>4</BagType>
-      <FameBonus>4</FameBonus>
-      <MpCost>0</MpCost>
-      <MpEndCost>100</MpEndCost>
-      <MultiPhase/>
-      <Activate>ShurikenAbility</Activate>
-      <feedPower>380</feedPower>
-      <DisplayId>{equip.Doom_Circle}</DisplayId>
-   </Object>
+         <Class>Equipment</Class>
+         <Item/>
+         <Texture>
+            <File>lofiObj3</File>
+            <Index>0x231</Index>
+         </Texture>
+         <SlotType>25</SlotType>
+         <Tier>6</Tier>
+         <Description>{equip.An_ancient_weapon_that_spells_destruction_for_all_who_oppos}</Description>
+         <ActivateOnEquip stat="26" amount="2">IncrementStat</ActivateOnEquip>
+         <ActivateOnEquip stat="27" amount="2">IncrementStat</ActivateOnEquip>
+         <Sound>spell/fire_spray</Sound>
+         <ExtraTooltipData>
+            <EffectInfo name="{equip.While_Key_Held}" description=""/>
+            <EffectInfo name="" description="{equip.Speedy_on_self}"/>
+            <EffectInfo name="" description="{equip.Drain_10_MP/sec}"/>
+            <EffectInfo name="{equip.When_Key_Released}" description=""/>
+         </ExtraTooltipData>
+         <Projectile>
+            <ObjectId>Ninja Star Doom</ObjectId>
+            <Speed>150</Speed>
+            <MinDamage>850</MinDamage>
+            <MaxDamage>950</MaxDamage>
+            <LifetimeMS>1000</LifetimeMS>
+            <Size>120</Size>
+            <PassesCover/>
+         </Projectile>
+         <Usable/>
+         <BagType>4</BagType>
+         <FameBonus>4</FameBonus>
+         <MpCost>0</MpCost>
+         <MpEndCost>100</MpEndCost>
+         <MultiPhase/>
+         <Activate>ShurikenAbility</Activate>
+         <feedPower>380</feedPower>
+         <DisplayId>{equip.Doom_Circle}</DisplayId>
+      </Object>
    <Object type="0x916" id="Midnight Star">
       <Class>Equipment</Class>
       <Item/>
@@ -11401,59 +11403,63 @@
       <DisplayId>{equip.Draconis_Key}</DisplayId>
    </Object>
    <Object type="0x7562" id="Leaf Dragon Hide Armor">
-      <Class>Equipment</Class>
-      <Item/>
-      <Texture>
-         <File>lofiObj3</File>
-         <Index>0x3d0</Index>
-      </Texture>
-      <SlotType>6</SlotType>
-      <Description>{equip.Light_armor_crafted_from_the_hard-as-steel_leafy_scales_of_}</Description>
-      <ActivateOnEquip stat="0" amount="50">IncrementStat</ActivateOnEquip>
-      <ActivateOnEquip stat="21" amount="9">IncrementStat</ActivateOnEquip>
-      <BagType>6</BagType>
-      <FameBonus>5</FameBonus>
-      <feedPower>450</feedPower>
-      
-      <DisplayId>{equip.Leaf_Dragon_Hide_Armor}</DisplayId>
-   </Object>
-   <Object type="0x7563" id="Water Dragon Silk Robe">
-      <Class>Equipment</Class>
-      <Item/>
-      <Texture>
-         <File>lofiObj3</File>
-         <Index>0x3d1</Index>
-      </Texture>
-      <SlotType>14</SlotType>
-      <Description>{equip.A_magic_robe_woven_from_enchanted_threads_of_water_harveste}</Description>
-      <ActivateOnEquip stat="20" amount="3">IncrementStat</ActivateOnEquip>
-      <ActivateOnEquip stat="21" amount="10">IncrementStat</ActivateOnEquip>
-      <ActivateOnEquip stat="22" amount="5">IncrementStat</ActivateOnEquip>
-      <BagType>6</BagType>
-      <FameBonus>5</FameBonus>
-      <feedPower>450</feedPower>
-      
-      <DisplayId>{equip.Water_Dragon_Silk_Robe}</DisplayId>
-   </Object>
-   <Object type="0x7564" id="Fire Dragon Battle Armor">
-      <Class>Equipment</Class>
-      <Item/>
-      <Texture>
-         <File>lofiObj3</File>
-         <Index>0x3d2</Index>
-      </Texture>
-      <SlotType>7</SlotType>
-      <Description>{equip.Battle_armor_made_from_Fire_Dragon_scales,_one_of_the_stron}</Description>
-      <ActivateOnEquip stat="20" amount="3">IncrementStat</ActivateOnEquip>
-      <ActivateOnEquip stat="21" amount="15">IncrementStat</ActivateOnEquip>
-      <ActivateOnEquip stat="22" amount="3">IncrementStat</ActivateOnEquip>
-      <ActivateOnEquip stat="26" amount="3">IncrementStat</ActivateOnEquip>
-      <BagType>6</BagType>
-      <FameBonus>5</FameBonus>
-      <feedPower>450</feedPower>
-      
-      <DisplayId>{equip.Fire_Dragon_Battle_Armor}</DisplayId>
-   </Object>
+         <Class>Equipment</Class>
+         <Item/>
+         <Texture>
+            <File>lofiObj3</File>
+            <Index>0x3d0</Index>
+         </Texture>
+         <SlotType>6</SlotType>
+         <Description>{equip.Light_armor_crafted_from_the_hard-as-steel_leafy_scales_of_}</Description>
+         <ActivateOnEquip stat="0" amount="50">IncrementStat</ActivateOnEquip>
+         <ActivateOnEquip stat="21" amount="13">IncrementStat</ActivateOnEquip>
+         <ActivateOnEquip stat="22" amount="6">IncrementStat</ActivateOnEquip>
+         <ActivateOnEquip stat="27" amount="3">IncrementStat</ActivateOnEquip>
+         <ActivateOnEquip stat="26" amount="3">IncrementStat</ActivateOnEquip>
+         <BagType>6</BagType>
+         <FameBonus>5</FameBonus>
+         <feedPower>450</feedPower>
+
+         <DisplayId>{equip.Leaf_Dragon_Hide_Armor}</DisplayId>
+      </Object>
+      <Object type="0x7563" id="Water Dragon Silk Robe">
+         <Class>Equipment</Class>
+         <Item/>
+         <Texture>
+            <File>lofiObj3</File>
+            <Index>0x3d1</Index>
+         </Texture>
+         <SlotType>14</SlotType>
+         <Description>{equip.A_magic_robe_woven_from_enchanted_threads_of_water_harveste}</Description>
+         <ActivateOnEquip stat="20" amount="6">IncrementStat</ActivateOnEquip>
+         <ActivateOnEquip stat="21" amount="12">IncrementStat</ActivateOnEquip>
+         <ActivateOnEquip stat="22" amount="6">IncrementStat</ActivateOnEquip>
+         <ActivateOnEquip stat="27" amount="3">IncrementStat</ActivateOnEquip>
+         <BagType>6</BagType>
+         <FameBonus>5</FameBonus>
+         <feedPower>450</feedPower>
+
+         <DisplayId>{equip.Water_Dragon_Silk_Robe}</DisplayId>
+      </Object>
+      <Object type="0x7564" id="Fire Dragon Battle Armor">
+         <Class>Equipment</Class>
+         <Item/>
+         <Texture>
+            <File>lofiObj3</File>
+            <Index>0x3d2</Index>
+         </Texture>
+         <SlotType>7</SlotType>
+         <Description>{equip.Battle_armor_made_from_Fire_Dragon_scales,_one_of_the_stron}</Description>
+         <ActivateOnEquip stat="20" amount="4">IncrementStat</ActivateOnEquip>
+         <ActivateOnEquip stat="21" amount="17">IncrementStat</ActivateOnEquip>
+         <ActivateOnEquip stat="22" amount="3">IncrementStat</ActivateOnEquip>
+         <ActivateOnEquip stat="26" amount="3">IncrementStat</ActivateOnEquip>
+         <BagType>6</BagType>
+         <FameBonus>5</FameBonus>
+         <feedPower>450</feedPower>
+
+         <DisplayId>{equip.Fire_Dragon_Battle_Armor}</DisplayId>
+      </Object>
    <Object type="0x7565" id="Annoying Firecracker Katana">
       <Class>Equipment</Class>
       <Item/>
@@ -16376,7 +16382,7 @@
                       <Index>0x07</Index>
                     </AnimatedTexture>
                   </Object>
-    <Object id="NiceZylixel" type ="6093">
+    <Object id="NiceZylixel" type ="0x6093">
         <Class>Character</Class>
         <Texture>
           <File>lofiObj5</File>
@@ -16388,4 +16394,234 @@
         <ShadowSize>50</ShadowSize>
         <DisplayId>Zylixel</DisplayId>
       </Object>
+      <Object type="0x6094" id="Crystal Prisoner Steed Pet Stone">
+          <Class>Equipment</Class>
+          <Item/>
+          <AnimatedTexture>
+            <File>chars8x8rPets2</File>
+            <Index>0x08</Index>
+          </AnimatedTexture>
+          <SlotType>10</SlotType>
+          <Description></Description>
+          <Consumable/>
+          <BagType>0</BagType>
+          <Activate petType="24725">PetSkin</Activate>
+          <Sound>use_potion</Sound>
+          <feedPower>5000</feedPower>
+          <DisplayId>Crystal Prisoner Steed Pet Stone</DisplayId>
+        </Object>
+        <Object type="0x6095" id="Crystal Prisoner Steed Skin">
+          <PetSkin/>
+          <DisplayId>Crystal Prisoner Steed Skin</DisplayId>
+          <Class>PetSkin</Class>
+          <AnimatedTexture>
+            <File>chars8x8rPets2</File>
+            <Index>0x08</Index>
+          </AnimatedTexture>
+        </Object>
+   <Object type="0x6096" id="Grand Sphinx Pet Stone">
+       <Class>Equipment</Class>
+       <Item/>
+       <AnimatedTexture>
+         <File>chars8x8rPets2</File>
+         <Index>0x09</Index>
+       </AnimatedTexture>
+       <SlotType>10</SlotType>
+       <Description></Description>
+       <Consumable/>
+       <BagType>0</BagType>
+       <Activate petType="24727">PetSkin</Activate>
+       <Sound>use_potion</Sound>
+       <feedPower>5000</feedPower>
+       <DisplayId>Grand Sphinx Pet Stone</DisplayId>
+     </Object>
+     <Object type="0x6097" id="Grand Sphinx Skin">
+       <PetSkin/>
+       <DisplayId>Grand Sphinx Skin</DisplayId>
+       <Class>PetSkin</Class>
+       <AnimatedTexture>
+         <File>chars8x8rPets2</File>
+         <Index>0x09</Index>
+       </AnimatedTexture>
+     </Object>
+<Object type="0x16ec" id="Penguin Knight Skin">
+    <Class>Equipment</Class>
+    <Item />
+    <AnimatedTexture>
+        <File>playerskins2</File>
+        <Index>120</Index>
+    </AnimatedTexture>
+    <SlotType>10</SlotType>
+    <Description>Looks a lot less cute once its sword is in your eye.\n\nSprite Credits: Beige</Description>
+    <Activate skinType="5860">UnlockSkin</Activate>
+    <Consumable />
+    <Soulbound />
+    <BagType>4</BagType>
+    <feedPower>5000</feedPower>
+</Object>
+<Object type="0x16ed" id="Frimar Knight Skin">
+    <Class>Equipment</Class>
+    <Item />
+    <AnimatedTexture>
+        <File>playerskins2</File>
+        <Index>121</Index>
+    </AnimatedTexture>
+    <SlotType>10</SlotType>
+    <Description>Smaller than the real Frimar, but no less dangerous.\n\nSprite Credits: Poshun</Description>
+    <Activate skinType="5861">UnlockSkin</Activate>
+    <Consumable />
+    <Soulbound />
+    <BagType>4</BagType>
+    <feedPower>5000</feedPower>
+</Object>
+<Object type="0x16ef" id="Frozen King Skin">
+    <Class>Equipment</Class>
+    <Item />
+    <AnimatedTexture>
+        <File>playerskins2</File>
+        <Index>122</Index>
+    </AnimatedTexture>
+    <SlotType>10</SlotType>
+    <Description>Once sat on a Frozen Throne, but decided to go adventuring.\n\nSprite Credits: Beige</Description>
+    <Activate skinType="5862">UnlockSkin</Activate>
+    <Consumable />
+    <Soulbound />
+    <BagType>4</BagType>
+    <feedPower>5000</feedPower>
+</Object>
+<Object type="0x16f0" id="Blizzard Sorcerer Skin">
+    <Class>Equipment</Class>
+    <Item />
+    <AnimatedTexture>
+        <File>playerskins2</File>
+        <Index>123</Index>
+    </AnimatedTexture>
+    <SlotType>10</SlotType>
+    <Description>Some say the world will end in fire, some say in ice.\n\nSprite Credits: Beige</Description>
+    <Activate skinType="5863">UnlockSkin</Activate>
+    <Consumable />
+    <Soulbound />
+    <BagType>4</BagType>
+    <feedPower>5000</feedPower>
+</Object>
+<Object type="0x16f1" id="Ice King Priest Skin">
+    <Class>Equipment</Class>
+    <Item />
+    <AnimatedTexture>
+        <File>playerskins2</File>
+        <Index>124</Index>
+    </AnimatedTexture>
+    <SlotType>10</SlotType>
+    <Description>Crown not included to preserve sanity.\n\nSprite Credits: Kingged</Description>
+    <Activate skinType="5864">UnlockSkin</Activate>
+    <Consumable />
+    <Soulbound />
+    <BagType>4</BagType>
+    <feedPower>5000</feedPower>
+</Object>
+<Object type="0x16f2" id="Icicle Dial Mystic Skin">
+    <Class>Equipment</Class>
+    <Item />
+    <AnimatedTexture>
+        <File>playerskins2</File>
+        <Index>125</Index>
+    </AnimatedTexture>
+    <SlotType>10</SlotType>
+    <Description>In case of emergency use icicle to stab enemy.\n\nSprite Credits: Poshun</Description>
+    <Activate skinType="5865">UnlockSkin</Activate>
+    <Consumable />
+    <Soulbound />
+    <BagType>4</BagType>
+    <feedPower>5000</feedPower>
+</Object>
+<Object type="0x16f3" id="Yuki Onna Mystic Skin">
+    <Class>Equipment</Class>
+    <Item />
+    <AnimatedTexture>
+        <File>playerskins2</File>
+        <Index>126</Index>
+    </AnimatedTexture>
+    <SlotType>10</SlotType>
+    <Description>Do not follow, unless you like frostbite.\n\nSprite Credits: Beige</Description>
+    <Activate skinType="5866">UnlockSkin</Activate>
+    <Consumable />
+    <Soulbound />
+    <BagType>4</BagType>
+    <feedPower>5000</feedPower>
+</Object>
+<Object type="0x178b" id="Juliet Trickster Skin">
+    <Class>Equipment</Class>
+    <Item />
+    <AnimatedTexture>
+        <File>playerskins2</File>
+        <Index>132</Index>
+    </AnimatedTexture>
+    <SlotType>10</SlotType>
+    <Description>Oh white bag, white bag! Wherefore art thou white bag?\n\nSprite Credits: Poshun</Description>
+    <Activate skinType="6022">UnlockSkin</Activate>
+    <Consumable />
+    <Soulbound />
+    <BagType>4</BagType>
+    <feedPower>5000</feedPower>
+</Object>
+<Object type="0x178c" id="Heartseeker Huntress Skin">
+    <Class>Equipment</Class>
+    <Item />
+    <AnimatedTexture>
+        <File>playerskins2</File>
+        <Index>133</Index>
+    </AnimatedTexture>
+    <SlotType>10</SlotType>
+    <Description>She's coming for your heart!\n\nSprite Credits: Beige</Description>
+    <Activate skinType="6023">UnlockSkin</Activate>
+    <Consumable />
+    <Soulbound />
+    <BagType>4</BagType>
+    <feedPower>5000</feedPower>
+</Object>
+<Object type="0x178d" id="Romeo Assassin Skin">
+    <Class>Equipment</Class>
+    <Item />
+    <AnimatedTexture>
+        <File>playerskins2</File>
+        <Index>134</Index>
+    </AnimatedTexture>
+    <SlotType>10</SlotType>
+    <Description>Is good loot a tender thing? It is too rare, too scarce, too extraordinary, and it pricks like a Poison Fang Dagger.\n\nSprite Credits: Poshun</Description>
+    <Activate skinType="6024">UnlockSkin</Activate>
+    <Consumable />
+    <Soulbound />
+    <BagType>4</BagType>
+    <feedPower>5000</feedPower>
+</Object>
+<Object type="0x178e" id="Mardi Gras Sorcerer Skin">
+    <Class>Equipment</Class>
+    <Item />
+    <AnimatedTexture>
+        <File>playerskins2</File>
+        <Index>135</Index>
+    </AnimatedTexture>
+    <SlotType>10</SlotType>
+    <Description>Let's get this clown fiesta started!\n\nSprite Credits: Poshun</Description>
+    <Activate skinType="6025">UnlockSkin</Activate>
+    <Consumable />
+    <Soulbound />
+    <BagType>4</BagType>
+    <feedPower>5000</feedPower>
+</Object>
+<Object type="0x178f" id="Carnivalmancer Skin">
+    <Class>Equipment</Class>
+    <Item />
+    <AnimatedTexture>
+        <File>playerskins2</File>
+        <Index>136</Index>
+    </AnimatedTexture>
+    <SlotType>10</SlotType>
+    <Description>Totally not a Necromancer.\n\nSprite Credits: Beige</Description>
+    <Activate skinType="6026">UnlockSkin</Activate>
+    <Consumable />
+    <Soulbound />
+    <BagType>4</BagType>
+    <feedPower>5000</feedPower>
+</Object>
 </Objects>
