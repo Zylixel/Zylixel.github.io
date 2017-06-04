@@ -1,0 +1,4 @@
+-Fix Paladin Stacking
+-Tweak T8 Abilities
+-Resprite T14+ Armor
+-Update to Include many Prod Items

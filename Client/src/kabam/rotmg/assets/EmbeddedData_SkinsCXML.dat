@@ -1159,7 +1159,7 @@
           </AnimatedTexture>
           <DisplayId>Future Seeker Tester Skin</DisplayId>
       </Object>
-      <Object type="0x6117" id="Ninja - Future Seeker Tester Skin">
+      <Object type="0x6139" id="Ninja - Future Seeker Tester Skin">
       	<PlayerClassType>0x0326</PlayerClassType>
           <Class>Skin</Class>
           <Skin />

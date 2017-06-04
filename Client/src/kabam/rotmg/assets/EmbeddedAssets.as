@@ -20,7 +20,9 @@ public class EmbeddedAssets {
     public static var lofiObj4Embed_:Class = EmbeddedAssets_lofiObj4Embed_;
     public static var lofiObj5Embed_:Class = EmbeddedAssets_lofiObj5Embed_;
     public static var lofiObj6Embed_:Class = EmbeddedAssets_lofiObj6Embed_;
+    public static var lofiObj7Embed_:Class = EmbeddedAssets_lofiObj7Embed_;
     public static var lofiObjBigEmbed_:Class = EmbeddedAssets_lofiObjBigEmbed_;
+    public static var lofiObj8Embed_:Class = EmbeddedAssets_lofiObj8Embed_;
     public static var lofiObj40x40Embed_:Class = EmbeddedAssets_lofiObj40x40Embed_;
     public static var lofiProjsEmbed_:Class = EmbeddedAssets_lofiProjsEmbed_;
     public static var lofiProjsBigEmbed_:Class = EmbeddedAssets_lofiProjsBigEmbed_;
@@ -122,7 +124,6 @@ public class EmbeddedAssets {
     public static var d1LofiObjBigEmbed_:Class = EmbeddedAssets_d1LofiObjBigEmbed_;
     public static var d2Chars8x8rEmbed_:Class = EmbeddedAssets_d2Chars8x8rEmbed_;
     public static var d2Chars16x16rEmbed_:Class = EmbeddedAssets_d2Chars16x16rEmbed_;
-    public static var d2LofiObjEmbed_:Class = EmbeddedAssets_d2LofiObjEmbed_;
     public static var d2LofiObjBigEmbed_:Class = EmbeddedAssets_d2LofiObjBigEmbed_;
     public static var d3Chars8x8rEmbed_:Class = EmbeddedAssets_d3Chars8x8rEmbed_;
     public static var d3Chars16x16rEmbed_:Class = EmbeddedAssets_d3Chars16x16rEmbed_;

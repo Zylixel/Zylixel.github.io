@@ -16444,36 +16444,51 @@
          <Index>0x09</Index>
        </AnimatedTexture>
      </Object>
-<Object type="0x16ec" id="Penguin Knight Skin">
-    <Class>Equipment</Class>
-    <Item />
-    <AnimatedTexture>
-        <File>playerskins2</File>
-        <Index>120</Index>
-    </AnimatedTexture>
-    <SlotType>10</SlotType>
-    <Description>Looks a lot less cute once its sword is in your eye.\n\nSprite Credits: Beige</Description>
-    <Activate skinType="24728">UnlockSkin</Activate>
-    <Consumable />
-    <Soulbound />
-    <BagType>4</BagType>
-    <feedPower>5000</feedPower>
-</Object>
-<Object type="0x16ed" id="Frimar Knight Skin">
-    <Class>Equipment</Class>
-    <Item />
-    <AnimatedTexture>
-        <File>playerskins2</File>
-        <Index>121</Index>
-    </AnimatedTexture>
-    <SlotType>10</SlotType>
-    <Description>Smaller than the real Frimar, but no less dangerous.\n\nSprite Credits: Poshun</Description>
-    <Activate skinType="5861">UnlockSkin</Activate>
-    <Consumable />
-    <Soulbound />
-    <BagType>4</BagType>
-    <feedPower>5000</feedPower>
-</Object>
+     <Object type="0x16eb" id="Chinese Dress Trickster Skin">
+         <Class>Equipment</Class>
+         <Item />
+         <AnimatedTexture>
+             <File>playerskins2</File>
+             <Index>119</Index>
+         </AnimatedTexture>
+         <SlotType>10</SlotType>
+         <Description>Fashionable AND dangerous.\n\nSprite Credits: Beige</Description>
+         <Activate skinType="5859">UnlockSkin</Activate>
+         <Consumable />
+         <Soulbound />
+         <BagType>4</BagType>
+         <feedPower>5000</feedPower>
+     </Object>
+     <Object type="0x16ec" id="Penguin Knight Skin">
+         <Class>Equipment</Class>
+         <Item />
+         <AnimatedTexture>
+             <File>playerskins2</File>
+             <Index>120</Index>
+         </AnimatedTexture>
+         <SlotType>10</SlotType>
+         <Description>Looks a lot less cute once its sword is in your eye.\n\nSprite Credits: Beige</Description>
+         <Activate skinType="24728">UnlockSkin</Activate>
+         <Consumable />
+         <Soulbound />
+         <BagType>4</BagType>
+         <feedPower>5000</feedPower>
+     </Object>
+     <Object type="0x16ed" id="Frimar Knight Skin">
+         <Class>Equipment</Class>
+         <Item />
+         <AnimatedTexture>
+             <File>playerskins2</File>
+             <Index>121</Index>
+         </AnimatedTexture>
+         <SlotType>10</SlotType>
+         <Description>Smaller than the real Frimar, but no less dangerous.\n\nSprite Credits: Poshun</Description>
+         <Activate skinType="24729">UnlockSkin</Activate>
+         <Consumable />
+         <Soulbound />
+         <BagType>4</BagType>
+         <feedPower>5000</feedPower>
+     </Object>
 <Object type="0x16ef" id="Frozen King Skin">
     <Class>Equipment</Class>
     <Item />
@@ -16483,7 +16498,7 @@
     </AnimatedTexture>
     <SlotType>10</SlotType>
     <Description>Once sat on a Frozen Throne, but decided to go adventuring.\n\nSprite Credits: Beige</Description>
-    <Activate skinType="5862">UnlockSkin</Activate>
+    <Activate skinType="24832">UnlockSkin</Activate>
     <Consumable />
     <Soulbound />
     <BagType>4</BagType>
@@ -16498,7 +16513,7 @@
     </AnimatedTexture>
     <SlotType>10</SlotType>
     <Description>Some say the world will end in fire, some say in ice.\n\nSprite Credits: Beige</Description>
-    <Activate skinType="5863">UnlockSkin</Activate>
+    <Activate skinType="24833">UnlockSkin</Activate>
     <Consumable />
     <Soulbound />
     <BagType>4</BagType>
@@ -16513,7 +16528,7 @@
     </AnimatedTexture>
     <SlotType>10</SlotType>
     <Description>Crown not included to preserve sanity.\n\nSprite Credits: Kingged</Description>
-    <Activate skinType="5864">UnlockSkin</Activate>
+    <Activate skinType="24834">UnlockSkin</Activate>
     <Consumable />
     <Soulbound />
     <BagType>4</BagType>
@@ -16528,7 +16543,7 @@
     </AnimatedTexture>
     <SlotType>10</SlotType>
     <Description>In case of emergency use icicle to stab enemy.\n\nSprite Credits: Poshun</Description>
-    <Activate skinType="5865">UnlockSkin</Activate>
+    <Activate skinType="24835">UnlockSkin</Activate>
     <Consumable />
     <Soulbound />
     <BagType>4</BagType>
@@ -16543,22 +16558,7 @@
     </AnimatedTexture>
     <SlotType>10</SlotType>
     <Description>Do not follow, unless you like frostbite.\n\nSprite Credits: Beige</Description>
-    <Activate skinType="5866">UnlockSkin</Activate>
-    <Consumable />
-    <Soulbound />
-    <BagType>4</BagType>
-    <feedPower>5000</feedPower>
-</Object>
-<Object type="0x178b" id="Juliet Trickster Skin">
-    <Class>Equipment</Class>
-    <Item />
-    <AnimatedTexture>
-        <File>playerskins2</File>
-        <Index>132</Index>
-    </AnimatedTexture>
-    <SlotType>10</SlotType>
-    <Description>Oh white bag, white bag! Wherefore art thou white bag?\n\nSprite Credits: Poshun</Description>
-    <Activate skinType="6022">UnlockSkin</Activate>
+    <Activate skinType="24836">UnlockSkin</Activate>
     <Consumable />
     <Soulbound />
     <BagType>4</BagType>
@@ -16573,7 +16573,7 @@
     </AnimatedTexture>
     <SlotType>10</SlotType>
     <Description>She's coming for your heart!\n\nSprite Credits: Beige</Description>
-    <Activate skinType="6023">UnlockSkin</Activate>
+    <Activate skinType="24839">UnlockSkin</Activate>
     <Consumable />
     <Soulbound />
     <BagType>4</BagType>
@@ -16588,7 +16588,7 @@
     </AnimatedTexture>
     <SlotType>10</SlotType>
     <Description>Is good loot a tender thing? It is too rare, too scarce, too extraordinary, and it pricks like a Poison Fang Dagger.\n\nSprite Credits: Poshun</Description>
-    <Activate skinType="6024">UnlockSkin</Activate>
+    <Activate skinType="24840">UnlockSkin</Activate>
     <Consumable />
     <Soulbound />
     <BagType>4</BagType>
@@ -16603,7 +16603,7 @@
     </AnimatedTexture>
     <SlotType>10</SlotType>
     <Description>Let's get this clown fiesta started!\n\nSprite Credits: Poshun</Description>
-    <Activate skinType="6025">UnlockSkin</Activate>
+    <Activate skinType="24841">UnlockSkin</Activate>
     <Consumable />
     <Soulbound />
     <BagType>4</BagType>
@@ -16618,10 +16618,755 @@
     </AnimatedTexture>
     <SlotType>10</SlotType>
     <Description>Totally not a Necromancer.\n\nSprite Credits: Beige</Description>
-    <Activate skinType="6026">UnlockSkin</Activate>
+    <Activate skinType="24848">UnlockSkin</Activate>
+    <Consumable />
+    <Soulbound />
+    <BagType>4</BagType>
+    <feedPower>5000</feedPower>
+</Object>>
+<Object type="0x2ac1" id="Warrior - Future Seeker Tester Skin">
+    <Class>Equipment</Class>
+    <Item />
+    <AnimatedTexture>
+        <File>playerskins2</File>
+        <Index>137</Index>
+    </AnimatedTexture>
+    <SlotType>10</SlotType>
+    <Description>Testers assemble! Seek the bugs of tomorrow!\n\nSprite Credits: Beige</Description>
+    <Activate skinType="24849">UnlockSkin</Activate>
     <Consumable />
     <Soulbound />
     <BagType>4</BagType>
     <feedPower>5000</feedPower>
 </Object>
+<Object type="0x2ac2" id="Knight - Future Seeker Tester Skin">
+    <Class>Equipment</Class>
+    <Item />
+    <AnimatedTexture>
+        <File>playerskins2</File>
+        <Index>137</Index>
+    </AnimatedTexture>
+    <SlotType>10</SlotType>
+    <Description>Testers assemble! Seek the bugs of tomorrow!\n\nSprite Credits: Beige</Description>
+    <Activate skinType="24850">UnlockSkin</Activate>
+    <Consumable />
+    <Soulbound />
+    <BagType>4</BagType>
+    <feedPower>5000</feedPower>
+</Object>
+<Object type="0x2ac3" id="Paladin - Future Seeker Tester Skin">
+    <Class>Equipment</Class>
+    <Item />
+    <AnimatedTexture>
+        <File>playerskins2</File>
+        <Index>137</Index>
+    </AnimatedTexture>
+    <SlotType>10</SlotType>
+    <Description>Testers assemble! Seek the bugs of tomorrow!\n\nSprite Credits: Beige</Description>
+    <Activate skinType="24851">UnlockSkin</Activate>
+    <Consumable />
+    <Soulbound />
+    <BagType>4</BagType>
+    <feedPower>5000</feedPower>
+</Object>
+<Object type="0x2ac4" id="Rogue - Future Seeker Tester Skin">
+    <Class>Equipment</Class>
+    <Item />
+    <AnimatedTexture>
+        <File>playerskins2</File>
+        <Index>138</Index>
+    </AnimatedTexture>
+    <SlotType>10</SlotType>
+    <Description>Testers assemble! Seek the bugs of tomorrow!\n\nSprite Credits: Beige</Description>
+    <Activate skinType="24852">UnlockSkin</Activate>
+    <Consumable />
+    <Soulbound />
+    <BagType>4</BagType>
+    <feedPower>5000</feedPower>
+</Object>
+<Object type="0x2ac5" id="Assassin - Future Seeker Tester Skin">
+    <Class>Equipment</Class>
+    <Item />
+    <AnimatedTexture>
+        <File>playerskins2</File>
+        <Index>138</Index>
+    </AnimatedTexture>
+    <SlotType>10</SlotType>
+    <Description>Testers assemble! Seek the bugs of tomorrow!\n\nSprite Credits: Beige</Description>
+    <Activate skinType="24853">UnlockSkin</Activate>
+    <Consumable />
+    <Soulbound />
+    <BagType>4</BagType>
+    <feedPower>5000</feedPower>
+</Object>
+<Object type="0x2ac6" id="Trickster - Future Seeker Tester Skin">
+    <Class>Equipment</Class>
+    <Item />
+    <AnimatedTexture>
+        <File>playerskins2</File>
+        <Index>138</Index>
+    </AnimatedTexture>
+    <SlotType>10</SlotType>
+    <Description>Testers assemble! Seek the bugs of tomorrow!\n\nSprite Credits: Beige</Description>
+    <Activate skinType="24854">UnlockSkin</Activate>
+    <Consumable />
+    <Soulbound />
+    <BagType>4</BagType>
+    <feedPower>5000</feedPower>
+</Object>
+<Object type="0x2ac7" id="Ninja - Future Seeker Tester Skin">
+    <Class>Equipment</Class>
+    <Item />
+    <AnimatedTexture>
+        <File>playerskins2</File>
+        <Index>138</Index>
+    </AnimatedTexture>
+    <SlotType>10</SlotType>
+    <Description>Testers assemble! Seek the bugs of tomorrow!\n\nSprite Credits: Beige</Description>
+    <Activate skinType="24889">UnlockSkin</Activate>
+    <Consumable />
+    <Soulbound />
+    <BagType>4</BagType>
+    <feedPower>5000</feedPower>
+</Object>
+<Object type="0x2ac8" id="Wizard - Future Seeker Tester Skin">
+    <Class>Equipment</Class>
+    <Item />
+    <AnimatedTexture>
+        <File>playerskins2</File>
+        <Index>139</Index>
+    </AnimatedTexture>
+    <SlotType>10</SlotType>
+    <Description>Testers assemble! Seek the bugs of tomorrow!\n\nSprite Credits: Beige</Description>
+    <Activate skinType="24856">UnlockSkin</Activate>
+    <Consumable />
+    <Soulbound />
+    <BagType>4</BagType>
+    <feedPower>5000</feedPower>
+</Object>
+<Object type="0x2ac9" id="Necromancer - Future Seeker Tester Skin">
+    <Class>Equipment</Class>
+    <Item />
+    <AnimatedTexture>
+        <File>playerskins2</File>
+        <Index>139</Index>
+    </AnimatedTexture>
+    <SlotType>10</SlotType>
+    <Description>Testers assemble! Seek the bugs of tomorrow!\n\nSprite Credits: Beige</Description>
+    <Activate skinType="24857">UnlockSkin</Activate>
+    <Consumable />
+    <Soulbound />
+    <BagType>4</BagType>
+    <feedPower>5000</feedPower>
+</Object>
+<Object type="0x2aca" id="Mystic - Future Seeker Tester Skin">
+    <Class>Equipment</Class>
+    <Item />
+    <AnimatedTexture>
+        <File>playerskins2</File>
+        <Index>139</Index>
+    </AnimatedTexture>
+    <SlotType>10</SlotType>
+    <Description>Testers assemble! Seek the bugs of tomorrow!\n\nSprite Credits: Beige</Description>
+    <Activate skinType="24858">UnlockSkin</Activate>
+    <Consumable />
+    <Soulbound />
+    <BagType>4</BagType>
+    <feedPower>5000</feedPower>
+</Object>
+<Object type="0x2acb" id="Archer - Future Seeker Tester Skin">
+    <Class>Equipment</Class>
+    <Item />
+    <AnimatedTexture>
+        <File>playerskins2</File>
+        <Index>140</Index>
+    </AnimatedTexture>
+    <SlotType>10</SlotType>
+    <Description>Testers assemble! Seek the bugs of tomorrow!\n\nSprite Credits: Beige</Description>
+    <Activate skinType="24864">UnlockSkin</Activate>
+    <Consumable />
+    <Soulbound />
+    <BagType>4</BagType>
+    <feedPower>5000</feedPower>
+</Object>
+<Object type="0x2acc" id="Huntress - Future Seeker Tester Skin">
+    <Class>Equipment</Class>
+    <Item />
+    <AnimatedTexture>
+        <File>playerskins2</File>
+        <Index>140</Index>
+    </AnimatedTexture>
+    <SlotType>10</SlotType>
+    <Description>Testers assemble! Seek the bugs of tomorrow!\n\nSprite Credits: Beige</Description>
+    <Activate skinType="24865">UnlockSkin</Activate>
+    <Consumable />
+    <Soulbound />
+    <BagType>4</BagType>
+    <feedPower>5000</feedPower>
+</Object>
+<Object type="0x2acd" id="Priest - Future Seeker Tester Skin">
+    <Class>Equipment</Class>
+    <Item />
+    <AnimatedTexture>
+        <File>playerskins2</File>
+        <Index>141</Index>
+    </AnimatedTexture>
+    <SlotType>10</SlotType>
+    <Description>Testers assemble! Seek the bugs of tomorrow!\n\nSprite Credits: Beige</Description>
+    <Activate skinType="24866">UnlockSkin</Activate>
+    <Consumable />
+    <Soulbound />
+    <BagType>4</BagType>
+    <feedPower>5000</feedPower>
+</Object>
+<Object type="0x2ace" id="Sorcerer - Future Seeker Tester Skin">
+    <Class>Equipment</Class>
+    <Item />
+    <AnimatedTexture>
+        <File>playerskins2</File>
+        <Index>141</Index>
+    </AnimatedTexture>
+    <SlotType>10</SlotType>
+    <Description>Testers assemble! Seek the bugs of tomorrow!\n\nSprite Credits: Beige</Description>
+    <Activate skinType="24867">UnlockSkin</Activate>
+    <Consumable />
+    <Soulbound />
+    <BagType>4</BagType>
+    <feedPower>5000</feedPower>
+</Object>
+<Object type="0x2adf" id="Wind Flower Skin">
+    <Class>Equipment</Class>
+    <Item />
+    <AnimatedTexture>
+        <File>playerskins2</File>
+        <Index>142</Index>
+    </AnimatedTexture>
+    <SlotType>10</SlotType>
+    <Description>Make sure to Equip a Wind Circle for style points!\n\nSprite Credits: Poshun</Description>
+    <Activate skinType="24868">UnlockSkin</Activate>
+    <Consumable />
+    <Soulbound />
+    <BagType>4</BagType>
+    <feedPower>5000</feedPower>
+</Object>
+<Object type="0x2ae0" id="Leprechaun Mystic Skin">
+    <Class>Equipment</Class>
+    <Item />
+    <AnimatedTexture>
+        <File>playerskins2</File>
+        <Index>143</Index>
+    </AnimatedTexture>
+    <SlotType>10</SlotType>
+    <Description>Legends say she will lead you to a pot of gold if you catch her!\n\nSprite Credits: Beige</Description>
+    <Activate skinType="24869">UnlockSkin</Activate>
+    <Consumable />
+    <Soulbound />
+    <BagType>4</BagType>
+    <feedPower>5000</feedPower>
+</Object>
+<Object type="0x2aed" id="Mini Nut Archer Skin">
+    <Class>Equipment</Class>
+    <Item />
+    <AnimatedTexture>
+        <File>playerskins2</File>
+        <Index>144</Index>
+    </AnimatedTexture>
+    <SlotType>10</SlotType>
+    <Description>The goddess of the sky. Make sure not to vandalize her property.\n\nSprite Credits: Poshun</Description>
+    <Activate skinType="24870">UnlockSkin</Activate>
+    <Consumable />
+    <Soulbound />
+    <BagType>4</BagType>
+    <feedPower>5000</feedPower>
+</Object>
+<Object type="0x2ae1" id="Miss Shamrock Wizard Skin">
+    <Class>Equipment</Class>
+    <Item />
+    <AnimatedTexture>
+        <File>playerskins2</File>
+        <Index>145</Index>
+    </AnimatedTexture>
+    <SlotType>10</SlotType>
+    <Description>The most ladylike of all leprechauns, or so she says. Don't tell the Mystic!\n\nSprite Credits: Kingged</Description>
+    <Activate skinType="24871">UnlockSkin</Activate>
+    <Consumable />
+    <Soulbound />
+    <BagType>4</BagType>
+    <feedPower>5000</feedPower>
+</Object>
+<Object type="0x2ae2" id="Sheep Warrior Skin">
+    <Class>Equipment</Class>
+    <Item />
+    <AnimatedTexture>
+        <File>playerskins2</File>
+        <Index>146</Index>
+    </AnimatedTexture>
+    <SlotType>10</SlotType>
+    <Description>200 POUNDS OF FLUFFY TESTOSTERONE!\n\nSprite Credits: Beige</Description>
+    <Activate skinType="24872">UnlockSkin</Activate>
+    <Consumable />
+    <Soulbound />
+    <BagType>4</BagType>
+    <feedPower>5000</feedPower>
+</Object>
+<Object type="0x2ae3" id="Sheep Rogue Skin">
+    <Class>Equipment</Class>
+    <Item />
+    <AnimatedTexture>
+        <File>playerskins2</File>
+        <Index>147</Index>
+    </AnimatedTexture>
+    <SlotType>10</SlotType>
+    <Description>Easily pulls his wool over people's eyes.\n\nSprite Credits: Beige</Description>
+    <Activate skinType="24873">UnlockSkin</Activate>
+    <Consumable />
+    <Soulbound />
+    <BagType>4</BagType>
+    <feedPower>5000</feedPower>
+</Object>
+<Object type="0x2ae4" id="Sheep Wizard Skin">
+    <Class>Equipment</Class>
+    <Item />
+    <AnimatedTexture>
+        <File>playerskins2</File>
+        <Index>148</Index>
+    </AnimatedTexture>
+    <SlotType>10</SlotType>
+    <Description>Ever thought about all the wizards who got polymorphed into sheep? \n\nSprite Credits: Beige</Description>
+    <Activate skinType="24880">UnlockSkin</Activate>
+    <Consumable />
+    <Soulbound />
+    <BagType>4</BagType>
+    <feedPower>5000</feedPower>
+</Object>
+<Object type="0x2ae5" id="Sheep Archer Skin">
+    <Class>Equipment</Class>
+    <Item />
+    <AnimatedTexture>
+        <File>playerskins2</File>
+        <Index>149</Index>
+    </AnimatedTexture>
+    <SlotType>10</SlotType>
+    <Description>The hunters will now become the hunted! \n\nSprite Credits: Beige</Description>
+    <Activate skinType="24881">UnlockSkin</Activate>
+    <Consumable />
+    <Soulbound />
+    <BagType>4</BagType>
+    <feedPower>5000</feedPower>
+</Object>
+<Object type="0x2ae6" id="Sheep Priest Skin">
+    <Class>Equipment</Class>
+    <Item />
+    <AnimatedTexture>
+        <File>playerskins2</File>
+        <Index>150</Index>
+    </AnimatedTexture>
+    <SlotType>10</SlotType>
+    <Description>Guides the lambs to greener pastures. \n\nSprite Credits: Beige</Description>
+    <Activate skinType="24882">UnlockSkin</Activate>
+    <Consumable />
+    <Soulbound />
+    <BagType>4</BagType>
+    <feedPower>5000</feedPower>
+</Object>
+<Object type="0x2ae7" id="Lil' Bo-Peep Mystic Skin">
+    <Class>Equipment</Class>
+    <Item />
+    <AnimatedTexture>
+        <File>playerskins2</File>
+        <Index>151</Index>
+    </AnimatedTexture>
+    <SlotType>10</SlotType>
+    <Description>Little Bo-Peep has lost her sheep... \n\nSprite Credits: Beige</Description>
+    <Activate skinType="24883">UnlockSkin</Activate>
+    <Consumable />
+    <Soulbound />
+    <BagType>4</BagType>
+    <feedPower>5000</feedPower>
+</Object>
+<Object type="0x2ae8" id="The Flamingo Wizard Skin">
+    <Class>Equipment</Class>
+    <Item />
+    <AnimatedTexture>
+        <File>playerskins2</File>
+        <Index>152</Index>
+    </AnimatedTexture>
+    <SlotType>10</SlotType>
+    <Description>It's a bird... It's a plane... It's... just another wizard. \n\nSprite Credits: Kingged</Description>
+    <Activate skinType="24884">UnlockSkin</Activate>
+    <Consumable />
+    <Soulbound />
+    <BagType>4</BagType>
+    <feedPower>5000</feedPower>
+</Object>
+<Object type="0x2aea" id="Dr. Spellbomb Skin">
+    <Class>Equipment</Class>
+    <Item />
+    <AnimatedTexture>
+        <File>playerskins2</File>
+        <Index>153</Index>
+    </AnimatedTexture>
+    <SlotType>10</SlotType>
+    <Description>MARVEL AT HIS ABILITY! \n\nSprite Credits: Poshun</Description>
+    <Activate skinType="24885">UnlockSkin</Activate>
+    <Consumable />
+    <Soulbound />
+    <BagType>4</BagType>
+    <feedPower>5000</feedPower>
+</Object>
+<Object type="0x2ae9" id="Mini Stheno Skin">
+    <Class>Equipment</Class>
+    <Item />
+    <AnimatedTexture>
+        <File>playerskins2</File>
+        <Index>154</Index>
+    </AnimatedTexture>
+    <SlotType>10</SlotType>
+    <Description>Dye it green to become Stheno's sister! \n\nSprite Credits: Poshun</Description>
+    <Activate skinType="24886">UnlockSkin</Activate>
+    <Consumable />
+    <Soulbound />
+    <BagType>4</BagType>
+    <feedPower>5000</feedPower>
+</Object>
+<Object type="0x2aeb" id="Iron Maiden Skin">
+    <Class>Equipment</Class>
+    <Item />
+    <AnimatedTexture>
+        <File>playerskins2</File>
+        <Index>155</Index>
+    </AnimatedTexture>
+    <SlotType>10</SlotType>
+    <Description>A divine leader of war and an exceptional musical artist. \n\nSprite Credits: Poshun</Description>
+    <Activate skinType="24887">UnlockSkin</Activate>
+    <Consumable />
+    <Soulbound />
+    <BagType>4</BagType>
+    <feedPower>5000</feedPower>
+</Object>
+<Object type="0x2aec" id="Explorer Skin">
+    <Class>Equipment</Class>
+    <Item />
+    <AnimatedTexture>
+        <File>playerskins2</File>
+        <Index>156</Index>
+    </AnimatedTexture>
+    <SlotType>10</SlotType>
+    <Description>Sails the seven seas to sell his life pots. For overpay, naturally. \n\nSprite Credits: Poshun</Description>
+    <Activate skinType="24888">UnlockSkin</Activate>
+    <Consumable />
+    <Soulbound />
+    <BagType>4</BagType>
+    <feedPower>5000</feedPower>
+</Object>
+<Object type="0x2aef" id="Juliet Trickster Skin">
+    <Class>Equipment</Class>
+    <Item />
+    <AnimatedTexture>
+        <File>playerskins2</File>
+        <Index>156</Index>
+    </AnimatedTexture>
+    <SlotType>10</SlotType>
+    <Description>ERROR</Description>
+    <Activate skinType="24838">UnlockSkin</Activate>
+    <Consumable />
+    <Soulbound />
+    <BagType>4</BagType>
+    <feedPower>5000</feedPower>
+</Object>
+<Object type="0x1412" id="Frozen Wand">
+    <Class>Equipment</Class>
+    <Item />
+    <Texture>
+        <File>d3LofiObjEmbed</File>
+        <Index>0x47</Index>
+    </Texture>
+    <SlotType>8</SlotType>
+    <Description>From the realms of frost, this wand's ice magic penetrates even the strongest armor.</Description>
+    <RateOfFire>1.1</RateOfFire>
+    <Sound>weapon/wand_of_death</Sound>
+    <Projectile>
+        <ObjectId>Frozen Wand Icicle</ObjectId>
+        <Speed>120</Speed>
+        <LifetimeMS>750</LifetimeMS>
+        <MinDamage>75</MinDamage>
+        <MaxDamage>100</MaxDamage>
+        <ArmorPiercing />
+    </Projectile>
+    <BagType>6</BagType>
+    <FameBonus>4</FameBonus>
+    <OldSound>magicShoot</OldSound>
+    <feedPower>500</feedPower>
+</Object>
+<Object type="0x1413" id="Freezing Quiver">
+    <Class>Equipment</Class>
+    <Item />
+    <Texture>
+        <File>d3LofiObjEmbed</File>
+        <Index>0x49</Index>
+    </Texture>
+    <SlotType>15</SlotType>
+    <Description>Corrupted by creatures of the frost realms, its arrows will slacken assailants promptly.</Description>
+    <Sound>spell/fire_spray</Sound>
+    <Projectile>
+        <ObjectId>Frozen Arrow</ObjectId>
+        <Speed>160</Speed>
+        <MinDamage>180</MinDamage>
+        <MaxDamage>260</MaxDamage>
+        <LifetimeMS>600</LifetimeMS>
+        <Size>120</Size>
+        <ConditionEffect duration="5">Slowed</ConditionEffect>
+        <PassesCover />
+        <MultiHit />
+        <ParticleTrail lifetimeMS="150">0x33ccff</ParticleTrail>
+    </Projectile>
+    <ActivateOnEquip stat="20" amount="3">IncrementStat</ActivateOnEquip>
+    <ActivateOnEquip stat="28" amount="3">IncrementStat</ActivateOnEquip>
+    <ConditionEffect duration="5">Slowed</ConditionEffect>
+    <Usable />
+    <NumProjectiles>3</NumProjectiles>
+    <ArcGap>8</ArcGap>
+    <FameBonus>5</FameBonus>
+    <MpCost>90</MpCost>
+    <Activate>Shoot</Activate>
+    <feedPower>700</feedPower>
+</Object>
+<Object type="0x6140" id="Frozen Arrow">
+      <Class>Projectile</Class>
+      <Texture>
+         <File>d3LofiObjEmbed</File>
+         <Index>0x4a</Index>
+      </Texture>
+      <AngleCorrection>1</AngleCorrection>
+   </Object>
+<Object type="0x6141" id="Frozen Wand Icicle">
+      <Class>Projectile</Class>
+      <Texture>
+         <File>d3LofiObjEmbed</File>
+         <Index>0x48</Index>
+      </Texture>
+      <AngleCorrection>1</AngleCorrection>
+   </Object>
+   <Object type="0x16d6" id="Enchanted Ice Blade">
+       <Class>Equipment</Class>
+       <Item />
+       <Texture>
+           <File>lofiObj7</File>
+           <Index>0x19</Index>
+       </Texture>
+       <SlotType>1</SlotType>
+       <Description>A lightweight blade, imbued with frosty runes.\n\nSprite Credits: Poshun</Description>
+       <RateOfFire>1</RateOfFire>
+       <Sound>weapon/glass_sword</Sound>
+       <Projectile>
+           <ObjectId>Enchanted Ice Blade Slash</ObjectId>
+           <Speed>100</Speed>
+           <MinDamage>180</MinDamage>
+           <MaxDamage>210</MaxDamage>
+           <LifetimeMS>450</LifetimeMS>
+       </Projectile>
+       <BagType>6</BagType>
+       <FameBonus>3</FameBonus>
+       <OldSound>bladeSwing</OldSound>
+       <feedPower>400</feedPower>
+
+   </Object>
+   <Object type="0x16d7" id="Staff of Iceblast">
+       <Class>Equipment</Class>
+       <Item />
+       <Texture>
+           <File>lofiObj7</File>
+           <Index>0x1a</Index>
+       </Texture>
+       <SlotType>17</SlotType>
+       <Description>A frozen staff, used for creating powerful chilly blasts around the user.\n\nSprite Credits: Poshun</Description>
+       <RateOfFire>0.4</RateOfFire>
+       <Sound>weapon/sprite_wand</Sound>
+       <Projectile>
+           <ObjectId>Iceblast Missile</ObjectId>
+           <Speed>110</Speed>
+           <MinDamage>80</MinDamage>
+           <MaxDamage>95</MaxDamage>
+           <LifetimeMS>364</LifetimeMS>
+           <Amplitude>0.15</Amplitude>
+           <Frequency>2</Frequency>
+       </Projectile>
+       <BagType>6</BagType>
+       <FameBonus>6</FameBonus>
+       <NumProjectiles>10</NumProjectiles>
+       <ArcGap>36</ArcGap>
+       <OldSound>magicShoot</OldSound>
+       <feedPower>600</feedPower>
+
+   </Object>
+   <Object type="0x16d8" id="Eternal Snowflake Wand">
+       <Class>Equipment</Class>
+       <Item />
+       <Texture>
+           <File>lofiObj7</File>
+           <Index>0x1b</Index>
+       </Texture>
+       <SlotType>8</SlotType>
+       <Description>A cool wand that creates a flurry of beautiful snowflakes.\n\nSprite Credits: Poshun</Description>
+       <RateOfFire>0.33</RateOfFire>
+       <Sound>weapon/wand_of_death</Sound>
+       <Projectile>
+           <ObjectId>Eternal Snowflake Shot</ObjectId>
+           <Speed>6</Speed>
+           <MinDamage>300</MinDamage>
+           <MaxDamage>400</MaxDamage>
+           <LifetimeMS>11000</LifetimeMS>
+           <Parametric />
+           <PassesCover />
+       </Projectile>
+       <BagType>6</BagType>
+       <FameBonus>6</FameBonus>
+       <OldSound>magicShoot</OldSound>
+       <feedPower>650</feedPower>
+
+   </Object>
+   <Object type="0x16d9" id="Arctic Bow">
+       <Class>Equipment</Class>
+       <Item />
+       <Texture>
+           <File>lofiObj7</File>
+           <Index>0x1c</Index>
+       </Texture>
+       <SlotType>3</SlotType>
+       <Description>A bow, fashioned from solid ice, enchanted not to melt. Its often used by elven hunters which live in the arctic wastes.\n\nSprite Credits: Poshun</Description>
+       <RateOfFire>1.25</RateOfFire>
+       <Sound>weapon/double_bow</Sound>
+       <Projectile>
+           <ObjectId>Artic Arrow</ObjectId>
+           <Speed>185</Speed>
+           <MinDamage>60</MinDamage>
+           <MaxDamage>80</MaxDamage>
+           <LifetimeMS>420</LifetimeMS>
+           <MultiHit />
+       </Projectile>
+       <BagType>6</BagType>
+       <FameBonus>6</FameBonus>
+       <NumProjectiles>2</NumProjectiles>
+       <OldSound>arrowShoot</OldSound>
+       <feedPower>1200</feedPower>
+
+   </Object>
+   <Object type="0x16da" id="Frost Drake Hide Armor">
+       <Class>Equipment</Class>
+       <Item />
+       <Texture>
+           <File>lofiObj7</File>
+           <Index>0x1d</Index>
+       </Texture>
+       <SlotType>6</SlotType>
+       <Description>Protective leather armor fashioned from the frozen, but resilient scales of a frost drake.\n\nSprite Credits: Poshun</Description>
+       <ActivateOnEquip stat="21" amount="17">IncrementStat</ActivateOnEquip>
+       <ActivateOnEquip stat="28" amount="5">IncrementStat</ActivateOnEquip>
+
+       <FameBonus>4</FameBonus>
+       <feedPower>435</feedPower>
+
+   </Object>
+   <Object type="0x16db" id="Frost Elementalist Robe">
+       <Class>Equipment</Class>
+       <Item />
+       <Texture>
+           <File>lofiObj7</File>
+           <Index>0x1e</Index>
+       </Texture>
+       <SlotType>14</SlotType>
+       <Description>An excellent robe, woven from icy threads. Its typically only worn by the most adept ice mages.\n\nSprite Credits: Poshun</Description>
+       <ActivateOnEquip stat="20" amount="4">IncrementStat</ActivateOnEquip>
+       <ActivateOnEquip stat="21" amount="13">IncrementStat</ActivateOnEquip>
+       <ActivateOnEquip stat="27" amount="6">IncrementStat</ActivateOnEquip>
+       <ActivateOnEquip stat="3" amount="55">IncrementStat</ActivateOnEquip>
+
+       <FameBonus>4</FameBonus>
+       <feedPower>435</feedPower>
+
+   </Object>
+   <Object type="0x16dc" id="Ice Crown">
+       <Class>Equipment</Class>
+       <Item />
+       <Texture>
+           <File>lofiObj7</File>
+           <Index>0x1f</Index>
+       </Texture>
+       <SlotType>9</SlotType>
+       <Description>An ancient artifact, once worn by a corrupt king of the frost realms.\n\nSprite Credits: Poshun</Description>
+       <ActivateOnEquip stat="28" amount="6">IncrementStat</ActivateOnEquip>
+       <ActivateOnEquip stat="20" amount="6">IncrementStat</ActivateOnEquip>
+       <ActivateOnEquip stat="0" amount="110">IncrementStat</ActivateOnEquip>
+       <BagType>6</BagType>
+       <FameBonus>5</FameBonus>
+       <feedPower>500</feedPower>
+
+   </Object>
+   <Object type="0x16dd" id="Frost Citadel Armor">
+       <Class>Equipment</Class>
+       <Item />
+       <Texture>
+           <File>lofiObj7</File>
+           <Index>0x24</Index>
+       </Texture>
+       <SlotType>7</SlotType>
+       <Description>A sturdy suit of armor, reinforced with ice plating. It's worn by the bravest warriors known to challenge the Mad God.\n\nSprite Credits: Poshun</Description>
+       <ActivateOnEquip stat="21" amount="24">IncrementStat</ActivateOnEquip>
+
+       <FameBonus>4</FameBonus>
+       <feedPower>435</feedPower>
+
+   </Object>
+   <Object type="0x16de" id="Tome of Frigid Protection">
+       <Class>Equipment</Class>
+       <Item />
+       <Texture>
+           <File>lofiObj7</File>
+           <Index>0x25</Index>
+       </Texture>
+       <SlotType>4</SlotType>
+       <Description>A tome that allows the caster to encase themselves in extremely durable ice. However, despite being nearly impenetrable, it will melt after a while.\n\nSprite Credits: Poshun</Description>
+       <Sound>spell/major_heal</Sound>
+       <ActivateOnEquip stat="26" amount="4">IncrementStat</ActivateOnEquip>
+       <ActivateOnEquip stat="0" amount="40">IncrementStat</ActivateOnEquip>
+       <Usable />
+       <BagType>6</BagType>
+       <FameBonus>6</FameBonus>
+       <MpCost>120</MpCost>
+       <Activate amount="200" range="6" useWisMod="true">HealNova</Activate>
+       <Activate effect="Armored" duration="4" useWisMod="true">ConditionEffectSelf</Activate>
+       <feedPower>1300</feedPower>
+   </Object>
+<Object type="0x6142" id="Enchanted Ice Blade Slash">
+      <Class>Projectile</Class>
+      <Texture>
+         <File>lofiObj7</File>
+         <Index>0x20</Index>
+      </Texture>
+      <AngleCorrection>1</AngleCorrection>
+   </Object>
+   <Object type="0x6143" id="Iceblast Missile">
+         <Class>Projectile</Class>
+         <Texture>
+            <File>lofiObj7</File>
+            <Index>0x21</Index>
+         </Texture>
+         <AngleCorrection>1</AngleCorrection>
+      </Object>
+<Object type="0x6144" id="Eternal Snowflake Shot">
+      <Class>Projectile</Class>
+      <Texture>
+         <File>lofiObj7</File>
+         <Index>0x22</Index>
+      </Texture>
+      <AngleCorrection>1</AngleCorrection>
+   </Object>
+<Object type="0x6145" id="Artic Arrow">
+      <Class>Projectile</Class>
+      <Texture>
+         <File>lofiObj7</File>
+         <Index>0x23</Index>
+      </Texture>
+      <AngleCorrection>1</AngleCorrection>
+   </Object>
 </Objects>
