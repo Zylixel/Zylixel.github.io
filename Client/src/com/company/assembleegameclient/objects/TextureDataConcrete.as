@@ -15,7 +15,7 @@ import kabam.rotmg.core.StaticInjectorContext;
 
 public class TextureDataConcrete extends TextureData {
 
-    public static var remoteTexturesUsed:Boolean = true;
+    public static var remoteTexturesUsed:Boolean = false;
 
     private var isUsingLocalTextures:Boolean;
 
@@ -101,7 +101,7 @@ public class TextureDataConcrete extends TextureData {
                     _local_3 = new RemoteTexture(_arg_1.Id, _arg_1.Instance, this.onRemoteTexture);
                     _local_3.run();
                     if (!AssetLoader.currentXmlIsTesting) {
-                        remoteTexturesUsed = true;
+                        remoteTexturesUsed = false;
                     }
                 }
                 remoteTextureDir_ = ((_arg_1.hasOwnProperty("Right")) ? AnimatedChar.RIGHT : AnimatedChar.DOWN);

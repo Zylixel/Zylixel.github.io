@@ -17826,4 +17826,30 @@ A power crystal will show me the right way. Forward to victory!\n\nSkin Class: S
 <Soulbound/>
 <feedPower>5000</feedPower>
 </Object>
+<Object id="Apple" type="0x190">
+      <DisplayId>Apple of Extreme Maxening</DisplayId>
+      <Class>Equipment</Class>
+      <Item/>
+      <Texture>
+         <File>lofiObj</File>
+         <Index>0x0f</Index>
+      </Texture>
+      <SlotType>10</SlotType>
+      <Description>It's healthy!\nMaxes any class to 8/8 and adds a Backpack.</Description>
+      <Sound>use_potion</Sound>
+      <Activate amount="2000" stat="0">IncrementStat</Activate>
+      <Activate amount="2000" stat="3">IncrementStat</Activate>
+      <Activate amount="2000" stat="20">IncrementStat</Activate>
+      <Activate amount="2000" stat="21">IncrementStat</Activate>
+      <Activate amount="2000" stat="22">IncrementStat</Activate>
+      <Activate amount="2000" stat="26">IncrementStat</Activate>
+      <Activate amount="2000" stat="27">IncrementStat</Activate>
+      <Activate amount="2000" stat="28">IncrementStat</Activate>
+      <Consumable/>
+      <Backpack/>
+      <Potion/>
+      <BagType>5</BagType>
+      <feedPower>100000</feedPower>
+   </Object>
 </Objects>
+
