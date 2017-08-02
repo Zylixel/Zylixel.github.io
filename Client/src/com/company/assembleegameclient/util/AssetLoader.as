@@ -114,6 +114,7 @@ public class AssetLoader {
         AnimatedChars.add("players", new EmbeddedAssets.playersEmbed_().bitmapData, new EmbeddedAssets.playersMaskEmbed_().bitmapData, 8, 8, 56, 24, AnimatedChar.RIGHT);
         AnimatedChars.add("playerskins", new EmbeddedAssets.playersSkinsEmbed_().bitmapData, new EmbeddedAssets.playersSkinsMaskEmbed_().bitmapData, 8, 8, 56, 24, AnimatedChar.RIGHT);
         AnimatedChars.add("playerskins2", new EmbeddedAssets.playersSkinsEmbed2_().bitmapData, new EmbeddedAssets.playersSkinsMaskEmbed2_().bitmapData, 8, 8, 56, 24, AnimatedChar.RIGHT);
+        AnimatedChars.add("playerskins3", new EmbeddedAssets.playersSkinsEmbed3_().bitmapData, new EmbeddedAssets.playersSkinsMaskEmbed3_().bitmapData, 8, 8, 56, 24, AnimatedChar.RIGHT);
         AnimatedChars.add("chars8x8rPets1", new EmbeddedAssets.chars8x8rPets1Embed_().bitmapData, new EmbeddedAssets.chars8x8rPets1MaskEmbed_().bitmapData, 8, 8, 56, 8, AnimatedChar.RIGHT);
         AnimatedChars.add("chars8x8rPets2", new EmbeddedAssets.chars8x8rPets2Embed_().bitmapData, new EmbeddedAssets.chars8x8rPets1MaskEmbed_().bitmapData, 8, 8, 56, 8, AnimatedChar.RIGHT);
         AnimatedChars.add("petsDivine", new EmbeddedAssets.petsDivineEmbed_().bitmapData, null, 16, 16, 112, 16, AnimatedChar.RIGHT);

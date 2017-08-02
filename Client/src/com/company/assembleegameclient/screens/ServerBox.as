@@ -25,7 +25,7 @@ public class ServerBox extends Sprite {
         this.value_ = (((_arg_1 == null)) ? null : _arg_1.name);
         this.nameText_ = new TextFieldDisplayConcrete().setSize(18).setColor(0xFFFFFF).setBold(true);
         if (_arg_1 == null) {
-            this.nameText_.setStringBuilder(new LineBuilder().setParams(TextKey.SERVER_BOX_BEST));
+            this.nameText_.setStringBuilder(new LineBuilder().setParams("US Midwest"));
         }
         else {
             this.nameText_.setStringBuilder(new StaticStringBuilder(_arg_1.name));

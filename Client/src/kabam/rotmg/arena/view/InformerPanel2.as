@@ -17,7 +17,7 @@ public class InformerPanel2 extends Panel {
     private var icon:Bitmap;
     var infoButton:DeprecatedTextButton;
     var enterButton:DeprecatedTextButton;
-    private var title:String = "Zylixel";
+    private var title:String = "Gotcha!";
     private var infoButtonString:String = "Pets.caretakerPanelButtonInfo";
     private var upgradeYardButtonString:String = "ArenaQueryPanel.leaderboard";
     private var waiter:SignalWaiter;
@@ -29,6 +29,7 @@ public class InformerPanel2 extends Panel {
         super(_arg_1);
         this.waiter.complete.addOnce(this.alignButton);
         this.handleIcon();
+        this.handleIcon2();
         this.handleTitleText();
         this.handleInfoButton();
     }
@@ -42,7 +43,7 @@ public class InformerPanel2 extends Panel {
     private function handleTitleText():void {
         this.titleText.setStringBuilder(new LineBuilder().setParams(this.title));
         this.titleText.x = 65;
-        this.titleText.y = 28;
+        this.titleText.y = 50;
         addChild(this.titleText);
     }
 
@@ -51,6 +52,14 @@ public class InformerPanel2 extends Panel {
         this.icon = ArenaViewAssetFactory.returnHostBitmap(this.type);
         addChild(this.icon);
         this.icon.x = 5;
+        this.icon.y = 15;
+    }
+
+    private function handleIcon2():void {
+        this.icon = ArenaViewAssetFactory.returnHostBitmap(this.type);
+        addChild(this.icon);
+        this.icon.x = 130;
+        this.icon.y = 15;
     }
 
     private function alignButton():void {

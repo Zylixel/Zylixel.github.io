@@ -15,7 +15,7 @@ import kabam.rotmg.core.StaticInjectorContext;
 
 public class TextureDataConcrete extends TextureData {
 
-    public static var remoteTexturesUsed:Boolean = false;
+    public static var remoteTexturesUsed:Boolean = true;
 
     private var isUsingLocalTextures:Boolean;
 

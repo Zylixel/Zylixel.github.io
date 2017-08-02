@@ -68,7 +68,7 @@ public class ObjectLibrary {
         "Pet": Pet,
         "PetUpgrader": PetUpgrader,
         "YardUpgrader": YardUpgrader,
-        "Informer": Informer
+        "FakeWhiteBag": Informer
     };
 
 

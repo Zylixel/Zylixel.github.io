@@ -16,7 +16,7 @@ public class TestingSetup implements ApplicationSetup {
     }
 
     public function getBuildLabel():String {
-        var _local_1:String = ((Parameters.BUILD_VERSION + ".") + Parameters.MINOR_VERSION);
+        var _local_1:String = ("Zy's Realm BETA");
         return (this.BUILD_LABEL.replace("{VERSION}", _local_1));
     }
 
