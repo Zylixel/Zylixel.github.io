@@ -1439,6 +1439,14 @@
       <feedPower>450</feedPower>
       <DisplayId>{equip.Sword_of_Acclaim}</DisplayId>
    </Object>
+   <Object type="0x3003" id="Splendor Bolt">
+         <Class>Projectile</Class>
+         <Texture>
+            <File>lofiObj5</File>
+            <Index>0x3f</Index>
+         </Texture>
+         <AngleCorrection>1</AngleCorrection>
+      </Object>
    <Object type="0x9c8" id="Sword of Splendor">
       <Class>Equipment</Class>
       <Item/>
@@ -1451,7 +1459,7 @@
       <RateOfFire>1</RateOfFire>
       <Sound>weapon/mithril_sword</Sound>
       <Projectile>
-         <ObjectId>Green Bolt</ObjectId>
+         <ObjectId>Splendor Bolt</ObjectId>
          <Speed>100</Speed>
          <MinDamage>225</MinDamage>
          <MaxDamage>285</MaxDamage>
@@ -1922,31 +1930,38 @@
       <feedPower>450</feedPower>
       <DisplayId>{equip.Wand_of_Recompense}</DisplayId>
    </Object>
-   <Object type="0x9ca" id="Wand of Evocation">
-      <Class>Equipment</Class>
-      <Item/>
-      <Texture>
-         <File>lofiObj5</File>
-         <Index>0x4d</Index>
-      </Texture>
-      <SlotType>8</SlotType>
-      <Description>{equip.A_shining_gold_wand_of_force,_built_by_a_diabolic_archmagus}</Description>
-      <RateOfFire>1</RateOfFire>
-      <Sound>weapon/wand_of_death</Sound>
-      <Projectile>
-         <ObjectId>Purple Magic</ObjectId>
-         <Speed>150</Speed>
-         <LifetimeMS>600</LifetimeMS>
-         <MinDamage>95</MinDamage>
-         <MaxDamage>135</MaxDamage>
-      </Projectile>
-      <BagType>4</BagType>
-      <FameBonus>4</FameBonus>
-      <OldSound>magicShoot</OldSound>
-      <feedPower>0</feedPower>
-      <Tier>13</Tier>
-      <DisplayId>{equip.Wand_of_Evocation}</DisplayId>
-   </Object>
+   <Object type="0x3005" id="Evocation Magic">
+       <Class>Projectile</Class>
+       <Texture>
+       <File>lofiObj5</File>
+       <Index>0x4f</Index>
+       </Texture>
+     </Object>
+      <Object type="0x9ca" id="Wand of Evocation">
+         <Class>Equipment</Class>
+         <Item/>
+         <Texture>
+            <File>lofiObj5</File>
+            <Index>0x4d</Index>
+         </Texture>
+         <SlotType>8</SlotType>
+        <Tier>13</Tier>
+         <Description>{equip.A_shining_gold_wand_of_force,_built_by_a_diabolic_archmagus}</Description>
+         <RateOfFire>1</RateOfFire>
+         <Sound>weapon/wand_of_death</Sound>
+         <Projectile>
+            <ObjectId>Evocation Magic</ObjectId>
+            <Speed>150</Speed>
+            <LifetimeMS>600</LifetimeMS>
+            <MinDamage>95</MinDamage>
+            <MaxDamage>135</MaxDamage>
+         </Projectile>
+         <BagType>4</BagType>
+         <FameBonus>4</FameBonus>
+         <OldSound>magicShoot</OldSound>
+         <feedPower>0</feedPower>
+         <DisplayId>{equip.Wand_of_Evocation}</DisplayId>
+      </Object>
    <Object type="0x9c0" id="Wand of Retribution">
       <Class>Equipment</Class>
       <Item/>
@@ -1959,7 +1974,7 @@
       <RateOfFire>1</RateOfFire>
       <Sound>weapon/wand_of_death</Sound>
       <Projectile>
-         <ObjectId>Orange Magic</ObjectId>
+         <ObjectId>Blue Magic</ObjectId>
          <Speed>150</Speed>
          <LifetimeMS>600</LifetimeMS>
          <MinDamage>95</MinDamage>
@@ -3180,7 +3195,7 @@
       <RateOfFire>1</RateOfFire>
       <Sound>weapon/fire_dagger</Sound>
       <Projectile>
-         <ObjectId>Green Magic</ObjectId>
+         <ObjectId>Orange Magic</ObjectId>
          <Speed>140</Speed>
          <MinDamage>95</MinDamage>
          <MaxDamage>180</MaxDamage>
@@ -3581,6 +3596,14 @@
       <feedPower>450</feedPower>
       <DisplayId>{equip.Bow_of_Covert_Havens}</DisplayId>
    </Object>
+   <Object type="0x3007" id="Mystical Energy Arrow">
+   <Class>Projectile</Class>
+   <Texture>
+   <File>lofiObj5</File>
+   <Index>0x5f</Index>
+   </Texture>
+   <AngleCorrection>1</AngleCorrection>
+   </Object>
    <Object type="0x9cc" id="Bow of Mystical Energy">
       <Class>Equipment</Class>
       <Item/>
@@ -3593,7 +3616,7 @@
       <RateOfFire>1</RateOfFire>
       <Sound>weapon/golden_bow</Sound>
       <Projectile>
-         <ObjectId>Gold Arrow</ObjectId>
+         <ObjectId>Mystical Energy Arrow</ObjectId>
          <Speed>160</Speed>
          <MinDamage>50</MinDamage>
          <MaxDamage>75</MaxDamage>
@@ -19424,5 +19447,77 @@ The solid honey on this ring renews its wearer with incredible energy.
 <BagType>4</BagType>
 </Object>
 
+<Object type="0x3008" id="Sadamune Slash">
+   <Class>Projectile</Class>
+   <Texture>
+   <File>lofiObj5</File>
+   <Index>0x8f</Index>
+   </Texture>
+   <AngleCorrection>1</AngleCorrection>
+</Object>
+<Object type="0x024a" id="Sadamune">
+<Class>Equipment</Class>
+<Item/>
+<Texture>
+<File>lofiObj5</File>
+<Index>0x8e</Index>
+</Texture>
+<SlotType>24</SlotType>
+<Tier>13</Tier>
+<Description>
+A formidable blade that was meticulously crafted over the course of several centuries by the most renowned masters in history.
+</Description>
+<RateOfFire>1</RateOfFire>
+<Sound>weapon/long_sword</Sound>
+<Projectile>
+<ObjectId>Sadamune Slash</ObjectId>
+<Speed>130</Speed>
+<LifetimeMS>365</LifetimeMS>
+<MinDamage>145</MinDamage>
+<MaxDamage>185</MaxDamage>
+<MultiHit/>
+</Projectile>
+<BagType>4</BagType>
+<FameBonus>5</FameBonus>
+<OldSound>bladeSwing</OldSound>
+<feedPower>650</feedPower>
+</Object>
+
+
+<Object type="0x3009" id="Kusanagi Slash">
+   <Class>Projectile</Class>
+   <Texture>
+   <File>lofiObj5</File>
+   <Index>0x9f</Index>
+   </Texture>
+   <AngleCorrection>1</AngleCorrection>
+</Object>
+<Object type="0x024b" id="Kusanagi">
+<Class>Equipment</Class>
+<Item/>
+<Texture>
+<File>lofiObj5</File>
+<Index>0x9e</Index>
+</Texture>
+<SlotType>24</SlotType>
+<Tier>14</Tier>
+<Description>
+An awe-inspiring sword gifted to only the most worthy mortals from the heavens themselves.
+</Description>
+<RateOfFire>1</RateOfFire>
+<Sound>weapon/long_sword</Sound>
+<Projectile>
+<ObjectId>Kusanagi Slash</ObjectId>
+<Speed>130</Speed>
+<LifetimeMS>365</LifetimeMS>
+<MinDamage>150</MinDamage>
+<MaxDamage>190</MaxDamage>
+<MultiHit/>
+</Projectile>
+<BagType>4</BagType>
+<FameBonus>6</FameBonus>
+<OldSound>bladeSwing</OldSound>
+<feedPower>950</feedPower>
+</Object>
 </Objects>
 
