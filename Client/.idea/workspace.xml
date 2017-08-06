@@ -19,21 +19,19 @@
       <file leaf-file-name="EmbeddedData_EquipCXML.dat" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedData_EquipCXML.dat">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="3606" column="38" lean-forward="false" selection-start-line="3606" selection-start-column="28" selection-end-line="3606" selection-end-column="38" />
+            <state relative-caret-position="303">
+              <caret line="19551" column="43" lean-forward="false" selection-start-line="19551" selection-start-column="43" selection-end-line="19551" selection-end-column="43" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NewsCell.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/news/view/NewsCell.as">
+      <file leaf-file-name="EmbeddedData_HauntedCemeteryCXML.dat" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedData_HauntedCemeteryCXML.dat">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="901">
-              <caret line="70" column="0" lean-forward="false" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
-              <folding>
-                <element signature="e#32#60#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="7905">
+              <caret line="465" column="12" lean-forward="false" selection-start-line="352" selection-start-column="3" selection-end-line="465" selection-end-column="12" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -129,7 +127,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Slime</find>
       <find>rosen</find>
       <find>playserskins2</find>
       <find>wind</find>
@@ -159,6 +156,7 @@
       <find>epicHiveObjects8x8</find>
       <find>legendary</find>
       <find>omn</find>
+      <find>blue zombie</find>
     </findStrings>
     <replaceStrings>
       <replace>lofiObj7</replace>
@@ -441,9 +439,9 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="PackagesPane" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -965,20 +963,25 @@
       <workItem from="1501717997114" duration="1297000" />
       <workItem from="1501723984967" duration="1775000" />
       <workItem from="1501725802968" duration="1631000" />
+      <workItem from="1501816483693" duration="1806000" />
+      <workItem from="1501821406352" duration="1587000" />
+      <workItem from="1501874404300" duration="1211000" />
+      <workItem from="1501876865804" duration="619000" />
+      <workItem from="1501965157653" duration="1541000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="123896000" />
+    <option name="totallyTimeSpent" value="130660000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1924" height="1056" extended-state="1" />
+    <frame x="-8" y="-8" width="1924" height="1056" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32502708" sideWeight="0.26492536" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32502708" sideWeight="0.26492536" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -990,9 +993,8 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2864807" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3025751" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.4936034" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1005,6 +1007,7 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Thumbnails" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980973" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.4936034" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1054,13 +1057,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/WebMain.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="65" column="20" lean-forward="false" selection-start-line="65" selection-start-column="19" selection-end-line="65" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/account/web/view/FormField.as">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -1321,9 +1317,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="901">
           <caret line="70" column="0" lean-forward="false" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
-          <folding>
-            <element signature="e#32#60#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1391,10 +1384,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedData_HauntedCemeteryCXML.dat">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7905">
+          <caret line="465" column="12" lean-forward="false" selection-start-line="352" selection-start-column="3" selection-end-line="465" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedData_EquipCXML.dat">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="3606" column="38" lean-forward="false" selection-start-line="3606" selection-start-column="28" selection-end-line="3606" selection-end-column="38" />
+        <state relative-caret-position="303">
+          <caret line="19551" column="43" lean-forward="false" selection-start-line="19551" selection-start-column="43" selection-end-line="19551" selection-end-column="43" />
           <folding />
         </state>
       </provider>

@@ -19157,30 +19157,30 @@ A nefarious helm combining pheromones and Killer Honey to captivate Killer Bees 
 </Object>
 <Object type="0x08b2" id="EH Ability Bee 1">
 <Class>Character</Class>
-<Texture>
-<File>lofiObj9</File>
-<Index>0x70</Index>
-</Texture>
+<AnimatedTexture>
+<File>chars8x8rHigh</File>
+<Index>0x013</Index>
+</AnimatedTexture>
 <Flying/>
 <Size>80</Size>
 <NoMiniMap/>
 </Object>
 <Object type="0x08e8" id="EH Ability Bee 2">
 <Class>Character</Class>
-<Texture>
-<File>lofiObj9</File>
-<Index>0x80</Index>
-</Texture>
+<AnimatedTexture>
+<File>chars8x8rHigh</File>
+<Index>0x014</Index>
+</AnimatedTexture>
 <Flying/>
 <Size>80</Size>
 <NoMiniMap/>
 </Object>
 <Object type="0x08e9" id="EH Ability Bee 3">
 <Class>Character</Class>
-<Texture>
-<File>lofiObj9</File>
-<Index>0x90</Index>
-</Texture>
+<AnimatedTexture>
+<File>chars8x8rHigh</File>
+<Index>0x015</Index>
+</AnimatedTexture>
 <Flying/>
 <Size>80</Size>
 <NoMiniMap/>
@@ -19519,5 +19519,163 @@ An awe-inspiring sword gifted to only the most worthy mortals from the heavens t
 <OldSound>bladeSwing</OldSound>
 <feedPower>950</feedPower>
 </Object>
+
+<Object type="0x6098" id="Keeper Minion">
+      <Enemy/>
+      <Class>Character</Class>
+      <AnimatedTexture>
+         <File>chars8x8rEncounters</File>
+         <Index>123</Index>
+      </AnimatedTexture>
+      <Size>110</Size>
+      <ShadowSize>80</ShadowSize>
+      <HitSound>monster/abyss_demons_hit</HitSound>
+      <DeathSound>monster/dwarf_god_hit</DeathSound>
+      <MaxHitPoints>1500</MaxHitPoints>
+      <XpMult>0</XpMult>
+      <Defense>15</Defense>
+      <Projectile id="0">
+         <ObjectId>Blue Zombie Wave</ObjectId>
+         <Damage>80</Damage>
+         <Speed>80</Speed>
+         <Size>80</Size>
+         <LifetimeMS>800</LifetimeMS>
+      </Projectile>
+      <DisplayId>The Keeper's Minion</DisplayId>
+   </Object>
+  <Object type="0x6100" id="Keeper Minion Activator">
+      <Class>Character</Class>
+      <Texture>
+         <File>invisible</File>
+         <Index>0</Index>
+      </Texture>
+      <DisplayId>Gilgor Keeper of the Realm</DisplayId>
+   </Object>
+   <Object type="0x6099" id="Keeper Minion Rise">
+      <Class>Character</Class>
+      <Texture>
+         <File>invisible</File>
+         <Index>0</Index>
+      </Texture>
+      <AltTexture id="1">
+         <Texture>
+            <File>lofiObj9</File>
+            <Index>0x70</Index>
+         </Texture>
+      </AltTexture>
+      <AltTexture id="2">
+         <Texture>
+            <File>lofiObj9</File>
+            <Index>0x71</Index>
+         </Texture>
+      </AltTexture>
+      <AltTexture id="3">
+         <Texture>
+            <File>lofiObj9</File>
+            <Index>0x72</Index>
+         </Texture>
+      </AltTexture>
+      <AltTexture id="4">
+         <Texture>
+            <File>lofiObj9</File>
+            <Index>0x73</Index>
+         </Texture>
+      </AltTexture>
+      <AltTexture id="5">
+         <Texture>
+            <File>lofiObj9</File>
+            <Index>0x74</Index>
+         </Texture>
+      </AltTexture>
+      <AltTexture id="6">
+         <Texture>
+            <File>lofiObj9</File>
+            <Index>0x75</Index>
+         </Texture>
+      </AltTexture>
+      <AltTexture id="7">
+         <Texture>
+            <File>lofiObj9</File>
+            <Index>0x76</Index>
+         </Texture>
+      </AltTexture>
+      <AltTexture id="8">
+         <Texture>
+            <File>lofiObj9</File>
+            <Index>0x77</Index>
+         </Texture>
+      </AltTexture>
+      <AltTexture id="9">
+         <Texture>
+            <File>lofiObj9</File>
+            <Index>0x78</Index>
+         </Texture>
+      </AltTexture>
+      <AltTexture id="10">
+         <Texture>
+            <File>lofiObj9</File>
+            <Index>0x79</Index>
+         </Texture>
+      </AltTexture>
+      <AltTexture id="11">
+         <Texture>
+            <File>lofiObj9</File>
+            <Index>0x7a</Index>
+         </Texture>
+      </AltTexture>
+      <AltTexture id="12">
+         <Texture>
+            <File>lofiObj9</File>
+            <Index>0x7b</Index>
+         </Texture>
+      </AltTexture>
+      <AltTexture id="13">
+         <Texture>
+            <File>lofiObj9</File>
+            <Index>0x7c</Index>
+         </Texture>
+      </AltTexture>
+      <Size>110</Size>
+      <ShadowSize>0</ShadowSize>
+      <NoMiniMap/>
+      <MaxHitPoints>10000</MaxHitPoints>
+      <XpMult>0</XpMult>
+      <DisplayId>{hauntedCemetery.Zombie_Rise}</DisplayId>
+   </Object>
+  <Object type="0x6101" id="The Realm Keeper Key">
+      <Class>Equipment</Class>
+      <Item/>
+      <Texture>
+         <File>lofiObj9</File>
+         <Index>0x6e</Index>
+      </Texture>
+      <SlotType>10</SlotType>
+      <Description>Produced from those who destroy the realm. Molded by those who live in the realm. The end of all the realm.</Description>
+      <Sound>use_key</Sound>
+      <Consumable/>
+      <Activate id="Temp Portal">Create</Activate>
+      <feedPower>100</feedPower>
+      <DisplayId>The Realm Keeper Key</DisplayId>
+   </Object>
+  <Object type="0x6102" id="Temp Portal">
+      <Class>Portal</Class>
+      <IntergamePortal/>
+      <DungeonName>TheRealmKeeper</DungeonName>
+      <Texture>
+         <File>lofiObjBig</File>
+         <Index>0x139</Index>
+      </Texture>
+      <Size>60</Size>
+      <DisplayId>Temp Portal</DisplayId>
+   </Object>
+  <Object type="0x6103" id="Keeper Gods Activator">
+      <Class>Character</Class>
+      <Texture>
+         <File>invisible</File>
+         <Index>0</Index>
+      </Texture>
+      <DisplayId>Gilgor Keeper of the Realm</DisplayId>
+   </Object>
+
 </Objects>
 

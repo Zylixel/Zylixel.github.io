@@ -374,7 +374,6 @@
       <DisplayId>{hauntedCemetery.Blue_Zombie}</DisplayId>
    </Object>
    <Object type="0x6000" id="Zombie Rise">
-      <Enemy/>
       <Class>Character</Class>
       <Texture>
          <File>invisible</File>
