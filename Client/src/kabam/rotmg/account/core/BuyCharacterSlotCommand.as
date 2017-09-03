@@ -13,7 +13,7 @@ import kabam.rotmg.core.model.PlayerModel;
 import kabam.rotmg.core.signals.SetScreenSignal;
 import kabam.rotmg.dialogs.control.CloseDialogsSignal;
 import kabam.rotmg.dialogs.control.OpenDialogSignal;
-import kabam.rotmg.ui.view.CharacterSlotNeedGoldDialog;
+import kabam.rotmg.ui.view.CharacterSlotNeedFameDialog;
 
 public class BuyCharacterSlotCommand {
 
@@ -37,7 +37,7 @@ public class BuyCharacterSlotCommand {
 
     public function execute():void {
         if (this.isSlotUnaffordable()) {
-            this.promptToGetMoreGold();
+            this.promptToGetMoreFame();
         }
         else {
             this.purchaseSlot();
@@ -45,11 +45,11 @@ public class BuyCharacterSlotCommand {
     }
 
     private function isSlotUnaffordable():Boolean {
-        return ((this.model.getCredits() < this.model.getNextCharSlotPrice()));
+        return ((this.model.getFame() < this.model.getNextCharSlotPrice()));
     }
 
-    private function promptToGetMoreGold():void {
-        this.openDialog.dispatch(new CharacterSlotNeedGoldDialog());
+    private function promptToGetMoreFame():void {
+        this.openDialog.dispatch(new CharacterSlotNeedFameDialog());
     }
 
     private function purchaseSlot():void {

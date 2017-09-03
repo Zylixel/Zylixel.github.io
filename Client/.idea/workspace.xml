@@ -16,102 +16,98 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="EmbeddedData_EquipCXML.dat" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedData_EquipCXML.dat">
+      <file leaf-file-name="BuyCharacterRect.as" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/company/assembleegameclient/screens/charrects/BuyCharacterRect.as">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="303">
-              <caret line="19551" column="43" lean-forward="false" selection-start-line="19551" selection-start-column="43" selection-end-line="19551" selection-end-column="43" />
+            <state relative-caret-position="187">
+              <caret line="22" column="31" lean-forward="false" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="31" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EmbeddedData_HauntedCemeteryCXML.dat" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedData_HauntedCemeteryCXML.dat">
+      <file leaf-file-name="CharacterSlotNeedFameDialog.as" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/ui/view/CharacterSlotNeedFameDialog.as">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7905">
-              <caret line="465" column="12" lean-forward="false" selection-start-line="352" selection-start-column="3" selection-end-line="465" selection-end-column="12" />
+            <state relative-caret-position="68">
+              <caret line="4" column="26" lean-forward="false" selection-start-line="4" selection-start-column="26" selection-end-line="4" selection-end-column="26" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LegendListItem.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/legends/view/LegendListItem.as">
+      <file leaf-file-name="CharacterSlotNeedFameMediator.as" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/ui/view/CharacterSlotNeedFameMediator.as">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1173">
-              <caret line="86" column="33" lean-forward="false" selection-start-line="86" selection-start-column="33" selection-end-line="86" selection-end-column="33" />
+            <state relative-caret-position="357">
+              <caret line="29" column="36" lean-forward="false" selection-start-line="29" selection-start-column="36" selection-end-line="29" selection-end-column="36" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EmbeddedAssets_playersSkinsMaskEmbed2_.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedAssets_playersSkinsMaskEmbed2_.as">
+      <file leaf-file-name="UIConfig.as" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/ui/UIConfig.as">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="16" lean-forward="false" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="16" />
+            <state relative-caret-position="181">
+              <caret line="82" column="53" lean-forward="false" selection-start-line="82" selection-start-column="53" selection-end-line="82" selection-end-column="53" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EmbeddedAssets_playersSkinsMaskEmbed3_.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedAssets_playersSkinsMaskEmbed3_.as">
+      <file leaf-file-name="Dialog.as" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/company/assembleegameclient/ui/dialogs/Dialog.as">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="493">
+              <caret line="51" column="51" lean-forward="false" selection-start-line="51" selection-start-column="51" selection-end-line="51" selection-end-column="51" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CharacterSelectionAndNewsScreen.as" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/company/assembleegameclient/screens/CharacterSelectionAndNewsScreen.as">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="43" column="18" lean-forward="false" selection-start-line="43" selection-start-column="18" selection-end-line="43" selection-end-column="18" />
+              <folding>
+                <element signature="e#50#116#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CurrentCharacterMediator.as" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/ui/view/CurrentCharacterMediator.as">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="153">
-              <caret line="9" column="1" lean-forward="false" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
+              <caret line="26" column="4" lean-forward="false" selection-start-line="26" selection-start-column="4" selection-end-line="27" selection-end-column="41" />
+              <folding>
+                <element signature="e#30#94#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SoundEffectLibrary.as" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/company/assembleegameclient/sound/SoundEffectLibrary.as">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="45" lean-forward="false" selection-start-line="0" selection-start-column="8" selection-end-line="0" selection-end-column="45" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EmbeddedAssets_lofiObj11Embed_.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedAssets_lofiObj11Embed_.as">
+      <file leaf-file-name="BuyCharacterSlotCommand.as" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/account/core/BuyCharacterSlotCommand.as">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AssetLoader.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/company/assembleegameclient/util/AssetLoader.as">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="867">
-              <caret line="67" column="64" lean-forward="false" selection-start-line="67" selection-start-column="64" selection-end-line="67" selection-end-column="64" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EmbeddedAssets_lofiObj8Embed_.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedAssets_lofiObj8Embed_.as">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="16" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EmbeddedAssets_lofiObj9Embed_.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedAssets_lofiObj9Embed_.as">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="1" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EmbeddedAssets_lofiObj10Embed_.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedAssets_lofiObj10Embed_.as">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" column="48" lean-forward="false" selection-start-line="3" selection-start-column="48" selection-end-line="3" selection-end-column="49" />
-              <folding />
+            <state relative-caret-position="629">
+              <caret line="51" column="59" lean-forward="false" selection-start-line="51" selection-start-column="59" selection-end-line="51" selection-end-column="59" />
+              <folding>
+                <element signature="e#35#114#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -127,19 +123,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>rosen</find>
-      <find>playserskins2</find>
-      <find>wind</find>
-      <find>Ninja -</find>
-      <find>Juliet</find>
-      <find>132</find>
-      <find>Juli</find>
-      <find>EmbeddedAssets_lofiObj5Embed_</find>
-      <find>lofiObjEmbed7</find>
-      <find>frost c</find>
-      <find>Skin</find>
-      <find>Dagger</find>
-      <find>Doom cir</find>
       <find>Screens.servers</find>
       <find>playerskins</find>
       <find>playerskins2</find>
@@ -157,6 +140,19 @@
       <find>legendary</find>
       <find>omn</find>
       <find>blue zombie</find>
+      <find>Rock</find>
+      <find>x - 10</find>
+      <find>else {</find>
+      <find>bow</find>
+      <find>Legendary</find>
+      <find>getfa</find>
+      <find>getNextCharSlotPrice</find>
+      <find>CharacterSlotNeedGoldDialo</find>
+      <find>arg_</find>
+      <find>playGame</find>
+      <find>screen</find>
+      <find>onmous</find>
+      <find>onmouseClick</find>
     </findStrings>
     <replaceStrings>
       <replace>lofiObj7</replace>
@@ -167,6 +163,8 @@
     </replaceStrings>
     <dirStrings>
       <dir>C:\Users\mason\Downloads\RotMG_Client_27.7.X2-master\RotMG_Client_27.7.X2-master</dir>
+      <dir>C:\Users\mason\Dropbox\Zylixel.github.io\Client</dir>
+      <dir>D:\Dropbox\Zylixel.github.io\Client\src\com\company\assembleegameclient\map</dir>
     </dirStrings>
   </component>
   <component name="GradleLocalSettings">
@@ -177,20 +175,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedData_ShattersCXML.dat" />
-        <option value="$PROJECT_DIR$/src/com/company/assembleegameclient/screens/TitleMenuOption.as" />
-        <option value="$PROJECT_DIR$/src/com/company/assembleegameclient/objects/TextureDataConcrete.as" />
-        <option value="$PROJECT_DIR$/src/kabam/rotmg/chat/control/TextHandler.as" />
-        <option value="$PROJECT_DIR$/src/kabam/rotmg/text/model/TextKey.as" />
-        <option value="$PROJECT_DIR$/src/com/company/assembleegameclient/ui/tooltip/EquipmentToolTip.as" />
-        <option value="$PROJECT_DIR$/src/com/company/assembleegameclient/account/ui/CreateGuildFrame.as" />
-        <option value="$PROJECT_DIR$/src/com/company/assembleegameclient/account/ui/ChooseNameFrame.as" />
-        <option value="$PROJECT_DIR$/src/com/company/assembleegameclient/account/ui/Frame.as" />
-        <option value="$PROJECT_DIR$/src/com/company/assembleegameclient/parameters/Parameters.as" />
-        <option value="$PROJECT_DIR$/src/com/company/assembleegameclient/ui/options/Options.as" />
-        <option value="$PROJECT_DIR$/src/com/company/assembleegameclient/game/MapUserInput.as" />
-        <option value="$PROJECT_DIR$/src/kabam/rotmg/game/model/PotionInventoryModel.as" />
-        <option value="$PROJECT_DIR$/src/com/company/assembleegameclient/game/GameSprite.as" />
         <option value="$PROJECT_DIR$/src/com/company/assembleegameclient/ui/panels/itemgrids/EquippedGrid.as" />
         <option value="$PROJECT_DIR$/src/kabam/rotmg/ui/view/StatMetersView.as" />
         <option value="$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedData_ObjectsCXML.dat" />
@@ -214,7 +198,6 @@
         <option value="$PROJECT_DIR$/src/com/company/assembleegameclient/objects/ObjectLibrary.as" />
         <option value="$PROJECT_DIR$/src/kabam/rotmg/arena/view/InformerPanel2.as" />
         <option value="$PROJECT_DIR$/src/com/company/assembleegameclient/screens/ServerBox.as" />
-        <option value="$PROJECT_DIR$/src/kabam/rotmg/ui/view/ButtonFactory.as" />
         <option value="$PROJECT_DIR$/src/kabam/rotmg/ui/view/TitleView.as" />
         <option value="$PROJECT_DIR$/src/kabam/rotmg/messaging/impl/GameServerConnectionConcrete.as" />
         <option value="$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedAssets_playersSkinsEmbed3_.as" />
@@ -227,7 +210,22 @@
         <option value="$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedAssets_lofiObj9Embed_.as" />
         <option value="$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedAssets_lofiObj10Embed_.as" />
         <option value="$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedAssets_lofiObj11Embed_.as" />
+        <option value="$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedData_GroundCXML.dat" />
+        <option value="$PROJECT_DIR$/src/com/company/util/GraphicsUtil.as" />
+        <option value="$PROJECT_DIR$/src/com/company/assembleegameclient/engine3d/Face3D.as" />
+        <option value="$PROJECT_DIR$/src/com/company/assembleegameclient/map/GradientOverlay.as" />
+        <option value="$PROJECT_DIR$/src/WebMain.as" />
         <option value="$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedData_EquipCXML.dat" />
+        <option value="$PROJECT_DIR$/src/com/company/assembleegameclient/screens/charrects/BuyCharacterRect.as" />
+        <option value="$PROJECT_DIR$/src/kabam/rotmg/core/model/PlayerModel.as" />
+        <option value="$PROJECT_DIR$/src/kabam/rotmg/account/core/services/BuyCharacterSlotTask.as" />
+        <option value="$PROJECT_DIR$/src/kabam/rotmg/ui/view/CharacterSlotNeedGoldMediator.as" />
+        <option value="$PROJECT_DIR$/src/kabam/rotmg/account/core/BuyCharacterSlotCommand.as" />
+        <option value="$PROJECT_DIR$/src/com/company/assembleegameclient/ui/dialogs/Dialog.as" />
+        <option value="$PROJECT_DIR$/src/kabam/rotmg/ui/view/ButtonFactory.as" />
+        <option value="$PROJECT_DIR$/src/kabam/rotmg/ui/view/CharacterSlotNeedFameDialog.as" />
+        <option value="$PROJECT_DIR$/src/kabam/rotmg/ui/view/CharacterSlotNeedFameMediator.as" />
+        <option value="$PROJECT_DIR$/src/kabam/rotmg/ui/UIConfig.as" />
       </list>
     </option>
   </component>
@@ -329,119 +327,15 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="kabam" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rotmg" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RotMG_Client_27.7.X2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kabam" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rotmg" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RotMG_Client_27.7.X2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kabam" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rotmg" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RotMG_Client_27.7.X2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kabam" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rotmg" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RotMG_Client_27.7.X2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kabam" />
+              <option name="myItemId" value="company" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -453,7 +347,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="js.eslint.eslintPackage" value="" />
-    <property name="SearchEverywhereHistoryKey" value="mask&#9;FILE&#9;file://C:/Users/mason/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/assets/EmbeddedAssets_playersSkinsMaskEmbed2_.as&#10;player&#9;FILE&#9;file://C:/Users/mason/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/assets/EmbeddedAssets_playersSkinsEmbed2_.as&#10;skins&#9;FILE&#9;file://C:/Users/mason/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/assets/EmbeddedData_SkinsCXML.dat&#10;informer&#9;FILE&#9;file://C:/Users/mason/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/arena/view/InformerPanel2.as&#10;asset&#9;null&#9;null&#10;lofi6&#9;null&#9;null&#10;lofiobj&#9;null&#9;null&#10;lofi&#9;null&#9;null&#10;lofio&#9;FILE&#9;file://C:/Users/mason/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/assets/EmbeddedAssets_lofiObj5Embed_.png&#10;d2LofiObjEmbed&#9;FILE&#9;file://C:/Users/mason/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/assets/EmbeddedAssets_d2LofiObjEmbed_.png&#10;playersskinsmaskEmbed2&#9;FILE&#9;file://C:/Users/mason/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/assets/EmbeddedAssets_playersSkinsMaskEmbed_2.png&#10;playerskinsma&#9;null&#9;null&#10;embedded&#9;null&#9;null&#10;embedd&#9;FILE&#9;file://C:/Users/mason/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/assets/EmbeddedAssets_playersSkinsEmbed_.as&#10;AssetLoader.as&#9;FILE&#9;file://C:/Users/mason/Dropbox/Zylixel.github.io/Client/src/com/company/assembleegameclient/util/AssetLoader.as&#10;asse&#9;FILE&#9;file://C:/Users/mason/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/assets/EmbeddedAssets_playersSkinsEmbed_.as&#10;equip&#9;FILE&#9;file://C:/Users/mason/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/assets/EmbeddedData_EquipCXML.dat&#10;playerskins&#9;FILE&#9;file://C:/Users/mason/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/assets/EmbeddedAssets_playersSkins16Embed_.png&#10;playerskin&#9;null&#9;null&#10;equipped&#9;null&#9;null&#10;gamesprite&#9;null&#9;null&#10;hudview&#9;FILE&#9;file://C:/Users/mason/Dropbox/ZysRealm/Client/src/kabam/rotmg/ui/view/HUDView.as&#10;pot&#9;null&#9;null&#10;ui&#9;null&#9;null&#10;status&#9;null&#9;null&#10;statmeter&#9;null&#9;null&#10;mapus&#9;null&#9;null&#10;options&#9;FILE&#9;file://C:/Users/mason/Dropbox/ZysRealm/Client/src/com/company/assembleegameclient/ui/options/Options.as&#10;para&#9;FILE&#9;file://C:/Users/mason/Dropbox/ZysRealm/Client/src/com/company/assembleegameclient/parameters/Parameters.as&#10;arenaq&#9;null&#9;null&#10;frame&#9;null&#9;null&#10;create&#9;null&#9;null&#10;frame.as&#9;FILE&#9;file://C:/Users/mason/Dropbox/ZysRealm/Client/src/com/company/assembleegameclient/account/ui/Frame.as&#10;textkey&#9;FILE&#9;file://C:/Users/mason/Dropbox/ZysRealm/Client/src/kabam/rotmg/text/model/TextKey.as&#10;game&#9;FILE&#9;file://C:/Users/mason/Dropbox/RotMG_Client_27.7.X2-masterb/src/kabam/rotmg/messaging/impl/GameServerConnectionConcrete.as&#10;obj&#9;FILE&#9;file://C:/Users/mason/Dropbox/RotMG_Client_27.7.X2-masterb/src/kabam/rotmg/messaging/impl/data/ObjectData.as&#10;title&#9;FILE&#9;file://C:/Users/mason/Dropbox/RotMG_Client_27.7.X2-masterb/src/com/company/assembleegameclient/screens/TitleMenuOption.as&#10;shatter&#9;FILE&#9;file://C:/Users/mason/Dropbox/RotMG_Client_27.7.X2-masterb/src/kabam/rotmg/assets/EmbeddedData_ShattersCXML.dat&#10;friend&#9;FILE&#9;file://C:/Users/mason/Dropbox/RotMG_Client_27.7.X2-masterb/src/kabam/rotmg/friends/view/FriendRemoveButton.as&#10;PlayersC&#9;null&#9;null" />
+    <property name="SearchEverywhereHistoryKey" value="Button&#9;FILE&#9;file://D:/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/ui/view/ButtonFactory.as&#10;characterS&#9;null&#9;null&#10;CharacterSlotNeed&#9;null&#9;null&#10;characterSlotNee&#9;FILE&#9;file://D:/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/ui/view/CharacterSlotNeedFameMediator.as&#10;charR&#9;null&#9;null&#10;buycha&#9;FILE&#9;file://D:/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/account/core/services/BuyCharacterSlotTask.as&#10;PlayerMO&#9;FILE&#9;file://D:/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/core/model/PlayerModel.as&#10;BuyCharacterRect.as&#9;FILE&#9;file://D:/Dropbox/Zylixel.github.io/Client/src/com/company/assembleegameclient/screens/charrects/BuyCharacterRect.as&#10;mask&#9;FILE&#9;file://C:/Users/mason/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/assets/EmbeddedAssets_playersSkinsMaskEmbed2_.as&#10;player&#9;FILE&#9;file://C:/Users/mason/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/assets/EmbeddedAssets_playersSkinsEmbed2_.as&#10;skins&#9;FILE&#9;file://C:/Users/mason/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/assets/EmbeddedData_SkinsCXML.dat&#10;informer&#9;FILE&#9;file://C:/Users/mason/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/arena/view/InformerPanel2.as&#10;asset&#9;null&#9;null&#10;lofi6&#9;null&#9;null&#10;lofiobj&#9;null&#9;null&#10;lofi&#9;null&#9;null&#10;lofio&#9;FILE&#9;file://C:/Users/mason/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/assets/EmbeddedAssets_lofiObj5Embed_.png&#10;d2LofiObjEmbed&#9;FILE&#9;file://C:/Users/mason/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/assets/EmbeddedAssets_d2LofiObjEmbed_.png&#10;playersskinsmaskEmbed2&#9;FILE&#9;file://C:/Users/mason/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/assets/EmbeddedAssets_playersSkinsMaskEmbed_2.png&#10;playerskinsma&#9;null&#9;null&#10;embedded&#9;null&#9;null&#10;embedd&#9;FILE&#9;file://C:/Users/mason/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/assets/EmbeddedAssets_playersSkinsEmbed_.as&#10;AssetLoader.as&#9;FILE&#9;file://C:/Users/mason/Dropbox/Zylixel.github.io/Client/src/com/company/assembleegameclient/util/AssetLoader.as&#10;asse&#9;FILE&#9;file://C:/Users/mason/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/assets/EmbeddedAssets_playersSkinsEmbed_.as&#10;equip&#9;FILE&#9;file://C:/Users/mason/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/assets/EmbeddedData_EquipCXML.dat&#10;playerskins&#9;FILE&#9;file://C:/Users/mason/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/assets/EmbeddedAssets_playersSkins16Embed_.png&#10;playerskin&#9;null&#9;null&#10;equipped&#9;null&#9;null&#10;gamesprite&#9;null&#9;null&#10;hudview&#9;FILE&#9;file://C:/Users/mason/Dropbox/ZysRealm/Client/src/kabam/rotmg/ui/view/HUDView.as&#10;pot&#9;null&#9;null&#10;ui&#9;null&#9;null&#10;status&#9;null&#9;null&#10;statmeter&#9;null&#9;null&#10;mapus&#9;null&#9;null&#10;options&#9;FILE&#9;file://C:/Users/mason/Dropbox/ZysRealm/Client/src/com/company/assembleegameclient/ui/options/Options.as&#10;para&#9;FILE&#9;file://C:/Users/mason/Dropbox/ZysRealm/Client/src/com/company/assembleegameclient/parameters/Parameters.as&#10;arenaq&#9;null&#9;null&#10;frame&#9;null&#9;null&#10;create&#9;null&#9;null&#10;frame.as&#9;FILE&#9;file://C:/Users/mason/Dropbox/ZysRealm/Client/src/com/company/assembleegameclient/account/ui/Frame.as&#10;textkey&#9;FILE&#9;file://C:/Users/mason/Dropbox/ZysRealm/Client/src/kabam/rotmg/text/model/TextKey.as&#10;game&#9;FILE&#9;file://C:/Users/mason/Dropbox/RotMG_Client_27.7.X2-masterb/src/kabam/rotmg/messaging/impl/GameServerConnectionConcrete.as&#10;obj&#9;FILE&#9;file://C:/Users/mason/Dropbox/RotMG_Client_27.7.X2-masterb/src/kabam/rotmg/messaging/impl/data/ObjectData.as&#10;title&#9;FILE&#9;file://C:/Users/mason/Dropbox/RotMG_Client_27.7.X2-masterb/src/com/company/assembleegameclient/screens/TitleMenuOption.as&#10;shatter&#9;FILE&#9;file://C:/Users/mason/Dropbox/RotMG_Client_27.7.X2-masterb/src/kabam/rotmg/assets/EmbeddedData_ShattersCXML.dat&#10;friend&#9;FILE&#9;file://C:/Users/mason/Dropbox/RotMG_Client_27.7.X2-masterb/src/kabam/rotmg/friends/view/FriendRemoveButton.as&#10;PlayersC&#9;null&#9;null" />
   </component>
   <component name="RecentsManager">
     <key name="CreateActionScriptClassDialog.DESTINATION_PACKAGE_RECENT_KEY">
@@ -968,20 +862,34 @@
       <workItem from="1501874404300" duration="1211000" />
       <workItem from="1501876865804" duration="619000" />
       <workItem from="1501965157653" duration="1541000" />
+      <workItem from="1502069373292" duration="672000" />
+      <workItem from="1502071249803" duration="640000" />
+      <workItem from="1502419088018" duration="446000" />
+      <workItem from="1502493204758" duration="1122000" />
+      <workItem from="1504454321748" duration="973000" />
+      <workItem from="1504455513634" duration="452000" />
+      <workItem from="1504456023601" duration="709000" />
+      <workItem from="1504456933147" duration="585000" />
+      <workItem from="1504466974275" duration="1684000" />
+      <workItem from="1504468879462" duration="1009000" />
+      <workItem from="1504469926014" duration="1985000" />
+      <workItem from="1504471963423" duration="1851000" />
+      <workItem from="1504473915654" duration="1011000" />
+      <workItem from="1504476012318" duration="669000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="130660000" />
+    <option name="totallyTimeSpent" value="144468000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1924" height="1056" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32502708" sideWeight="0.26492536" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32502708" sideWeight="0.26492536" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -993,7 +901,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3025751" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3524678" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1057,130 +965,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/account/web/view/FormField.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="10" column="53" lean-forward="false" selection-start-line="10" selection-start-column="53" selection-end-line="10" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/assembleegameclient/ui/BoostPanel.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1105">
-          <caret line="82" column="40" lean-forward="false" selection-start-line="82" selection-start-column="40" selection-end-line="82" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/assembleegameclient/ui/panels/mediators/ItemGridMediator.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2210">
-          <caret line="164" column="25" lean-forward="false" selection-start-line="164" selection-start-column="20" selection-end-line="164" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/assembleegameclient/ui/panels/itemgrids/InventoryGrid.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="5" column="26" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/assembleegameclient/ui/tooltip/MyPlayerToolTip.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="59" lean-forward="false" selection-start-line="8" selection-start-column="59" selection-end-line="8" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/assembleegameclient/objects/Merchant.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/assembleegameclient/objects/ArenaGuard.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/arena/view/InformerPanel.as" />
-    <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/arena/view/InformerPanelMediator.as" />
-    <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedData_StaticObjectsCXML.dat">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143531">
-          <caret line="8443" column="12" lean-forward="false" selection-start-line="8443" selection-start-column="12" selection-end-line="8443" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/arena/view/ArenaQueryPanelMediator.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="13" column="12" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/arena/view/ArenaQueryPanel.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="29" column="55" lean-forward="false" selection-start-line="29" selection-start-column="55" selection-end-line="29" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/classes/control/ParseClassesXmlCommand.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1003">
-          <caret line="66" column="26" lean-forward="false" selection-start-line="66" selection-start-column="26" selection-end-line="66" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/assembleegameclient/objects/CharacterChanger.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/arena/view/InformerPanelMediator2.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="18" column="31" lean-forward="false" selection-start-line="18" selection-start-column="31" selection-end-line="18" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedAssets_playersSkins16Embed_.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/util/AssetLibrary.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedData_PlayersCXML.dat">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7395">
-          <caret line="435" column="12" lean-forward="false" selection-start-line="435" selection-start-column="12" selection-end-line="435" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedAssets_playersSkinsEmbed_.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedAssets_playersSkinsMaskEmbed2_.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedAssets_playersSkinsMaskEmbed_.as">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -1257,13 +1041,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/ui/view/ButtonFactory.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="969">
-          <caret line="63" column="33" lean-forward="false" selection-start-line="63" selection-start-column="33" selection-end-line="63" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/assembleegameclient/screens/ServerBox.as">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="697">
@@ -1324,63 +1101,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1173">
           <caret line="86" column="33" lean-forward="false" selection-start-line="86" selection-start-column="33" selection-end-line="86" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/assembleegameclient/util/AssetLoader.as">
+    <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedData_GroundCXML.dat">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="867">
-          <caret line="67" column="64" lean-forward="false" selection-start-line="67" selection-start-column="64" selection-end-line="67" selection-end-column="64" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedAssets_lofiObj8Embed_.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="16" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedAssets_lofiObj9Embed_.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="1" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedAssets_lofiObj10Embed_.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="48" lean-forward="false" selection-start-line="3" selection-start-column="48" selection-end-line="3" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedAssets_playersSkinsMaskEmbed2_.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="16" lean-forward="false" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedAssets_playersSkinsMaskEmbed3_.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="1" lean-forward="false" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedAssets_lofiObj11Embed_.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-          <folding />
+        <state relative-caret-position="708">
+          <caret line="3723" column="19" lean-forward="false" selection-start-line="3723" selection-start-column="19" selection-end-line="3723" selection-end-column="19" />
         </state>
       </provider>
     </entry>
@@ -1388,14 +1115,219 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="7905">
           <caret line="465" column="12" lean-forward="false" selection-start-line="352" selection-start-column="3" selection-end-line="465" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/assembleegameclient/engine3d/Face3D.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="115" column="35" lean-forward="false" selection-start-line="115" selection-start-column="35" selection-end-line="115" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/util/GraphicsUtil.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="28" column="5" lean-forward="false" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedAssets_playersSkinsMaskEmbed2_.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="16" lean-forward="false" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedAssets_playersSkinsMaskEmbed3_.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="1" lean-forward="false" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedAssets_lofiObj11Embed_.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/assembleegameclient/util/AssetLoader.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="867">
+          <caret line="67" column="64" lean-forward="false" selection-start-line="67" selection-start-column="64" selection-end-line="67" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedAssets_lofiObj8Embed_.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="16" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedAssets_lofiObj9Embed_.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="1" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedAssets_lofiObj10Embed_.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="48" lean-forward="false" selection-start-line="3" selection-start-column="48" selection-end-line="3" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/assembleegameclient/map/GradientOverlay.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="17" column="22" lean-forward="false" selection-start-line="17" selection-start-column="22" selection-end-line="17" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/WebMain.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="82" column="51" lean-forward="false" selection-start-line="82" selection-start-column="51" selection-end-line="82" selection-end-column="51" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedData_EquipCXML.dat">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="303">
-          <caret line="19551" column="43" lean-forward="false" selection-start-line="19551" selection-start-column="43" selection-end-line="19551" selection-end-column="43" />
+        <state relative-caret-position="4743">
+          <caret line="279" column="6" lean-forward="false" selection-start-line="279" selection-start-column="6" selection-end-line="279" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/core/model/PlayerModel.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1241">
+          <caret line="82" column="9" lean-forward="false" selection-start-line="82" selection-start-column="9" selection-end-line="82" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/account/core/services/BuyCharacterSlotTask.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="32" column="39" lean-forward="false" selection-start-line="32" selection-start-column="39" selection-end-line="32" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/assembleegameclient/screens/charrects/CharacterRectList.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1224">
+          <caret line="91" column="70" lean-forward="false" selection-start-line="91" selection-start-column="50" selection-end-line="91" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/assembleegameclient/screens/charrects/BuyCharacterRect.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="22" column="31" lean-forward="false" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/account/core/BuyCharacterSlotCommand.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="629">
+          <caret line="51" column="59" lean-forward="false" selection-start-line="51" selection-start-column="59" selection-end-line="51" selection-end-column="59" />
+          <folding>
+            <element signature="e#35#114#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/ui/view/CharacterSlotNeedGoldMediator.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="7" column="42" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/assembleegameclient/ui/dialogs/Dialog.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="51" column="51" lean-forward="false" selection-start-line="51" selection-start-column="51" selection-end-line="51" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/ui/view/ButtonFactory.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="314">
+          <caret line="80" column="48" lean-forward="false" selection-start-line="80" selection-start-column="48" selection-end-line="80" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/assembleegameclient/sound/SoundEffectLibrary.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="45" lean-forward="false" selection-start-line="0" selection-start-column="8" selection-end-line="0" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/assembleegameclient/screens/TitleMenuOption.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2261">
+          <caret line="163" column="48" lean-forward="true" selection-start-line="163" selection-start-column="48" selection-end-line="163" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/ui/view/CharacterSlotNeedGoldDialog.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="16" column="26" lean-forward="false" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/assembleegameclient/screens/CharacterSelectionAndNewsScreen.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="43" column="18" lean-forward="false" selection-start-line="43" selection-start-column="18" selection-end-line="43" selection-end-column="18" />
+          <folding>
+            <element signature="e#50#116#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/ui/view/CurrentCharacterMediator.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="26" column="4" lean-forward="false" selection-start-line="26" selection-start-column="4" selection-end-line="27" selection-end-column="41" />
+          <folding>
+            <element signature="e#30#94#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/ui/view/CharacterSlotNeedFameDialog.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="26" lean-forward="false" selection-start-line="4" selection-start-column="26" selection-end-line="4" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/ui/view/CharacterSlotNeedFameMediator.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="29" column="36" lean-forward="false" selection-start-line="29" selection-start-column="36" selection-end-line="29" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/ui/UIConfig.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="181">
+          <caret line="82" column="53" lean-forward="false" selection-start-line="82" selection-start-column="53" selection-end-line="82" selection-end-column="53" />
           <folding />
         </state>
       </provider>

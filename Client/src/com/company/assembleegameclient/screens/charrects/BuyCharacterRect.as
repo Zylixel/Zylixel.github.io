@@ -32,7 +32,7 @@ public class BuyCharacterRect extends CharacterRect {
 
     private function makeCoin():void {
         var _local_2:Bitmap;
-        var _local_1:BitmapData = IconFactory.makeCoin();
+        var _local_1:BitmapData = IconFactory.makeFame();
         _local_2 = new Bitmap(_local_1);
         _local_2.x = (WIDTH - 43);
         _local_2.y = (((HEIGHT - _local_2.height) * 0.5) - 1);

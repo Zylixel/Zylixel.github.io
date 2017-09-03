@@ -1,5 +1,0 @@
--Fix Paladin Stacking
--Tweak T8 Abilities
--Resprite T14 Armor and T13+ Weapons 
--Update to Include many Prod Items {50%}
--Rename and T14+ Armor and T13+ Weapons

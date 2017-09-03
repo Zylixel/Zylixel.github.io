@@ -579,6 +579,7 @@ public class TextKey {
     public static const CONDITIONEFFECT_CURSE_IMMUNE:String = "conditionEffect.CurseImmune";
     public static const MONEY_GOLD_NEED_REGISTRATION:String = "Money.goldNeedsRegistration";
     public static const CHARACTERSLOTNEEDGOLDDIALOG_PRICE:String = "CharacterSlotNeedGoldDialog.price";
+    public static const CHARACTERSLOTNEEDFAMEDIALOG_PRICE:String = "CharacterSlotNeedFameDialog.price";
     public static const BUY_GOLD:String = "Gold.Buy";
     public static const NOT_ENOUGH_GOLD:String = "Gold.NotEnough";
     public static const GOLD_NOTENOUGHFORITEM:String = "Gold.notEnoughForItem";

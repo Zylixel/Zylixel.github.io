@@ -19676,6 +19676,34 @@ An awe-inspiring sword gifted to only the most worthy mortals from the heavens t
       </Texture>
       <DisplayId>Gilgor Keeper of the Realm</DisplayId>
    </Object>
-
+<Object type="0x2602" id="Boshy Gun">
+    <Class>Equipment</Class>
+    <Item />
+    <Texture>
+             <File>lofiObj5</File>
+             <Index>0x5e</Index>
+          </Texture>
+    <SlotType>3</SlotType>
+    <Description>It was Boshy Time</Description>
+    <RateOfFire>0.5</RateOfFire>
+    <OldSound>weapon/boshy_gun</OldSound>
+    <Projectile>
+      <ObjectId>Black Arrow</ObjectId>
+      <Speed>160</Speed>
+      <MinDamage>50</MinDamage>
+      <MaxDamage>70</MaxDamage>
+      <LifetimeMS>500</LifetimeMS>
+      <Size>40</Size>
+      <MultiHit />
+      <PassesCover />
+    </Projectile>
+    <NumProjectiles>5</NumProjectiles>
+    <ArcGap>5</ArcGap>
+    <BagType>6</BagType>
+    <FameBonus>5</FameBonus>
+    <feedPower>0</feedPower>
+    <Soulbound />
+    <DisplayId>Boshy Gun</DisplayId>
+  </Object>
 </Objects>
 

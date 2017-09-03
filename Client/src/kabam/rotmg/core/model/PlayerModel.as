@@ -83,6 +83,11 @@ public class PlayerModel {
         }
     }
 
+    public function changeFame(_arg_1:int):void {
+        this.charList.fame_ = (this.charList.fame_ + _arg_1);
+        this.fameChanged.dispatch(this.charList.fame_);
+    }
+
     public function getFame():int {
         return (this.charList.fame_);
     }

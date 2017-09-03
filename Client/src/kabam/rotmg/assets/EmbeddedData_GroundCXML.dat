@@ -3709,4 +3709,20 @@
       <MinDamage>70</MinDamage>
       <MaxDamage>80</MaxDamage>
    </Ground>
+   <Ground type="0x2600" id="White">
+       <Texture>
+         <File>lofiObj9</File>
+         <Index>0x80</Index>
+       </Texture>
+       <BlendPriority>10</BlendPriority>
+       <RandomOffset/>
+     </Ground>
+     <Ground type="0x2601" id="KeeperRock">
+         <Texture>
+           <File>lofiEnvironment</File>
+           <Index>0x60</Index>
+         </Texture>
+         <RandomOffset/>
+       </Ground>
+
 </GroundTypes>
