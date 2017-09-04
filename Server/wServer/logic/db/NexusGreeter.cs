@@ -98,6 +98,14 @@ namespace wServer.logic
                     new TimedTransition(1500, "Idle")
                         )
                   )
+            )
+            .Init("Nexus Summoner",
+                    new State(
+                            new State("Reload",
+                                new ApplySetpiece("NexusFloral"),
+                                new TimedTransition(60000, "Reload")
+                                )
+                        )
               );
     }
 }

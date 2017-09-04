@@ -13,7 +13,7 @@ namespace wServer.realm.worlds
     public class Nexus : World
     {
         public const string WINTER_RESOURCE = "wServer.realm.worlds.maps.nexus_winter.jm";
-        public const string SUMMER_RESOURCE = "wServer.realm.worlds.maps.Nexus_for_meh.jm";
+        public const string SUMMER_RESOURCE = "wServer.realm.worlds.maps.NozenNexus.jm";
 
         public Nexus()
         {
@@ -21,7 +21,7 @@ namespace wServer.realm.worlds
             Name = "Nexus";
             ClientWorldName = "server.nexus";
             Background = 2;
-            AllowTeleport = false;
+            AllowTeleport = true;
             Difficulty = -1;
         }
 

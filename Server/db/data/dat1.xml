@@ -79987,5 +79987,14 @@ The solid honey on this ring renews its wearer with incredible energy.
       <Size>100</Size>
   <DisplayId>{shatters.shtrs_The_Cursed_Crown}</DisplayId>
    </Object>
+  <Object type="0x6107" id="Nexus Summoner">
+    <Group>Nexus</Group>
+    <Class>Character</Class>
+    <Texture>
+      <File>invisible</File>
+      <Index>0</Index>
+    </Texture>
+    <DisplayId>Nexus Summoner</DisplayId>
+  </Object>
 </Objects>
 
