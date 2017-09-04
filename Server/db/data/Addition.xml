@@ -1,0 +1,1215 @@
+﻿<ExtData>
+
+
+  
+  <Object id="Mantle of Ash" setType="0x2aa2" setName="Royal Dragon Set" ext="true" type="0x6025">
+    <Class>Equipment</Class>
+    <Item/>
+    <Texture>
+      <File>lofiObj5</File>
+      <Index>0x89</Index>
+    </Texture>
+    <SlotType>14</SlotType>
+    <Description>Ha! Filthy dogs, your claws only hone my golden scales.</Description>
+    <ActivateOnEquip stat="26" amount="5">IncrementStat</ActivateOnEquip>
+    <ActivateOnEquip stat="27" amount="-5">IncrementStat</ActivateOnEquip>
+    <ActivateOnEquip stat="21" amount="10">IncrementStat</ActivateOnEquip>
+    <ActivateOnEquip stat="0" amount="60">IncrementStat</ActivateOnEquip>
+    <BagType>6</BagType>
+    <FameBonus>6</FameBonus>
+    <feedPower>800</feedPower>
+    <AshRobe />
+    <DisplayId>Mantle of Ash</DisplayId>
+    
+///Credit to User Scorchmist On Realmeye.com/forums
+   
+ </Object>
+
+  <Object id="Rod of the Wyrm" setType="0x2aa2" setName="Royal Dragon Set" ext="true" type="0x6024">
+    <Class>Equipment</Class>
+    <Item/>
+    <Texture>
+      <File>lofiObj5</File>
+      <Index>0x88</Index>
+    </Texture>
+    <SlotType>8</SlotType>
+    <Description>Your kind is not worthy of my attention, plebeians. Vanish from my sight!</Description>
+    <RateOfFire>0.7</RateOfFire>
+    <NumProjectiles>3</NumProjectiles>
+    <ArcGap>4</ArcGap>
+    <Sound>weapon/wand_of_death</Sound>
+    <Projectile>
+      <ObjectId>Fire Bullet</ObjectId>
+      <Speed>200</Speed>
+      <LifetimeMS>350</LifetimeMS>
+      <MinDamage>70</MinDamage>
+      <MultiHit/>
+      <MaxDamage>85</MaxDamage>
+    </Projectile>
+    <BagType>6</BagType>
+    <FameBonus>4</FameBonus>
+    <OldSound>magicShoot</OldSound>
+    <feedPower>800</feedPower>
+    <DisplayId>Rod of the Wyrm</DisplayId>
+  </Object>
+
+  <Object id="Dragonbreath Scepter" setType="0x2aa2" setName="Royal Dragon Set" ext="true" type="0x6023">
+      <Class>Equipment</Class>
+      <Item/>
+      <Texture>
+         <File>lofiObj5</File>
+         <Index>0x8a</Index>
+      </Texture>
+      <SlotType>23</SlotType>
+      <Description>You scurry before me like rats fleeing the flame. Do you think you can hide from my storm of conflagration? Pray to your gods tonight, for tomorrow, you will burn.</Description>
+      <Sound>spell/magic_nova</Sound>
+      <ActivateOnEquip stat="22" amount="2">IncrementStat</ActivateOnEquip>
+      <Usable/>
+      <BagType>6</BagType>
+      <FameBonus>4</FameBonus>
+      <MpCost>85</MpCost>
+      <Activate totalDamage="250" maxTargets="7">Lightning</Activate>
+      <feedPower>800</feedPower>
+      <DisplayId>Dragonbreath Scepter</DisplayId>
+   </Object>
+  
+  <Object id="Pendant of the Dusk Talon" setType="0x2aa2" setName="Royal Dragon Set" ext="true" type="0x6022">
+      <Class>Equipment</Class>
+      <Item/>
+      <Texture>
+         <File>lofiObj5</File>
+         <Index>0x8b</Index>
+      </Texture>
+      <SlotType>9</SlotType>
+      <Description>A midnight claw that glows dimly. If too much blood is spilled, light erupts</Description>
+      <ActivateOnEquip stat="0" amount="40">IncrementStat</ActivateOnEquip>
+      <ActivateOnEquip stat="27" amount="4">IncrementStat</ActivateOnEquip>
+      <ActivateOnEquip stat="26" amount="4">IncrementStat</ActivateOnEquip>
+      <ActivateOnEquip stat="3" amount="40">IncrementStat</ActivateOnEquip>
+      <BagType>6</BagType>
+      <FameBonus>4</FameBonus>
+      <feedPower>500</feedPower>
+      <DisplayId>Pendant of the Dusk Talon</DisplayId>
+      <MantleResurrect />
+   </Object>
+ 
+    <Object id="Bow of the Nile Arrow" ext="true">
+    <Class>Projectile</Class>
+    <Texture>
+      <File>lofiObj2</File>
+      <Index>0x85</Index>
+    </Texture>
+    <AngleCorrection>1</AngleCorrection>
+  </Object>
+  
+  <Object id="Bow of the Nile" ext="true" type="0x6020">
+    <Class>Equipment</Class>
+    <Item/>
+    <Texture>
+      <File>lofiObj5</File>
+      <Index>0x98</Index>
+    </Texture>
+    <SlotType>3</SlotType>
+    <Description>Thanks to Nickapod for making this bow!</Description>
+    <RateOfFire>1</RateOfFire>
+    <Sound>weapon/golden_bow</Sound>
+    <Projectile>
+      <ObjectId>Bow of the Nile Arrow</ObjectId>
+      <Speed>160</Speed>
+      <MinDamage>80</MinDamage>
+      <MaxDamage>100</MaxDamage>
+      <LifetimeMS>440</LifetimeMS>
+      <MultiHit/>
+      <Amplitude>0.75</Amplitude>
+      <Frequency>1.25</Frequency>
+    </Projectile>
+    <BagType>6</BagType>
+    <FameBonus>5</FameBonus>
+    <NumProjectiles>2</NumProjectiles>
+    <OldSound>arrowShoot</OldSound>
+    <feedPower>800</feedPower>
+    <DisplayId>Bow of the Nile</DisplayId>
+  </Object>
+
+  <Object id="Quiver of the Nile" ext="true" type="0x6019">
+    <Class>Equipment</Class>
+    <Item/>
+    <Texture>
+      <File>lofiObj5</File>
+      <Index>0x99</Index>
+    </Texture>
+    <SlotType>15</SlotType>
+    <Description>Thanks to Nickapod for making this Quiver!</Description>
+    <Sound>spell/fire_spray</Sound>
+    <Projectile>
+      <ObjectId>Quiver of the Nile Arrow</ObjectId>
+      <Speed>150</Speed>
+      <MinDamage>200</MinDamage>
+      <MaxDamage>250</MaxDamage>
+      <LifetimeMS>600</LifetimeMS>
+      <Size>150</Size>
+      <ConditionEffect duration="3">Paralyzed</ConditionEffect>
+      <ConditionEffect duration="2">Dazed</ConditionEffect>
+      <MultiHit/>
+      <PassesCover/>
+      <ParticleTrail/>
+    </Projectile>
+    <ConditionEffect duration="3">Paralyzed</ConditionEffect>
+    <ConditionEffect duration="2">Dazed</ConditionEffect>
+    <Usable/>
+    <BagType>6</BagType>
+    <FameBonus>5</FameBonus>
+    <MpCost>75</MpCost>
+    <Activate>Shoot</Activate>
+    <feedPower>800</feedPower>
+    <DisplayId>Quiver of the Nile</DisplayId>
+  </Object>
+
+  <Object id="Quiver of the Nile Arrow" ext="true">
+    <Class>Projectile</Class>
+    <Texture>
+      <File>lofiObj2</File>
+      <Index>0x84</Index>
+    </Texture>
+    <AngleCorrection>1</AngleCorrection>
+  </Object>
+  <Object ext="true" id="Inner Sanctum Key" type="0x6021">
+    <Class>Equipment</Class>
+    <Item/>
+    <Texture>
+      <File>lofiObj3</File>
+      <Index>0x54E</Index>
+    </Texture>
+    <SlotType>10</SlotType>
+    <Description>Not Your Average Ice Cave!</Description>
+    <Sound>use_key</Sound>
+    <Consumable/>
+    <Activate id="Inner Sanctum Portal">Create</Activate>
+    <feedPower>145</feedPower>
+    <DisplayId>Inner Sanctum Key</DisplayId>
+  </Object>
+  <Object id="Zylixel" ext="true">
+    <Class>Character</Class>
+       <Texture>
+         <File>lofiObj5</File>
+         <Index>0x8c</Index>
+       </Texture>
+    <HitSound>monster/slimes_death</HitSound>
+    <DeathSound>monster/flying_brain_death</DeathSound>
+    <Size>200</Size>
+    <ShadowSize>50</ShadowSize>
+  </Object>
+  <Object type="0x2aa1" id="Royal Dragon Skin" ext="true">
+    <Skin/>
+    <Class>Skin</Class>
+    <AnimatedTexture>
+      <File>playerskins</File>
+      <Index>91</Index>
+    </AnimatedTexture>
+    <PlayerClassType>0x0325</PlayerClassType>
+    <UnlockSpecial>Set Skin</UnlockSpecial>
+    <NoSkinSelect/>
+    <DisplayId>Royal Dragon Skin</DisplayId>
+  </Object>
+  <Object id="Osiris Armor" type="0x6018" ext="true">
+    <Class>Equipment</Class>
+    <Item/>
+    <Texture>
+      <File>lofiObj5</File>
+      <Index>0x9a</Index>
+    </Texture>
+    <SlotType>6</SlotType>
+    <Description>Thanks to Nickapod for making this armor!</Description>
+    <ActivateOnEquip stat="21" amount="15">IncrementStat</ActivateOnEquip>
+    <ActivateOnEquip stat="28" amount="5">IncrementStat</ActivateOnEquip>
+    <ActivateOnEquip stat="27" amount="5">IncrementStat</ActivateOnEquip>
+    <ActivateOnEquip stat="0" amount="15">IncrementStat</ActivateOnEquip>
+    <BagType>6</BagType>
+    <FameBonus>5</FameBonus>
+    <feedPower>800</feedPower>
+    <DisplayId>Osiris Armor</DisplayId>
+  </Object>
+  <Object id="Eye of Osiris" type="0x6017" ext="true">
+    <Class>Equipment</Class>
+    <Item/>
+    <Texture>
+      <File>lofiObj5</File>
+      <Index>0x9b</Index>
+    </Texture>
+    <SlotType>9</SlotType>
+    <Description>Thanks to Nickapod for making this ring!</Description>
+    <ActivateOnEquip stat="0" amount="80">IncrementStat</ActivateOnEquip>
+    <ActivateOnEquip stat="27" amount="4">IncrementStat</ActivateOnEquip>
+    <ActivateOnEquip stat="26" amount="4">IncrementStat</ActivateOnEquip>
+    <ActivateOnEquip stat="3" amount="20">IncrementStat</ActivateOnEquip>
+    <ActivateOnEquip stat="28" amount="4">IncrementStat</ActivateOnEquip>
+    <BagType>6</BagType>
+    <FameBonus>4</FameBonus>
+    <feedPower>500</feedPower>
+    <DisplayId>Eye of Osiris</DisplayId>
+  </Object>
+   <Object ext="true" id="Market Portal">
+      <Class>Portal</Class>
+      <IntergamePortal/>
+      <DungeonName>Market</DungeonName>
+      <Texture>
+         <File>lofiEnvironment2</File>
+         <Index>0x36</Index>
+      </Texture>
+      <DisplayId>Market Portal</DisplayId>
+   </Object>
+  <Object ext="true" id="Zepts the Ghost King">
+    <Enemy/>
+    <Class>Character</Class>
+    <Texture>
+      <File>lofiChar216x16</File>
+      <Index>0x30</Index>
+    </Texture>
+    <HitSound>monster/ghost_god_hit</HitSound>
+    <DeathSound>monster/ghost_god_death</DeathSound>
+    <Size>150</Size>
+    <MaxHitPoints>80000</MaxHitPoints>
+    <Defense>15</Defense>
+    <Flying/>
+    <Quest/>
+    <God/>
+    <StasisImmune/>
+    <Level>1</Level>
+    <XpMult>4</XpMult>
+    <NoArticle/>
+    <Projectile id="0">
+      <ObjectId>White Bullet</ObjectId>
+      <Speed>90</Speed>
+      <Damage>400</Damage>
+      <Size>50</Size>
+      <LifetimeMS>12000</LifetimeMS>
+      <ArmorPiercing/>
+      <MultiHit/>
+    </Projectile>
+    <Projectile id="1">
+      <ObjectId>Brown Magic</ObjectId>
+      <Speed>90</Speed>
+      <MinDamage>80</MinDamage>
+      <MaxDamage>90</MaxDamage>
+      <Size>40</Size>
+      <LifetimeMS>2600</LifetimeMS>
+      <MultiHit/>
+      <Boomerang/>
+      <Amplitude>2</Amplitude>
+      <Frequency>2.5</Frequency>
+      <ConditionEffect duration="1">Quiet</ConditionEffect>
+    </Projectile>
+    <Projectile id="2">
+      <ObjectId>Yellow Star</ObjectId>
+      <Speed>57</Speed>
+      <Damage>65</Damage>
+      <Size>80</Size>
+      <LifetimeMS>30000</LifetimeMS>
+      <MultiHit/>
+      <ConditionEffect duration="1">Confused</ConditionEffect>
+    </Projectile>
+    <Projectile id="4">
+      <ObjectId>White Bullet</ObjectId>
+      <Speed>40</Speed>
+      <Damage>160</Damage>
+      <Size>80</Size>
+      <LifetimeMS>40000</LifetimeMS>
+      <MultiHit/>
+      <ConditionEffect duration="3" target="1">Stasis</ConditionEffect>
+    </Projectile>
+    <Projectile id="5">
+      <ObjectId>White Bullet</ObjectId>
+      <Speed>70</Speed>
+      <Damage>60</Damage>
+      <Size>60</Size>
+      <LifetimeMS>20000</LifetimeMS>
+      <MultiHit/>
+    </Projectile>
+    <DisplayId>Zepts the Ghost King</DisplayId>
+  </Object>
+  <Object ext="true" id="Epic Undead Lair Key" type="0x6028">
+    <Class>Equipment</Class>
+    <Item/>
+    <Texture>
+      <File>lofiObj3</File>
+      <Index>0xf4</Index>
+    </Texture>
+    <SlotType>10</SlotType>
+    <Description>May Zepts spare your life</Description>
+    <Sound>use_key</Sound>
+    <Consumable/>
+    <Activate id="Epic Undead Lair Portal">Create</Activate>
+    <feedPower>145</feedPower>
+    <DisplayId>Epic Undead Lair Key</DisplayId>
+  </Object>
+  <Object type="0x6029" id="Epic Undead Lair Portal" ext="true">
+    <Class>Portal</Class>
+    <IntergamePortal/>
+    <DungeonName>Epic Undead Lair</DungeonName>
+    <Texture>
+      <File>lofiEnvironment2</File>
+      <Index>0x97</Index>
+    </Texture>
+    <Animation prob="1.0" period="0.0">
+      <Frame time="0.2">
+        <RandomTexture>
+          <Texture>
+            <File>lofiEnvironment2</File>
+            <Index>0x98</Index>
+          </Texture>
+          <Texture>
+            <File>lofiEnvironment2</File>
+            <Index>0x99</Index>
+          </Texture>
+          <Texture>
+            <File>lofiEnvironment2</File>
+            <Index>0x9a</Index>
+          </Texture>
+          <Texture>
+            <File>lofiEnvironment2</File>
+            <Index>0x9b</Index>
+          </Texture>
+          <Texture>
+            <File>lofiEnvironment2</File>
+            <Index>0x9c</Index>
+          </Texture>
+        </RandomTexture>
+      </Frame>
+    </Animation>
+    <DisplayId>Epic Undead Lair Portal</DisplayId>
+  </Object>
+  <Object type="0x6042" id="Ghost Rogue of Zepts" ext="true">
+    <Group>Epic Lair Ghosts</Group>
+    <Enemy/>
+    <Class>Character</Class>
+    <Texture>
+      <File>lofiChar8x8</File>
+      <Index>0x7d</Index>
+    </Texture>
+    <HitSound>monster/ghosts_hit</HitSound>
+    <DeathSound>monster/ghosts_death</DeathSound>
+    <Size>120</Size>
+    <MaxHitPoints>1200</MaxHitPoints>
+    <Defense>25</Defense>
+    <XpMult>0</XpMult>
+    <Projectile id="0">
+      <ObjectId>Blade</ObjectId>
+      <Damage>50</Damage>
+      <Speed>120</Speed>
+      <LifetimeMS>400</LifetimeMS>
+    </Projectile>
+    <DisplayId>Ghost Rogue of Zepts</DisplayId>
+  </Object>
+  <Object type="0x6030" id="Ghost Warrior of Zepts" ext="true">
+    <Group>Epic Lair Ghosts</Group>
+    <Enemy/>
+    <Class>Character</Class>
+    <Texture>
+      <File>lofiChar8x8</File>
+      <Index>0x7b</Index>
+    </Texture>
+    <HitSound>monster/ghosts_hit</HitSound>
+    <DeathSound>monster/ghosts_death</DeathSound>
+    <Size>120</Size>
+    <MaxHitPoints>1200</MaxHitPoints>
+    <Defense>25</Defense>
+    <XpMult>0</XpMult>
+    <Projectile id="0">
+      <ObjectId>Blade</ObjectId>
+      <Damage>60</Damage>
+      <Speed>120</Speed>
+      <LifetimeMS>400</LifetimeMS>
+    </Projectile>
+    <DisplayId>Ghost Warrior of Zepts</DisplayId>
+  </Object>
+  <Object type="0x6031" id="Ghost Mage of Zepts" ext="true">
+    <Group>Epic Lair Ghosts</Group>
+    <Enemy/>
+    <Class>Character</Class>
+    <Texture>
+      <File>lofiChar8x8</File>
+      <Index>0x7c</Index>
+    </Texture>
+    <HitSound>monster/ghosts_hit</HitSound>
+    <DeathSound>monster/ghosts_death</DeathSound>
+    <Size>120</Size>
+    <MaxHitPoints>1200</MaxHitPoints>
+    <Defense>25</Defense>
+    <XpMult>0</XpMult>
+    <Projectile id="0">
+      <ObjectId>Blue Bolt</ObjectId>
+      <Damage>75</Damage>
+      <Speed>50</Speed>
+      <LifetimeMS>3000</LifetimeMS>
+    </Projectile>
+    <DisplayId>Ghost Mage of Zepts</DisplayId>
+  </Object>
+  <Object type="0x6032" id="Epic Lair Construct Giant" ext="true">
+    <Group>Epic Lair Constructs</Group>
+    <Enemy/>
+    <Class>Character</Class>
+    <Texture>
+      <File>lofiChar16x16</File>
+      <Index>0x4c</Index>
+    </Texture>
+    <HitSound>monster/dwarf_god_hit</HitSound>
+    <DeathSound>monster/dwarf_god_death</DeathSound>
+    <Size>110</Size>
+    <MaxHitPoints>1400</MaxHitPoints>
+    <Defense>20</Defense>
+    <Projectile id="0">
+      <ObjectId>White Bolt</ObjectId>
+      <Damage>120</Damage>
+      <Speed>50</Speed>
+      <LifetimeMS>3000</LifetimeMS>
+      <Size>120</Size>
+    </Projectile>
+    <Projectile id="1">
+      <ObjectId>Blue Star</ObjectId>
+      <Damage>20</Damage>
+      <Speed>80</Speed>
+      <LifetimeMS>3000</LifetimeMS>
+      <ConditionEffect duration="3">Confused</ConditionEffect>
+    </Projectile>
+    <DisplayId>Epic Lair Construct Giant</DisplayId>
+  </Object>
+  <Object type="0x6033" id="Epic Lair Construct Titan" ext="true">
+    <Group>Epic Lair Constructs</Group>
+    <Enemy/>
+    <Class>Character</Class>
+    <Texture>
+      <File>lofiChar16x16</File>
+      <Index>0x4d</Index>
+    </Texture>
+    <HitSound>monster/dwarf_god_hit</HitSound>
+    <DeathSound>monster/dwarf_god_death</DeathSound>
+    <Size>120</Size>
+    <MaxHitPoints>1400</MaxHitPoints>
+    <Defense>20</Defense>
+    <Projectile id="0">
+      <ObjectId>Blue Bolt</ObjectId>
+      <Damage>140</Damage>
+      <Speed>70</Speed>
+      <LifetimeMS>3000</LifetimeMS>
+    </Projectile>
+    <Projectile id="1">
+      <ObjectId>Blue Star</ObjectId>
+      <Damage>20</Damage>
+      <Speed>80</Speed>
+      <LifetimeMS>3000</LifetimeMS>
+      <ConditionEffect duration="3">Confused</ConditionEffect>
+    </Projectile>
+    <DisplayId>Epic Lair Construct Titan</DisplayId>
+  </Object>
+  <Object type="0x6034" id="Epic Lair Big Black Slime" ext="true">
+    <Group>Epic Lair Slimes</Group>
+    <Enemy/>
+    <Class>Character</Class>
+    <Texture>
+      <File>lofiChar8x8</File>
+      <Index>0xb0</Index>
+    </Texture>
+    <HitSound>monster/slimes_hit</HitSound>
+    <DeathSound>monster/slimes_death</DeathSound>
+    <Size>150</Size>
+    <MaxHitPoints>900</MaxHitPoints>
+    <Defense>0</Defense>
+    <Projectile id="0">
+      <ObjectId>Black Magic</ObjectId>
+      <Damage>250</Damage>
+      <Speed>80</Speed>
+      <LifetimeMS>1000</LifetimeMS>
+    </Projectile>
+    <DisplayId>Epic Lair Big Black Slime</DisplayId>
+  </Object>
+  <Object type="0x6035" id="Epic Lair Medium Black Slime" ext="true">
+    <Enemy/>
+    <Class>Character</Class>
+    <Texture>
+      <File>lofiChar8x8</File>
+      <Index>0xb0</Index>
+    </Texture>
+    <HitSound>monster/slimes_hit</HitSound>
+    <DeathSound>monster/slimes_death</DeathSound>
+    <Size>120</Size>
+    <MaxHitPoints>650</MaxHitPoints>
+    <Defense>0</Defense>
+    <Projectile id="0">
+      <ObjectId>Black Magic</ObjectId>
+      <Damage>200</Damage>
+      <Speed>80</Speed>
+      <LifetimeMS>1000</LifetimeMS>
+    </Projectile>
+    <DisplayId>Epic Lair Medium Black Slime</DisplayId>
+  </Object>
+  <Object type="0x6036" id="Epic Lair Little Black Slime" ext="true">
+    <Enemy/>
+    <Class>Character</Class>
+    <Texture>
+      <File>lofiChar8x8</File>
+      <Index>0xb0</Index>
+    </Texture>
+    <HitSound>monster/slimes_hit</HitSound>
+    <DeathSound>monster/slimes_death</DeathSound>
+    <Size>75</Size>
+    <MaxHitPoints>150</MaxHitPoints>
+    <Defense>0</Defense>
+    <Projectile id="0">
+      <ObjectId>Black Magic</ObjectId>
+      <Damage>100</Damage>
+      <Speed>80</Speed>
+      <LifetimeMS>1000</LifetimeMS>
+    </Projectile>
+    <DisplayId>Epic Lair Little Black Slime</DisplayId>
+  </Object>
+  <Object type="0x6037" id="Epic Lair Big Brown Slime" ext="true">
+    <Group>Epic Lair Slimes</Group>
+    <Enemy/>
+    <Class>Character</Class>
+    <Texture>
+      <File>lofiChar8x8</File>
+      <Index>0xb1</Index>
+    </Texture>
+    <HitSound>monster/slimes_hit</HitSound>
+    <DeathSound>monster/slimes_death</DeathSound>
+    <Size>150</Size>
+    <MaxHitPoints>900</MaxHitPoints>
+    <Defense>0</Defense>
+    <Projectile id="0">
+      <ObjectId>Brown Magic</ObjectId>
+      <Damage>250</Damage>
+      <Speed>80</Speed>
+      <LifetimeMS>1000</LifetimeMS>
+    </Projectile>
+    <DisplayId>Epic Lair Big Brown Slime</DisplayId>
+  </Object>
+  <Object type="0x6038" id="Epic Lair Little Brown Slime" ext="true">
+    <Enemy/>
+    <Class>Character</Class>
+    <Texture>
+      <File>lofiChar8x8</File>
+      <Index>0xb1</Index>
+    </Texture>
+    <HitSound>monster/slimes_hit</HitSound>
+    <DeathSound>monster/slimes_death</DeathSound>
+    <Size>75</Size>
+    <MaxHitPoints>650</MaxHitPoints>
+    <Defense>0</Defense>
+    <Projectile id="0">
+      <ObjectId>Brown Magic</ObjectId>
+      <Damage>150</Damage>
+      <Speed>80</Speed>
+      <LifetimeMS>1000</LifetimeMS>
+    </Projectile>
+    <DisplayId>Epic Lair Little Brown Slime</DisplayId>
+  </Object>
+  <Object type="0x6039" id="Epic Lair Brown Bat" ext="true">
+    <Group>Epic Lair Bats</Group>
+    <Enemy/>
+    <Class>Character</Class>
+    <Texture>
+      <File>lofiChar8x8</File>
+      <Index>0xce</Index>
+    </Texture>
+    <HitSound>monster/bats_hit</HitSound>
+    <DeathSound>monster/bats_death</DeathSound>
+    <Size>50</Size>
+    <MaxHitPoints>400</MaxHitPoints>
+    <Defense>0</Defense>
+    <Flying/>
+    <Projectile id="0">
+      <ObjectId>Blue Magic</ObjectId>
+      <Damage>100</Damage>
+      <Speed>100</Speed>
+      <LifetimeMS>200</LifetimeMS>
+    </Projectile>
+    <DisplayId>Epic Lair Brown Bat</DisplayId>
+  </Object>
+  <Object type="0x6040" id="Epic Lair Ghost Bat" ext="true">
+    <Group>Epic Lair Bats</Group>
+    <Enemy/>
+    <Class>Character</Class>
+    <Texture>
+      <File>lofiChar8x8</File>
+      <Index>0x79</Index>
+    </Texture>
+    <HitSound>monster/bats_hit</HitSound>
+    <DeathSound>monster/bats_death</DeathSound>
+    <Size>50</Size>
+    <MaxHitPoints>400</MaxHitPoints>
+    <Defense>30</Defense>
+    <Flying/>
+    <Projectile id="0">
+      <ObjectId>Blue Magic</ObjectId>
+      <Damage>100</Damage>
+      <Speed>100</Speed>
+      <LifetimeMS>200</LifetimeMS>
+    </Projectile>
+    <DisplayId>Epic Lair Ghost Bat</DisplayId>
+  </Object>
+  <Object type="0x6062" id="Epic Lair Skeleton" ext="true">
+    <Group>Epic Lair Skeletons</Group>
+    <Enemy/>
+    <Class>Character</Class>
+    <Texture>
+      <File>lofiChar8x8</File>
+      <Index>0x60</Index>
+    </Texture>
+    <HitSound>monster/skeletons_hit</HitSound>
+    <DeathSound>monster/skeletons_death</DeathSound>
+    <Size>100</Size>
+    <MaxHitPoints>1000</MaxHitPoints>
+    <Defense>0</Defense>
+    <Projectile id="0">
+      <ObjectId>Blade</ObjectId>
+      <Damage>90</Damage>
+      <Speed>120</Speed>
+      <LifetimeMS>400</LifetimeMS>
+    </Projectile>
+    <DisplayId>Epic Lair Skeleton</DisplayId>
+  </Object>
+  <Object type="0x6043" id="Epic Lair Skeleton Swordsman" ext="true">
+    <Group>Epic Lair Skeletons</Group>
+    <Enemy/>
+    <Class>Character</Class>
+    <Texture>
+      <File>lofiChar8x8</File>
+      <Index>0x61</Index>
+    </Texture>
+    <HitSound>monster/skeletons_hit</HitSound>
+    <DeathSound>monster/skeletons_death</DeathSound>
+    <Size>100</Size>
+    <MaxHitPoints>1200</MaxHitPoints>
+    <Defense>4</Defense>
+    <Projectile id="0">
+      <ObjectId>Blade</ObjectId>
+      <Damage>105</Damage>
+      <Speed>120</Speed>
+      <LifetimeMS>400</LifetimeMS>
+    </Projectile>
+    <DisplayId>Epic Lair Skeleton Swordsman</DisplayId>
+  </Object>
+  <Object type="0x6044" id="Epic Lair Skeleton Veteran" ext="true">
+    <Group>Epic Lair Skeletons</Group>
+    <Enemy/>
+    <Class>Character</Class>
+    <Texture>
+      <File>lofiChar8x8</File>
+      <Index>0x62</Index>
+    </Texture>
+    <HitSound>monster/skeletons_hit</HitSound>
+    <DeathSound>monster/skeletons_death</DeathSound>
+    <Size>100</Size>
+    <MaxHitPoints>1400</MaxHitPoints>
+    <Defense>8</Defense>
+    <Projectile id="0">
+      <ObjectId>Blade</ObjectId>
+      <Damage>115</Damage>
+      <Speed>120</Speed>
+      <LifetimeMS>400</LifetimeMS>
+    </Projectile>
+    <DisplayId>Epic Lair Skeleton Veteran</DisplayId>
+  </Object>
+  <Object type="0x6045" id="Epic Lair Skeleton Mage" ext="true">
+    <Group>Epic Lair Skeletons</Group>
+    <Enemy/>
+    <Class>Character</Class>
+    <Texture>
+      <File>lofiChar8x8</File>
+      <Index>0x63</Index>
+    </Texture>
+    <HitSound>monster/skeletons_hit</HitSound>
+    <DeathSound>monster/skeletons_death</DeathSound>
+    <Size>100</Size>
+    <MaxHitPoints>1000</MaxHitPoints>
+    <Defense>0</Defense>
+    <Projectile id="0">
+      <ObjectId>Blue Magic</ObjectId>
+      <Damage>120</Damage>
+      <Speed>60</Speed>
+      <LifetimeMS>3000</LifetimeMS>
+    </Projectile>
+    <DisplayId>Epic Lair Skeleton Mage</DisplayId>
+  </Object>
+  <Object type="0x6046" id="Epic Lair Skeleton King" ext="true">
+    <Group>Epic Lair Skeletons</Group>
+    <Enemy/>
+    <Class>Character</Class>
+    <Texture>
+      <File>lofiChar8x8</File>
+      <Index>0x64</Index>
+    </Texture>
+    <HitSound>monster/skeletons_hit</HitSound>
+    <DeathSound>monster/skeletons_death</DeathSound>
+    <Size>100</Size>
+    <MaxHitPoints>1200</MaxHitPoints>
+    <Defense>0</Defense>
+    <Projectile id="0">
+      <ObjectId>Blue Bolt</ObjectId>
+      <Damage>135</Damage>
+      <Speed>70</Speed>
+      <LifetimeMS>3000</LifetimeMS>
+    </Projectile>
+    <DisplayId>Epic Lair Skeleton King</DisplayId>
+  </Object>
+  <Object type="0x6047" id="Epic Lair Mummy" ext="true">
+    <Group>Epic Lair Mummies</Group>
+    <Enemy/>
+    <Class>Character</Class>
+    <Texture>
+      <File>lofiChar8x8</File>
+      <Index>0x6a</Index>
+    </Texture>
+    <HitSound>monster/mummies_hit</HitSound>
+    <DeathSound>monster/mummies_death</DeathSound>
+    <Size>100</Size>
+    <MaxHitPoints>900</MaxHitPoints>
+    <Defense>0</Defense>
+    <Projectile id="0">
+      <ObjectId>Green Magic</ObjectId>
+      <Damage>105</Damage>
+      <Speed>80</Speed>
+      <LifetimeMS>2000</LifetimeMS>
+    </Projectile>
+    <DisplayId>Epic Lair Mummy</DisplayId>
+  </Object>
+  <Object type="0x6048" id="Epic Lair Mummy King" ext="true">
+    <Group>Epic Lair Mummies</Group>
+    <Enemy/>
+    <Class>Character</Class>
+    <Texture>
+      <File>lofiChar8x8</File>
+      <Index>0x6b</Index>
+    </Texture>
+    <HitSound>monster/mummies_hit</HitSound>
+    <DeathSound>monster/mummies_death</DeathSound>
+    <Size>100</Size>
+    <MaxHitPoints>1200</MaxHitPoints>
+    <Defense>0</Defense>
+    <Projectile id="0">
+      <ObjectId>Green Magic</ObjectId>
+      <Damage>135</Damage>
+      <Speed>50</Speed>
+      <LifetimeMS>3000</LifetimeMS>
+    </Projectile>
+    <DisplayId>Epic Lair Mummy King</DisplayId>
+  </Object>
+  <Object type="0x6049" id="Epic Lair Mummy Pharaoh" ext="true">
+    <Group>Epic Lair Mummies</Group>
+    <Enemy/>
+    <Class>Character</Class>
+    <Texture>
+      <File>lofiChar8x8</File>
+      <Index>0x6c</Index>
+    </Texture>
+    <HitSound>monster/mummies_hit</HitSound>
+    <DeathSound>monster/mummies_death</DeathSound>
+    <Size>100</Size>
+    <MaxHitPoints>1100</MaxHitPoints>
+    <Defense>0</Defense>
+    <Projectile id="0">
+      <ObjectId>Green Magic</ObjectId>
+      <Damage>150</Damage>
+      <Speed>70</Speed>
+      <LifetimeMS>3000</LifetimeMS>
+    </Projectile>
+    <DisplayId>Epic Lair Mummy Pharaoh</DisplayId>
+  </Object>
+  <Object type="0x6050" id="Epic Lair Reaper" ext="true">
+    <Group>Epic Lair Reapers</Group>
+    <Enemy/>
+    <Class>Character</Class>
+    <Texture>
+      <File>lofiChar8x8</File>
+      <Index>0x6d</Index>
+    </Texture>
+    <HitSound>monster/ghosts_hit</HitSound>
+    <DeathSound>monster/ghosts_death</DeathSound>
+    <Size>100</Size>
+    <MaxHitPoints>1700</MaxHitPoints>
+    <Defense>25</Defense>
+    <Projectile id="0">
+      <ObjectId>Fire Bolt</ObjectId>
+      <Damage>100</Damage>
+      <Speed>120</Speed>
+      <LifetimeMS>200</LifetimeMS>
+    </Projectile>
+    <DisplayId>Epic Lair Reaper</DisplayId>
+  </Object>
+  <Object type="0x6051" id="Epic Lair Vampire" ext="true">
+    <Group>Epic Lair Vampires</Group>
+    <Enemy/>
+    <Class>Character</Class>
+    <Texture>
+      <File>lofiChar8x8</File>
+      <Index>0x6e</Index>
+    </Texture>
+    <HitSound>monster/ghosts_hit</HitSound>
+    <DeathSound>monster/ghosts_death</DeathSound>
+    <Size>100</Size>
+    <MaxHitPoints>750</MaxHitPoints>
+    <Defense>4</Defense>
+    <Projectile id="0">
+      <ObjectId>Green Star</ObjectId>
+      <Damage>175</Damage>
+      <Speed>100</Speed>
+      <LifetimeMS>2000</LifetimeMS>
+      <ConditionEffect duration="3">Slowed</ConditionEffect>
+    </Projectile>
+    <Projectile id="1">
+      <ObjectId>Green Bolt</ObjectId>
+      <Damage>100</Damage>
+      <Speed>100</Speed>
+      <LifetimeMS>200</LifetimeMS>
+    </Projectile>
+    <DisplayId>Epic Lair Vampire</DisplayId>
+  </Object>
+  <Object type="0x6052" id="Epic Lair Vampire King" ext="true">
+    <Group>Epic Lair Vampires</Group>
+    <Enemy/>
+    <Class>Character</Class>
+    <Texture>
+      <File>lofiChar8x8</File>
+      <Index>0x6f</Index>
+    </Texture>
+    <HitSound>monster/ghosts_hit</HitSound>
+    <DeathSound>monster/ghosts_death</DeathSound>
+    <Size>100</Size>
+    <MaxHitPoints>1200</MaxHitPoints>
+    <Defense>0</Defense>
+    <Projectile id="0">
+      <ObjectId>Grey Star</ObjectId>
+      <Damage>200</Damage>
+      <Speed>100</Speed>
+      <LifetimeMS>2000</LifetimeMS>
+      <ConditionEffect duration="3">Quiet</ConditionEffect>
+    </Projectile>
+    <Projectile id="1">
+      <ObjectId>Green Bolt</ObjectId>
+      <Damage>275</Damage>
+      <Speed>100</Speed>
+      <LifetimeMS>200</LifetimeMS>
+    </Projectile>
+    <DisplayId>Epic Lair Vampire King</DisplayId>
+  </Object>
+  <Object type="0x6053" id="Epic Lair Grey Spectre" ext="true">
+    <Group>Epic Lair Spectres</Group>
+    <Enemy/>
+    <Class>Character</Class>
+    <Texture>
+      <File>lofiChar8x8</File>
+      <Index>0x76</Index>
+    </Texture>
+    <HitSound>monster/ghosts_hit</HitSound>
+    <DeathSound>monster/ghosts_death</DeathSound>
+    <Size>100</Size>
+    <MaxHitPoints>2100</MaxHitPoints>
+    <Defense>0</Defense>
+    <Flying/>
+    <Projectile id="0">
+      <ObjectId>Pink Bolt</ObjectId>
+      <Damage>250</Damage>
+      <Speed>70</Speed>
+      <LifetimeMS>2000</LifetimeMS>
+    </Projectile>
+    <DisplayId>Epic Lair Grey Spectre</DisplayId>
+  </Object>
+  <Object type="0x6054" id="Epic Lair Blue Spectre" ext="true">
+    <Group>Epic Epic Lair Spectres</Group>
+    <Enemy/>
+    <Class>Character</Class>
+    <Texture>
+      <File>lofiChar8x8</File>
+      <Index>0x77</Index>
+    </Texture>
+    <HitSound>monster/ghosts_hit</HitSound>
+    <DeathSound>monster/ghosts_death</DeathSound>
+    <Size>115</Size>
+    <MaxHitPoints>2100</MaxHitPoints>
+    <Defense>0</Defense>
+    <Flying/>
+    <Projectile id="0">
+      <ObjectId>Pink Bolt</ObjectId>
+      <Damage>275</Damage>
+      <Speed>70</Speed>
+      <LifetimeMS>2000</LifetimeMS>
+    </Projectile>
+    <DisplayId>Epic Lair Blue Spectre</DisplayId>
+  </Object>
+  <Object type="0x6055" id="Epic Lair White Spectre" ext="true">
+    <Group>Epic Epic Lair Spectres</Group>
+    <Enemy/>
+    <Class>Character</Class>
+    <Texture>
+      <File>lofiChar8x8</File>
+      <Index>0x78</Index>
+    </Texture>
+    <HitSound>monster/ghosts_hit</HitSound>
+    <DeathSound>monster/ghosts_death</DeathSound>
+    <Size>130</Size>
+    <MaxHitPoints>2100</MaxHitPoints>
+    <Defense>0</Defense>
+    <Flying/>
+    <Projectile id="0">
+      <ObjectId>Pink Bolt</ObjectId>
+      <Damage>300</Damage>
+      <Speed>70</Speed>
+      <LifetimeMS>2000</LifetimeMS>
+    </Projectile>
+    <DisplayId>Epic Lair White Spectre</DisplayId>
+  </Object>
+  <Object type="0x6056" id="Epic Lair Ghost Archer" ext="true">
+    <Group>Epic Epic Lair Ghosts</Group>
+    <Enemy/>
+    <Class>Character</Class>
+    <Texture>
+      <File>lofiChar8x8</File>
+      <Index>0x7a</Index>
+    </Texture>
+    <HitSound>monster/ghosts_hit</HitSound>
+    <DeathSound>monster/ghosts_death</DeathSound>
+    <Size>100</Size>
+    <MaxHitPoints>1400</MaxHitPoints>
+    <Defense>20</Defense>
+    <Projectile id="0">
+      <ObjectId>Blue Arrow</ObjectId>
+      <Damage>120</Damage>
+      <Speed>60</Speed>
+      <LifetimeMS>2500</LifetimeMS>
+      <Size>110</Size>
+    </Projectile>
+    <DisplayId>Epic Lair Ghost Archer</DisplayId>
+  </Object>
+  <Object type="0x6057" id="Epic Lair Ghost Warrior" ext="true">
+    <Group>Epic Epic Lair Ghosts</Group>
+    <Enemy/>
+    <Class>Character</Class>
+    <Texture>
+      <File>lofiChar8x8</File>
+      <Index>0x7b</Index>
+    </Texture>
+    <HitSound>monster/ghosts_hit</HitSound>
+    <DeathSound>monster/ghosts_death</DeathSound>
+    <Size>100</Size>
+    <MaxHitPoints>800</MaxHitPoints>
+    <Defense>20</Defense>
+    <Projectile id="0">
+      <ObjectId>Blade</ObjectId>
+      <Damage>75</Damage>
+      <Speed>120</Speed>
+      <LifetimeMS>400</LifetimeMS>
+    </Projectile>
+    <DisplayId>Epic Lair Ghost Warrior</DisplayId>
+  </Object>
+  <Object type="0x6058" id="Epic Lair Ghost Mage" ext="true">
+    <Group>Epic Epic Lair Ghosts</Group>
+    <Enemy/>
+    <Class>Character</Class>
+    <Texture>
+      <File>lofiChar8x8</File>
+      <Index>0x7c</Index>
+    </Texture>
+    <HitSound>monster/ghosts_hit</HitSound>
+    <DeathSound>monster/ghosts_death</DeathSound>
+    <Size>100</Size>
+    <MaxHitPoints>800</MaxHitPoints>
+    <Defense>20</Defense>
+    <Projectile id="0">
+      <ObjectId>Blue Bolt</ObjectId>
+      <Damage>80</Damage>
+      <Speed>50</Speed>
+      <LifetimeMS>3000</LifetimeMS>
+    </Projectile>
+    <DisplayId>Epic Lair Ghost Mage</DisplayId>
+  </Object>
+  <Object type="0x6059" id="Epic Lair Ghost Rogue" ext="true">
+    <Group>Epic Epic Lair Ghosts</Group>
+    <Enemy/>
+    <Class>Character</Class>
+    <Texture>
+      <File>lofiChar8x8</File>
+      <Index>0x7d</Index>
+    </Texture>
+    <HitSound>monster/ghosts_hit</HitSound>
+    <DeathSound>monster/ghosts_death</DeathSound>
+    <Size>100</Size>
+    <MaxHitPoints>800</MaxHitPoints>
+    <Defense>17</Defense>
+    <Projectile id="0">
+      <ObjectId>Blade</ObjectId>
+      <Damage>60</Damage>
+      <Speed>150</Speed>
+      <LifetimeMS>400</LifetimeMS>
+    </Projectile>
+    <DisplayId>Epic Lair Ghost Rogue</DisplayId>
+  </Object>
+  <Object type="0x6060" id="Epic Lair Ghost Paladin" ext="true">
+    <Group>Epic Epic Lair Ghosts</Group>
+    <Enemy/>
+    <Class>Character</Class>
+    <Texture>
+      <File>lofiChar8x8</File>
+      <Index>0x7e</Index>
+    </Texture>
+    <HitSound>monster/ghosts_hit</HitSound>
+    <DeathSound>monster/ghosts_death</DeathSound>
+    <Size>100</Size>
+    <MaxHitPoints>900</MaxHitPoints>
+    <Defense>25</Defense>
+    <Projectile id="0">
+      <ObjectId>Blade</ObjectId>
+      <Damage>75</Damage>
+      <Speed>120</Speed>
+      <LifetimeMS>400</LifetimeMS>
+    </Projectile>
+    <DisplayId>Epic Lair Ghost Paladin</DisplayId>
+  </Object>
+  <Object type="0x6061" id="Epic Lair Ghost Knight" ext="true">
+    <Group>Epic Epic Lair Ghosts</Group>
+    <Enemy/>
+    <Class>Character</Class>
+    <Texture>
+      <File>lofiChar8x8</File>
+      <Index>0x7f</Index>
+    </Texture>
+    <HitSound>monster/ghosts_hit</HitSound>
+    <DeathSound>monster/ghosts_death</DeathSound>
+    <Size>100</Size>
+    <MaxHitPoints>1000</MaxHitPoints>
+    <Defense>40</Defense>
+    <Projectile id="0">
+      <ObjectId>Blade</ObjectId>
+      <Damage>50</Damage>
+      <Speed>120</Speed>
+      <LifetimeMS>400</LifetimeMS>
+    </Projectile>
+    <DisplayId>Epic Lair Ghost Knight</DisplayId>
+  </Object>
+  <Object id="Amulet of Actual Resurrection" ext="true">
+    <Class>Equipment</Class>
+    <Item />
+    <Texture>
+      <File>lofiObj2</File>
+      <Index>0x50</Index>
+    </Texture>
+    <SlotType>9</SlotType>
+    <Description>0w0 What is this?</Description>
+    <ActivateOnEquip stat="20" amount="4">IncrementStat</ActivateOnEquip>
+    <ActivateOnEquip stat="21" amount="4">IncrementStat</ActivateOnEquip>
+    <ActivateOnEquip stat="22" amount="4">IncrementStat</ActivateOnEquip>
+    <ActivateOnEquip stat="26" amount="4">IncrementStat</ActivateOnEquip>
+    <ActivateOnEquip stat="27" amount="4">IncrementStat</ActivateOnEquip>
+    <ActivateOnEquip stat="28" amount="4">IncrementStat</ActivateOnEquip>
+    <ActivateOnEquip stat="0" amount="40">IncrementStat</ActivateOnEquip>
+    <ActivateOnEquip stat="3" amount="40">IncrementStat</ActivateOnEquip>
+    <BrokenResurrect />
+    <BagType>4</BagType>
+  </Object>
+  <Object id="Amulet of Broken Resurrection" ext="true">
+    <Class>Equipment</Class>
+    <Item />
+    <Texture>
+      <File>lofiObj2</File>
+      <Index>0x50</Index>
+    </Texture>
+    <SlotType>9</SlotType>
+    <Description>0w0 GONE SEXUAL YOU SHOULD NOT HAVE THIS ITEM</Description>
+    <ActivateOnEquip stat="20" amount="4">IncrementStat</ActivateOnEquip>
+    <ActivateOnEquip stat="21" amount="4">IncrementStat</ActivateOnEquip>
+    <ActivateOnEquip stat="22" amount="4">IncrementStat</ActivateOnEquip>
+    <ActivateOnEquip stat="26" amount="4">IncrementStat</ActivateOnEquip>
+    <ActivateOnEquip stat="27" amount="4">IncrementStat</ActivateOnEquip>
+    <ActivateOnEquip stat="28" amount="4">IncrementStat</ActivateOnEquip>
+    <ActivateOnEquip stat="0" amount="40">IncrementStat</ActivateOnEquip>
+    <ActivateOnEquip stat="3" amount="40">IncrementStat</ActivateOnEquip>
+    <NotBrokenResurrect />
+    <BagType>4</BagType>
+  </Object>
+  <Object id="Oryx the Mad God 3" ext="true">
+    <DisplayId>Oryx the Mad God</DisplayId>
+    <Enemy/>
+    <Class>Character</Class>
+    <Texture>
+      <File>lofiChar16x16</File>
+      <Index>0x54</Index>
+    </Texture>
+    <HitSound>monster/oryx_hit</HitSound>
+    <DeathSound>monster/oryx_death</DeathSound>
+    <Size>140</Size>
+    <MaxHitPoints>150000</MaxHitPoints>
+    <Defense>60</Defense>
+    <Quest/>
+    <God/>
+    <Oryx/>
+    <StasisImmune/>
+    <Level>1</Level>
+    <XpMult>1</XpMult>
+    <NoArticle/>
+    <Projectile id="0">
+      <ObjectId>Fire Bolt</ObjectId>
+      <Damage>150</Damage>
+      <Speed>70</Speed>
+      <LifetimeMS>2500</LifetimeMS>
+    </Projectile>
+    <Projectile id="1">
+      <ObjectId>Green Star</ObjectId>
+      <Damage>170</Damage>
+      <Speed>70</Speed>
+      <LifetimeMS>2500</LifetimeMS>
+      <ConditionEffect duration="15">Slowed</ConditionEffect>
+    </Projectile>
+    <Projectile id="2">
+      <ObjectId>Blade</ObjectId>
+      <Damage>260</Damage>
+      <Speed>100</Speed>
+      <LifetimeMS>450</LifetimeMS>
+    </Projectile>
+    <Projectile id="3">
+      <ObjectId>Purple Star</ObjectId>
+      <Damage>180</Damage>
+      <Speed>55</Speed>
+      <LifetimeMS>3000</LifetimeMS>
+      <ConditionEffect duration="10">Blind</ConditionEffect>
+    </Projectile>
+    <Projectile id="4">
+      <ObjectId>Blue Star</ObjectId>
+      <Damage>180</Damage>
+      <Speed>105</Speed>
+      <LifetimeMS>1200</LifetimeMS>
+      <ConditionEffect duration="10">Confused</ConditionEffect>
+    </Projectile>
+    <Projectile id="5">
+      <ObjectId>Grey Star</ObjectId>
+      <Damage>180</Damage>
+      <Speed>45</Speed>
+      <LifetimeMS>3000</LifetimeMS>
+      <ConditionEffect duration="8">Quiet</ConditionEffect>
+    </Projectile>
+    <Projectile id="6">
+      <ObjectId>Red Star</ObjectId>
+      <Damage>180</Damage>
+      <Speed>55</Speed>
+      <LifetimeMS>3000</LifetimeMS>
+      <ArmorPiercing/>
+    </Projectile>
+    <Projectile id="13">
+      <ObjectId>Dark Gray Spinner</ObjectId>
+      <Speed>90</Speed>
+      <Size>100</Size>
+      <Damage>1</Damage>
+      <LifetimeMS>1800</LifetimeMS>
+      <ConditionEffect duration="30">Quiet</ConditionEffect>
+      <MultiHit/>
+    </Projectile>
+    <Projectile id="14">
+      <ObjectId>Gray Spinner</ObjectId>
+      <Speed>90</Speed>
+      <Size>100</Size>
+      <Damage>1</Damage>
+      <LifetimeMS>1800</LifetimeMS>
+      <ConditionEffect duration="90">Weak</ConditionEffect>
+      <MultiHit/>
+    </Projectile>
+  </Object>
+</ExtData>
+

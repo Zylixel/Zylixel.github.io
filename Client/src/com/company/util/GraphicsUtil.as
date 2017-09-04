@@ -24,8 +24,8 @@ public class GraphicsUtil {
         _arg_1.data.length = 0;
     }
 
-    public static function getRectPath(_arg_1:int, _arg_2:int, _arg_3:int, _arg_4:int):GraphicsPath {
-        return (new GraphicsPath(QUAD_COMMANDS, new <Number>[_arg_1, _arg_2, (_arg_1 + _arg_3), _arg_2, (_arg_1 + _arg_3), (_arg_2 + _arg_4), _arg_1, (_arg_2 + _arg_4)]));
+    public static function getRectPath(_arg1:int, _arg2:int, _arg3:int, _arg4:int):GraphicsPath {
+        return (new GraphicsPath(QUAD_COMMANDS, new <Number>[_arg1, _arg2, (_arg1 + _arg3), _arg2, (_arg1 + _arg3), (_arg2 + _arg4), _arg1, (_arg2 + _arg4)]));
     }
 
     public static function getGradientMatrix(_arg_1:Number, _arg_2:Number, _arg_3:Number = 0, _arg_4:Number = 0, _arg_5:Number = 0):Matrix {

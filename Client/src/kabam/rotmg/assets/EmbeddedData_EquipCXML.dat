@@ -7609,7 +7609,7 @@
       <ArcGap>0</ArcGap>
       <OldSound>magicShoot</OldSound>
       <feedPower>0</feedPower>
-      
+      <Tier>14</Tier>
       <DisplayId>{equip.Staff_of_the_Fundamental_Core}</DisplayId>
    </Object>
    <Object type="0xc03" id="Staff of Extreme Prejudice">
@@ -18709,7 +18709,7 @@ This armor does not deflect projectiles like most materials known to man. It abs
 </Object>
 <Object type="0x0251" id="Omnipotence Ring">
 <Class>Equipment</Class>
-<legendary></legendary>
+<Legendary></Legendary>
 <Item/>
 <DisplayId>Omnipotence Ring</DisplayId>
 <Texture>
@@ -19705,5 +19705,62 @@ An awe-inspiring sword gifted to only the most worthy mortals from the heavens t
     <Soulbound />
     <DisplayId>Boshy Gun</DisplayId>
   </Object>
+  <Object type="0x6104" id="Keeper Support">
+        <Group>Realm Keeper Game</Group>
+        <Class>GameObject</Class>
+        <AnimatedTexture>
+           <File>chars16x16dEncounters</File>
+           <Index>10</Index>
+        </AnimatedTexture>
+        <Size>140</Size>
+     </Object>
+     <Object type="0x6105" id="Keeper Attacker">
+        <Group>Realm Keeper Game</Group>
+        <Class>GameObject</Class>
+        <AnimatedTexture>
+           <File>chars16x16dEncounters</File>
+           <Index>11</Index>
+        </AnimatedTexture>
+        <Size>140</Size>
+     </Object>
+     <Object type="0x6106" id="Keeper Defender">
+        <Group>Realm Keeper Game</Group>
+        <Class>GameObject</Class>
+        <AnimatedTexture>
+           <File>chars16x16dEncounters</File>
+           <Index>12</Index>
+        </AnimatedTexture>
+        <Size>140</Size>
+     </Object>
+  <Object type="0x6107" id="Keeper Crown">
+        <Group>Realm Keeper Game</Group>
+        <Class>GameObject</Class>
+        <AnimatedTexture>
+           <File>chars16x16dEncounters2</File>
+           <Index>82</Index>
+        </AnimatedTexture>
+        <Size>100</Size>
+    <DisplayId>{shatters.shtrs_The_Cursed_Crown}</DisplayId>
+     </Object>
+  <Object type="0x6107" id="Keeper Thessal">
+      <Group>Realm Keeper Game</Group>
+      <Class>GameObject</Class>
+      <AnimatedTexture>
+           <File>chars16x16dEncounters2</File>
+           <Index>16</Index>
+      </AnimatedTexture>
+      <Size>100</Size>
+  <DisplayId>{shatters.shtrs_The_Cursed_Crown}</DisplayId>
+   </Object>
+   <Object type="0x6107" id="Keeper Oryx">
+             <Group>Realm Keeper Game</Group>
+             <Class>GameObject</Class>
+             <AnimatedTexture>
+                  <File>chars16x16dEncounters2</File>
+                  <Index>16</Index>
+             </AnimatedTexture>
+             <Size>100</Size>
+         <DisplayId>{shatters.shtrs_The_Cursed_Crown}</DisplayId>
+          </Object>
 </Objects>
 
