@@ -77,7 +77,7 @@ namespace wServer.logic
                     new TierLoot(10, ItemType.Weapon, 0.05),
                     new TierLoot(4, ItemType.Ring, 0.025),
                     new ItemLoot("Demon Blade", 0.02),
-                    new ItemLoot("Cloak of Utter Rage", 0.02)
+                    new ItemLoot("Cloak of Bloody Surprises", 0.02)
                 )
             )
             .Init("Malphas Missile",

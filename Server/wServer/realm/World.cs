@@ -24,7 +24,7 @@ namespace wServer.realm
     {
         public const int TUT_ID = -1;
         public const int NEXUS_ID = -2;
-        //public const int RAND_REALM = -3;
+        public const int RAND_REALM = -3;
         public const int NEXUS_LIMBO = -3;
         public const int VAULT_ID = -5;
         public const int TEST_ID = -6;

@@ -53,7 +53,7 @@ public class ErrorDialog extends Sprite {
 
     public function ErrorDialog(_arg_1:String) {
         super();
-        var _local_2:String = ["The Server Is (Likely) Offline:", _arg_1].join("\n");
+        var _local_2:String = ["The Server Is Offline, or in Maintenance:", _arg_1].join("\n");
         this.stageProxy = new StageProxy(this);
         this._makeUIAndAdd(_local_2, "This is your captain speaking...", "Okay", null);
         this.makeUIAndAdd();

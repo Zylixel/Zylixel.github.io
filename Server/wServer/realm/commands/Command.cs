@@ -159,7 +159,28 @@ namespace wServer.realm.commands
             {
                 Host = "",
                 Port = 2050,
-                GameId = -15,
+                GameId = World.FMARKET,
+                Name = "Market",
+                Key = Empty<byte>.Array,
+            });
+            return true;
+        }
+    }
+
+    internal class TpVault : Command
+    {
+        public TpVault()
+            : base("Vault", 0)
+        {
+        }
+
+        protected override bool Process(Player player, RealmTime time, string[] args)
+        {
+            player.Client.Reconnect(new ReconnectPacket
+            {
+                Host = "",
+                Port = 2050,
+                GameId = World.VAULT_ID,
                 Name = "Market",
                 Key = Empty<byte>.Array,
             });
@@ -178,47 +199,13 @@ namespace wServer.realm.commands
         {
             player.Client.Reconnect(new ReconnectPacket
             {
-                GameId = 1,
+                GameId = World.RAND_REALM,
                 Host = "",
-                Name = "Realm",
+                Name = "Realm of the Mad God",
                 Key = Empty<byte>.Array,
                 Port = 2050
             });
             return true;
-        }
-    }
-    internal class Realm : Command
-    {
-        public Realm()
-            : base("NRealm", 1)
-        {
-        }
-
-        protected override bool Process(Player player, RealmTime time, string[] args)
-        {
-            foreach (KeyValuePair<string, Client> i in player.Manager.Clients)
-            {
-                {
-                    Packet pkt;
-                    {
-                        pkt = new ReconnectPacket
-                        {
-                            GameId = 1,
-                            Host = "",
-                            Name = "Market",
-                            Key = Empty<byte>.Array,
-                            Port = 2050
-                        };
-                        player.SendInfo("Sending you to Nicks Realm!");
-                    }
-
-                    i.Value.SendPacket(pkt);
-
-                    return true;
-                }
-            }
-            player.SendError(string.Format("Player '{0}' could not be found!", args));
-            return false;
         }
     }
 }

@@ -71,6 +71,7 @@ namespace wServer.realm.entities.player
                 {"Stone Guardian Right", Tuple.Create(20, 1, 1000)},
                 {"Oryx the Mad God 1", Tuple.Create(20, 1, 1000)},
                 {"Oryx the Mad God 2", Tuple.Create(20, 1, 1000)},
+                {"Keeper Gilgor Boss", Tuple.Create(20, 1, 1000)},
             };
 
         public Entity Quest { get; private set; }

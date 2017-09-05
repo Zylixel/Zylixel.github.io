@@ -11,6 +11,22 @@ namespace wServer.logic
     partial class BehaviorDb
     {
         private _ NexusGreeter = () => Behav()
+                .Init("Nexus Summoner",
+                    new State(
+                            new State("init",
+                                new ApplySetpiece("NexusFloral"),
+                                new TimedTransition(300000, "Reload1")
+                                ),
+                            new State("Reload1",
+                                new ApplySetpiece("NexusFloral"),
+                                new TimedTransition(300000, "Reload2")
+                                ),
+                            new State("Reload2",
+                                new ApplySetpiece("NexusFloral"),
+                                new TimedTransition(300000, "Reload1")
+                                )
+                        )
+            )
               .Init("NiceZylixel",
                   new State(
                           new State("Idle",
@@ -98,14 +114,6 @@ namespace wServer.logic
                     new TimedTransition(1500, "Idle")
                         )
                   )
-            )
-            .Init("Nexus Summoner",
-                    new State(
-                            new State("Reload",
-                                new ApplySetpiece("NexusFloral"),
-                                new TimedTransition(60000, "Reload")
-                                )
-                        )
               );
     }
 }

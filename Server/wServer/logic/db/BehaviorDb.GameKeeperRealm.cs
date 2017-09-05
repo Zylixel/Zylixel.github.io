@@ -123,6 +123,13 @@ namespace wServer.logic
                     )
                     )
             )
+        .Init("Keeper Boss Anchor",
+                new State(
+                    new State("begin",
+                        new Spawn("Keeper Gilgor Boss", maxChildren: 1)
+                        )
+                    )
+            )
         .Init("Keeper Crown",
                 new State(
                     new State("begin",
@@ -161,23 +168,23 @@ namespace wServer.logic
                     ),
                 new State("KeeperClose",
                     new ApplySetpiece("KeeperClose"),
-                    new TimedTransition(1000, "KeeperClose1")
+                    new TimedTransition(3000, "KeeperClose1")
                     ),
                 new State("KeeperClose1",
                     new ApplySetpiece("KeeperClose1"),
-                    new TimedTransition(1000, "KeeperClose2")
+                    new TimedTransition(3000, "KeeperClose2")
                     ),
                 new State("KeeperClose2",
                     new ApplySetpiece("KeeperClose2"),
-                    new TimedTransition(1000, "KeeperClose3")
+                    new TimedTransition(3000, "KeeperClose3")
                     ),
                 new State("KeeperClose3",
                     new ApplySetpiece("KeeperClose3"),
-                    new TimedTransition(1000, "Tomb")
+                    new TimedTransition(3000, "Tomb")
                     ),
                 new State("Tomb",
                     new ApplySetpiece("KeeperTomb"),
-                    new TimedTransition(5000, "Shatters")
+                    new TimedTransition(500000, "Shatters")
                     ),
                 new State("Shatters",
                     new ApplySetpiece("KeeperShatters"),
@@ -191,6 +198,45 @@ namespace wServer.logic
                     new Suicide()
                     )
                 )
-            );
+            )
+        .Init("Keeper Gilgor Boss",
+                new State(
+                    new State("init",
+                        new Shoot(100, projectileIndex: 0, count: 1, coolDown: 75),
+                        new Orbit(2, 20, target: "Keeper Boss Anchor", acquireRange: 30),
+                        new TimedTransition(3000, "sneakIn1")
+                        ),
+                    new State("sneakIn1",
+                        new Orbit(2, 19, target: "Keeper Boss Anchor", acquireRange: 30),
+                        new TimedTransition(3000, "sneakIn2")
+                        ),
+                    new State("sneakIn2",
+                        new Orbit(2, 18, target: "Keeper Boss Anchor", acquireRange: 30),
+                        new TimedTransition(3000, "sneakIn3")
+                        ),
+                    new State("sneakIn3",
+                        new Orbit(2, 17, target: "Keeper Boss Anchor", acquireRange: 30),
+                        new TimedTransition(3000, "fadeOut1")
+                        ),
+                    new State("fadeOut1",
+                        new KeeperDisappear("Disappear", 50),
+                        new TimedTransition(3000, "moveToSpawn1")
+                        ),
+                    new State("moveToSpawn1",
+                        new ReturnToSpawn(true, 1),
+                        new TimedTransition(3000, "moveToTomb")
+                        ),
+                    new State("moveToTomb",
+                        new MoveTo(4, 4, speed: 1, isMapPosition: false, once: true, instant: true),
+                        new TimedTransition(500, "fadeIn1")
+                        ),
+                    new State("fadeIn1",
+                        new KeeperDisappear("Appear", 50)
+                        )
+                    )
+            )
+
+
+        ;
     }
 }

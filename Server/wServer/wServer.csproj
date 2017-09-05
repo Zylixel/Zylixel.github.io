@@ -140,6 +140,7 @@
     <Compile Include="logic\behaviors\ChangeGroundOnDeath.cs" />
     <Compile Include="logic\behaviors\ChangeSize.cs" />
     <Compile Include="logic\behaviors\Charge.cs" />
+    <Compile Include="logic\behaviors\KeeperDisappear.cs" />
     <Compile Include="logic\behaviors\Drakes\BeesC.cs" />
     <Compile Include="logic\behaviors\Drakes\KeeperGodRandom.cs" />
     <Compile Include="logic\behaviors\Drakes\BeesR.cs" />
@@ -176,6 +177,7 @@
     <Compile Include="logic\db\BehaviorDb.Jungle.cs" />
     <Compile Include="logic\db\BehaviorDb.GameKeeperRealm.cs" />
     <Compile Include="logic\db\BehaviorDb.Lab.cs" />
+    <Compile Include="logic\db\BehaviorDb.IvoryWyvern.cs" />
     <Compile Include="logic\db\BehaviorDb.LairOfDraconis.cs" />
     <Compile Include="logic\db\BehaviorDb.Lotll.cs" />
     <Compile Include="logic\db\BehaviorDb.Nexus.cs" />
@@ -447,6 +449,7 @@
     <Compile Include="realm\setpieces\Building.cs" />
     <Compile Include="realm\setpieces\Castle.cs" />
     <Compile Include="realm\setpieces\BottledEvil.cs" />
+    <Compile Include="realm\setpieces\NexusFloral.cs" />
     <Compile Include="realm\setpieces\KeeperOcean.cs" />
     <Compile Include="realm\setpieces\KeeperShatters.cs" />
     <Compile Include="realm\setpieces\KeeperClose.cs" />
@@ -693,6 +696,7 @@
     <EmbeddedResource Include="realm\worlds\maps\ZysArena.jm" />
     <EmbeddedResource Include="realm\worlds\maps\UDL1.jm" />
     <EmbeddedResource Include="realm\worlds\maps\TheRealmKeeper.jm" />
+    <EmbeddedResource Include="realm\worlds\maps\NozenNexus.jm" />
     <None Include="wServer.cfg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
