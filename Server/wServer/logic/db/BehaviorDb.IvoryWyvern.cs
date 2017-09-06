@@ -11,6 +11,38 @@ namespace wServer.logic
     partial class BehaviorDb
     {
         private _ TheIvoryWyvern = () => Behav()
+        .Init("lod Ivory Spawner",
+                new State(
+                    new DropPortalOnDeath("Ivory Wyvern Portal", 100),
+                    new State("Idle",
+                        new EntityNotExistsTransition4("NM Red Dragon Spawner", "NM Blue Dragon Spawner", "NM Green Dragon Spawner", "NM Black Dragon Spawner", 999, "spawnPortal")
+                    ),
+                    new State("spawnPortal",
+                        new Suicide()
+                    )
+                )
+            )
+        .Init("lod Ivory Loot Balloon",
+                new State(
+                    new State("Idle",
+                        new ConditionalEffect(ConditionEffectIndex.Invulnerable),
+                        new TimedTransition(5000, "Hit")
+                    ),
+                    new State("Hit")
+                ),
+                new MostDamagers(3,
+                    new TierLoot(2, ItemType.Potion, 1)
+                    ),
+                new Threshold(0.01, //Shat1 Drop Rates
+                    new TierLoot(12, ItemType.Weapon, 0.3),
+                    new TierLoot(13, ItemType.Armor, 0.3),
+                    new ItemLoot("Large Ivory Dragon Scale Cloth", 0.1),
+                    new ItemLoot("Small Ivory Dragon Scale Cloth", 0.1),
+                    new ItemLoot("Wine Cellar Incantation", 0.01),
+                    new ItemLoot("Midnight Star", 0.05),
+                    new ItemLoot("The World Tarot Card", 0.04)
+                )
+            )
             .Init("lod Ivory Wyvern",
             new State(
                 new HpLessTransition(0.05, "death"),

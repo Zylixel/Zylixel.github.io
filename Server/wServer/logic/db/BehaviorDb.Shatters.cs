@@ -684,7 +684,7 @@ namespace wServer.logic
                     new TierLoot(6, ItemType.Ring, 0.3),
                     new ItemLoot("Potion of Attack", 1),
                     new ItemLoot("Potion of Defense", 1),
-                    new ItemLoot("Bracer of the Guardian", 0.01)
+                    new ItemLoot("Bracer of the Guardian", 0.05)
                     )
             )
         #endregion 1stbosschest
@@ -705,7 +705,7 @@ namespace wServer.logic
                     new TierLoot(13, ItemType.Armor, 0.3),
                     new TierLoot(6, ItemType.Ring, 0.3),
                     new ItemLoot("Potion of Mana", 0.5),
-                    new ItemLoot("The Twilight Gemstone", 0.01)
+                    new ItemLoot("The Twilight Gemstone", 0.05)
                     )
             )
         #endregion 2ndbosschest

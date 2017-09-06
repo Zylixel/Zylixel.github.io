@@ -103,7 +103,7 @@ namespace wServer.realm.commands
                     return false;
                 }
                 int c = int.Parse(args[0]);
-                if (!(player.Client.Account.Rank > 2) && c > 50)
+                if  (c > 50)
                 {
                     player.SendError("Maximum spawn count is set to 50!");
                     return false;

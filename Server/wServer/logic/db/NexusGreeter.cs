@@ -27,8 +27,29 @@ namespace wServer.logic
                                 )
                         )
             )
+        .Init("NiceZylixel2",
+                    new State(
+                            new State("init",
+                                new Taunt("Did you know that you can access the marketplace by typing /market into the chat?"),
+                                new TimedTransition(60000, "message1")
+                                ),
+                            new State("message1",
+                                new Taunt("We are currently on Update 2.016, are you?"),
+                                new TimedTransition(60000, "message2")
+                                ),
+                            new State("message2",
+                                new Taunt("Thanks to Nozen for creating this nexus!"),
+                                new TimedTransition(60000, "message3")
+                                ),
+                        new State("message3",
+                                new Taunt("You are currently on the testing server, expect random restarts"),
+                                new TimedTransition(60000, "init")
+                                )
+                        )
+            )
               .Init("NiceZylixel",
                   new State(
+                          new Spawn("NiceZylixel2", maxChildren: 1),
                           new State("Idle",
                                new ChatTransition("hi", "Hi"),
                                new ChatTransition("hi", "Hi!"),
@@ -101,12 +122,11 @@ namespace wServer.logic
                         ),
                     new State("Die",
                     new Taunt("No! Don't... kill... me!"),
-                    new ConditionalEffect(ConditionEffectIndex.Invisible, true),
+                    new ConditionalEffect(ConditionEffectIndex.Invisible),
                     new TimedTransition(3500, "Die2")
                         ),
                     new State("Die2",
                     new Taunt("Ha! I can't die!"),
-                    new ConditionalEffect(ConditionEffectIndex.Invisible, false),
                     new TimedTransition(1500, "Idle")
                         ),
                     new State("Tier",

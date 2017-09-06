@@ -140,6 +140,7 @@
     <Compile Include="logic\behaviors\ChangeGroundOnDeath.cs" />
     <Compile Include="logic\behaviors\ChangeSize.cs" />
     <Compile Include="logic\behaviors\Charge.cs" />
+    <Compile Include="logic\behaviors\KeeperAppear.cs" />
     <Compile Include="logic\behaviors\KeeperDisappear.cs" />
     <Compile Include="logic\behaviors\Drakes\BeesC.cs" />
     <Compile Include="logic\behaviors\Drakes\KeeperGodRandom.cs" />

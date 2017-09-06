@@ -494,7 +494,7 @@ namespace wServer.logic
                     new ItemLoot("Small Blue Dragon Scale Cloth", 0.08),
                     new ItemLoot("Potion of Mana", 0.03),
                     new ItemLoot("Wine Cellar Incantation", 0.008),
-                    new ItemLoot("Water Dragon Silk Robe", 0.008)
+                    new ItemLoot("Water Dragon Silk Robe", 0.04)
                 )
             )
             .Init("NM Blue Dragon God Hardmode",
@@ -672,7 +672,7 @@ namespace wServer.logic
                     new ItemLoot("Small Blue Dragon Scale Cloth", 0.1),
                     new ItemLoot("Potion of Mana", 0.05),
                     new ItemLoot("Wine Cellar Incantation", 0.01),
-                    new ItemLoot("Water Dragon Silk Robe", 0.01)
+                    new ItemLoot("Water Dragon Silk Robe", 0.05)
                 )
             )
         .Init("NM Red Dragon Spawner",
@@ -1164,7 +1164,7 @@ namespace wServer.logic
                     new ItemLoot("Large Red Dragon Scale Cloth", 0.1),
                     new ItemLoot("Small Red Dragon Scale Cloth", 0.1),
                     new ItemLoot("Wine Cellar Incantation", 0.01),
-                    new ItemLoot("Fire Dragon Battle Armor", 0.01)
+                    new ItemLoot("Fire Dragon Battle Armor", 0.05)
                 )
             )
             .Init("lod Red Loot Balloon",
@@ -1189,7 +1189,7 @@ namespace wServer.logic
                     new ItemLoot("Large Red Dragon Scale Cloth", 0.08),
                     new ItemLoot("Small Red Dragon Scale Cloth", 0.08),
                     new ItemLoot("Wine Cellar Incantation", 0.008),
-                    new ItemLoot("Fire Dragon Battle Armor", 0.008)
+                    new ItemLoot("Fire Dragon Battle Armor", 0.04)
                 )
             )
         //1
@@ -1587,7 +1587,7 @@ namespace wServer.logic
                     new ItemLoot("Large Green Dragon Scale Cloth", 0.08),
                     new ItemLoot("Small Green Dragon Scale Cloth", 0.08),
                     new ItemLoot("Wine Cellar Incantation", 0.008),
-                    new ItemLoot("Leaf Dragon Hide Armor", 0.008)
+                    new ItemLoot("Leaf Dragon Hide Armor", 0.04)
                 )
             )
             .Init("lod Green HM Loot Balloon",
@@ -1612,7 +1612,7 @@ namespace wServer.logic
                     new ItemLoot("Large Green Dragon Scale Cloth", 0.1),
                     new ItemLoot("Small Green Dragon Scale Cloth", 0.1),
                     new ItemLoot("Wine Cellar Incantation", 0.01),
-                    new ItemLoot("Leaf Dragon Hide Armor", 0.01)
+                    new ItemLoot("Leaf Dragon Hide Armor", 0.05)
                 )
             )
         .Init("drac wall green",
@@ -1977,7 +1977,7 @@ namespace wServer.logic
                     new ItemLoot("Small Midnight Dragon Scale Cloth", 0.1),
                     new ItemLoot("Wine Cellar Incantation", 0.01),
                     new ItemLoot("The World Tarot Card", 0.04),
-                    new ItemLoot("Annoying Firecracker Katana", 0.01)
+                    new ItemLoot("Annoying Firecracker Katana", 0.05)
                 )
             )
             .Init("lod Black Loot Balloon",
@@ -2003,7 +2003,7 @@ namespace wServer.logic
                     new ItemLoot("Small Midnight Dragon Scale Cloth", 0.08),
                     new ItemLoot("Wine Cellar Incantation", 0.008),
                     new ItemLoot("The World Tarot Card", 0.02),
-                    new ItemLoot("Annoying Firecracker Katana", 0.008)
+                    new ItemLoot("Annoying Firecracker Katana", 0.04)
                 )
             )
 

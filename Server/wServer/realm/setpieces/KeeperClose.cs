@@ -117,9 +117,6 @@ namespace wServer.realm.setpieces
                         Entity anchor = Entity.Resolve(world.Manager, "Keeper Boss Anchor");
                         anchor.Move(x + pos.X, y + pos.Y);
                         world.EnterWorld(anchor);
-                        Entity boss = Entity.Resolve(world.Manager, "Keeper Gilgor Boss");
-                        boss.Move(x + pos.X, y + pos.Y);
-                        world.EnterWorld(boss);
                     }
                 }
         }

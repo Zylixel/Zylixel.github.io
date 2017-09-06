@@ -164,7 +164,7 @@ namespace wServer.logic
                     ),
                 new State("godsDead2",
                     new Taunt(true, "THIS REALM IS MINE"),
-                    new TimedTransition(2000, "KeeperClose")
+                    new TimedTransition(4000, "KeeperClose")
                     ),
                 new State("KeeperClose",
                     new ApplySetpiece("KeeperClose"),
@@ -201,8 +201,27 @@ namespace wServer.logic
             )
         .Init("Keeper Gilgor Boss",
                 new State(
+                    new State("test1",
+                        new SetAltTexture(9),
+                        new TimedTransition(1, "test3")
+                        ),
+                    new State("test3",
+                        new SetAltTexture(7),
+                        new TimedTransition(1, "test5")
+                        ),
+                    new State("test5",
+                        new SetAltTexture(5),
+                        new TimedTransition(1, "test7")
+                        ),
+                    new State("test7",
+                        new SetAltTexture(3),
+                        new TimedTransition(1, "init")
+                        ),
                     new State("init",
-                        new Shoot(100, projectileIndex: 0, count: 1, coolDown: 75),
+                        new SetAltTexture(1),
+                        new TimedTransition(5000, "test3")
+                        ),
+                    new State("sneakIn0",
                         new Orbit(2, 20, target: "Keeper Boss Anchor", acquireRange: 30),
                         new TimedTransition(3000, "sneakIn1")
                         ),
@@ -219,7 +238,7 @@ namespace wServer.logic
                         new TimedTransition(3000, "fadeOut1")
                         ),
                     new State("fadeOut1",
-                        new KeeperDisappear("Disappear", 50),
+                        new KeeperDisappear(10),
                         new TimedTransition(3000, "moveToSpawn1")
                         ),
                     new State("moveToSpawn1",
@@ -228,10 +247,15 @@ namespace wServer.logic
                         ),
                     new State("moveToTomb",
                         new MoveTo(4, 4, speed: 1, isMapPosition: false, once: true, instant: true),
-                        new TimedTransition(500, "fadeIn1")
+                        new TimedTransition(300, "fadeIn1")
                         ),
                     new State("fadeIn1",
-                        new KeeperDisappear("Appear", 50)
+                        new KeeperAppear(10),
+                        new TimedTransition(3000, "shootTomb1")
+                        ),
+                    new State("shootTomb1",
+                        new Taunt(true, "Say goodbye to your precious Gods!"),
+                        new Shoot(100, count: 1, projectileIndex: 0, shootAngle: 220, fixedAngle: 120, coolDown: 10000)
                         )
                     )
             )
