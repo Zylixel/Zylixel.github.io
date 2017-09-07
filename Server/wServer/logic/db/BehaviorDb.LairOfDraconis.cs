@@ -59,7 +59,7 @@ namespace wServer.logic
                     new EntityExistsTransition("NM Blue Dragon Spawner", 999, "blue normal")
                     ),
                 new State("blue normal",
-                    new Taunt(true, "Do not let the tranquil surroundigps fool you!"),
+                    new Taunt(true, "Do not let the tranquil surroundings fool you!"),
                     new Order(99, "NM Blue Dragon Soul", "despawn"),
                     new Order(999, "NM Blue Dragon Spawner", "normal"),
                     new Order(999, "NM Blue Open Wall", "1"),
@@ -178,7 +178,7 @@ namespace wServer.logic
                         ),
                     new State("despawn",
                         new Aoe(1, false, 0, 0, false, 0xFFFFFF),
-                        new Decay(0)
+                        new Suicide()
                         )
                     )
             )
@@ -190,7 +190,7 @@ namespace wServer.logic
                         ),
                     new State("despawn",
                         new Aoe(1, false, 0, 0, false, 0xFFFFFF),
-                        new Decay(0)
+                        new Suicide()
                         )
                     )
             )
@@ -202,7 +202,7 @@ namespace wServer.logic
                         ),
                     new State("despawn",
                         new Aoe(1, false, 0, 0, false, 0xFFFFFF),
-                        new Decay(0)
+                        new Suicide()
                         )
                     )
             )
@@ -214,7 +214,7 @@ namespace wServer.logic
                         ),
                     new State("despawn",
                         new Aoe(1, false, 0, 0, false, 0xFFFFFF),
-                        new Decay(0)
+                        new Suicide()
                         )
                     )
             )
@@ -467,7 +467,7 @@ namespace wServer.logic
                     new Spawn("NM Blue Dragon God Hardmode", 1, 0)
                     ),
                 new State("despawn",
-                    new Decay(0)
+                    new Suicide()
                     )
                 )
             )
@@ -493,6 +493,7 @@ namespace wServer.logic
                     new ItemLoot("Large Blue Dragon Scale Cloth", 0.08),
                     new ItemLoot("Small Blue Dragon Scale Cloth", 0.08),
                     new ItemLoot("Potion of Mana", 0.03),
+                    new ItemLoot("Mantle of Ash", 0.04),
                     new ItemLoot("Wine Cellar Incantation", 0.008),
                     new ItemLoot("Water Dragon Silk Robe", 0.04)
                 )
@@ -671,6 +672,7 @@ namespace wServer.logic
                     new ItemLoot("Large Blue Dragon Scale Cloth", 0.1),
                     new ItemLoot("Small Blue Dragon Scale Cloth", 0.1),
                     new ItemLoot("Potion of Mana", 0.05),
+                    new ItemLoot("Mantle Of Ash", 0.04),
                     new ItemLoot("Wine Cellar Incantation", 0.01),
                     new ItemLoot("Water Dragon Silk Robe", 0.05)
                 )
@@ -686,7 +688,7 @@ namespace wServer.logic
                     new Spawn("NM Red Dragon God Hardmode", 1, 0)
                     ),
                 new State("despawn",
-                    new Decay(0)
+                    new Suicide()
                     )
                 )
             )
@@ -1067,7 +1069,7 @@ namespace wServer.logic
                 new State("2",
                     new Order(999, "NM Red Dragon Lava Trigger", "3"),
                     new Aoe(1, false, 0, 0, false, 0xFF0000),
-                    new Decay(0)
+                    new Suicide()
                     )
                 )
             )
@@ -1164,6 +1166,7 @@ namespace wServer.logic
                     new ItemLoot("Large Red Dragon Scale Cloth", 0.1),
                     new ItemLoot("Small Red Dragon Scale Cloth", 0.1),
                     new ItemLoot("Wine Cellar Incantation", 0.01),
+                    new ItemLoot("Pendant of the Dusk Talon", 0.05),
                     new ItemLoot("Fire Dragon Battle Armor", 0.05)
                 )
             )
@@ -1189,6 +1192,7 @@ namespace wServer.logic
                     new ItemLoot("Large Red Dragon Scale Cloth", 0.08),
                     new ItemLoot("Small Red Dragon Scale Cloth", 0.08),
                     new ItemLoot("Wine Cellar Incantation", 0.008),
+                    new ItemLoot("Pendant of the Dusk Talon", 0.04),
                     new ItemLoot("Fire Dragon Battle Armor", 0.04)
                 )
             )
@@ -1533,7 +1537,7 @@ namespace wServer.logic
                     new Spawn("NM Green Dragon God Hardmode", 1, 0)
                     ),
                 new State("despawn",
-                    new Decay(0)
+                    new Suicide()
                     )
                 )
             )
@@ -1586,6 +1590,7 @@ namespace wServer.logic
                     new TierLoot(11, ItemType.Armor, 0.05),
                     new ItemLoot("Large Green Dragon Scale Cloth", 0.08),
                     new ItemLoot("Small Green Dragon Scale Cloth", 0.08),
+                    new ItemLoot("Mantle of Ash", 0.04),
                     new ItemLoot("Wine Cellar Incantation", 0.008),
                     new ItemLoot("Leaf Dragon Hide Armor", 0.04)
                 )
@@ -1612,6 +1617,7 @@ namespace wServer.logic
                     new ItemLoot("Large Green Dragon Scale Cloth", 0.1),
                     new ItemLoot("Small Green Dragon Scale Cloth", 0.1),
                     new ItemLoot("Wine Cellar Incantation", 0.01),
+                    new ItemLoot("Mantle of Ash", 0.05),
                     new ItemLoot("Leaf Dragon Hide Armor", 0.05)
                 )
             )
@@ -1658,7 +1664,7 @@ namespace wServer.logic
                     new EntityNotExistsTransition("lod Green HM Loot Balloon", 999, "despawn")
                     ),
                 new State("despawn",
-                    new Decay(0)
+                    new Decay(1)
                     )
                 )
             )
@@ -1675,7 +1681,7 @@ namespace wServer.logic
                     new EntityNotExistsTransition("lod Black HM Loot Balloon", 999, "despawn")
                     ),
                 new State("despawn",
-                    new Decay(0)
+                    new Decay(1)
                     )
                 )
             )
@@ -1950,7 +1956,7 @@ namespace wServer.logic
                     new Spawn("NM Black Dragon God Hardmode", 1, 0)
                     ),
                 new State("despawn",
-                    new Decay(0)
+                    new Suicide()
                     )
                 )
             )
@@ -1977,6 +1983,7 @@ namespace wServer.logic
                     new ItemLoot("Small Midnight Dragon Scale Cloth", 0.1),
                     new ItemLoot("Wine Cellar Incantation", 0.01),
                     new ItemLoot("The World Tarot Card", 0.04),
+                    new ItemLoot("Rod of the wyrm", 0.05),
                     new ItemLoot("Annoying Firecracker Katana", 0.05)
                 )
             )
@@ -2003,6 +2010,7 @@ namespace wServer.logic
                     new ItemLoot("Small Midnight Dragon Scale Cloth", 0.08),
                     new ItemLoot("Wine Cellar Incantation", 0.008),
                     new ItemLoot("The World Tarot Card", 0.02),
+                    new ItemLoot("Rod of the Wyrm", 0.04),
                     new ItemLoot("Annoying Firecracker Katana", 0.04)
                 )
             )

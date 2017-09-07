@@ -14,16 +14,12 @@ namespace wServer.logic
                 .Init("Nexus Summoner",
                     new State(
                             new State("init",
-                                new ApplySetpiece("NexusFloral"),
+                                new ApplySetpiece("NexusDark"),
                                 new TimedTransition(300000, "Reload1")
                                 ),
                             new State("Reload1",
-                                new ApplySetpiece("NexusFloral"),
-                                new TimedTransition(300000, "Reload2")
-                                ),
-                            new State("Reload2",
-                                new ApplySetpiece("NexusFloral"),
-                                new TimedTransition(300000, "Reload1")
+                                new ApplySetpiece("NexusLight"),
+                                new TimedTransition(300000, "init")
                                 )
                         )
             )
@@ -43,6 +39,10 @@ namespace wServer.logic
                                 ),
                         new State("message3",
                                 new Taunt("You are currently on the testing server, expect random restarts"),
+                                new TimedTransition(60000, "message4")
+                                ),
+                        new State("message4",
+                                new Taunt("I think it's time for a change!"),
                                 new TimedTransition(60000, "init")
                                 )
                         )

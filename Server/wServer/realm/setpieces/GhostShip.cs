@@ -83,6 +83,8 @@ namespace wServer.realm.setpieces
                     else if (t[x, y] == 3)
                     {
                         var tile = world.Map[x + pos.X, y + pos.Y].Clone();
+                        tile.ObjId = 0;
+                        if (tile.ObjId == 0) tile.ObjId = world.GetNextEntityId();
                         tile.TileId = dat.IdToTileType[Water];
                         world.Obstacles[x + pos.X, y + pos.Y] = 0;
                         world.Map[x + pos.X, y + pos.Y] = tile;

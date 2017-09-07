@@ -18,7 +18,7 @@ namespace wServer.logic.behaviors
         public KeeperAppear(Cooldown coolDown = new Cooldown())
         {
             this.coolDown = coolDown.Normalize();
-            Stage = 9;
+            Stage = 5;
         }
 
         protected override void OnStateEntry(Entity host, RealmTime time, ref object state)

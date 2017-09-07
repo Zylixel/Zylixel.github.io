@@ -15,7 +15,7 @@ namespace wServer.logic
                 new State(
                     new DropPortalOnDeath("Ivory Wyvern Portal", 100),
                     new State("Idle",
-                        new EntityNotExistsTransition4("NM Red Dragon Spawner", "NM Blue Dragon Spawner", "NM Green Dragon Spawner", "NM Black Dragon Spawner", 999, "spawnPortal")
+                        new EntitiesNotExistsTransition(999, "spawnPortal", "lod Red HM Loot Balloon", "lod Blue HM Loot Balloon", "lod Green HM Loot Balloon", "lod Black HM Loot Balloon", "lod Red Loot Balloon", "lod Blue Loot Balloon", "lod Green Loot Balloon", "lod Black Loot Balloon", "NM Red Dragon Spawner", "NM Blue Dragon Spawner", "NM Green Dragon Spawner", "NM Black Dragon Spawner", "NM Red Dragon God", "NM Blue Dragon God", "NM Green Dragon God", "NM Black Dragon God", "NM Red Dragon Soul", "NM Blue Dragon Soul", "NM Green Dragon Soul", "NM Black Dragon Soul")
                     ),
                     new State("spawnPortal",
                         new Suicide()
@@ -45,6 +45,7 @@ namespace wServer.logic
             )
             .Init("lod Ivory Wyvern",
             new State(
+                new TransformOnDeath("lod Ivory Loot Balloon"),
                 new HpLessTransition(0.05, "death"),
                 new State("Idle",
                     new ConditionalEffect(ConditionEffectIndex.Invulnerable),
@@ -62,10 +63,10 @@ namespace wServer.logic
                     ),
                 new State("toss",
                     new ConditionalEffect(ConditionEffectIndex.Invulnerable),
-                    new TossObject("lod Mirror Wyvern1", 4, 360, coolDown: 300000, randomToss: false),
-                    new TossObject("lod Mirror Wyvern1", 8, 360, coolDown: 300000, randomToss: false),
-                    new TossObject("lod Mirror Wyvern1", 4, 180, coolDown: 300000, randomToss: false),
-                    new TossObject("lod Mirror Wyvern1", 8, 180, coolDown: 300000, randomToss: false),
+                    new TossObject("lod Mirror Wyvern1", 5, 360, coolDown: 300000, randomToss: false),
+                    new TossObject("lod Mirror Wyvern1", 10, 360, coolDown: 300000, randomToss: false),
+                    new TossObject("lod Mirror Wyvern1", 6, 180, coolDown: 300000, randomToss: false),
+                    new TossObject("lod Mirror Wyvern1", 10, 180, coolDown: 300000, randomToss: false),
                     new MoveTo(0, 1, 1, isMapPosition: false, once: true),
                     new TimedTransition(2000, "start")
                     ),
@@ -143,7 +144,8 @@ namespace wServer.logic
                     ),
                 new State("pre2ndphase",
                     new MoveTo(0, 1, 1, isMapPosition: false, once: true),
-                    new TimedTransition(2000, "2ndphase")
+                    new Shoot(20, 1, 0, projectileIndex: 0, coolDown: 200),
+                    new HpLessTransition(0.65, "2ndphase")
                     ),
                 new State("2ndphase",
                     new RemoveEntity(500, "lod Mirror Wyvern1"),
@@ -171,19 +173,19 @@ namespace wServer.logic
                     ),
                 new State("2ndphasestart2",
                         new Shoot(10, count: 8, fixedAngle: 90, shootAngle: 20, projectileIndex: 0, coolDown: 500),
-                        new TimedTransition(5000, "preflames")
+                        new TimedTransition(2500, "preflames")
                     ),
                 new State("preflames",
+                    new ConditionalEffect(ConditionEffectIndex.Invulnerable),
                     new ReturnToSpawn(true, 0.9),
-                    new RemoveEntity(420, "lod Mirror Wyvern1"),
-                    new TimedTransition(2000, "flames")
+                    new TimedTransition(2500, "flames")
                     ),
                 new State("flames",
                     new ConditionalEffect(ConditionEffectIndex.Invulnerable),
-                    new TossObject("lod Green Soul Flame", 4, 180, coolDown: 300000, randomToss: false),
-                    new TossObject("lod Blue Soul Flame", 8, 180, coolDown: 300000, randomToss: false),
-                    new TossObject("lod Red Soul Flame", 4, 360, coolDown: 300000, randomToss: false),
-                    new TossObject("lod Black Soul Flame", 8, 360, coolDown: 300000, randomToss: false),
+                    new TossObject("lod Red Soul Flame", 6, 180, coolDown: 300000, randomToss: false),
+                    new TossObject("lod Blue Soul Flame", 10, 180, coolDown: 300000, randomToss: false),
+                    new TossObject("lod Green Soul Flame", 5, 360, coolDown: 300000, randomToss: false),
+                    new TossObject("lod Black Soul Flame", 10, 360, coolDown: 300000, randomToss: false),
                     new TimedTransition(3000, "Wait")
                     ),
                 new State("Wait",
@@ -191,8 +193,9 @@ namespace wServer.logic
                     new EntitiesNotExistsTransition(500, "preMiddle", "lod Green Soul Flame", "lod Red Soul Flame", "lod Blue Soul Flame", "lod Black Soul Flame")
                     ),
                 new State("preMiddle",
+                    new ConditionalEffect(ConditionEffectIndex.Invulnerable),
                     new ReturnToSpawn(true, 0.9),
-                    new TimedTransition(100, "Middle")
+                    new TimedTransition(300, "Middle")
                     ),
                 new State("Middle",
                     new MoveTo(0, 12, 1, isMapPosition: false, once: true),
@@ -236,6 +239,7 @@ namespace wServer.logic
                 new State("death",
                     new ConditionalEffect(ConditionEffectIndex.Invulnerable),
                     new Taunt("You have defeated me, hero!"),
+                    new RemoveEntity(500, "lod White Dragon Orb"),
                     new TimedTransition(2000, "Suicide")
                     ),
                 new State("Suicide",

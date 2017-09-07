@@ -24,7 +24,7 @@ namespace wServer.realm.setpieces
 
         public int Size
         {
-            get { return 26; }
+            get { return 75; }
         }
 
         public void RenderSetPiece(World world, IntPoint pos)

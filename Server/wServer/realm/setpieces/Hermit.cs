@@ -70,6 +70,8 @@ namespace wServer.realm.setpieces
                     if (SetPiece[y, x] == 1)
                     {
                         WmapTile tile = world.Map[x + pos.X, y + pos.Y].Clone();
+                        tile.ObjId = 0;
+                        if (tile.ObjId == 0) tile.ObjId = world.GetNextEntityId();
                         tile.TileId = dat.IdToTileType[Ground[0]];
                         world.Map[x + pos.X, y + pos.Y] = tile;
                     }
@@ -77,6 +79,8 @@ namespace wServer.realm.setpieces
                     {
                         WmapTile tile = world.Map[x + pos.X, y + pos.Y].Clone();
                         tile.TileId = dat.IdToTileType[Ground[1]];
+                        tile.ObjId = 0;
+                        if (tile.ObjId == 0) tile.ObjId = world.GetNextEntityId();
                         tile.ObjType = 0;
                         world.Map[x + pos.X, y + pos.Y] = tile;
                     }

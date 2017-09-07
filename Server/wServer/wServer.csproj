@@ -284,6 +284,7 @@
     <Compile Include="logic\Transition.cs" />
     <Compile Include="logic\transitions\DamageTakenTransition.cs" />
     <Compile Include="logic\transitions\EntityExistsTransition.cs" />
+    <Compile Include="logic\transitions\EntityNotExistsTransition4.cs" />
     <Compile Include="logic\transitions\EntityNotExistsTransition2.cs" />
     <Compile Include="logic\transitions\NoPlayerWithinTransition.cs" />
     <Compile Include="logic\transitions\EntityNotExistsTransition.cs" />
@@ -450,6 +451,8 @@
     <Compile Include="realm\setpieces\Building.cs" />
     <Compile Include="realm\setpieces\Castle.cs" />
     <Compile Include="realm\setpieces\BottledEvil.cs" />
+    <Compile Include="realm\setpieces\NexusDark.cs" />
+    <Compile Include="realm\setpieces\NexusLight.cs" />
     <Compile Include="realm\setpieces\NexusFloral.cs" />
     <Compile Include="realm\setpieces\KeeperOcean.cs" />
     <Compile Include="realm\setpieces\KeeperShatters.cs" />
@@ -496,6 +499,7 @@
     <Compile Include="realm\Wmap.cs" />
     <Compile Include="realm\World.cs" />
     <Compile Include="realm\worlds\BattleNexus.cs" />
+    <Compile Include="realm\worlds\TheIvoryWyvern.cs" />
     <Compile Include="realm\worlds\TheRealmKeeper.cs" />
     <Compile Include="realm\worlds\ZysArena.cs" />
     <Compile Include="realm\worlds\Market.cs" />
@@ -698,6 +702,7 @@
     <EmbeddedResource Include="realm\worlds\maps\UDL1.jm" />
     <EmbeddedResource Include="realm\worlds\maps\TheRealmKeeper.jm" />
     <EmbeddedResource Include="realm\worlds\maps\NozenNexus.jm" />
+    <EmbeddedResource Include="realm\worlds\maps\ivory.jm" />
     <None Include="wServer.cfg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

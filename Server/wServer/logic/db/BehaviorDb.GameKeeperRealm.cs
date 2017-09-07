@@ -201,25 +201,9 @@ namespace wServer.logic
             )
         .Init("Keeper Gilgor Boss",
                 new State(
-                    new State("test1",
-                        new SetAltTexture(9),
-                        new TimedTransition(1, "test3")
-                        ),
-                    new State("test3",
-                        new SetAltTexture(7),
-                        new TimedTransition(1, "test5")
-                        ),
-                    new State("test5",
-                        new SetAltTexture(5),
-                        new TimedTransition(1, "test7")
-                        ),
-                    new State("test7",
-                        new SetAltTexture(3),
-                        new TimedTransition(1, "init")
-                        ),
                     new State("init",
-                        new SetAltTexture(1),
-                        new TimedTransition(5000, "test3")
+                        new SetAltTexture(15),
+                        new TimedTransition(100000, "sneakIn0")
                         ),
                     new State("sneakIn0",
                         new Orbit(2, 20, target: "Keeper Boss Anchor", acquireRange: 30),
@@ -246,16 +230,16 @@ namespace wServer.logic
                         new TimedTransition(3000, "moveToTomb")
                         ),
                     new State("moveToTomb",
-                        new MoveTo(4, 4, speed: 1, isMapPosition: false, once: true, instant: true),
+                        new MoveTo(4, 4, speed: 1, isMapPosition: false, once: true, instant: false),
                         new TimedTransition(300, "fadeIn1")
                         ),
                     new State("fadeIn1",
-                        new KeeperAppear(10),
+                        new KeeperAppear(1),
                         new TimedTransition(3000, "shootTomb1")
                         ),
                     new State("shootTomb1",
                         new Taunt(true, "Say goodbye to your precious Gods!"),
-                        new Shoot(100, count: 1, projectileIndex: 0, shootAngle: 220, fixedAngle: 120, coolDown: 10000)
+                        new Shoot(100, count: 1, projectileIndex: 0, shootAngle: 200, fixedAngle: 200, coolDown: 100)
                         )
                     )
             )
