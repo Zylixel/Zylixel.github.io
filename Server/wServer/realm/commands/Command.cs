@@ -15,7 +15,7 @@ namespace wServer.realm.commands
 {
     public abstract class Command
     {
-        protected static readonly ILog log = LogManager.GetLogger(typeof (Command));
+        protected static readonly ILog log = LogManager.GetLogger(typeof(Command));
 
         public Command(string name, int permLevel = 0)
         {
@@ -58,7 +58,7 @@ namespace wServer.realm.commands
             }
             catch (Exception ex)
             {
-                log.Error("Error when executing the command.", ex);
+                //                log.Error("Error when executing the command.", ex);
                 player.SendError("Error when executing the command.");
                 return false;
             }
@@ -67,7 +67,7 @@ namespace wServer.realm.commands
 
     public class CommandManager
     {
-        private static readonly ILog log = LogManager.GetLogger(typeof (CommandManager));
+        private static readonly ILog log = LogManager.GetLogger(typeof(CommandManager));
 
         private readonly Dictionary<string, Command> cmds;
 
@@ -77,11 +77,11 @@ namespace wServer.realm.commands
         {
             this.manager = manager;
             cmds = new Dictionary<string, Command>(StringComparer.InvariantCultureIgnoreCase);
-            Type t = typeof (Command);
+            Type t = typeof(Command);
             foreach (Type i in t.Assembly.GetTypes())
                 if (t.IsAssignableFrom(i) && i != t)
                 {
-                    Command instance = (Command) Activator.CreateInstance(i);
+                    Command instance = (Command)Activator.CreateInstance(i);
                     cmds.Add(instance.CommandName, instance);
                 }
         }
@@ -166,46 +166,6 @@ namespace wServer.realm.commands
             return true;
         }
     }
-
-    internal class TpVault : Command
-    {
-        public TpVault()
-            : base("Vault", 0)
-        {
-        }
-
-        protected override bool Process(Player player, RealmTime time, string[] args)
-        {
-            player.Client.Reconnect(new ReconnectPacket
-            {
-                Host = "",
-                Port = 2050,
-                GameId = World.VAULT_ID,
-                Name = "Market",
-                Key = Empty<byte>.Array,
-            });
-            return true;
-        }
-    }
-
-    internal class ZysRealm : Command
-    {
-        public ZysRealm()
-            : base("Realm", 0)
-        {
-        }
-
-        protected override bool Process(Player player, RealmTime time, string[] args)
-        {
-            player.Client.Reconnect(new ReconnectPacket
-            {
-                GameId = World.RAND_REALM,
-                Host = "",
-                Name = "Realm of the Mad God",
-                Key = Empty<byte>.Array,
-                Port = 2050
-            });
-            return true;
-        }
-    }
 }
+
+ 

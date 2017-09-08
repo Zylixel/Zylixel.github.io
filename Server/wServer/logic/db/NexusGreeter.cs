@@ -30,7 +30,7 @@ namespace wServer.logic
                                 new TimedTransition(60000, "message1")
                                 ),
                             new State("message1",
-                                new Taunt("We are currently on Update 2.016, are you?"),
+                                new Taunt("We are currently on Update 2.021, are you?"),
                                 new TimedTransition(60000, "message2")
                                 ),
                             new State("message2",

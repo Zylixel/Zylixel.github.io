@@ -38,7 +38,7 @@ namespace wServer.logic.behaviors.PetBehaviors
                     if (newMp != player.Mp)
                     {
                         int n = newMp - player.Mp;
-                        if (player.HasConditionEffect(ConditionEffectIndex.Quiet))
+                        if (player.HasConditionEffect(ConditionEffects.Quiet))
                         {
                             player.Owner.BroadcastPacket(new ShowEffectPacket
                             {
@@ -120,30 +120,505 @@ namespace wServer.logic.behaviors.PetBehaviors
 
         private int CalculateMagicHeal(int level, ref int cooldown)
         {
-            if (Enumerable.Range(0, 30).Contains(level))
+            if (Enumerable.Range(1, 1).Contains(level))
             {
-                cooldown = 5000;
+                cooldown = 10000;
+                return 1;
+            }
+            else if (Enumerable.Range(2, 1).Contains(level))
+            {
+                cooldown = 9350;
+                return 1;
+            }
+            else if (Enumerable.Range(3, 1).Contains(level))
+            {
+                cooldown = 8690;
+                return 1;
+            }
+            else if (Enumerable.Range(4, 1).Contains(level))
+            {
+                cooldown = 8040;
+                return 1;
+            }
+            else if (Enumerable.Range(5, 1).Contains(level))
+            {
+                cooldown = 7390;
+                return 1;
+            }
+            else if (Enumerable.Range(6, 1).Contains(level))
+            {
+                cooldown = 7130;
+                return 1;
+            }
+            else if (Enumerable.Range(7, 1).Contains(level))
+            {
+                cooldown = 6880;
+                return 1;
+            }
+            else if (Enumerable.Range(8, 1).Contains(level))
+            {
+                cooldown = 6620;
+                return 1;
+            }
+            else if (Enumerable.Range(9, 1).Contains(level))
+            {
+                cooldown = 6370;
+                return 1;
+            }
+            else if (Enumerable.Range(10, 1).Contains(level))
+            {
+                cooldown = 6110;
+                return 1;
+            }
+            else if (Enumerable.Range(11, 1).Contains(level))
+            {
+                cooldown = 5940;
+                return 1;
+            }
+            else if (Enumerable.Range(12, 1).Contains(level))
+            {
+                cooldown = 5760;
+                return 1;
+            }
+            else if (Enumerable.Range(13, 1).Contains(level))
+            {
+                cooldown = 5590;
+                return 1;
+            }
+            else if (Enumerable.Range(14, 1).Contains(level))
+            {
+                cooldown = 5420;
+                return 1;
+            }
+            else if (Enumerable.Range(15, 1).Contains(level))
+            {
+                cooldown = 5250;
+                return 1;
+            }
+            else if (Enumerable.Range(16, 1).Contains(level))
+            {
+                cooldown = 5130;
+                return 1;
+            }
+            else if (Enumerable.Range(17, 1).Contains(level))
+            {
+                cooldown = 5010;
+                return 1;
+            }
+            else if (Enumerable.Range(18, 1).Contains(level))
+            {
+                cooldown = 4900;
+                return 1;
+            }
+            else if (Enumerable.Range(19, 1).Contains(level))
+            {
+                cooldown = 4780;
+                return 1;
+            }
+            else if (Enumerable.Range(20, 1).Contains(level))
+            {
+                cooldown = 4670;
+                return 2;
+            }
+            else if (Enumerable.Range(21, 1).Contains(level))
+            {
+                cooldown = 4580;
+                return 2;
+            }
+            else if (Enumerable.Range(22, 1).Contains(level))
+            {
+                cooldown = 4490;
+                return 2;
+            }
+            else if (Enumerable.Range(23, 1).Contains(level))
+            {
+                cooldown = 4400;
+                return 2;
+            }
+            else if (Enumerable.Range(24, 1).Contains(level))
+            {
+                cooldown = 4310;
+                return 2;
+            }
+            else if (Enumerable.Range(25, 1).Contains(level))
+            {
+                cooldown = 4220;
+                return 2;
+            }
+            else if (Enumerable.Range(26, 1).Contains(level))
+            {
+                cooldown = 4140;
+                return 2;
+            }
+            else if (Enumerable.Range(27, 1).Contains(level))
+            {
+                cooldown = 4060;
+                return 2;
+            }
+            else if (Enumerable.Range(28, 1).Contains(level))
+            {
+                cooldown = 3980;
+                return 3;
+            }
+            else if (Enumerable.Range(29, 1).Contains(level))
+            {
+                cooldown = 3900;
+                return 3;
+            }
+            else if (Enumerable.Range(30, 1).Contains(level))
+            {
+                cooldown = 3820;
+                return 3;
+            }
+            else if (Enumerable.Range(31, 1).Contains(level))
+            {
+                cooldown = 3750;
+                return 3;
+            }
+            else if (Enumerable.Range(32, 1).Contains(level))
+            {
+                cooldown = 3690;
+                return 3;
+            }
+            else if (Enumerable.Range(33, 1).Contains(level))
+            {
+                cooldown = 3620;
+                return 3;
+            }
+            else if (Enumerable.Range(34, 1).Contains(level))
+            {
+                cooldown = 3550;
+                return 4;
+            }
+            else if (Enumerable.Range(35, 1).Contains(level))
+            {
+                cooldown = 3480;
+                return 4;
+            }
+            else if (Enumerable.Range(36, 1).Contains(level))
+            {
+                cooldown = 3430;
+                return 4;
+            }
+            else if (Enumerable.Range(37, 1).Contains(level))
+            {
+                cooldown = 3390;
+                return 4;
+            }
+            else if (Enumerable.Range(38, 1).Contains(level))
+            {
+                cooldown = 3340;
+                return 4;
+            }
+            else if (Enumerable.Range(39, 1).Contains(level))
+            {
+                cooldown = 3290;
                 return 5;
             }
-            else if (Enumerable.Range(30, 20).Contains(level))
+            else if (Enumerable.Range(40, 1).Contains(level))
             {
-                cooldown = 4500;
+                cooldown = 3240;
+                return 5;
+            }
+            else if (Enumerable.Range(41, 1).Contains(level))
+            {
+                cooldown = 3190;
+                return 5;
+            }
+            else if (Enumerable.Range(42, 1).Contains(level))
+            {
+                cooldown = 3130;
+                return 5;
+            }
+            else if (Enumerable.Range(43, 1).Contains(level))
+            {
+                cooldown = 3080;
+                return 6;
+            }
+            else if (Enumerable.Range(44, 1).Contains(level))
+            {
+                cooldown = 3030;
+                return 6;
+            }
+            else if (Enumerable.Range(45, 1).Contains(level))
+            {
+                cooldown = 2970;
+                return 6;
+            }
+            else if (Enumerable.Range(46, 1).Contains(level))
+            {
+                cooldown = 2910;
+                return 7;
+            }
+            else if (Enumerable.Range(47, 1).Contains(level))
+            {
+                cooldown = 2850;
+                return 7;
+            }
+            else if (Enumerable.Range(48, 1).Contains(level))
+            {
+                cooldown = 2780;
+                return 7;
+            }
+            else if (Enumerable.Range(49, 1).Contains(level))
+            {
+                cooldown = 2720;
+                return 8;
+            }
+            else if (Enumerable.Range(50, 1).Contains(level))
+            {
+                cooldown = 2660;
+                return 8;
+            }
+            else if (Enumerable.Range(51, 1).Contains(level))
+            {
+                cooldown = 2610;
+                return 8;
+            }
+            else if (Enumerable.Range(52, 1).Contains(level))
+            {
+                cooldown = 2560;
+                return 9;
+            }
+            else if (Enumerable.Range(53, 1).Contains(level))
+            {
+                cooldown = 2510;
+                return 9;
+            }
+            else if (Enumerable.Range(54, 1).Contains(level))
+            {
+                cooldown = 2460;
+                return 9;
+            }
+            else if (Enumerable.Range(55, 1).Contains(level))
+            {
+                cooldown = 2410;
                 return 10;
             }
-            else if (Enumerable.Range(50, 20).Contains(level))
+            else if (Enumerable.Range(56, 1).Contains(level))
             {
-                cooldown = 4000;
+                cooldown = 2370;
+                return 10;
+            }
+            else if (Enumerable.Range(57, 1).Contains(level))
+            {
+                cooldown = 2340;
+                return 11;
+            }
+            else if (Enumerable.Range(58, 1).Contains(level))
+            {
+                cooldown = 2300;
+                return 11;
+            }
+            else if (Enumerable.Range(59, 1).Contains(level))
+            {
+                cooldown = 2260;
+                return 11;
+            }
+            else if (Enumerable.Range(60, 1).Contains(level))
+            {
+                cooldown = 2220;
+                return 12;
+            }
+            else if (Enumerable.Range(61, 1).Contains(level))
+            {
+                cooldown = 2190;
+                return 12;
+            }
+            else if (Enumerable.Range(62, 1).Contains(level))
+            {
+                cooldown = 2150;
+                return 13;
+            }
+            else if (Enumerable.Range(63, 1).Contains(level))
+            {
+                cooldown = 2120;
+                return 13;
+            }
+            else if (Enumerable.Range(64, 1).Contains(level))
+            {
+                cooldown = 2080;
+                return 14;
+            }
+            else if (Enumerable.Range(65, 1).Contains(level))
+            {
+                cooldown = 2050;
+                return 14;
+            }
+            else if (Enumerable.Range(66, 1).Contains(level))
+            {
+                cooldown = 2030;
+                return 15;
+            }
+            else if (Enumerable.Range(67, 1).Contains(level))
+            {
+                cooldown = 2010;
+                return 16;
+            }
+            else if (Enumerable.Range(68, 1).Contains(level))
+            {
+                cooldown = 1990;
+                return 16;
+            }
+            else if (Enumerable.Range(69, 1).Contains(level))
+            {
+                cooldown = 1980;
                 return 17;
             }
-            else if (Enumerable.Range(70, 20).Contains(level))
+            else if (Enumerable.Range(70, 1).Contains(level))
             {
-                cooldown = 3500;
+                cooldown = 1960;
+                return 17;
+            }
+            else if (Enumerable.Range(71, 1).Contains(level))
+            {
+                cooldown = 1910;
+                return 18;
+            }
+            else if (Enumerable.Range(72, 1).Contains(level))
+            {
+                cooldown = 1880;
+                return 19;
+            }
+            else if (Enumerable.Range(73, 1).Contains(level))
+            {
+                cooldown = 1850;
+                return 19;
+            }
+            else if (Enumerable.Range(74, 1).Contains(level))
+            {
+                cooldown = 1830;
+                return 20;
+            }
+            else if (Enumerable.Range(75, 1).Contains(level))
+            {
+                cooldown = 1790;
+                return 21;
+            }
+            else if (Enumerable.Range(76, 1).Contains(level))
+            {
+                cooldown = 1740;
+                return 21;
+            }
+            else if (Enumerable.Range(77, 1).Contains(level))
+            {
+                cooldown = 1700;
+                return 22;
+            }
+            else if (Enumerable.Range(78, 1).Contains(level))
+            {
+                cooldown = 1650;
+                return 23;
+            }
+            else if (Enumerable.Range(79, 1).Contains(level))
+            {
+                cooldown = 1610;
+                return 24;
+            }
+            else if (Enumerable.Range(80, 1).Contains(level))
+            {
+                cooldown = 1570;
+                return 24;
+            }
+            else if (Enumerable.Range(81, 1).Contains(level))
+            {
+                cooldown = 1530;
                 return 25;
             }
-            else if (Enumerable.Range(90, 11).Contains(level))
+            else if (Enumerable.Range(82, 1).Contains(level))
             {
-                cooldown = 3000;
+                cooldown = 1500;
+                return 26;
+            }
+            else if (Enumerable.Range(83, 1).Contains(level))
+            {
+                cooldown = 1460;
+                return 27;
+            }
+            else if (Enumerable.Range(84, 1).Contains(level))
+            {
+                cooldown = 1420;
+                return 28;
+            }
+            else if (Enumerable.Range(85, 1).Contains(level))
+            {
+                cooldown = 1420;
+                return 28;
+            }
+            else if (Enumerable.Range(86, 1).Contains(level))
+            {
+                cooldown = 1420;
+                return 29;
+            }
+            else if (Enumerable.Range(87, 1).Contains(level))
+            {
+                cooldown = 1420;
+                return 30;
+            }
+            else if (Enumerable.Range(88, 1).Contains(level))
+            {
+                cooldown = 1420;
+                return 31;
+            }
+            else if (Enumerable.Range(89, 1).Contains(level))
+            {
+                cooldown = 1420;
+                return 32;
+            }
+            else if (Enumerable.Range(90, 1).Contains(level))
+            {
+                cooldown = 1420;
+                return 33;
+            }
+            else if (Enumerable.Range(91, 1).Contains(level))
+            {
+                cooldown = 1380;
+                return 34;
+            }
+            else if (Enumerable.Range(92, 1).Contains(level))
+            {
+                cooldown = 1340;
                 return 35;
+            }
+            else if (Enumerable.Range(93, 1).Contains(level))
+            {
+                cooldown = 1290;
+                return 36;
+            }
+            else if (Enumerable.Range(94, 1).Contains(level))
+            {
+                cooldown = 1250;
+                return 38;
+            }
+            else if (Enumerable.Range(95, 1).Contains(level))
+            {
+                cooldown = 1210;
+                return 39;
+            }
+            else if (Enumerable.Range(96, 1).Contains(level))
+            {
+                cooldown = 1170;
+                return 40;
+            }
+            else if (Enumerable.Range(97, 1).Contains(level))
+            {
+                cooldown = 1130;
+                return 41;
+            }
+            else if (Enumerable.Range(98, 1).Contains(level))
+            {
+                cooldown = 1080;
+                return 42;
+            }
+            else if (Enumerable.Range(99, 1).Contains(level))
+            {
+                cooldown = 1040;
+                return 44;
+            }
+            else if (Enumerable.Range(100, 1).Contains(level))
+            {
+                cooldown = 1000;
+                return 45;
             }
             throw new Exception("Invalid PetLevel");
             //switch (level)
@@ -160,3 +635,5 @@ namespace wServer.logic.behaviors.PetBehaviors
         }
     }
 }
+
+//Realm Resolution Pet Stats

@@ -406,7 +406,7 @@ namespace wServer.logic
                     new HpLessTransition(.1, "Death"),
                     new State("Idle",
                         new ConditionalEffect(ConditionEffectIndex.Invulnerable),
-                        new EntityNotExistsTransition2("shtrs Glassier Archmage", "shtrs Archmage of Flame", 15, "Wake")
+                        new EntitiesNotExistsTransition(15, "Wake", "shtrs Glassier Archmage", "shtrs Archmage of Flame")
                     ),
                     new State("Wake",
                         new State("Comment1",

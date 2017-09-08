@@ -10,7 +10,6 @@ namespace server.friends
     {
         protected override void HandleRequest()
         {
-            throw new NotImplementedException();
         }
     }
 }

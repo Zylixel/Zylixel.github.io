@@ -86,7 +86,6 @@ namespace wServer.realm.setpieces
                         tile.ObjId = 0;
                         if (tile.ObjId == 0) tile.ObjId = world.GetNextEntityId();
                         tile.TileId = dat.IdToTileType[Water];
-                        world.Obstacles[x + pos.X, y + pos.Y] = 0;
                         world.Map[x + pos.X, y + pos.Y] = tile;
                     }
                     else if (t[x, y] == 4)
@@ -94,7 +93,6 @@ namespace wServer.realm.setpieces
                         var tile = world.Map[x + pos.X, y + pos.Y].Clone();
                         tile.ObjId = dat.IdToObjectType[Tree];
                         if (tile.ObjId == 0) tile.ObjId = world.GetNextEntityId();
-                        world.Obstacles[x + pos.X, y + pos.Y] = 0;
                         world.Map[x + pos.X, y + pos.Y] = tile;
                     }
                 }

@@ -148,37 +148,44 @@ namespace wServer.logic
                     new HpLessTransition(0.65, "2ndphase")
                     ),
                 new State("2ndphase",
+                    new ConditionalEffect(ConditionEffectIndex.Invulnerable),
                     new RemoveEntity(500, "lod Mirror Wyvern1"),
                     new TimedTransition(500, "pre2ndphasestart")
                     ),
                 new State("pre2ndphasestart",
+                    new ConditionalEffect(ConditionEffectIndex.Invulnerable),
                     new MoveTo(6, 0, 0.5, isMapPosition: false, once: true),
                     new TimedTransition(1500, "2ndphasestart")
                     ),
                 new State("2ndphasestart",
+                    new ConditionalEffect(ConditionEffectIndex.Invulnerable),
                         new Shoot(10, count: 8, fixedAngle: 90, shootAngle: 20, projectileIndex: 0, coolDown: 500),
                         new TimedTransition(3000, "prepre2ndphasestart2")
                     ),
                 new State("prepre2ndphasestart2",
+                    new ConditionalEffect(ConditionEffectIndex.Invulnerable),
                     new ReturnToSpawn(true, 0.9),
                     new TimedTransition(2000, "preprepre2ndphasestart2")
                     ),
                 new State("preprepre2ndphasestart2",
+                    new ConditionalEffect(ConditionEffectIndex.Invulnerable),
                     new MoveTo(0, 1, 1, isMapPosition: false, once: true),
                     new TimedTransition(500, "pre2ndphasestart2")
                     ),
                 new State("pre2ndphasestart2",
+                    new ConditionalEffect(ConditionEffectIndex.Invulnerable),
                     new MoveTo(-6, 0, 0.5, isMapPosition: false, once: true),
                     new TimedTransition(1500, "2ndphasestart2")
                     ),
                 new State("2ndphasestart2",
+                        new ConditionalEffect(ConditionEffectIndex.Invulnerable),
                         new Shoot(10, count: 8, fixedAngle: 90, shootAngle: 20, projectileIndex: 0, coolDown: 500),
                         new TimedTransition(2500, "preflames")
                     ),
                 new State("preflames",
                     new ConditionalEffect(ConditionEffectIndex.Invulnerable),
                     new ReturnToSpawn(true, 0.9),
-                    new TimedTransition(2500, "flames")
+                    new TimedTransition(3000, "flames")
                     ),
                 new State("flames",
                     new ConditionalEffect(ConditionEffectIndex.Invulnerable),

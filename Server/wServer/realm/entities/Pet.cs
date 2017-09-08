@@ -6,18 +6,6 @@ using MySql.Data.MySqlClient;
 using wServer.realm.entities.player;
 using wServer.networking.svrPackets;
 using wServer.realm.worlds;
-using db;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using wServer.networking.cliPackets;
-using wServer.networking.svrPackets;
-using wServer.realm;
-using wServer.realm.entities;
-using wServer.realm.entities.player;
-using wServer.realm.worlds;
 
 #endregion
 

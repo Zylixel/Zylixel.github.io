@@ -19,7 +19,6 @@ namespace wServer.realm.setpieces
         private static readonly string Shallow = "Tropical Water Surf";
         private static readonly string F1 = "Bush";
         private static readonly string F2 = "Butterfly";
-        private static readonly string F3 = "Corn";
         private static readonly string F4 = "Fir Tree 2";
 
         private readonly Random rand = new Random();

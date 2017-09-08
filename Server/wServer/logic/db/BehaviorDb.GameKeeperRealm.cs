@@ -168,7 +168,7 @@ namespace wServer.logic
                     ),
                 new State("KeeperClose",
                     new ApplySetpiece("KeeperClose"),
-                    new TimedTransition(3000, "KeeperClose1")
+                    new TimedTransition(3700, "KeeperClose1")
                     ),
                 new State("KeeperClose1",
                     new ApplySetpiece("KeeperClose1"),
@@ -199,13 +199,34 @@ namespace wServer.logic
                     )
                 )
             )
+        .Init("Keeper Gilgor Boss Appear",
+                new State(
+                    new State("init",
+                        new TimedTransition(700,"die")
+                        ),
+                    new State("die",
+                        new Suicide()
+                        )
+                    )
+            )
+        .Init("Keeper Gilgor Boss Disappear",
+                new State(
+                    new State("init",
+                        new TimedTransition(700, "die")
+                        ),
+                    new State("die",
+                        new Suicide()
+                        )
+                    )
+            )
         .Init("Keeper Gilgor Boss",
                 new State(
                     new State("init",
-                        new SetAltTexture(15),
-                        new TimedTransition(100000, "sneakIn0")
+                        new Spawn("Keeper Gilgor Boss Appear"),
+                        new EntityNotExistsTransition("Keeper Gilgor Boss Appear", 999, "sneakIn0")
                         ),
                     new State("sneakIn0",
+                        new SetAltTexture(1),
                         new Orbit(2, 20, target: "Keeper Boss Anchor", acquireRange: 30),
                         new TimedTransition(3000, "sneakIn1")
                         ),
@@ -222,8 +243,9 @@ namespace wServer.logic
                         new TimedTransition(3000, "fadeOut1")
                         ),
                     new State("fadeOut1",
-                        new KeeperDisappear(10),
-                        new TimedTransition(3000, "moveToSpawn1")
+                        new Spawn("Keeper Gilgor Boss Disappear"),
+                        new SetAltTexture(5),
+                        new TimedTransition(800, "moveToSpawn1")
                         ),
                     new State("moveToSpawn1",
                         new ReturnToSpawn(true, 1),
@@ -231,10 +253,14 @@ namespace wServer.logic
                         ),
                     new State("moveToTomb",
                         new MoveTo(4, 4, speed: 1, isMapPosition: false, once: true, instant: false),
-                        new TimedTransition(300, "fadeIn1")
+                        new TimedTransition(50, "fadeIn1")
                         ),
                     new State("fadeIn1",
-                        new KeeperAppear(1),
+                        new Spawn("Keeper Gilgor Boss Appear"),
+                        new EntityNotExistsTransition("Keeper Gilgor Boss Appear", 999, "fadeIn2")
+                        ),
+                    new State("fadeIn2",
+                        new SetAltTexture(1),
                         new TimedTransition(3000, "shootTomb1")
                         ),
                     new State("shootTomb1",

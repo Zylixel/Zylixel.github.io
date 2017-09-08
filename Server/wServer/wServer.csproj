@@ -140,8 +140,6 @@
     <Compile Include="logic\behaviors\ChangeGroundOnDeath.cs" />
     <Compile Include="logic\behaviors\ChangeSize.cs" />
     <Compile Include="logic\behaviors\Charge.cs" />
-    <Compile Include="logic\behaviors\KeeperAppear.cs" />
-    <Compile Include="logic\behaviors\KeeperDisappear.cs" />
     <Compile Include="logic\behaviors\Drakes\BeesC.cs" />
     <Compile Include="logic\behaviors\Drakes\KeeperGodRandom.cs" />
     <Compile Include="logic\behaviors\Drakes\BeesR.cs" />
@@ -284,8 +282,6 @@
     <Compile Include="logic\Transition.cs" />
     <Compile Include="logic\transitions\DamageTakenTransition.cs" />
     <Compile Include="logic\transitions\EntityExistsTransition.cs" />
-    <Compile Include="logic\transitions\EntityNotExistsTransition4.cs" />
-    <Compile Include="logic\transitions\EntityNotExistsTransition2.cs" />
     <Compile Include="logic\transitions\NoPlayerWithinTransition.cs" />
     <Compile Include="logic\transitions\EntityNotExistsTransition.cs" />
     <Compile Include="logic\transitions\PlayerWithinTransition.cs" />

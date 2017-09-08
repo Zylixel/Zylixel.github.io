@@ -65,7 +65,6 @@ public class AssetLoader {
         AssetLibrary.addImageSet("lofiObj5", new EmbeddedAssets.lofiObj5Embed_().bitmapData, 8, 8);
         AssetLibrary.addImageSet("lofiObj6", new EmbeddedAssets.lofiObj6Embed_().bitmapData, 8, 8);
         AssetLibrary.addImageSet("lofiObj7", new EmbeddedAssets.lofiObj7Embed_().bitmapData, 8, 8);
-        AssetLibrary.addImageSet("lofiObj8", new EmbeddedAssets.lofiObj8Embed_().bitmapData, 8, 8);
         AssetLibrary.addImageSet("lofiObj9", new EmbeddedAssets.lofiObj9Embed_().bitmapData, 8, 8);
         AssetLibrary.addImageSet("lofiObj10", new EmbeddedAssets.lofiObj10Embed_().bitmapData, 8, 8);
         AssetLibrary.addImageSet("lofiObjBig", new EmbeddedAssets.lofiObjBigEmbed_().bitmapData, 16, 16);
