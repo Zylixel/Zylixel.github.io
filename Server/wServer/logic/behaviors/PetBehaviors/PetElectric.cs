@@ -18,11 +18,11 @@ namespace wServer.logic.behaviors.PetBehaviors
         protected override void TickCore(Entity host, RealmTime time, ref object state)
         {
             if (state == null) return;
-            int cool = (int) state;
+            int cool = (int)state;
 
             if (cool <= 0)
             {
-                
+
                 PetLevel level = null;
                 if (host is Pet)
                 {
@@ -36,49 +36,49 @@ namespace wServer.logic.behaviors.PetBehaviors
                 double dist = getDist(host as Pet, level);
 
                 Enemy[] targets = host.GetNearestEntities(dist).OfType<Enemy>().ToArray();
-                foreach (Enemy e in targets)
-                {
-                    if (e.HasConditionEffect(ConditionEffectIndex.Invulnerable) || e.HasConditionEffect(ConditionEffectIndex.Invincible) || e.HasConditionEffect(ConditionEffectIndex.Stasis)) continue;
-                    if (Random.Next(0, 100) > level.Level) break;
-
-                    if (e.ObjectDesc == null | !e.ObjectDesc.Enemy) continue;
-
-                    if (e.HasConditionEffect(ConditionEffectIndex.Invincible)) continue;
-
-                    e.ApplyConditionEffect(new ConditionEffect
+                    foreach (Enemy e in targets)
                     {
-                        DurationMS = level.Level * 40,
-                        Effect = ConditionEffectIndex.Paralyzed
-                    });
+                        if (e.HasConditionEffect(ConditionEffectIndex.Invulnerable) || e.HasConditionEffect(ConditionEffectIndex.Invincible) || e.HasConditionEffect(ConditionEffectIndex.Stasis)) continue;
+                        if (Random.Next(0, 100) > level.Level) break;
 
-                    e.Owner.BroadcastPacket(new ShowEffectPacket
-                    {
-                        EffectType = EffectType.ElectricFlashing,
-                        PosA = new Position { X = level.Level * 40},
-                        TargetId = e.Id
-                    }, null);
+                        if (e.ObjectDesc == null | !e.ObjectDesc.Enemy) continue;
 
-                    host.Owner.BroadcastPacket(new ShowEffectPacket
-                    {
-                        PosA = new Position { X = host.X, Y = host.Y },
-                        EffectType = EffectType.ElectricBolts,
-                        TargetId = host.Id,
-                    }, null);
+                        if (e.HasConditionEffect(ConditionEffectIndex.Invincible)) continue;
 
-                    e.Damage(null, time, level.Level, true, new ConditionEffect
-                    {
-                        DurationMS = level.Level * 40,
-                        Effect = ConditionEffectIndex.Paralyzed
-                    });
+                        e.ApplyConditionEffect(new ConditionEffect
+                        {
+                            DurationMS = level.Level * 40,
+                            Effect = ConditionEffectIndex.Paralyzed
+                        });
+
+                        e.Owner.BroadcastPacket(new ShowEffectPacket
+                        {
+                            EffectType = EffectType.ElectricFlashing,
+                            PosA = new Position { X = level.Level * 40 },
+                            TargetId = e.Id
+                        }, null);
+
+                        host.Owner.BroadcastPacket(new ShowEffectPacket
+                        {
+                            PosA = new Position { X = host.X, Y = host.Y },
+                            EffectType = EffectType.ElectricBolts,
+                            TargetId = host.Id,
+                        }, null);
+
+                        e.Damage(null, time, level.Level, true, new ConditionEffect
+                        {
+                            DurationMS = level.Level * 40,
+                            Effect = ConditionEffectIndex.Paralyzed
+                        });
+                    }
+
+                    cool = getCooldown(host as Pet, level) / host.Manager.TPS;
                 }
+                else
+                    cool -= time.thisTickTimes;
 
-                cool = getCooldown(host as Pet, level) / host.Manager.TPS;
+                state = cool;
             }
-            else
-                cool -= time.thisTickTimes;
-
-            state = cool;
-        }
 
         private int getCooldown(Pet host, PetLevel type)
         {

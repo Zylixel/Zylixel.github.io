@@ -96,7 +96,7 @@ namespace wServer.logic
             .Init("Keeper Defender",
                 new State(
                     new State("begin",
-                        new TimedTransition(5000, "die")
+                        new TimedTransition(15000, "die")
                         ),
                     new State("die",
                         new Suicide()
@@ -106,7 +106,7 @@ namespace wServer.logic
         .Init("Keeper Attacker",
                 new State(
                     new State("begin",
-                        new TimedTransition(5000, "die")
+                        new TimedTransition(15000, "die")
                         ),
                     new State("die",
                         new Suicide()
@@ -116,7 +116,7 @@ namespace wServer.logic
         .Init("Keeper Support",
                 new State(
                     new State("begin",
-                        new TimedTransition(5000, "die")
+                        new TimedTransition(15000, "die")
                         ),
                     new State("die",
                         new Suicide()
@@ -222,28 +222,29 @@ namespace wServer.logic
         .Init("Keeper Gilgor Boss",
                 new State(
                     new State("init",
-                        new Spawn("Keeper Gilgor Boss Appear"),
-                        new EntityNotExistsTransition("Keeper Gilgor Boss Appear", 999, "sneakIn0")
+                        new ConditionalEffect(ConditionEffectIndex.Invulnerable, perm: true),
+                        new Spawn("Keeper Gilgor Boss Appear", maxChildren: 1),
+                        new TimedTransition(700, "sneakIn0")
                         ),
                     new State("sneakIn0",
                         new SetAltTexture(1),
-                        new Orbit(2, 20, target: "Keeper Boss Anchor", acquireRange: 30),
+                        new Orbit(2, 19, target: "Keeper Boss Anchor", acquireRange: 30),
                         new TimedTransition(3000, "sneakIn1")
                         ),
                     new State("sneakIn1",
-                        new Orbit(2, 19, target: "Keeper Boss Anchor", acquireRange: 30),
+                        new Orbit(2, 18, target: "Keeper Boss Anchor", acquireRange: 30),
                         new TimedTransition(3000, "sneakIn2")
                         ),
                     new State("sneakIn2",
-                        new Orbit(2, 18, target: "Keeper Boss Anchor", acquireRange: 30),
+                        new Orbit(2, 17, target: "Keeper Boss Anchor", acquireRange: 30),
                         new TimedTransition(3000, "sneakIn3")
                         ),
                     new State("sneakIn3",
-                        new Orbit(2, 17, target: "Keeper Boss Anchor", acquireRange: 30),
+                        new Orbit(2, 16, target: "Keeper Boss Anchor", acquireRange: 30),
                         new TimedTransition(3000, "fadeOut1")
                         ),
                     new State("fadeOut1",
-                        new Spawn("Keeper Gilgor Boss Disappear"),
+                        new Spawn("Keeper Gilgor Boss Disappear", maxChildren: 1),
                         new SetAltTexture(5),
                         new TimedTransition(800, "moveToSpawn1")
                         ),
@@ -252,12 +253,12 @@ namespace wServer.logic
                         new TimedTransition(3000, "moveToTomb")
                         ),
                     new State("moveToTomb",
-                        new MoveTo(4, 4, speed: 1, isMapPosition: false, once: true, instant: false),
+                        new MoveTo(6, 6, speed: 1, isMapPosition: false, once: true, instant: false),
                         new TimedTransition(50, "fadeIn1")
                         ),
                     new State("fadeIn1",
-                        new Spawn("Keeper Gilgor Boss Appear"),
-                        new EntityNotExistsTransition("Keeper Gilgor Boss Appear", 999, "fadeIn2")
+                        new Spawn("Keeper Gilgor Boss Appear", maxChildren: 1),
+                        new TimedTransition(700, "fadeIn2")
                         ),
                     new State("fadeIn2",
                         new SetAltTexture(1),
