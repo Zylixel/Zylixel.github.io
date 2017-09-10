@@ -16,6 +16,8 @@ import flash.display.Sprite;
 import flash.events.Event;
 import flash.geom.Point;
 
+import com.company.assembleegameclient.parameters.Parameters;
+
 import kabam.rotmg.game.view.components.TabStripView;
 import kabam.rotmg.messaging.impl.incoming.TradeAccepted;
 import kabam.rotmg.messaging.impl.incoming.TradeChanged;
@@ -102,7 +104,12 @@ public class HUDView extends Sprite implements UnFocusAble {
 
     private function createEquippedGridBackground():void {
         var _local_3:Vector.<IGraphicsData>;
-        var _local_1:GraphicsSolidFill = new GraphicsSolidFill(0x187a61, 1);
+        if (Parameters.data_.blueSidebar) {
+            var _local_1:GraphicsSolidFill = new GraphicsSolidFill(0x187a61, 1);
+        }
+        else {
+            var _local_1:GraphicsSolidFill = new GraphicsSolidFill(0x676767, 1);
+        }
         var _local_2:GraphicsPath = new GraphicsPath(new Vector.<int>(), new Vector.<Number>());
         _local_3 = new <IGraphicsData>[_local_1, _local_2, GraphicsUtil.END_FILL];
         GraphicsUtil.drawCutEdgeRect(0, 0, 178, 46, 6, [1, 1, 1, 1], _local_2);

@@ -6,8 +6,6 @@
         private bool lootTierBoostFreeTimer;
         private bool ninjaShoot;
         private bool ninjaFreeTimer;
-        private bool RangerShoot;
-        private bool RangerFreeTimer;
         private bool xpFreeTimer;
 
         public void HandleBoosts()
@@ -23,22 +21,6 @@
                         if (Mp <= 0)
                             ApplyConditionEffect(new ConditionEffect { Effect = ConditionEffectIndex.Speedy, DurationMS = 0 });
                         ninjaFreeTimer = true;
-                        UpdateCount++;
-                    }));
-                }
-            }
-
-            if (RangerShoot && RangerFreeTimer)
-            {
-                if (Mp > 0)
-                {
-                    RangerFreeTimer = false;
-                    Owner.Timers.Add(new WorldTimer(100, (w, t) =>
-                    {
-                        Mp -= 3;
-                        if (Mp <= 0)
-                            ApplyConditionEffect(new ConditionEffect { Effect = ConditionEffectIndex.Invisible, DurationMS = 0 });
-                        RangerFreeTimer = true;
                         UpdateCount++;
                     }));
                 }

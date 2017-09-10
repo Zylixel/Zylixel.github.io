@@ -759,7 +759,7 @@ public class EquipmentToolTip extends ToolTip {
         this.titleText.y = ((this.icon.height / 2) - (this.titleText.height / 2));
         if (this.objectXML.hasOwnProperty("Legendary")) {
             this.tierText.y = ((this.icon.height / 2) - (this.tierText.height / 2));
-            this.tierText.x = (MAX_WIDTH - 55);
+            this.tierText.x = (MAX_WIDTH - 45);
         }
         else if (this.objectXML.hasOwnProperty("Event")) {
             this.tierText.y = ((this.icon.height / 2) - (this.tierText.height / 2));

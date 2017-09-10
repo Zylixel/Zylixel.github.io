@@ -145,7 +145,12 @@ public class PotionSlotView extends Sprite {
         }
         if (!_local_5) {
             if (Parameters.data_.contextualPotionBuy) {
-                this.text.setColor(0x33ffcc);
+                if (Parameters.data_.blueSidebar) {
+                    this.text.setColor(0x33ffcc);
+                }
+                else {
+                    this.text.setColor(0xFFFFFF);
+                }
                 this.costIcon.filters = [];
                 this.costIcon.visible = true;
             }
@@ -156,7 +161,12 @@ public class PotionSlotView extends Sprite {
             }
         }
         else {
-            this.text.setColor(0x33ffcc);
+            if (Parameters.data_.blueSidebar) {
+                this.text.setColor(0x33ffcc);
+            }
+            else {
+                this.text.setColor(0xFFFFFF);
+            }
             this.costIcon.filters = [];
             this.costIcon.visible = false;
         }

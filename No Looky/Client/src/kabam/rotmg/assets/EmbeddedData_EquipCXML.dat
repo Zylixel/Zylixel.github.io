@@ -19792,65 +19792,47 @@ An awe-inspiring sword gifted to only the most worthy mortals from the heavens t
             <DisplayId>Keeper Boss Anchor</DisplayId>
           </Object>
           <Object type="0x610a" id="Keeper Gilgor Boss">
-            <Group>Nexus</Group>
-            <Class>Character</Class>
-            <Flying/>
-            <ParalyzeImmune/>
-            <DazedImmune/>
-            <StasisImmune/>
-            <StunImmune/>
-            <Enemy/>
-            <Projectile id="0">
-              <ObjectId>Blue Zombie Wave</ObjectId>
-              <Damage>80</Damage>
-              <Speed>80</Speed>
-              <Size>100</Size>
-              <LifetimeMS>800</LifetimeMS>
-            </Projectile>
-            <Texture>
-                <File>invisible</File>
-                <Index>0</Index>
-              </Texture>
-            <AltTexture id="1">
-              <AnimatedTexture>
-                <File>chars16x16dEncounters2</File>
-                <Index>95</Index>
-              </AnimatedTexture>
-            </AltTexture>
-            <AltTexture id="2">
+              <Group>Nexus</Group>
+              <Class>Character</Class>
+              <Flying/>
+              <ParalyzeImmune/>
+              <DazedImmune/>
+              <StasisImmune/>
+              <StunImmune/>
+              <Enemy/>
+              <Projectile id="0">
+                <ObjectId>Stone Slash</ObjectId>
+                <Damage>1</Damage>
+                <Speed>50</Speed>
+                <Size>200</Size>
+                <LifetimeMS>800</LifetimeMS>
+              </Projectile>
               <Texture>
-                <File>d3LofiObjBigEmbed</File>
-                <Index>0x03</Index>
-              </Texture>
-            </AltTexture>
-            <AltTexture id="3">
-              <Texture>
-                <File>d3LofiObjBigEmbed</File>
-                <Index>0x05</Index>
-              </Texture>
-            </AltTexture>
-            <AltTexture id="4">
-              <Texture>
-                <File>d3LofiObjBigEmbed</File>
-                <Index>0x07</Index>
-              </Texture>
-            </AltTexture>
-            <AltTexture id="5">
-              <Texture>
-                <File>invisible</File>
-                <Index>0</Index>
-              </Texture>
-            </AltTexture>
-            <Size>250</Size>
-            <Quest/>
-            <ShadowSize>0</ShadowSize>
-            <MaxHitPoints>500000</MaxHitPoints>
-            <Defense>40</Defense>
-            <DisplayId>Giglor Keeper of the Realm</DisplayId>
-            <HitSound>monster/abyss_demons_hit</HitSound>
-            <XpMult>20000</XpMult>
-            <DeathSound>monster/dwarf_god_hit</DeathSound>
-          </Object>
+                  <File>invisible</File>
+                  <Index>0</Index>
+                </Texture>
+              <AltTexture id="1">
+                <AnimatedTexture>
+                  <File>chars16x16dEncounters2</File>
+                  <Index>95</Index>
+                </AnimatedTexture>
+              </AltTexture>
+              <AltTexture id="2">
+                <Texture>
+                  <File>invisible</File>
+                  <Index>0</Index>
+                </Texture>
+              </AltTexture>
+              <Size>250</Size>
+              <Quest/>
+              <ShadowSize>0</ShadowSize>
+              <MaxHitPoints>500000</MaxHitPoints>
+              <Defense>40</Defense>
+              <DisplayId>Giglor Keeper of the Realm</DisplayId>
+              <HitSound>monster/abyss_demons_hit</HitSound>
+              <XpMult>20000</XpMult>
+              <DeathSound>monster/dwarf_god_hit</DeathSound>
+            </Object>
           <Object type="0x6110" id="lod Ivory Loot Balloon">
             <Class>Character</Class>
             <Enemy/>
@@ -19950,9 +19932,9 @@ An awe-inspiring sword gifted to only the most worthy mortals from the heavens t
                 <StunImmune/>
                 <Enemy/>
                 <Texture>
-                  <File>invisible</File>
-                  <Index>0</Index>
-                </Texture>
+                      <File>d3LofiObjBigEmbed</File>
+                      <Index>0x07</Index>
+                    </Texture>
                   <Animation prob="1" period="0.7">
                     <Frame time="0.1">
                       <Texture>
@@ -20072,30 +20054,46 @@ An awe-inspiring sword gifted to only the most worthy mortals from the heavens t
         <FameBonus>6</FameBonus>
         <feedPower>1000</feedPower>
       </Object>
-      <Object type="0x6116" id="Ring of the Gods">
-        <Class>Equipment</Class>
-        <Item/>
-        <DisplayId>Ring of the Gods</DisplayId>
-        <Texture>
-          <File>lofiObj9</File>
-          <Index>0x83</Index>
-        </Texture>
-        <SlotType>9</SlotType>
-        <Description>
-          A ring forged for Gilgor, no mortal could fathom holding this.
-        </Description>
-        <ActivateOnEquip stat="20" amount="3">IncrementStat</ActivateOnEquip>
-        <ActivateOnEquip stat="21" amount="3">IncrementStat</ActivateOnEquip>
-        <ActivateOnEquip stat="22" amount="4">IncrementStat</ActivateOnEquip>
-        <ActivateOnEquip stat="28" amount="4">IncrementStat</ActivateOnEquip>
-        <ActivateOnEquip stat="26" amount="5">IncrementStat</ActivateOnEquip>
-        <ActivateOnEquip stat="27" amount="5">IncrementStat</ActivateOnEquip>
-        <ActivateOnEquip stat="0" amount="60">IncrementStat</ActivateOnEquip>
-        <ActivateOnEquip stat="3" amount="60">IncrementStat</ActivateOnEquip>
-        <BagType>6</BagType>
-        <FameBonus>6</FameBonus>
-        <feedPower>1000</feedPower>
-        <Legendary></Legendary>
-      </Object>
+      <Object type="0x6116" id="Amulet of the Gods">
+          <Class>Equipment</Class>
+          <Item/>
+          <DisplayId>Amulet of the Gods</DisplayId>
+          <Texture>
+            <File>lofiObj9</File>
+            <Index>0x83</Index>
+          </Texture>
+          <SlotType>9</SlotType>
+          <Description>
+            An Amulet forged for Gilgor, no mortal could fathom holding this.
+          </Description>
+          <ActivateOnEquip stat="20" amount="3">IncrementStat</ActivateOnEquip>
+          <ActivateOnEquip stat="21" amount="3">IncrementStat</ActivateOnEquip>
+          <ActivateOnEquip stat="22" amount="4">IncrementStat</ActivateOnEquip>
+          <ActivateOnEquip stat="28" amount="4">IncrementStat</ActivateOnEquip>
+          <ActivateOnEquip stat="26" amount="5">IncrementStat</ActivateOnEquip>
+          <ActivateOnEquip stat="27" amount="5">IncrementStat</ActivateOnEquip>
+          <ActivateOnEquip stat="0" amount="60">IncrementStat</ActivateOnEquip>
+          <ActivateOnEquip stat="3" amount="60">IncrementStat</ActivateOnEquip>
+          <BagType>6</BagType>
+          <FameBonus>6</FameBonus>
+          <feedPower>1000</feedPower>
+          <Legendary></Legendary>
+        </Object>
+        <Object type="0x6117" id="Mystery Pet Stone">
+            <DisplayId>Mystery Pet Stone</DisplayId>
+            <Class>Equipment</Class>
+            <Item/>
+            <Texture>
+              <File>lofiObj3</File>
+              <Index>0x572</Index>
+            </Texture>
+            <SlotType>10</SlotType>
+            <Description>
+              Open this amazing Mystery Item to get any of the pet stones in-game!
+            </Description>
+            <Sound>use_key</Sound>
+            <Consumable/>
+            <Activate>RandomPetStone</Activate>
+          </Object>
 </Objects>
 

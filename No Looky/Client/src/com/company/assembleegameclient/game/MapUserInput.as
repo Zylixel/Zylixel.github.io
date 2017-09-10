@@ -454,6 +454,10 @@ public class MapUserInput {
                 Parameters.data_.onToggleUI = !(Parameters.data_.onToggleUI);
                 Parameters.save();
                 break;
+            case Parameters.data_.blueSidebar:
+                Parameters.data_.blueSidebar = !(Parameters.data_.blueSidebar);
+                Parameters.save();
+                break;
             case Parameters.data_.toggleFullscreen:
                 if (Capabilities.playerType == "Desktop") {
                     Parameters.data_.fullscreenMode = !(Parameters.data_.fullscreenMode);

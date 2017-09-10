@@ -194,6 +194,7 @@ public class Parameters {
         setDefault("disablePlayersHitParticles", false);
         setDefaultKey("ToggleUI", KeyCodes.UNSET);
         setDefault("onToggleUI", true);
+        setDefault("blueSidebar", false);
         setDefault("cursorSelect", "4");
         setDefault("friendListDisplayFlag", false);
         if (Capabilities.playerType == "Desktop") {
@@ -224,6 +225,9 @@ public class Parameters {
             setDefault("SFXVolume", 0);
         }
         setDefault("friendList", KeyCodes.UNSET);
+
+        setDefault("mscale",10);
+
         setDefault("tradeWithFriends", false);
         setDefault("chatFriend", false);
         setDefault("friendStarRequirement", 0);

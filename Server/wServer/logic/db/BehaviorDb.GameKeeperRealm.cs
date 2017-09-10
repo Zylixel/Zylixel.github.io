@@ -96,7 +96,7 @@ namespace wServer.logic
             .Init("Keeper Defender",
                 new State(
                     new State("begin",
-                        new TimedTransition(15000, "die")
+                        new TimedTransition(13650, "die")
                         ),
                     new State("die",
                         new Suicide()
@@ -106,7 +106,7 @@ namespace wServer.logic
         .Init("Keeper Attacker",
                 new State(
                     new State("begin",
-                        new TimedTransition(15000, "die")
+                        new TimedTransition(13650, "die")
                         ),
                     new State("die",
                         new Suicide()
@@ -116,7 +116,7 @@ namespace wServer.logic
         .Init("Keeper Support",
                 new State(
                     new State("begin",
-                        new TimedTransition(15000, "die")
+                        new TimedTransition(13650, "die")
                         ),
                     new State("die",
                         new Suicide()
@@ -222,9 +222,9 @@ namespace wServer.logic
         .Init("Keeper Gilgor Boss",
                 new State(
                     new State("init",
-                        new ConditionalEffect(ConditionEffectIndex.Invulnerable, perm: true),
+                        new ConditionalEffect(ConditionEffectIndex.Invincible, perm: true),
                         new Spawn("Keeper Gilgor Boss Appear", maxChildren: 1),
-                        new TimedTransition(700, "sneakIn0")
+                        new TimedTransition(800, "sneakIn0")
                         ),
                     new State("sneakIn0",
                         new SetAltTexture(1),
@@ -244,8 +244,8 @@ namespace wServer.logic
                         new TimedTransition(3000, "fadeOut1")
                         ),
                     new State("fadeOut1",
+                        new SetAltTexture(2),
                         new Spawn("Keeper Gilgor Boss Disappear", maxChildren: 1),
-                        new SetAltTexture(5),
                         new TimedTransition(800, "moveToSpawn1")
                         ),
                     new State("moveToSpawn1",
@@ -266,7 +266,7 @@ namespace wServer.logic
                         ),
                     new State("shootTomb1",
                         new Taunt(true, "Say goodbye to your precious Gods!"),
-                        new Shoot(100, count: 1, projectileIndex: 0, shootAngle: 200, fixedAngle: 200, coolDown: 100)
+                        new Shoot(100, count: 1, projectileIndex: 0, shootAngle: 200, fixedAngle: 200, coolDown: 10000000)
                         )
                     )
             )

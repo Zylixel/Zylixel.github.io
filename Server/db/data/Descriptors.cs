@@ -323,8 +323,8 @@ public enum ActivateEffects
     UnlockSkin,
     MysteryPortal,
     GenericActivate,
-    RangerAbility,
-    PetSkin
+    PetSkin,
+    RandomPetStone
 }
 
 public class ActivateEffect

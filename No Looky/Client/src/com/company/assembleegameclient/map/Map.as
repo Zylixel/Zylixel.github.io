@@ -334,6 +334,12 @@ public class Map extends AbstractMap {
         y = -(_local_3.y);
         var _local_4:Number = ((-(_local_3.y) - (_local_3.height / 2)) / 50);
         var _local_5:Point = new Point((_arg_1.x_ + (_local_4 * Math.cos((_arg_1.angleRad_ - (Math.PI / 2))))), (_arg_1.y_ + (_local_4 * Math.sin((_arg_1.angleRad_ - (Math.PI / 2))))));
+        {
+            this.scaleX = 600 / (Parameters.data_.mscale * 50);
+            this.scaleY = 600 / (Parameters.data_.mscale * 50);
+            x = -_local_3.x * 600 / (Parameters.data_.mscale * 50);
+            y = -_local_3.y * 600 / (Parameters.data_.mscale * 50);
+        }
         if (background_ != null) {
             background_.draw(_arg_1, _arg_2);
         }

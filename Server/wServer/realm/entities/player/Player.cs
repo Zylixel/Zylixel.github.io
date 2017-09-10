@@ -463,12 +463,11 @@ namespace wServer.realm.entities.player
         {
             if (CheckBrokenAmulet(MathsUtils.GenerateProb(100)))
                 return;
-            // if (CheckMantleResurrect(MathsUtils.GenerateProb(100)))
-            //   return;
             if (CheckNotBrokenAmulet(MathsUtils.GenerateProb(100)))
                 return;
             if (dying) return;
             dying = true;
+            var killPlayer = true;
             switch (Owner.Name)
 
             {
@@ -506,6 +505,7 @@ namespace wServer.realm.entities.player
             {
                 case "":
                 case "Unknown":
+                    killPlayer = false;
                     break;
 
                 default:
@@ -519,37 +519,44 @@ namespace wServer.realm.entities.player
                     break;
             }
 
-
-            try
+            if (killPlayer == true)
             {
-                Manager.Database.DoActionAsync(db =>
+                try
                 {
-                    Client.Character.Dead = true;
-                    SaveToCharacter();
-                    db.SaveCharacter(Client.Account, Client.Character);
-                    db.Death(Manager.GameData, Client.Account, Client.Character, killer);
-                });
-                if (Owner.Id != -6)
-                {
-                    Client.SendPacket(new DeathPacket
+                    Manager.Database.DoActionAsync(db =>
                     {
-                        AccountId = AccountId,
-                        CharId = Client.Character.CharacterId,
-                        Killer = killer,
-                        obf0 = -1,
-                        obf1 = -1,
+                        Client.Character.Dead = true;
+                        SaveToCharacter();
+                        db.SaveCharacter(Client.Account, Client.Character);
+                        db.Death(Manager.GameData, Client.Account, Client.Character, killer);
                     });
-                    Owner.Timers.Add(new WorldTimer(1000, (w, t) => Client.Disconnect()));
-                    Owner.LeaveWorld(this);
+                    if (Owner.Id != -6)
+                    {
+                        Client.SendPacket(new DeathPacket
+                        {
+                            AccountId = AccountId,
+                            CharId = Client.Character.CharacterId,
+                            Killer = killer,
+                            obf0 = -1,
+                            obf1 = -1,
+                        });
+                        Owner.Timers.Add(new WorldTimer(1000, (w, t) => Client.Disconnect()));
+                        Owner.LeaveWorld(this);
+                    }
+                    else
+                        Client.Disconnect();
                 }
-                else
-                    Client.Disconnect();
+                catch (Exception e)
+                {
+                    log.Error(e);
+                }
             }
-            catch (Exception e)
+            else
             {
-                log.Error(e);
+                Client.Disconnect();
             }
         }
+
         private bool CheckBrokenAmulet(bool doesRevive)
         {
             for (int i = 0; i < 4; i++)

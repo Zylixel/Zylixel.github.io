@@ -445,6 +445,7 @@ public class Options extends Sprite {
     private function addGraphicsOptions():void {
         var _local_1:String;
         var _local_2:Number;
+        this.addOptionAndPosition((new ChoiceOption("blueSidebar", makeOnOffLabels(), [true, false], "Blue Mode", "Sets the theme to Zylixel's favorite color", null)));
         this.addOptionAndPosition((new KeyMapper("ToggleUI", "Hard Mode", "Disables MP and HP bars")));
         this.addOptionAndPosition(new ChoiceOption("defaultCameraAngle", makeDegreeOptions(), [((7 * Math.PI) / 4), 0], TextKey.OPTIONS_DEFAULT_CAMERA_ANGLE, TextKey.OPTIONS_DEFAULT_CAMERA_ANGLE_DESC, onDefaultCameraAngleChange));
         this.addOptionAndPosition(new ChoiceOption("centerOnPlayer", makeOnOffLabels(), [true, false], TextKey.OPTIONS_CENTER_ON_PLAYER, TextKey.OPTIONS_CENTER_ON_PLAYER_DESC, null));

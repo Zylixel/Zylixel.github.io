@@ -80,7 +80,7 @@ namespace wServer.realm.entities.player
 
         private bool CanMpRegen()
         {
-            if (HasConditionEffect(ConditionEffectIndex.Quiet) || ninjaShoot || RangerShoot)
+            if (HasConditionEffect(ConditionEffectIndex.Quiet) || ninjaShoot)
                 return false;
             return true;
         }

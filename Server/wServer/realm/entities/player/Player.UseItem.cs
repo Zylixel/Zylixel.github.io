@@ -1078,36 +1078,36 @@ namespace wServer.realm.entities.player
                         }
                         break;
 
-                    case ActivateEffects.RangerAbility:
+                    case ActivateEffects.RandomPetStone:
+                        int[] Items = new[]
                         {
-                            if (!RangerShoot)
+                            0x6073, //Gigacorn
+                            0x6075, //Gship
+                            0x6079, //RedStoneGuard
+                            0x6081, //BlueStoneGuard
+                            0x6083, //Limon
+                            0x6089, //Sprite God
+                            0x6091, //Forgotten King
+                            0x6094, //Crystal Steed
+                            0x6096  //GSphinx
+                        };
+
+                        var Succeed = false;
+
+                        for (int i = 5; i < Client.Player.Inventory.Length; i++)
+                            if (Client.Player.Inventory[i] == null)
                             {
-                                ApplyConditionEffect(new ConditionEffect
-                                {
-                                    Effect = ConditionEffectIndex.Invisible,
-                                    DurationMS = -1
-                                });
-                                RangerFreeTimer = true;
-                                RangerShoot = true;
+                                Client.Player.Inventory[i] = Client.Player.Manager.GameData.Items[(ushort)Items[new Random().Next(0, Items.Length)]];
+                                Succeed = true;
+                                endMethod = false;
+                                break;
                             }
-                            else
-                            {
-                                ApplyConditionEffect(new ConditionEffect
-                                {
-                                    Effect = ConditionEffectIndex.Invisible,
-                                    DurationMS = 0
-                                });
-                                ushort obj;
-                                Manager.GameData.IdToObjectType.TryGetValue(item.ObjectId, out obj);
-                                if (Mp >= item.MpEndCost)
-                                {
-                                    ActivateShoot(time, item, pkt.ItemUsePos);
-                                    Mp -= (int)item.MpEndCost;
-                                }
-                                targetlink = target;
-                                RangerShoot = false;
+                            if (Succeed == false)
+                            { 
+                                SendInfo("Please have one open slot to use this item.");
+                                endMethod = true;
                             }
-                        }
+                        Client.Player.UpdateCount++;
                         break;
 
                     case ActivateEffects.UnlockSkin:
