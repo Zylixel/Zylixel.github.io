@@ -3,6 +3,7 @@ using System.Linq;
 using wServer.networking.svrPackets;
 using wServer.realm;
 using wServer.realm.entities;
+using wServer.realm.worlds;
 
 namespace wServer.logic.behaviors.PetBehaviors
 {
@@ -17,7 +18,7 @@ namespace wServer.logic.behaviors.PetBehaviors
 
         protected override void TickCore(Entity host, RealmTime time, ref object state)
         {
-            if (state == null) return;
+                if (state == null) return;
             int cool = (int)state;
 
             if (cool <= 0)
@@ -41,7 +42,7 @@ namespace wServer.logic.behaviors.PetBehaviors
                         if (e.HasConditionEffect(ConditionEffectIndex.Invulnerable) || e.HasConditionEffect(ConditionEffectIndex.Invincible) || e.HasConditionEffect(ConditionEffectIndex.Stasis)) continue;
                         if (Random.Next(0, 100) > level.Level) break;
 
-                        if (e.ObjectDesc == null | !e.ObjectDesc.Enemy) continue;
+                        if (e.ObjectDesc == null | !e.ObjectDesc.Enemy | !e.ObjectDesc.NoElectric) continue;
 
                         if (e.HasConditionEffect(ConditionEffectIndex.Invincible)) continue;
 

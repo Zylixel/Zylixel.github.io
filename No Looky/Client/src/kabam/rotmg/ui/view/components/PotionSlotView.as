@@ -23,6 +23,7 @@ import flash.utils.Timer;
 
 import kabam.rotmg.text.view.TextFieldDisplayConcrete;
 import kabam.rotmg.text.view.stringBuilder.StaticStringBuilder;
+import kabam.rotmg.ui.view.HUDView;
 
 import org.osflash.signals.Signal;
 import org.osflash.signals.natives.NativeSignal;
@@ -60,6 +61,7 @@ public class PotionSlotView extends Sprite {
     private var dragStart:Point;
     private var pendingSecondClick:Boolean;
     private var isDragging:Boolean;
+    public var hudView:HUDView;
 
     public function PotionSlotView(_arg_1:Array, _arg_2:int) {
         var _local_3:BitmapData;

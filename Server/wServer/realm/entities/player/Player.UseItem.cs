@@ -1089,11 +1089,12 @@ namespace wServer.realm.entities.player
                             0x6089, //Sprite God
                             0x6091, //Forgotten King
                             0x6094, //Crystal Steed
-                            0x6096  //GSphinx
+                            0x6096, //GSphinx
+                            0x6118, //Bridge Sentinal
+                            0x6119  //Twilight Archmage
                         };
 
                         var Succeed = false;
-
                         for (int i = 5; i < Client.Player.Inventory.Length; i++)
                             if (Client.Player.Inventory[i] == null)
                             {

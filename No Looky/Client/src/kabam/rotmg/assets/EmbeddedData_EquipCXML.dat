@@ -19933,7 +19933,7 @@ An awe-inspiring sword gifted to only the most worthy mortals from the heavens t
                 <Enemy/>
                 <Texture>
                       <File>d3LofiObjBigEmbed</File>
-                      <Index>0x07</Index>
+                      <Index>0x01</Index>
                     </Texture>
                   <Animation prob="1" period="0.7">
                     <Frame time="0.1">
@@ -20095,5 +20095,185 @@ An awe-inspiring sword gifted to only the most worthy mortals from the heavens t
             <Consumable/>
             <Activate>RandomPetStone</Activate>
           </Object>
+          <Object type="0x6118" id="Bridge Sentinel Pet Stone">
+              <Class>Equipment</Class>
+              <Item />
+              <AnimatedTexture>
+                <File>chars8x8rPets2</File>
+                <Index>0x0c</Index>
+              </AnimatedTexture>
+              <SlotType>10</SlotType>
+              <Activate petType="24858">PetSkin</Activate>
+              <Sound>use_potion</Sound>
+              <Description></Description>
+              <Consumable/>
+              <feedPower>5000</feedPower>
+              <DisplayId>Bridge Sentinel Skin</DisplayId>
+            </Object>
+            <Object type="0x6119" id="Twilight Archmage Pet Stone">
+              <Class>Equipment</Class>
+              <Item />
+              <AnimatedTexture>
+                <File>chars8x8rPets2</File>
+                <Index>0x0d</Index>
+              </AnimatedTexture>
+              <SlotType>10</SlotType>
+              <Activate petType="24859">PetSkin</Activate>
+              <Sound>use_potion</Sound>
+              <Description></Description>
+              <Consumable/>
+              <feedPower>5000</feedPower>
+              <DisplayId>Twilight Archmage Pet Stone</DisplayId>
+            </Object>
+            <Object type="0x611a" id="Bridge Sentinel Skin">
+              <PetSkin/>
+              <DisplayId>Bridge Sentinel Skin</DisplayId>
+              <Class>PetSkin</Class>
+              <AnimatedTexture>
+                <File>chars8x8rPets2</File>
+                <Index>0x0c</Index>
+              </AnimatedTexture>
+            </Object>
+            <Object type="0x611b" id="Twilight Archmage Skin">
+              <PetSkin/>
+              <DisplayId>Twilight Archmage Skin</DisplayId>
+              <Class>PetSkin</Class>
+              <AnimatedTexture>
+                <File>chars8x8rPets2</File>
+                <Index>0x0d</Index>
+              </AnimatedTexture>
+            </Object>
+            <Object type="0x6120" id="Crystal Dagger Shot">
+                <Class>Projectile</Class>
+                <Texture>
+                  <File>lofiObj3</File>
+                  <Index>0x577</Index>
+                </Texture>
+                <AngleCorrection>1</AngleCorrection>
+              </Object>
+              <Object type="0x611c" id="Crystal Dagger of Evolution 1">
+                <DisplayId>Crystal Dagger of Evolution</DisplayId>
+                <Class>Equipment</Class>
+                <Item/>
+                <Texture>
+                  <File>lofiObj3</File>
+                  <Index>0x573</Index>
+                </Texture>
+                <SlotType>2</SlotType>
+                <RateOfFire>0.85</RateOfFire>
+                <Description>
+                  The blade of this dagger went missing long ago. Its pieces remain in the realm, waiting to be reunited.
+                </Description>
+                <OldSound>bladeSwing</OldSound>
+                <ExtraTooltipData>
+                                         <EffectInfo name="" description="Level 1"/>
+                                </ExtraTooltipData>
+                <Projectile>
+                  <ObjectId>Crystal Dagger Shot</ObjectId>
+                  <Speed>140</Speed>
+                  <MinDamage>50</MinDamage>
+                  <MaxDamage>155</MaxDamage>
+                  <LifetimeMS>357</LifetimeMS>
+                  <Size>100</Size>
+                  <MultiHit/>
+                  <ArmorPiercing/>
+                </Projectile>
+                <BagType>6</BagType>
+                <FameBonus>2</FameBonus>
+                <feedPower>250</feedPower>
+              </Object>
+              <Object type="0x611d" id="Crystal Dagger of Evolution 2">
+                <DisplayId>Crystal Dagger of Evolution</DisplayId>
+                <Class>Equipment</Class>
+                <Item/>
+                <Texture>
+                  <File>lofiObj3</File>
+                  <Index>0x574</Index>
+                </Texture>
+                <SlotType>2</SlotType>
+                <RateOfFire>0.9</RateOfFire>
+                <Description>
+                  The blade of this dagger went missing long ago. Its pieces remain in the realm, waiting to be reunited.
+                </Description>
+                <OldSound>bladeSwing</OldSound>
+                <ExtraTooltipData>
+                                         <EffectInfo name="" description="Level 2"/>
+                                </ExtraTooltipData>
+                <Projectile>
+                  <ObjectId>Crystal Dagger Shot</ObjectId>
+                  <Speed>140</Speed>
+                  <MinDamage>55</MinDamage>
+                  <MaxDamage>155</MaxDamage>
+                  <LifetimeMS>357</LifetimeMS>
+                  <Size>100</Size>
+                  <MultiHit/>
+                  <ArmorPiercing/>
+                </Projectile>
+                <BagType>6</BagType>
+                <FameBonus>3</FameBonus>
+                <feedPower>500</feedPower>
+              </Object>
+              <Object type="0x611e" id="Crystal Dagger of Evolution 3">
+                <DisplayId>Crystal Dagger of Evolution</DisplayId>
+                <Class>Equipment</Class>
+                <Item/>
+                <Texture>
+                  <File>lofiObj3</File>
+                  <Index>0x575</Index>
+                </Texture>
+                <SlotType>2</SlotType>
+                <RateOfFire>0.95</RateOfFire>
+                <Description>
+                  The blade of this dagger went missing long ago. Its pieces remain in the realm, waiting to be reunited.
+                </Description>
+                <OldSound>bladeSwing</OldSound>
+                <ExtraTooltipData>
+                                         <EffectInfo name="" description="Level 3"/>
+                                </ExtraTooltipData>
+                <Projectile>
+                  <ObjectId>Crystal Dagger Shot</ObjectId>
+                  <Speed>140</Speed>
+                  <MinDamage>60</MinDamage>
+                  <MaxDamage>155</MaxDamage>
+                  <LifetimeMS>357</LifetimeMS>
+                  <Size>100</Size>
+                  <MultiHit/>
+                  <ArmorPiercing/>
+                </Projectile>
+                <BagType>6</BagType>
+                <FameBonus>4</FameBonus>
+                <feedPower>750</feedPower>
+              </Object>
+              <Object type="0x611f" id="Crystal Dagger of Evolution 4">
+                <DisplayId>Crystal Dagger of Evolution</DisplayId>
+                <Class>Equipment</Class>
+                <Item/>
+                <Texture>
+                  <File>lofiObj3</File>
+                  <Index>0x576</Index>
+                </Texture>
+                <SlotType>2</SlotType>
+                <RateOfFire>1</RateOfFire>
+                <Description>
+                  The blade of this dagger went missing long ago. Its pieces remain in the realm, waiting to be reunited.
+                </Description>
+                <OldSound>bladeSwing</OldSound>
+                <ExtraTooltipData>
+                         <EffectInfo name="" description="Level 4"/>
+                </ExtraTooltipData>
+                <Projectile>
+                  <ObjectId>Crystal Dagger Shot</ObjectId>
+                  <Speed>140</Speed>
+                  <MinDamage>65</MinDamage>
+                  <MaxDamage>155</MaxDamage>
+                  <LifetimeMS>357</LifetimeMS>
+                  <Size>100</Size>
+                  <MultiHit/>
+                  <ArmorPiercing/>
+                </Projectile>
+                <BagType>6</BagType>
+                <FameBonus>5</FameBonus>
+                <feedPower>1000</feedPower>
+              </Object>
 </Objects>
 

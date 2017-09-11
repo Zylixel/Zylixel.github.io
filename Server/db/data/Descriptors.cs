@@ -731,6 +731,7 @@ public class ObjectDesc
     public string Class { get; private set; }
     public bool Player { get; private set; }
     public bool Enemy { get; private set; }
+    public bool NoElectric { get; private set; }
     public bool OccupySquare { get; private set; }
     public bool FullOccupy { get; private set; }
     public bool EnemyOccupySquare { get; private set; }

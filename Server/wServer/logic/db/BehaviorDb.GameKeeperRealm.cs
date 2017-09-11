@@ -95,8 +95,7 @@ namespace wServer.logic
             )
             .Init("Keeper Defender",
                 new State(
-                    new State("begin",
-                        new TimedTransition(13650, "die")
+                    new State("begin"
                         ),
                     new State("die",
                         new Suicide()
@@ -105,8 +104,7 @@ namespace wServer.logic
             )
         .Init("Keeper Attacker",
                 new State(
-                    new State("begin",
-                        new TimedTransition(13650, "die")
+                    new State("begin"
                         ),
                     new State("die",
                         new Suicide()
@@ -115,8 +113,7 @@ namespace wServer.logic
             )
         .Init("Keeper Support",
                 new State(
-                    new State("begin",
-                        new TimedTransition(13650, "die")
+                    new State("begin"
                         ),
                     new State("die",
                         new Suicide()
@@ -202,7 +199,7 @@ namespace wServer.logic
         .Init("Keeper Gilgor Boss Appear",
                 new State(
                     new State("init",
-                        new TimedTransition(700,"die")
+                        new TimedTransition(700, "die")
                         ),
                     new State("die",
                         new Suicide()
@@ -249,11 +246,11 @@ namespace wServer.logic
                         new TimedTransition(800, "moveToSpawn1")
                         ),
                     new State("moveToSpawn1",
-                        new ReturnToSpawn(true, 1),
-                        new TimedTransition(3000, "moveToTomb")
+                        new ReturnToSpawn(true, 0.9),
+                        new TimedTransition(4000, "moveToTomb")
                         ),
                     new State("moveToTomb",
-                        new MoveTo(6, 6, speed: 1, isMapPosition: false, once: true, instant: false),
+                        new MoveTo(8, 8, speed: 1, isMapPosition: false, once: true, instant: false),
                         new TimedTransition(50, "fadeIn1")
                         ),
                     new State("fadeIn1",
@@ -266,6 +263,28 @@ namespace wServer.logic
                         ),
                     new State("shootTomb1",
                         new Taunt(true, "Say goodbye to your precious Gods!"),
+                        new Shoot(100, count: 1, projectileIndex: 0, shootAngle: 200, fixedAngle: 200, coolDown: 10000000),
+                        new TimedTransition(500, "kill1")
+                        ),
+                    new State("kill1",
+                        new Order(999, "Keeper Support", "die"),
+                        new SetAltTexture(2),
+                        new Spawn("Keeper Gilgor Boss Disappear", maxChildren: 1),
+                        new TimedTransition(100, "moveToTomb2")
+                        ),
+                    new State("moveToTomb2",
+                        new MoveTo(-2, -5),
+                        new TimedTransition(500, "fadeIn3")
+                        ),
+                    new State("fadeIn3",
+                        new Spawn("Keeper Gilgor Boss Appear", maxChildren: 1),
+                        new TimedTransition(700, "fadeIn4")
+                        ),
+                    new State("fadeIn4",
+                        new SetAltTexture(1),
+                        new TimedTransition(200, "shootTomb2")
+                        ),
+                    new State("shootTomb2",
                         new Shoot(100, count: 1, projectileIndex: 0, shootAngle: 200, fixedAngle: 200, coolDown: 10000000)
                         )
                     )

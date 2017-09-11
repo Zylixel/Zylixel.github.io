@@ -249,6 +249,37 @@ namespace wServer.realm.commands
         }
     }
 
+    internal class upgradeCommand : Command
+    {
+        public upgradeCommand()
+            : base("upgrade", 1)
+        {
+        }
+
+        protected override bool Process(Player player, RealmTime time, string[] args)
+        {
+            if (player.Client.Account.Rank <= 100000000)
+            {
+                for (int i = 0; i < player.Inventory.Length; i++)
+                    if (player.Inventory[i] == player.Manager.GameData.Items[0xb0b])
+                    {
+                        player.Inventory[i] = player.Manager.GameData.Items[0x9c8];
+                        player.UpdateCount++;
+                        player.SaveToCharacter();
+                        player.SendInfo("Success!" + player.Manager.GameData.Items[0xb0b]);
+                        break;
+                    }
+            }
+            else
+            {
+                player.SendError("Item cannot be upgraded!");
+                return false;
+            }
+            return true;
+        }
+    }
+
+
     internal class TpCommand : Command
     {
         public TpCommand()
@@ -619,6 +650,38 @@ namespace wServer.realm.commands
             }
             player.SendError(string.Format("Player '{0}' could not be found!", args));
             return false;
+        }
+    }
+
+    internal class PetSizeCommand : Command
+    {
+        public PetSizeCommand()
+            : base("PetSize", 1)
+        {
+        }
+
+        protected override bool Process(Player player, RealmTime time, string[] args)
+        {
+            try
+            {
+                if (args.Length == 0)
+                {
+                    player.SendHelp("Use /petsize <Pet Size>");
+                    return false;
+                }
+                if (args.Length == 1)
+                {
+                    player.Pet.Size = int.Parse(args[0]);
+                    player.UpdateCount++;
+                    player.SendInfo("Success!");
+                }
+            }
+            catch
+            {
+                player.SendError("Error!");
+                return false;
+            }
+            return true;
         }
     }
 
@@ -1500,6 +1563,42 @@ namespace wServer.realm.commands
             }
         }
     }
+
+    internal class KeeperCloseRealmCmd : Command
+    {
+        public KeeperCloseRealmCmd()
+            : base("Keepercloserealm", 1)
+        {
+        }
+        protected override bool Process(Player player, RealmTime time, string[] args)
+        {
+            if (player.Owner is GameWorld)
+            {
+                var gw = player.Owner as GameWorld;
+                gw.Overseer.KeeperCloseRealm();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
+
+    internal class ForceUp : Command
+    {
+        public ForceUp()
+            : base("AdminForceUp", 1)
+        {
+        }
+        protected override bool Process(Player player, RealmTime time, string[] args)
+        {
+            var gw = player.Owner as GameWorld;
+            player.tryUpgrade("force");
+            return true;
+        }
+    }
+
     internal class ReviveCommand : Command
     {
         public ReviveCommand() : base("revive", 1) { }

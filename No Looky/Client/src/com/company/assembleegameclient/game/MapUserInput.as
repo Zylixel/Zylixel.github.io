@@ -39,6 +39,7 @@ import kabam.rotmg.minimap.control.MiniMapZoomSignal;
 import kabam.rotmg.pets.controller.reskin.ReskinPetFlowStartSignal;
 import kabam.rotmg.ui.UIUtils;
 import kabam.rotmg.ui.model.TabStripModel;
+import kabam.rotmg.ui.view.HUDView;
 
 import net.hires.debug.Stats;
 
@@ -452,10 +453,6 @@ public class MapUserInput {
                 break;
             case Parameters.data_.ToggleUI:
                 Parameters.data_.onToggleUI = !(Parameters.data_.onToggleUI);
-                Parameters.save();
-                break;
-            case Parameters.data_.blueSidebar:
-                Parameters.data_.blueSidebar = !(Parameters.data_.blueSidebar);
                 Parameters.save();
                 break;
             case Parameters.data_.toggleFullscreen:

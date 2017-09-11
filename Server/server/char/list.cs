@@ -171,7 +171,7 @@ namespace server.@char
             }
             catch
             {
-                Program.Logger.Error("Not supported server detected: \nHost: " + host + "\nPort: " + port);
+                Program.Logger.Error("Not supported server detected at " + host );
                 return -1;
             }
         }

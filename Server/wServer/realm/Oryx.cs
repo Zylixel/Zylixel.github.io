@@ -267,6 +267,40 @@ namespace wServer.realm
             world.Timers.Add(new WorldTimer(10000, (w, t) => w.Manager.RemoveWorld(w)));
         }
 
+        public void KeeperCloseRealm()
+        {
+            World ocWorld = null;
+            world.Timers.Add(new WorldTimer(2000, (w, t) =>
+            {
+                ocWorld = world.Manager.AddWorld(new TheRealmKeeper());
+                ocWorld.Manager = world.Manager;
+            }));
+            world.Timers.Add(new WorldTimer(8000, (w, t) =>
+            {
+                foreach (var i in world.Players.Values)
+                {
+                    if (ocWorld == null) i.Client.Disconnect();
+                    i.Client.SendPacket(new ReconnectPacket
+                    {
+                        Host = "",
+                        Port = Program.Settings.GetValue<int>("port"),
+                        GameId = ocWorld.Id,
+                        Name = ocWorld.Name,
+                        Key = ocWorld.PortalKey
+                    });
+                }
+            }));
+            foreach (var i in world.Players.Values)
+            {
+                SendMsg(i, "FOOLS! YOU DO NOT UNDERSTAND WHAT YOU ARE DOING", "#Oryx the Mad God");
+                i.Client.SendPacket(new ShowEffectPacket
+                {
+                    EffectType = EffectType.Earthquake
+                });
+            }
+            world.Timers.Add(new WorldTimer(10000, (w, t) => w.Manager.RemoveWorld(w)));
+        }
+
         public int CountEnemies(params string[] enemies)
         {
             var enemyList = new List<ushort>();

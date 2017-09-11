@@ -463,7 +463,7 @@ namespace wServer.logic
         .Init("Dr Terrible Bubble",
             new State(
                 new State("nothing change",
-                    new ConditionalEffect(ConditionEffectIndex.Invincible),
+                    new ConditionalEffect(ConditionEffectIndex.Invincible)
                     )
                 )
             )

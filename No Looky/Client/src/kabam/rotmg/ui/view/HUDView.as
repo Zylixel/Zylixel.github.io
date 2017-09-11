@@ -51,6 +51,7 @@ public class HUDView extends Sprite implements UnFocusAble {
         this.positionAssets();
     }
 
+
     private function createAssets():void {
         this.background = new CharacterWindowBackground();
         this.miniMap = new MiniMapImp(192, 192);

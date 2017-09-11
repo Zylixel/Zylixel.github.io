@@ -162,12 +162,85 @@ namespace wServer.realm.entities.player
             Quest = newQuest;
         }
 
+        public void tryUpgrade(string arg = "Random")
+        {
+            ushort[] levelable =
+            {
+                0x611c,
+                0x611d,
+                0x611e,
+            };
+            ushort[] tolevel =
+            {
+                0x611d,
+                0x611e,
+                0x611f
+            };
+            string[] type =
+            {
+                "Dagger",
+                "Dagger",
+                "Dagger"
+            };
+
+            bool upgraded = false;
+            double r = 0;
+            int r2 = 0;
+
+            if (arg == "force")
+                r = 1;
+            else
+            {
+                r = Random.Next(1, 50);
+            }
+
+            r2 = Random.Next(0, Inventory.Length);
+
+            if (r == 1)
+            {
+                for (int i = r2; i < Inventory.Length + r2; i++)
+                    for (int q = 0; q < levelable.Length; q++)
+                    {
+                        if (upgraded == false)
+                        {
+
+                            if (i >= 12 && Inventory.Length == 12) //Makes sure every item is checked
+                                i = i - 12;
+
+                            if (i >= 20 && Inventory.Length == 20) //Makes sure every item is checked
+                                i = i - 20;
+
+                            if (Inventory[i] == Manager.GameData.Items[levelable[q]])
+                            {
+                                Owner.BroadcastPacket(new NotificationPacket
+                                {
+                                    ObjectId = Id,
+                                    Color = new ARGB(0xFF6600),
+                                    Text = "{\"key\":\"blank\",\"tokens\":{\"data\":\"" + type[q] + " Piece Found!\"}}",
+                                }, null);
+                                Inventory[i] = Manager.GameData.Items[tolevel[q]];
+                                UpdateCount++;
+                                SaveToCharacter();
+                                upgraded = true;
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            break;
+                        }
+
+                    }
+            }
+        }
+
         private void CalculateFame()
         {
             int newFame;
             if (Experience < 200*1000) newFame = Experience/1000;
             else newFame = 200 + (Experience - 200*1000)/1000;
             if (newFame == Fame) return;
+            tryUpgrade();
             Fame = newFame;
             int newGoal;
             var state =

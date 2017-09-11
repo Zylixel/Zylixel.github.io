@@ -12,13 +12,15 @@ import org.osflash.signals.natives.NativeSignal;
 
 public class StatsView extends Sprite {
 
-    private static const statsModel:Array = [new StatModel(TextKey.STAT_MODEL_ATTACK_SHORT, TextKey.STAT_MODEL_ATTACK_LONG, TextKey.STAT_MODEL_ATTACK_DESCRIPTION, true), new StatModel(TextKey.STAT_MODEL_DEFENSE_SHORT, TextKey.STAT_MODEL_DEFENSE_LONG, TextKey.STAT_MODEL_DEFENSE_DESCRIPTION, false), new StatModel(TextKey.STAT_MODEL_SPEED_SHORT, TextKey.STAT_MODEL_SPEED_LONG, TextKey.STAT_MODEL_SPEED_DESCRIPTION, true), new StatModel(TextKey.STAT_MODEL_DEXTERITY_SHORT, TextKey.STAT_MODEL_DEXTERITY_LONG, TextKey.STAT_MODEL_DEXTERITY_DESCRIPTION, true), new StatModel(TextKey.STAT_MODEL_VITALITY_SHORT, TextKey.STAT_MODEL_VITALITY_LONG, TextKey.STAT_MODEL_VITALITY_DESCRIPTION, true), new StatModel(TextKey.STAT_MODEL_WISDOM_SHORT, TextKey.STAT_MODEL_WISDOM_LONG, TextKey.STAT_MODEL_WISDOM_DESCRIPTION, true)];
+    private static const statsModel:Array = [new StatModel(TextKey.STAT_MODEL_ATTACK_SHORT, TextKey.STAT_MODEL_ATTACK_LONG, TextKey.STAT_MODEL_ATTACK_DESCRIPTION, true), new StatModel(TextKey.STAT_MODEL_DEFENSE_SHORT, TextKey.STAT_MODEL_DEFENSE_LONG, TextKey.STAT_MODEL_DEFENSE_DESCRIPTION, false), new StatModel(TextKey.STAT_MODEL_SPEED_SHORT, TextKey.STAT_MODEL_SPEED_LONG, TextKey.STAT_MODEL_SPEED_DESCRIPTION, true), new StatModel(TextKey.STAT_MODEL_DEXTERITY_SHORT, TextKey.STAT_MODEL_DEXTERITY_LONG, TextKey.STAT_MODEL_DEXTERITY_DESCRIPTION, true), new StatModel(TextKey.STAT_MODEL_VITALITY_SHORT, TextKey.STAT_MODEL_VITALITY_LONG, TextKey.STAT_MODEL_VITALITY_DESCRIPTION, true), new StatModel(TextKey.STAT_MODEL_WISDOM_SHORT, TextKey.STAT_MODEL_WISDOM_LONG, TextKey.STAT_MODEL_WISDOM_DESCRIPTION, true), new StatModel("HP", TextKey.STAT_MODEL_ATTACK_LONG, TextKey.STAT_MODEL_ATTACK_DESCRIPTION, true),];
     public static const ATTACK:int = 0;
     public static const DEFENSE:int = 1;
     public static const SPEED:int = 2;
     public static const DEXTERITY:int = 3;
     public static const VITALITY:int = 4;
     public static const WISDOM:int = 5;
+    public static const HP:int = 6;
+    public static const MP:int = 6;
     public static const STATE_UNDOCKED:String = "state_undocked";
     public static const STATE_DOCKED:String = "state_docked";
     public static const STATE_DEFAULT:String = STATE_DOCKED;//"state_docked"
@@ -81,6 +83,7 @@ public class StatsView extends Sprite {
         this.stats_[DEXTERITY].draw(_arg_1.dexterity_, _arg_1.dexterityBoost_, _arg_1.dexterityMax_);
         this.stats_[VITALITY].draw(_arg_1.vitality_, _arg_1.vitalityBoost_, _arg_1.vitalityMax_);
         this.stats_[WISDOM].draw(_arg_1.wisdom_, _arg_1.wisdomBoost_, _arg_1.wisdomMax_);
+        this.stats_[HP].draw(_arg_1.maxHP_, _arg_1.maxHPBoost_, _arg_1.maxHPMax_);
     }
 
     public function dock():void {
