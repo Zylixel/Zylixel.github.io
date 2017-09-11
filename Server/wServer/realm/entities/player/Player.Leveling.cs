@@ -203,14 +203,15 @@ namespace wServer.realm.entities.player
                     {
                         if (upgraded == false)
                         {
+                            int u = i;
 
-                            if (i >= 12 && Inventory.Length == 12) //Makes sure every item is checked
-                                i = i - 12;
+                            if (u >= 12 && Inventory.Length == 12) //Makes sure every item is checked
+                                u = i - 12;
 
-                            if (i >= 20 && Inventory.Length == 20) //Makes sure every item is checked
-                                i = i - 20;
+                            if (u >= 20 && Inventory.Length == 20) //Makes sure every item is checked
+                                u = i - 20;
 
-                            if (Inventory[i] == Manager.GameData.Items[levelable[q]])
+                            if (Inventory[u] == Manager.GameData.Items[levelable[q]])
                             {
                                 Owner.BroadcastPacket(new NotificationPacket
                                 {
@@ -218,16 +219,16 @@ namespace wServer.realm.entities.player
                                     Color = new ARGB(0xFF6600),
                                     Text = "{\"key\":\"blank\",\"tokens\":{\"data\":\"" + type[q] + " Piece Found!\"}}",
                                 }, null);
-                                Inventory[i] = Manager.GameData.Items[tolevel[q]];
+                                Inventory[u] = Manager.GameData.Items[tolevel[q]];
                                 UpdateCount++;
                                 SaveToCharacter();
                                 upgraded = true;
-                                break;
+                                return;
                             }
                         }
                         else
                         {
-                            break;
+                            return;
                         }
 
                     }
