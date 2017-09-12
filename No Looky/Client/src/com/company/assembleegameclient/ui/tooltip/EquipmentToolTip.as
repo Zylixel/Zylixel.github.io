@@ -91,6 +91,7 @@ public class EquipmentToolTip extends ToolTip {
         this.addDoseTagsToEffectsList();
         this.addMpCostTagToEffectsList();
         this.addFameBonusTagToEffectsList();
+        this.addLevelTagToEffectsList();
         this.makeEffectsList();
         this.makeLineTwo();
         this.makeRestrictionList();
@@ -274,6 +275,24 @@ public class EquipmentToolTip extends ToolTip {
                 _local_2 = TooltipHelper.getTextColor((_local_1 - _local_3));
             }
             this.effects.push(new Effect(TextKey.FAME_BONUS, {"percent": (this.objectXML.FameBonus + "%")}).setReplacementsColor(_local_2));
+        }
+    }
+
+    private function addLevelTagToEffectsList():void {
+        if (((this.objectXML.hasOwnProperty("Level")) && (!((this.comparisonResults.processedTags.hasOwnProperty(this.objectXML.Level5.toXMLString()) == true))))) {
+            this.effects.push(new Effect("Level 1", {"Level": "5"}).setColor(0x8FFFFF));
+        }
+        if (((this.objectXML.hasOwnProperty("Level2")) && (!((this.comparisonResults.processedTags.hasOwnProperty(this.objectXML.Level5.toXMLString()) == true))))) {
+            this.effects.push(new Effect("Level 2", {"Level": "5"}).setColor(0x8FFFFF));
+        }
+            if (((this.objectXML.hasOwnProperty("Level3")) && (!((this.comparisonResults.processedTags.hasOwnProperty(this.objectXML.Level5.toXMLString()) == true))))) {
+            this.effects.push(new Effect("Level 3", {"Level": "5"}).setColor(0x8FFFFF));
+        }
+            if (((this.objectXML.hasOwnProperty("Level4")) && (!((this.comparisonResults.processedTags.hasOwnProperty(this.objectXML.Level5.toXMLString()) == true))))) {
+            this.effects.push(new Effect("Level 4", {"Level": "5"}).setColor(0x8FFFFF));
+        }
+            if (((this.objectXML.hasOwnProperty("Level5")) && (!((this.comparisonResults.processedTags.hasOwnProperty(this.objectXML.Level5.toXMLString()) == true))))) {
+            this.effects.push(new Effect("Mastered (Level 5)", {"Level": "5"}).setColor(0x8FFFFF));
         }
     }
 

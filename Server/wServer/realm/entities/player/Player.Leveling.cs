@@ -169,69 +169,87 @@ namespace wServer.realm.entities.player
                 0x611c,
                 0x611d,
                 0x611e,
+                0x611f,
+                0x6123,
+                0x6124,
+                0x6125,
+                0x6126,
+                0x6129,
+                0x612a,
+                0x612b,
+                0x612c,
             };
             ushort[] tolevel =
             {
                 0x611d,
                 0x611e,
-                0x611f
+                0x611f,
+                0x6121,
+                0x6124,
+                0x6125,
+                0x6126,
+                0x6127,
+                0x612a,
+                0x612b,
+                0x612c,
+                0x612d,
             };
             string[] type =
             {
                 "Dagger",
                 "Dagger",
-                "Dagger"
+                "Dagger",
+                "Dagger",
+                "Sword",
+                "Sword",
+                "Sword",
+                "Sword",
+                "Wand",
+                "Wand",
+                "Wand",
+                "Wand",
             };
 
             bool upgraded = false;
             double r = 0;
-            int r2 = 0;
+            int i = 0;
 
             if (arg == "force")
                 r = 1;
             else
             {
-                r = Random.Next(1, 50);
+                r = Random.Next(1, 10);
             }
 
-            r2 = Random.Next(0, Inventory.Length);
+            i = Random.Next(1, 4);
 
             if (r == 1)
             {
-                for (int i = r2; i < Inventory.Length + r2; i++)
-                    for (int q = 0; q < levelable.Length; q++)
+                for (int q = 0; q < levelable.Length; q++)
+                {
+                    if (upgraded == false)
                     {
-                        if (upgraded == false)
+                        if (Inventory[i] == Manager.GameData.Items[levelable[q]])
                         {
-                            int u = i;
-
-                            if (u >= 12 && Inventory.Length == 12) //Makes sure every item is checked
-                                u = i - 12;
-
-                            if (u >= 20 && Inventory.Length == 20) //Makes sure every item is checked
-                                u = i - 20;
-
-                            if (Inventory[u] == Manager.GameData.Items[levelable[q]])
+                            Owner.BroadcastPacket(new NotificationPacket
                             {
-                                Owner.BroadcastPacket(new NotificationPacket
-                                {
-                                    ObjectId = Id,
-                                    Color = new ARGB(0xFF6600),
-                                    Text = "{\"key\":\"blank\",\"tokens\":{\"data\":\"" + type[q] + " Piece Found!\"}}",
-                                }, null);
-                                Inventory[u] = Manager.GameData.Items[tolevel[q]];
-                                UpdateCount++;
-                                SaveToCharacter();
-                                upgraded = true;
-                                return;
-                            }
-                        }
-                        else
-                        {
+                                ObjectId = Id,
+                                Color = new ARGB(0xFF6600),
+                                Text = "{\"key\":\"blank\",\"tokens\":{\"data\":\"" + type[q] + " Piece Found!\"}}",
+                            }, null);
+                            Inventory[i] = Manager.GameData.Items[tolevel[q]];
+                            UpdateCount++;
+                            SaveToCharacter();
+                            upgraded = true;
                             return;
                         }
-
                     }
+                    else
+                    {
+                        return;
+                    }
+
+                }
             }
         }
 

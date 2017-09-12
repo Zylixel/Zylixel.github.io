@@ -10,6 +10,8 @@ public class SlotComparison {
     static const NO_DIFF_COLOR:uint = 16777103;
     static const LABEL_COLOR:uint = 0xB3B3B3;
     static const UNTIERED_COLOR:uint = 9055202;
+    static const LEVEL_COLOR:uint = 0x8FFFFF;
+
 
     public var processedTags:Dictionary;
     public var processedActivateOnEquipTags:AppendingLineBuilder;
