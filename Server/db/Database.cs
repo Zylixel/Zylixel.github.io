@@ -10,6 +10,8 @@ using MySql.Data.MySqlClient;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
+using log4net;
+
 
 #endregion
 
@@ -18,6 +20,7 @@ namespace db
     public partial class Database : IDisposable
     {
         private static readonly List<string> emails = new List<string>();
+        private static readonly ILog log = LogManager.GetLogger(typeof(Database));
         private static readonly string[] Names =
         {
             "Darq", "Deyst", "Drac", "Drol",
@@ -813,6 +816,56 @@ SELECT MAX(chestId) FROM vaults WHERE accId = @accId;";
                 return info;
             }
         }
+
+        public int GetMarketCharID(int MType, int Price)
+        {
+            using (Database db = new Database())
+            {
+                int accID = 0;
+                log.Error("Attemping to give fame to player with: " + MType + " | " + Price);
+                MySqlCommand cmd = db.CreateQuery();
+                cmd.CommandText = "SELECT id FROM market WHERE itemid=@itemid AND fame=@fame";
+                cmd.Parameters.AddWithValue("@itemID", MType);
+                cmd.Parameters.AddWithValue("@fame", Price);
+                using (MySqlDataReader rdr = cmd.ExecuteReader())
+                {
+                    if (!rdr.HasRows) return 0;
+                    rdr.Read();
+                    accID = rdr.GetInt32("id");
+                }
+                return accID;
+            }
+        }
+
+
+        public int GetMarketInfo(int id, int type)
+        {
+            int info = 5;
+            MySqlCommand cmd = CreateQuery();
+            cmd.CommandText = "SELECT MIN( fame ) FROM market WHERE itemid=@itemid LIMIT 1";
+            cmd.Parameters.AddWithValue("@itemid", id);
+            using (MySqlDataReader rdr = cmd.ExecuteReader())
+            {
+                log.Info("GetMarketInfo | Attemping to call ItemID: " + id);
+                rdr.Read();
+                if (!rdr.HasRows)
+                {
+                    log.Error("GetMarketInfo | Missing ID ");
+                    return 0;
+                }
+                var ordinal = rdr.GetOrdinal("MIN( fame )");
+                if (rdr.IsDBNull(ordinal))
+                {
+                    return 0;
+                }
+                if (type == 1)
+                    info = rdr.GetInt32("MIN( fame )");
+                log.Info("GetMarketInfo | " + info);
+                return info;
+            }
+        }
+
+        
 
         public bool HasEmail(string email)
         {

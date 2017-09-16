@@ -7,6 +7,8 @@ using System.Xml.Linq;
 using log4net;
 using wServer.networking.svrPackets;
 using wServer.realm.entities.player;
+using db;
+using MySql.Data.MySqlClient;
 
 #endregion
 
@@ -20,15 +22,15 @@ namespace wServer.realm.entities.merchant
         private const int MERCHANT_SIZE = 100;
         private static readonly ILog log = LogManager.GetLogger(typeof(Merchants));
 
-        private readonly Dictionary<int, Tuple<int, CurrencyType>> prices = MerchantLists.prices;
+        private readonly Dictionary<int, Tuple<int, CurrencyType>> prices = MerchantLists.prices2;
 
-        private bool closing;
-        private bool newMerchant;
+        public bool closing;
+        public static bool newMerchant;
         private int tickcount;
 
         public static Random Random { get; private set; }
 
-        public Merchants(RealmManager manager, ushort objType, World owner = null)
+    public Merchants(RealmManager manager, ushort objType, World owner = null)
             : base(manager, objType)
         {
             MType = -1;
@@ -112,6 +114,26 @@ namespace wServer.realm.entities.merchant
                                         player.CurrentFame =
                                             player.Client.Account.Stats.Fame =
                                                 db.UpdateFame(player.Client.Account, -Price);
+                                                using (Database db2 = new Database())
+                                                {
+                                                    log.Error("Attemping to delete item from database: " + MType + " | " + Price);
+                                                    MySqlCommand cmd = db2.CreateQuery();
+                                                    cmd.CommandText = "DELETE FROM market WHERE itemid=@itemid AND fame=@fame";
+                                                    cmd.Parameters.AddWithValue("@itemID", MType);
+                                                    cmd.Parameters.AddWithValue("@fame", Price);
+                                                    cmd.ExecuteNonQuery();
+                                                } 
+                                            using (Database db4 = new Database())
+                                            {
+                                                int accID = 0;
+                                                accID = db.GetMarketCharID(MType, Price);
+                                                log.Error("Updating Player Info...");
+                                                MySqlCommand cmd1 = db4.CreateQuery();
+                                                cmd1.CommandText = "UPDATE stats SET fame = fame + @Price WHERE accId=@accId";
+                                                cmd1.Parameters.AddWithValue("@accId", accID);
+                                                cmd1.Parameters.AddWithValue("@Price", Price);
+                                                cmd1.ExecuteNonQuery();
+                                            }
                                     if (Currency == CurrencyType.Gold)
                                         player.Credits =
                                             player.Client.Account.Credits =
@@ -197,7 +219,7 @@ namespace wServer.realm.entities.merchant
                 if (!closing)
                 {
                     tickcount++;
-                    if (tickcount % (Manager?.TPS * 60) == 0) //once per minute after spawning
+                    if (tickcount % (Manager?.TPS * 1) == 0) //once per minute after spawning
                     {
                         MTime--;
                         UpdateCount++;
@@ -219,22 +241,7 @@ namespace wServer.realm.entities.merchant
                     Recreate(this);
                     UpdateCount++;
                 }
-
-                if (MTime == 1 && !closing)
-                {
-                    closing = true;
-                    Owner?.Timers.Add(new WorldTimer(30 * 1000, (w1, t1) =>
-                    {
-                        MTime--;
-                        UpdateCount++;
-                        w1.Timers.Add(new WorldTimer(30 * 1000, (w2, t2) =>
-                        {
-                            MTime--;
-                            UpdateCount++;
-                        }));
-                    }));
-                }
-
+                
                 if (MType == -1) Owner?.LeaveWorld(this);
 
                 base.Tick(time);
@@ -253,7 +260,7 @@ namespace wServer.realm.entities.merchant
                 mrc.Move(x.X, x.Y);
                 var w = Owner;
                 Owner.LeaveWorld(this);
-                w.Timers.Add(new WorldTimer(Random.Next(30, 60) * 1000, (world, time) => w.EnterWorld(mrc)));
+                w.Timers.Add(new WorldTimer(Random.Next(30, 60) * 1, (world, time) => w.EnterWorld(mrc)));
             }
             catch (Exception e)
             {
@@ -266,27 +273,27 @@ namespace wServer.realm.entities.merchant
             MType = -1;
             var list = new int[0];
             if (Owner.Map[(int) X, (int) Y].Region == TileRegion.Store_1)
-                list = MerchantLists.store1List;
+                list = MerchantLists.ZyList;
             else if (Owner.Map[(int) X, (int) Y].Region == TileRegion.Store_2)
-                list = MerchantLists.store2List;
+                list = MerchantLists.ZyList;
             else if (Owner.Map[(int) X, (int) Y].Region == TileRegion.Store_3)
-                list = MerchantLists.store3List;
+                list = MerchantLists.ZyList;
             else if (Owner.Map[(int) X, (int) Y].Region == TileRegion.Store_4)
-                list = MerchantLists.store4List;
+                list = MerchantLists.ZyList;
             else if (Owner.Map[(int) X, (int) Y].Region == TileRegion.Store_5)
-                list = MerchantLists.store5List;
+                list = MerchantLists.ZyList;
             else if (Owner.Map[(int) X, (int) Y].Region == TileRegion.Store_6)
-                list = MerchantLists.store6List;
+                list = MerchantLists.ZyList;
             else if (Owner.Map[(int) X, (int) Y].Region == TileRegion.Store_7)
-                list = MerchantLists.store7List;
+                list = MerchantLists.ZyList;
             else if (Owner.Map[(int) X, (int) Y].Region == TileRegion.Store_8)
-                list = MerchantLists.store8List;
+                list = MerchantLists.ZyList;
             else if (Owner.Map[(int) X, (int) Y].Region == TileRegion.Store_9)
-                list = MerchantLists.store9List;
+                list = MerchantLists.ZyList;
             else if (Owner.Map[(int) X, (int) Y].Region == TileRegion.Store_10)
-                list = MerchantLists.store10List;
+                list = MerchantLists.ZyList;
             else if (Owner.Map[(int) X, (int) Y].Region == TileRegion.Store_11)
-                list = MerchantLists.store11List;
+                list = MerchantLists.ZyList;
             else if (Owner.Map[(int) X, (int) Y].Region == TileRegion.Store_12)
                 list = MerchantLists.AccessoryDyeList;
             else if (Owner.Map[(int) X, (int) Y].Region == TileRegion.Store_13)
@@ -298,9 +305,9 @@ namespace wServer.realm.entities.merchant
             else if (Owner.Map[(int) X, (int) Y].Region == TileRegion.Store_16)
                 list = MerchantLists.store5List;
             else if (Owner.Map[(int) X, (int) Y].Region == TileRegion.Store_17)
-                list = MerchantLists.store7List;
+                list = MerchantLists.ZyList;
             else if (Owner.Map[(int) X, (int) Y].Region == TileRegion.Store_18)
-                list = MerchantLists.store6List;
+                list = MerchantLists.ZyList;
             else if (Owner.Map[(int) X, (int) Y].Region == TileRegion.Store_19)
                 list = MerchantLists.store2List;
             else if (Owner.Map[(int) X, (int) Y].Region == TileRegion.Store_20)
@@ -320,35 +327,23 @@ namespace wServer.realm.entities.merchant
             {
                 AddedTypes.Add(new KeyValuePair<string, int>(Owner.Name, t1));
                 MType = t1;
-                MTime = Random.Next(6, 15);
-                MRemaining = Random.Next(6, 11);
-                newMerchant = true;
+                MTime = Random.Next(60, 90);
+                MRemaining = Random.Next(1, 1);
                 Owner.Timers.Add(new WorldTimer(30000, (w, t) =>
                 {
                     newMerchant = false;
                     UpdateCount++;
                 }));
 
-                var s = Random.Next(0, 100);
-
-                if(s < 2)
-                    Discount = 50;
-                else if(s < 5)
-                    Discount = 25;
-                else if (s < 10)
-                    Discount = 15;
-                else if(s < 15)
-                    Discount = 10;
-                else Discount = 0;
-
                 Tuple<int, CurrencyType> price;
                 if (prices.TryGetValue(MType, out price))
                 {
-                    if (Discount != 0)
-                        Price = (int)(price.Item1 - (price.Item1 * ((double)Discount / 100))) < 1 ?
-                            price.Item1 : (int)(price.Item1 - (price.Item1 * ((double)Discount / 100)));
-                    else
-                        Price = price.Item1;
+                    using (Database db = new Database())
+                    {
+                        Price = db.GetMarketInfo(price.Item1, 1);
+                    }
+                    if (Price == 0)
+                        Owner.LeaveWorld(this);
                     Currency = price.Item2;
                 }
 

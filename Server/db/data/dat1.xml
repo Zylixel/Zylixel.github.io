@@ -77795,30 +77795,6 @@
          <Index>0x0b</Index>
        </AnimatedTexture>
      </Object>
-<Object type="0x7ffd" id="Giant Vampire Bat Pet Stone">
-    <Class>Equipment</Class>
-    <Item />
-    <Texture>
-        <File>lofiObj3</File>
-        <Index>0x59b</Index>
-    </Texture>
-    <SlotType>10</SlotType>
-    <Description>Transform your pet into Giant Vampire Bat of the Spooky family. This is irreversible and the item is consumed upon use. The rarity and abilities of your pet will be retained. If you fuse your pet to reach a new rarity level it is not guaranteed that your pet will retain the current skin.</Description>
-    <Activate petType="32763">PetSkin</Activate>
-    <DisplayId>Giant Vampire Bat Skin</DisplayId>
-</Object>
-<Object type="0x7f8d" id="Pumpkin Head Pet Stone">
-    <Class>Equipment</Class>
-    <Item />
-    <Texture>
-        <File>d3LofiObjEmbed</File>
-        <Index>0x1f</Index>
-    </Texture>
-    <SlotType>10</SlotType>
-    <Description>Transform your pet into Pumpkin Head of the Spooky family. This is irreversible and the item is consumed upon use. The rarity and abilities of your pet will be retained. If you fuse your pet to reach a new rarity level it is not guaranteed that your pet will retain the current skin.</Description>
-    <Activate petType="32651">PetSkin</Activate>
-    <DisplayId>Pumpkin Head Pet Skin</DisplayId>
-</Object>
 <Object type="0x0d42" id="Prism of Dire Instability">
     <Class>Equipment</Class>
     <Item />

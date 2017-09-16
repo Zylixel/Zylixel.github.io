@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 
 public static class Utils
 {
-    public const string BAD_WORDS = "(anus|ass|arse|arsehole|ass|asshat|assjabber|asspirate|assbag|assbandit|assbanger|assbite|assclown|asscock|asscracker|asses|assface|assfuck|assfucker|assgoblin|asshat|asshead|asshole|asshopper|assjacker|asslick|asslicker|assmonkey|assmunch|assmuncher|assnigger|asspirate|assshit|assshole)";
+    public const string BAD_WORDS = "(rawr)";
 
     public static class ConsoleCloseEventHandler
     {

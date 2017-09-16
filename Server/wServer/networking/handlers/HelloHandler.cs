@@ -177,7 +177,7 @@ namespace wServer.networking.handlers
         {
             if (Program.WhiteList)
             {
-                if (rank > 0) return true;
+                if (rank > 4) return true;
                 return false;
             }
             return true;

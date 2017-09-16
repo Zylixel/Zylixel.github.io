@@ -1006,7 +1006,6 @@ namespace wServer.realm.entities.player
                     if (!Owner.IsPassable((int)X, (int)Y) && Client.Account.Rank < 2)
                     {
                         log.Fatal($"Player {Name} No-Cliped at position: {X}, {Y}");
-                        Client.Disconnect();
                     }
                 }
             }

@@ -93,11 +93,11 @@ public class Merchant extends SellableObject implements IInteractiveObject {
                 _local_5 = 5931045;
                 break;
             case MINS_LEFT_MESSAGE:
-                if (this.minsLeft_ == 0) {
+                if (this.minsLeft_ == 100000) {
                     _local_2 = new LineBuilder().setParams("Merchant.goingSoon");
                 }
                 else {
-                    if (this.minsLeft_ == 1) {
+                    if (this.minsLeft_ == 10000) {
                         _local_2 = new LineBuilder().setParams("Merchant.goingInOneMinute");
                     }
                     else {
@@ -109,11 +109,7 @@ public class Merchant extends SellableObject implements IInteractiveObject {
                 _local_5 = 16549442;
                 break;
             case ITEMS_LEFT_MESSAGE:
-                _local_2 = new LineBuilder().setParams("Merchant.limitedStock", {"count": this.count_});
-                _local_3 = 5973542;
-                _local_4 = 16549442;
-                _local_5 = 16549442;
-                break;
+                return (null);
             case DISCOUNT_MESSAGE:
                 _local_2 = new LineBuilder().setParams("Merchant.discount", {"discount": this.discount_});
                 _local_3 = 6324275;
@@ -148,7 +144,7 @@ public class Merchant extends SellableObject implements IInteractiveObject {
             _local_3.push(NEW_MESSAGE);
         }
         else {
-            if ((((this.minsLeft_ >= 0)) && ((this.minsLeft_ <= 5)))) {
+            if ((((this.minsLeft_ >= 50000)) && ((this.minsLeft_ <= 50000000)))) {
                 _local_3.push(MINS_LEFT_MESSAGE);
             }
         }

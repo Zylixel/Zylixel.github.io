@@ -1,21 +1,39 @@
 ﻿#region
 
+using db;
+using db.data;
+using log4net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using db.data;
-using log4net;
 
 #endregion
-
 namespace wServer.realm.entities
 {
     internal class MerchantLists
     {
+
+        public static int HandleRequest(int item)
+        {
+            {
+                using (Database db = new Database())
+                {
+
+                    return db.GetMarketInfo(item, 1);
+                }
+            }
+        }
+
         public static int[] AccessoryClothList;
         public static int[] AccessoryDyeList;
         public static int[] ClothingClothList;
         public static int[] ClothingDyeList;
+        public static int[] ZyList;
+
+        public static Dictionary<int, Tuple<int, CurrencyType>> prices2 = new Dictionary<int, Tuple<int, CurrencyType>>
+        {
+
+        };
 
         public static Dictionary<int, Tuple<int, CurrencyType>> prices = new Dictionary<int, Tuple<int, CurrencyType>>
         {
@@ -23,27 +41,32 @@ namespace wServer.realm.entities
             {0xbab, new Tuple<int, CurrencyType>(0, CurrencyType.Fame)},
             {0xbad, new Tuple<int, CurrencyType>(0, CurrencyType.Fame)},
 
-            //WEAPONS
-            {0xaf6, new Tuple<int, CurrencyType>(300, CurrencyType.Fame)}, //recomp
-            {0xa87, new Tuple<int, CurrencyType>(200, CurrencyType.Fame)}, //T11 Wand
-            {0xa86, new Tuple<int, CurrencyType>(150, CurrencyType.Fame)}, //T10 Wand
-            {0xa85, new Tuple<int, CurrencyType>(100, CurrencyType.Fame)}, //T9 Wand
-            {0xb02, new Tuple<int, CurrencyType>(300, CurrencyType.Fame)}, //T12 Bow
-            {0xa8d, new Tuple<int, CurrencyType>(200, CurrencyType.Fame)}, //T11 Bow
-            {0xa8c, new Tuple<int, CurrencyType>(150, CurrencyType.Fame)}, //T10 Bow
-            {0xa8b, new Tuple<int, CurrencyType>(100, CurrencyType.Fame)}, //T9 Bow
-            {0xb08, new Tuple<int, CurrencyType>(300, CurrencyType.Fame)}, //Cosmic
-            {0xaa2, new Tuple<int, CurrencyType>(200, CurrencyType.Fame)}, //T11 Staff
-            {0xaa1, new Tuple<int, CurrencyType>(100, CurrencyType.Fame)}, //T10 Staff
-            {0xaa0, new Tuple<int, CurrencyType>(100, CurrencyType.Fame)}, //T9 Staff
-            {0xb0b, new Tuple<int, CurrencyType>(300, CurrencyType.Fame)}, //Swords
-            {0xa47, new Tuple<int, CurrencyType>(200, CurrencyType.Fame)},
-            {0xa84, new Tuple<int, CurrencyType>(150, CurrencyType.Fame)},
-            {0xa83, new Tuple<int, CurrencyType>(100, CurrencyType.Fame)},
-            {0xaff, new Tuple<int, CurrencyType>(300, CurrencyType.Fame)}, //Daggers 
-            {0xa8a, new Tuple<int, CurrencyType>(200, CurrencyType.Fame)},
-            {0xa89, new Tuple<int, CurrencyType>(150, CurrencyType.Fame)},
-            {0xa88, new Tuple<int, CurrencyType>(100, CurrencyType.Fame)},
+        //WEAPONS
+       
+
+      //      {0xaf6, new Tuple<int, CurrencyType>(300, CurrencyType.Fame)}, //recomp
+     //       {0xa87, new Tuple<int, CurrencyType>(200, CurrencyType.Fame)}, //T11 Wand
+      //      {0xa86, new Tuple<int, CurrencyType>(150, CurrencyType.Fame)}, //T10 Wand
+     //       {0xa85, new Tuple<int, CurrencyType>(100, CurrencyType.Fame)}, //T9 Wand
+     //       {0xb02, new Tuple<int, CurrencyType>(300, CurrencyType.Fame)}, //T12 Bow
+     //       {0xa8d, new Tuple<int, CurrencyType>(200, CurrencyType.Fame)}, //T11 Bow
+     //       {0xa8c, new Tuple<int, CurrencyType>(150, CurrencyType.Fame)}, //T10 Bow
+      //      {0xa8b, new Tuple<int, CurrencyType>(100, CurrencyType.Fame)}, //T9 Bow
+     //       {0xb08, new Tuple<int, CurrencyType>(300, CurrencyType.Fame)}, //Cosmic
+     //       {0xaa2, new Tuple<int, CurrencyType>(200, CurrencyType.Fame)}, //T11 Staff
+     //       {0xaa1, new Tuple<int, CurrencyType>(100, CurrencyType.Fame)}, //T10 Staff
+     //       {0xaa0, new Tuple<int, CurrencyType>(100, CurrencyType.Fame)}, //T9 Staff
+      //      {0xb0b, new Tuple<int, CurrencyType>(300, CurrencyType.Fame)}, //Swords
+      //      {0xa47, new Tuple<int, CurrencyType>(200, CurrencyType.Fame)},
+     //       {0xa84, new Tuple<int, CurrencyType>(150, CurrencyType.Fame)},
+     //       {0xa83, new Tuple<int, CurrencyType>(100, CurrencyType.Fame)},
+            {0xaff, new Tuple<int, CurrencyType>(0xaff, CurrencyType.Fame)}, //Daggers 
+            {0x6129, new Tuple<int, CurrencyType>(0x6129, CurrencyType.Fame)},
+            {0x611c, new Tuple<int, CurrencyType>(0x611c, CurrencyType.Fame)},
+            {0x6123, new Tuple<int, CurrencyType>(0x6123, CurrencyType.Fame)},
+            {0xa8a, new Tuple<int, CurrencyType>(6113, CurrencyType.Fame)},
+            {0xa89, new Tuple<int, CurrencyType>(6113, CurrencyType.Fame)},
+            {0xa88, new Tuple<int, CurrencyType>(6113, CurrencyType.Fame)},
             {0xc50, new Tuple<int, CurrencyType>(300, CurrencyType.Fame)}, //Katanas
             {0xc4f, new Tuple<int, CurrencyType>(200, CurrencyType.Fame)},
             {0xc4e, new Tuple<int, CurrencyType>(150, CurrencyType.Fame)},
@@ -233,7 +256,7 @@ namespace wServer.realm.entities
         public static int[] store7List =
         {
             0xb0b, 0xa47, 0xa84, 0xa83, 0xaff, 0xa8a, 0xa89, 0xa88, 0xc50,
-            0xc4f, 0xc4e, 0xc4d
+            0xc4f, 0xc4e, 0xc4d, 0x611c, 0x6123, 0x6129
         };
 
         //Swords&daggers&samurai
@@ -255,33 +278,28 @@ namespace wServer.realm.entities
             List<int> clothingDyeList = new List<int>();
             List<int> accessoryClothList = new List<int>();
             List<int> clothingClothList = new List<int>();
+            List<int> zyList = new List<int>();
 
-            foreach (KeyValuePair<ushort, Item> item in data.Items.Where(_ => noShopCloths.All(i => i != _.Value.ObjectId)))
+            foreach (KeyValuePair<ushort, Item> item in data.Items.Where(_ => noShopItems.All(i => i != _.Value.ObjectId)))
             {
-                if (item.Value.Texture1 != 0 && item.Value.ObjectId.Contains("Clothing") && item.Value.Class == "Dye")
-                {
-                    prices.Add(item.Value.ObjectType, new Tuple<int, CurrencyType>(51, CurrencyType.Fame));
-                    clothingDyeList.Add(item.Value.ObjectType);
-                }
-
-                if (item.Value.Texture2 != 0 && item.Value.ObjectId.Contains("Accessory") && item.Value.Class == "Dye")
-                {
-                    prices.Add(item.Value.ObjectType, new Tuple<int, CurrencyType>(51, CurrencyType.Fame));
-                    accessoryDyeList.Add(item.Value.ObjectType);
-                }
-
-                if (item.Value.Texture1 != 0 && item.Value.ObjectId.Contains("Cloth") &&
-                    item.Value.ObjectId.Contains("Large"))
-                {
-                    prices.Add(item.Value.ObjectType, new Tuple<int, CurrencyType>(160, CurrencyType.Fame));
-                    clothingClothList.Add(item.Value.ObjectType);
-                }
-
-                if (item.Value.Texture2 != 0 && item.Value.ObjectId.Contains("Cloth") &&
-                    item.Value.ObjectId.Contains("Small"))
-                {
-                    prices.Add(item.Value.ObjectType, new Tuple<int, CurrencyType>(160, CurrencyType.Fame));
-                    accessoryClothList.Add(item.Value.ObjectType);
+                if (!(item.Value.ObjectId.Contains("Egg")))
+                    if (!(item.Value.ObjectId.Contains("Skin")))
+                        if (!(item.Value.ObjectId.Contains("Cloth")))
+                            if (!(item.Value.ObjectId.Contains("Dye")))
+                                if (!(item.Value.ObjectId.Contains("Tincture")))
+                                    if (!(item.Value.ObjectId.Contains("Effusion")))
+                                        if (!(item.Value.ObjectId.Contains("Elixer")))
+                                            if (!(item.Value.ObjectId.Contains("Tarot")))
+                                                if (!(item.Value.Description.Contains("Treasure")))
+                                                    {
+                            prices2.Add(item.Value.ObjectType, new Tuple<int, CurrencyType>(item.Value.ObjectType, CurrencyType.Fame));
+                            using (Database db = new Database())
+                            {
+                                if (db.GetMarketInfo(item.Value.ObjectType, 1) >= 1)
+                                {
+                                    zyList.Add(item.Value.ObjectType);
+                                }
+                            }
                 }
             }
 
@@ -289,8 +307,14 @@ namespace wServer.realm.entities
             ClothingClothList = clothingClothList.ToArray();
             AccessoryClothList = accessoryClothList.ToArray();
             AccessoryDyeList = accessoryDyeList.ToArray();
+            ZyList = zyList.ToArray();
             log.Info("Merchat lists added.");
         }
+
+        private static readonly string[] noShopItems =
+        {
+           "Crown", "Muscat", "Cabernet", "Vial of Pure Darkness", "Omnipotence Ring",
+        };
 
         private static readonly string[] noShopCloths =
         {

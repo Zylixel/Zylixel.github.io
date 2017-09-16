@@ -1,5 +1,8 @@
 ﻿#region
 
+using db;
+using db.data;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +11,14 @@ using System.Threading.Tasks;
 using wServer.networking;
 using wServer.networking.svrPackets;
 using wServer.realm.entities;
+using wServer.realm.entities.merchant;
 using wServer.realm.entities.player;
 using wServer.realm.setpieces;
 using wServer.realm.worlds;
+using System.Collections.Specialized;
+using System.IO;
+using System.Net;
+using System.Web;
 
 #endregion
 
@@ -243,36 +251,6 @@ namespace wServer.realm.commands
             else
             {
                 player.SendError("Item cannot be given!");
-                return false;
-            }
-            return true;
-        }
-    }
-
-    internal class upgradeCommand : Command
-    {
-        public upgradeCommand()
-            : base("upgrade", 1)
-        {
-        }
-
-        protected override bool Process(Player player, RealmTime time, string[] args)
-        {
-            if (player.Client.Account.Rank <= 100000000)
-            {
-                for (int i = 0; i < player.Inventory.Length; i++)
-                    if (player.Inventory[i] == player.Manager.GameData.Items[0xb0b])
-                    {
-                        player.Inventory[i] = player.Manager.GameData.Items[0x9c8];
-                        player.UpdateCount++;
-                        player.SaveToCharacter();
-                        player.SendInfo("Success!" + player.Manager.GameData.Items[0xb0b]);
-                        break;
-                    }
-            }
-            else
-            {
-                player.SendError("Item cannot be upgraded!");
                 return false;
             }
             return true;
@@ -1595,6 +1573,62 @@ namespace wServer.realm.commands
         {
             var gw = player.Owner as GameWorld;
             player.tryUpgrade("force");
+            return true;
+        }
+    }
+
+    internal class Sell : Command
+    {
+        public Sell()
+            : base("Sell", 0)
+        {
+        }
+        protected override bool Process(Player player, RealmTime time, string[] args)
+        {
+            using (Database db = new Database())
+            {
+                if (string.IsNullOrEmpty(args[0]))
+                {
+                    player.SendHelp("Usage: /sell <slot> <price>");
+                    return false;
+                }
+                if (string.IsNullOrEmpty(args[1]))
+                {
+                    player.SendHelp("Usage: /sell <slot> <price>");
+                    return false;
+                }
+                int slot = Convert.ToInt32(args[0]) + 3;
+                int itemID = player.Inventory[slot].ObjectType;
+                if (Convert.ToInt32(args[0]) > 8)
+                {
+                    player.SendError("Slot Number Invalid");
+                    return false;
+                }
+                if (itemID < 1)
+                {
+                    player.SendError("Slot Number Invalid");
+                    return false;
+                }
+                MySqlCommand cmd = db.CreateQuery();
+                cmd.CommandText = "INSERT INTO market(itemID, fame, id) VALUES(@itemID, @fame, @playerID)";
+                cmd.Parameters.AddWithValue("@itemID", Convert.ToInt32(itemID));
+                cmd.Parameters.AddWithValue("@fame", args[1]);
+                var plr = player.Manager.FindPlayer(player.Name);
+                cmd.Parameters.AddWithValue("@playerID", plr.AccountId);
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                    player.Inventory[slot] = null;
+                    player.UpdateCount++;
+                    player.SendInfo("Item put on the market! please wait 1-2 minutes if it is an item already on the market.");
+                    player.SendInfo("If the item is currently not on the market, please wait for a server restart.");
+
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("[" + DateTime.Now.ToString("h:mm:ss tt") + "] " + e);
+                }
+            }
             return true;
         }
     }
