@@ -35,6 +35,7 @@ V	no /who support - easy to add
 	night elves respawn fully with owner. Gets a little crazy.
 V	fulmination scepter doesn't slow 
 	
+	I dont know what im doing
 	
 
 	
