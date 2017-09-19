@@ -32,6 +32,10 @@ namespace wServer.realm.commands
         {
             if (player.Client.Account.Rank == 3)
                 return 1;
+            if (player.Client.Account.Rank == 4)
+                return 2;
+            if (player.Client.Account.Rank == 5)
+                return 3;
             return 0;
         }
 

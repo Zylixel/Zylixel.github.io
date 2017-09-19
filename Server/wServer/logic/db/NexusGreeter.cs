@@ -27,23 +27,11 @@ namespace wServer.logic
                     new State(
                             new State("init",
                                 new Taunt("Did you know that you can access the marketplace by typing /market into the chat?"),
-                                new TimedTransition(60000, "message1")
+                                new TimedTransition(120000, "message1")
                                 ),
                             new State("message1",
-                                new Taunt("We are currently on Update 2.031, are you?"),
-                                new TimedTransition(60000, "message2")
-                                ),
-                            new State("message2",
                                 new Taunt("Thanks to Nozen for creating this nexus!"),
-                                new TimedTransition(60000, "message3")
-                                ),
-                        new State("message3",
-                                new Taunt("You are currently on the testing server, expect random restarts"),
-                                new TimedTransition(60000, "message4")
-                                ),
-                        new State("message4",
-                                new Taunt("I think it's time for a change!"),
-                                new TimedTransition(60000, "init")
+                                new TimedTransition(120000, "init")
                                 )
                         )
             )

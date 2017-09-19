@@ -13,5 +13,7 @@ Zy's Realm has been influenced greatly by these kind people:
 - toby2449
 - Orbit
 - Omniraptyr
+- MikeRaarupBirk
+- thenired
 
 Without them, this project would be seemingly impossible

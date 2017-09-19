@@ -9,27 +9,14 @@ namespace wServer.logic
         private _ ForestMaze = () => Behav()
         .Init("Mama Megamoth",
             new State(
+                new RealmPortalDrop(),
                 new State("swaggin around",
-                    new Wander(0.1),
-                    new HpLessTransition(.99, "Death is Near")
-                    ),
-                new State("Death is Near",
                     new Charge(1, 10, 2000),
                     new Wander(0.2),
                     new Spawn("Mini Megamoth", coolDown: 2000, initialSpawn: 1),
                     new Reproduce("Mini Megamoth", coolDown: 4000, densityMax: 4),
-                    new Shoot(radius: 10, count: 1, projectileIndex: 0, coolDown: 50),
-                    new Taunt("Zylixel has created me, Mama Megamoth will DESTROYED YOU!"),
-                    new DropPortalOnDeath("Realm Portal", 100)
-                         )
-                    ),
-            new Threshold(0.01,
-                    new TierLoot(2, ItemType.Weapon, 1),
-                    new TierLoot(5, ItemType.Armor, 1),
-                    new TierLoot(5, ItemType.Armor, 1),
-                    new TierLoot(3, ItemType.Weapon, 1),
-                    new TierLoot(4, ItemType.Weapon, 1),
-                    new ItemLoot("Speed Sprout", 1.00)
+                    new Shoot(radius: 10, count: 1, projectileIndex: 0, coolDown: 50)
+                    )
                 )
             )
         .Init("Mini Megamoth",
@@ -56,13 +43,7 @@ namespace wServer.logic
                     new Shoot(radius: 8, count: 1, coolDown: 100),
                     new TimedTransition(3000, "oh crap there is no queen")
                 )
-            ),
-            new Threshold(0.01,
-                    new TierLoot(2, ItemType.Weapon, 0.01),
-                    new TierLoot(5, ItemType.Armor, 0.01),
-                    new TierLoot(3, ItemType.Weapon, 0.01),
-                    new TierLoot(4, ItemType.Weapon, 0.01)
-                )
+            )
         )
         .Init("Armored Squirrel",
             new State(
@@ -80,13 +61,6 @@ namespace wServer.logic
                     new Wander(0.3)
                     ),
                 new Shoot(radius: 7, count: 3, projectileIndex: 0, shootAngle: 20, coolDown: 2000)
-                ),
-            new Threshold(0.1,
-            new ItemLoot("Speed Sprout", 0.1),
-            new TierLoot(2, ItemType.Weapon, 0.1),
-            new TierLoot(6, ItemType.Armor, 0.1),
-            new TierLoot(3, ItemType.Weapon, 0.1),
-            new TierLoot(4, ItemType.Weapon, 0.1)
                 )
             )
         .Init("Forest Goblin",
@@ -104,13 +78,6 @@ namespace wServer.logic
                     new Wander(0.4),
                     new Shoot(radius: 10, count: 2, projectileIndex: 0, predictive: 1, coolDown: 500, shootAngle: 2)
                     )
-                ),
-            new Threshold(0.1,
-            new ItemLoot("Speed Sprout", 0.1),
-            new TierLoot(2, ItemType.Weapon, 0.1),
-            new TierLoot(6, ItemType.Armor, 0.1),
-            new TierLoot(3, ItemType.Weapon, 0.1),
-            new TierLoot(4, ItemType.Weapon, 0.1)
                 )
             );
     }

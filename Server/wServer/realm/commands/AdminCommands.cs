@@ -215,7 +215,7 @@ namespace wServer.realm.commands
     internal class GiveCommand : Command
     {
         public GiveCommand()
-            : base("give", 1)
+            : base("give", 2)
         {
         }
 
@@ -304,7 +304,7 @@ namespace wServer.realm.commands
 
     class KillAll : Command
     {
-        public KillAll() : base("killAll", permLevel: 1) { }
+        public KillAll() : base("killAll", permLevel: 2) { }
         
         protected override bool Process(Player player, RealmTime time, string[] args)
         {
@@ -471,7 +471,7 @@ namespace wServer.realm.commands
     internal class OryxSay : Command
     {
         public OryxSay()
-            : base("osay", 1)
+            : base("osay", 2)
         {
         }
 
@@ -610,7 +610,7 @@ namespace wServer.realm.commands
     internal class KillPlayerCommand : Command
     {
         public KillPlayerCommand()
-            : base("kill", 1)
+            : base("kill", 3)
         {
         }
 
@@ -634,7 +634,7 @@ namespace wServer.realm.commands
     internal class PetSizeCommand : Command
     {
         public PetSizeCommand()
-            : base("PetSize", 1)
+            : base("PetSize", 3)
         {
         }
 
@@ -666,7 +666,7 @@ namespace wServer.realm.commands
     internal class RestartCommand : Command
     {
         public RestartCommand()
-            : base("restart", 1)
+            : base("restart", 3)
         {
         }
 
@@ -1196,7 +1196,7 @@ namespace wServer.realm.commands
     internal class LevelCommand : Command
     {
         public LevelCommand()
-            : base("level", 1)
+            : base("level", 2)
         {
         }
 
@@ -1229,7 +1229,7 @@ namespace wServer.realm.commands
     internal class SetCommand : Command
     {
         public SetCommand()
-            : base("setStat", 1)
+            : base("setStat", 2)
         {
         }
 
@@ -1373,7 +1373,7 @@ namespace wServer.realm.commands
     internal class SetpieceCommand : Command
     {
         public SetpieceCommand()
-            : base("setpiece", 1)
+            : base("setpiece", 2)
         {
         }
 
@@ -1415,7 +1415,7 @@ namespace wServer.realm.commands
     internal class GodCommand : Command
     {
         public GodCommand()
-        : base("god", 1)
+        : base("god", 2)
         {
         }
 
@@ -1445,7 +1445,7 @@ namespace wServer.realm.commands
     internal class StarsCommand : Command
     {
         public StarsCommand()
-        : base("stars", 1)
+        : base("stars", 2)
         {
         }
 
@@ -1474,7 +1474,7 @@ namespace wServer.realm.commands
     internal class CFameCommand : Command
     {
         public CFameCommand()
-        : base("cfame", 1)
+        : base("cfame", 2)
         {
         }
 
@@ -1545,7 +1545,7 @@ namespace wServer.realm.commands
     internal class KeeperCloseRealmCmd : Command
     {
         public KeeperCloseRealmCmd()
-            : base("Keepercloserealm", 1)
+            : base("Keepercloserealm", 3)
         {
         }
         protected override bool Process(Player player, RealmTime time, string[] args)
@@ -1566,7 +1566,7 @@ namespace wServer.realm.commands
     internal class ForceUp : Command
     {
         public ForceUp()
-            : base("AdminForceUp", 1)
+            : base("AdminForceUp", 3)
         {
         }
         protected override bool Process(Player player, RealmTime time, string[] args)
@@ -1662,7 +1662,7 @@ namespace wServer.realm.commands
     internal class VisitCommand : Command
     {
         public VisitCommand()
-            : base("visit", 1)
+            : base("visit", 2)
         {
         }
 

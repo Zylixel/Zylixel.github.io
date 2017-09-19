@@ -318,8 +318,36 @@ namespace wServer.realm
             return world.Enemies.Count(i => enemyList.Contains(i.Value.ObjectType));
         }
 
+        public void TimedSpawn()
+        {
+            if (world.Players.Count >= 1) //Makes sure player is in the realm
+            {
+                var evt = events[rand.Next(0, events.Count)];
+                world.Timers.Add(new WorldTimer(300000, (ww, tt) => { TimedSpawn(); })); //New Event every 5 minutes
+                SpawnEvent(evt.Item1, evt.Item2);
+
+                TauntData? dat = null;
+                dat = null;
+                foreach (var i in criticalEnemies)
+                    if (evt.Item1 == i.Item1)
+                    {
+                        dat = i.Item2;
+                        break;
+                    }
+                if (dat == null) return;
+
+                if (dat.Value.spawn != null)
+                {
+                    var arr = dat.Value.spawn;
+                    var msg = arr[rand.Next(0, arr.Length)];
+                    BroadcastMsg(msg); //Taunt that bish
+                }
+            }
+        }
+
         public void Init()
         {
+            world.Timers.Add(new WorldTimer(10000, (ww, tt) => { TimedSpawn(); }));
             log.InfoFormat("Oryx is controlling world {0}({1})...", world.Id, world.Name);
             var w = world.Map.Width;
             var h = world.Map.Height;
@@ -366,55 +394,8 @@ namespace wServer.realm
             world.Manager.CloseWorld(world);
         }
 
-        public void OnEnemyKilled(Enemy enemy, Player killer)
+        public void OnEnemyKilled(Enemy enemy, Player killer) //TODO remove this
         {
-            if (enemy.ObjectDesc != null && enemy.ObjectDesc.Quest)
-            {
-                TauntData? dat = null;
-                foreach (var i in criticalEnemies)
-                    if ((enemy.ObjectDesc.DisplayId ?? enemy.ObjectDesc.ObjectId) == i.Item1)
-                    {
-                        dat = i.Item2;
-                        break;
-                    }
-                if (dat == null) return;
-
-                if (dat.Value.killed != null)
-                {
-                    var arr = dat.Value.killed;
-                    var msg = arr[rand.Next(0, arr.Length)];
-                    while (killer == null && msg.Contains("{PLAYER}"))
-                        msg = arr[rand.Next(0, arr.Length)];
-                    msg = msg.Replace("{PLAYER}", killer.Name);
-                    BroadcastMsg(msg);
-                }
-
-                if (rand.NextDouble() < 1.00)
-                {
-                    var evt = events[rand.Next(0, events.Count)];
-                    if (
-                        world.Manager.GameData.ObjectDescs[world.Manager.GameData.IdToObjectType[evt.Item1]].PerRealmMax ==
-                        1)
-                        events.Remove(evt);
-                    SpawnEvent(evt.Item1, evt.Item2);
-
-                    dat = null;
-                    foreach (var i in criticalEnemies)
-                        if (evt.Item1 == i.Item1)
-                        {
-                            dat = i.Item2;
-                            break;
-                        }
-                    if (dat == null) return;
-
-                    if (dat.Value.spawn != null)
-                    {
-                        var arr = dat.Value.spawn;
-                        var msg = arr[rand.Next(0, arr.Length)];
-                        BroadcastMsg(msg);
-                    }
-                }
-            }
         }
 
         public void OnPlayerEntered(Player player)

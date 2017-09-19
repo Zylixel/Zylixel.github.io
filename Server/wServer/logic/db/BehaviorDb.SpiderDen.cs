@@ -1,316 +1,213 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using wServer.realm;
 using wServer.logic.behaviors;
-using wServer.logic.loot;
 using wServer.logic.transitions;
+using wServer.logic.loot;
 
 namespace wServer.logic
 {
     partial class BehaviorDb
     {
-        _ Spider_Den = () => Behav()
-            .Init("Spider Egg Sac",
+        private _ SpiderDen = () => Behav()
+            .Init("Arachna the Spider Queen",
+                 new State(
+                     new RealmPortalDrop(),
+                     new State("idle",
+                         new ConditionalEffect(ConditionEffectIndex.Invulnerable),
+                         new PlayerWithinTransition(12, "WEB!")
+                         ),
+                     new State("WEB!",
+                         new ConditionalEffect(ConditionEffectIndex.Invulnerable),
+                         new TossObject("Arachna Web Spoke 7", 6, 0, 100000),
+                         new TossObject("Arachna Web Spoke 8", 6, 120, 100000),
+                         new TossObject("Arachna Web Spoke 9", 6, 240, 100000),
+                         new TossObject("Arachna Web Spoke 1", 10, 0, 100000),
+                         new TossObject("Arachna Web Spoke 2", 10, 60, 100000),
+                         new TossObject("Arachna Web Spoke 3", 10, 120, 100000),
+                         new TossObject("Arachna Web Spoke 4", 10, 180, 100000),
+                         new TossObject("Arachna Web Spoke 5", 10, 240, 100000),
+                         new TossObject("Arachna Web Spoke 6", 10, 300, 100000),
+                         new TimedTransition(2000, "attack")
+                         ),
+                     new State("attack",
+                         new Wander(1.0),
+                         new Shoot(3000, count: 12, projectileIndex: 0, fixedAngle: fixedAngle_RingAttack2),
+                         new Shoot(10, 1, 0, defaultAngle: 0, angleOffset: 0, projectileIndex: 0, predictive: 1,
+                         coolDown: 1000, coolDownOffset: 0),
+                         new Shoot(10, 1, 0, defaultAngle: 0, angleOffset: 0, projectileIndex: 1, predictive: 1,
+                         coolDown: 2000, coolDownOffset: 0)
+                         )
+                         ),
+                    new ItemLoot("Golden Dagger", 0.2),
+                    new ItemLoot("Spider's Eye Ring", 0.2),
+                    new ItemLoot("Poison Fang Dagger", 0.2),
+                 new Threshold(0.32,
+                    new ItemLoot("Healing Ichor", 1)
+                     )
+            )
+        .Init("Arachna Web Spoke 1",
             new State(
-                new TransformOnDeath("Green Den Spider Hatchling", min: 3, max: 8),
-                new State("Idle",
-                    new PlayerWithinTransition(1, "Open")
-                    ),
-                new State("Open",
-                    new Spawn("Green Den Spider Hatchling", 8, 1, coolDown: 500),
-                    new Decay(0)
+                new State(":D",
+                         new ConditionalEffect(ConditionEffectIndex.Invulnerable),
+                         new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 120, fixedAngle: 120, coolDown: 5),
+                         new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 180, fixedAngle: 180, coolDown: 5),
+                         new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 240, fixedAngle: 240, coolDown: 5)
                     )
                 )
-               )
-            .Init("Green Den Spider Hatchling",
-                new State(
-                    new Prioritize(
-                        new StayAbove(0.4, 160),
-                        new Follow(0.4, acquireRange: 9, range: 3.5, duration: 4),
-                        new Wander(0.4)
-                        ),
-                    new Shoot(8, predictive: 0.2)
-                       )
-                       )
-            .Init("Black Den Spider",
-                new State(
-                    new State("Wander",
-                        new StayAbove(0.2, 50),
-                        new Wander(0.4),
-                        new PlayerWithinTransition(7, "Attack")
-                            ),
-                    new State("Attack",
-                        new StayAbove(0.2, 50),
-                        new Prioritize(
-                            new Charge(2),
-                            new Wander(0.4)
-                            ),
-                        new Shoot(5, predictive: 1),
-                        new TimedTransition(1000, "Wander")
-                        )
-                  ),
-                  new ItemLoot("Healing Ichor", .05)
-                  )
-            .Init("Brown Den Spider",
-                new State(
-                    new State("Idle",
-                        new StayAbove(0.2, 50),
-                        new Wander(0.4),
-                        new PlayerWithinTransition(7, "Attack")
-                        ),
-                    new State("Attack",
-                        new Prioritize(
-                            new StayAbove(0.4, 160),
-                            new Follow(0.9, acquireRange: 9, range: 0),
-                            new Wander(0.4)
-                            ),
-                        new Shoot(8, count: 3, shootAngle: 10, coolDown: 400),
-                        new TimedTransition(10000, "Idle")
-                        )
-                        ),
-                  new ItemLoot("Healing Ichor", .05)
-                        )
-            .Init("Black Spotted Den Spider",
-                new State(
-                    new Wander(0.4),
-                    new Shoot(7)
+            )
+       .Init("Arachna Web Spoke 2",
+            new State(
+                new State(":D",
+                         new ConditionalEffect(ConditionEffectIndex.Invulnerable),
+                         new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 240, fixedAngle: 240, coolDown: 5),
+                         new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 180, fixedAngle: 180, coolDown: 5),
+                         new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 300, fixedAngle: 300, coolDown: 5)
+                    )
+                )
+                )
+      .Init("Arachna Web Spoke 3",
+            new State(
+                new State(":D",
+                         new ConditionalEffect(ConditionEffectIndex.Invulnerable),
+                         new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 300, fixedAngle: 300, coolDown: 5),
+                         new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 240, fixedAngle: 240, coolDown: 5),
+                         new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 0, fixedAngle: 0, coolDown: 5)
+                    )
+                )
+                )
+       .Init("Arachna Web Spoke 4",
+            new State(
+                new State(":D",
+                         new ConditionalEffect(ConditionEffectIndex.Invulnerable),
+                         new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 0, fixedAngle: 0, coolDown: 5),
+                         new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 60, fixedAngle: 60, coolDown: 5),
+                         new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 300, fixedAngle: 300, coolDown: 5)
+                    )
+                )
+                )
+      .Init("Arachna Web Spoke 5",
+            new State(
+                new State(":D",
+                         new ConditionalEffect(ConditionEffectIndex.Invulnerable),
+                         new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 60, fixedAngle: 60, coolDown: 5),
+                         new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 0, fixedAngle: 0, coolDown: 5),
+                         new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 120, fixedAngle: 120, coolDown: 5)
+                    )
+                )
+                )
+       .Init("Arachna Web Spoke 6",
+            new State(
+                new State(":D",
+                         new ConditionalEffect(ConditionEffectIndex.Invulnerable),
+                         new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 120, fixedAngle: 120, coolDown: 5),
+                         new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 60, fixedAngle: 60, coolDown: 5),
+                         new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 180, fixedAngle: 180, coolDown: 5)
+                    )
+                )
+                )
+        .Init("Arachna Web Spoke 7",
+            new State(
+                new State(":D",
+                         new ConditionalEffect(ConditionEffectIndex.Invulnerable),
+                         new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 180, fixedAngle: 180, coolDown: 5),
+                         new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 120, fixedAngle: 120, coolDown: 5),
+                         new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 240, fixedAngle: 240, coolDown: 5)
+                    )
+                )
+                )
+        .Init("Arachna Web Spoke 8",
+            new State(
+                new State(":D",
+                         new ConditionalEffect(ConditionEffectIndex.Invulnerable),
+                         new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 360, fixedAngle: 360, coolDown: 5),
+                         new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 240, fixedAngle: 240, coolDown: 5),
+                         new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 300, fixedAngle: 300, coolDown: 5)
+                    )
+                )
+                )
+        .Init("Arachna Web Spoke 9",
+            new State(
+                new State(":D",
+                         new ConditionalEffect(ConditionEffectIndex.Invulnerable),
+                         new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 0, fixedAngle: 0, coolDown: 5),
+                         new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 60, fixedAngle: 60, coolDown: 5),
+                         new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 120, fixedAngle: 120, coolDown: 5)
+                    )
+                )
+             )
+        .Init("Black Den Spider",
+            new State(
+                new State("idle",
+                    new Wander(0.8),
+                    new Charge(0.9, 20f, 2000),
+                    new Shoot(10, 1, 0, defaultAngle: 0, angleOffset: 0, projectileIndex: 0, predictive: 1,
+                    coolDown: 500, coolDownOffset: 0)
+                         )
+                     ),
+                    new ItemLoot("Healing Ichor", 0.2)
+            )
+        .Init("Black Spotted Den Spider",
+            new State(
+                new State("idle",
+                    new Wander(0.8),
+                    new Charge(0.9, 40f, 2000),
+                    new Shoot(10, 1, 0, defaultAngle: 0, angleOffset: 0, projectileIndex: 0, predictive: 1,
+                    coolDown: 500, coolDownOffset: 0)
+                         )
+                     ),
+                    new ItemLoot("Healing Ichor", 0.2)
+            )
+       .Init("Brown Den Spider",
+            new State(
+                new State("idle",
+                    new Wander(0.8),
+                    new Follow(0.8, 0.3, 0),
+                    new Shoot(10, 3, 20, angleOffset: 0 / 3, projectileIndex: 0, coolDown: 500)
+                    )
+                ),
+                new ItemLoot("Healing Ichor", 0.2)
+           )
+       .Init("Green Den Spider Hatchling",
+            new State(
+                new State("idle",
+                    new Wander(0),
+                    new Follow(0.8, 0.8, 0),
+                    new Shoot(10, 1, 0, defaultAngle: 0, angleOffset: 0, projectileIndex: 0, predictive: 1,
+                    coolDown: 1000, coolDownOffset: 0)
+                    )
+                )
+             )
+       .Init("Spider Egg Sac",
+            new State(
+                new TransformOnDeath("Green Den Spider Hatchling", 2, 7),
+                new State("idle",
+                    new PlayerWithinTransition(0.5, "suicide")
                     ),
-                  new ItemLoot("Healing Ichor", .05)
+                new State("suicide",
+                    new Suicide()
                     )
-            .Init("Red Spotted Den Spider",
-                new State(
-                    new Prioritize(
-                    new Follow(0.3, acquireRange: 10, range: 4),
-                    new Wander(0.5)
+                )
+            )
+       .Init("Red Spotted Den Spider",
+            new State(
+                new State("idle",
+                    new Wander(0),
+                    new Follow(1.0, 0.8, 0),
+                    new Shoot(10, 1, 0, defaultAngle: 0, angleOffset: 0, projectileIndex: 0, predictive: 1,
+                    coolDown: 500, coolDownOffset: 0)
+                    )
+                ),
+                new ItemLoot("Healing Ichor", 0.2)
+            )
+       .Init("Arachna Summoner",
+            new State(
+                new ConditionalEffect(ConditionEffectIndex.Invincible, true),
+                new RealmPortalDrop(),
+                new State("idle",
+                     new EntitiesNotExistsTransition(300, "Death", "Arachna the Spider Queen")
                     ),
-                    new Shoot(10)
-                    ),
-                  new ItemLoot("Healing Ichor", .05)
+                new State("Death",
+                    new Suicide()
                     )
-            .Init("Arachna the Spider Queen",
-                new State(
-                    new DropPortalOnDeath("Realm Portal", 100),
-                    new State("Idle",
-                        new ConditionalEffect(ConditionEffectIndex.Invulnerable),
-                        new PlayerWithinTransition(3, "Hello!")
-                    ),
-                    new State("Hello!",
-                    new ConditionalEffect(ConditionEffectIndex.Invulnerable),
-                    new Taunt("Oh, Hey {PLAYER}!"),
-                    new TimedTransition(3000, "Hello2")
-                    ),
-                    new State("Hello2",
-                    new ConditionalEffect(ConditionEffectIndex.Invulnerable),
-                    new Taunt("Check out this awesome web I can make!"),
-                    new TimedTransition(3000, "MakeWeb")
-                    ),
-                    new State("Talk3",
-                    new ConditionalEffect(ConditionEffectIndex.Invulnerable),
-                    new Taunt("I can even shoot stuff!"),
-                    new TimedTransition(3000, "Attack")
-                    ),
-                    new State("Why?",
-                    new Taunt("Hey! That Hurts!"),
-                    new TimedTransition(0, "Attack2")
-                    ),
-                    new State("Why2",
-                    new Taunt("I'd stop that if I were you..."),
-                    new TimedTransition(0, "Attack3")
-                    ),
-                    new State("Why3",
-                    new Taunt("I SAID STOP!"),
-                    new TimedTransition(0, "Attack4")
-                    ),
-                    new State("MakeWeb",
-                        new ConditionalEffect(ConditionEffectIndex.Invulnerable),
-                        new TossObject("Arachna Web Spoke 1", range: 10, angle: 0, coolDown: 100000),
-                        new TossObject("Arachna Web Spoke 7", range: 6, angle: 0, coolDown: 100000),
-                        new TossObject("Arachna Web Spoke 2", range: 10, angle: 60, coolDown: 100000),
-                        new TossObject("Arachna Web Spoke 3", range: 10, angle: 120, coolDown: 100000),
-                        new TossObject("Arachna Web Spoke 8", range: 6, angle: 120, coolDown: 100000),
-                        new TossObject("Arachna Web Spoke 4", range: 10, angle: 180, coolDown: 100000),
-                        new TossObject("Arachna Web Spoke 5", range: 10, angle: 240, coolDown: 100000),
-                        new TossObject("Arachna Web Spoke 9", range: 6, angle: 240, coolDown: 100000),
-                        new TossObject("Arachna Web Spoke 6", range: 10, angle: 300, coolDown: 100000),
-                        new TimedTransition(3500, "Talk3")
-                        ),
-                    new State("Attack",
-                        new HpLessTransition(.95, "Why?"),
-                        new Shoot(1, projectileIndex: 0, count: 8, coolDown: 1200, shootAngle: 45, fixedAngle: 0),
-                        new Shoot(10, projectileIndex: 1, coolDown: 2000),
-                        new State("Follow",
-                            new Prioritize(
-                                new StayAbove(.6, 1),
-                                new Wander(.7)
-                                ),
-                            new TimedTransition(1000, "Return")
-                                ),
-                        new State("Return",
-                            new StayCloseToSpawn(.4, 1),
-                            new TimedTransition(1000, "Follow")
-                            )),                   
-                        new State("Attack2",
-                        new HpLessTransition(.50, "Why2"),
-                        new Shoot(1, projectileIndex: 0, count: 8, coolDown: 1200, shootAngle: 45, fixedAngle: 0),
-                        new Shoot(10, projectileIndex: 1, coolDown: 2000),
-                        new State("Follow2",
-                            new Prioritize(
-                                new StayAbove(.6, 1),
-                                new Wander(.7)
-                                ),
-                            new TimedTransition(1000, "Return2")
-                                ),
-                        new State("Return2",
-                            new StayCloseToSpawn(.4, 1),
-                            new TimedTransition(1000, "Follow2")
-                            )),
-                    new State("Attack3",
-                        new HpLessTransition(.2, "Why3"),
-                        new Shoot(1, projectileIndex: 0, count: 8, coolDown: 1200, shootAngle: 45, fixedAngle: 0),
-                        new Shoot(10, projectileIndex: 1, coolDown: 2000),
-                        new State("Follow3",
-                            new Prioritize(
-                                new StayAbove(.6, 1),
-                                new Wander(.7)
-                                ),
-                            new TimedTransition(1000, "Return3")
-                                ),
-                        new State("Return3",
-                            new StayCloseToSpawn(.4, 1),
-                            new TimedTransition(1000, "Follow3")
-                            )),
-                    new State("Attack4",
-                        new Shoot(1, projectileIndex: 0, count: 20, coolDown: 10, shootAngle: 45, fixedAngle: 0),
-                        new Shoot(10, projectileIndex: 1, count: 10, coolDown: 10),
-                        new Follow(1, range: 1, acquireRange: 9),
-                        new State("Follow4",
-                            new Prioritize(
-                                new StayAbove(.6, 1),
-                                new Wander(.7)
-                                ),
-                            new TimedTransition(1000, "Return4")
-                                ),
-                        new State("Return4",
-                            new StayCloseToSpawn(.4, 1),
-                            new TimedTransition(1000, "Follow4")
-                            ))
-                        ),
-
-                    new ItemLoot("Healing Ichor", 0.75),
-                    new ItemLoot("Golden Dagger", 0.5),
-                    new ItemLoot("Poison Fang Dagger", 0.1),
-                    new ItemLoot("Spider's Eye Ring", 0.1)
-                        )
-            .Init("Arachna Web Spoke 1",
-                new State(
-                    new State("Attack",
-                    new ConditionalEffect(ConditionEffectIndex.Invulnerable),
-                    new Shoot(1, count: 3, fixedAngle: 180, shootAngle: 60, coolDown: 150),
-                    new EntityNotExistsTransition("Arachna the Spider Queen", 1000, "Die")
-                    ),
-                    new State("Die",
-                        new Decay(0)
-                    )
-                    )
-                    )
-            .Init("Arachna Web Spoke 2",
-                new State(
-                    new State("Attack",
-                    new ConditionalEffect(ConditionEffectIndex.Invulnerable),
-                    new Shoot(1, count: 1, fixedAngle: 240, shootAngle: 60, coolDown: 150),
-                    new EntityNotExistsTransition("Arachna the Spider Queen", 1000, "Die")
-                    ),
-                    new State("Die",
-                        new Decay(0)
-                    )
-                    )
-                    )
-            .Init("Arachna Web Spoke 3",
-                new State(
-                    new State("Attack",
-                    new ConditionalEffect(ConditionEffectIndex.Invulnerable),
-                    new Shoot(1, count: 3, fixedAngle: 300, shootAngle: 60, coolDown: 150),
-                    new EntityNotExistsTransition("Arachna the Spider Queen", 1000, "Die")
-                    ),
-                    new State("Die",
-                        new Decay(0)
-                    )
-                    )
-                    )
-            .Init("Arachna Web Spoke 4",
-                new State(
-                    new State("Attack",
-                    new ConditionalEffect(ConditionEffectIndex.Invulnerable),
-                    new Shoot(1, count: 1, fixedAngle: 0, shootAngle: 60, coolDown: 150),
-                    new EntityNotExistsTransition("Arachna the Spider Queen", 1000, "Die")
-                    ),
-                    new State("Die",
-                        new Decay(0)
-                    )
-                    )
-                    )
-            .Init("Arachna Web Spoke 5",
-                new State(
-                    new State("Attack",
-                    new ConditionalEffect(ConditionEffectIndex.Invulnerable),
-                    new Shoot(1, count: 3, fixedAngle: 60, shootAngle: 60, coolDown: 150),
-                    new EntityNotExistsTransition("Arachna the Spider Queen", 1000, "Die")
-                    ),
-                    new State("Die",
-                        new Decay(0)
-                    )
-                    )
-                    )
-            .Init("Arachna Web Spoke 6",
-                new State(
-                    new State("Attack",
-                    new ConditionalEffect(ConditionEffectIndex.Invulnerable),
-                    new Shoot(1, count: 1, fixedAngle: 120, shootAngle: 60, coolDown: 150),
-                    new EntityNotExistsTransition("Arachna the Spider Queen", 1000, "Die")
-                    ),
-                    new State("Die",
-                        new Decay(0)
-                    )
-                    )
-                    )
-            .Init("Arachna Web Spoke 7",
-                new State(
-                    new State("Attack",
-                    new ConditionalEffect(ConditionEffectIndex.Invulnerable),
-                    new Shoot(1, count: 3, fixedAngle: 180, shootAngle: 60, coolDown: 150),
-                    new EntityNotExistsTransition("Arachna the Spider Queen", 1000, "Die")
-                    ),
-                    new State("Die",
-                        new Decay(0)
-                    )
-                    )
-                    )
-            .Init("Arachna Web Spoke 8",
-                new State(
-                    new State("Attack",
-                    new ConditionalEffect(ConditionEffectIndex.Invulnerable),
-                    new Shoot(1, count: 3, fixedAngle: 300, shootAngle: 60, coolDown: 150),
-                    new EntityNotExistsTransition("Arachna the Spider Queen", 1000, "Die")
-                    ),
-                    new State("Die",
-                        new Decay(0)
-                    )
-                    )
-                    )
-            .Init("Arachna Web Spoke 9",
-                new State(
-                    new State("Attack",
-                    new ConditionalEffect(ConditionEffectIndex.Invulnerable),
-                    new Shoot(1, count: 3, fixedAngle: 60, shootAngle: 60, coolDown: 150),
-                    new EntityNotExistsTransition("Arachna the Spider Queen", 1000, "Die")
-                    ),
-                    new State("Die",
-                        new Decay(0)
-                    )
-                    )
-                    )
-        ;
+                )
+            );
     }
 }

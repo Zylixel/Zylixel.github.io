@@ -1,86 +1,59 @@
-﻿#region
-
-using System;
+﻿using System;
 using System.Collections.Concurrent;
 using System.Threading;
-using log4net;
 using wServer.networking;
-
-#endregion
+using log4net;
 
 namespace wServer.realm
 {
-    #region
-
-    using Work = Tuple<Client, Packet>;
-
-    #endregion
-
-    public class NetworkTicker //Sync network processing
+    using Work = Tuple<Client, PacketID, byte[]>;
+    public class NetworkTicker
     {
-        private static readonly ConcurrentQueue<Work> pendings = new ConcurrentQueue<Work>();
-        private static SpinWait loopLock = new SpinWait();
-        private readonly ILog log = LogManager.GetLogger(typeof (NetworkTicker));
-
-        public NetworkTicker(RealmManager manager)
-        {
-            Manager = manager;
-        }
+        ILog log = LogManager.GetLogger(typeof(NetworkTicker));
 
         public RealmManager Manager { get; private set; }
-
-        public void AddPendingPacket(Client parrent, Packet pkt)
+        public NetworkTicker(RealmManager manager)
         {
-            pendings.Enqueue(new Work(parrent, pkt));
+            this.Manager = manager;
         }
+
+        public void AddPendingPacket(Client client, PacketID id, byte[] packet)
+        {
+            pendings.Enqueue(new Work(client, id, packet));
+        }
+        static ConcurrentQueue<Work> pendings = new ConcurrentQueue<Work>();
+        static SpinWait loopLock = new SpinWait();
 
 
         public void TickLoop()
         {
-            log.Info("Network loop started.");
+            log.Info("Procces: Starting network loop.");
             Work work;
             while (true)
             {
-                try
+                if (Manager.Terminating) break;
+                loopLock.Reset();
+                while (pendings.TryDequeue(out work))
                 {
-                    if (Manager.Terminating) break;
-                    loopLock.Reset();
-                    while (pendings.TryDequeue(out work))
+                    if (Manager.Terminating) return;
+                    if (work.Item1.Stage == ProtocalStage.Disconnected)
                     {
-                        try
-                        {
-                            if (Manager.Terminating) return;
-                            if (work.Item1.Stage == ProtocalStage.Disconnected)
-                            {
-                                Client client;
-                                var accId = work.Item1?.Account?.AccountId;
-                                if(accId != null)
-                                Manager.Clients.TryRemove(accId, out client);
-                                continue;
-                            }
-                            try
-                            {
-                                work.Item1.ProcessPacket(work.Item2);
-                            }
-                            catch (Exception ex)
-                            {
-                                log.Error(ex);
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            log.Error(ex);
-                        }
+                        Client client;
+                        Manager.Clients.TryRemove(work.Item1.Account.AccountId, out client);
+                        continue;
                     }
-                    while (pendings.Count == 0 && !Manager.Terminating)
-                        loopLock.SpinOnce();
+                    try
+                    {
+                        Packet packet = Packet.Packets[work.Item2].CreateInstance();
+                        packet.Read(work.Item1, work.Item3, 0, work.Item3.Length);
+                        work.Item1.ProcessPacket(packet);
+                    }
+                    catch { }
                 }
-                catch (Exception ex)
-                {
-                    log.Error(ex);
-                }
+                while (pendings.Count == 0 && !Manager.Terminating)
+                    loopLock.SpinOnce();
             }
-            log.Info("Network loop stopped.");
+            log.Info("Procces: Stopping network loop.");
         }
     }
 }

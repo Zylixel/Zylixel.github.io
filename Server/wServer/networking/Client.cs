@@ -213,7 +213,6 @@ namespace wServer.networking
         public void Dispose()
         {
             if (disposed) return;
-            handler?.Dispose();
             handler = null;
             ReceiveKey = null;
             SendKey = null;

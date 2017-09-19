@@ -88,6 +88,7 @@ public class AssetLoader {
         AssetLibrary.addImageSet("d3LofiObjBigEmbed", new EmbeddedAssets.d3LofiObjBigEmbed_().bitmapData, 16, 16);
         AssetLibrary.addImageSet("d1lofiObjBig", new EmbeddedAssets.d1LofiObjBigEmbed_().bitmapData, 16, 16);
         AssetLibrary.addImageSet("cursorsEmbed", new EmbeddedAssets.cursorsEmbed_().bitmapData, 32, 32);
+        AssetLibrary.addImageSet("summerNexusObjects8x8", new EmbeddedAssets.summerNexusObjects8x8Embed_().bitmapData, 8, 8);
     }
 
     private function addAnimatedCharacters():void {

@@ -962,5 +962,39 @@
       <MultiHit/>
     </Projectile>
   </Object>
+  <Object ext="true" id="The New World Key">
+    <Class>Equipment</Class>
+    <Item/>
+    <Texture>
+      <File>lofiObj9</File>
+      <Index>0x6e</Index>
+    </Texture>
+    <SlotType>10</SlotType>
+    <Description>Produced from those who destroy the realm. Molded by those who live in the realm. The end of all the realm.</Description>
+    <Sound>use_key</Sound>
+    <Consumable/>
+    <Activate id="Temp Portal2">Create</Activate>
+    <feedPower>100</feedPower>
+    <DisplayId>The New World Key</DisplayId>
+  </Object>
+  <Object ext="true" id="Temp Portal2">
+    <Class>Portal</Class>
+    <IntergamePortal/>
+    <DungeonName>TheNewWorld</DungeonName>
+    <Texture>
+      <File>lofiObjBig</File>
+      <Index>0x139</Index>
+    </Texture>
+    <Size>60</Size>
+    <DisplayId>Temp Portal</DisplayId>
+  </Object>
+  <Object ext="true" id="NewWorld Water Summoner">
+    <Class>Character</Class>
+    <Texture>
+      <File>invisible</File>
+      <Index>0</Index>
+    </Texture>
+    <DisplayId>Water Summoner</DisplayId>
+  </Object>
 </ExtData>
 

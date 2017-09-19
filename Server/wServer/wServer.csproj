@@ -170,6 +170,7 @@
     <Compile Include="logic\db\BehaviorDb.Drakes.cs" />
     <Compile Include="logic\db\BehaviorDb.EpicForestMaze.cs" />
     <Compile Include="logic\db\BehaviorDb.ForestMaze.cs" />
+    <Compile Include="logic\db\BehaviorDb.NewWorld.cs" />
     <Compile Include="logic\db\BehaviorDb.GhostShip.cs" />
     <Compile Include="logic\db\BehaviorDb.IceCave.cs" />
     <Compile Include="logic\db\BehaviorDb.Janus.cs" />
@@ -448,6 +449,7 @@
     <Compile Include="realm\setpieces\Castle.cs" />
     <Compile Include="realm\setpieces\BottledEvil.cs" />
     <Compile Include="realm\setpieces\NexusDark.cs" />
+    <Compile Include="realm\setpieces\NewWorldWaterFill.cs" />
     <Compile Include="realm\setpieces\NexusLight.cs" />
     <Compile Include="realm\setpieces\NexusFloral.cs" />
     <Compile Include="realm\setpieces\KeeperOcean.cs" />
@@ -495,6 +497,7 @@
     <Compile Include="realm\Wmap.cs" />
     <Compile Include="realm\World.cs" />
     <Compile Include="realm\worlds\BattleNexus.cs" />
+    <Compile Include="realm\worlds\TheNewWorld.cs" />
     <Compile Include="realm\worlds\TheIvoryWyvern.cs" />
     <Compile Include="realm\worlds\TheRealmKeeper.cs" />
     <Compile Include="realm\worlds\ZysArena.cs" />
@@ -634,7 +637,6 @@
     </None>
     <EmbeddedResource Include="realm\worlds\maps\vault.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\nexusprod.wmap" />
-    <EmbeddedResource Include="realm\worlds\maps\vaulttest.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\world1.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\abyss.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\kitchen.wmap" />
@@ -648,8 +650,6 @@
     <EmbeddedResource Include="realm\worlds\maps\abyss2.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\nexusLimbo.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\tomb.wmap" />
-    <EmbeddedResource Include="realm\worlds\maps\UDL1.wmap" />
-    <EmbeddedResource Include="realm\worlds\maps\UDL2.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\belladonnasGarden.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\shaitansmap.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\shittersmep.wmap" />
@@ -668,7 +668,6 @@
     <EmbeddedResource Include="realm\worlds\maps\candyland.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\forestmaze.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\pcave.wmap" />
-    <EmbeddedResource Include="realm\worlds\maps\spiderden.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\spriteworld.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\nexus_winter.jm" />
     <EmbeddedResource Include="realm\worlds\maps\nexus_summer.jm" />
@@ -695,10 +694,12 @@
     <EmbeddedResource Include="realm\worlds\maps\oryxchamber.jm" />
     <EmbeddedResource Include="realm\worlds\maps\BattlefortheNexus.jm" />
     <EmbeddedResource Include="realm\worlds\maps\ZysArena.jm" />
-    <EmbeddedResource Include="realm\worlds\maps\UDL1.jm" />
     <EmbeddedResource Include="realm\worlds\maps\TheRealmKeeper.jm" />
     <EmbeddedResource Include="realm\worlds\maps\NozenNexus.jm" />
     <EmbeddedResource Include="realm\worlds\maps\ivory.jm" />
+    <EmbeddedResource Include="realm\worlds\maps\TheNewWorld.jm" />
+    <EmbeddedResource Include="realm\worlds\maps\spiderden.jm" />
+    <EmbeddedResource Include="realm\worlds\maps\forestmaze.jm" />
     <None Include="wServer.cfg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
