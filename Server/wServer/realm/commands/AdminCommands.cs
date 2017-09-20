@@ -1587,11 +1587,6 @@ namespace wServer.realm.commands
         {
             using (Database db = new Database())
             {
-                if (string.IsNullOrEmpty(args[0]))
-                {
-                    player.SendHelp("Usage: /sell <slot> <price>");
-                    return false;
-                }
                 if (string.IsNullOrEmpty(args[1]))
                 {
                     player.SendHelp("Usage: /sell <slot> <price>");
@@ -1599,39 +1594,57 @@ namespace wServer.realm.commands
                 }
                 int slot = Convert.ToInt32(args[0]) + 3;
                 int itemID = player.Inventory[slot].ObjectType;
-                if (Convert.ToInt32(args[0]) > 8)
-                {
-                    player.SendError("Slot Number Invalid");
-                    return false;
-                }
-                if (itemID < 1)
-                {
-                    player.SendError("Slot Number Invalid");
-                    return false;
-                }
-                MySqlCommand cmd = db.CreateQuery();
-                cmd.CommandText = "INSERT INTO market(itemID, fame, id) VALUES(@itemID, @fame, @playerID)";
-                cmd.Parameters.AddWithValue("@itemID", Convert.ToInt32(itemID));
-                cmd.Parameters.AddWithValue("@fame", args[1]);
-                var plr = player.Manager.FindPlayer(player.Name);
-                cmd.Parameters.AddWithValue("@playerID", plr.AccountId);
-                try
-                {
-                    cmd.ExecuteNonQuery();
-                    player.Inventory[slot] = null;
-                    player.UpdateCount++;
-                    player.SendInfo("Item put on the market! please wait 1-2 minutes if it is an item already on the market.");
-                    player.SendInfo("If the item is currently not on the market, please wait for a server restart.");
+                string checker = player.Manager.GameData.ObjectTypeToId[player.Inventory[slot].ObjectType];
 
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("[" + DateTime.Now.ToString("h:mm:ss tt") + "] " + e);
-                }
+                if (!(checker.Contains("Egg")))
+                    if (!(checker.Contains("Skin")))
+                        if (!(checker.Contains("Cloth")))
+                            if (!(checker.Contains("Dye")))
+                                if (!(checker.Contains("Tincture")))
+                                    if (!(checker.Contains("Effusion")))
+                                        if (!(checker.Contains("Elixer")))
+                                            if (!(checker.Contains("Tarot")))
+                                                if (!(checker.Contains("Treasure")))
+                                                {
+
+                                                    if (Convert.ToInt32(args[0]) > 8)
+                                                    {
+                                                        player.SendError("Slot Number Invalid, please only choose items in slot 1-8");
+                                                        return false;
+                                                    }
+                                                    if (itemID < 1)
+                                                    {
+                                                        player.SendError("Slot Number Invalid, please only choose items in slot 1-8");
+                                                        return false;
+                                                    }
+                                                    MySqlCommand cmd = db.CreateQuery();
+                                                    cmd.CommandText = "INSERT INTO market(itemID, fame, id) VALUES(@itemID, @fame, @playerID)";
+                                                    cmd.Parameters.AddWithValue("@itemID", Convert.ToInt32(itemID));
+                                                    cmd.Parameters.AddWithValue("@fame", args[1]);
+                                                    var plr = player.Manager.FindPlayer(player.Name);
+                                                    cmd.Parameters.AddWithValue("@playerID", plr.AccountId);
+                                                    try
+                                                    {
+                                                        cmd.ExecuteNonQuery();
+                                                        player.Inventory[slot] = null;
+                                                        player.UpdateCount++;
+                                                        player.SaveToCharacter();
+                                                        player.SendInfo("Item put on the market! please wait 1-2 minutes if it is an item already on the market.");
+                                                        player.SendInfo("If the item is currently not on the market, please wait for a server restart.");
+
+                                                    }
+                                                    catch (Exception e)
+                                                    {
+                                                        Console.WriteLine("[" + DateTime.Now.ToString("h:mm:ss tt") + "] " + e);
+                                                    }
+                                                    return true;
+                                                }
             }
-            return true;
+        player.SendError("You cannot sell this item!");
+        return false;
+
         }
-    }
+        }
 
     internal class ReviveCommand : Command
     {

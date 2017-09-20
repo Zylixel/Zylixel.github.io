@@ -442,7 +442,6 @@ AND characters.charId=death.chrId;";
                 };
             }
             ReadStats(ret);
-            ReadGiftCodes(ret);
             ret.Guild.Name = GetGuildName(ret.Guild.Id);
             ret.DailyQuest = GetDailyQuest(ret.AccountId, data);
             return ret;
@@ -537,17 +536,6 @@ SELECT credits FROM stats WHERE accId=@accId;";
             if (acc.Stats.ClassStates.Count > 0)
                 acc.Stats.BestCharFame = acc.Stats.ClassStates.Max(_ => _.BestFame);
             acc.Vault = ReadVault(acc);
-        }
-
-        public void ReadGiftCodes(Account acc)
-        {
-            var cmd = CreateQuery();
-            cmd.CommandText = "SELECT * FROM giftcodes WHERE accId=@accId;";
-            cmd.Parameters.AddWithValue("@accId", acc.AccountId);
-            acc.GiftCodes = new List<string>();
-            using (var rdr = cmd.ExecuteReader())
-                while (rdr.Read())
-                    acc.GiftCodes.Add(rdr.GetString("code"));
         }
 
 
@@ -856,12 +844,13 @@ SELECT MAX(chestId) FROM vaults WHERE accId = @accId;";
                 var ordinal = rdr.GetOrdinal("MIN( fame )");
                 if (rdr.IsDBNull(ordinal))
                 {
+                    log.Info("GetMarketInfo | " + 0);
                     return 0;
                 }
                 if (type == 1)
                     info = rdr.GetInt32("MIN( fame )");
                 log.Info("GetMarketInfo | " + info);
-                return info;
+                return 0;
             }
         }
 
@@ -1405,21 +1394,6 @@ VALUES(@accId, @petId, @objType, @skinName, @skin, @rarity, @maxLevel, @abilitie
             cmd.CommandText = "UPDATE accounts SET accountInUse=0 WHERE id=@accId;";
             cmd.Parameters.AddWithValue("@accId", acc.AccountId);
             cmd.ExecuteScalar();
-        }
-
-        public string GenerateGiftcode(string contents, string accId)
-        {
-            var code = generateGiftCode(5, 5);
-            while (giftCodeExists(code))
-                code = generateGiftCode(5, 5);
-
-            var cmd = CreateQuery();
-            cmd.CommandText = "INSERT INTO giftCodes(code, content, accId) VALUES(@code, @contents, @accId);";
-            cmd.Parameters.AddWithValue("@code", code);
-            cmd.Parameters.AddWithValue("@contents", contents);
-            cmd.Parameters.AddWithValue("@accId", accId);
-            cmd.ExecuteNonQuery();
-            return code;
         }
 
         private string generateGiftCode(int blocks, int blockLength)

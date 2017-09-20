@@ -11,7 +11,6 @@ using wServer.networking.svrPackets;
 using wServer.realm;
 using wServer.realm.entities.player;
 using System.Threading.Tasks;
-using db.JsonObjects;
 
 #endregion
 
@@ -176,38 +175,6 @@ namespace wServer.networking
                 Save();
                 SendPacket(pkt);
             }, PendingPriority.Destruction);
-        }
-
-        public void GiftCodeReceived(string type)
-        {
-            //Use later
-            switch (type)
-            {
-                case "Pong":
-                    break;
-                case "LevelUp":
-                    break;
-            }
-
-            AddGiftCode(GiftCode.GenerateRandom(Manager.GameData));
-        }
-
-        private void AddGiftCode(GiftCode code)
-        {
-            Manager.Database.DoActionAsync(db =>
-            {
-                var key = db.GenerateGiftcode(code.ToJson(), Account.AccountId);
-
-                //var message = new MailMessage();
-                //message.To.Add(Account.Email);
-                //message.IsBodyHtml = true;
-                //message.Subject = "You received a new GiftCode";
-                //message.From = new MailAddress(Program.Settings.GetValue<string>("serverEmail", ""));
-                //message.Body = "<center>Your giftcode is: " + code + "</br> Check the items in your giftcode <a href=\"" + Program.Settings.GetValue<string>("serverDomain", "localhost") + "/CheckGiftCode.html\" target=\"_blank\">here</a> or redeem the code <a href=\"" + Program.Settings.GetValue<string>("serverDomain", "localhost") + "/RedeemGiftCode.html\" target=\"_blank\">here</a></center>";
-
-                //Program.SendEmail(message);
-                //Player.SendInfo($"You have received a new GiftCode: {key}\nRedeem it at: {Program.Settings.GetValue("serverDomain")}/GiftCode.html or\n type /giftcode to scan it with your mobile via qr code");
-            });
         }
 
         public void Dispose()

@@ -82,10 +82,8 @@
     <Compile Include="Database.Guilds.cs" />
     <Compile Include="data\Descriptors.cs" />
     <Compile Include="data\XmlDatas.cs" />
-    <Compile Include="AccountDataHelper.cs" />
     <Compile Include="FameStats.cs" />
     <Compile Include="IFeedable.cs" />
-    <Compile Include="JsonObjects\GiftCode.cs" />
     <Compile Include="Models.cs" />
     <Compile Include="NWriter.cs" />
     <Compile Include="NReader.cs" />
@@ -141,6 +139,9 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="JsonObjects\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

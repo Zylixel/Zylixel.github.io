@@ -96,8 +96,6 @@ namespace server
             {"/playerMuledump/view", new playerMuledump.view()},
             {"/account/acceptTOS", new account.acceptTOS()},
             {"/account/playFortuneGame", new account.playFortuneGame()},
-            {"/account/redeemGiftCode", new account.redeemGiftCode()},
-            {"/account/checkGiftCode", new account.checkGiftCode()},
             {"/account/resetPassword", new account.resetPassword()},
             {"/account/validateEmail", new account.validateEmail()},
             {"/account/changeEmail", new account.changeEmail()},

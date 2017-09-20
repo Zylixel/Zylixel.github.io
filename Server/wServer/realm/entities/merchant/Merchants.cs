@@ -342,8 +342,6 @@ namespace wServer.realm.entities.merchant
                     {
                         Price = db.GetMarketInfo(price.Item1, 1);
                     }
-                    if (Price == 0)
-                        Owner.LeaveWorld(this);
                     Currency = price.Item2;
                 }
 

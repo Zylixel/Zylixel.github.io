@@ -135,8 +135,6 @@ namespace server
                                 file = Settings.GetValue<bool>("testingOnline", "false") ? "game/Testing.html" : "game/TestingIsOffline.html";
                             SendFile(file, context);
                         }
-                        else
-                            SendFile("game/404.html", context);
                     }
                 }
 

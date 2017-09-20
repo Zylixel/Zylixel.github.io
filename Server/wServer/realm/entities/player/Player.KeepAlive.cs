@@ -22,8 +22,6 @@ namespace wServer.realm.entities.player
         {
             try
             {
-                if (Random.Next(1, 100000) == 1)
-                    Client.GiftCodeReceived("Pong");
 
                 updateLastSeen++;
 
