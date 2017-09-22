@@ -187,17 +187,6 @@ namespace wServer.realm.entities.merchant
 
         public override void Tick(RealmTime time)
         {
-            Tuple<int, CurrencyType> price;
-            if (prices.TryGetValue(MType, out price))
-            {
-                using (Database db = new Database())
-                {
-                    Price = db.GetMarketInfo(price.Item1, 1);
-                }
-                if (Price == 0)
-                    TempDisable(this);
-                Currency = price.Item2;
-            }
             try
             {
                 if (Size == 0 && MType != -1)
