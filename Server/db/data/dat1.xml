@@ -82197,7 +82197,7 @@ The solid honey on this ring renews its wearer with incredible energy.
     <FameBonus>3</FameBonus>
     <feedPower>500</feedPower>
   </Object>
-   <Object type="0x612d" id="Test staff">
+   <Object type="0x9000" id="Test staff">
       <Class>Equipment</Class>
       <Item/>
       <Texture>
@@ -82223,7 +82223,7 @@ The solid honey on this ring renews its wearer with incredible energy.
       <ArcGap>0</ArcGap>
       <OldSound>magicShoot</OldSound>
       <feedPower>10000</feedPower>
-      <DisplayId>{equip.Firebrand_Staff}</DisplayId>
+      <DisplayId>Test Staff</DisplayId>
    </Object>
   <Object type="0x611e" id="Crystal Dagger of Evolution 3">
     <DisplayId>Crystal Dagger of Evolution</DisplayId>

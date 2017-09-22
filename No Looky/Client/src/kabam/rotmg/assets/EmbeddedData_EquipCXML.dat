@@ -20180,7 +20180,7 @@ An awe-inspiring sword gifted to only the most worthy mortals from the heavens t
                 <FameBonus>2</FameBonus>
                 <feedPower>250</feedPower>
               </Object>
-			  <Object type="0x612d" id="Test staff">
+			  <Object type="0x9000" id="Test staff">
       <Class>Equipment</Class>
       <Item/>
       <Texture>
@@ -20206,8 +20206,8 @@ An awe-inspiring sword gifted to only the most worthy mortals from the heavens t
       <ArcGap>0</ArcGap>
       <OldSound>magicShoot</OldSound>
       <feedPower>10000</feedPower>
-      <DisplayId>{equip.Firebrand_Staff}</DisplayId>
-   </Object>
+      <DisplayId>Test Staff</DisplayId>
+	  </object>
               <Object type="0x611d" id="Crystal Dagger of Evolution 2">
                 <DisplayId>Crystal Dagger of Evolution</DisplayId>
                 <Class>Equipment</Class>
