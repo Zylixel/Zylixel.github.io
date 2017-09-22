@@ -20207,7 +20207,7 @@ An awe-inspiring sword gifted to only the most worthy mortals from the heavens t
       <OldSound>magicShoot</OldSound>
       <feedPower>10000</feedPower>
       <DisplayId>Test Staff</DisplayId>
-	  </object>
+	  </Object>
               <Object type="0x611d" id="Crystal Dagger of Evolution 2">
                 <DisplayId>Crystal Dagger of Evolution</DisplayId>
                 <Class>Equipment</Class>
