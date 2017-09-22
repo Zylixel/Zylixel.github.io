@@ -20180,12 +20180,12 @@ An awe-inspiring sword gifted to only the most worthy mortals from the heavens t
                 <FameBonus>2</FameBonus>
                 <feedPower>250</feedPower>
               </Object>
-			  <Object type="0x9000" id="Test staff">
+			  <Object type="0x7000" id="Test staff">
       <Class>Equipment</Class>
       <Item/>
       <Texture>
          <File>lofiObj5</File>
-         <Index>0xbb</Index>
+         <Index>0xaa</Index>
       </Texture>
       <SlotType>17</SlotType>
       <Tier>1</Tier>

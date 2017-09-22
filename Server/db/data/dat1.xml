@@ -82197,7 +82197,7 @@ The solid honey on this ring renews its wearer with incredible energy.
     <FameBonus>3</FameBonus>
     <feedPower>500</feedPower>
   </Object>
-   <Object type="0x9000" id="Test staff">
+   <Object type="0x7000" id="Test staff">
       <Class>Equipment</Class>
       <Item/>
       <Texture>
