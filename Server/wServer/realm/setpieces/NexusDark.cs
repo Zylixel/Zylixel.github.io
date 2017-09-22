@@ -14,6 +14,10 @@ namespace wServer.realm.setpieces
         private static readonly string Floor = "Bright Grass";
         private static readonly string Ocean = "Dark Water Flowing";
         private static readonly string Shallow = "Water";
+      //  private static readonly string ToFloor = "SN Gs Dk"; 
+     //   private static readonly string ToOcean = "SN S W Dk D";
+      //  private static readonly string ToShallow = "SN S W";
+      //TODO
         private static readonly string ToFloor = "Light Grass";
         private static readonly string ToOcean = "Tropical Water Deep";
         private static readonly string ToShallow = "Tropical Water Surf";

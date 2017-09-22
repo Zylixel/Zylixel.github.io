@@ -96,7 +96,7 @@ namespace wServer.networking
                         int len = (e.UserToken as ReceiveToken).Length =
                             IPAddress.NetworkToHostOrder(BitConverter.ToInt32(e.Buffer, 0)) - 5;
                         if (len < 0 || len > BUFFER_SIZE)
-                            log.ErrorFormat("Buffer not large enough! (requested size={0})", len);
+                            log.ErrorFormat("Buffer not large enough!", len);
                         (e.UserToken as ReceiveToken).PacketBody = new byte[len];
                         (e.UserToken as ReceiveToken).ID = (PacketID)e.Buffer[4];
 

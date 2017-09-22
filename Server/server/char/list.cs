@@ -35,7 +35,7 @@ namespace server.@char
             return null;
         }
 
-        public MapPoint GetLatLong(IPAddress ip)
+        public MapPoint GetLatLong(IPAddress ip) //TODO remove
         {
             if (ip == IPAddress.Any) return null;
             try
@@ -107,32 +107,6 @@ namespace server.@char
             }
         }
 
-        private string GetAddress(IPAddress ip)
-        {
-            string ret = String.Empty;
-            WebRequest wb = WebRequest.Create("http://api.hostip.info/get_html.php?ip=" + ip.ToString());
-            using (StreamReader rdr = new StreamReader(wb.GetResponse().GetResponseStream()))
-            {
-                string tmp = null;
-                while (!String.IsNullOrWhiteSpace(tmp = rdr.ReadLine()))
-                {
-                    if (tmp.StartsWith("Country:"))
-                    {
-                        if (tmp.Split(':')[1].Contains("(Unknown Country?)")) continue;
-
-                        ret += tmp.Split(':')[1].Remove(tmp.Split(':')[1].IndexOf("("));
-                    }
-                    else if (tmp.StartsWith("City:"))
-                    {
-                        if (tmp.Split(':')[1].Contains("(Unknown City?)")) continue;
-
-                        ret += tmp.Split(':')[1];
-                    }
-                }
-            }
-            return ret;
-        }
-
         List<ServerItem> GetServerList()
         {
             var ret = new List<ServerItem>();
@@ -155,25 +129,9 @@ namespace server.@char
             return ret;
         }
 
-        private static double GetUsage(string host, int port = 2050)
+        private static double GetUsage(string host, int port = 2050) //TODO Remove
         {
-            try
-            {
-                using (var cli = new TcpClient(host, 2050))
-                {
-                    var stream = cli.GetStream();
-                    stream.Write(new byte[5] { 0x4d, 0x61, 0x64, 0x65, 0xff }, 0, 5);
-                    var buffer = new byte[cli.ReceiveBufferSize];
-                    Array.Resize<byte>(ref buffer, cli.Client.Receive(buffer));
-                    var s = Encoding.ASCII.GetString(buffer).Split(':');
-                    return double.Parse(s[1]) / double.Parse(s[0]);
-                }
-            }
-            catch
-            {
-                Program.Logger.Error("Not supported server detected at " + host );
-                return -1;
-            }
+            return -1;
         }
 
         private List<ClassAvailabilityItem> GetClassAvailability(Account acc)
@@ -195,27 +153,7 @@ namespace server.@char
                 "Knight",
                 "Paladin"
             };
-
-            if (acc == null)
-            {
-                return new List<ClassAvailabilityItem>
-                {
-                    new ClassAvailabilityItem {Class = "Rogue", Restricted = "unrestricted"},
-                    new ClassAvailabilityItem {Class = "Assassin", Restricted = "unrestricted"},
-                    new ClassAvailabilityItem {Class = "Huntress", Restricted = "unrestricted"},
-                    new ClassAvailabilityItem {Class = "Mystic", Restricted = "unrestricted"},
-                    new ClassAvailabilityItem {Class = "Trickster", Restricted = "unrestricted"},
-                    new ClassAvailabilityItem {Class = "Sorcerer", Restricted = "unrestricted"},
-                    new ClassAvailabilityItem {Class = "Ninja", Restricted = "unrestricted"},
-                    new ClassAvailabilityItem {Class = "Archer", Restricted = "unrestricted"},
-                    new ClassAvailabilityItem {Class = "Wizard", Restricted = "unrestricted"},
-                    new ClassAvailabilityItem {Class = "Priest", Restricted = "unrestricted"},
-                    new ClassAvailabilityItem {Class = "Necromancer", Restricted = "unrestricted"},
-                    new ClassAvailabilityItem {Class = "Warrior", Restricted = "unrestricted"},
-                    new ClassAvailabilityItem {Class = "Knight", Restricted = "unrestricted"},
-                    new ClassAvailabilityItem {Class = "Paladin", Restricted = "unrestricted"},
-                };
-            }
+            
 
             List<ClassAvailabilityItem> ret = new List<ClassAvailabilityItem>();
 
