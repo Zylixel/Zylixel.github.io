@@ -39,7 +39,7 @@
       <file leaf-file-name="EmbeddedData_EquipCXML.dat" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedData_EquipCXML.dat">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="33">
+            <state relative-caret-position="62">
               <caret line="20182" column="31" lean-forward="false" selection-start-line="20182" selection-start-column="31" selection-end-line="20182" selection-end-column="31" />
               <folding />
             </state>
@@ -906,16 +906,16 @@
       <workItem from="1505604758096" duration="1039000" />
       <workItem from="1505786879083" duration="1031000" />
       <workItem from="1506043428186" duration="905000" />
-      <workItem from="1506044962528" duration="894000" />
+      <workItem from="1506044962528" duration="1234000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="214255000" />
+    <option name="totallyTimeSpent" value="214595000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1924" height="1056" extended-state="1" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1924" height="1056" extended-state="0" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1351,7 +1351,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedData_EquipCXML.dat">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="33">
+        <state relative-caret-position="62">
           <caret line="20182" column="31" lean-forward="false" selection-start-line="20182" selection-start-column="31" selection-end-line="20182" selection-end-column="31" />
           <folding />
         </state>

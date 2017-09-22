@@ -267,7 +267,7 @@ namespace wServer.realm.entities.merchant
             try
             {
                 var mrc = new Merchants(Manager, x.ObjectType, x.Owner);
-                mrc.Move(10, 10);
+                mrc.Move(14, 37);
                 var w = Owner;
                 Owner.LeaveWorld(this);
                 w.Timers.Add(new WorldTimer(Random.Next(30, 60) * 1000, (world, time) => w.EnterWorld(mrc)));
