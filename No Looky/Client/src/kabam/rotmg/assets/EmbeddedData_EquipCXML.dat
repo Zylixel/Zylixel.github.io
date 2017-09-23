@@ -20180,12 +20180,12 @@ An awe-inspiring sword gifted to only the most worthy mortals from the heavens t
                 <FameBonus>2</FameBonus>
                 <feedPower>250</feedPower>
               </Object>
-			  <Object type="0x9000" id="Test staff">
+			  <Object type="0x7000" id="Test staff">
       <Class>Equipment</Class>
       <Item/>
       <Texture>
          <File>lofiObj5</File>
-         <Index>0xbb</Index>
+         <Index>0xaa</Index>
       </Texture>
       <SlotType>17</SlotType>
       <Tier>1</Tier>
@@ -20201,11 +20201,11 @@ An awe-inspiring sword gifted to only the most worthy mortals from the heavens t
          <Amplitude>0.5</Amplitude>
          <Frequency>2</Frequency>
       </Projectile>
-      <BagType>4</BagType>
+      <BagType>6</BagType>
       <NumProjectiles>2</NumProjectiles>
       <ArcGap>0</ArcGap>
       <OldSound>magicShoot</OldSound>
-      <feedPower>10000</feedPower>
+      <feedPower>2500</feedPower>
       <DisplayId>Test Staff</DisplayId>
 	  </object>
               <Object type="0x611d" id="Crystal Dagger of Evolution 2">
@@ -20620,5 +20620,30 @@ An awe-inspiring sword gifted to only the most worthy mortals from the heavens t
                   <feedPower>1250</feedPower>
                   <DisplayId>Crystal Wand of Evolution</DisplayId>
                 </Object>
+				<Object type="0x7001" id="Test Spell">
+      <Class>Equipment</Class>
+      <Item/>
+      <Texture>
+         <File>lofiObj6</File>
+         <Index>0x5a</Index>
+      </Texture>
+      <SlotType>11</SlotType>
+      <Description>{equip.A_spell_that_shoots_fire_in_all_directions.}</Description>
+      <Sound>spell/fire_spray</Sound>
+      <Projectile>
+         <ObjectId>Fire Bolt</ObjectId>
+         <Speed>160</Speed>
+         <MinDamage>100</MinDamage>
+         <MaxDamage>250</MaxDamage>
+         <LifetimeMS>1000</LifetimeMS>
+      </Projectile>
+      <Usable/>
+      <BagType>6</BagType>
+      <MpCost>95</MpCost>
+	  <Activate effect="Berserk" duration="4">ConditionEffectSelf</Activate>
+      <Activate>BulletNova</Activate>
+      <feedPower>5000</feedPower>
+      <DisplayId>Test Spell</DisplayId>
+   </Object>
 </Objects>
 
