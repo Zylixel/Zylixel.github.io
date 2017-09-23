@@ -39,7 +39,7 @@ public class MyPlayerToolTip extends ToolTip {
     private var charStats:CharacterStats;
 
     public function MyPlayerToolTip(_arg_1:String, _arg_2:XML, _arg_3:CharacterStats) {
-        super(0x187a61, 1, 0xFFFFFF, 1);
+        super(0x363636, 1, 0xFFFFFF, 1);
         this.accountName = _arg_1;
         this.charXML = _arg_2;
         this.charStats = _arg_3;

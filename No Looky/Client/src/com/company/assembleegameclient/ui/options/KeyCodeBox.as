@@ -62,7 +62,7 @@ public class KeyCodeBox extends Sprite {
         var _local_1:Graphics = graphics;
         _local_1.clear();
         _local_1.lineStyle(2, ((((this.selected_) || (this.inputMode_))) ? 0xB3B3B3 : 0x444444));
-        _local_1.beginFill(0x006666);
+        _local_1.beginFill(0x333333);
         _local_1.drawRect(0, 0, WIDTH, HEIGHT);
         _local_1.endFill();
         _local_1.lineStyle();

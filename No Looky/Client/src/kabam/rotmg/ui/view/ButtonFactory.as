@@ -29,55 +29,55 @@ public class ButtonFactory {
 
 
     public static function getPlayButton():TitleMenuOption {
-        return ((playButton = ((playButton) || (makeButton(ScreenTypes.PLAY, BUTTON_SIZE_LARGE, CENTER, true, 0x33ffcc, false, 0x33cccc)))));
+        return ((playButton = ((playButton) || (makeButton(ScreenTypes.PLAY, BUTTON_SIZE_LARGE, CENTER, true, 0xFF4500, false, 0xCC3700)))));
     }
 
     public static function getClassesButton():TitleMenuOption {
-        return ((classesButton = ((classesButton) || (makeButton(TextKey.SCREENS_CLASSES, BUTTON_SIZE_SMALL, LEFT, false, 0xB2B2B2, false, 0x33cccc)))));
+        return ((classesButton = ((classesButton) || (makeButton(TextKey.SCREENS_CLASSES, BUTTON_SIZE_SMALL, LEFT, false, 0xB2B2B2, false, 0xCC3700)))));
     }
 
 
     public static function getMainButton():TitleMenuOption {
-        return ((mainButton = ((mainButton) || (makeButton(TextKey.SCREENS_MAIN, BUTTON_SIZE_SMALL, RIGHT, false, 0xB2B2B2, false, 0x33cccc)))));
+        return ((mainButton = ((mainButton) || (makeButton(TextKey.SCREENS_MAIN, BUTTON_SIZE_SMALL, RIGHT, false, 0xB2B2B2, false, 0xCC3700)))));
     }
 
     public static function getDoneButton():TitleMenuOption {
-        return ((doneButton = ((doneButton) || (makeButton(TextKey.DONE_TEXT, BUTTON_SIZE_LARGE, CENTER, false, 0xB2B2B2, false, 0x33cccc)))));
+        return ((doneButton = ((doneButton) || (makeButton(TextKey.DONE_TEXT, BUTTON_SIZE_LARGE, CENTER, false, 0xB2B2B2, false, 0xCC3700)))));
     }
 
     public static function getAccountButton():TitleMenuOption {
-        return ((accountButton = ((accountButton) || (makeButton(ScreenTypes.ACCOUNT, BUTTON_SIZE_SMALL, LEFT, false, 0xB2B2B2, false, 0x33cccc)))));
+        return ((accountButton = ((accountButton) || (makeButton(ScreenTypes.ACCOUNT, BUTTON_SIZE_SMALL, LEFT, false, 0xB2B2B2, false, 0xCC3700)))));
     }
 
     public static function getLegendsButton():TitleMenuOption {
-        return ((legendsButton = ((legendsButton) || (makeButton(ScreenTypes.LEGENDS, BUTTON_SIZE_SMALL, LEFT, false, 0xB2B2B2, false, 0x33cccc)))));
+        return ((legendsButton = ((legendsButton) || (makeButton(ScreenTypes.LEGENDS, BUTTON_SIZE_SMALL, LEFT, false, 0xB2B2B2, false, 0xCC3700)))));
     }
 
     public static function getServersButton():TitleMenuOption {
-        return ((serversButton = ((serversButton) || (makeButton(ScreenTypes.SERVERS, BUTTON_SIZE_SMALL, RIGHT, false, 0xB2B2B2, false, 0x33cccc)))));
+        return ((serversButton = ((serversButton) || (makeButton(ScreenTypes.SERVERS, BUTTON_SIZE_SMALL, RIGHT, false, 0xB2B2B2, false, 0xCC3700)))));
     }
 
     public static function getLanguagesButton():TitleMenuOption {
-        return ((languagesButton = ((languagesButton) || (makeButton(ScreenTypes.LANGUAGES, BUTTON_SIZE_SMALL, RIGHT, false, 0xB2B2B2, false, 0x33cccc)))));
+        return ((languagesButton = ((languagesButton) || (makeButton(ScreenTypes.LANGUAGES, BUTTON_SIZE_SMALL, RIGHT, false, 0xB2B2B2, false, 0xCC3700)))));
     }
 
     public static function getSupportButton():TitleMenuOption {
-        return ((supportButton = ((supportButton) || (makeButton(ScreenTypes.SUPPORT, BUTTON_SIZE_SMALL, RIGHT, false, 0xB2B2B2, false, 0x33cccc)))));
+        return ((supportButton = ((supportButton) || (makeButton(ScreenTypes.SUPPORT, BUTTON_SIZE_SMALL, RIGHT, false, 0xB2B2B2, false, 0xCC3700)))));
     }
 
     public static function getEditorButton():TitleMenuOption {
-        return ((editorButton = ((editorButton) || (makeButton(ScreenTypes.EDITOR, BUTTON_SIZE_SMALL, RIGHT, false, 0xB2B2B2, false, 0x33cccc)))));
+        return ((editorButton = ((editorButton) || (makeButton(ScreenTypes.EDITOR, BUTTON_SIZE_SMALL, RIGHT, false, 0xB2B2B2, false, 0xCC3700)))));
     }
 
     public static function getQuitButton():TitleMenuOption {
-        return ((quitButton = ((quitButton) || (makeButton(ScreenTypes.QUIT, BUTTON_SIZE_SMALL, LEFT, false, 0xB2B2B2, false, 0x33cccc)))));
+        return ((quitButton = ((quitButton) || (makeButton(ScreenTypes.QUIT, BUTTON_SIZE_SMALL, LEFT, false, 0xB2B2B2, false, 0xCC3700)))));
     }
 
     public static function getTransferButton():TitleMenuOption {
-        return ((transferAccountButton = ((transferAccountButton) || (makeButton(ScreenTypes.TRANSFER_ACCOUNT, BUTTON_SIZE_SMALL, RIGHT, false, 0xB2B2B2, false, 0x33cccc)))));
+        return ((transferAccountButton = ((transferAccountButton) || (makeButton(ScreenTypes.TRANSFER_ACCOUNT, BUTTON_SIZE_SMALL, RIGHT, false, 0xB2B2B2, false, 0xCC3700)))));
     }
 
-    private static function makeButton(_arg_1:String, _arg_2:int, _arg_3:String, _arg_4:Boolean = false, _arg_5:uint = 0xB2B2B2, _arg_6:Boolean = true, _arg_7:uint = 0x33cccc):TitleMenuOption {
+    private static function makeButton(_arg_1:String, _arg_2:int, _arg_3:String, _arg_4:Boolean = false, _arg_5:uint = 0xB2B2B2, _arg_6:Boolean = true, _arg_7:uint = 0xCC3700):TitleMenuOption {
         var _local_5:TitleMenuOption = new TitleMenuOption(_arg_1, _arg_2, _arg_4, _arg_5, _arg_6, _arg_7);
         _local_5.setAutoSize(_arg_3);
         _local_5.setVerticalAlign(TextFieldDisplayConcrete.MIDDLE);

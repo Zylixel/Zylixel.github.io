@@ -110,14 +110,14 @@ public class LegendListItem extends Sprite {
     private function getTextColor():uint {
         var _local_1:uint;
         if (this.legend.isOwnLegend) {
-            _local_1 = 0x5BFFD6;
+            _local_1 = 0xFF4500;
         }
         else {
             if (this.legend.place == 1) {
-                _local_1 = 0x5BFFD6;
+                _local_1 = 0xFF4500;
             }
             else {
-                _local_1 = 0x28A3A3;
+                _local_1 = 0xCC3700;
             }
         }
         return (_local_1);

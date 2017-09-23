@@ -276,7 +276,7 @@ public class MiniMapImp extends MiniMap {
                             _local_15 = 0xFF00;
                         }
                         else {
-                            _local_15 = 0x33ffcc;
+                            _local_15 = 0xFF4500;
                         }
                     }
                 }

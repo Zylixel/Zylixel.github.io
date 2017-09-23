@@ -79,7 +79,7 @@ public class CheckBoxField extends Sprite {
         var _local_2:Number;
         var _local_1:Graphics = this.checkBox_.graphics;
         _local_1.clear();
-        _local_1.beginFill(0x006666, 1);
+        _local_1.beginFill(0x333333, 1);
         _local_1.drawRect(0, 0, BOX_SIZE, BOX_SIZE);
         _local_1.endFill();
         if (this.checked_) {

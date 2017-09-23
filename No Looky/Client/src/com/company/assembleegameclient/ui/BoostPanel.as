@@ -80,7 +80,7 @@ public class BoostPanel extends Sprite {
 
     private function createBackground():void {
         graphics.clear();
-        graphics.lineStyle(2, 0x006666);
+        graphics.lineStyle(2, 0x333333);
         graphics.beginFill(0x339966);
         graphics.drawRoundRect(0, 0, 150, (height + 5), 10);
         this.resized.dispatch();

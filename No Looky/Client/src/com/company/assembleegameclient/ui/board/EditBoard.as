@@ -31,7 +31,7 @@ class EditBoard extends Sprite {
     private var scrollBar_:Scrollbar;
     private var cancelButton_:DeprecatedTextButton;
     private var saveButton_:DeprecatedTextButton;
-    private var backgroundFill_:GraphicsSolidFill = new GraphicsSolidFill(0x006666, 1);
+    private var backgroundFill_:GraphicsSolidFill = new GraphicsSolidFill(0x333333, 1);
     private var outlineFill_:GraphicsSolidFill = new GraphicsSolidFill(0xFFFFFF, 1);
     private var lineStyle_:GraphicsStroke = new GraphicsStroke(
             2, false, LineScaleMode.NORMAL, CapsStyle.NONE, JointStyle.ROUND, 3, outlineFill_

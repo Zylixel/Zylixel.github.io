@@ -127,9 +127,13 @@ namespace wServer.realm.entities
                                             if (!(item.Value.ObjectId.Contains("Tarot")))
                                                 if (!(item.Value.Description.Contains("Treasure")))
                                                     {
-                            prices.Add(item.Value.ObjectType, new Tuple<int, CurrencyType>(item.Value.ObjectType, CurrencyType.Fame));
-                            zyList.Add(item.Value.ObjectType);
+                                                    prices.Add(item.Value.ObjectType, new Tuple<int, CurrencyType>(item.Value.ObjectType, CurrencyType.Fame));
+                                                    zyList.Add(item.Value.ObjectType);
                                                     log.Info("Loading: " + item.Value.ObjectId);
+                                                    using (Database db = new Database())
+                                                    {
+                                                        db.GetMarketInfo(item.Value.ObjectType, 2140000000);
+                                                    }
 
                 }
                 if (item.Value.Texture1 != 0 && item.Value.ObjectId.Contains("Clothing") && item.Value.Class == "Dye")

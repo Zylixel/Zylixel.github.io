@@ -19,7 +19,7 @@ public final class ConsoleInputView extends TextField implements Resizable {
         background = true;
         backgroundColor = 0x3300;
         border = true;
-        borderColor = 0x006666;
+        borderColor = 0x333333;
         defaultTextFormat = new TextFormat("_sans", 14, 0xFFFFFF, true);
         text = "";
         type = TextFieldType.INPUT;

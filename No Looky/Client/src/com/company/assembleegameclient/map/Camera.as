@@ -89,6 +89,14 @@ public class Camera
 
     public function configureCamera(param1:GameObject, param2:Boolean) : void
     {
+        if (Parameters.data_.mscale == null) {
+            Parameters.data_.mscale = 10;
+            Parameters.save();
+        }
+        if (Parameters.data_.mscale == 0) {
+            Parameters.data_.mscale = 10;
+            Parameters.save();
+        }
         var _loc3_:Rectangle = !!Parameters.data_.centerOnPlayer?CENTER_SCREEN_RECT:OFFSET_SCREEN_RECT;
         var _loc4_:Rectangle = _loc3_.clone();
             _loc4_.x = -(Parameters.data_.mscale * 50 * (1 / 2));

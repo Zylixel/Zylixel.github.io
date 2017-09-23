@@ -106,7 +106,7 @@ public class HUDView extends Sprite implements UnFocusAble {
     private function createEquippedGridBackground():void {
         var _local_3:Vector.<IGraphicsData>;
         if (Parameters.data_.blueSidebar) {
-            var _local_1:GraphicsSolidFill = new GraphicsSolidFill(0x187a61, 1);
+            var _local_1:GraphicsSolidFill = new GraphicsSolidFill(0x363636, 1);
         }
         else {
             var _local_1:GraphicsSolidFill = new GraphicsSolidFill(0x676767, 1);

@@ -10,8 +10,8 @@ import org.osflash.signals.Signal;
 
 public class LegendsTab extends Sprite {
 
-    private static const OVER_COLOR:int = 0x33ffcc;
-    private static const DOWN_COLOR:int = 0x33ffcc;
+    private static const OVER_COLOR:int = 0xFF4500;
+    private static const DOWN_COLOR:int = 0xFF4500;
     private static const OUT_COLOR:int = 0xB2B2B2;
 
     public const selected:Signal = new Signal(LegendsTab);
@@ -34,7 +34,7 @@ public class LegendsTab extends Sprite {
     }
 
     private function makeLabel(_arg_1:Timespan):void {
-        this.label = new TextFieldDisplayConcrete().setSize(20).setColor(0x33ffcc);
+        this.label = new TextFieldDisplayConcrete().setSize(20).setColor(0xFF4500);
         this.label.setBold(true);
         this.label.setStringBuilder(new LineBuilder().setParams(_arg_1.getName()));
         this.label.x = 2;

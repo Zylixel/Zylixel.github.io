@@ -148,7 +148,7 @@ public class PotionSlotView extends Sprite {
         if (!_local_5) {
             if (Parameters.data_.contextualPotionBuy) {
                 if (Parameters.data_.blueSidebar) {
-                    this.text.setColor(0x33ffcc);
+                    this.text.setColor(0xFF4500);
                 }
                 else {
                     this.text.setColor(0xFFFFFF);
@@ -163,12 +163,7 @@ public class PotionSlotView extends Sprite {
             }
         }
         else {
-            if (Parameters.data_.blueSidebar) {
-                this.text.setColor(0x33ffcc);
-            }
-            else {
-                this.text.setColor(0xFFFFFF);
-            }
+            this.text.setColor(0xFFFFFF);
             this.costIcon.filters = [];
             this.costIcon.visible = false;
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using log4net;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,8 @@ namespace wServer.logic.transitions
 {
     public class EntityExistsTransition : Transition
     {
+        private static readonly ILog log = LogManager.GetLogger(typeof(Transition));
+
         //State storage: none
 
         private readonly double dist;

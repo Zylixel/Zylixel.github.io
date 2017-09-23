@@ -131,7 +131,10 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="GeneratorCache.cs" />
+    <Compile Include="logic\ConditionalBehavior.cs" />
     <Compile Include="logic\Behavior.cs" />
+    <Compile Include="logic\behaviors\EntityCount.cs" />
+    <Compile Include="logic\behaviors\If.cs" />
     <Compile Include="logic\behaviors\Aoe.cs" />
     <Compile Include="logic\behaviors\ApplySetpiece.cs" />
     <Compile Include="logic\behaviors\BackAndForth.cs" />
@@ -165,8 +168,10 @@
     <Compile Include="logic\behaviors\PetBehaviors\PetBehavior.cs" />
     <Compile Include="logic\behaviors\PetBehaviors\PetShoot.cs" />
     <Compile Include="logic\behaviors\RemoveEntity.cs" />
+    <Compile Include="logic\db\BehaivorDb.HauntedCemetery.cs" />
     <Compile Include="logic\db\BehaviorDb.Abyss.cs" />
     <Compile Include="logic\db\BehaviorDb.CandyLand.cs" />
+    <Compile Include="logic\db\BehaviorDb.CrawlingDepths.cs" />
     <Compile Include="logic\db\BehaviorDb.Drakes.cs" />
     <Compile Include="logic\db\BehaviorDb.EpicForestMaze.cs" />
     <Compile Include="logic\db\BehaviorDb.ForestMaze.cs" />
@@ -497,6 +502,13 @@
     <Compile Include="realm\Wmap.cs" />
     <Compile Include="realm\World.cs" />
     <Compile Include="realm\worlds\BattleNexus.cs" />
+    <Compile Include="realm\worlds\Test.cs" />
+    <Compile Include="realm\worlds\WoodlandLadybrinth.cs" />
+    <Compile Include="realm\worlds\TheCrawlingDepths.cs" />
+    <Compile Include="realm\worlds\HauntedCemetery.cs" />
+    <Compile Include="realm\worlds\HauntedCemeteryFinalRest.cs" />
+    <Compile Include="realm\worlds\HauntedCemeteryGates.cs" />
+    <Compile Include="realm\worlds\HauntedCemeteryGraves.cs" />
     <Compile Include="realm\worlds\TheNewWorld.cs" />
     <Compile Include="realm\worlds\TheIvoryWyvern.cs" />
     <Compile Include="realm\worlds\TheRealmKeeper.cs" />
@@ -510,7 +522,6 @@
     <Compile Include="realm\worlds\DeadwaterDocks.cs" />
     <Compile Include="realm\worlds\ForbiddenJungle.cs" />
     <Compile Include="realm\worlds\IceCave.cs" />
-    <Compile Include="realm\worlds\IceChamber.cs" />
     <Compile Include="realm\worlds\InnerSanctum.cs" />
     <Compile Include="realm\worlds\LoD.cs" />
     <Compile Include="realm\worlds\ClothBazaar.cs" />
@@ -536,8 +547,6 @@
     <Compile Include="realm\Oryx.cs" />
     <Compile Include="realm\worlds\OceanTrench.cs" />
     <Compile Include="realm\worlds\OryxCastle.cs" />
-    <Compile Include="realm\worlds\RandRealm.cs" />
-    <Compile Include="realm\worlds\Test.cs" />
     <Compile Include="realm\worlds\Tutorial.cs" />
     <Compile Include="realm\worlds\EpicUndeadLair.cs" />
     <Compile Include="realm\worlds\UndeadLair.cs" />
@@ -592,7 +601,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="air_icon.ico" />
-    <Content Include="bugs.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\db\db.csproj">
@@ -652,7 +660,6 @@
     <EmbeddedResource Include="realm\worlds\maps\tomb.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\belladonnasGarden.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\shaitansmap.wmap" />
-    <EmbeddedResource Include="realm\worlds\maps\shittersmep.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\PetYard_Common.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\PetYard_Divine.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\PetYard_Rare.wmap" />
@@ -671,7 +678,6 @@
     <EmbeddedResource Include="realm\worlds\maps\spriteworld.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\nexus_winter.jm" />
     <EmbeddedResource Include="realm\worlds\maps\nexus_summer.jm" />
-    <EmbeddedResource Include="realm\worlds\maps\ShattersMike.jm" />
     <EmbeddedResource Include="realm\worlds\maps\LoD.jm" />
     <EmbeddedResource Include="realm\worlds\maps\nexus2.jm" />
     <EmbeddedResource Include="realm\worlds\maps\nexus3.jm" />
@@ -679,11 +685,9 @@
     <EmbeddedResource Include="realm\worlds\maps\ddocks.jm" />
     <EmbeddedResource Include="realm\worlds\maps\bgrotto.jm" />
     <EmbeddedResource Include="realm\worlds\maps\icecave.wmap" />
-    <EmbeddedResource Include="realm\worlds\maps\icechamber.jm" />
     <EmbeddedResource Include="realm\worlds\maps\innersanctum.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\jungles.jm" />
     <EmbeddedResource Include="realm\worlds\maps\Nexus_for_meh.jm" />
-    <EmbeddedResource Include="realm\worlds\maps\shittersmep2.jm" />
     <EmbeddedResource Include="realm\worlds\maps\SpiderCave.jm" />
     <EmbeddedResource Include="realm\worlds\maps\CandylandHuntingGrounds.jm" />
     <EmbeddedResource Include="realm\worlds\maps\DavyJonesLocker.jm" />
@@ -700,6 +704,12 @@
     <EmbeddedResource Include="realm\worlds\maps\TheNewWorld.jm" />
     <EmbeddedResource Include="realm\worlds\maps\spiderden.jm" />
     <EmbeddedResource Include="realm\worlds\maps\forestmaze.jm" />
+    <EmbeddedResource Include="realm\worlds\maps\ceme1.jm" />
+    <EmbeddedResource Include="realm\worlds\maps\ceme2.jm" />
+    <EmbeddedResource Include="realm\worlds\maps\ceme3.jm" />
+    <EmbeddedResource Include="realm\worlds\maps\cemefinal.jm" />
+    <EmbeddedResource Include="realm\worlds\maps\woodlandlabyrinth.jm" />
+    <EmbeddedResource Include="realm\worlds\maps\crawling.wmap" />
     <None Include="wServer.cfg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

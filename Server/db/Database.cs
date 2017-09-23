@@ -854,7 +854,18 @@ SELECT MAX(chestId) FROM vaults WHERE accId = @accId;";
             }
         }
 
-        
+        public void SetMarketInfo(int id, int price)
+        {
+            MySqlCommand cmd = CreateQuery();
+            cmd.CommandText =
+                "INSERT INTO market(itemid, fame, id) VALUES(@itemid, @fame, @id);";
+            cmd.Parameters.AddWithValue("@itemid", id);
+            cmd.Parameters.AddWithValue("@fame", price);
+            cmd.Parameters.AddWithValue("@id", 1);
+            cmd.ExecuteNonQuery();
+        }
+
+
 
         public bool HasEmail(string email)
         {

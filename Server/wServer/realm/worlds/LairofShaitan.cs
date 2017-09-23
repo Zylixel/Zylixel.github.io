@@ -20,10 +20,5 @@ namespace wServer.realm.worlds
         {
             LoadMap("wServer.realm.worlds.maps.shaitansmap.wmap", MapType.Wmap);
         }
-
-        public override World GetInstance(Client psr)
-        {
-            return Manager.AddWorld(new LairofShaitan());
-        }
     }
 }

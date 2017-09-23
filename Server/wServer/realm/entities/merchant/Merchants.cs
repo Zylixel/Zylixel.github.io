@@ -18,7 +18,7 @@ namespace wServer.realm.entities.merchant
         private const int BUY_NO_GOLD = 3;
         private const int BUY_NO_FAME = 6;
         private const int BUY_NO_FORTUNETOKENS = 9;
-        private const int MERCHANT_SIZE = 100;
+        private int MERCHANT_SIZE = 100;
         private static readonly ILog log = LogManager.GetLogger(typeof(Merchants));
 
         private readonly Dictionary<int, Tuple<int, CurrencyType>> prices = MerchantLists.prices;
@@ -267,10 +267,10 @@ namespace wServer.realm.entities.merchant
             try
             {
                 var mrc = new Merchants(Manager, x.ObjectType, x.Owner);
-                mrc.Move(14, 37);
+                mrc.Move(x.X, x.Y);
                 var w = Owner;
                 Owner.LeaveWorld(this);
-                w.Timers.Add(new WorldTimer(Random.Next(30, 60) * 1000, (world, time) => w.EnterWorld(mrc)));
+                w.Timers.Add(new WorldTimer(Random.Next(90, 210) * 1000, (world, time) => w.EnterWorld(mrc)));
             }
             catch (Exception e)
             {

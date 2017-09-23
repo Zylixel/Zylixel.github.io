@@ -1,0 +1,25 @@
+﻿#region
+
+using wServer.networking;
+
+#endregion
+
+namespace wServer.realm.worlds
+{
+    public class TheCrawlingDepths : World
+    {
+        public TheCrawlingDepths()
+        {
+            Name = "The Crawling Depths";
+            ClientWorldName = "The Crawling Depths";
+            Background = 0;
+            Difficulty = 5;
+            AllowTeleport = true;
+        }
+
+        protected override void Init()
+        {
+            LoadMap("wServer.realm.worlds.maps.crawling.wmap", MapType.Wmap);
+        }
+    }
+}

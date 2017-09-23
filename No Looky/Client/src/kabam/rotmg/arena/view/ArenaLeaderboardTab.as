@@ -11,8 +11,8 @@ import org.osflash.signals.Signal;
 
 public class ArenaLeaderboardTab extends Sprite {
 
-    private static const OVER_COLOR:int = 0x33ffcc;
-    private static const DOWN_COLOR:int = 0x33ffcc;
+    private static const OVER_COLOR:int = 0xFF4500;
+    private static const DOWN_COLOR:int = 0xFF4500;
     private static const OUT_COLOR:int = 0xB2B2B2;
 
     public var label:StaticTextDisplay = makeLabel();

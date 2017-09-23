@@ -1474,7 +1474,7 @@ namespace wServer.realm.commands
     internal class CFameCommand : Command
     {
         public CFameCommand()
-        : base("cfame", 2)
+        : base("cfame", 5)
         {
         }
 

@@ -226,8 +226,6 @@ public class Parameters {
         }
         setDefault("friendList", KeyCodes.UNSET);
 
-        setDefault("mscale",10);
-
         setDefault("tradeWithFriends", false);
         setDefault("chatFriend", false);
         setDefault("friendStarRequirement", 0);

@@ -320,11 +320,14 @@ namespace wServer.realm
 
         public void TimedSpawn()
         {
-            if (world.Players.Count >= 1) //Makes sure player is in the realm
+            if (world.Players.Count > 0) //Makes sure player is in the realm
             {
                 var evt = events[rand.Next(0, events.Count)];
                 world.Timers.Add(new WorldTimer(300000, (ww, tt) => { TimedSpawn(); })); //New Event every 5 minutes
                 SpawnEvent(evt.Item1, evt.Item2);
+
+                log.Info("Players in Realm: " + world.Players.Count);
+                //Use this to check players in realm every 5 min
 
                 TauntData? dat = null;
                 dat = null;

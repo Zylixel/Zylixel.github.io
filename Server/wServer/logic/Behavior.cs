@@ -10,7 +10,8 @@ namespace wServer.logic
 {
     public abstract class Behavior : IStateChildren
     {
-        [ThreadStatic] private static Random rand;
+        [ThreadStatic]
+        private static Random rand;
         private static int randomCount = 0;
         public static ILog log = LogManager.GetLogger(typeof(Behavior));
 
@@ -50,6 +51,8 @@ namespace wServer.logic
                     host.Manager.GameData.ObjectTypeToId[host.ObjectType], state, e);
             }
         }
+            
+            
 
         protected abstract void TickCore(Entity host, RealmTime time, ref object state);
 

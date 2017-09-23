@@ -39,6 +39,10 @@ namespace wServer.realm.entities.player
         private float mpRegenCounter;
         private bool resurrecting;
 
+        public int checkForDex = 0;
+        public int lastShootTime = -1;
+        public int shootCounter = 0;
+
         private byte[,] tiles;
         private int pingSerial;
         private SetTypeSkin setTypeSkin;
