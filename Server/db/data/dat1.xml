@@ -81049,34 +81049,6 @@ The solid honey on this ring renews its wearer with incredible energy.
     <FameBonus>3</FameBonus>
     <feedPower>500</feedPower>
   </Object>
-   <Object type="0x7000" id="Test staff">
-      <Class>Equipment</Class>
-      <Item/>
-      <Texture>
-         <File>lofiObj5</File>
-         <Index>0xbb</Index>
-      </Texture>
-      <SlotType>17</SlotType>
-      <Tier>1</Tier>
-      <Description>{equip.A_staff_imbued_with_potent_magical_fire.}</Description>
-      <RateOfFire>1</RateOfFire>
-      <Sound>weapon/missile_wand</Sound>
-      <Projectile>
-         <ObjectId>Fire Missile</ObjectId>
-         <Speed>200</Speed>
-         <MinDamage>100</MinDamage>
-         <MaxDamage>400</MaxDamage>
-         <LifetimeMS>475</LifetimeMS>
-         <Amplitude>0.5</Amplitude>
-         <Frequency>2</Frequency>
-      </Projectile>
-      <BagType>4</BagType>
-      <NumProjectiles>2</NumProjectiles>
-      <ArcGap>0</ArcGap>
-      <OldSound>magicShoot</OldSound>
-      <feedPower>10000</feedPower>
-      <DisplayId>Test Staff</DisplayId>
-   </Object>
   <Object type="0x611e" id="Crystal Dagger of Evolution 3">
     <DisplayId>Crystal Dagger of Evolution</DisplayId>
     <Class>Equipment</Class>
