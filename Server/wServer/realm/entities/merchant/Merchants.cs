@@ -266,11 +266,14 @@ namespace wServer.realm.entities.merchant
         {
             try
             {
-                var mrc = new Merchants(Manager, x.ObjectType, x.Owner);
-                mrc.Move(x.X, x.Y);
-                var w = Owner;
-                Owner.LeaveWorld(this);
-                w.Timers.Add(new WorldTimer(Random.Next(90, 210) * 1000, (world, time) => w.EnterWorld(mrc)));
+                if (Price == 0)
+                {
+                    var mrc = new Merchants(Manager, x.ObjectType, x.Owner);
+                    mrc.Move(x.X, x.Y);
+                    var w = Owner;
+                    Owner.LeaveWorld(this);
+                    w.Timers.Add(new WorldTimer(Random.Next(150, 290) * 1000, (world, time) => w.EnterWorld(mrc)));
+                }
             }
             catch (Exception e)
             {
@@ -357,7 +360,9 @@ namespace wServer.realm.entities.merchant
                             Price = db.GetMarketInfo(price.Item1, 1);
                         }
                     if (Price == 0)
+                    {
                         TempDisable(this);
+                    }
                     Currency = price.Item2;
                 }
 

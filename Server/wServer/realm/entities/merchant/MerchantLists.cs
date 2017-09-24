@@ -130,10 +130,11 @@ namespace wServer.realm.entities
                                                     prices.Add(item.Value.ObjectType, new Tuple<int, CurrencyType>(item.Value.ObjectType, CurrencyType.Fame));
                                                     zyList.Add(item.Value.ObjectType);
                                                     log.Info("Loading: " + item.Value.ObjectId);
-                                                    using (Database db = new Database())
+                                                   /* using (Database db = new Database())
                                                     {
-                                                        db.GetMarketInfo(item.Value.ObjectType, 2140000000);
+                                                        db.SetMarketInfo(item.Value.ObjectType, 2140000000);
                                                     }
+                                                    */ //Use this to fill database
 
                 }
                 if (item.Value.Texture1 != 0 && item.Value.ObjectId.Contains("Clothing") && item.Value.Class == "Dye")
