@@ -1587,9 +1587,29 @@ namespace wServer.realm.commands
         {
             using (Database db = new Database())
             {
-                if (string.IsNullOrEmpty(args[1]))
+                if (args[0] == "")
                 {
                     player.SendHelp("Usage: /sell <slot> <price>");
+                    return false;
+                }
+                if (args[1] == "")
+                {
+                    player.SendHelp("Usage: /sell <slot> <price>");
+                    return false;
+                }
+                if (Convert.ToInt32(args[0]) + 3 > 8)
+                {
+                    player.SendError("Slot Number Invalid, please only choose items in slot 1-8");
+                    return false;
+                }
+                if (Convert.ToInt32(args[0]) + 3 < 1)
+                {
+                    player.SendError("Slot Number Invalid, please only choose items in slot 1-8");
+                    return false;
+                }
+                if (Convert.ToInt32(args[1]) < 0)
+                {
+                    player.SendError("Do you know how an economy works?");
                     return false;
                 }
                 int slot = Convert.ToInt32(args[0]) + 3;
@@ -1607,16 +1627,7 @@ namespace wServer.realm.commands
                                                 if (!(checker.Contains("Treasure")))
                                                 {
 
-                                                    if (Convert.ToInt32(args[0]) > 8)
-                                                    {
-                                                        player.SendError("Slot Number Invalid, please only choose items in slot 1-8");
-                                                        return false;
-                                                    }
-                                                    if (itemID < 1)
-                                                    {
-                                                        player.SendError("Slot Number Invalid, please only choose items in slot 1-8");
-                                                        return false;
-                                                    }
+                                                    
                                                     MySqlCommand cmd = db.CreateQuery();
                                                     cmd.CommandText = "INSERT INTO market(itemID, fame, id) VALUES(@itemID, @fame, @playerID)";
                                                     cmd.Parameters.AddWithValue("@itemID", Convert.ToInt32(itemID));
@@ -1629,9 +1640,8 @@ namespace wServer.realm.commands
                                                         player.Inventory[slot] = null;
                                                         player.UpdateCount++;
                                                         player.SaveToCharacter();
-                                                        player.SendInfo("Item put on the market! please wait 1-2 minutes if it is an item already on the market.");
-                                                        player.SendInfo("If the item is currently not on the market, please wait for a server restart.");
-
+                                                        log.Error("Requesting Update for Item | " + itemID);
+                                                        Merchants.refreshMerchants = itemID;
                                                     }
                                                     catch (Exception e)
                                                     {

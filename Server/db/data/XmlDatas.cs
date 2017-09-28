@@ -34,6 +34,7 @@ namespace db.data
         private readonly Dictionary<ushort, string> type2id_obj;
         private readonly Dictionary<ushort, string> type2id_tile;
         private readonly Dictionary<ushort, SetTypeSkin> setTypeSkins;
+        private readonly Dictionary<ushort, SetTypeSkin> abilities;
 
         private string[] addXml;
         private int prevUpdateCount = -1;
@@ -90,6 +91,7 @@ namespace db.data
             log.InfoFormat("{0} Items", items.Count);
             log.InfoFormat("{0} Tiles", tiles.Count);
             log.InfoFormat("{0} Objects", objDescs.Count);
+            log.InfoFormat("{0} Portals", portals.Count);
             log.InfoFormat("{0} Additions", addition.Elements().Count());
         }
 
@@ -116,7 +118,7 @@ namespace db.data
         public IDictionary<ushort, PetStruct> TypeToPet { get; private set; }
         public IDictionary<string, PetSkin> IdToPetSkin { get; private set; }
         public IDictionary<ushort, SetTypeSkin> SetTypeSkins { get; private set; }
-        
+
 
         public string[] AdditionXml
         {

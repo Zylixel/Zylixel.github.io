@@ -13244,10 +13244,6 @@
       <DeathSound>monster/tress_death</DeathSound>
       <DisplayId>{forbiddenJungle.Jungle_Tree_Big}</DisplayId>
    </Object>
-^(?([^
-])\s)*?$?
-^(?([^
-])\s)*?$?
    <Object type="0x1e17" id="Treasure Thief">
       <Class>Character</Class>
       <Enemy/>

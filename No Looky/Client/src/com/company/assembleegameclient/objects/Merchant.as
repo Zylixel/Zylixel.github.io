@@ -93,23 +93,17 @@ public class Merchant extends SellableObject implements IInteractiveObject {
                 _local_5 = 5931045;
                 break;
             case MINS_LEFT_MESSAGE:
-                if (this.minsLeft_ == 100000) {
-                    _local_2 = new LineBuilder().setParams("Merchant.goingSoon");
-                }
-                else {
-                    if (this.minsLeft_ == 10000) {
-                        _local_2 = new LineBuilder().setParams("Merchant.goingInOneMinute");
-                    }
-                    else {
-                        _local_2 = new LineBuilder().setParams("Merchant.goingInNMinutes", {"minutes": this.minsLeft_});
-                    }
-                }
-                _local_3 = 5973542;
-                _local_4 = 16549442;
-                _local_5 = 16549442;
+                _local_2 = new LineBuilder().setParams("Merchant.discount", {"discount": this.discount_});
+                _local_3 = 6324275;
+                _local_4 = 16777103;
+                _local_5 = 16777103;
                 break;
             case ITEMS_LEFT_MESSAGE:
-                return (null);
+                _local_2 = new LineBuilder().setParams("Merchant.discount", {"discount": this.discount_});
+                _local_3 = 6324275;
+                _local_4 = 16777103;
+                _local_5 = 16777103;
+                break;
             case DISCOUNT_MESSAGE:
                 _local_2 = new LineBuilder().setParams("Merchant.discount", {"discount": this.discount_});
                 _local_3 = 6324275;
@@ -120,7 +114,7 @@ public class Merchant extends SellableObject implements IInteractiveObject {
                 return (null);
         }
         _local_2.setStringMap(this.stringMap);
-        return (new AddSpeechBalloonVO(this, _local_2.getString(), "", false, false, _local_3, 1, _local_4, 1, _local_5, 6, true, false));
+        return (new AddSpeechBalloonVO(this, _local_2.getString(), "", false, false, _local_3, 1, _local_4, 1, _local_5, 0, true, false));
     }
 
     override public function update(_arg_1:int, _arg_2:int):Boolean {

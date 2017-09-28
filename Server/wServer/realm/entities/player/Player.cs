@@ -710,7 +710,7 @@ namespace wServer.realm.entities.player
 //               if (item == null || !item.AshRobe) continue;
 //                {
 //                    Mp = Mp + 5;
-//                   return false;
+//                   return true;
 //                }
 //            }
 //            return false;
@@ -719,12 +719,9 @@ namespace wServer.realm.entities.player
 
         public void GivePet(PetItem petInfo)
         {
-            //if (Name == "ossimc82" || Name == "C453")
-            //{
-                Pet = new Pet(Manager, petInfo, this);
-                Pet.Move(X, Y);
-                Owner.EnterWorld(Pet);
-            //}
+            Pet = new Pet(Manager, petInfo, this);
+            Pet.Move(X, Y);
+            Owner.EnterWorld(Pet);
         }
 
         public override bool HitByProjectile(Projectile projectile, RealmTime time)
@@ -1007,7 +1004,7 @@ namespace wServer.realm.entities.player
                 if (Owner != null)
                 {
                     SendUpdate(time);
-                    if (!Owner.IsPassable((int)X, (int)Y) && Client.Account.Rank < 2)
+                    if (!Owner.IsPassable((int)X, (int)Y))
                     {
                         log.Fatal($"Player {Name} No-Cliped at position: {X}, {Y}");
                     }
@@ -1028,10 +1025,18 @@ namespace wServer.realm.entities.player
 
             if (HP < 0 && !dying)
             {
-                Death("Unknown");
+                Client.Player.SendError("Woooooah there cowboy! you almost died to 'Unknown' Lucky thats a dumb way to die so I'm not gonna let that happen!");
+                Client.Reconnect(new ReconnectPacket
+                {
+                    Host = "",
+                    Port = Program.Settings.GetValue<int>("port"),
+                    GameId = World.NEXUS_ID,
+                    Name = "Nexus",
+                    Key = Empty<byte>.Array,
+                });
                 return;
             }
-            if (HP == MaxHp / 2)
+            if (HP >= MaxHp / 2)
             {
                 AshCooldown = 0;
             }

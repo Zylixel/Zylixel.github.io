@@ -363,7 +363,6 @@ namespace wServer.realm.terrain
                                     ConnectionInfo.Infos[(uint) Utils.FromString(kv[1])];
                                 break;
                             case "mtype":
-                                (entity as Merchants).Custom = true;
                                 (entity as Merchants).MType = Utils.FromString(kv[1]);
                                 break;
                                 //case "mcount":

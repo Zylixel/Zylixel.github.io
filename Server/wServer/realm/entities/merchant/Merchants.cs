@@ -8,6 +8,7 @@ using log4net;
 using wServer.networking.svrPackets;
 using wServer.realm.entities.player;
 using db;
+using MySql.Data.MySqlClient;
 
 #endregion
 
@@ -15,10 +16,8 @@ namespace wServer.realm.entities.merchant
 {
     public class Merchants : SellableObject
     {
-        private const int BUY_NO_GOLD = 3;
         private const int BUY_NO_FAME = 6;
-        private const int BUY_NO_FORTUNETOKENS = 9;
-        private int MERCHANT_SIZE = 100;
+        private const int MERCHANT_SIZE = 100;
         private static readonly ILog log = LogManager.GetLogger(typeof(Merchants));
 
         private readonly Dictionary<int, Tuple<int, CurrencyType>> prices = MerchantLists.prices;
@@ -26,6 +25,8 @@ namespace wServer.realm.entities.merchant
         private bool closing;
         private bool newMerchant;
         private int tickcount;
+        private bool Buyable = true;
+        private int accID;
 
         public static Random Random { get; private set; }
 
@@ -43,13 +44,12 @@ namespace wServer.realm.entities.merchant
         }
 
         private static List<KeyValuePair<string, int>> AddedTypes { get; set; }
-
-        public bool Custom { get; set; }
-
+        
         public int MType { get; set; }
         public int MRemaining { get; set; }
         public int MTime { get; set; }
         public int Discount { get; set; }
+        public static int refreshMerchants { get; internal set; }
 
         protected override void ExportStats(IDictionary<StatsType, object> stats)
         {
@@ -74,17 +74,7 @@ namespace wServer.realm.entities.merchant
 
         protected override bool TryDeduct(Player player)
         {
-            var acc = player.Client.Account;
-            if (player.Stars < RankReq) return false;
-
-            if (Currency == CurrencyType.Fame)
-                if (acc.Stats.Fame < Price) return false;
-
-            if (Currency == CurrencyType.Gold)
-                if (acc.Credits < Price) return false;
-
-            if (Currency == CurrencyType.FortuneTokens)
-                if (acc.FortuneTokens < Price) return false;
+            if (player.Client.Account.Stats.Fame < Price) return false;
             return true;
         }
 
@@ -108,20 +98,44 @@ namespace wServer.realm.entities.merchant
                                 // Exploit fix - No more mnovas as weapons!
                                 {
                                     player.Inventory[i] = Manager.GameData.Items[(ushort)MType];
-
-                                    if (Currency == CurrencyType.Fame)
-                                        player.CurrentFame =
-                                            player.Client.Account.Stats.Fame =
-                                                db.UpdateFame(player.Client.Account, -Price);
-                                    if (Currency == CurrencyType.Gold)
-                                        player.Credits =
-                                            player.Client.Account.Credits =
-                                                db.UpdateCredit(player.Client.Account, -Price);
-                                    if (Currency == CurrencyType.FortuneTokens)
-                                        player.Tokens =
-                                            player.Client.Account.FortuneTokens =
-                                                db.UpdateFortuneToken(player.Client.Account, -Price);
-
+                                    
+                                    player.CurrentFame =
+                                        player.Client.Account.Stats.Fame =
+                                            db.UpdateFame(player.Client.Account, -Price);
+                                    using (Database db2 = new Database())
+                                    /*{
+                                        log.Error("Attemping to delete item from database: " + MType + " | " + Price);
+                                        MySqlCommand cmd = db2.CreateQuery();
+                                        cmd.CommandText = "DELETE FROM market WHERE itemid=@itemid AND fame=@fame";
+                                        cmd.Parameters.AddWithValue("@itemID", MType);
+                                        cmd.Parameters.AddWithValue("@fame", Price);
+                                        cmd.ExecuteNonQuery();
+                                    }
+                                    using (Database db3 = new Database())
+                                    {
+                                        log.Error("Attemping to find player to give fame to: " + MType + " | " + Price);
+                                        MySqlCommand cmd = db.CreateQuery();
+                                        cmd.CommandText = "SELECT * FROM market WHERE itemid='@itemID' AND fame='@fame' LIMIT 1";
+                                        cmd.Parameters.AddWithValue("@itemID", MType);
+                                        cmd.Parameters.AddWithValue("@fame", Price);
+                                        using (MySqlDataReader rdr = cmd.ExecuteReader())
+                                        {
+                                            if (!rdr.HasRows)
+                                                accID = 0;
+                                            rdr.Read();
+                                            accID = rdr.GetInt32("id");
+                                        }
+                                    }
+                                    using (Database db4 = new Database())
+                                    {
+                                        log.Error("Updating Player Info...");
+                                        MySqlCommand cmd1 = db4.CreateQuery();
+                                        cmd1.CommandText = "UPDATE stats SET fame = fame + @Price WHERE accId=@accId";
+                                        cmd1.Parameters.AddWithValue("@accId", accID);
+                                        cmd1.Parameters.AddWithValue("@Price", Price);
+                                        log.Error("Attempted to give Player " + accID + ", " + Price + " fame");
+                                        cmd1.ExecuteNonQuery();
+                                    }*/
                                     player.Client.SendPacket(new BuyResultPacket
                                     {
                                         Result = 0,
@@ -147,36 +161,13 @@ namespace wServer.realm.entities.merchant
                     }
                     else
                     {
-                        if (player.Stars < RankReq)
-                        {
-                            player.Client.SendPacket(new BuyResultPacket
-                            {
-                                Result = 0,
-                                Message = "Not enough stars!"
-                            });
-                            return;
-                        }
                         switch (Currency)
                         {
-                            case CurrencyType.Gold:
-                                player.Client.SendPacket(new BuyResultPacket
-                                {
-                                    Result = BUY_NO_GOLD,
-                                    Message = "{\"key\":\"server.not_enough_gold\"}"
-                                });
-                                break;
                             case CurrencyType.Fame:
                                 player.Client.SendPacket(new BuyResultPacket
                                 {
                                     Result = BUY_NO_FAME,
                                     Message = "{\"key\":\"server.not_enough_fame\"}"
-                                });
-                                break;
-                            case CurrencyType.FortuneTokens:
-                                player.Client.SendPacket(new BuyResultPacket
-                                {
-                                    Result = BUY_NO_FORTUNETOKENS,
-                                    Message = "{\"key\":\"server.not_enough_fortunetokens\"}"
                                 });
                                 break;
                         }
@@ -194,6 +185,28 @@ namespace wServer.realm.entities.merchant
                     Size = MERCHANT_SIZE;
                     UpdateCount++;
                 }
+                /*if (refreshMerchants > 0)
+                {
+                    foreach (var t1 in MerchantLists.ZyList)
+                    {
+                        log.Info("Looking for updates on item | " + t1);
+                        if (refreshMerchants == t1)
+                        {
+                            Tuple<int, CurrencyType> price;
+                            if (prices.TryGetValue(MType, out price))
+                            {
+                                using (Database db = new Database())
+                                    Price = db.GetMarketInfo(price.Item1, 1);
+                                Currency = price.Item2;
+                            }
+                            
+                            
+                            UpdateCount++;
+                        }
+                    }
+                    refreshMerchants = 0;
+                }*/
+                
 
                 if (!closing)
                 {
@@ -254,7 +267,7 @@ namespace wServer.realm.entities.merchant
                 mrc.Move(x.X, x.Y);
                 var w = Owner;
                 Owner.LeaveWorld(this);
-                w.Timers.Add(new WorldTimer(Random.Next(30, 60) * 1000, (world, time) => w.EnterWorld(mrc)));
+                w.Timers.Add(new WorldTimer(Random.Next(100, 500), (world, time) => w.EnterWorld(mrc)));
             }
             catch (Exception e)
             {
@@ -266,9 +279,11 @@ namespace wServer.realm.entities.merchant
         {
             try
             {
-                if (Price == 0)
+                Tuple<int, CurrencyType> price;
+                if (prices.TryGetValue(MType, out price))
                 {
                     var mrc = new Merchants(Manager, x.ObjectType, x.Owner);
+                    log.Warn("TempDisable | Price of item is equal to: " + price.Item1 + "! Leaving world...");
                     mrc.Move(x.X, x.Y);
                     var w = Owner;
                     Owner.LeaveWorld(this);
@@ -285,84 +300,27 @@ namespace wServer.realm.entities.merchant
         {
             MType = -1;
             var list = new int[0];
-            if (Owner.Map[(int)X, (int)Y].Region == TileRegion.Store_1)
-                list = MerchantLists.ZyList;
-            else if (Owner.Map[(int)X, (int)Y].Region == TileRegion.Store_2)
-                list = MerchantLists.ZyList;
-            else if (Owner.Map[(int)X, (int)Y].Region == TileRegion.Store_3)
-                list = MerchantLists.ZyList;
-            else if (Owner.Map[(int)X, (int)Y].Region == TileRegion.Store_4)
-                list = MerchantLists.ZyList;
-            else if (Owner.Map[(int)X, (int)Y].Region == TileRegion.Store_5)
-                list = MerchantLists.ZyList;
-            else if (Owner.Map[(int)X, (int)Y].Region == TileRegion.Store_6)
-                list = MerchantLists.ZyList;
-            else if (Owner.Map[(int)X, (int)Y].Region == TileRegion.Store_7)
-                list = MerchantLists.ZyList;
-            else if (Owner.Map[(int)X, (int)Y].Region == TileRegion.Store_8)
-                list = MerchantLists.ZyList;
-            else if (Owner.Map[(int)X, (int)Y].Region == TileRegion.Store_9)
-                list = MerchantLists.ZyList;
-            else if (Owner.Map[(int)X, (int)Y].Region == TileRegion.Store_10)
-                list = MerchantLists.ZyList;
-            else if (Owner.Map[(int)X, (int)Y].Region == TileRegion.Store_11)
-                list = MerchantLists.ZyList;
-            else if (Owner.Map[(int)X, (int)Y].Region == TileRegion.Store_12)
-                list = MerchantLists.AccessoryDyeList;
-            else if (Owner.Map[(int)X, (int)Y].Region == TileRegion.Store_13)
-                list = MerchantLists.ClothingClothList;
-            else if (Owner.Map[(int)X, (int)Y].Region == TileRegion.Store_14)
-                list = MerchantLists.AccessoryClothList;
-            else if (Owner.Map[(int)X, (int)Y].Region == TileRegion.Store_15)
-                list = MerchantLists.ZyList;
-            else if (Owner.Map[(int)X, (int)Y].Region == TileRegion.Store_16)
-                list = MerchantLists.ZyList;
-            else if (Owner.Map[(int)X, (int)Y].Region == TileRegion.Store_17)
-                list = MerchantLists.ZyList;
-            else if (Owner.Map[(int)X, (int)Y].Region == TileRegion.Store_18)
-                list = MerchantLists.ZyList;
-            else if (Owner.Map[(int)X, (int)Y].Region == TileRegion.Store_19)
-                list = MerchantLists.ZyList;
-            else if (Owner.Map[(int)X, (int)Y].Region == TileRegion.Store_20)
-                list = MerchantLists.ZyList;
-            else if (Owner.Map[(int)X, (int)Y].Region == TileRegion.Store_21)
-                list = MerchantLists.AccessoryClothList;
-            else if (Owner.Map[(int)X, (int)Y].Region == TileRegion.Store_22)
-                list = MerchantLists.AccessoryDyeList;
-            else if (Owner.Map[(int)X, (int)Y].Region == TileRegion.Store_23)
-                list = MerchantLists.ClothingClothList;
-            else if (Owner.Map[(int)X, (int)Y].Region == TileRegion.Store_24)
                 list = MerchantLists.ZyList;
 
             if (AddedTypes == null) AddedTypes = new List<KeyValuePair<string, int>>();
             list.Shuffle();
-            foreach (var t1 in list.Where(t1 => !AddedTypes.Contains(new KeyValuePair<string, int>(Owner.Name, t1))))
+            foreach (var t1 in list)
             {
                 AddedTypes.Add(new KeyValuePair<string, int>(Owner.Name, t1));
                 MType = t1;
-                MTime = Random.Next(1, 2);
-                MRemaining = Random.Next(1, 1);
-                newMerchant = true;
-                Owner.Timers.Add(new WorldTimer(30000, (w, t) =>
-                {
-                    newMerchant = false;
-                    UpdateCount++;
-                }));
+                MTime = Random.Next(2, 5);
+                MRemaining = 1;
+                newMerchant = false;
 
-                var s = Random.Next(0, 100);
-
+                Discount = 0;
 
                 Tuple<int, CurrencyType> price;
                 if (prices.TryGetValue(MType, out price))
                 {
-                        using (Database db = new Database())
-                        {
-                            Price = db.GetMarketInfo(price.Item1, 1);
-                        }
-                    if (Price == 0)
-                    {
-                        TempDisable(this);
-                    }
+                    using (Database db = new Database())
+                        Price = db.GetMarketInfo(price.Item1, 1);
+                    if (Price == 2140000000)
+                        Buyable = false;
                     Currency = price.Item2;
                 }
 

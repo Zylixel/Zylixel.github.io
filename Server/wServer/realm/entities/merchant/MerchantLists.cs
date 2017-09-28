@@ -117,31 +117,36 @@ namespace wServer.realm.entities
 
             foreach (KeyValuePair<ushort, Item> item in data.Items.Where(_ => noShopItems.All(i => i != _.Value.ObjectId)))
             {
+                if (item.Value.Texture1 != 0 && item.Value.ObjectId.Contains("Clothing") && item.Value.Class == "Dye")
+                {
+                    prices.Add(item.Value.ObjectType, new Tuple<int, CurrencyType>(51, CurrencyType.Fame));
+                    clothingDyeList.Add(item.Value.ObjectType);
+                }
                 if (!(item.Value.ObjectId.Contains("Egg")))
                     if (!(item.Value.ObjectId.Contains("Skin")))
                         if (!(item.Value.ObjectId.Contains("Cloth")))
                             if (!(item.Value.ObjectId.Contains("Dye")))
                                 if (!(item.Value.ObjectId.Contains("Tincture")))
                                     if (!(item.Value.ObjectId.Contains("Effusion")))
-                                        if (!(item.Value.ObjectId.Contains("Elixer")))
+                                        if (!(item.Value.ObjectId.Contains("Elixir")))
                                             if (!(item.Value.ObjectId.Contains("Tarot")))
-                                                if (!(item.Value.Description.Contains("Treasure")))
-                                                    {
-                                                    prices.Add(item.Value.ObjectType, new Tuple<int, CurrencyType>(item.Value.ObjectType, CurrencyType.Fame));
-                                                    zyList.Add(item.Value.ObjectType);
+                                                if (!(item.Value.ObjectId.Contains("Gunball")))
+                                                    if (item.Value.Tier >= 4)
+                                                        if (item.Value.Treasure == false)
+                                                        {
+                                                     prices.Add(item.Value.ObjectType, new Tuple<int, CurrencyType>(item.Value.ObjectType, CurrencyType.Fame));
+                                                     zyList.Add(item.Value.ObjectType);
                                                     log.Info("Loading: " + item.Value.ObjectId);
-                                                   /* using (Database db = new Database())
+
+                                                    /* using (Database db = new Database())
                                                     {
                                                         db.SetMarketInfo(item.Value.ObjectType, 2140000000);
                                                     }
-                                                    */ //Use this to fill database
+                                                    */ 
+                                                    //Use this to fill database
 
                 }
-                if (item.Value.Texture1 != 0 && item.Value.ObjectId.Contains("Clothing") && item.Value.Class == "Dye")
-                {
-                    prices.Add(item.Value.ObjectType, new Tuple<int, CurrencyType>(51, CurrencyType.Fame));
-                    clothingDyeList.Add(item.Value.ObjectType);
-                }
+                
             }
 
             
@@ -156,7 +161,9 @@ namespace wServer.realm.entities
 
         private static readonly string[] noShopItems =
         {
-           "Crown", "Muscat", "Cabernet", "Vial of Pure Darkness", "Omnipotence Ring",
+           "Crown", "Muscat", "Cabernet", "Vial of Pure Darkness", "Omnipotence Ring", "Draconis Potion", "Sauvignon Blanc", "Snake Oil", "Pollen Powder",
+           "XP Booster Test"
+
         };
 
         private static readonly string[] noShopCloths =

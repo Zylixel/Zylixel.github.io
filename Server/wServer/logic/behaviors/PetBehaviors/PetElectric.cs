@@ -42,7 +42,7 @@ namespace wServer.logic.behaviors.PetBehaviors
                         if (e.HasConditionEffect(ConditionEffectIndex.Invulnerable) || e.HasConditionEffect(ConditionEffectIndex.Invincible) || e.HasConditionEffect(ConditionEffectIndex.Stasis)) continue;
                         if (Random.Next(0, 100) > level.Level) break;
 
-                        if (e.ObjectDesc == null | !e.ObjectDesc.Enemy | !e.ObjectDesc.NoElectric) continue;
+                        if (e.ObjectDesc == null | !e.ObjectDesc.Enemy) continue;
 
                         if (e.HasConditionEffect(ConditionEffectIndex.Invincible)) continue;
 

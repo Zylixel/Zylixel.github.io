@@ -540,6 +540,7 @@ public class Item : IFeedable
             XpBooster = elem.Element("XpBoost") != null;
             LootDropBooster = elem.Element("LDBoosted") != null;
             LootTierBooster = elem.Element("LTBoosted") != null;
+            Treasure = elem.Element("Treasure") != null;
         }
         catch (Exception ex)
         {
@@ -592,6 +593,7 @@ public class Item : IFeedable
     public bool NotBrokenResurrect { get; set; }
     public bool MantleResurrect { get; set; }
     public bool AshRobe { get; set; }
+    public bool Treasure { get; set; }
 }
 
 public class SpawnCount

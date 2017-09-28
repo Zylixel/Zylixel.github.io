@@ -44,7 +44,6 @@ namespace db
                             val.Equals("null", StringComparison.InvariantCultureIgnoreCase) ? null : val);
                         lineNum++;
                     }
-                    log.InfoFormat("Settings loaded.");
                 }
             else
                 log.Info("Settings not found.");
@@ -74,7 +73,6 @@ namespace db
                             val.Equals("null", StringComparison.InvariantCultureIgnoreCase) ? null : val);
                         lineNum++;
                     }
-                    log.InfoFormat("Settings loaded.");
                 }
             else
                 log.Info("Settings not found.");

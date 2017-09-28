@@ -47,6 +47,7 @@ namespace wServer.realm
         public Oryx(GameWorld world)
         {
             this.world = world;
+            TimedSpawn();
             Init();
         }
 
@@ -320,15 +321,13 @@ namespace wServer.realm
 
         public void TimedSpawn()
         {
+            log.Info("Players in Realm: " + world.Players.Count);
+            //Use this to check players in realm
             if (world.Players.Count > 0) //Makes sure player is in the realm
             {
                 var evt = events[rand.Next(0, events.Count)];
-                world.Timers.Add(new WorldTimer(300000, (ww, tt) => { TimedSpawn(); })); //New Event every 5 minutes
                 SpawnEvent(evt.Item1, evt.Item2);
-
-                log.Info("Players in Realm: " + world.Players.Count);
-                //Use this to check players in realm every 5 min
-
+                
                 TauntData? dat = null;
                 dat = null;
                 foreach (var i in criticalEnemies)
@@ -344,13 +343,13 @@ namespace wServer.realm
                     var arr = dat.Value.spawn;
                     var msg = arr[rand.Next(0, arr.Length)];
                     BroadcastMsg(msg); //Taunt that bish
-                }
+                }  
             }
+            world.Timers.Add(new WorldTimer(300000, (ww, tt) => { TimedSpawn(); })); //New Event every 5 minutes
         }
 
         public void Init()
         {
-            world.Timers.Add(new WorldTimer(10000, (ww, tt) => { TimedSpawn(); }));
             log.InfoFormat("Oryx is controlling world {0}({1})...", world.Id, world.Name);
             var w = world.Map.Width;
             var h = world.Map.Height;

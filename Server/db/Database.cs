@@ -809,10 +809,10 @@ SELECT MAX(chestId) FROM vaults WHERE accId = @accId;";
         {
             using (Database db = new Database())
             {
-                int accID = 0;
-                log.Error("Attemping to give fame to player with: " + MType + " | " + Price);
+                int accID;
+                log.Error("Attemping to find player to give fame to: " + MType + " | " + Price);
                 MySqlCommand cmd = db.CreateQuery();
-                cmd.CommandText = "SELECT id FROM market WHERE itemid=@itemid AND fame=@fame";
+                cmd.CommandText = "SELECT * FROM market WHERE itemid='@itemID' AND fame='@fame' LIMIT 1";
                 cmd.Parameters.AddWithValue("@itemID", MType);
                 cmd.Parameters.AddWithValue("@fame", Price);
                 using (MySqlDataReader rdr = cmd.ExecuteReader())
@@ -850,7 +850,7 @@ SELECT MAX(chestId) FROM vaults WHERE accId = @accId;";
                 if (type == 1)
                     info = rdr.GetInt32("MIN( fame )");
                 log.Info("GetMarketInfo | " + info);
-                return 0;
+                return info;
             }
         }
 
