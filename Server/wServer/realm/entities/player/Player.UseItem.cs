@@ -417,15 +417,12 @@ namespace wServer.realm.entities.player
                             }
                             if (HasConditionEffect(ConditionEffectIndex.HPBoost))
                             {
-                                
-
-                                if (amountSBA == 0) ;
-                                
-                            else if (amountSBA >= 1) ;
-                                amountSBA = 0;
-                                durationSBA = 0;
-                                return false;
-
+                                if (amountSBA >= 1)
+                                {
+                                    amountSBA = 0;
+                                    durationSBA = 0;
+                                    return false;
+                                }
                             } 
                 
                             this.Aoe(rangeSBA, true, player =>

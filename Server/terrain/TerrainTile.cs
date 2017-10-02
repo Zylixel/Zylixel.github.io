@@ -95,8 +95,6 @@ namespace terrain
         public TerrainType Terrain;
         public ushort TileId;
         public string TileObj;
-        public int X;
-        public int Y;
 
         public bool Equals(TerrainTile other)
         {

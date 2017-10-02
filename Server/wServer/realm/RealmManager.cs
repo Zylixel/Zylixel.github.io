@@ -67,7 +67,6 @@ namespace wServer.realm
         private int nextClientId;
 
         private int nextWorldId;
-        private object client;
 
         public RealmManager(int maxClients, int tps)
         {
