@@ -242,6 +242,22 @@ namespace wServer.realm.entities.player
                 return true;
             }
 
+            if (item.Maxy)
+            {
+                Client.Player.Stats[0] = Client.Player.ObjectDesc.MaxHitPoints;
+                Client.Player.Stats[1] = Client.Player.ObjectDesc.MaxMagicPoints;
+                Client.Player.Stats[2] = Client.Player.ObjectDesc.MaxAttack;
+                Client.Player.Stats[3] = Client.Player.ObjectDesc.MaxDefense;
+                Client.Player.Stats[4] = Client.Player.ObjectDesc.MaxSpeed;
+                Client.Player.Stats[5] = Client.Player.ObjectDesc.MaxHpRegen;
+                Client.Player.Stats[6] = Client.Player.ObjectDesc.MaxMpRegen;
+                Client.Player.Stats[7] = Client.Player.ObjectDesc.MaxDexterity;
+                Client.Player.SaveToCharacter();
+                Client.Player.Client.Save();
+                Client.Player.UpdateCount++;
+                Client.Player.SendInfo("Success");
+        }
+
             if (item.IsBackpack)
             {
                 if (HasBackpack) return true;
@@ -739,7 +755,7 @@ namespace wServer.realm.entities.player
 
                     case ActivateEffects.Decoy:
                     {
-                        Decoy decoy = new Decoy(Manager, this, eff.DurationMS, StatsManager.GetSpeed());
+                        Decoy decoy = new Decoy(Manager, this, eff.DurationMS, StatsManager.GetSpeed(), eff.random);
                         decoy.Move(X, Y);
                         Owner.EnterWorld(decoy);
                     }

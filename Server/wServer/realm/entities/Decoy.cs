@@ -21,26 +21,26 @@ namespace wServer.realm.entities
         private Vector2 direction;
         private bool exploded;
 
-        public Decoy(RealmManager manager, Player player, int duration, float tps)
+        public Decoy(RealmManager manager, Player player, int duration, float tps, int random)
             : base(manager, 0x0715, duration, true, true, true)
         {
             this.player = player;
             this.duration = duration;
             speed = tps;
-
+            
             Position? history = player.TryGetHistory(100);
-//            if (history == null)
+            if (history == null)
+              direction = GetRandDirection();
+            if (random == 1)
                 direction = GetRandDirection();
-//            else
-//            {
-//                direction = new Vector2(player.X - history.Value.X, player.Y - history.Value.Y);
-//                if (direction.LengthSquared() == 0)
-//                    direction = GetRandDirection();
-//                else
-//                    direction.Normalize();
-//            }
-
-//Hidden for the Choas Trickster Item; Too lazy to write own code Kappa
+            else
+            {
+                direction = new Vector2(player.X - history.Value.X, player.Y - history.Value.Y);
+                if (direction.LengthSquared() == 0)
+                    direction = GetRandDirection();
+                else
+                    direction.Normalize();
+            }
 
         }
 
@@ -55,13 +55,6 @@ namespace wServer.realm.entities
                 (float) Math.Cos(angle),
                 (float) Math.Sin(angle)
                 );
-        }
-
-        public static Decoy DecoyRandom(RealmManager manager, Player player, int duration, float tps)
-        {
-            Decoy d = new Decoy(manager, player, duration, tps);
-            d.direction = d.GetRandDirection();
-            return d;
         }
 
         protected override void ExportStats(IDictionary<StatsType, object> stats)

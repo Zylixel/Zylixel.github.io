@@ -15,7 +15,7 @@ import flash.geom.Matrix;
 
 import kabam.rotmg.core.StaticInjectorContext;
 import kabam.rotmg.game.model.AddSpeechBalloonVO;
-import kabam.rotmg.game.signals.AddSpeechBalloonSignal;
+
 import kabam.rotmg.language.model.StringMap;
 import kabam.rotmg.text.view.stringBuilder.LineBuilder;
 
@@ -39,7 +39,6 @@ public class Merchant extends SellableObject implements IInteractiveObject {
     public var discount_:int = 0;
     public var merchandiseTexture_:BitmapData = null;
     public var alpha_:Number = 1;
-    private var addSpeechBalloon:AddSpeechBalloonSignal;
     private var stringMap:StringMap;
     private var firstUpdate_:Boolean = true;
     private var messageIndex_:int = 0;
@@ -47,7 +46,6 @@ public class Merchant extends SellableObject implements IInteractiveObject {
 
     public function Merchant(_arg_1:XML) {
         this.ct_ = new ColorTransform(1, 1, 1, 1);
-        this.addSpeechBalloon = StaticInjectorContext.getInjector().getInstance(AddSpeechBalloonSignal);
         this.stringMap = StaticInjectorContext.getInjector().getInstance(StringMap);
         super(_arg_1);
         isInteractive_ = true;

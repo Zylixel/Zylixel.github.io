@@ -131,7 +131,7 @@ namespace wServer.realm.entities
                                         if (!(item.Value.ObjectId.Contains("Elixir")))
                                             if (!(item.Value.ObjectId.Contains("Tarot")))
                                                 if (!(item.Value.ObjectId.Contains("Gunball")))
-                                                    if (item.Value.Tier >= 4)
+                                                    if (item.Value.Tier == -1 || item.Value.Tier >= 4)
                                                         if (item.Value.Treasure == false)
                                                         {
                                                      prices.Add(item.Value.ObjectType, new Tuple<int, CurrencyType>(item.Value.ObjectType, CurrencyType.Fame));

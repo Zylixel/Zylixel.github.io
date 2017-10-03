@@ -25,18 +25,20 @@ namespace wServer.realm.entities.merchant
         private bool closing;
         private bool newMerchant;
         private int tickcount;
-        private bool Buyable = true;
         private int accID;
+        int itemChange;
 
         public static Random Random { get; private set; }
 
-        public Merchants(RealmManager manager, ushort objType, World owner = null)
+        public Merchants(RealmManager manager, ushort objType, int itemChangeLocal, World owner = null)
             : base(manager, objType)
         {
             MType = -1;
             Size = MERCHANT_SIZE;
             if (owner != null)
                 Owner = owner;
+
+            itemChange = itemChangeLocal;
 
             if (Random == null) Random = new Random();
             if (AddedTypes == null) AddedTypes = new List<KeyValuePair<string, int>>();
@@ -103,7 +105,7 @@ namespace wServer.realm.entities.merchant
                                         player.Client.Account.Stats.Fame =
                                             db.UpdateFame(player.Client.Account, -Price);
                                     using (Database db2 = new Database())
-                                    /*{
+                                    {
                                         log.Error("Attemping to delete item from database: " + MType + " | " + Price);
                                         MySqlCommand cmd = db2.CreateQuery();
                                         cmd.CommandText = "DELETE FROM market WHERE itemid=@itemid AND fame=@fame";
@@ -135,7 +137,7 @@ namespace wServer.realm.entities.merchant
                                         cmd1.Parameters.AddWithValue("@Price", Price);
                                         log.Error("Attempted to give Player " + accID + ", " + Price + " fame");
                                         cmd1.ExecuteNonQuery();
-                                    }*/
+                                    }
                                     player.Client.SendPacket(new BuyResultPacket
                                     {
                                         Result = 0,
@@ -185,27 +187,21 @@ namespace wServer.realm.entities.merchant
                     Size = MERCHANT_SIZE;
                     UpdateCount++;
                 }
-                /*if (refreshMerchants > 0)
+                if (refreshMerchants > 0)
                 {
                     foreach (var t1 in MerchantLists.ZyList)
                     {
                         log.Info("Looking for updates on item | " + t1);
                         if (refreshMerchants == t1)
                         {
-                            Tuple<int, CurrencyType> price;
-                            if (prices.TryGetValue(MType, out price))
-                            {
-                                using (Database db = new Database())
-                                    Price = db.GetMarketInfo(price.Item1, 1);
-                                Currency = price.Item2;
-                            }
-                            
-                            
+                            log.Info("Found Update on Item | " + t1);
+                            itemChange = t1;
+                            Refresh(this, t1);
                             UpdateCount++;
                         }
                     }
                     refreshMerchants = 0;
-                }*/
+                }
                 
 
                 if (!closing)
@@ -263,7 +259,7 @@ namespace wServer.realm.entities.merchant
         {
             try
             {
-                var mrc = new Merchants(Manager, x.ObjectType, x.Owner);
+                var mrc = new Merchants(Manager, x.ObjectType, 0, x.Owner);
                 mrc.Move(x.X, x.Y);
                 var w = Owner;
                 Owner.LeaveWorld(this);
@@ -275,19 +271,19 @@ namespace wServer.realm.entities.merchant
             }
         }
 
-        public void TempDisable(Merchants x)
+        public void Refresh(Merchants x, int item)
         {
             try
             {
                 Tuple<int, CurrencyType> price;
                 if (prices.TryGetValue(MType, out price))
                 {
-                    var mrc = new Merchants(Manager, x.ObjectType, x.Owner);
-                    log.Warn("TempDisable | Price of item is equal to: " + price.Item1 + "! Leaving world...");
+                    var mrc = new Merchants(Manager, x.ObjectType, item, x.Owner);
+                    log.Info("Attempting to refresh Merchant | " + item);
                     mrc.Move(x.X, x.Y);
                     var w = Owner;
                     Owner.LeaveWorld(this);
-                    w.Timers.Add(new WorldTimer(Random.Next(150, 290) * 1000, (world, time) => w.EnterWorld(mrc)));
+                    w.Timers.Add(new WorldTimer(Random.Next(100, 100), (world, time) => w.EnterWorld(mrc)));
                 }
             }
             catch (Exception e)
@@ -307,7 +303,17 @@ namespace wServer.realm.entities.merchant
             foreach (var t1 in list)
             {
                 AddedTypes.Add(new KeyValuePair<string, int>(Owner.Name, t1));
-                MType = t1;
+                if (itemChange > 0)
+                {
+                    MType = itemChange;
+                    log.Info("Refreshing Merchant | " + MType);
+                }
+                if (itemChange <= 0)
+                {
+                    MType = t1;
+                    log.Info("Randomizing Merchant to be item | " + MType);
+                }
+
                 MTime = Random.Next(2, 5);
                 MRemaining = 1;
                 newMerchant = false;
@@ -319,8 +325,6 @@ namespace wServer.realm.entities.merchant
                 {
                     using (Database db = new Database())
                         Price = db.GetMarketInfo(price.Item1, 1);
-                    if (Price == 2140000000)
-                        Buyable = false;
                     Currency = price.Item2;
                 }
 

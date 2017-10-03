@@ -375,7 +375,7 @@ namespace wServer.realm
                 case "ClosedGiftChest":
                 case "VaultChest":
                 case "Merchant":
-                    return new Merchants(manager, id);
+                    return new Merchants(manager, id, 0);
                 case "GuildMerchant":
                     return new GuildMerchant(manager, id);
                 case "ArenaGuard":

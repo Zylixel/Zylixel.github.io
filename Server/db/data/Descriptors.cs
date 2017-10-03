@@ -401,6 +401,10 @@ public class ActivateEffect
         if (elem.Attribute("center") != null)
             Center = elem.Attribute("center").Value;
 		noStack = elem.Attribute("noStack") != null;
+        if (elem.Attribute("random") != null)
+        {
+            random = (int)float.Parse(elem.Attribute("random").Value, NumberStyles.Any, ci);
+        }
     }
 
     public ActivateEffects Effect { get; private set; }
@@ -429,6 +433,7 @@ public class ActivateEffect
     public bool noStack { get; private set; }
     public float VisualEffect { get; private set; }
     public uint? Color { get; private set; }
+    public int random { get; private set; } //Used for prism of fallen chaos
 }
 
 public class PortalDesc
@@ -511,6 +516,7 @@ public class Item : IFeedable
             }
             Secret = elem.Element("Secret") != null;
             IsBackpack = elem.Element("Backpack") != null;
+            Maxy = elem.Element("Maxy") != null;
             Cooldown = (n = elem.Element("Cooldown")) != null ? float.Parse(n.Value, NumberStyles.Any, ci) : 0;
             Resurrects = elem.Element("Resurrects") != null;
             Texture1 = (n = elem.Element("Tex1")) != null ? Convert.ToInt32(n.Value, 16) : 0;
@@ -594,6 +600,7 @@ public class Item : IFeedable
     public bool MantleResurrect { get; set; }
     public bool AshRobe { get; set; }
     public bool Treasure { get; set; }
+    public bool Maxy { get; set; }
 }
 
 public class SpawnCount

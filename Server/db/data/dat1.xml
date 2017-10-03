@@ -38575,7 +38575,6 @@
       <Consumable/>
       <BagType>0</BagType>
       <Activate objectId="Rock Candy Grenade">Pet</Activate>
-      <Activate>PetSkin</Activate>
       <OldSound>use_potion</OldSound>
       <feedPower>70</feedPower>
       <DisplayId>{equip.Rock_Candy}</DisplayId>
@@ -77047,7 +77046,7 @@
       <Index>0x56c</Index>
     </Texture>
     <SlotType>10</SlotType>
-    <Description></Description>
+    <Description>Consume this Item to turn change the skin of your current pet/n/nThis Result is permanent</Description>
     <Consumable/>
     <BagType>0</BagType>
     <Activate petType="24692">PetSkin</Activate>
@@ -77081,7 +77080,7 @@
       <Index>0x56d</Index>
     </Texture>
     <SlotType>10</SlotType>
-    <Description></Description>
+    <Description>Consume this Item to turn change the skin of your current pet/n/nThis Result is permanent</Description>
     <Consumable/>
     <BagType>0</BagType>
     <Activate petType="24694">PetSkin</Activate>
@@ -77122,7 +77121,7 @@
       <Index>0x03</Index>
     </Texture>
     <SlotType>10</SlotType>
-    <Description></Description>
+    <Description>Consume this Item to turn change the skin of your current pet/n/nThis Result is permanent</Description>
     <Consumable/>
     <BagType>0</BagType>
     <Activate petType="24704">PetSkin</Activate>
@@ -77147,7 +77146,7 @@
       <Index>0x04</Index>
     </Texture>
     <SlotType>10</SlotType>
-    <Description></Description>
+    <Description>Consume this Item to turn change the skin of your current pet/n/nThis Result is permanent</Description>
     <Consumable/>
     <BagType>0</BagType>
     <Activate petType="24706">PetSkin</Activate>
@@ -77172,7 +77171,7 @@
       <Index>0x05</Index>
     </Texture>
     <SlotType>10</SlotType>
-    <Description></Description>
+    <Description>Consume this Item to turn change the skin of your current pet/n/nThis Result is permanent</Description>
     <Consumable/>
     <BagType>0</BagType>
     <Activate petType="24708">PetSkin</Activate>
@@ -77298,7 +77297,7 @@
       <Index>0x06</Index>
     </Texture>
     <SlotType>10</SlotType>
-    <Description></Description>
+    <Description>Consume this Item to turn change the skin of your current pet/n/nThis Result is permanent</Description>
     <Consumable/>
     <BagType>0</BagType>
     <Activate petType="24720">PetSkin</Activate>
@@ -77323,7 +77322,7 @@
       <Index>0x07</Index>
     </Texture>
     <SlotType>10</SlotType>
-    <Description></Description>
+    <Description>Consume this Item to turn change the skin of your current pet/n/nThis Result is permanent</Description>
     <Consumable/>
     <BagType>0</BagType>
     <Activate petType="24722">PetSkin</Activate>
@@ -77360,7 +77359,7 @@
       <Index>0x08</Index>
     </Texture>
     <SlotType>10</SlotType>
-    <Description></Description>
+  <Description>Consume this Item to turn change the skin of your current pet/n/nThis Result is permanent</Description>
     <Consumable/>
     <BagType>0</BagType>
     <Activate petType="24725">PetSkin</Activate>
@@ -77385,7 +77384,7 @@
       <Index>0x09</Index>
     </AnimatedTexture>
     <SlotType>10</SlotType>
-    <Description></Description>
+  <Description>Consume this Item to turn change the skin of your current pet/n/nThis Result is permanent</Description>
     <Consumable/>
     <BagType>0</BagType>
     <Activate petType="24727">PetSkin</Activate>
@@ -78433,23 +78432,23 @@
           </Object>
 <Object type="0x6151" id="Prism of Fallen Chaos">
     <Class>Equipment</Class>
-    <Item />
+    <Item/>
     <Texture>
         <File>lofiObj5</File>
         <Index>0x9d</Index>
     </Texture>
     <SlotType>22</SlotType>
-    <Description>Powered by a might fnatic long ago, this prism was designed only for those who had a head of disorder.</Description>
-   <Activate duration="3" explode="1" bullet="12">Decoy</Activate>
-    <Activate duration="3" explode="1" bullet="12">Decoy</Activate>
-    <Activate duration="3" explode="1" bullet="12">Decoy</Activate>
-    <Activate duration="3" explode="1" bullet="12">Decoy</Activate>
     <Activate maxDistance="20">Teleport</Activate>
-    <Usable />
+    <Description>Powered by a might fnatic long ago, this prism was designed only for those who had a head of disorder.</Description>
+    <Activate duration="3" explode="1" bullet="12" random="1">Decoy</Activate>
+    <Activate duration="3" explode="1" bullet="12" random="1">Decoy</Activate>
+    <Activate duration="3" explode="1" bullet="12" random="1">Decoy</Activate>
+    <Activate duration="3" explode="1" bullet="12" random="1">Decoy</Activate>
+    <Usable/>
     <BagType>6</BagType>
     <FameBonus>6</FameBonus>
-    <MpCost>40</MpCost>
-     <EffectInfo name="" description="Spawns four decoys for 2 seconds"/>
+    <MpCost>80</MpCost>
+    <EffectInfo name="" description="Spawns four decoys for 2 seconds"/>
     <feedPower>900</feedPower>
 </Object>
 <Object type="0x2abb" id="Beefcake Rogue Skin">
@@ -78719,18 +78718,10 @@ A power crystal will show me the right way. Forward to victory!\n\nSkin Class: S
       <SlotType>10</SlotType>
       <Description>It's healthy!\nMaxes any class to 8/8 and adds a Backpack.</Description>
       <Sound>use_potion</Sound>
-      <Activate amount="2000" stat="0">IncrementStat</Activate>
-      <Activate stat="20" amount="1">IncrementStat</Activate>
-      <Activate amount="2000" stat="3">IncrementStat</Activate>
-      <Activate amount="2000" stat="20">IncrementStat</Activate>
-      <Activate amount="2000" stat="21">IncrementStat</Activate>
-      <Activate amount="2000" stat="22">IncrementStat</Activate>
-      <Activate amount="2000" stat="26">IncrementStat</Activate>
-      <Activate amount="2000" stat="27">IncrementStat</Activate>
-      <Activate amount="2000" stat="28">IncrementStat</Activate>
       <Consumable/>
       <Backpack/>
       <Potion/>
+      <Maxy/>
       <BagType>5</BagType>
       <feedPower>100000</feedPower>
    </Object>
@@ -80933,7 +80924,7 @@ The solid honey on this ring renews its wearer with incredible energy.
   </Object>
   <Object type="0x6118" id="Bridge Sentinel Pet Stone">
     <Class>Equipment</Class>
-    <Item />
+    <Item/>
     <AnimatedTexture>
       <File>chars8x8rPets2</File>
       <Index>0x0c</Index>
@@ -80941,7 +80932,7 @@ The solid honey on this ring renews its wearer with incredible energy.
     <SlotType>10</SlotType>
     <Activate petType="24858">PetSkin</Activate>
     <Sound>use_potion</Sound>
-    <Description></Description>
+    <Description>Consume this Item to turn change the skin of your current pet/n/nThis Result is permanent</Description>
     <Consumable/>
     <feedPower>5000</feedPower>
     <DisplayId>Bridge Sentinel Skin</DisplayId>
@@ -80956,7 +80947,7 @@ The solid honey on this ring renews its wearer with incredible energy.
     <SlotType>10</SlotType>
     <Activate petType="24859">PetSkin</Activate>
     <Sound>use_potion</Sound>
-    <Description></Description>
+    <Description>Consume this Item to turn change the skin of your current pet/n/nThis Result is permanent</Description>
     <Consumable/>
     <feedPower>5000</feedPower>
     <DisplayId>Twilight Archmage Pet Stone</DisplayId>

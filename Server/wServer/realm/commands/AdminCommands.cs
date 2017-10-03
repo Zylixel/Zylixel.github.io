@@ -1597,12 +1597,12 @@ namespace wServer.realm.commands
                     player.SendHelp("Usage: /sell <slot> <price>");
                     return false;
                 }
-                if (Convert.ToInt32(args[0]) + 3 > 8)
+                if (Convert.ToInt32(args[0]) > 8)
                 {
                     player.SendError("Slot Number Invalid, please only choose items in slot 1-8");
                     return false;
                 }
-                if (Convert.ToInt32(args[0]) + 3 < 1)
+                if (Convert.ToInt32(args[0]) < 1)
                 {
                     player.SendError("Slot Number Invalid, please only choose items in slot 1-8");
                     return false;
@@ -1622,10 +1622,10 @@ namespace wServer.realm.commands
                             if (!(checker.Contains("Dye")))
                                 if (!(checker.Contains("Tincture")))
                                     if (!(checker.Contains("Effusion")))
-                                        if (!(checker.Contains("Elixer")))
+                                        if (!(checker.Contains("Elixir")))
                                             if (!(checker.Contains("Tarot")))
-                                                if (!(checker.Contains("Treasure")))
-                                                {
+                                                if (!(checker.Contains("Gunball")))
+                                                        {
 
                                                     
                                                     MySqlCommand cmd = db.CreateQuery();
@@ -1638,8 +1638,9 @@ namespace wServer.realm.commands
                                                     {
                                                         cmd.ExecuteNonQuery();
                                                         player.Inventory[slot] = null;
-                                                        player.UpdateCount++;
                                                         player.SaveToCharacter();
+                                                        player.Client.Save();
+                                                        player.UpdateCount++;
                                                         log.Error("Requesting Update for Item | " + itemID);
                                                         Merchants.refreshMerchants = itemID;
                                                     }
