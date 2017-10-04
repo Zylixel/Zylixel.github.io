@@ -9,6 +9,7 @@ using MySql.Data.MySqlClient;
 using wServer.networking;
 using wServer.networking.cliPackets;
 using wServer.networking.svrPackets;
+using db.data;
 
 #endregion
 
@@ -99,6 +100,7 @@ namespace wServer.realm.entities.player
 
         public static Position targetlink { get; set; }
         public int PetIdLookup { get; private set; }
+        public Entity ground { get; private set; }
 
         public static void ActivateHealHp(Player player, int amount, List<Packet> pkts)
         {
@@ -221,7 +223,7 @@ namespace wServer.realm.entities.player
             }
         }
 
-        public bool Activate(RealmTime time, Item item, UseItemPacket pkt)
+        public bool Activate(RealmTime time, Item item, UseItemPacket pkt, XmlData data)
         {
             bool endMethod = false;
             Position target = pkt.ItemUsePos;
@@ -255,7 +257,6 @@ namespace wServer.realm.entities.player
                 Client.Player.SaveToCharacter();
                 Client.Player.Client.Save();
                 Client.Player.UpdateCount++;
-                Client.Player.SendInfo("Success");
         }
 
             if (item.IsBackpack)
@@ -1122,6 +1123,56 @@ namespace wServer.realm.entities.player
                                 endMethod = true;
                             }
                         Client.Player.UpdateCount++;
+                        break;
+
+                    case ActivateEffects.TreasureFind:
+                        bool foundTreasure = false;
+                        bool KeepGoing = true;
+                        List<int> TreasureItems = new List<int>();
+                        int[] TreasureItemsExe;
+                        string[] noItems = {};
+
+
+
+                        foreach (KeyValuePair<ushort, Item> Treasureitem in data.Items.Where(_ => noItems.All(i => i != _.Value.ObjectId)))
+                        {
+                            if (Treasureitem.Value.Tier >= 4 && Treasureitem.Value.SlotType <= 3)
+                                TreasureItems.Add(Treasureitem.Value.ObjectType);
+                        }
+
+                        TreasureItemsExe = TreasureItems.ToArray();
+
+                        Entity ground = this.GetNearestEntity(3, Manager.GameData.IdToObjectType["The Marked Spot"]) as Entity;
+                        if (ground == null)
+                        {
+                            SendInfo("Can't find any treasure...");
+                            break;
+                        }
+                        TreasureItemsExe.Shuffle();
+                        foreach (var t1 in TreasureItemsExe)
+                        {
+                            if (!KeepGoing) break;
+                                for (int i = 3; i < Client.Player.Inventory.Length; i++)
+                                {
+                                    if (Client.Player.Inventory[i] == null)
+                                    {
+                                        Owner.Timers.Add(new WorldTimer(1, (w, t) => w.LeaveWorld(ground))); //Remove Treasure
+                                        Client.Player.Inventory[i] = Client.Player.Manager.GameData.Items[(ushort)t1];
+                                        endMethod = false;
+                                        foundTreasure = true;
+                                        break;
+                                    }
+                                    Client.Player.UpdateCount++;
+                                    Client.Player.SaveToCharacter();
+                                    Client.Player.Client.Save();
+                                }
+                            if (!foundTreasure)
+                            {
+                                SendInfo("Please have one open slot to use this item.");
+                                endMethod = true;
+                            }
+                            KeepGoing = false;
+                        }
                         break;
 
                     case ActivateEffects.UnlockSkin:

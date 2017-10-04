@@ -81419,4 +81419,27 @@ The solid honey on this ring renews its wearer with incredible energy.
     <feedPower>1250</feedPower>
     <DisplayId>Crystal Wand of Evolution</DisplayId>
   </Object>
+  <Object type="0x613e" id="Treasure Shovel">
+    <Class>Equipment</Class>
+    <Item/>
+    <Texture>
+      <File>lofiObj3</File>
+      <Index>0x590</Index>
+    </Texture>
+    <SlotType>10</SlotType>
+    <Description>A shovel that digs deep into the sand to find hidden treasure.</Description>
+    <Sound>use_key</Sound>
+    <Consumable/>
+    <Activate>TreasureFind</Activate>
+    <feedPower>50</feedPower>
+    <DisplayId>Treasure Shovel</DisplayId>
+  </Object>
+  <Object type="0x613f" id="The Marked Spot">
+    <Class>Character</Class>
+    <Texture>
+      <File>lofiObj3</File>
+      <Index>0x591</Index>
+    </Texture>
+    <DisplayId>The Marked Spot</DisplayId>
+  </Object>
 </Objects>

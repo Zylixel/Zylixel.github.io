@@ -1,11 +1,13 @@
 ﻿#region
 
 using db;
+using db.data;
 using MySql.Data.MySqlClient;
 using System;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Threading.Tasks;
+using wServer.logic;
 using wServer.networking.cliPackets;
 using wServer.realm;
 using wServer.realm.entities;
@@ -21,7 +23,7 @@ namespace wServer.networking.handlers
         {
             get { return PacketID.USEITEM; }
         }
-
+        
         protected override void HandlePacket(Client client, UseItemPacket packet)
         {
             if (client.Player.Owner == null) return;
@@ -241,7 +243,7 @@ namespace wServer.networking.handlers
                 }
                 if (item != null)
                 {
-                    if (!client.Player.Activate(t, item, packet))
+                    if (!client.Player.Activate(t, item, packet, Manager.GameData))
                     {
                         if (item.Consumable)
                         {

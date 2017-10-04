@@ -283,7 +283,7 @@ namespace wServer.realm.entities.merchant
                     mrc.Move(x.X, x.Y);
                     var w = Owner;
                     Owner.LeaveWorld(this);
-                    w.Timers.Add(new WorldTimer(Random.Next(100, 100), (world, time) => w.EnterWorld(mrc)));
+                    w.Timers.Add(new WorldTimer(Random.Next(1000, 2000), (world, time) => w.EnterWorld(mrc)));
                 }
             }
             catch (Exception e)

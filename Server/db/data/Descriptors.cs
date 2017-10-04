@@ -324,7 +324,8 @@ public enum ActivateEffects
     MysteryPortal,
     GenericActivate,
     PetSkin,
-    RandomPetStone
+    RandomPetStone,
+    TreasureFind
 }
 
 public class ActivateEffect

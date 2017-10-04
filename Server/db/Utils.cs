@@ -207,7 +207,7 @@ public static class Utils
     public static string ToSafeText(this string str)
     {
         Regex wordFilter = new Regex(BAD_WORDS);
-        return wordFilter.Replace(str, "<3");
+        return wordFilter.Replace(str, "#!&^");
     }
 
     public static short[] PackFromEquips(this Char chr)

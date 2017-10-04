@@ -34,7 +34,6 @@ namespace db.data
         private readonly Dictionary<ushort, string> type2id_obj;
         private readonly Dictionary<ushort, string> type2id_tile;
         private readonly Dictionary<ushort, SetTypeSkin> setTypeSkins;
-        private readonly Dictionary<ushort, SetTypeSkin> abilities;
 
         private string[] addXml;
         private int prevUpdateCount = -1;
