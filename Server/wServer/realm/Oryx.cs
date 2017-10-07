@@ -60,10 +60,11 @@ namespace wServer.realm
                     WmapTerrain.ShoreSand, Tuple.Create(
                         100, new[]
                         {
-                            Tuple.Create("Pirate", 0.3),
+                            Tuple.Create("Pirate", 0.2),
                             Tuple.Create("Piratess", 0.1),
-                            Tuple.Create("Snake", 0.2),
-                            Tuple.Create("Scorpion Queen", 0.4)
+                            Tuple.Create("Snake", 0.3),
+                            Tuple.Create("Scorpion Queen", 0.30),
+                            Tuple.Create("The Marked Spot", 0.1)
                         })
                 },
                 {
@@ -186,7 +187,7 @@ namespace wServer.realm
                         Tuple.Create("Flying Brain", 0.1),
                         Tuple.Create("Slime God", 0.09),
                         Tuple.Create("Ghost God", 0.09),
-                        Tuple.Create("Rock Bot", 0.05),
+                        // Tuple.Create("Rock Bot", 0.05), Nobody Likes you
                         Tuple.Create("Djinn", 0.09),
                         Tuple.Create("Leviathan", 0.09),
                         Tuple.Create("Arena Headless Horseman", 0.01)
@@ -271,11 +272,6 @@ namespace wServer.realm
         public void KeeperCloseRealm()
         {
             World ocWorld = null;
-            world.Timers.Add(new WorldTimer(2000, (w, t) =>
-            {
-                ocWorld = world.Manager.AddWorld(new TheRealmKeeper());
-                ocWorld.Manager = world.Manager;
-            }));
             world.Timers.Add(new WorldTimer(8000, (w, t) =>
             {
                 foreach (var i in world.Players.Values)
@@ -299,7 +295,6 @@ namespace wServer.realm
                     EffectType = EffectType.Earthquake
                 });
             }
-            world.Timers.Add(new WorldTimer(10000, (w, t) => w.Manager.RemoveWorld(w)));
         }
 
         public int CountEnemies(params string[] enemies)
@@ -396,16 +391,9 @@ namespace wServer.realm
             world.Manager.CloseWorld(world);
         }
 
-        public void OnEnemyKilled(Enemy enemy, Player killer) //TODO remove this
-        {
-        }
-
         public void OnPlayerEntered(Player player)
         {
             player.SendInfo("Welcome to Zy's Realm!");
-            player.SendEnemy("Oryx the Mad God", "You are food for my minions!");
-            player.SendInfo("Use [WASDQE] to move; click to shoot!");
-            player.SendInfo("Type \"/help\" for more help");
         }
 
         public void Tick(RealmTime time)

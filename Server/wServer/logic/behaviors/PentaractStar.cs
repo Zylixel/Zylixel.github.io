@@ -52,10 +52,6 @@ namespace wServer.logic.behaviors
                             Color = new ARGB(0xFF00FF00),
                             Text = "{\"key\":\"blank\",\"tokens\":{\"data\":\"Quest Complete!\"}}"
                         });
-
-                    if (host.Owner is GameWorld)
-                        (host.Owner as GameWorld).EnemyKilled(host as Enemy,
-                            (entities.Last() as Enemy).DamageCounter.Parent.LastHitter);
                     new Decay(0).Tick(host, time);
                     foreach (var i in entities)
                         new Suicide().Tick(i, time);

@@ -58,12 +58,6 @@ namespace wServer.realm.worlds
                 Overseer.Tick(time);
         }
 
-        public void EnemyKilled(Enemy enemy, Player killer)
-        {
-            if (Overseer != null)
-                Overseer.OnEnemyKilled(enemy, killer);
-        }
-
         public override int EnterWorld(Entity entity)
         {
             int ret = base.EnterWorld(entity);

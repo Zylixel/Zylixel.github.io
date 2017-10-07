@@ -325,7 +325,8 @@ public enum ActivateEffects
     GenericActivate,
     PetSkin,
     RandomPetStone,
-    TreasureFind
+    TreasureFind,
+    UncommonTreasureFind
 }
 
 public class ActivateEffect
@@ -406,6 +407,8 @@ public class ActivateEffect
         {
             random = (int)float.Parse(elem.Attribute("random").Value, NumberStyles.Any, ci);
         }
+        if (elem.Attribute("treaureTier") != null)
+            treaureTier = Utils.FromString(elem.Attribute("treaureTier").Value);
     }
 
     public ActivateEffects Effect { get; private set; }
@@ -435,6 +438,7 @@ public class ActivateEffect
     public float VisualEffect { get; private set; }
     public uint? Color { get; private set; }
     public int random { get; private set; } //Used for prism of fallen chaos
+    public int treaureTier { get; private set; } //Treasure Chest Stuff
 }
 
 public class PortalDesc
