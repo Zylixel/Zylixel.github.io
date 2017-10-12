@@ -180,10 +180,22 @@ namespace wServer.logic.loot
         {
             Lootstate = lootState;
             //if (playerDat != null && playerDat.Item2/enemy.ObjectDesc.MaxHP >= threshold)
+            if (playerDat != null && playerDat.Item2 / enemy.ObjectDesc.MaxHP >= 0)
             //Removes Loot Threshhold
             {
                 foreach (ILootDef i in children)
                     i.Populate(manager, enemy, null, rand, lootState, lootDefs);
+            }
+            {
+                Lootstate = lootState;
+                if (playerDat != null) return;
+                Item[] candidates = manager.GameData.Items
+                    .Where(item => item.Value.Description == "A shovel that digs deep into the sand to find hidden treasure.")
+                    .Select(item => item.Value)
+                    .ToArray();
+                foreach (Item i in candidates)
+                    if (!(i.Tier == -1))
+                        lootDefs.Add(new LootDef(i, ((i.Tier * -2) + 10) * 0.005, lootState));
             }
         }
     }

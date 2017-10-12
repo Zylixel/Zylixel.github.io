@@ -682,9 +682,10 @@ namespace wServer.logic
                     new TierLoot(12, ItemType.Armor, 0.6),
                     new TierLoot(13, ItemType.Armor, 0.3),
                     new TierLoot(6, ItemType.Ring, 0.3),
+                    new ItemLoot("Shatters Treasure Shovel", 0.1),
                     new ItemLoot("Potion of Attack", 1),
                     new ItemLoot("Potion of Defense", 1),
-                    new ItemLoot("Bracer of the Guardian", 0.05)
+                    new ItemLoot("Bracer of the Guardian", 0.025)
                     )
             )
         #endregion 1stbosschest
@@ -704,8 +705,9 @@ namespace wServer.logic
                     new TierLoot(12, ItemType.Armor, 0.6),
                     new TierLoot(13, ItemType.Armor, 0.3),
                     new TierLoot(6, ItemType.Ring, 0.3),
+                    new ItemLoot("Shatters Treasure Shovel", 0.2),
                     new ItemLoot("Potion of Mana", 0.5),
-                    new ItemLoot("The Twilight Gemstone", 0.05)
+                    new ItemLoot("The Twilight Gemstone", 0.025)
                     )
             )
         #endregion 2ndbosschest
@@ -2014,8 +2016,9 @@ namespace wServer.logic
                     new TierLoot(7, ItemType.Ring, 0.2),
                     new TierLoot(14, ItemType.Armor, 0.2),
                     new TierLoot(13, ItemType.Weapon, 0.2),
+                    new ItemLoot("Shatters Treasure Shovel", 0.3),
                     new ItemLoot("Potion of Life", 0.5),
-                    new ItemLoot("The Forgotten Crown", 0.05)
+                    new ItemLoot("The Forgotten Crown", 0.025)
                     )
             )
         #endregion 3rdbosschest

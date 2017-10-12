@@ -20648,6 +20648,7 @@ An awe-inspiring sword gifted to only the most worthy mortals from the heavens t
    <Object type="0x613e" id="Treasure Shovel">
        <Class>Equipment</Class>
        <Item/>
+       <Tier>1</Tier>
        <Texture>
          <File>lofiObj3</File>
          <Index>0x590</Index>
@@ -20656,6 +20657,7 @@ An awe-inspiring sword gifted to only the most worthy mortals from the heavens t
        <Description>A shovel that digs deep into the sand to find hidden treasure.</Description>
        <Sound>use_key</Sound>
        <Consumable/>
+       <BagType>3</BagType>
        <Activate treaureTier="1">TreasureFind</Activate>
        <feedPower>50</feedPower>
        <DisplayId>Treasure Shovel</DisplayId>
@@ -20671,14 +20673,16 @@ An awe-inspiring sword gifted to only the most worthy mortals from the heavens t
      <Object type="0x7141" id="Uncommon Treasure Shovel">
        <Class>Equipment</Class>
        <Item/>
+       <Tier>2</Tier>
        <Texture>
          <File>lofiObj3</File>
-         <Index>0x592</Index>
+         <Index>0x593</Index>
        </Texture>
        <SlotType>10</SlotType>
        <Description>A shovel that digs deep into the sand to find hidden treasure.</Description>
        <Sound>use_key</Sound>
        <Consumable/>
+       <BagType>3</BagType>
        <Activate treaureTier="2">TreasureFind</Activate>
        <feedPower>50</feedPower>
        <DisplayId>Uncommon Treasure Shovel</DisplayId>
@@ -20687,21 +20691,23 @@ An awe-inspiring sword gifted to only the most worthy mortals from the heavens t
        <Class>Character</Class>
        <Texture>
          <File>lofiObj3</File>
-         <Index>0x593</Index>
+         <Index>0x594</Index>
        </Texture>
        <DisplayId>The Marked Spot</DisplayId>
      </Object>
      <Object type="0x7143" id="Rare Treasure Shovel">
        <Class>Equipment</Class>
        <Item/>
+       <Tier>3</Tier>
        <Texture>
          <File>lofiObj3</File>
-         <Index>0x594</Index>
+         <Index>0x593</Index>
        </Texture>
        <SlotType>10</SlotType>
        <Description>A shovel that digs deep into the sand to find hidden treasure.</Description>
        <Sound>use_key</Sound>
        <Consumable/>
+       <BagType>4</BagType>
        <Activate treaureTier="3">TreasureFind</Activate>
        <feedPower>50</feedPower>
        <DisplayId>Rare Treasure Shovel</DisplayId>
@@ -20710,21 +20716,23 @@ An awe-inspiring sword gifted to only the most worthy mortals from the heavens t
        <Class>Character</Class>
        <Texture>
          <File>lofiObj3</File>
-         <Index>0x595</Index>
+         <Index>0x594</Index>
        </Texture>
        <DisplayId>The Marked Spot</DisplayId>
      </Object>
      <Object type="0x7145" id="Legendary Treasure Shovel">
        <Class>Equipment</Class>
        <Item/>
+       <Tier>4</Tier>
        <Texture>
          <File>lofiObj3</File>
-         <Index>0x596</Index>
+         <Index>0x595</Index>
        </Texture>
        <SlotType>10</SlotType>
        <Description>A shovel that digs deep into the sand to find hidden treasure.</Description>
        <Sound>use_key</Sound>
        <Consumable/>
+       <BagType>4</BagType>
        <Activate treaureTier="4">TreasureFind</Activate>
        <feedPower>50</feedPower>
        <DisplayId>Legendary Treasure Shovel</DisplayId>
@@ -20733,7 +20741,7 @@ An awe-inspiring sword gifted to only the most worthy mortals from the heavens t
        <Class>Character</Class>
        <Texture>
          <File>lofiObj3</File>
-         <Index>0x597</Index>
+         <Index>0x596</Index>
        </Texture>
        <DisplayId>The Marked Spot</DisplayId>
      </Object>
@@ -20742,13 +20750,14 @@ An awe-inspiring sword gifted to only the most worthy mortals from the heavens t
        <Item/>
        <Texture>
          <File>lofiObj3</File>
-         <Index>0x598</Index>
+         <Index>0x597</Index>
        </Texture>
        <SlotType>10</SlotType>
        <Description>A shovel that digs deep into the sand to find hidden treasure.</Description>
        <Sound>use_key</Sound>
+       <BagType>4</BagType>
        <Consumable/>
-       <Activate treaureTier="4">TreasureFind</Activate>
+       <Activate treaureTier="5">TreasureFind</Activate>
        <feedPower>50</feedPower>
        <DisplayId>Shatters Treasure Shovel</DisplayId>
      </Object>
@@ -20756,7 +20765,7 @@ An awe-inspiring sword gifted to only the most worthy mortals from the heavens t
        <Class>Character</Class>
        <Texture>
          <File>lofiObj3</File>
-         <Index>0x599</Index>
+         <Index>0x598</Index>
        </Texture>
        <DisplayId>The Marked Spot</DisplayId>
      </Object>
@@ -20765,13 +20774,14 @@ An awe-inspiring sword gifted to only the most worthy mortals from the heavens t
        <Item/>
        <Texture>
          <File>lofiObj3</File>
-         <Index>0x59a</Index>
+         <Index>0x599</Index>
        </Texture>
        <SlotType>10</SlotType>
        <Description>A shovel that digs deep into the sand to find hidden treasure.</Description>
        <Sound>use_key</Sound>
+       <BagType>4</BagType>
        <Consumable/>
-       <Activate treaureTier="4">TreasureFind</Activate>
+       <Activate treaureTier="6">TreasureFind</Activate>
        <feedPower>50</feedPower>
        <DisplayId>Tainted Treasure Shovel</DisplayId>
      </Object>
@@ -20779,8 +20789,35 @@ An awe-inspiring sword gifted to only the most worthy mortals from the heavens t
        <Class>Character</Class>
        <Texture>
          <File>lofiObj3</File>
-         <Index>0x59b</Index>
+         <Index>0x59a</Index>
        </Texture>
        <DisplayId>The Marked Spot</DisplayId>
+     </Object>
+     <Object type="0x9000" id="Pillar of Gilgor">
+       <Group>Nexus</Group>
+       <Class>Character</Class>
+       <ParalyzeImmune/>
+       <NoElectric/>
+       <DazedImmune/>
+       <StasisImmune/>
+       <StunImmune/>
+       <Enemy/>
+       <Projectile id="0">
+         <ObjectId>Stone Slash</ObjectId>
+         <Damage>300</Damage>
+         <Speed>200</Speed>
+         <Size>100</Size>
+         <LifetimeMS>800</LifetimeMS>
+       </Projectile>
+       <AnimatedTexture>
+         <File>chars16x16dEncounters2</File>
+         <Index>96</Index>
+       </AnimatedTexture>
+       <Size>150</Size>
+       <MaxHitPoints>50000</MaxHitPoints>
+       <Defense>20</Defense>
+       <DisplayId>Pillar of Gilgor</DisplayId>
+       <HitSound>monster/abyss_demons_hit</HitSound>
+       <DeathSound>monster/dwarf_god_hit</DeathSound>
      </Object>
 </Objects>

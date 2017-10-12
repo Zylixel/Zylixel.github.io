@@ -1124,7 +1124,7 @@ namespace wServer.realm.entities.player
                                     TreasureItems.Add(Treasureitem.Value.ObjectType);
                                 if (Treasureitem.Value.Tier <= 11 && Treasureitem.Value.SlotType == 24) //Katana
                                     TreasureItems.Add(Treasureitem.Value.ObjectType);
-                                if (Treasureitem.Value.Tier <= 4)
+                                if (Treasureitem.Value.Tier <= 5)
                                     if (Treasureitem.Value.Usable == true && Treasureitem.Value.MpCost >= 1) //Abilites
                                         TreasureItems.Add(Treasureitem.Value.ObjectType);
                                 if (Treasureitem.Value.Tier <= 11 && Treasureitem.Value.SlotType == 11) //Rings
@@ -1138,6 +1138,18 @@ namespace wServer.realm.entities.player
                                 if (Treasureitem.Value.Tier == -1) TreasureItems.Remove(Treasureitem.Value.ObjectType); //No Uts
                                 #endregion
                                 TreasureFind = "The Uncommon Marked Spot";
+                            }
+                            if (eff.treaureTier == 5) //Recieves Treasure Tier (Shatters)
+                            {
+                                #region ItemData
+                                if (Treasureitem.Value.ObjectId == "The Forgotten Crown")
+                                    TreasureItems.Add(Treasureitem.Value.ObjectType);
+                                if (Treasureitem.Value.ObjectId == "The Twilight Gemstone")
+                                    TreasureItems.Add(Treasureitem.Value.ObjectType);
+                                if (Treasureitem.Value.ObjectId == "Bracer of the Guardian")
+                                    TreasureItems.Add(Treasureitem.Value.ObjectType);
+                                #endregion
+                                TreasureFind = "The Shatters Marked Spot";
                             }
                         }
 
@@ -1155,15 +1167,14 @@ namespace wServer.realm.entities.player
                         {
                                 for (int i = 3; i < Client.Player.Inventory.Length; i++) //Checks all open slots in inventory (not weapon slots)
                                 {
-
-                                    if (Client.Player.Inventory[i] == null) //Nothing in inventory slot
+                                endMethod = false;
+                                if (Client.Player.Inventory[i] == null) //Nothing in inventory slot
                                     {
                                         Owner.Timers.Add(new WorldTimer(1, (w, t) => w.LeaveWorld(ground))); //Remove Treasure
                                         Client.Player.Inventory[i] = Client.Player.Manager.GameData.Items[(ushort)t1]; //Give Item
                                         Client.Player.UpdateCount++; //Update Stuff
                                         Client.Player.SaveToCharacter();
                                         Client.Player.Client.Save();
-                                        endMethod = false;
                                         foundTreasure = true; //Won't Send Open Slot Info
                                         break; //Stops Checking Inventory
                                     }

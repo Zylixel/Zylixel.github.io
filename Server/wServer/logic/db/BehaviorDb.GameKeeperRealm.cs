@@ -174,15 +174,7 @@ namespace wServer.logic
                     ),
                 new State("Shatters",
                     new ApplySetpiece("KeeperShatters"),
-                    new Taunt(true, "Remember this king? He's Nothing compared to me"),
-                    new TimedTransition(3000, "ContShatts")
-                    ),
-                new State("ContShatts",
-                    new Order(999, "Keeper Crown", "die"),
-                    new Order(999, "Keeper Gilgor Boss", "LetsDoThis")
-                    ),
-                new State("Ocean",
-                    new ApplySetpiece("KeeperOcean")
+                    new Taunt(true, "Remember this king? He's Nothing compared to me")
                     )
                 )
             )
@@ -206,6 +198,29 @@ namespace wServer.logic
                         )
                     )
             )
+
+        .Init("Keeper Crown",
+                new State(
+                    new State("begin",
+                        new TimedTransition(5000, "die")
+                        ),
+                    new State("die",
+                        new Suicide()
+                    )
+                    )
+            )
+
+        .Init("Pillar of Gilgor",
+                new State(
+                    new State("begin",
+                        new ConditionalEffect(ConditionEffectIndex.Invulnerable, true)
+                        ),
+                    new State("Shoot",
+                        new Shoot(99, 1, coolDown: 3000, coolDownOffset: 1000)
+                    )
+                    )
+            )
+
         .Init("Keeper Gilgor Boss",
                 new State(
                     new State("init",
@@ -302,7 +317,7 @@ namespace wServer.logic
                         ),
                     new State("kill3",
                         new Order(999, "Keeper Support", "die"),
-                        new Taunt(true, "By, killing the gracious ones who provide life, you're offspring will be weakened!"),
+                        new Taunt(true, "By killing the gracious ones who provide life, you're offspring will be weakened!"),
                         new TimedTransition(1000, "disappear")
                         ),
                     new State("disappear",
@@ -311,10 +326,11 @@ namespace wServer.logic
                         new TimedTransition(500, "initShatts")
                         ),
                      new State("initShatts",
-                        new Order(999, "Keeper Gods Activator", "Shatters")
+                        new Order(999, "Keeper Gods Activator", "Shatters"),
+                        new TimedTransition(1000, "wait")
                         ),
-                     new State("LetsDoThis",
-                         new TimedTransition(2000, "fadeIn7")
+                     new State("wait",
+                         new TimedTransition(4000, "fadeIn7")
                          ),
                      new State("fadeIn7",
                         new Spawn("Keeper Gilgor Boss Appear", maxChildren: 1),
@@ -325,7 +341,19 @@ namespace wServer.logic
                         new TimedTransition(200, "LetsDoThis2")
                         ),
                     new State("LetsDoThis2",
-                        new Taunt(true, "I'm bored.... Time to die")
+                        new ReturnToSpawn(true, 0.9),
+                        new Taunt(true, "I summon my pillars from hell to take you to their creator"),
+                        new TimedTransition(1000, "ItsHappening")
+                        ),
+                    new State("ItsHappening",
+                        new TossObject("Pillar of Gilgor", 8, 0, coolDown: 1000000),
+                        new TossObject("Pillar of Gilgor", 8, 180, coolDown: 1000000),
+                        new ConditionalEffect(ConditionEffectIndex.Invincible, false),
+                        new TimedTransition(3000, "ShootThePillars1")
+                            ),
+                    new State("ShootThePillars1",
+                        new Taunt(true, "FIRE!"),
+                        new Order(99, "Pillar Of Gilgor", "Shoot")
                         )
                     )
             )

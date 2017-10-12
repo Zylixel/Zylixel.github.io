@@ -189,8 +189,9 @@ namespace wServer.realm
                         Tuple.Create("Ghost God", 0.09),
                         // Tuple.Create("Rock Bot", 0.05), Nobody Likes you
                         Tuple.Create("Djinn", 0.09),
-                        Tuple.Create("Leviathan", 0.09),
-                        Tuple.Create("Arena Headless Horseman", 0.01)
+                        Tuple.Create("Leviathan", 0.04), //-0.5
+                        Tuple.Create("Arena Headless Horseman", 0.01),
+                        Tuple.Create("The Uncommon Marked Spot", 0.1) 
                     })
                 },
             };

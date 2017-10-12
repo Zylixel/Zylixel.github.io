@@ -2,20 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="93f28b12-1fe2-4634-a4f6-ac52cc653dc2" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedAssets_lofiObj3Embed_.png" afterPath="$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedAssets_lofiObj3Embed_.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedAssets_lofiObj5Embed_.png" afterPath="$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedAssets_lofiObj5Embed_.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedAssets_lofiObj6Embed_.png" afterPath="$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedAssets_lofiObj6Embed_.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../client.swf" afterPath="$PROJECT_DIR$/../client.swf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../client.swf" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedAssets_chars16x16dEncounters2Embed_.png" afterPath="$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedAssets_chars16x16dEncounters2Embed_.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedData_EquipCXML.dat" afterPath="$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedData_EquipCXML.dat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Server/db/data/Descriptors.cs" afterPath="$PROJECT_DIR$/../Server/db/data/Descriptors.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Server/db/data/dat1.xml" afterPath="$PROJECT_DIR$/../Server/db/data/dat1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Server/wServer/logic/DamageCounter.cs" afterPath="$PROJECT_DIR$/../Server/wServer/logic/DamageCounter.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Server/wServer/logic/behaviors/PentaractStar.cs" afterPath="$PROJECT_DIR$/../Server/wServer/logic/behaviors/PentaractStar.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Server/wServer/logic/db/BehaviorDb.GameKeeperRealm.cs" afterPath="$PROJECT_DIR$/../Server/wServer/logic/db/BehaviorDb.GameKeeperRealm.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Server/wServer/logic/db/BehaviorDb.Mountain.cs" afterPath="$PROJECT_DIR$/../Server/wServer/logic/db/BehaviorDb.Mountain.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Server/wServer/logic/db/BehaviorDb.Shatters.cs" afterPath="$PROJECT_DIR$/../Server/wServer/logic/db/BehaviorDb.Shatters.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Server/wServer/logic/loot/LootDefs.cs" afterPath="$PROJECT_DIR$/../Server/wServer/logic/loot/LootDefs.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Server/wServer/realm/Oryx.cs" afterPath="$PROJECT_DIR$/../Server/wServer/realm/Oryx.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Server/wServer/realm/entities/player/Player.UseItem.cs" afterPath="$PROJECT_DIR$/../Server/wServer/realm/entities/player/Player.UseItem.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Server/wServer/realm/worlds/GameWorld.cs" afterPath="$PROJECT_DIR$/../Server/wServer/realm/worlds/GameWorld.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Server/wServer/realm/worlds/maps/ShattersMike2.jm" afterPath="$PROJECT_DIR$/../Server/wServer/realm/worlds/maps/ShattersMike2.jm" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -66,8 +63,8 @@
       <file leaf-file-name="EmbeddedData_EquipCXML.dat" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedData_EquipCXML.dat">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="694">
-              <caret line="20781" column="21" lean-forward="false" selection-start-line="20781" selection-start-column="21" selection-end-line="20781" selection-end-column="21" />
+            <state relative-caret-position="419">
+              <caret line="20795" column="25" lean-forward="false" selection-start-line="20795" selection-start-column="25" selection-end-line="20795" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -315,7 +312,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -331,6 +327,7 @@
         </subPane>
       </pane>
       <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -944,15 +941,16 @@
       <workItem from="1507150954821" duration="958000" />
       <workItem from="1507171960290" duration="883000" />
       <workItem from="1507258889880" duration="1232000" />
+      <workItem from="1507775202754" duration="1173000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="232253000" />
+    <option name="totallyTimeSpent" value="233426000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1924" height="1056" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -969,7 +967,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2446352" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2473176" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1390,8 +1388,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedData_EquipCXML.dat">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="694">
-          <caret line="20781" column="21" lean-forward="false" selection-start-line="20781" selection-start-column="21" selection-end-line="20781" selection-end-column="21" />
+        <state relative-caret-position="419">
+          <caret line="20795" column="25" lean-forward="false" selection-start-line="20795" selection-start-column="25" selection-end-line="20795" selection-end-column="25" />
           <folding />
         </state>
       </provider>
