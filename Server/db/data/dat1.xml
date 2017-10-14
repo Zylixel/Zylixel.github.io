@@ -80165,11 +80165,11 @@ The solid honey on this ring renews its wearer with incredible energy.
       <XpMult>0</XpMult>
       <Defense>15</Defense>
       <Projectile id="0">
-         <ObjectId>Blue Zombie Wave</ObjectId>
-         <Damage>80</Damage>
+         <ObjectId>Keeper Minion Purple</ObjectId>
+         <Damage>30</Damage>
          <Speed>80</Speed>
          <Size>80</Size>
-         <LifetimeMS>800</LifetimeMS>
+         <LifetimeMS>1000</LifetimeMS>
       </Projectile>
       <StunImmune/>
       <DisplayId>The Keeper's Minion</DisplayId>
@@ -80397,6 +80397,20 @@ The solid honey on this ring renews its wearer with incredible energy.
       <Size>200</Size>
       <LifetimeMS>800</LifetimeMS>
     </Projectile>
+    <Projectile id="1">
+      <ObjectId>Stone Slash</ObjectId>
+      <Damage>300</Damage>
+      <Speed>10</Speed>
+      <Size>200</Size>
+      <LifetimeMS>40000</LifetimeMS>
+    </Projectile>
+    <Projectile id="2">
+      <ObjectId>Stone Slash</ObjectId>
+      <Damage>100</Damage>
+      <Speed>20</Speed>
+      <Size>150</Size>
+      <LifetimeMS>40000</LifetimeMS>
+    </Projectile>
     <Texture>
         <File>invisible</File>
         <Index>0</Index>
@@ -80412,6 +80426,24 @@ The solid honey on this ring renews its wearer with incredible energy.
         <File>invisible</File>
         <Index>0</Index>
       </Texture>
+    </AltTexture>
+      <AltTexture id="3">
+        <AnimatedTexture>
+          <File>chars16x16dEncounters2</File>
+          <Index>98</Index>
+        </AnimatedTexture>
+      </AltTexture>
+      <AltTexture id="4">
+        <AnimatedTexture>
+          <File>chars16x16rEncounters</File>
+          <Index>115</Index>
+        </AnimatedTexture>
+      </AltTexture>
+      <AltTexture id="5">
+      <AnimatedTexture>
+        <File>chars16x16rEncounters</File>
+        <Index>66</Index>
+      </AnimatedTexture>
     </AltTexture>
     <Size>250</Size>
     <Quest/>
@@ -80884,7 +80916,7 @@ The solid honey on this ring renews its wearer with incredible energy.
   <Object type="0x6116" id="Amulet of the Gods">
     <Class>Equipment</Class>
     <Item/>
-    <DisplayId>Amulet of the Gods</DisplayId>
+    <DisplayId>Amulet of Gods</DisplayId>
     <Texture>
       <File>lofiObj9</File>
       <Index>0x83</Index>
@@ -81577,10 +81609,10 @@ The solid honey on this ring renews its wearer with incredible energy.
     <StunImmune/>
     <Enemy/>
     <Projectile id="0">
-      <ObjectId>Stone Slash</ObjectId>
+      <ObjectId>Pillar Strike</ObjectId>
       <Damage>150</Damage>
       <Speed>300</Speed>
-      <Size>20000</Size>
+      <Size>200</Size>
       <LifetimeMS>800</LifetimeMS>
     </Projectile>
     <AnimatedTexture>
@@ -81593,5 +81625,71 @@ The solid honey on this ring renews its wearer with incredible energy.
     <DisplayId>Pillar of Gilgor</DisplayId>
     <HitSound>monster/abyss_demons_hit</HitSound>
     <DeathSound>monster/dwarf_god_hit</DeathSound>
+  </Object>
+  <Object type="0x9001" id="Minion of Gilgor">
+    <Enemy/>
+    <Class>Character</Class>
+    <AnimatedTexture>
+      <File>chars8x8rEncounters</File>
+      <Index>126</Index>
+    </AnimatedTexture>
+    <Size>125</Size>
+    <ShadowSize>80</ShadowSize>
+    <HitSound>monster/abyss_demons_hit</HitSound>
+    <DeathSound>monster/dwarf_god_hit</DeathSound>
+    <MaxHitPoints>1500</MaxHitPoints>
+    <XpMult>0</XpMult>
+    <Defense>10</Defense>
+    <Projectile id="0">
+      <ObjectId>Stone Slash</ObjectId>
+      <Damage>80</Damage>
+      <Speed>80</Speed>
+      <Size>110</Size>
+      <LifetimeMS>800</LifetimeMS>
+    </Projectile>
+    <StunImmune/>
+    <DisplayId>Minion of Gilgor</DisplayId>
+  </Object>
+  <Object type="0x9002" id="Pillar of Gilgor2">
+    <Group>Nexus</Group>
+    <Class>Character</Class>
+    <ParalyzeImmune/>
+    <NoElectric/>
+    <DazedImmune/>
+    <StasisImmune/>
+    <StunImmune/>
+    <Enemy/>
+    <Projectile id="0">
+      <ObjectId>Pillar Strike</ObjectId>
+      <Damage>250</Damage>
+      <Speed>400</Speed>
+      <Size>200</Size>
+      <LifetimeMS>800</LifetimeMS>
+    </Projectile>
+    <AnimatedTexture>
+      <File>chars16x16dEncounters2</File>
+      <Index>97</Index>
+    </AnimatedTexture>
+    <Size>200</Size>
+    <MaxHitPoints>50000</MaxHitPoints>
+    <Defense>20</Defense>
+    <DisplayId>Pillar of Gilgor</DisplayId>
+    <HitSound>monster/abyss_demons_hit</HitSound>
+    <DeathSound>monster/dwarf_god_hit</DeathSound>
+  </Object>
+  <Object type="0x9003" id="Pillar Strike">
+    <Class>Projectile</Class>
+    <Texture>
+      <File>lofiObj9</File>
+      <Index>0x84</Index>
+    </Texture>
+  </Object>
+  <Object type="0x9004" id="Keeper Minion Purple">
+    <Class>Projectile</Class>
+    <Texture>
+      <File>lofiObj9</File>
+      <Index>0x85</Index>
+    </Texture>
+    <AngleCorrection>3</AngleCorrection>
   </Object>
 </Objects>

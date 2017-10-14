@@ -19535,12 +19535,13 @@ An awe-inspiring sword gifted to only the most worthy mortals from the heavens t
       <XpMult>0</XpMult>
       <Defense>15</Defense>
       <Projectile id="0">
-         <ObjectId>Blue Zombie Wave</ObjectId>
-         <Damage>80</Damage>
+         <ObjectId>Keeper Minion Purple</ObjectId>
+         <Damage>30</Damage>
          <Speed>80</Speed>
          <Size>80</Size>
-         <LifetimeMS>800</LifetimeMS>
+         <LifetimeMS>1000</LifetimeMS>
       </Projectile>
+      <StunImmune/>
       <DisplayId>The Keeper's Minion</DisplayId>
    </Object>
   <Object type="0x6100" id="Keeper Minion Activator">
@@ -19676,35 +19677,6 @@ An awe-inspiring sword gifted to only the most worthy mortals from the heavens t
       </Texture>
       <DisplayId>Gilgor Keeper of the Realm</DisplayId>
    </Object>
-<Object type="0x2602" id="Boshy Gun">
-    <Class>Equipment</Class>
-    <Item />
-    <Texture>
-             <File>lofiObj5</File>
-             <Index>0x5e</Index>
-          </Texture>
-    <SlotType>3</SlotType>
-    <Description>It was Boshy Time</Description>
-    <RateOfFire>0.5</RateOfFire>
-    <OldSound>weapon/boshy_gun</OldSound>
-    <Projectile>
-      <ObjectId>Black Arrow</ObjectId>
-      <Speed>160</Speed>
-      <MinDamage>50</MinDamage>
-      <MaxDamage>70</MaxDamage>
-      <LifetimeMS>500</LifetimeMS>
-      <Size>40</Size>
-      <MultiHit />
-      <PassesCover />
-    </Projectile>
-    <NumProjectiles>5</NumProjectiles>
-    <ArcGap>5</ArcGap>
-    <BagType>6</BagType>
-    <FameBonus>5</FameBonus>
-    <feedPower>0</feedPower>
-    <Soulbound />
-    <DisplayId>Boshy Gun</DisplayId>
-  </Object>
   <Object type="0x6104" id="Keeper Support">
         <Group>Realm Keeper Game</Group>
         <Class>GameObject</Class>
@@ -19796,6 +19768,7 @@ An awe-inspiring sword gifted to only the most worthy mortals from the heavens t
               <Class>Character</Class>
               <Flying/>
               <ParalyzeImmune/>
+              <NoElectric/>
               <DazedImmune/>
               <StasisImmune/>
               <StunImmune/>
@@ -19806,6 +19779,20 @@ An awe-inspiring sword gifted to only the most worthy mortals from the heavens t
                 <Speed>50</Speed>
                 <Size>200</Size>
                 <LifetimeMS>800</LifetimeMS>
+              </Projectile>
+              <Projectile id="1">
+                <ObjectId>Stone Slash</ObjectId>
+                <Damage>300</Damage>
+                <Speed>10</Speed>
+                <Size>200</Size>
+                <LifetimeMS>40000</LifetimeMS>
+              </Projectile>
+              <Projectile id="2">
+                <ObjectId>Stone Slash</ObjectId>
+                <Damage>100</Damage>
+                <Speed>20</Speed>
+                <Size>150</Size>
+                <LifetimeMS>40000</LifetimeMS>
               </Projectile>
               <Texture>
                   <File>invisible</File>
@@ -19822,6 +19809,24 @@ An awe-inspiring sword gifted to only the most worthy mortals from the heavens t
                   <File>invisible</File>
                   <Index>0</Index>
                 </Texture>
+              </AltTexture>
+                <AltTexture id="3">
+                  <AnimatedTexture>
+                    <File>chars16x16dEncounters2</File>
+                    <Index>98</Index>
+                  </AnimatedTexture>
+                </AltTexture>
+                <AltTexture id="4">
+                  <AnimatedTexture>
+                    <File>chars16x16rEncounters</File>
+                    <Index>115</Index>
+                  </AnimatedTexture>
+                </AltTexture>
+                <AltTexture id="5">
+                <AnimatedTexture>
+                  <File>chars16x16rEncounters</File>
+                  <Index>66</Index>
+                </AnimatedTexture>
               </AltTexture>
               <Size>250</Size>
               <Quest/>
@@ -20057,7 +20062,7 @@ An awe-inspiring sword gifted to only the most worthy mortals from the heavens t
       <Object type="0x6116" id="Amulet of the Gods">
           <Class>Equipment</Class>
           <Item/>
-          <DisplayId>Amulet of the Gods</DisplayId>
+          <DisplayId>Amulet of Gods</DisplayId>
           <Texture>
             <File>lofiObj9</File>
             <Index>0x83</Index>
@@ -20794,30 +20799,97 @@ An awe-inspiring sword gifted to only the most worthy mortals from the heavens t
        <DisplayId>The Marked Spot</DisplayId>
      </Object>
      <Object type="0x9000" id="Pillar of Gilgor">
-       <Group>Nexus</Group>
-       <Class>Character</Class>
-       <ParalyzeImmune/>
-       <NoElectric/>
-       <DazedImmune/>
-       <StasisImmune/>
-       <StunImmune/>
-       <Enemy/>
-       <Projectile id="0">
-         <ObjectId>Stone Slash</ObjectId>
-         <Damage>300</Damage>
-         <Speed>200</Speed>
-         <Size>100</Size>
-         <LifetimeMS>800</LifetimeMS>
-       </Projectile>
-       <AnimatedTexture>
-         <File>chars16x16dEncounters2</File>
-         <Index>96</Index>
-       </AnimatedTexture>
-       <Size>150</Size>
-       <MaxHitPoints>50000</MaxHitPoints>
-       <Defense>20</Defense>
-       <DisplayId>Pillar of Gilgor</DisplayId>
-       <HitSound>monster/abyss_demons_hit</HitSound>
-       <DeathSound>monster/dwarf_god_hit</DeathSound>
-     </Object>
+         <Group>Nexus</Group>
+         <Class>Character</Class>
+         <ParalyzeImmune/>
+         <NoElectric/>
+         <DazedImmune/>
+         <StasisImmune/>
+         <StunImmune/>
+         <Enemy/>
+         <Projectile id="0">
+           <ObjectId>Pillar Strike</ObjectId>
+           <Damage>150</Damage>
+           <Speed>300</Speed>
+           <Size>200</Size>
+           <LifetimeMS>800</LifetimeMS>
+         </Projectile>
+         <AnimatedTexture>
+           <File>chars16x16dEncounters2</File>
+           <Index>96</Index>
+         </AnimatedTexture>
+         <Size>200</Size>
+         <MaxHitPoints>50000</MaxHitPoints>
+         <Defense>20</Defense>
+         <DisplayId>Pillar of Gilgor</DisplayId>
+         <HitSound>monster/abyss_demons_hit</HitSound>
+         <DeathSound>monster/dwarf_god_hit</DeathSound>
+       </Object>
+       <Object type="0x9001" id="Minion of Gilgor">
+         <Enemy/>
+         <Class>Character</Class>
+         <AnimatedTexture>
+           <File>chars8x8rEncounters</File>
+           <Index>126</Index>
+         </AnimatedTexture>
+         <Size>125</Size>
+         <ShadowSize>80</ShadowSize>
+         <HitSound>monster/abyss_demons_hit</HitSound>
+         <DeathSound>monster/dwarf_god_hit</DeathSound>
+         <MaxHitPoints>1500</MaxHitPoints>
+         <XpMult>0</XpMult>
+         <Defense>10</Defense>
+         <Projectile id="0">
+           <ObjectId>Stone Slash</ObjectId>
+           <Damage>80</Damage>
+           <Speed>80</Speed>
+           <Size>110</Size>
+           <LifetimeMS>800</LifetimeMS>
+         </Projectile>
+         <StunImmune/>
+         <DisplayId>Minion of Gilgor</DisplayId>
+       </Object>
+       <Object type="0x9002" id="Pillar of Gilgor2">
+         <Group>Nexus</Group>
+         <Class>Character</Class>
+         <ParalyzeImmune/>
+         <NoElectric/>
+         <DazedImmune/>
+         <StasisImmune/>
+         <StunImmune/>
+         <Enemy/>
+         <Projectile id="0">
+           <ObjectId>Pillar Strike</ObjectId>
+           <Damage>250</Damage>
+           <Speed>400</Speed>
+           <Size>200</Size>
+           <LifetimeMS>800</LifetimeMS>
+         </Projectile>
+         <AnimatedTexture>
+           <File>chars16x16dEncounters2</File>
+           <Index>97</Index>
+         </AnimatedTexture>
+         <Size>200</Size>
+         <MaxHitPoints>50000</MaxHitPoints>
+         <Defense>20</Defense>
+         <DisplayId>Pillar of Gilgor</DisplayId>
+         <HitSound>monster/abyss_demons_hit</HitSound>
+         <DeathSound>monster/dwarf_god_hit</DeathSound>
+       </Object>
+       <Object type="0x9003" id="Pillar Strike">
+         <Class>Projectile</Class>
+         <Texture>
+           <File>lofiObj9</File>
+           <Index>0x84</Index>
+           <AngleCorrection>1</AngleCorrection>
+         </Texture>
+       </Object>
+       <Object type="0x9004" id="Keeper Minion Purple">
+           <Class>Projectile</Class>
+           <Texture>
+             <File>lofiObj9</File>
+             <Index>0x85</Index>
+           </Texture>
+           <AngleCorrection>2</AngleCorrection>
+         </Object>
 </Objects>

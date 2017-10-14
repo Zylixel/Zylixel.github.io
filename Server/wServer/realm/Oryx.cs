@@ -443,11 +443,12 @@ namespace wServer.realm
                     diff[i] = enemyCounts[i] - enemyMaxCounts[i];
                     c++;
                 }
-                else if (enemyCounts[i] < enemyMaxCounts[i] * 0.75) //Add some
+               /* else if (enemyCounts[i] < enemyMaxCounts[i] * 0.75) //Add some
                 {
                     state[i] = 2;
                     diff[i] = enemyMaxCounts[i] - enemyCounts[i];
                 }
+                */
                 else
                 {
                     state[i] = 0;
@@ -472,7 +473,7 @@ namespace wServer.realm
             }
 
             int w = world.Map.Width, h = world.Map.Height;
-            for (var i = 0; i < state.Length; i++)  //Add
+            /*for (var i = 0; i < state.Length; i++)  //Add
             {
                 if (state[i] != 2) continue;
                 var x = diff[i];
@@ -484,7 +485,7 @@ namespace wServer.realm
 
                     j += Spawn(world.Manager.GameData.ObjectDescs[objType], t, w, h);
                 }
-            }
+            }*/
             RecalculateEnemyCount();
 
             GC.Collect();
