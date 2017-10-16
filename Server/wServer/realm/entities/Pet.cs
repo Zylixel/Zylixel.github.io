@@ -178,15 +178,14 @@ namespace wServer.realm.entities
             if (checkRarity)
             {
                 if (FirstPetLevel.Ability == ability) return FirstPetLevel;
-                else if (SecondPetLevel.Ability == ability && PetRarity >= Rarity.Uncommon) return SecondPetLevel;
-                else if (ThirdPetLevel.Ability == ability && PetRarity >= Rarity.Legendary) return ThirdPetLevel;
+                if (SecondPetLevel.Ability == ability && PetRarity >= Rarity.Uncommon) return SecondPetLevel;
+                if (ThirdPetLevel.Ability == ability && PetRarity >= Rarity.Legendary) return ThirdPetLevel;
                 return null;
             }
-            else
             {
                 if (FirstPetLevel.Ability == ability) return FirstPetLevel;
-                else if (SecondPetLevel.Ability == ability) return SecondPetLevel;
-                else if (ThirdPetLevel.Ability == ability) return ThirdPetLevel;
+                if (SecondPetLevel.Ability == ability) return SecondPetLevel;
+                if (ThirdPetLevel.Ability == ability) return ThirdPetLevel;
                 return null;
             }
         }
@@ -211,7 +210,7 @@ namespace wServer.realm.entities
                     SkinName = skin.DisplayId,
                     Skin = skin.ObjectType,
                     Type = petStruct.ObjectType,
-                    Abilities = GetPetAbilites(egg, petStruct),
+                    Abilities = GetPetAbilites(egg, petStruct)
                 };
 
                 switch (item.Rarity)
@@ -293,7 +292,7 @@ namespace wServer.realm.entities
 
         private static List<AbilityItem> GetPetAbilites(Item egg, PetStruct petStruct)
         {
-            List<Ability> abilities = new List<Ability>()
+            List<Ability> abilities = new List<Ability>
             {
                 Ability.AttackClose,
                 Ability.AttackFar,
@@ -408,7 +407,7 @@ namespace wServer.realm.entities
         public bool IsVisibleToEnemy()
         {
             //Todo: Implement decoy here
-            if (HasConditionEffect(global::ConditionEffectIndex.Stasis)) return false;
+            if (HasConditionEffect(ConditionEffectIndex.Stasis)) return false;
             return true;
         }
 

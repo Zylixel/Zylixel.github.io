@@ -318,14 +318,6 @@ namespace terrain
         private void DrawCurveSegment(
             double x1, double y1, double x2, double y2,
             double x3, double y3, double x4, double y4,
-            double tension, T val, int width)
-        {
-            DrawCurveSegment(x1, y1, x2, y2, x3, y3, x4, y4, tension, t => val, width);
-        }
-
-        private void DrawCurveSegment(
-            double x1, double y1, double x2, double y2,
-            double x3, double y3, double x4, double y4,
             double tension, Func<T, T> transform, int width)
         {
             // Determine distances between controls points (bounding rect) to find the optimal stepsize

@@ -31,8 +31,7 @@ namespace wServer.networking.handlers
                     {
                         if(client.Player.Guild[client.Account.AccountId].Rank <= p.Guild[p.AccountId].Rank && p.Guild.Name != client.Player.Guild.Name)
                             return;
-
-                        var g = db.ChangeGuild(p.Client.Account, p.Client.Account.Guild.Id, p.Guild[p.AccountId].Rank, p.Client.Account.Guild.Fame, true);
+                        
                         client.Player.Guild.RemoveFromGuild(client.Player, p);
                     }
                     else

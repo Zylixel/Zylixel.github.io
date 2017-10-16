@@ -73,7 +73,6 @@ namespace wServer.realm.setpieces
                 };
             }
         }
-        private readonly Random rand = new Random();
 
         public int Size
         {

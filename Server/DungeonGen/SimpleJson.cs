@@ -526,7 +526,6 @@ namespace Json
 
 		private static readonly char[] EscapeTable;
 		private static readonly char[] EscapeCharacters = { '"', '\\', '\b', '\f', '\n', '\r', '\t' };
-		private static readonly string EscapeCharactersString = new string(EscapeCharacters);
 
 		static SimpleJson()
 		{

@@ -287,7 +287,6 @@ namespace wServer.realm.entities.player
                     xpFreeTimer = (float)item.Timer == -1.0 ? false : true;
                     return false;
                 }
-                else
                 {
                     SendInfo("You have already an active XP Booster.");
                     return true;
@@ -302,7 +301,6 @@ namespace wServer.realm.entities.player
                     lootDropBoostFreeTimer = (float)item.Timer == -1.0 ? false : true;
                     return false;
                 }
-                else
                 {
                     SendInfo("You have already an active Loot Drop Booster.");
                     return true;
@@ -317,7 +315,6 @@ namespace wServer.realm.entities.player
                     lootTierBoostFreeTimer = (float)item.Timer == -1.0 ? false : true;
                     return false;
                 }
-                else
                 {
                     SendInfo("You have already an active Loot Tier Booster.");
                     return true;
@@ -1100,7 +1097,7 @@ namespace wServer.realm.entities.player
                                 if (Treasureitem.Value.Tier <= 7 && Treasureitem.Value.SlotType == 24) //Katana
                                     TreasureItems.Add(Treasureitem.Value.ObjectType);
                                 if (Treasureitem.Value.Tier <= 4)
-                                    if (Treasureitem.Value.Usable == true && Treasureitem.Value.MpCost >= 1) //Abilites
+                                    if (Treasureitem.Value.Usable && Treasureitem.Value.MpCost >= 1) //Abilites
                                         TreasureItems.Add(Treasureitem.Value.ObjectType);
                                 if (Treasureitem.Value.Tier <= 4 && Treasureitem.Value.SlotType == 11) //Rings
                                     TreasureItems.Add(Treasureitem.Value.ObjectType);
@@ -1125,7 +1122,7 @@ namespace wServer.realm.entities.player
                                 if (Treasureitem.Value.Tier <= 11 && Treasureitem.Value.SlotType == 24) //Katana
                                     TreasureItems.Add(Treasureitem.Value.ObjectType);
                                 if (Treasureitem.Value.Tier <= 5)
-                                    if (Treasureitem.Value.Usable == true && Treasureitem.Value.MpCost >= 1) //Abilites
+                                    if (Treasureitem.Value.Usable && Treasureitem.Value.MpCost >= 1) //Abilites
                                         TreasureItems.Add(Treasureitem.Value.ObjectType);
                                 if (Treasureitem.Value.Tier <= 11 && Treasureitem.Value.SlotType == 11) //Rings
                                     TreasureItems.Add(Treasureitem.Value.ObjectType);

@@ -2,12 +2,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using wServer.networking.cliPackets;
 using wServer.networking.svrPackets;
-using wServer.realm.commands;
-using wServer.realm.entities;
 using wServer.realm.entities.player;
 
 #endregion
@@ -31,7 +26,6 @@ namespace wServer.realm.commands
                         player.SendHelp("Usage: /guild <text>");
                         return false;
                     }
-                    else
                     {
                         player.Guild.Chat(player, saytext.ToSafeText());
                         return true;
@@ -43,8 +37,7 @@ namespace wServer.realm.commands
                     return false;
                 }
             }
-            else
-                player.SendInfo("You need to be in a guild to use guild chat!");
+            player.SendInfo("You need to be in a guild to use guild chat!");
             return false;
         }
     }
@@ -61,7 +54,7 @@ namespace wServer.realm.commands
                 {
                     var saytext = string.Join(" ", args);
 
-                    if (String.IsNullOrWhiteSpace(saytext))
+                    if (string.IsNullOrWhiteSpace(saytext))
                     {
                         player.SendHelp("Usage: /g <text>");
                         return false;
@@ -78,8 +71,7 @@ namespace wServer.realm.commands
                     return false;
                 }
             }
-            else
-                player.SendInfo("You need to be in a guild to use guild chat!");
+            player.SendInfo("You need to be in a guild to use guild chat!");
             return false;
         }
     }
@@ -104,10 +96,7 @@ namespace wServer.realm.commands
 
                     if (target == null)
                     {
-                        player.SendInfoWithTokens("server.invite_notfound", new KeyValuePair<string, object>[1]
-                        {
-                            new KeyValuePair<string, object>("player", args[0])
-                        });
+                        player.SendInfoWithTokens("server.invite_notfound", new KeyValuePair<string, object>("player", args[0]));
                         return false;
                     }
                     if (!target.NameChosen || player.Dist(target) > 20)

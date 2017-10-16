@@ -2,7 +2,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Xml.Linq;
 using log4net;
 using wServer.networking.svrPackets;
@@ -113,7 +112,6 @@ namespace wServer.realm.entities.merchant
                                         cmd.Parameters.AddWithValue("@fame", Price);
                                         cmd.ExecuteNonQuery();
                                     }
-                                    using (Database db3 = new Database())
                                     {
                                         log.Error("Attemping to find player to give fame to: " + MType + " | " + Price);
                                         MySqlCommand cmd = db.CreateQuery();
@@ -128,10 +126,9 @@ namespace wServer.realm.entities.merchant
                                             accID = rdr.GetInt32("id");
                                         }
                                     }
-                                    using (Database db4 = new Database())
                                     {
                                         log.Error("Updating Player Info...");
-                                        MySqlCommand cmd1 = db4.CreateQuery();
+                                        MySqlCommand cmd1 = db.CreateQuery();
                                         cmd1.CommandText = "UPDATE stats SET fame = fame + @Price WHERE accId=@accId";
                                         cmd1.Parameters.AddWithValue("@accId", accID);
                                         cmd1.Parameters.AddWithValue("@Price", Price);
@@ -295,8 +292,7 @@ namespace wServer.realm.entities.merchant
         public void ResolveMType()
         {
             MType = -1;
-            var list = new int[0];
-                list = MerchantLists.ZyList;
+            var list = MerchantLists.ZyList;
 
             if (AddedTypes == null) AddedTypes = new List<KeyValuePair<string, int>>();
             list.Shuffle();

@@ -10,7 +10,6 @@ namespace wServer.logic.transitions
 {
     public class EntityExistsTransition : Transition
     {
-        private static readonly ILog log = LogManager.GetLogger(typeof(Transition));
 
         //State storage: none
 

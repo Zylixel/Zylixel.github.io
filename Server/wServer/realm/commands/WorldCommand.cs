@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using db;
 using wServer.networking.cliPackets;
 using wServer.networking.svrPackets;
 using wServer.realm.entities;
@@ -29,7 +28,7 @@ namespace wServer.realm.commands
                 Port = Program.Settings.GetValue<int>("port"),
                 GameId = World.TUT_ID,
                 Name = "Tutorial",
-                Key = Empty<byte>.Array,
+                Key = Empty<byte>.Array
             });
             return true;
         }
@@ -201,7 +200,7 @@ namespace wServer.realm.commands
             {
                 if (msg.ToLower() == "private muledump")
                 {
-                    player.Client.SendPacket(new TextPacket() //echo to self
+                    player.Client.SendPacket(new TextPacket //echo to self
                     {
                         ObjectId = player.Id,
                         BubbleTime = 10,
@@ -218,7 +217,7 @@ namespace wServer.realm.commands
                         cmd.CommandText = "UPDATE accounts SET publicMuledump=0 WHERE id=@accId;";
                         cmd.Parameters.AddWithValue("@accId", player.AccountId);
                         cmd.ExecuteNonQuery();
-                        player.Client.SendPacket(new TextPacket()
+                        player.Client.SendPacket(new TextPacket
                         {
                             ObjectId = -1,
                             BubbleTime = 10,
@@ -232,7 +231,7 @@ namespace wServer.realm.commands
                 }
                 else if (msg.ToLower() == "public muledump")
                 {
-                    player.Client.SendPacket(new TextPacket() //echo to self
+                    player.Client.SendPacket(new TextPacket //echo to self
                     {
                         ObjectId = player.Id,
                         BubbleTime = 10,
@@ -249,7 +248,7 @@ namespace wServer.realm.commands
                         cmd.Parameters.AddWithValue("@accId", player.AccountId);
                         cmd.ExecuteNonQuery();
 
-                        player.Client.SendPacket(new TextPacket()
+                        player.Client.SendPacket(new TextPacket
                         {
                             ObjectId = -1,
                             BubbleTime = 10,
@@ -263,7 +262,7 @@ namespace wServer.realm.commands
                 }
                 else
                 {
-                    player.Client.SendPacket(new TextPacket() //echo to self
+                    player.Client.SendPacket(new TextPacket //echo to self
                     {
                         ObjectId = player.Id,
                         BubbleTime = 10,
@@ -274,7 +273,7 @@ namespace wServer.realm.commands
                         CleanText = ""
                     });
 
-                    player.Client.SendPacket(new TextPacket()
+                    player.Client.SendPacket(new TextPacket
                     {
                         ObjectId = -1,
                         BubbleTime = 10,
@@ -292,7 +291,7 @@ namespace wServer.realm.commands
             {
                 if (i.Account.NameChosen && i.Account.Name.EqualsIgnoreCase(playername))
                 {
-                    player.Client.SendPacket(new TextPacket() //echo to self
+                    player.Client.SendPacket(new TextPacket //echo to self
                     {
                         ObjectId = player.Id,
                         BubbleTime = 10,
@@ -303,7 +302,7 @@ namespace wServer.realm.commands
                         CleanText = ""
                     });
 
-                    i.SendPacket(new TextPacket() //echo to /tell player
+                    i.SendPacket(new TextPacket //echo to /tell player
                     {
                         ObjectId = i.Player.Owner.Id == player.Owner.Id ? player.Id : -1,
                         BubbleTime = 10,

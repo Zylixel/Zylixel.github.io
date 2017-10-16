@@ -184,7 +184,8 @@ namespace wServer.logic
                     new Reproduce(densityMax: 1)
                     ),
                 new TierLoot(6, ItemType.Armor, 0.015),
-                new ItemLoot("Health Potion", 0.03)
+                new ItemLoot("Health Potion", 0.03),
+                new ItemLoot("Other Side Key 1", 0.01)
             )
             .Init("Darkness Golem",
                 new State(

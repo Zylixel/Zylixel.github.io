@@ -37,9 +37,9 @@ namespace wServer.realm
 
         private readonly Random rand = new Random();
         private GameWorld world;
-        public bool ClosingStarted = false;
-        public bool RealmClosed = false;
-        private bool disposed = false;
+        public bool ClosingStarted;
+        public bool RealmClosed;
+        private bool disposed;
         private long prevTick;
 
         private int x;
@@ -472,8 +472,8 @@ namespace wServer.realm
                 if (c == 0) break;
             }
 
-            int w = world.Map.Width, h = world.Map.Height;
-            /*for (var i = 0; i < state.Length; i++)  //Add
+            /*int w = world.Map.Width, h = world.Map.Height;
+            for (var i = 0; i < state.Length; i++)  //Add
             {
                 if (state[i] != 2) continue;
                 var x = diff[i];

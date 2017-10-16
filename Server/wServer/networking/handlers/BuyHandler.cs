@@ -21,7 +21,6 @@ namespace wServer.networking.handlers
             {
                 if (client.Player.Owner == null) return;
                 SellableObject obj = client.Player.Owner.GetEntity(packet.ObjectId) as SellableObject;
-                int quantity = packet.Quantity;
                     if (obj != null)
                         obj.Buy(client.Player);
             }, PendingPriority.Networking);

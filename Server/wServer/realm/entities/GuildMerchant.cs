@@ -1,7 +1,6 @@
 ﻿#region
 
 using db;
-using System;
 using wServer.networking.svrPackets;
 using wServer.realm.entities.player;
 

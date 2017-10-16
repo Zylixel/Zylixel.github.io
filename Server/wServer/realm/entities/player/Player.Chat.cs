@@ -47,7 +47,7 @@ namespace wServer.realm.entities.player
 
         public void SendInfo(string text)
         {
-            Client.SendPacket(new TextPacket()
+            Client.SendPacket(new TextPacket
             {
                 BubbleTime = 0,
                 Stars = -1,
@@ -57,7 +57,7 @@ namespace wServer.realm.entities.player
         }
         public void SendError(string text)
         {
-            Client.SendPacket(new TextPacket()
+            Client.SendPacket(new TextPacket
             {
                 BubbleTime = 0,
                 Stars = -1,
@@ -67,7 +67,7 @@ namespace wServer.realm.entities.player
         }
         public void SendpsrText(string text)
         {
-            Client.SendPacket(new TextPacket()
+            Client.SendPacket(new TextPacket
             {
                 BubbleTime = 0,
                 Stars = -1,
@@ -77,7 +77,7 @@ namespace wServer.realm.entities.player
         }
         public void SendHelp(string text)
         {
-            Client.SendPacket(new TextPacket()
+            Client.SendPacket(new TextPacket
             {
                 BubbleTime = 0,
                 Stars = -1,
@@ -87,7 +87,7 @@ namespace wServer.realm.entities.player
         }
         public void SendEnemy(string name, string text)
         {
-            Client.SendPacket(new TextPacket()
+            Client.SendPacket(new TextPacket
             {
                 BubbleTime = 0,
                 Stars = -1,
@@ -97,7 +97,7 @@ namespace wServer.realm.entities.player
         }
         public void SendText(string sender, string text)
         {
-            Client.SendPacket(new TextPacket()
+            Client.SendPacket(new TextPacket
             {
                 BubbleTime = 0,
                 Stars = -1,

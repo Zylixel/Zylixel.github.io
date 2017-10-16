@@ -74,7 +74,6 @@ namespace wServer.networking.handlers
 
                 if (cmd.ExecuteNonQuery() > 0)
                 {
-                    World target = client.Manager.Worlds[client.TargetWorld];
                     client.SendPacket(new Create_SuccessPacket
                     {
                         CharacterID = client.Character.CharacterId,

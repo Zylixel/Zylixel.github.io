@@ -169,7 +169,6 @@ namespace terrain
 
         private enum Mode
         {
-            None,
             Erase,
             Average,
             MAX

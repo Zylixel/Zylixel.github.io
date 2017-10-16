@@ -195,7 +195,7 @@ namespace wServer.logic.loot
                     .ToArray();
                 foreach (Item i in candidates)
                     if (!(i.Tier == -1))
-                        lootDefs.Add(new LootDef(i, ((i.Tier * -2) + 10) * 0.005, lootState));
+                        lootDefs.Add(new LootDef(i, ((i.Tier * -2) + 10) * 0.0005, lootState));
             }
         }
     }

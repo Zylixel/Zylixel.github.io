@@ -290,7 +290,7 @@ namespace wServer.realm.entities.player
 
         public void Damage(int dmg, Entity chr)
         {
-            if (CheckMantleResurrect(MathsUtils.GenerateProb(100)))
+            if (CheckMantleResurrect())
                return;
             // if (CheckAshRobe(MathsUtils.GenerateProb(100)))
             //    return;
@@ -523,7 +523,7 @@ namespace wServer.realm.entities.player
                     break;
             }
 
-            if (killPlayer == true)
+            if (killPlayer)
             {
                 try
                 {
@@ -648,7 +648,7 @@ namespace wServer.realm.entities.player
             return false;
         }
 
-        private bool CheckMantleResurrect(bool doesRevive)
+        private bool CheckMantleResurrect()
         {
             for (int i = 0; i < 4; i++)
             {
@@ -688,18 +688,6 @@ namespace wServer.realm.entities.player
                 }
             }
             return false;
-        }
-        private bool CheckPendantHP(bool PendHpCheck)
-        {
-            if (HP > MaxHp / 2)
-            {
-                PendantReady = 1;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
         }
   //      private bool CheckAshRobe(bool doesWork)
   //      {

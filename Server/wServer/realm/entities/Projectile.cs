@@ -137,7 +137,6 @@ namespace wServer.realm.entities
                 return false;
             }
             bool penetrateObsta = Descriptor.PassesCover;
-            bool penetrateEnemy = Descriptor.MultiHit;
 
             ushort objId = Owner.Map[(int)pos.X, (int)pos.Y].ObjType;
             if (objId != 0 &&

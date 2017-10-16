@@ -18,16 +18,13 @@ namespace wServer.realm.setpieces
         private static readonly string Tree = "Tree Jungle";
         private static readonly string Water = "GhostWater";
         private static readonly string Sand = "Ghost Water Beach";
-        
-        Random rand = new Random();
+
         public void RenderSetPiece(World world, IntPoint pos)
         {
             XmlData dat = world.Manager.GameData;
             int DarkGrassradiu = 17;
             int sandRadius = 17;
             int waterRadius = 14;
-
-            List<IntPoint> border = new List<IntPoint>();
 
             int[,] o = new int[Size, Size];
             int[,] t = new int[Size, Size];

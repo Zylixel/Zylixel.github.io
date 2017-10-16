@@ -453,6 +453,8 @@
     <Compile Include="realm\setpieces\Building.cs" />
     <Compile Include="realm\setpieces\Castle.cs" />
     <Compile Include="realm\setpieces\BottledEvil.cs" />
+    <Compile Include="realm\setpieces\KeeperMain.cs" />
+    <Compile Include="realm\setpieces\KeeperOryx.cs" />
     <Compile Include="realm\setpieces\NexusDark.cs" />
     <Compile Include="realm\setpieces\NewWorldWaterFill.cs" />
     <Compile Include="realm\setpieces\NexusLight.cs" />
@@ -650,7 +652,6 @@
     <EmbeddedResource Include="realm\worlds\maps\kitchen.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\oceantrench.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\OryxCastle.wmap" />
-    <EmbeddedResource Include="realm\worlds\maps\gameworld.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\PetYard_Legendary.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\tutorial.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\arena.wmap" />
@@ -659,7 +660,6 @@
     <EmbeddedResource Include="realm\worlds\maps\nexusLimbo.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\tomb.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\belladonnasGarden.wmap" />
-    <EmbeddedResource Include="realm\worlds\maps\shaitansmap.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\PetYard_Common.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\PetYard_Divine.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\PetYard_Rare.wmap" />
@@ -673,7 +673,6 @@
     <EmbeddedResource Include="realm\worlds\maps\snakepit.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\dailyQuest.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\candyland.wmap" />
-    <EmbeddedResource Include="realm\worlds\maps\forestmaze.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\pcave.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\spriteworld.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\nexus_winter.jm" />
@@ -710,6 +709,7 @@
     <EmbeddedResource Include="realm\worlds\maps\cemefinal.jm" />
     <EmbeddedResource Include="realm\worlds\maps\woodlandlabyrinth.jm" />
     <EmbeddedResource Include="realm\worlds\maps\crawling.wmap" />
+    <EmbeddedResource Include="realm\worlds\maps\shaitansmap.wmap" />
     <None Include="wServer.cfg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

@@ -199,8 +199,6 @@ namespace DungeonGenerator {
 					if (collision.HitTest(target))
 						return null;
 
-					var linkY = new Range(src.Pos.Y, src.Pos.Y + src.Height).Intersection(
-						new Range(target.Pos.Y, target.Pos.Y + target.Height));
 					link = new Link(conn.Item1, src.Pos.Y + conn.Item2);
 					break;
 			}

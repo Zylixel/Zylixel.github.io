@@ -12,8 +12,6 @@ namespace wServer.realm.setpieces
         private static readonly string[] Ground = { "Dark Water", "Shallow Water", "Dark Grass" };
         private static readonly string[] Pillars = { "Grey Pillar", "Broken Grey Pillar" };
 
-        private readonly Random rand = new Random();
-
         private static byte[,] SetPiece //[Y, X]
         {
             get

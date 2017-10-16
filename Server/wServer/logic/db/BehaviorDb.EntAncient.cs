@@ -193,7 +193,8 @@ namespace wServer.logic
                 new TierLoot(2, ItemType.Ability, 0.25),
                 new TierLoot(3, ItemType.Ability, 0.05),
                 new ItemLoot("Health Potion", 0.7),
-                new ItemLoot("Magic Potion", 0.7)
+                new ItemLoot("Magic Potion", 0.7),
+                new ItemLoot("Other Side Key 1", 0.01)
             )
             .Init("Ent",
                 new State(

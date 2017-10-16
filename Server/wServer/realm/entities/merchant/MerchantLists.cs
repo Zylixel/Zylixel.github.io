@@ -30,10 +30,7 @@ namespace wServer.realm.entities
         public static int[] ClothingDyeList;
         public static int[] ZyList;
 
-        public static Dictionary<int, Tuple<int, CurrencyType>> prices = new Dictionary<int, Tuple<int, CurrencyType>>
-        {
-            
-        };
+        public static Dictionary<int, Tuple<int, CurrencyType>> prices = new Dictionary<int, Tuple<int, CurrencyType>>{};
 
         public static int[] store10List = {0xb41, 0xbab, 0xbad, 0xbac};
         public static int[] store11List = {0xb41, 0xbab, 0xbad, 0xbac};
@@ -164,21 +161,6 @@ namespace wServer.realm.entities
            "Crown", "Muscat", "Cabernet", "Vial of Pure Darkness", "Omnipotence Ring", "Draconis Potion", "Sauvignon Blanc", "Snake Oil", "Pollen Powder",
            "XP Booster Test"
 
-        };
-
-        private static readonly string[] noShopCloths =
-        {
-            "Large Ivory Dragon Scale Cloth", "Small Ivory Dragon Scale Cloth",
-            "Large Green Dragon Scale Cloth", "Small Green Dragon Scale Cloth",
-            "Large Midnight Dragon Scale Cloth", "Small Midnight Dragon Scale Cloth",
-            "Large Blue Dragon Scale Cloth", "Small Blue Dragon Scale Cloth",
-            "Large Red Dragon Scale Cloth", "Small Red Dragon Scale Cloth",
-            "Large Jester Argyle Cloth", "Small Jester Argyle Cloth",
-            "Large Alchemist Cloth", "Small Alchemist Cloth",
-            "Large Mosaic Cloth", "Small Mosaic Cloth",
-            "Large Spooky Cloth", "Small Spooky Cloth",
-            "Large Flame Cloth", "Small Flame Cloth",
-            "Large Heavy Chainmail Cloth", "Small Heavy Chainmail Cloth",
         };
     }
 }

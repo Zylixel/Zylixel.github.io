@@ -80166,10 +80166,17 @@ The solid honey on this ring renews its wearer with incredible energy.
       <Defense>15</Defense>
       <Projectile id="0">
          <ObjectId>Keeper Minion Purple</ObjectId>
-         <Damage>30</Damage>
+         <Damage>50</Damage>
          <Speed>80</Speed>
          <Size>80</Size>
          <LifetimeMS>1000</LifetimeMS>
+      </Projectile>
+  <Projectile id="1">
+         <ObjectId>Keeper Minion Purple</ObjectId>
+         <Damage>80</Damage>
+         <Speed>80</Speed>
+         <Size>100</Size>
+         <LifetimeMS>1500</LifetimeMS>
       </Projectile>
       <StunImmune/>
       <DisplayId>The Keeper's Minion</DisplayId>
@@ -80273,32 +80280,32 @@ The solid honey on this ring renews its wearer with incredible energy.
       <XpMult>0</XpMult>
       <DisplayId>{hauntedCemetery.Zombie_Rise}</DisplayId>
    </Object>
-  <Object type="0x6101" id="The Realm Keeper Key">
-      <Class>Equipment</Class>
-      <Item/>
-      <Texture>
-         <File>lofiObj9</File>
-         <Index>0x6e</Index>
-      </Texture>
-      <SlotType>10</SlotType>
-      <Description>Produced from those who destroy the realm. Molded by those who live in the realm. The end of all the realm.</Description>
-      <Sound>use_key</Sound>
-      <Consumable/>
-      <Activate id="Temp Portal">Create</Activate>
-      <feedPower>100</feedPower>
-      <DisplayId>The Realm Keeper Key</DisplayId>
-   </Object>
-  <Object type="0x6102" id="Temp Portal">
-      <Class>Portal</Class>
-      <IntergamePortal/>
-      <DungeonName>TheRealmKeeper</DungeonName>
-      <Texture>
-         <File>lofiObjBig</File>
-         <Index>0x139</Index>
-      </Texture>
-      <Size>60</Size>
-      <DisplayId>Temp Portal</DisplayId>
-   </Object>
+  <Object type="0x6101" id="The Other Side Key">
+    <Class>Equipment</Class>
+    <Item/>
+    <Texture>
+      <File>lofiObj9</File>
+      <Index>0x6e</Index>
+    </Texture>
+    <SlotType>10</SlotType>
+    <Description>Produced from those who destroy the realm. Molded by those who live in the realm. The end of all the realm.</Description>
+    <Sound>use_key</Sound>
+    <Consumable/>
+    <Activate id="The Other Side Portal">Create</Activate>
+    <feedPower>500</feedPower>
+    <DisplayId>The Other Side Key</DisplayId>
+  </Object>
+  <Object type="0x6102" id="The Other Side Portal">
+    <Class>Portal</Class>
+    <IntergamePortal/>
+    <DungeonName>The Other Side</DungeonName>
+    <Texture>
+      <File>lofiObj9</File>
+      <Index>0x86</Index>
+    </Texture>
+    <Size>60</Size>
+    <DisplayId>The Other Side Portal</DisplayId>
+  </Object>
   <Object type="0x6103" id="Keeper Gods Activator">
       <Class>Character</Class>
       <Texture>
@@ -80400,17 +80407,96 @@ The solid honey on this ring renews its wearer with incredible energy.
     <Projectile id="1">
       <ObjectId>Stone Slash</ObjectId>
       <Damage>300</Damage>
-      <Speed>10</Speed>
+      <Speed>50</Speed>
       <Size>200</Size>
       <LifetimeMS>40000</LifetimeMS>
     </Projectile>
     <Projectile id="2">
       <ObjectId>Stone Slash</ObjectId>
-      <Damage>100</Damage>
-      <Speed>20</Speed>
+      <Damage>200</Damage>
+      <Speed>40</Speed>
       <Size>150</Size>
       <LifetimeMS>40000</LifetimeMS>
     </Projectile>
+    <Projectile id="7">
+      <ObjectId>Fire Bolt</ObjectId>
+      <Damage>135</Damage>
+      <Speed>70</Speed>
+      <Size>80</Size>
+      <LifetimeMS>2500</LifetimeMS>
+    </Projectile>
+    <Projectile id="8">
+      <ObjectId>Green Star</ObjectId>
+      <Damage>160</Damage>
+      <Speed>70</Speed>
+      <Size>80</Size>
+      <LifetimeMS>2500</LifetimeMS>
+      <ConditionEffect duration="10">Slowed</ConditionEffect>
+    </Projectile>
+    <Projectile id="9">
+      <ObjectId>Blade</ObjectId>
+      <Damage>240</Damage>
+      <Speed>100</Speed>
+      <Size>80</Size>
+      <LifetimeMS>450</LifetimeMS>
+    </Projectile>
+    <Projectile id="3">
+      <ObjectId>Purple Star</ObjectId>
+      <Damage>160</Damage>
+      <Speed>55</Speed>
+      <Size>80</Size>
+      <LifetimeMS>3000</LifetimeMS>
+      <ConditionEffect duration="5">Blind</ConditionEffect>
+    </Projectile>
+    <Projectile id="4">
+      <ObjectId>Blue Star</ObjectId>
+      <Damage>160</Damage>
+      <Speed>105</Speed>
+      <Size>80</Size>
+      <LifetimeMS>1200</LifetimeMS>
+      <ConditionEffect duration="5">Confused</ConditionEffect>
+    </Projectile>
+    <Projectile id="5">
+      <ObjectId>Grey Star</ObjectId>
+      <Damage>160</Damage>
+      <Speed>45</Speed>
+      <Size>80</Size>
+      <LifetimeMS>3000</LifetimeMS>
+      <ConditionEffect duration="3">Quiet</ConditionEffect>
+    </Projectile>
+    <Projectile id="6">
+      <ObjectId>Red Star</ObjectId>
+      <Damage>160</Damage>
+      <Speed>55</Speed>
+      <Size>80</Size>
+      <LifetimeMS>3000</LifetimeMS>
+      <ArmorPiercing/>
+    </Projectile>
+    <Projectile id="7">
+         <ObjectId>Darkness Bolt</ObjectId>
+         <Damage>240</Damage>
+         <Speed>60</Speed>
+         <LifetimeMS>2000</LifetimeMS>
+         <Size>180</Size>
+         <MultiHit/>
+      </Projectile>
+      <Projectile id="8">
+         <ObjectId>Fire Boomerang</ObjectId>
+         <Damage>150</Damage>
+         <Speed>60</Speed>
+         <LifetimeMS>5000</LifetimeMS>
+         <ConditionEffect duration="5">Armor Broken</ConditionEffect>
+         <Boomerang/>
+         <MultiHit/>
+      </Projectile>
+      <Projectile id="9">
+         <ObjectId>Silver Shield</ObjectId>
+         <Damage>60</Damage>
+         <Speed>80</Speed>
+         <LifetimeMS>1200</LifetimeMS>
+         <ConditionEffect duration="1.2">Stunned</ConditionEffect>
+         <Size>200</Size>
+      </Projectile>
     <Texture>
         <File>invisible</File>
         <Index>0</Index>
@@ -80445,10 +80531,34 @@ The solid honey on this ring renews its wearer with incredible energy.
         <Index>66</Index>
       </AnimatedTexture>
     </AltTexture>
+    <AltTexture id="6">
+    <AnimatedTexture>
+      <File>chars16x16dEncounters2</File>
+      <Index>37</Index>
+    </AnimatedTexture>
+    </AltTexture>
+    <AltTexture id="7">
+      <AnimatedTexture>
+        <File>chars16x16dEncounters2</File>
+        <Index>99</Index>
+      </AnimatedTexture>
+    </AltTexture>
+    <AltTexture id="8">
+      <AnimatedTexture>
+        <File>chars16x16dEncounters2</File>
+        <Index>100</Index>
+      </AnimatedTexture>
+    </AltTexture>
+    <AltTexture id="9">
+    <AnimatedTexture>
+      <File>chars16x16dEncounters</File>
+      <Index>12</Index>
+    </AnimatedTexture>
+    </AltTexture>
     <Size>250</Size>
     <Quest/>
     <ShadowSize>0</ShadowSize>
-    <MaxHitPoints>500000</MaxHitPoints>
+    <MaxHitPoints>750000</MaxHitPoints>
     <Defense>40</Defense>
     <DisplayId>Giglor Keeper of the Realm</DisplayId>
     <HitSound>monster/abyss_demons_hit</HitSound>
@@ -81611,9 +81721,10 @@ The solid honey on this ring renews its wearer with incredible energy.
     <Projectile id="0">
       <ObjectId>Pillar Strike</ObjectId>
       <Damage>150</Damage>
-      <Speed>300</Speed>
+      <Speed>500</Speed>
       <Size>200</Size>
       <LifetimeMS>800</LifetimeMS>
+      <ParticleTrail intensity="1" lifetimeMS="800">0xFF0000</ParticleTrail>
     </Projectile>
     <AnimatedTexture>
       <File>chars16x16dEncounters2</File>
@@ -81662,9 +81773,10 @@ The solid honey on this ring renews its wearer with incredible energy.
     <Projectile id="0">
       <ObjectId>Pillar Strike</ObjectId>
       <Damage>250</Damage>
-      <Speed>400</Speed>
+      <Speed>500</Speed>
       <Size>200</Size>
       <LifetimeMS>800</LifetimeMS>
+      <ParticleTrail intensity="1" lifetimeMS="800">0xFF0000</ParticleTrail>
     </Projectile>
     <AnimatedTexture>
       <File>chars16x16dEncounters2</File>
@@ -81682,6 +81794,7 @@ The solid honey on this ring renews its wearer with incredible energy.
     <Texture>
       <File>lofiObj9</File>
       <Index>0x84</Index>
+      <AngleCorrection>2</AngleCorrection>
     </Texture>
   </Object>
   <Object type="0x9004" id="Keeper Minion Purple">
@@ -81691,5 +81804,109 @@ The solid honey on this ring renews its wearer with incredible energy.
       <Index>0x85</Index>
     </Texture>
     <AngleCorrection>3</AngleCorrection>
+  </Object>
+  <Object type="0x9005" id="Minion of Gilgor2">
+    <Enemy/>
+    <Class>Character</Class>
+    <AnimatedTexture>
+      <File>chars8x8rEncounters</File>
+      <Index>126</Index>
+    </AnimatedTexture>
+    <Size>125</Size>
+    <ShadowSize>80</ShadowSize>
+    <HitSound>monster/abyss_demons_hit</HitSound>
+    <DeathSound>monster/dwarf_god_hit</DeathSound>
+    <MaxHitPoints>1500</MaxHitPoints>
+    <XpMult>0</XpMult>
+    <Defense>10</Defense>
+    <Projectile id="0">
+      <ObjectId>Stone Slash</ObjectId>
+      <Damage>80</Damage>
+      <Speed>80</Speed>
+      <Size>110</Size>
+      <LifetimeMS>800</LifetimeMS>
+    </Projectile>
+    <StunImmune/>
+    <DisplayId>Minion of Gilgor</DisplayId>
+  </Object>
+  <Object type="0x9006" id="Keeper Craig">
+      <Class>Character</Class>
+    <Texture>
+      <File>invisible</File>
+      <Index>0</Index>
+    </Texture>
+    <AltTexture id="1">
+      <AnimatedTexture>
+        <File>chars8x8rMid</File>
+        <Index>0x02</Index>
+      </AnimatedTexture>
+    </AltTexture>
+      <HitSound>monster/slimes_death</HitSound>
+      <DeathSound>monster/flying_brain_death</DeathSound>
+      <Size>100</Size>
+      <DisplayId>{miniDungeonHub.Craig,_Intern_of_the_Mad_God}</DisplayId>
+   </Object>
+  <Object type="0x9007" id="Gilgor Artifact">
+    <DisplayId>{tombOfTheAncients.Pyramid_Artifact_1}</DisplayId>
+    <Enemy/>
+    <Class>Character</Class>
+    <AnimatedTexture>
+      <File>chars16x8dEncounters</File>
+      <Index>0</Index>
+    </AnimatedTexture>
+    <Size>120</Size>
+    <MaxHitPoints>3000</MaxHitPoints>
+    <Defense>50</Defense>
+    <XpMult>0.0</XpMult>
+    <Projectile id="0">
+      <ObjectId>Beam</ObjectId>
+      <Damage>100</Damage>
+      <Speed>200</Speed>
+      <Size>140</Size>
+      <LifetimeMS>400</LifetimeMS>
+      <ConditionEffect duration="2">Weak</ConditionEffect>
+    </Projectile>
+  </Object>
+<Object type="0x6200" id="Other Side Key 1">
+    <Class>Equipment</Class>
+    <Item/>
+    <Texture>
+      <File>lofiObj9</File>
+      <Index>0x6f</Index>
+    </Texture>
+    <SlotType>10</SlotType>
+    <Description>A fragment of the Other Side Key, find 2 others to make a whole</Description>
+    <Sound>use_key</Sound>
+    <BagType>4</BagType>
+    <feedPower>250</feedPower>
+    <DisplayId>Fragment of the Other Side Key</DisplayId>
+  </Object>
+<Object type="0x6201" id="Other Side Key 2">
+    <Class>Equipment</Class>
+    <Item/>
+    <Texture>
+      <File>lofiObj9</File>
+      <Index>0x7e</Index>
+    </Texture>
+    <SlotType>10</SlotType>
+    <Description>A fragment of the Other Side Key, find 2 others to make a whole</Description>
+    <Sound>use_key</Sound>
+    <BagType>4</BagType>
+    <feedPower>250</feedPower>
+    <DisplayId>Fragment of the Other Side Key</DisplayId>
+  </Object>
+<Object type="0x6202" id="Other Side Key 3">
+    <Class>Equipment</Class>
+    <Item/>
+    <Texture>
+      <File>lofiObj9</File>
+      <Index>0x7f</Index>
+    </Texture>
+    <SlotType>10</SlotType>
+    <Description>A fragment of the Other Side Key, find 2 others to make a whole</Description>
+    <Sound>use_key</Sound>
+    <BagType>4</BagType>
+    <feedPower>250</feedPower>
+    <DisplayId>Fragment of the Other Side Key</DisplayId>
   </Object>
 </Objects>

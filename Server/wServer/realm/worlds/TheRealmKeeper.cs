@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace wServer.realm.worlds
 {
-    public class TheRealmKeeper : World
+    public class TheOtherSide : World
     {
-        public TheRealmKeeper()
+        public TheOtherSide()
         {
             Name = "The Other Side";
             ClientWorldName = "The Other Side ";
             Background = 0;
-            Difficulty = 4;
+            Difficulty = 5;
             AllowTeleport = false;
         }
 

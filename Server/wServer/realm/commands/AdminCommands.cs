@@ -1571,7 +1571,6 @@ namespace wServer.realm.commands
         }
         protected override bool Process(Player player, RealmTime time, string[] args)
         {
-            var gw = player.Owner as GameWorld;
             player.tryUpgrade("force");
             return true;
         }

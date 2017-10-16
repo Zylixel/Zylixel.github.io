@@ -15,7 +15,7 @@ namespace terrain
     {
         public const int Size = 2048;
 
-        private static void Show(IEnumerable<MapPolygon> polys, IEnumerable<MapNode> plot)
+        /*private static void Show(IEnumerable<MapPolygon> polys, IEnumerable<MapNode> plot)
         {
             Bitmap map = new Bitmap(Size, Size);
             using (Graphics g = Graphics.FromImage(map))
@@ -158,7 +158,7 @@ namespace terrain
                 }
             buff.Unlock();
             return bmp;
-        }
+        }*/
 
         public static void Generate()
         {
@@ -209,8 +209,6 @@ namespace terrain
             //Render lands poly
             foreach (MapPolygon poly in map.Polygons.Where(_ => !_.IsWater))
             {
-                uint color = 0x00ffffff;
-                color |= (uint) (poly.DistanceToCoast*255) << 24;
                 rasterizer.FillPolygon(
                     poly.Nodes.SelectMany(_ =>
                     {

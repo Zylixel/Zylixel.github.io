@@ -14,8 +14,6 @@ namespace wServer.realm.setpieces
         private static readonly string Wall = "Iinvisible NoWalk";
         private static readonly string Floor = "Black";
 
-        private readonly Random rand = new Random();
-
 
         private static byte[,] SetPiece //[Y, X]
         {
@@ -126,8 +124,6 @@ namespace wServer.realm.setpieces
         private static readonly string Wall = "Iinvisible NoWalk";
         private static readonly string Floor = "Black";
 
-        private readonly Random rand = new Random();
-
         public int Size
         {
             get { return 50; }
@@ -171,11 +167,6 @@ namespace wServer.realm.setpieces
         private static readonly string Wall = "Iinvisible NoWalk";
         private static readonly string Floor = "Black";
 
-        //Ocean Rock
-
-
-        private readonly Random rand = new Random();
-
         public int Size
         {
             get { return 50; }
@@ -218,11 +209,6 @@ namespace wServer.realm.setpieces
     {
         private static readonly string Wall = "Iinvisible NoWalk";
         private static readonly string Floor = "Black";
-
-        //Ocean Rock
-
-
-        private readonly Random rand = new Random();
 
         public int Size
         {

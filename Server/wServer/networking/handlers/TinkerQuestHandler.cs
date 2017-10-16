@@ -35,7 +35,6 @@ namespace wServer.networking.handlers
                     cmd.CommandText = "UPDATE dailyquests SET tier=@tier WHERE accId=@accId;";
                     cmd.Parameters.AddWithValue("@accId", client.Account.AccountId);
                     cmd.Parameters.AddWithValue("@tier", tier);
-                    int v = cmd.ExecuteNonQuery();
                     client.Player.DailyQuest = db.GetDailyQuest(client.Account.AccountId, Manager.GameData);
                     client.Player.UpdateCount++;
                     client.Player.SaveToCharacter();

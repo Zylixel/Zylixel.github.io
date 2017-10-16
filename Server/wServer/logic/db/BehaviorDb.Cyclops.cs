@@ -69,7 +69,8 @@ namespace wServer.logic
                     new Spawn("Cyclops Noble", 5, coolDown: 10000),
                     new Spawn("Cyclops Prince", 5, coolDown: 10000),
                     new Spawn("Cyclops King", 5, coolDown: 10000)
-                    )
+                    ),
+                new ItemLoot("Other Side Key 3", 0.01)
             )
             .Init("Cyclops",
                 new State(

@@ -76,12 +76,12 @@ namespace wServer.realm.entities
             if (HP < 250 && !exploded)
             {
                 exploded = true;
-                Owner.BroadcastPacket(new ShowEffectPacket()
+                Owner.BroadcastPacket(new ShowEffectPacket
                 {
                     EffectType = EffectType.AreaBlast,
                     Color = new ARGB(0xffff0000),
                     TargetId = Id,
-                    PosA = new Position() { X = 1 }
+                    PosA = new Position { X = 1 }
                 }, null);
             }
             base.Tick(time);

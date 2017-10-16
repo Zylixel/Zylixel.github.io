@@ -28,8 +28,6 @@ namespace wServer.realm.setpieces
         private static readonly string F15 = "SN Bh Sd Sf";
         private static readonly string Ocean = "SNR s S W Dk D";
 
-        private readonly Random rand = new Random();
-
         public int Size
         {
             get { return 230; }

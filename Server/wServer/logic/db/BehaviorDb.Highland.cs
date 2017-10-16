@@ -504,7 +504,8 @@ namespace wServer.logic
                         new Follow(2, range: 2.5, acquireRange: 10.5, duration: 2200, coolDown: 3200),
                         new Wander(0.9)
                         )
-                    )
+                    ),
+                new ItemLoot("Other Side Key 3", 0.01)
             )
             .Init("Juvenile White Dragon",
                 new State(
@@ -517,7 +518,8 @@ namespace wServer.logic
                     ),
                 new TierLoot(7, ItemType.Weapon, 0.01),
                 new TierLoot(7, ItemType.Armor, 0.02),
-                new TierLoot(6, ItemType.Armor, 0.07)
+                new TierLoot(6, ItemType.Armor, 0.07),
+                new ItemLoot("Other Side Key 3", 0.01)
             )
             .Init("Adult White Dragon",
                 new State(
@@ -532,7 +534,8 @@ namespace wServer.logic
                 new ItemLoot("Magic Potion", 0.03),
                 new TierLoot(7, ItemType.Armor, 0.05),
                 new ItemLoot("Seal of the Divine", 0.015),
-                new ItemLoot("White Drake Egg", 0.004)
+                new ItemLoot("White Drake Egg", 0.004),
+                new ItemLoot("Other Side Key 3", 0.01)
             )
             .Init("Shield Orc Shield",
                 new State(

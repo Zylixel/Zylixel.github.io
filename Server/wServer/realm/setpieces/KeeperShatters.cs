@@ -205,8 +205,7 @@ namespace wServer.realm.setpieces
                     {
                         WmapTile tile = world.Map[x + pos.X, y + pos.Y].Clone();
                         tile.TileId = dat.IdToTileType[Yellow];
-                        tile.ObjType = dat.IdToObjectType[Crown];
-                        if (tile.ObjId == 0) tile.ObjId = world.GetNextEntityId();
+                        tile.ObjType = 0;
                         world.Map[x + pos.X, y + pos.Y] = tile;
                     }
                 }

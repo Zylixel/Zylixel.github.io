@@ -11,7 +11,7 @@ namespace wServer.realm.worlds
 {
     public class Test : World
     {
-        public string js = null;
+        public string js;
 
         public Test()
         {

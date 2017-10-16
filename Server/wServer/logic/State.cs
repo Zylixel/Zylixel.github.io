@@ -98,12 +98,6 @@ namespace wServer.logic
                 j.Resolve(this);
         }
 
-        private void ResolveTransition(Dictionary<string, State> states)
-        {
-            foreach (Transition i in Transitions)
-                i.Resolve(states);
-        }
-
         public override string ToString()
         {
             return Name;

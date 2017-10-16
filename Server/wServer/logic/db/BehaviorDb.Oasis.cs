@@ -25,7 +25,8 @@ namespace wServer.logic
                         "You must be thirsty, {PLAYER}. Enter my waters!",
                         "Minions! We shall have {PLAYER} for dinner!"
                         )
-                    )
+                    ),
+                new ItemLoot("Other Side Key 3", 0.01)
             )
             .Init("Oasis Ruler",
                 new State(

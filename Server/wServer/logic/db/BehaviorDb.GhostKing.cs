@@ -257,7 +257,8 @@ namespace wServer.logic
                 new TierLoot(3, ItemType.Ability, 0.16),
                 new TierLoot(4, ItemType.Ability, 0.02),
                 new ItemLoot("Health Potion", 0.7),
-                new ItemLoot("Magic Potion", 0.7)
+                new ItemLoot("Magic Potion", 0.7),
+                new ItemLoot("Other Side Key 2", 0.01)
             )
             .Init("Small Ghost",
                 new State(
