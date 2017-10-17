@@ -9,7 +9,7 @@ namespace wServer.realm.worlds
 {
     public class Test : World
     {
-        public string js;
+        public string Js;
 
         public Test()
         {
@@ -20,7 +20,7 @@ namespace wServer.realm.worlds
 
         public void LoadJson(string json)
         {
-            js = json;
+            Js = json;
             LoadMap(json);
         }
 

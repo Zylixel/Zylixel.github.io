@@ -8,7 +8,7 @@ namespace wServer.realm.worlds
 {
     public class TheShatters : World
     {
-        public const string mapLocation = "wServer.realm.worlds.maps.ShattersMike2.jm";
+        public const string MapLocation = "wServer.realm.worlds.maps.ShattersMike2.jm";
         public TheShatters()
         {
             Name = "The Shatters";
@@ -19,7 +19,7 @@ namespace wServer.realm.worlds
 
         protected override void Init()
         {
-            LoadMap(mapLocation, MapType.Json);
+            LoadMap(MapLocation, MapType.Json);
             Entity en = Entity.Resolve(Manager, "shtrs Bridge Titanum");
             en.Move(233.5f, 36.5f);
             EnterWorld(en);

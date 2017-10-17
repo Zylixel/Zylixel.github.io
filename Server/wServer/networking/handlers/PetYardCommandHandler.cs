@@ -11,10 +11,7 @@ namespace wServer.networking.handlers
 {
     internal class PetYardCommandHandler : PacketHandlerBase<PetYardCommandPacket>
     {
-        public override PacketID Id
-        {
-            get { return PacketID.PETYARDCOMMAND; }
-        }
+        public override PacketID Id => PacketID.PETYARDCOMMAND;
 
         protected override void HandlePacket(Client client, PetYardCommandPacket packet)
         {

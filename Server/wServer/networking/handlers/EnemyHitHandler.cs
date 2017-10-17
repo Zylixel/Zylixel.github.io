@@ -10,10 +10,7 @@ namespace wServer.networking.handlers
 {
     internal class EnemyHitHandler : PacketHandlerBase<EnemyHitPacket>
     {
-        public override PacketID Id
-        {
-            get { return PacketID.ENEMYHIT; }
-        }
+        public override PacketID Id => PacketID.ENEMYHIT;
 
         protected override void HandlePacket(Client client, EnemyHitPacket packet)
         {

@@ -8,10 +8,7 @@ namespace wServer.networking.handlers
 {
     internal class OtherHitHandler : PacketHandlerBase<OtherHitPacket>
     {
-        public override PacketID Id
-        {
-            get { return PacketID.OTHERHIT; }
-        }
+        public override PacketID Id => PacketID.OTHERHIT;
 
         protected override void HandlePacket(Client client, OtherHitPacket packet)
         {

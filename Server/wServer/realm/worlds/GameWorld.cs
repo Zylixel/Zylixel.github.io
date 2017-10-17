@@ -13,29 +13,29 @@ namespace wServer.realm.worlds
     {
         private static readonly ILog log = LogManager.GetLogger(typeof (GameWorld));
 
-        private readonly int mapId;
-        private readonly bool oryxPresent;
-        private string displayname;
+        private readonly int _mapId;
+        private readonly bool _oryxPresent;
+        private string _displayname;
 
         public GameWorld(int mapId, string name, bool oryxPresent)
         {
-            displayname = name;
+            _displayname = name;
             Name = name;
             ClientWorldName = name;
             Background = 0;
             Difficulty = -1;
-            this.oryxPresent = oryxPresent;
-            this.mapId = mapId;
+            this._oryxPresent = oryxPresent;
+            this._mapId = mapId;
         }
 
         public Oryx Overseer { get; private set; }
 
         protected override void Init()
         {
-            log.InfoFormat("Initializing Game World {0}({1}) from map {2}...", Id, Name, mapId);
-            LoadMap("wServer.realm.worlds.maps.world" + mapId + ".wmap", MapType.Wmap);
+            log.InfoFormat("Initializing Game World {0}({1}) from map {2}...", Id, Name, _mapId);
+            LoadMap("wServer.realm.worlds.maps.world" + _mapId + ".wmap", MapType.Wmap);
             SetPieces.ApplySetPieces(this);
-            if (oryxPresent)
+            if (_oryxPresent)
                 Overseer = new Oryx(this);
             else
                 Overseer = null;

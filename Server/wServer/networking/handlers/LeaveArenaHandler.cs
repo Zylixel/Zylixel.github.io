@@ -6,10 +6,7 @@ namespace wServer.networking.handlers
 {
     internal class LeaveArenaHandler : PacketHandlerBase<LeaveArenaPacket>
     {
-        public override PacketID Id
-        {
-            get { return PacketID.LEAVEARENA; }
-        }
+        public override PacketID Id => PacketID.LEAVEARENA;
 
         protected override void HandlePacket(Client client, LeaveArenaPacket packet)
         {

@@ -10,10 +10,7 @@ namespace wServer.networking.handlers
 {
     internal class GroundDamageHandler : PacketHandlerBase<GroundDamagePacket>
     {
-        public override PacketID Id
-        {
-            get { return PacketID.GROUNDDAMAGE; }
-        }
+        public override PacketID Id => PacketID.GROUNDDAMAGE;
 
         protected override void HandlePacket(Client client, GroundDamagePacket packet)
         {

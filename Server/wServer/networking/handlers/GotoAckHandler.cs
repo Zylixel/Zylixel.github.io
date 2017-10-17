@@ -8,10 +8,7 @@ namespace wServer.networking.handlers
 {
     internal class GotoAckHandler : PacketHandlerBase<GotoAckPacket>
     {
-        public override PacketID Id
-        {
-            get { return PacketID.GOTOACK; }
-        }
+        public override PacketID Id => PacketID.GOTOACK;
 
         protected override void HandlePacket(Client client, GotoAckPacket packet)
         {

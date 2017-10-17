@@ -6,10 +6,7 @@ namespace wServer.networking.handlers
 {
     internal class TinkerQuestHandler : PacketHandlerBase<TinkerQuestPacket>
     {
-        public override PacketID Id
-        {
-            get { return PacketID.TINKERQUEST; }
-        }
+        public override PacketID Id => PacketID.TINKERQUEST;
 
         protected override void HandlePacket(Client client, TinkerQuestPacket packet)
         {

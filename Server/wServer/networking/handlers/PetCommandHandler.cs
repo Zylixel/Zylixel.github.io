@@ -6,10 +6,7 @@ namespace wServer.networking.handlers
 {
     internal class PetCommandHandler : PacketHandlerBase<PetCommandPacket>
     {
-        public override PacketID Id
-        {
-            get { return PacketID.PETCOMMAND; }
-        }
+        public override PacketID Id => PacketID.PETCOMMAND;
 
         protected override void HandlePacket(Client client, PetCommandPacket packet)
         {

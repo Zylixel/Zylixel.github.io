@@ -8,10 +8,7 @@ namespace wServer.networking.handlers
 {
     internal class SquareHitHandler : PacketHandlerBase<SquareHitPacket>
     {
-        public override PacketID Id
-        {
-            get { return PacketID.SQUAREHIT; }
-        }
+        public override PacketID Id => PacketID.SQUAREHIT;
 
         protected override void HandlePacket(Client client, SquareHitPacket packet)
         {

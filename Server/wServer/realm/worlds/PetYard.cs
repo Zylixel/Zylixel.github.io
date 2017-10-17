@@ -13,11 +13,11 @@ namespace wServer.realm.worlds
 {
     public class PetYard : World
     {
-        private readonly Player player;
+        private readonly Player _player;
 
         public PetYard(Player player)
         {
-            this.player = player;
+            this._player = player;
             Name = "Pet Yard";
             ClientWorldName = "{Pet Yard}";
             Background = 0;
@@ -29,7 +29,7 @@ namespace wServer.realm.worlds
         protected override void Init()
         {
             string petYard = "wServer.realm.worlds.maps.PetYard_Common.wmap";
-            switch (player.Client.Account.PetYardType)
+            switch (_player.Client.Account.PetYardType)
             {
                 case 1: petYard = "wServer.realm.worlds.maps.PetYard_Common.wmap"; break;
                 case 2: petYard = "wServer.realm.worlds.maps.PetYard_Uncommon.wmap"; break;
@@ -39,7 +39,7 @@ namespace wServer.realm.worlds
             }
 
             LoadMap(petYard, MapType.Wmap);
-            LoadPetYardData(player);
+            LoadPetYardData(_player);
         }
 
         private void LoadPetYardData(Player player)

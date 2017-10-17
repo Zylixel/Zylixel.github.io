@@ -12,9 +12,9 @@ namespace wServer.realm.worlds
 {
     public class Arena : World
     {
-        private bool ready = true;
-        private bool waiting;
-        public int wave = 1;
+        private bool _ready = true;
+        private bool _waiting;
+        public int Wave = 1;
 
         public Arena()
         {
@@ -29,21 +29,21 @@ namespace wServer.realm.worlds
             LoadMap("wServer.realm.worlds.maps.arena.wmap", MapType.Wmap);
         }
 
-        private readonly string[] WeakEnemies =
+        private readonly string[] _weakEnemies =
         {
             "Flamer King", "Lair Skeleton King", "Native Fire Sprite", "Native Ice Sprite", "Native Magic Sprite", "Nomadic Shaman", "Ogre King", "Orc King", "Red Spider", "Sand Phantom",
             "Swarm", "Tawny Warg", "Vampire Bat", "Wasp Queen", "Weretiger"
         };
-        private readonly string[] NormalEnemies =
+        private readonly string[] _normalEnemies =
         {
             "Aberrant of Oryx", "Abomination of Oryx", "Adult White Dragon", "Assassin of Oryx", "Bile of Oryx", "Gigacorn",
             "Great Lizard", "Minotaur", "Monstrosity of Oryx", "Phoenix Reborn", "Shambling Sludge", "Urgle"
         };
-        private readonly string[] Gods =
+        private readonly string[] _gods =
         {
             "Beholder", "Ent God", "Flying Brain", "Djinn", "Ghost God", "Leviathan", "Medusa", "Slime God", "Sprite God", "White Demon"
         };
-        private readonly string[] Bosses =
+        private readonly string[] _bosses =
         {
             "Tomb Defender", "Tomb Attacker", "Tomb Support", "Arachna the Spider Queen", "Archdemon Malphas", "Crystal Prisoner", "Grand Sphinx", "Limon the Sprite God",
             "Lord Ruthven", "Oryx the Mad God 1", "Septavius the Ghost God", "Stheno the Snake Queen", "Thessal the Mermaid Goddess"
@@ -63,27 +63,27 @@ namespace wServer.realm.worlds
 
             if (Enemies.Count == 0)
             {
-                if (ready)
+                if (_ready)
                 {
-                    if (waiting) return;
-                    ready = false;
-                    wave++;
+                    if (_waiting) return;
+                    _ready = false;
+                    Wave++;
                     foreach (KeyValuePair<int, Player> i in Players)
                     {
                         i.Value.Client.SendPacket(new ArenaNextWavePacket
                         {
-                            Type = wave
+                            Type = Wave
                         });
                     }
-                    waiting = true;
+                    _waiting = true;
                     Timers.Add(new WorldTimer(5000, (world, t) =>
                     {
-                        ready = false;
+                        _ready = false;
                         Spawn();
-                        waiting = false;
+                        _waiting = false;
                     }));
                 }
-                ready = true;
+                _ready = true;
             }
         }
 
@@ -100,17 +100,17 @@ namespace wServer.realm.worlds
                 List<string> enems = new List<string>();
                 Random r = new Random();
 
-                for (int i = 0; i < wave/3 + 1; i++)
+                for (int i = 0; i < Wave/3 + 1; i++)
                 {
-                    enems.Add(Gods[r.Next(0, Gods.Length)]);
+                    enems.Add(_gods[r.Next(0, _gods.Length)]);
                 }
-                for (int i = 0; i < wave/3 + 1; i++)
+                for (int i = 0; i < Wave/3 + 1; i++)
                 {
-                    enems.Add(NormalEnemies[r.Next(0, NormalEnemies.Length)]);
+                    enems.Add(_normalEnemies[r.Next(0, _normalEnemies.Length)]);
                 }
-                for (int i = 0; i < wave/3 + 1; i++)
+                for (int i = 0; i < Wave/3 + 1; i++)
                 {
-                    enems.Add(WeakEnemies[r.Next(0, WeakEnemies.Length)]);
+                    enems.Add(_weakEnemies[r.Next(0, _weakEnemies.Length)]);
                 }
                 Random r2 = new Random();
                 foreach (string i in enems)

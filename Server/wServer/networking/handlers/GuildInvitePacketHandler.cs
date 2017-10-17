@@ -8,7 +8,7 @@ namespace wServer.networking.handlers
 {
     class GuildInvitePacketHandler : PacketHandlerBase<GuildInvitePacket>
     {
-        public override PacketID Id { get { return PacketID.GUILDINVITE; } }
+        public override PacketID Id => PacketID.GUILDINVITE;
 
         protected override void HandlePacket(Client client, GuildInvitePacket packet)
         {

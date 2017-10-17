@@ -7,7 +7,7 @@ namespace wServer.networking.handlers
 {
     class ChangeGuildRankPacketHandler : PacketHandlerBase<ChangeGuildRankPacket>
     {
-        public override PacketID Id { get { return PacketID.CHANGEGUILDRANK; } }
+        public override PacketID Id => PacketID.CHANGEGUILDRANK;
 
         protected override void HandlePacket(Client client, ChangeGuildRankPacket packet)
         {

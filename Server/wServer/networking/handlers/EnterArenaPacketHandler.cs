@@ -12,10 +12,7 @@ namespace wServer.networking.handlers
 {
     internal class EnterArenaPacketHandler : PacketHandlerBase<EnterArenaPacket>
     {
-        public override PacketID Id
-        {
-            get { return PacketID.ENTER_ARENA; }
-        }
+        public override PacketID Id => PacketID.ENTER_ARENA;
 
         protected override void HandlePacket(Client client, EnterArenaPacket packet)
         {

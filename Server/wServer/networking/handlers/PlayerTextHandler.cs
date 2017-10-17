@@ -9,10 +9,7 @@ namespace wServer.networking.handlers
 {
     internal class PlayerTextHandler : PacketHandlerBase<PlayerTextPacket>
     {
-        public override PacketID Id
-        {
-            get { return PacketID.PLAYERTEXT; }
-        }
+        public override PacketID Id => PacketID.PLAYERTEXT;
 
         protected override void HandlePacket(Client client, PlayerTextPacket packet)
         {

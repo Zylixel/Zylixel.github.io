@@ -8,10 +8,7 @@ namespace wServer.networking.handlers
 {
     internal class UpdateAckHandler : PacketHandlerBase<UpdateAckPacket>
     {
-        public override PacketID Id
-        {
-            get { return PacketID.UPDATEACK; }
-        }
+        public override PacketID Id => PacketID.UPDATEACK;
 
         protected override void HandlePacket(Client client, UpdateAckPacket packet)
         {

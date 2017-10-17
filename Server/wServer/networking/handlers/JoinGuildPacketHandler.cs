@@ -6,7 +6,7 @@ namespace wServer.networking.handlers
 {
     class JoinGuildPacketHandler : PacketHandlerBase<JoinGuildPacket>
     {
-        public override PacketID Id { get { return PacketID.JOINGUILD; } }
+        public override PacketID Id => PacketID.JOINGUILD;
 
         protected override void HandlePacket(Client client, JoinGuildPacket packet)
         {

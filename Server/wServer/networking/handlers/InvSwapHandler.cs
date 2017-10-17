@@ -17,10 +17,7 @@ namespace wServer.networking.handlers
 {
     internal class InvSwapHandler : PacketHandlerBase<InvSwapPacket>
     {
-        public override PacketID Id
-        {
-            get { return PacketID.INVSWAP; }
-        }
+        public override PacketID Id => PacketID.INVSWAP;
 
         protected override void HandlePacket(Client client, InvSwapPacket packet)
         {

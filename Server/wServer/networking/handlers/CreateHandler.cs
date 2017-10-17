@@ -13,10 +13,7 @@ namespace wServer.networking.handlers
 {
     internal class CreateHandler : PacketHandlerBase<CreatePacket>
     {
-        public override PacketID Id
-        {
-            get { return PacketID.CREATE; }
-        }
+        public override PacketID Id => PacketID.CREATE;
 
         protected override void HandlePacket(Client client, CreatePacket packet)
         {

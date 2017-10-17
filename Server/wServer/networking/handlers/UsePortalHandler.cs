@@ -16,10 +16,7 @@ namespace wServer.networking.handlers
 {
     internal class UsePortalHandler : PacketHandlerBase<UsePortalPacket>
     {
-        public override PacketID Id
-        {
-            get { return PacketID.USEPORTAL; }
-        }
+        public override PacketID Id => PacketID.USEPORTAL;
 
         protected override void HandlePacket(Client client, UsePortalPacket packet)
         {

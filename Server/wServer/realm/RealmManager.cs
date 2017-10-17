@@ -13,7 +13,7 @@ using log4net;
 using wServer.logic;
 using wServer.networking;
 using wServer.realm.commands;
-using wServer.realm.entities;
+using wServer.realm.entities.merchant;
 using wServer.realm.entities.player;
 using wServer.realm.worlds;
 

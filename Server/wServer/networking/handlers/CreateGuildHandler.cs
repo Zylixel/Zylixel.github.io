@@ -8,7 +8,7 @@ namespace wServer.networking.handlers
 {
     class CreateGuildHandler : PacketHandlerBase<CreateGuildPacket>
     {
-        public override PacketID Id { get { return PacketID.CREATEGUILD; } }
+        public override PacketID Id => PacketID.CREATEGUILD;
 
         protected override void HandlePacket(Client client, CreateGuildPacket packet)
         {

@@ -12,10 +12,7 @@ namespace wServer.networking.handlers
 {
     internal class LoadHandler : PacketHandlerBase<LoadPacket>
     {
-        public override PacketID Id
-        {
-            get { return PacketID.LOAD; }
-        }
+        public override PacketID Id => PacketID.LOAD;
 
         protected override void HandlePacket(Client client, LoadPacket packet)
         {

@@ -17,9 +17,9 @@ namespace wServer.realm.entities.merchant
     {
         private const int BuyNoFame = 6;
         private const int MerchantSize = 100;
-        private static readonly ILog log = LogManager.GetLogger(typeof(Merchants));
+        private static readonly ILog LogIt = LogManager.GetLogger(typeof(Merchants));
 
-        private readonly Dictionary<int, Tuple<int, CurrencyType>> _prices = MerchantLists.prices;
+        private readonly Dictionary<int, Tuple<int, CurrencyType>> _prices = MerchantLists.Prices;
 
         private bool _closing;
         private bool _newMerchant;
@@ -105,7 +105,7 @@ namespace wServer.realm.entities.merchant
                                             db.UpdateFame(player.Client.Account, -Price);
                                     using (Database db2 = new Database())
                                     {
-                                        log.Error("Attemping to delete item from database: " + MType + " | " + Price);
+                                        LogIt.Error("Attemping to delete item from database: " + MType + " | " + Price);
                                         MySqlCommand cmd = db2.CreateQuery();
                                         cmd.CommandText = "DELETE FROM market WHERE itemid=@itemid AND fame=@fame";
                                         cmd.Parameters.AddWithValue("@itemID", MType);
@@ -113,7 +113,7 @@ namespace wServer.realm.entities.merchant
                                         cmd.ExecuteNonQuery();
                                     }
                                     {
-                                        log.Error("Attemping to find player to give fame to: " + MType + " | " + Price);
+                                        LogIt.Error("Attemping to find player to give fame to: " + MType + " | " + Price);
                                         MySqlCommand cmd = db.CreateQuery();
                                         cmd.CommandText = "SELECT * FROM market WHERE itemid='@itemID' AND fame='@fame' LIMIT 1";
                                         cmd.Parameters.AddWithValue("@itemID", MType);
@@ -127,12 +127,12 @@ namespace wServer.realm.entities.merchant
                                         }
                                     }
                                     {
-                                        log.Error("Updating Player Info...");
+                                        LogIt.Error("Updating Player Info...");
                                         MySqlCommand cmd1 = db.CreateQuery();
                                         cmd1.CommandText = "UPDATE stats SET fame = fame + @Price WHERE accId=@accId";
                                         cmd1.Parameters.AddWithValue("@accId", _accId);
                                         cmd1.Parameters.AddWithValue("@Price", Price);
-                                        log.Error("Attempted to give Player " + _accId + ", " + Price + " fame");
+                                        LogIt.Error("Attempted to give Player " + _accId + ", " + Price + " fame");
                                         cmd1.ExecuteNonQuery();
                                     }
                                     player.Client.SendPacket(new BuyResultPacket
@@ -149,7 +149,7 @@ namespace wServer.realm.entities.merchant
                             }
                             catch (Exception e)
                             {
-                                log.Error(e);
+                                LogIt.Error(e);
                             }
                         }
                         player.Client.SendPacket(new BuyResultPacket
@@ -188,10 +188,10 @@ namespace wServer.realm.entities.merchant
                 {
                     foreach (var t1 in MerchantLists.ZyList)
                     {
-                        log.Info("Looking for updates on item | " + t1);
+                        LogIt.Info("Looking for updates on item | " + t1);
                         if (RefreshMerchants == t1)
                         {
-                            log.Info("Found Update on Item | " + t1);
+                            LogIt.Info("Found Update on Item | " + t1);
                             _itemChange = t1;
                             Refresh(this, t1);
                             UpdateCount++;
@@ -248,7 +248,7 @@ namespace wServer.realm.entities.merchant
             }
             catch (Exception ex)
             {
-                log.Error(ex);
+                LogIt.Error(ex);
             }
         }
 
@@ -264,7 +264,7 @@ namespace wServer.realm.entities.merchant
             }
             catch (Exception e)
             {
-                log.Error(e);
+                LogIt.Error(e);
             }
         }
 
@@ -276,7 +276,7 @@ namespace wServer.realm.entities.merchant
                 if (_prices.TryGetValue(MType, out price))
                 {
                     var mrc = new Merchants(Manager, x.ObjectType, item, x.Owner);
-                    log.Info("Attempting to refresh Merchant | " + item);
+                    LogIt.Info("Attempting to refresh Merchant | " + item);
                     mrc.Move(x.X, x.Y);
                     var w = Owner;
                     Owner.LeaveWorld(this);
@@ -285,7 +285,7 @@ namespace wServer.realm.entities.merchant
             }
             catch (Exception e)
             {
-                log.Error(e);
+                LogIt.Error(e);
             }
         }
 
@@ -302,12 +302,12 @@ namespace wServer.realm.entities.merchant
                 if (_itemChange > 0)
                 {
                     MType = _itemChange;
-                    log.Info("Refreshing Merchant | " + MType);
+                    LogIt.Info("Refreshing Merchant | " + MType);
                 }
                 if (_itemChange <= 0)
                 {
                     MType = t1;
-                    log.Info("Randomizing Merchant to be item | " + MType);
+                    LogIt.Info("Randomizing Merchant to be item | " + MType);
                 }
 
                 MTime = Random.Next(2, 5);

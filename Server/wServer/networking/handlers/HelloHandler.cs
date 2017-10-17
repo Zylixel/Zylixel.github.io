@@ -16,10 +16,7 @@ namespace wServer.networking.handlers
 {
     internal class HelloHandler : PacketHandlerBase<HelloPacket>
     {
-        public override PacketID Id
-        {
-            get { return PacketID.HELLO; }
-        }
+        public override PacketID Id => PacketID.HELLO;
 
         protected override void HandlePacket(Client client, HelloPacket packet)
         {

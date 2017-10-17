@@ -16,10 +16,7 @@ namespace wServer.networking.handlers
     {
         private readonly Random _invRand = new Random();
 
-        public override PacketID Id
-        {
-            get { return PacketID.INVDROP; }
-        }
+        public override PacketID Id => PacketID.INVDROP;
 
         protected override void HandlePacket(Client client, InvDropPacket packet)
         {

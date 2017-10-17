@@ -13,10 +13,7 @@ namespace wServer.networking.handlers
 {
     internal class PlayerShootPacketHandler : PacketHandlerBase<PlayerShootPacket>
     {
-        public override PacketID Id
-        {
-            get { return PacketID.PLAYERSHOOT; }
-        }
+        public override PacketID Id => PacketID.PLAYERSHOOT;
 
         protected override void HandlePacket(Client client, PlayerShootPacket packet)
         {

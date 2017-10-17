@@ -10,10 +10,7 @@ namespace wServer.networking.handlers
 {
     internal class EscapeHander : PacketHandlerBase<EscapePacket>
     {
-        public override PacketID Id
-        {
-            get { return PacketID.ESCAPE; }
-        }
+        public override PacketID Id => PacketID.ESCAPE;
 
         protected override void HandlePacket(Client client, EscapePacket packet)
         {

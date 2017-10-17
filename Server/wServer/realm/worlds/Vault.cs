@@ -17,8 +17,8 @@ namespace wServer.realm.worlds
         private readonly ConcurrentDictionary<Tuple<Container, VaultChest>, int> _vaultChests =
             new ConcurrentDictionary<Tuple<Container, VaultChest>, int>();
 
-        private readonly bool isLimbo;
-        private Client psr;
+        private readonly bool _isLimbo;
+        private Client _psr;
         public string AccountId { get; private set; }
 
         public Vault(bool isLimbo, Client psr = null)
@@ -27,8 +27,8 @@ namespace wServer.realm.worlds
             Name = "Vault";
             ClientWorldName = "Vault";
             Background = 2;
-            this.psr = psr;
-            this.isLimbo = isLimbo;
+            this._psr = psr;
+            this._isLimbo = isLimbo;
             ShowDisplays = true;
             if (psr != null)
                 AccountId = psr.Account != null ? psr.Account.AccountId : "-1";
@@ -40,11 +40,11 @@ namespace wServer.realm.worlds
 
         protected override void Init()
         {
-            if (!(IsLimbo = isLimbo))
+            if (!(IsLimbo = _isLimbo))
             {
                 LoadMap("wServer.realm.worlds.maps.vault.wmap", MapType.Wmap);
-                if (psr != null)
-                    Init(psr);
+                if (_psr != null)
+                    Init(_psr);
                 else
                     Init(AccountId);
             }
@@ -295,7 +295,7 @@ namespace wServer.realm.worlds
 
         public void Reload(Client client)
         {
-            psr = client;
+            _psr = client;
             Init();
         }
     }

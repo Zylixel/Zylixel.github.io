@@ -8,7 +8,7 @@ namespace wServer.realm.worlds
 {
     public class Tutorial : World
     {
-        private readonly bool isLimbo;
+        private readonly bool _isLimbo;
 
         public Tutorial(bool isLimbo)
         {
@@ -16,12 +16,12 @@ namespace wServer.realm.worlds
             Name = "Tutorial";
             ClientWorldName = "server.tutorial";
             Background = 0;
-            this.isLimbo = isLimbo;
+            this._isLimbo = isLimbo;
         }
 
         protected override void Init()
         {
-            if (!(IsLimbo = isLimbo))
+            if (!(IsLimbo = _isLimbo))
             {
                 LoadMap("wServer.realm.worlds.maps.tutorial.wmap", MapType.Wmap);
             }

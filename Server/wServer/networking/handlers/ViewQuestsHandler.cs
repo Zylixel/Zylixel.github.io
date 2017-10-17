@@ -5,10 +5,7 @@ namespace wServer.networking.handlers
 {
     internal class ViewQuestsHandler : PacketHandlerBase<ViewQuestsPacket>
     {
-        public override PacketID Id
-        {
-            get { return PacketID.VIEWQUESTS; }
-        }
+        public override PacketID Id => PacketID.VIEWQUESTS;
 
         protected override void HandlePacket(Client client, ViewQuestsPacket packet)
         {

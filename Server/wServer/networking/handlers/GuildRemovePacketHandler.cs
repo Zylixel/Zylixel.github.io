@@ -6,7 +6,7 @@ namespace wServer.networking.handlers
 {
     class GuildRemovePacketHandler : PacketHandlerBase<GuildRemovePacket>
     {
-        public override PacketID Id { get { return PacketID.GUILDREMOVE; } }
+        public override PacketID Id => PacketID.GUILDREMOVE;
 
         protected override void HandlePacket(Client client, GuildRemovePacket packet)
         {

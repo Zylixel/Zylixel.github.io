@@ -8,10 +8,7 @@ namespace wServer.networking.handlers
 {
     internal class ShootAckHandler : PacketHandlerBase<ShootAckPacket>
     {
-        public override PacketID Id
-        {
-            get { return PacketID.SHOOTACK; }
-        }
+        public override PacketID Id => PacketID.SHOOTACK;
 
         protected override void HandlePacket(Client client, ShootAckPacket packet)
         {

@@ -648,7 +648,6 @@
     <EmbeddedResource Include="realm\worlds\maps\vault.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\nexusprod.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\world1.wmap" />
-    <EmbeddedResource Include="realm\worlds\maps\abyss.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\kitchen.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\oceantrench.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\OryxCastle.wmap" />
@@ -656,7 +655,6 @@
     <EmbeddedResource Include="realm\worlds\maps\tutorial.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\arena.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\winecellar.wmap" />
-    <EmbeddedResource Include="realm\worlds\maps\abyss2.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\nexusLimbo.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\tomb.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\belladonnasGarden.wmap" />
@@ -673,7 +671,6 @@
     <EmbeddedResource Include="realm\worlds\maps\snakepit.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\dailyQuest.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\candyland.wmap" />
-    <EmbeddedResource Include="realm\worlds\maps\pcave.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\spriteworld.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\nexus_winter.jm" />
     <EmbeddedResource Include="realm\worlds\maps\nexus_summer.jm" />

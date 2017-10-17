@@ -9,10 +9,7 @@ namespace wServer.networking.handlers
 {
     internal class TeleportHandler : PacketHandlerBase<TeleportPacket>
     {
-        public override PacketID Id
-        {
-            get { return PacketID.TELEPORT; }
-        }
+        public override PacketID Id => PacketID.TELEPORT;
 
         protected override void HandlePacket(Client client, TeleportPacket packet)
         {

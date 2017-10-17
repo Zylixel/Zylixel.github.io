@@ -12,10 +12,7 @@ namespace wServer.networking.handlers
 {
     internal class EditAccountListHandler : PacketHandlerBase<EditAccountListPacket>
     {
-        public override PacketID Id
-        {
-            get { return PacketID.EDITACCOUNTLIST; }
-        }
+        public override PacketID Id => PacketID.EDITACCOUNTLIST;
 
         protected override void HandlePacket(Client client, EditAccountListPacket packet)
         {
