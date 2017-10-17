@@ -1,11 +1,15 @@
-﻿namespace AdminPanel
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+using MetroFramework.Controls;
+
+namespace AdminPanel
 {
     partial class Login
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -122,11 +126,11 @@
 
         #endregion
 
-        private MetroFramework.Controls.MetroLabel metroLabel1;
-        private MetroFramework.Controls.MetroLabel metroLabel2;
-        private MetroFramework.Controls.MetroTextBox emailTextBox;
-        private MetroFramework.Controls.MetroTextBox passwordTextBox;
-        private MetroFramework.Controls.MetroButton metroButton1;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private MetroLabel metroLabel1;
+        private MetroLabel metroLabel2;
+        private MetroTextBox emailTextBox;
+        private MetroTextBox passwordTextBox;
+        private MetroButton metroButton1;
+        private PictureBox pictureBox1;
     }
 }

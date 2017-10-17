@@ -2,7 +2,7 @@
 {
     public class CancelTradePacket : ClientPacket
     {
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.CANCELTRADE; }
         }

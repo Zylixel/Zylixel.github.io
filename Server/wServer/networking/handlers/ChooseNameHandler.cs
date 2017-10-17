@@ -1,12 +1,10 @@
 ﻿#region
 
 using System;
-using System.Linq;
 using db;
 using MySql.Data.MySqlClient;
 using wServer.networking.cliPackets;
 using wServer.networking.svrPackets;
-using System.IO;
 
 #endregion
 
@@ -14,7 +12,7 @@ namespace wServer.networking.handlers
 {
     internal class ChooseNameHandler : PacketHandlerBase<ChooseNamePacket>
     {
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.CHOOSENAME; }
         }

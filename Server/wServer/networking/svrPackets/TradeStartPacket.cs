@@ -6,7 +6,7 @@
         public string YourName { get; set; }
         public TradeItem[] YourItems { get; set; }
 
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.TRADESTART; }
         }

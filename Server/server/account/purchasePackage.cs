@@ -1,21 +1,17 @@
 ﻿#region
 
-using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.IO;
-using System.Net;
-using System.Web;
 using db;
 using MySql.Data.MySqlClient;
-using server.package;
 using Newtonsoft.Json;
+using server.package;
 
 #endregion
 
 namespace server.account
 {
-    public class purchasePackage : RequestHandler
+    public class PurchasePackage : RequestHandler
     {
         protected override void HandleRequest()
         {
@@ -45,41 +41,40 @@ namespace server.account
                             return;
                         }
 
-                        var cmd = db.CreateQuery();
+                        MySqlCommand cmd;
 
-                        if (contents.items?.Count > 0)
+                        if (contents.Items?.Count > 0)
                         {
-                            foreach (var i in contents.items)
+                            foreach (var i in contents.Items)
                             {
-                                Dictionary<string, int> itemDic = new Dictionary<string, int>();
                                 List<int> gifts = acc.Gifts;
                                 gifts.Add(i);
 
                                 cmd = db.CreateQuery();
                                 cmd.CommandText =
                                     "UPDATE accounts SET gifts=@gifts WHERE uuid=@uuid AND password=SHA1(@password);";
-                                cmd.Parameters.AddWithValue("@gifts", Utils.GetCommaSepString<int>(gifts.ToArray()));
+                                cmd.Parameters.AddWithValue("@gifts", Utils.GetCommaSepString(gifts.ToArray()));
                                 cmd.Parameters.AddWithValue("@uuid", Query["guid"]);
                                 cmd.Parameters.AddWithValue("@password", Query["password"]);
                                 cmd.ExecuteNonQuery();
                             }
                         }
 
-                        if (contents.charSlots > 0)
+                        if (contents.CharSlots > 0)
                         {
                             cmd = db.CreateQuery();
                             cmd.CommandText =
                                 "UPDATE accounts SET maxCharSlot=maxCharSlot + @amount WHERE uuid=@uuid AND password=SHA1(@password);";
-                            cmd.Parameters.AddWithValue("@amount", contents.charSlots);
+                            cmd.Parameters.AddWithValue("@amount", contents.CharSlots);
                             cmd.Parameters.AddWithValue("@uuid", Query["guid"]);
                             cmd.Parameters.AddWithValue("@password", Query["password"]);
                             if (cmd.ExecuteNonQuery() == 0)
                                 return;
                         }
 
-                        if (contents.vaultChests > 0)
+                        if (contents.VaultChests > 0)
                         {
-                            for (int j = 0; j < contents.vaultChests; j++)
+                            for (int j = 0; j < contents.VaultChests; j++)
                                 db.CreateChest(acc);
                         }
 
@@ -92,9 +87,9 @@ namespace server.account
 
         struct PackageContent
         {
-            public List<int> items;
-            public int vaultChests;
-            public int charSlots;
+            public List<int> Items;
+            public int VaultChests;
+            public int CharSlots;
         }
     }
 }

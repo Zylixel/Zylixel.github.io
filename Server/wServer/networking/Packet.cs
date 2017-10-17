@@ -22,13 +22,13 @@ namespace wServer.networking
                 if (typeof (Packet).IsAssignableFrom(i) && !i.IsAbstract)
                 {
                     Packet pkt = (Packet) Activator.CreateInstance(i);
-                    if (!(pkt is ServerPacket))
-                        if (!Packets.ContainsKey(pkt.ID))
-                            Packets.Add(pkt.ID, pkt);
+                    if (pkt is ServerPacket) continue;
+                    if (!Packets.ContainsKey(pkt.Id))
+                        Packets.Add(pkt.Id, pkt);
                 }
         }
 
-        public abstract PacketID ID { get; }
+        public abstract PacketID Id { get; }
         public abstract Packet CreateInstance();
 
         public abstract void Crypt(Client client, byte[] dat, int offset, int len);
@@ -47,7 +47,7 @@ namespace wServer.networking
             int len = (int) s.Position;
             Crypt(client, buff, offset + 5, len);
             Buffer.BlockCopy(BitConverter.GetBytes(IPAddress.HostToNetworkOrder(len + 5)), 0, buff, offset, 4);
-            buff[offset + 4] = (byte) ID;
+            buff[offset + 4] = (byte) Id;
             return len + 5;
         }
 
@@ -70,7 +70,7 @@ namespace wServer.networking
 
     public class NopPacket : Packet
     {
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return (PacketID) 255; }
         }

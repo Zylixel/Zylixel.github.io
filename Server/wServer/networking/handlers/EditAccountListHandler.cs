@@ -1,6 +1,5 @@
 ﻿#region
 
-using System.Collections.Generic;
 using db;
 using wServer.networking.cliPackets;
 using wServer.networking.svrPackets;
@@ -13,7 +12,7 @@ namespace wServer.networking.handlers
 {
     internal class EditAccountListHandler : PacketHandlerBase<EditAccountListPacket>
     {
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.EDITACCOUNTLIST; }
         }
@@ -35,7 +34,7 @@ namespace wServer.networking.handlers
                     }
                     switch (packet.AccountListId)
                     {
-                        case AccountListPacket.LOCKED_LIST_ID:
+                        case AccountListPacket.LockedListId:
                             if (packet.Add)
                             {
                                 db.AddLock(client.Account.AccountId, target.AccountId);
@@ -47,7 +46,7 @@ namespace wServer.networking.handlers
                                 client.Player.Locked.Remove(target.AccountId);
                             }
                             break;
-                        case AccountListPacket.IGNORED_LIST_ID:
+                        case AccountListPacket.IgnoredListId:
                             if (packet.Add)
                             {
                                 db.AddIgnore(client.Account.AccountId, target.AccountId);

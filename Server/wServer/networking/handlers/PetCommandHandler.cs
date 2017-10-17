@@ -1,19 +1,12 @@
-﻿using db;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using wServer.networking.cliPackets;
+﻿using wServer.networking.cliPackets;
 using wServer.networking.svrPackets;
-using wServer.realm.entities;
 using wServer.realm.worlds;
 
 namespace wServer.networking.handlers
 {
     internal class PetCommandHandler : PacketHandlerBase<PetCommandPacket>
     {
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.PETCOMMAND; }
         }
@@ -29,7 +22,7 @@ namespace wServer.networking.handlers
 
                     switch (packet.CommandId)
                     {
-                        case PetCommandPacket.FOLLOW_PET:
+                        case PetCommandPacket.FollowPet:
                             if (client.Player.Pet != null) client.Player.Pet.PlayerOwner = null;
                             client.Player.Pet = pet;
                             pet.PlayerOwner = client.Player;
@@ -45,7 +38,7 @@ namespace wServer.networking.handlers
                             });
                             client.Player.SaveToCharacter();
                             break;
-                        case PetCommandPacket.UNFOLLOW_PET:
+                        case PetCommandPacket.UnfollowPet:
                             cmd = db.CreateQuery();
                             cmd.CommandText = "UPDATE characters SET petId=-1 WHERE charId=@charId AND accId=@accId;";
                             cmd.Parameters.AddWithValue("@charId", client.Character.CharacterId);
@@ -58,7 +51,7 @@ namespace wServer.networking.handlers
                                 PetId = -1
                             });
                             break;
-                        case PetCommandPacket.RELEASE_PET:
+                        case PetCommandPacket.ReleasePet:
                             cmd = db.CreateQuery();
                             cmd.CommandText = "DELETE FROM pets WHERE petId=@petId AND accId=@accId;";
                             cmd.Parameters.AddWithValue("@accId", client.Player.AccountId);

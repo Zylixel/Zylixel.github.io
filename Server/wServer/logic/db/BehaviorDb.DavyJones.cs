@@ -3,7 +3,6 @@
 using wServer.logic.behaviors;
 using wServer.logic.loot;
 using wServer.logic.transitions;
-using wServer.realm;
 
 #endregion
 

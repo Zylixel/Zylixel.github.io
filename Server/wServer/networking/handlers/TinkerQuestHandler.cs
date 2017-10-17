@@ -1,9 +1,4 @@
 ﻿using db;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using wServer.networking.cliPackets;
 using wServer.networking.svrPackets;
 
@@ -11,7 +6,7 @@ namespace wServer.networking.handlers
 {
     internal class TinkerQuestHandler : PacketHandlerBase<TinkerQuestPacket>
     {
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.TINKERQUEST; }
         }
@@ -21,7 +16,7 @@ namespace wServer.networking.handlers
             using (Database db = new Database())
             {
                 if (packet.Object.ObjectType == client.Player.Inventory[packet.Object.SlotId].ObjectType &&
-                    (int)client.Player.Inventory[packet.Object.SlotId].ObjectType == Utils.FromString(client.Player.DailyQuest.Goal))
+                    client.Player.Inventory[packet.Object.SlotId].ObjectType == Utils.FromString(client.Player.DailyQuest.Goal))
                 {
                     client.SendPacket(new QuestRedeemResponsePacket
                     {

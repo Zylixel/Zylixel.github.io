@@ -2,7 +2,6 @@
 
 using System;
 using log4net;
-using wServer.realm.entities;
 using wServer.realm.entities.player;
 using wServer.realm.setpieces;
 

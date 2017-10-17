@@ -1,24 +1,18 @@
 ﻿#region
 
-using db;
-using db.data;
-using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using db;
+using MySql.Data.MySqlClient;
 using wServer.networking;
 using wServer.networking.svrPackets;
-using wServer.realm.entities;
 using wServer.realm.entities.merchant;
 using wServer.realm.entities.player;
 using wServer.realm.setpieces;
 using wServer.realm.worlds;
-using System.Collections.Specialized;
-using System.IO;
-using System.Net;
-using System.Web;
 
 #endregion
 
@@ -165,7 +159,7 @@ namespace wServer.realm.commands
                 player.ApplyConditionEffect(new ConditionEffect
                 {
                     Effect = (ConditionEffectIndex)Enum.Parse(typeof(ConditionEffectIndex), args[0].Trim(), true),
-                    DurationMS = -1
+                    DurationMs = -1
                 });
                 {
                     player.SendInfo("Success!");
@@ -199,7 +193,7 @@ namespace wServer.realm.commands
                 player.ApplyConditionEffect(new ConditionEffect
                 {
                     Effect = (ConditionEffectIndex)Enum.Parse(typeof(ConditionEffectIndex), args[0].Trim(), true),
-                    DurationMS = 0
+                    DurationMs = 0
                 });
                 player.SendInfo("Success!");
             }
@@ -1293,7 +1287,7 @@ namespace wServer.realm.commands
                 }
                 return true;
             }
-            else if (args.Length == 3)
+            if (args.Length == 3)
             {
                 foreach (Client i in player.Manager.Clients.Values)
                 {
@@ -1359,14 +1353,11 @@ namespace wServer.realm.commands
                 player.SendError(string.Format("Player '{0}' could not be found!", args));
                 return false;
             }
-            else
-            {
-                player.SendHelp("Usage: /setStat <Stat> <Amount>");
-                player.SendHelp("or");
-                player.SendHelp("Usage: /setStat <Player> <Stat> <Amount>");
-                player.SendHelp("Shortcuts: Hp, Mp, Atk, Def, Spd, Vit, Wis, Dex");
-                return false;
-            }
+            player.SendHelp("Usage: /setStat <Stat> <Amount>");
+            player.SendHelp("or");
+            player.SendHelp("Usage: /setStat <Player> <Stat> <Amount>");
+            player.SendHelp("Shortcuts: Hp, Mp, Atk, Def, Spd, Vit, Wis, Dex");
+            return false;
         }
     }
 
@@ -1426,7 +1417,7 @@ namespace wServer.realm.commands
                 player.ApplyConditionEffect(new ConditionEffect
                 {
                     Effect = ConditionEffectIndex.Invincible,
-                    DurationMS = 0
+                    DurationMs = 0
                 });
                 player.SendInfo("Godmode Off");
             }
@@ -1435,7 +1426,7 @@ namespace wServer.realm.commands
                 player.ApplyConditionEffect(new ConditionEffect
                 {
                     Effect = ConditionEffectIndex.Invincible,
-                    DurationMS = -1
+                    DurationMs = -1
                 });
                 player.SendInfo("Godmode On");
             }
@@ -1488,7 +1479,7 @@ namespace wServer.realm.commands
             try
             {
                 int newFame = Convert.ToInt32(args[0]);
-                int newXP = Convert.ToInt32(newFame.ToString() + "000");
+                int newXP = Convert.ToInt32(newFame + "000");
                 player.Fame = newFame;
                 player.Experience = newXP;
                 player.SaveToCharacter();
@@ -1535,10 +1526,7 @@ namespace wServer.realm.commands
                 gw.Overseer.InitCloseRealm();
                 return true;
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
     }
 
@@ -1556,10 +1544,7 @@ namespace wServer.realm.commands
                 gw.Overseer.KeeperCloseRealm();
                 return true;
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
     }
 
@@ -1571,7 +1556,7 @@ namespace wServer.realm.commands
         }
         protected override bool Process(Player player, RealmTime time, string[] args)
         {
-            player.tryUpgrade("force");
+            player.TryUpgrade("force");
             return true;
         }
     }
@@ -1641,7 +1626,7 @@ namespace wServer.realm.commands
                                                         player.Client.Save();
                                                         player.UpdateCount++;
                                                         log.Error("Requesting Update for Item | " + itemID);
-                                                        Merchants.refreshMerchants = itemID;
+                                                        Merchants.RefreshMerchants = itemID;
                                                     }
                                                     catch (Exception e)
                                                     {
@@ -1715,7 +1700,7 @@ namespace wServer.realm.commands
                     }
                     else
                     {
-                        player.Client.Reconnect(new ReconnectPacket()
+                        player.Client.Reconnect(new ReconnectPacket
                         {
                             GameId = i.Value.Player.Owner.Id,
                             Host = "",
@@ -1723,7 +1708,7 @@ namespace wServer.realm.commands
                             Key = Empty<byte>.Array,
                             KeyTime = -1,
                             Name = i.Value.Player.Owner.Name,
-                            Port = -1,
+                            Port = -1
                         });
                         player.SendInfo("You are visiting " + i.Value.Player.Owner.Id);
                     }

@@ -2,26 +2,20 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.IO;
 using System.Net;
-using System.Runtime.CompilerServices;
 using System.Text;
-using System.Web;
 using System.Xml;
 using System.Xml.Serialization;
 using db;
-using MySql.Data.MySqlClient;
-using System.Net.Sockets;
-using GoogleMaps.LocationServices;
-using Newtonsoft.Json;
 using db.data;
+using GoogleMaps.LocationServices;
+using MySql.Data.MySqlClient;
 
 #endregion
 
 namespace server.@char
 {
-    internal class list : RequestHandler
+    internal class List : RequestHandler
     {
         public MapPoint GetLatLong(string address)
         {
@@ -116,7 +110,7 @@ namespace server.@char
                 MapPoint p = GetLatLong(Program.Settings.GetValue<string>("svr" + i + "Location", ""));
                 double usage = GetUsage(Program.Settings.GetValue<string>("svr" + i + "Adr"));
 
-                ret.Add(new ServerItem()
+                ret.Add(new ServerItem
                 {
                     Name = Program.Settings.GetValue<string>("svr" + i + "Name"),
                     Lat = p != null ? p.Latitude : 0,
@@ -213,7 +207,7 @@ namespace server.@char
                     Characters = new List<Char>(),
                     NextCharId = 2,
                     MaxNumChars = 1,
-                    Account = a,
+                    Account = a
                 };
                 db.GetCharData(chrs.Account, chrs);
                 db.LoadCharacters(chrs.Account, chrs);

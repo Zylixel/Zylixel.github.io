@@ -4,7 +4,6 @@ using db;
 using MySql.Data.MySqlClient;
 using wServer.networking.cliPackets;
 using wServer.networking.svrPackets;
-using wServer.realm;
 using wServer.realm.entities.player;
 using FailurePacket = wServer.networking.svrPackets.FailurePacket;
 
@@ -14,7 +13,7 @@ namespace wServer.networking.handlers
 {
     internal class CreateHandler : PacketHandlerBase<CreatePacket>
     {
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.CREATE; }
         }
@@ -47,8 +46,7 @@ namespace wServer.networking.handlers
                 client.Character = Database.CreateCharacter(client.Manager.GameData, (ushort) packet.ClassType,
                     nextCharId);
 
-                int[] stats = new[]
-                {
+                int[] stats = {
                     client.Character.MaxHitPoints,
                     client.Character.MaxMagicPoints,
                     client.Character.Attack,
@@ -74,10 +72,10 @@ namespace wServer.networking.handlers
 
                 if (cmd.ExecuteNonQuery() > 0)
                 {
-                    client.SendPacket(new Create_SuccessPacket
+                    client.SendPacket(new CreateSuccessPacket
                     {
-                        CharacterID = client.Character.CharacterId,
-                        ObjectID =
+                        CharacterId = client.Character.CharacterId,
+                        ObjectId =
                             client.Manager.Worlds[client.TargetWorld].EnterWorld(
                                 client.Player = new Player(client.Manager, client))
                     });

@@ -111,7 +111,7 @@ namespace wServer.logic.behaviors
                         Damage = (short)dmg,
                         BulletType = (byte)desc.BulletType,
                         AngleInc = (float)shootAngle,
-                        NumShots = (byte)count,
+                        NumShots = (byte)count
                     }, null);
                 }
                 cool = coolDown.Next(Random);

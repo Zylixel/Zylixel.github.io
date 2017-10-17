@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using wServer.networking.svrPackets;
+﻿using wServer.networking.svrPackets;
 using wServer.realm;
 using wServer.realm.entities;
-using wServer.realm.entities.player;
 
 namespace wServer.logic.behaviors
 {
@@ -55,9 +49,6 @@ namespace wServer.logic.behaviors
                         PosA = new Position { X = radius, Y = 0 },
                         Color = color
                     }, null);
-                }
-                else
-                {
                 }
             });
         }

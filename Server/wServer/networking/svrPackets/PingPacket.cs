@@ -4,7 +4,7 @@
     {
         public int Serial { get; set; }
 
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.PING; }
         }

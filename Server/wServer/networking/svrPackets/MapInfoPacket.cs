@@ -11,10 +11,10 @@
         public int Background { get; set; }
         public bool AllowTeleport { get; set; }
         public bool ShowDisplays { get; set; }
-        public string[] ClientXML { get; set; }
-        public string[] ExtraXML { get; set; }
+        public string[] ClientXml { get; set; }
+        public string[] ExtraXml { get; set; }
 
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.MAPINFO; }
         }
@@ -36,13 +36,13 @@
             AllowTeleport = rdr.ReadBoolean();
             ShowDisplays = rdr.ReadBoolean();
 
-            ClientXML = new string[rdr.ReadInt16()];
-            for (int i = 0; i < ClientXML.Length; i++)
-                ClientXML[i] = rdr.ReadUTF();
+            ClientXml = new string[rdr.ReadInt16()];
+            for (int i = 0; i < ClientXml.Length; i++)
+                ClientXml[i] = rdr.ReadUTF();
 
-            ExtraXML = new string[rdr.ReadInt16()];
-            for (int i = 0; i < ExtraXML.Length; i++)
-                ExtraXML[i] = rdr.ReadUTF();
+            ExtraXml = new string[rdr.ReadInt16()];
+            for (int i = 0; i < ExtraXml.Length; i++)
+                ExtraXml[i] = rdr.ReadUTF();
         }
 
         protected override void Write(Client psr, NWriter wtr)
@@ -57,12 +57,12 @@
             wtr.Write(AllowTeleport);
             wtr.Write(ShowDisplays);
 
-            wtr.Write((ushort) ClientXML.Length);
-            foreach (string i in ClientXML)
+            wtr.Write((ushort) ClientXml.Length);
+            foreach (string i in ClientXml)
                 wtr.Write32UTF(i);
 
-            wtr.Write((ushort) ExtraXML.Length);
-            foreach (string i in ExtraXML)
+            wtr.Write((ushort) ExtraXml.Length);
+            foreach (string i in ExtraXml)
                 wtr.Write32UTF(i);
         }
     }

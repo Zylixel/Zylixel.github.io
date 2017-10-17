@@ -94,7 +94,7 @@ public static class Utils
 
     public static T Convert<T>(this string value)
     {
-        return (T)TypeDescriptor.GetConverter(typeof(T)).ConvertFrom((object)value);
+        return (T)TypeDescriptor.GetConverter(typeof(T)).ConvertFrom(value);
     }
 
     public static T[] FromCSV<T>(this string csv)

@@ -14,9 +14,9 @@ namespace wServer.networking.handlers
 {
     internal class InvDropHandler : PacketHandlerBase<InvDropPacket>
     {
-        private readonly Random invRand = new Random();
+        private readonly Random _invRand = new Random();
 
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.INVDROP; }
         }
@@ -36,8 +36,8 @@ namespace wServer.networking.handlers
             client.Manager.Logic.AddPendingAction(t =>
             {
                 //TODO: locker again
-                const ushort NORM_BAG = 0x0500;
-                const ushort SOUL_BAG = 0x0507;
+                const ushort normBag = 0x0500;
+                const ushort soulBag = 0x0507;
 
                 Entity entity = client.Player.Owner.GetEntity(packet.SlotObject.ObjectId);
                 IContainer con = entity as IContainer;
@@ -66,17 +66,17 @@ namespace wServer.networking.handlers
                     Container container;
                     if (item.Soulbound)
                     {
-                        container = new Container(client.Player.Manager, SOUL_BAG, 1000*30, true)
+                        container = new Container(client.Player.Manager, soulBag, 1000*30, true)
                         {
                             BagOwners = new string[1] { client.Player.AccountId }
                         };
                     }
                     else
                     {
-                        container = new Container(client.Player.Manager, NORM_BAG, 1000*30, true);
+                        container = new Container(client.Player.Manager, normBag, 1000*30, true);
                     }
-                    float bagx = entity.X + (float) ((invRand.NextDouble()*2 - 1)*0.5);
-                    float bagy = entity.Y + (float) ((invRand.NextDouble()*2 - 1)*0.5);
+                    float bagx = entity.X + (float) ((_invRand.NextDouble()*2 - 1)*0.5);
+                    float bagy = entity.Y + (float) ((_invRand.NextDouble()*2 - 1)*0.5);
                     try
                     {
                         container.Inventory[0] = item;
@@ -100,8 +100,8 @@ namespace wServer.networking.handlers
                     }
                     catch (Exception ex)
                     {
-                        log.Error(ex);
-                        log.InfoFormat(client.Player.Name + " just attempted to dupe.");
+                        Log.Error(ex);
+                        Log.InfoFormat(client.Player.Name + " just attempted to dupe.");
                     }
                 }
             }, PendingPriority.Networking);

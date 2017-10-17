@@ -8,7 +8,7 @@ namespace wServer.networking.handlers
 {
     internal class RequestTradeHandler : PacketHandlerBase<RequestTradePacket>
     {
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.REQUESTTRADE; }
         }
@@ -21,7 +21,7 @@ namespace wServer.networking.handlers
 
     internal class ChangeTradeHandler : PacketHandlerBase<ChangeTradePacket>
     {
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.CHANGETRADE; }
         }
@@ -34,7 +34,7 @@ namespace wServer.networking.handlers
 
     internal class AcceptTradeHandler : PacketHandlerBase<AcceptTradePacket>
     {
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.ACCEPTTRADE; }
         }
@@ -47,7 +47,7 @@ namespace wServer.networking.handlers
 
     internal class CancelTradeHandler : PacketHandlerBase<CancelTradePacket>
     {
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.CANCELTRADE; }
         }

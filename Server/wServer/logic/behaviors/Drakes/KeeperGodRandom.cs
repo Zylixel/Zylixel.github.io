@@ -1,11 +1,4 @@
-﻿using Mono.Game;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using wServer.realm;
-using wServer.realm.entities.player;
+﻿using System;
 
 namespace wServer.logic.behaviors.Drakes
 {
@@ -19,34 +12,31 @@ namespace wServer.logic.behaviors.Drakes
                 {
                     return "beholder";
                 }
-                else if (r == 2)
-             {
-                    return "White Demon";
-                }
-                else if (r == 3)
+            if (r == 2)
             {
-                    return "ghost god";
-                }
-                else if (r == 4)
-                {
+                return "White Demon";
+            }
+            if (r == 3)
+            {
+                return "ghost god";
+            }
+            if (r == 4)
+            {
                 return "leviathan";
-                }
-            else if (r == 5)
+            }
+            if (r == 5)
             {
                 return "ent god";
             }
-            else if (r == 6)
+            if (r == 6)
             {
                 return "native sprite god";
             }
-            else if (r == 7)
+            if (r == 7)
             {
                 return "slime god";
             }
-            else
-            {
-                return "medusa";
-            }
+            return "medusa";
         }
     }
 }

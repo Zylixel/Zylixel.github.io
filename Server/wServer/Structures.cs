@@ -259,7 +259,7 @@ namespace wServer
             ret.Stats = new KeyValuePair<StatsType, object>[rdr.ReadInt16()];
             for (int i = 0; i < ret.Stats.Length; i++)
             {
-                StatsType type = (StatsType) rdr.ReadByte();
+                StatsType type = rdr.ReadByte();
                 if (type == StatsType.Guild || type == StatsType.Name)
                     ret.Stats[i] = new KeyValuePair<StatsType, object>(type, rdr.ReadUTF());
                 else
@@ -277,8 +277,8 @@ namespace wServer
                 wtr.Write((ushort)Stats.Length);
                 foreach (KeyValuePair<StatsType, object> i in Stats)
                 {
-                    wtr.Write((byte)i.Key);
-                    if (i.Key.IsUTF() && i.Value != null) wtr.WriteUTF(i.Value.ToString());
+                    wtr.Write(i.Key);
+                    if (i.Key.IsUtf() && i.Value != null) wtr.WriteUTF(i.Value.ToString());
                     else wtr.Write((int)i.Value);
                 }
             }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace wServer.networking.svrPackets
+﻿namespace wServer.networking.svrPackets
 {
     public class QuestFetchResponsePacket : ServerPacket
     {
@@ -14,7 +8,7 @@ namespace wServer.networking.svrPackets
         public string Image { get; set; }
 
 
-        public override PacketID ID
+        public override PacketID Id
         {
         	get { return PacketID.QUESTFETCHRESPONSE; }
         }

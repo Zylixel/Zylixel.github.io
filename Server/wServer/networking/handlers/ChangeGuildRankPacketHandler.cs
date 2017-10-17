@@ -1,19 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using wServer.networking.cliPackets;
-using wServer.realm;
 using wServer.networking.svrPackets;
-using db;
-using wServer.realm.entities;
 using wServer.realm.entities.player;
 
 namespace wServer.networking.handlers
 {
     class ChangeGuildRankPacketHandler : PacketHandlerBase<ChangeGuildRankPacket>
     {
-        public override PacketID ID { get { return PacketID.CHANGEGUILDRANK; } }
+        public override PacketID Id { get { return PacketID.CHANGEGUILDRANK; } }
 
         protected override void HandlePacket(Client client, ChangeGuildRankPacket packet)
         {
@@ -59,7 +53,7 @@ namespace wServer.networking.handlers
                 else
                     client.Player.SendInfo("Members and initiates cannot promote!");
 
-                client.SendPacket(new CreateGuildResultPacket()
+                client.SendPacket(new CreateGuildResultPacket
                 {
                     Success = true,
                     ErrorText = ""

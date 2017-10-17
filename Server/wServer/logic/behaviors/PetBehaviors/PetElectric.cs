@@ -1,9 +1,7 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using wServer.networking.svrPackets;
 using wServer.realm;
 using wServer.realm.entities;
-using wServer.realm.worlds;
 
 namespace wServer.logic.behaviors.PetBehaviors
 {
@@ -48,7 +46,7 @@ namespace wServer.logic.behaviors.PetBehaviors
 
                         e.ApplyConditionEffect(new ConditionEffect
                         {
-                            DurationMS = level.Level * 40,
+                            DurationMs = level.Level * 40,
                             Effect = ConditionEffectIndex.Paralyzed
                         });
 
@@ -63,12 +61,12 @@ namespace wServer.logic.behaviors.PetBehaviors
                         {
                             PosA = new Position { X = host.X, Y = host.Y },
                             EffectType = EffectType.ElectricBolts,
-                            TargetId = host.Id,
+                            TargetId = host.Id
                         }, null);
 
                         e.Damage(null, time, level.Level, true, new ConditionEffect
                         {
-                            DurationMS = level.Level * 40,
+                            DurationMs = level.Level * 40,
                             Effect = ConditionEffectIndex.Paralyzed
                         });
                     }
@@ -90,7 +88,7 @@ namespace wServer.logic.behaviors.PetBehaviors
                     cool -= 16.6666666666666;
                 return (int)cool;
             }
-            else if (type.Level > 89)
+            if (type.Level > 89)
             {
                 double cool = 500;
                 for (int i = 0; i < type.Level - 90; i++)

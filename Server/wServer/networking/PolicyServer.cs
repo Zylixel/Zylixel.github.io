@@ -11,22 +11,22 @@ namespace wServer.networking
 {
     internal class PolicyServer
     {
-        private static readonly ILog log = LogManager.GetLogger(typeof (PolicyServer));
+        private static readonly ILog Log = LogManager.GetLogger(typeof (PolicyServer));
 
-        private readonly TcpListener listener;
-        private bool started;
+        private readonly TcpListener _listener;
+        private bool _started;
 
         public PolicyServer()
         {
-            listener = new TcpListener(IPAddress.Any, 843);
+            _listener = new TcpListener(IPAddress.Any, 843);
         }
 
         private static void ServePolicyFile(IAsyncResult ar)
         {
             try
             {
-                TcpClient cli = (ar.AsyncState as TcpListener).EndAcceptTcpClient(ar);
-                (ar.AsyncState as TcpListener).BeginAcceptTcpClient(ServePolicyFile, ar.AsyncState);
+                TcpClient cli = ((TcpListener) ar.AsyncState).EndAcceptTcpClient(ar);
+                ((TcpListener) ar.AsyncState)?.BeginAcceptTcpClient(ServePolicyFile, ar.AsyncState);
                 NetworkStream s = cli.GetStream();
                 NReader rdr = new NReader(s);
                 NWriter wtr = new NWriter(s);
@@ -43,35 +43,33 @@ namespace wServer.networking
             catch (ObjectDisposedException) { }
             catch (Exception ex)
             {
-                log.Error(ex);
+                Log.Error(ex);
             }
         }
 
         public void Start()
         {
-            log.Info("Starting policy server...");
+            Log.Info("Starting policy server...");
             try
             {
-                listener.Start();
-                listener.BeginAcceptTcpClient(ServePolicyFile, listener);
-                started = true;
+                _listener.Start();
+                _listener.BeginAcceptTcpClient(ServePolicyFile, _listener);
+                _started = true;
             }
             catch (ObjectDisposedException) { }
             catch (Exception ex)
             {
-                log.Error(ex);
-                log.Warn("Could not start Socket Policy Server, is port 843 occupied?");
-                started = false;
+                Log.Error(ex);
+                Log.Warn("Could not start Socket Policy Server, is port 843 occupied?");
+                _started = false;
             }
         }
 
         public void Stop()
         {
-            if (started)
-            {
-                log.Info("Stopping policy server...");
-                listener.Stop();
-            }
+            if (!_started) return;
+            Log.Info("Stopping policy server...");
+            _listener.Stop();
         }
     }
 }

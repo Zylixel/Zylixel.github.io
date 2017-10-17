@@ -3,13 +3,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Xml.Linq;
 using db;
+using db.data;
 using MySql.Data.MySqlClient;
 using wServer.networking;
 using wServer.networking.cliPackets;
 using wServer.networking.svrPackets;
-using db.data;
 
 #endregion
 
@@ -22,85 +21,85 @@ namespace wServer.realm.entities.player
             new ConditionEffect
             {
                 Effect = ConditionEffectIndex.Slowed,
-                DurationMS = 0
+                DurationMs = 0
             },
             new ConditionEffect
             {
                 Effect = ConditionEffectIndex.Paralyzed,
-                DurationMS = 0
+                DurationMs = 0
             },
             new ConditionEffect
             {
                 Effect = ConditionEffectIndex.Weak,
-                DurationMS = 0
+                DurationMs = 0
             },
             new ConditionEffect
             {
                 Effect = ConditionEffectIndex.Stunned,
-                DurationMS = 0
+                DurationMs = 0
             },
             new ConditionEffect
             {
                 Effect = ConditionEffectIndex.Confused,
-                DurationMS = 0
+                DurationMs = 0
             },
             new ConditionEffect
             {
                 Effect = ConditionEffectIndex.Blind,
-                DurationMS = 0
+                DurationMs = 0
             },
             new ConditionEffect
             {
                 Effect = ConditionEffectIndex.Quiet,
-                DurationMS = 0
+                DurationMs = 0
             },
             new ConditionEffect
             {
                 Effect = ConditionEffectIndex.ArmorBroken,
-                DurationMS = 0
+                DurationMs = 0
             },
             new ConditionEffect
             {
                 Effect = ConditionEffectIndex.Bleeding,
-                DurationMS = 0
+                DurationMs = 0
             },
             new ConditionEffect
             {
                 Effect = ConditionEffectIndex.Dazed,
-                DurationMS = 0
+                DurationMs = 0
             },
             new ConditionEffect
             {
                 Effect = ConditionEffectIndex.Sick,
-                DurationMS = 0
+                DurationMs = 0
             },
             new ConditionEffect
             {
                 Effect = ConditionEffectIndex.Drunk,
-                DurationMS = 0
+                DurationMs = 0
             },
             new ConditionEffect
             {
                 Effect = ConditionEffectIndex.Hallucinating,
-                DurationMS = 0
+                DurationMs = 0
             },
             new ConditionEffect
             {
                 Effect = ConditionEffectIndex.Hexed,
-                DurationMS = 0
+                DurationMs = 0
             },
             new ConditionEffect
             {
                 Effect = ConditionEffectIndex.Unstable,
-                DurationMS = 0
+                DurationMs = 0
             }
         };
 
-        public static int oldstat { get; set; }
+        public static int Oldstat { get; set; }
 
-        public static Position targetlink { get; set; }
+        public static Position Targetlink { get; set; }
         public int PetIdLookup { get; private set; }
-        public Entity ground { get; private set; }
+        public Entity Ground { get; private set; }
         public string TreasureFind;
 
         public static void ActivateHealHp(Player player, int amount, List<Packet> pkts)
@@ -152,9 +151,9 @@ namespace wServer.realm.entities.player
 
         private static void ActivateBoostStat(Player player, int idxnew, List<Packet> pkts)
         {
-            var OriginalStat = 0;
-            OriginalStat = player.Stats[idxnew] + OriginalStat;
-            oldstat = OriginalStat;
+            var originalStat = 0;
+            originalStat = player.Stats[idxnew] + originalStat;
+            Oldstat = originalStat;
         }
 
         private void ActivateShoot(RealmTime time, Item item, Position target)
@@ -178,16 +177,13 @@ namespace wServer.realm.entities.player
             try
             {
                 if (eff.ConditionEffect != null)
-                    enemy.ApplyConditionEffect(new[]
+                    enemy.ApplyConditionEffect(new ConditionEffect
                     {
-                        new ConditionEffect
-                        {
-                            Effect = (ConditionEffectIndex) eff.ConditionEffect,
-                            DurationMS = (int) eff.EffectDuration
-                        }
+                        Effect = (ConditionEffectIndex) eff.ConditionEffect,
+                        DurationMs = (int) eff.EffectDuration
                     });
                 int remainingDmg = (int) StatsManager.GetDefenseDamage(enemy, eff.TotalDamage, enemy.ObjectDesc.Defense);
-                int perDmg = remainingDmg*1000/eff.DurationMS;
+                int perDmg = remainingDmg*1000/eff.DurationMs;
                 WorldTimer tmr = null;
                 int x = 0;
                 tmr = new WorldTimer(100, (w, t) =>
@@ -220,7 +216,7 @@ namespace wServer.realm.entities.player
             }
             catch (Exception ex)
             {
-                log.Error(ex);
+                Log.Error(ex);
             }
         }
 
@@ -235,11 +231,11 @@ namespace wServer.realm.entities.player
 
             if (pkt.SlotObject.SlotId != 255 && pkt.SlotObject.SlotId != 254 && con.Inventory[pkt.SlotObject.SlotId] != item)
             {
-                log.FatalFormat("Cheat engine detected for player {0},\nItem should be {1}, but its {2}.",
+                Log.FatalFormat("Cheat engine detected for player {0},\nItem should be {1}, but its {2}.",
                     Name, Inventory[pkt.SlotObject.SlotId].ObjectId, item.ObjectId);
                 foreach (Player player in Owner.Players.Values)
                     if (player.Client.Account.Rank >= 2)
-                        player.SendInfo(String.Format("Cheat engine detected for player {0},\nItem should be {1}, but its {2}.",
+                        player.SendInfo(string.Format("Cheat engine detected for player {0},\nItem should be {1}, but its {2}.",
                     Name, Inventory[pkt.SlotObject.SlotId].ObjectId, item.ObjectId));
                 Client.Disconnect();
                 return true;
@@ -268,7 +264,7 @@ namespace wServer.realm.entities.player
                 Client.Character.HasBackpack = 1;
                 Manager.Database.DoActionAsync(db =>
                     db.SaveBackpacks(Client.Character, Client.Account));
-                Array.Resize(ref inventory, 20);
+                Array.Resize(ref _inventory, 20);
                 int[] slotTypes =
                     Utils.FromCommaSepString32(
                         Manager.GameData.ObjectTypeToElement[ObjectType].Element("SlotTypes").Value);
@@ -284,7 +280,7 @@ namespace wServer.realm.entities.player
                 {
                     XpBoostTimeLeft = (float)item.Timer;
                     XpBoosted = item.XpBooster;
-                    xpFreeTimer = (float)item.Timer == -1.0 ? false : true;
+                    _xpFreeTimer = (float)item.Timer == -1.0 ? false : true;
                     return false;
                 }
                 {
@@ -298,7 +294,7 @@ namespace wServer.realm.entities.player
                 if (!LootDropBoost)
                 {
                     LootDropBoostTimeLeft = (float)item.Timer;
-                    lootDropBoostFreeTimer = (float)item.Timer == -1.0 ? false : true;
+                    _lootDropBoostFreeTimer = (float)item.Timer == -1.0 ? false : true;
                     return false;
                 }
                 {
@@ -312,7 +308,7 @@ namespace wServer.realm.entities.player
                 if (!LootTierBoost)
                 {
                     LootTierBoostTimeLeft = (float)item.Timer;
-                    lootTierBoostFreeTimer = (float)item.Timer == -1.0 ? false : true;
+                    _lootTierBoostFreeTimer = (float)item.Timer == -1.0 ? false : true;
                     return false;
                 }
                 {
@@ -338,7 +334,7 @@ namespace wServer.realm.entities.player
                                 time.tickTimes, target, (float)(i * (Math.PI * 2) / 20));
                             Owner.EnterWorld(proj);
                             FameCounter.Shoot(proj);
-                            batch[i] = new Shoot2Packet()
+                            batch[i] = new Shoot2Packet
                             {
                                 BulletId = proj.ProjectileId,
                                 OwnerId = Id,
@@ -349,7 +345,7 @@ namespace wServer.realm.entities.player
                             };
                         }
                         Random.CurrentSeed = s;
-                        batch[20] = new ShowEffectPacket()
+                        batch[20] = new ShowEffectPacket
                         {
                             EffectType = EffectType.Trail,
                             PosA = target,
@@ -368,8 +364,8 @@ namespace wServer.realm.entities.player
                     {
                         int idx = -1;
 
-                        if (eff.Stats == StatsType.MaximumHP) idx = 0;
-                        else if (eff.Stats == StatsType.MaximumMP) idx = 1;
+                        if (eff.Stats == StatsType.MaximumHp) idx = 0;
+                        else if (eff.Stats == StatsType.MaximumMp) idx = 1;
                         else if (eff.Stats == StatsType.Attack) idx = 2;
                         else if (eff.Stats == StatsType.Defense) idx = 3;
                         else if (eff.Stats == StatsType.Speed) idx = 4;
@@ -380,20 +376,20 @@ namespace wServer.realm.entities.player
                         List<Packet> pkts = new List<Packet>();
 
                         ActivateBoostStat(this, idx, pkts);
-                        int OGstat = oldstat;
+                        int oGstat = Oldstat;
                         int bit = idx + 39;
 
                         int s = eff.Amount;
                         Boost[idx] += s;
                         ApplyConditionEffect(new ConditionEffect
                         {
-                            DurationMS = eff.DurationMS,
+                            DurationMs = eff.DurationMs,
                             Effect = (ConditionEffectIndex)bit
                         });
                         UpdateCount++;
-                        Owner.Timers.Add(new WorldTimer(eff.DurationMS, (world, t) =>
+                        Owner.Timers.Add(new WorldTimer(eff.DurationMs, (world, t) =>
                         {
-                            Boost[idx] = OGstat;
+                            Boost[idx] = oGstat;
                             UpdateCount++;
                         }));
                         Owner.BroadcastPacket(new ShowEffectPacket
@@ -407,13 +403,13 @@ namespace wServer.realm.entities.player
 
                     case ActivateEffects.StatBoostAura:
                         {
-                            var amountSBA = eff.Amount;
-                            var durationSBA = eff.DurationMS;
-                            var rangeSBA = eff.Range;
+                            var amountSba = eff.Amount;
+                            var durationSba = eff.DurationMs;
+                            var rangeSba = eff.Range;
                             int idx = -1;
 
-                            if (eff.Stats == StatsType.MaximumHP) idx = 0;
-                            if (eff.Stats == StatsType.MaximumMP) idx = 1;
+                            if (eff.Stats == StatsType.MaximumHp) idx = 0;
+                            if (eff.Stats == StatsType.MaximumMp) idx = 1;
                             if (eff.Stats == StatsType.Attack) idx = 2;
                             if (eff.Stats == StatsType.Defense) idx = 3;
                             if (eff.Stats == StatsType.Speed) idx = 4;
@@ -426,50 +422,50 @@ namespace wServer.realm.entities.player
 
                             if (eff.UseWisMod)
                             {
-                                amountSBA = (int)UseWisMod(eff.Amount, 0);
-                                durationSBA = (int)(UseWisMod(eff.DurationSec) * 1000);
-                                rangeSBA = UseWisMod(eff.Range);
+                                amountSba = (int)UseWisMod(eff.Amount, 0);
+                                durationSba = (int)(UseWisMod(eff.DurationSec) * 1000);
+                                rangeSba = UseWisMod(eff.Range);
                             }
-                            if (HasConditionEffect(ConditionEffectIndex.HPBoost))
+                            if (HasConditionEffect(ConditionEffectIndex.HpBoost))
                             {
-                                if (amountSBA >= 1)
+                                if (amountSba >= 1)
                                 {
-                                    amountSBA = 0;
-                                    durationSBA = 0;
+                                    amountSba = 0;
+                                    durationSba = 0;
                                     return false;
                                 }
                             } 
                 
-                            this.Aoe(rangeSBA, true, player =>
+                            this.Aoe(rangeSba, true, player =>
                             {
                                 ApplyConditionEffect(new ConditionEffect
                                 {
-                                    DurationMS = durationSBA,
+                                    DurationMs = durationSba,
                                     Effect = (ConditionEffectIndex)bit
                                 });
-                                (player as Player).Boost[idx] += amountSBA;
+                                (player as Player).Boost[idx] += amountSba;
                                 player.UpdateCount++;
-                                Owner.Timers.Add(new WorldTimer(durationSBA, (world, t) =>
+                                Owner.Timers.Add(new WorldTimer(durationSba, (world, t) =>
                                 {
-                                    (player as Player).Boost[idx] -= amountSBA;
+                                    (player as Player).Boost[idx] -= amountSba;
                                     player.UpdateCount++;
                                
                                 }));
                             });
-                            BroadcastSync(new ShowEffectPacket()
+                            BroadcastSync(new ShowEffectPacket
                             {
                                 EffectType = EffectType.AreaBlast,
                                 TargetId = Id,
                                 Color = new ARGB(0xffffffff),
-                                PosA = new Position() { X = rangeSBA }
+                                PosA = new Position { X = rangeSba }
                             }, p => this.Dist(p) < 25);
                         } break;
 
                     case ActivateEffects.ConditionEffectSelf:
                     {
-                        var durationCES = eff.DurationMS;
+                        var durationCes = eff.DurationMs;
                         if (eff.UseWisMod)
-                            durationCES = (int) (UseWisMod(eff.DurationSec)*1000);
+                            durationCes = (int) (UseWisMod(eff.DurationSec)*1000);
 
                         var color = 0xffffffff;
                         switch (eff.ConditionEffect.Value)
@@ -485,7 +481,7 @@ namespace wServer.realm.entities.player
                         ApplyConditionEffect(new ConditionEffect
                         {
                             Effect = eff.ConditionEffect.Value,
-                            DurationMS = durationCES
+                            DurationMs = durationCes
                         });
                         Owner.BroadcastPacket(new ShowEffectPacket
                         {
@@ -499,20 +495,20 @@ namespace wServer.realm.entities.player
 
                     case ActivateEffects.ConditionEffectAura:
                     {
-                        var durationCEA = eff.DurationMS;
-                        var rangeCEA = eff.Range;
+                        var durationCea = eff.DurationMs;
+                        var rangeCea = eff.Range;
                         if (eff.UseWisMod)
                         {
-                            durationCEA = (int)(UseWisMod(eff.DurationSec) * 1000);
-                            rangeCEA = UseWisMod(eff.Range);
+                            durationCea = (int)(UseWisMod(eff.DurationSec) * 1000);
+                            rangeCea = UseWisMod(eff.Range);
                         }
 
-                        this.Aoe(rangeCEA, true, player =>
+                        this.Aoe(rangeCea, true, player =>
                         {
                             player.ApplyConditionEffect(new ConditionEffect
                             {
                                 Effect = eff.ConditionEffect.Value,
-                                DurationMS = durationCEA
+                                DurationMs = durationCea
                             });
                         });
 
@@ -532,7 +528,7 @@ namespace wServer.realm.entities.player
                             EffectType = EffectType.AreaBlast,
                             TargetId = Id,
                             Color = new ARGB(color),
-                            PosA = new Position {X = rangeCEA}
+                            PosA = new Position {X = rangeCea}
                         }, p => this.Dist(p) < 25);
                     }
                         break;
@@ -547,22 +543,22 @@ namespace wServer.realm.entities.player
 
                     case ActivateEffects.HealNova:
                     {
-                        var amountHN = eff.Amount;
-                        var rangeHN = eff.Range;
+                        var amountHn = eff.Amount;
+                        var rangeHn = eff.Range;
                         if (eff.UseWisMod)
                         {
-                            amountHN = (int)UseWisMod(eff.Amount, 0);
-                            rangeHN = UseWisMod(eff.Range);
+                            amountHn = (int)UseWisMod(eff.Amount, 0);
+                            rangeHn = UseWisMod(eff.Range);
                         }
                         
                         List<Packet> pkts = new List<Packet>();
-                        this.Aoe(rangeHN, true, player => { ActivateHealHp(player as Player, amountHN, pkts); });
+                        this.Aoe(rangeHn, true, player => { ActivateHealHp(player as Player, amountHn, pkts); });
                         pkts.Add(new ShowEffectPacket
                         {
                             EffectType = EffectType.AreaBlast,
                             TargetId = Id,
                             Color = new ARGB(0xffffffff),
-                            PosA = new Position {X = rangeHN}
+                            PosA = new Position {X = rangeHn}
                         });
                         BroadcastSync(pkts, p => this.Dist(p) < 25);
                     }
@@ -730,14 +726,14 @@ namespace wServer.realm.entities.player
                                 enemy.ApplyConditionEffect(new ConditionEffect
                                 {
                                     Effect = ConditionEffectIndex.Stasis,
-                                    DurationMS = eff.DurationMS
+                                    DurationMs = eff.DurationMs
                                 });
-                                Owner.Timers.Add(new WorldTimer(eff.DurationMS, (world, t) =>
+                                Owner.Timers.Add(new WorldTimer(eff.DurationMs, (world, t) =>
                                 {
                                     enemy.ApplyConditionEffect(new ConditionEffect
                                     {
                                         Effect = ConditionEffectIndex.StasisImmune,
-                                        DurationMS = 3000
+                                        DurationMs = 3000
                                     });
                                 }));
                                 pkts.Add(new NotificationPacket
@@ -754,7 +750,7 @@ namespace wServer.realm.entities.player
 
                     case ActivateEffects.Decoy:
                     {
-                        Decoy decoy = new Decoy(Manager, this, eff.DurationMS, StatsManager.GetSpeed(), eff.random);
+                        Decoy decoy = new Decoy(Manager, this, eff.DurationMs, StatsManager.GetSpeed(), eff.Random);
                         decoy.Move(X, Y);
                         Owner.EnterWorld(decoy);
                     }
@@ -804,7 +800,7 @@ namespace wServer.realm.entities.player
                                 targets[i].ApplyConditionEffect(new ConditionEffect
                                 {
                                     Effect = eff.ConditionEffect.Value,
-                                    DurationMS = (int) (eff.EffectDuration*1000)
+                                    DurationMs = (int) (eff.EffectDuration*1000)
                                 });
                             pkts.Add(new ShowEffectPacket
                             {
@@ -854,12 +850,12 @@ namespace wServer.realm.entities.player
                             }
                             catch (Exception ex)
                             {
-                                log.ErrorFormat("Poison ShowEffect:\n{0}", ex);
+                                Log.ErrorFormat("Poison ShowEffect:\n{0}", ex);
                             }
                         }
                         catch (Exception ex)
                         {
-                            log.ErrorFormat("Poisons General:\n{0}", ex);
+                            Log.ErrorFormat("Poisons General:\n{0}", ex);
                         }
                     }
                         break;
@@ -893,8 +889,8 @@ namespace wServer.realm.entities.player
                     {
                         int idx = -1;
 
-                        if (eff.Stats == StatsType.MaximumHP) idx = 0;
-                        else if (eff.Stats == StatsType.MaximumMP) idx = 1;
+                        if (eff.Stats == StatsType.MaximumHp) idx = 0;
+                        else if (eff.Stats == StatsType.MaximumMp) idx = 1;
                         else if (eff.Stats == StatsType.Attack) idx = 2;
                         else if (eff.Stats == StatsType.Defense) idx = 3;
                         else if (eff.Stats == StatsType.Speed) idx = 4;
@@ -959,8 +955,8 @@ namespace wServer.realm.entities.player
                                 break;
                             Entity entity = Resolve(Manager, objType);
                             World w = Manager.GetWorld(Owner.Id);
-                            int TimeoutTime = Manager.GameData.Portals[objType].TimeoutTime;
-                            string DungName = Manager.GameData.Portals[objType].DungeonName;
+                            int timeoutTime = Manager.GameData.Portals[objType].TimeoutTime;
+                            string dungName = Manager.GameData.Portals[objType].DungeonName;
 
                             ARGB c = new ARGB(0x00FF00);
 
@@ -970,7 +966,7 @@ namespace wServer.realm.entities.player
                             {
                                 Color = c,
                                 Text =
-                                DungName + " opened by " +
+                                dungName + " opened by " +
                                Client.Account.Name + "\"",
                                 ObjectId = Client.Player.Id
                             }, null);
@@ -980,9 +976,9 @@ namespace wServer.realm.entities.player
                                 BubbleTime = 0,
                                 Stars = -1,
                                 Name = "",
-                                Text = DungName + " opened by " + Client.Account.Name
+                                Text = dungName + " opened by " + Client.Account.Name
                             }, null);
-                            w.Timers.Add(new WorldTimer(TimeoutTime * 1000,
+                            w.Timers.Add(new WorldTimer(timeoutTime * 1000,
                                 (world, t) =>
                                 {
                                     try
@@ -991,7 +987,7 @@ namespace wServer.realm.entities.player
                                     }
                                     catch (Exception ex)
                                     {
-                                        log.ErrorFormat("Couldn't despawn portal.\n{0}", ex);
+                                        Log.ErrorFormat("Couldn't despawn portal.\n{0}", ex);
                                     }
                                 }));
                         }
@@ -1013,22 +1009,22 @@ namespace wServer.realm.entities.player
 
                     case ActivateEffects.ShurikenAbility:
                         {
-                            if (!ninjaShoot)
+                            if (!_ninjaShoot)
                             {
                                 ApplyConditionEffect(new ConditionEffect
                                 {
                                     Effect = ConditionEffectIndex.Speedy,
-                                    DurationMS = -1
+                                    DurationMs = -1
                                 });
-                                ninjaFreeTimer = true;
-                                ninjaShoot = true;
+                                _ninjaFreeTimer = true;
+                                _ninjaShoot = true;
                             }
                             else
                             {
                                 ApplyConditionEffect(new ConditionEffect
                                 {
                                     Effect = ConditionEffectIndex.Speedy,
-                                    DurationMS = 0
+                                    DurationMs = 0
                                 });
                                 ushort obj;
                                 Manager.GameData.IdToObjectType.TryGetValue(item.ObjectId, out obj);
@@ -1037,15 +1033,14 @@ namespace wServer.realm.entities.player
                                     ActivateShoot(time, item, pkt.ItemUsePos);
                                     Mp -= (int)item.MpEndCost;
                                 }
-                                targetlink = target;
-                                ninjaShoot = false;
+                                Targetlink = target;
+                                _ninjaShoot = false;
                             }
                         }
                         break;
 
                     case ActivateEffects.RandomPetStone:
-                        int[] Items = new[]
-                        {
+                        int[] items = {
                             0x6073, //Gigacorn
                             0x6075, //Gship
                             0x6079, //RedStoneGuard
@@ -1059,16 +1054,16 @@ namespace wServer.realm.entities.player
                             0x6119  //Twilight Archmage
                         };
 
-                        var Succeed = false;
+                        var succeed = false;
                         for (int i = 5; i < Client.Player.Inventory.Length; i++)
                             if (Client.Player.Inventory[i] == null)
                             {
-                                Client.Player.Inventory[i] = Client.Player.Manager.GameData.Items[(ushort)Items[new Random().Next(0, Items.Length)]];
-                                Succeed = true;
+                                Client.Player.Inventory[pkt.SlotObject.SlotId] = Client.Player.Manager.GameData.Items[(ushort)items[new Random().Next(0, items.Length)]];
+                                succeed = true;
                                 endMethod = false;
                                 break;
                             }
-                            if (Succeed == false)
+                            if (succeed == false)
                             { 
                                 SendInfo("Please have one open slot to use this item.");
                                 endMethod = true;
@@ -1078,89 +1073,89 @@ namespace wServer.realm.entities.player
 
                     case ActivateEffects.TreasureFind:
                         bool foundTreasure = false;
-                        List<int> TreasureItems = new List<int>();
-                        int[] TreasureItemsExe;
+                        List<int> treasureItems = new List<int>();
+                        int[] treasureItemsExe;
                         string[] noItems = {};
 
-                        foreach (KeyValuePair<ushort, Item> Treasureitem in data.Items.Where(_ => noItems.All(i => i != _.Value.ObjectId)))
+                        foreach (KeyValuePair<ushort, Item> treasureitem in data.Items.Where(_ => noItems.All(i => i != _.Value.ObjectId)))
                         {
-                            if (eff.treaureTier == 1) //Recieves Treasure Tier (Common, Uncommon, etc)
+                            if (eff.TreaureTier == 1) //Recieves Treasure Tier (Common, Uncommon, etc)
                             {
                                 TreasureFind = "The Marked Spot";
                                 #region ItemData
-                                if (Treasureitem.Value.Tier <= 7 && Treasureitem.Value.SlotType <= 3) //sword, dag, bow
-                                    TreasureItems.Add(Treasureitem.Value.ObjectType);
-                                if (Treasureitem.Value.Tier <= 7 && Treasureitem.Value.SlotType == 8) //wand
-                                    TreasureItems.Add(Treasureitem.Value.ObjectType);
-                                if (Treasureitem.Value.Tier <= 7 && Treasureitem.Value.SlotType == 17) //staff
-                                    TreasureItems.Add(Treasureitem.Value.ObjectType);
-                                if (Treasureitem.Value.Tier <= 7 && Treasureitem.Value.SlotType == 24) //Katana
-                                    TreasureItems.Add(Treasureitem.Value.ObjectType);
-                                if (Treasureitem.Value.Tier <= 4)
-                                    if (Treasureitem.Value.Usable && Treasureitem.Value.MpCost >= 1) //Abilites
-                                        TreasureItems.Add(Treasureitem.Value.ObjectType);
-                                if (Treasureitem.Value.Tier <= 4 && Treasureitem.Value.SlotType == 11) //Rings
-                                    TreasureItems.Add(Treasureitem.Value.ObjectType);
-                                if (Treasureitem.Value.Tier <= 7 && Treasureitem.Value.SlotType == 6) //Leather
-                                    TreasureItems.Add(Treasureitem.Value.ObjectType);
-                                if (Treasureitem.Value.Tier <= 7 && Treasureitem.Value.SlotType == 7) //Armor
-                                    TreasureItems.Add(Treasureitem.Value.ObjectType);
-                                if (Treasureitem.Value.Tier <= 7 && Treasureitem.Value.SlotType == 14) //Robe
-                                    TreasureItems.Add(Treasureitem.Value.ObjectType);
-                                if (Treasureitem.Value.Tier == -1) TreasureItems.Remove(Treasureitem.Value.ObjectType); //No Uts
+                                if (treasureitem.Value.Tier <= 7 && treasureitem.Value.SlotType <= 3) //sword, dag, bow
+                                    treasureItems.Add(treasureitem.Value.ObjectType);
+                                if (treasureitem.Value.Tier <= 7 && treasureitem.Value.SlotType == 8) //wand
+                                    treasureItems.Add(treasureitem.Value.ObjectType);
+                                if (treasureitem.Value.Tier <= 7 && treasureitem.Value.SlotType == 17) //staff
+                                    treasureItems.Add(treasureitem.Value.ObjectType);
+                                if (treasureitem.Value.Tier <= 7 && treasureitem.Value.SlotType == 24) //Katana
+                                    treasureItems.Add(treasureitem.Value.ObjectType);
+                                if (treasureitem.Value.Tier <= 4)
+                                    if (treasureitem.Value.Usable && treasureitem.Value.MpCost >= 1) //Abilites
+                                        treasureItems.Add(treasureitem.Value.ObjectType);
+                                if (treasureitem.Value.Tier <= 4 && treasureitem.Value.SlotType == 11) //Rings
+                                    treasureItems.Add(treasureitem.Value.ObjectType);
+                                if (treasureitem.Value.Tier <= 7 && treasureitem.Value.SlotType == 6) //Leather
+                                    treasureItems.Add(treasureitem.Value.ObjectType);
+                                if (treasureitem.Value.Tier <= 7 && treasureitem.Value.SlotType == 7) //Armor
+                                    treasureItems.Add(treasureitem.Value.ObjectType);
+                                if (treasureitem.Value.Tier <= 7 && treasureitem.Value.SlotType == 14) //Robe
+                                    treasureItems.Add(treasureitem.Value.ObjectType);
+                                if (treasureitem.Value.Tier == -1) treasureItems.Remove(treasureitem.Value.ObjectType); //No Uts
                                 #endregion
                             }
-                            if (eff.treaureTier == 2) //Recieves Treasure Tier (Common, Uncommon, etc)
+                            if (eff.TreaureTier == 2) //Recieves Treasure Tier (Common, Uncommon, etc)
                             {
                                 #region ItemData
-                                if (Treasureitem.Value.Tier <= 11 && Treasureitem.Value.SlotType <= 3) //sword, dag, bow
-                                    TreasureItems.Add(Treasureitem.Value.ObjectType);
-                                if (Treasureitem.Value.Tier <= 11 && Treasureitem.Value.SlotType == 8) //wand
-                                    TreasureItems.Add(Treasureitem.Value.ObjectType);
-                                if (Treasureitem.Value.Tier <= 11 && Treasureitem.Value.SlotType == 17) //staff
-                                    TreasureItems.Add(Treasureitem.Value.ObjectType);
-                                if (Treasureitem.Value.Tier <= 11 && Treasureitem.Value.SlotType == 24) //Katana
-                                    TreasureItems.Add(Treasureitem.Value.ObjectType);
-                                if (Treasureitem.Value.Tier <= 5)
-                                    if (Treasureitem.Value.Usable && Treasureitem.Value.MpCost >= 1) //Abilites
-                                        TreasureItems.Add(Treasureitem.Value.ObjectType);
-                                if (Treasureitem.Value.Tier <= 11 && Treasureitem.Value.SlotType == 11) //Rings
-                                    TreasureItems.Add(Treasureitem.Value.ObjectType);
-                                if (Treasureitem.Value.Tier <= 11 && Treasureitem.Value.SlotType == 6) //Leather
-                                    TreasureItems.Add(Treasureitem.Value.ObjectType);
-                                if (Treasureitem.Value.Tier <= 11 && Treasureitem.Value.SlotType == 7) //Armor
-                                    TreasureItems.Add(Treasureitem.Value.ObjectType);
-                                if (Treasureitem.Value.Tier <= 11 && Treasureitem.Value.SlotType == 14) //Robe
-                                    TreasureItems.Add(Treasureitem.Value.ObjectType);
-                                if (Treasureitem.Value.Tier == -1) TreasureItems.Remove(Treasureitem.Value.ObjectType); //No Uts
+                                if (treasureitem.Value.Tier <= 11 && treasureitem.Value.SlotType <= 3) //sword, dag, bow
+                                    treasureItems.Add(treasureitem.Value.ObjectType);
+                                if (treasureitem.Value.Tier <= 11 && treasureitem.Value.SlotType == 8) //wand
+                                    treasureItems.Add(treasureitem.Value.ObjectType);
+                                if (treasureitem.Value.Tier <= 11 && treasureitem.Value.SlotType == 17) //staff
+                                    treasureItems.Add(treasureitem.Value.ObjectType);
+                                if (treasureitem.Value.Tier <= 11 && treasureitem.Value.SlotType == 24) //Katana
+                                    treasureItems.Add(treasureitem.Value.ObjectType);
+                                if (treasureitem.Value.Tier <= 5)
+                                    if (treasureitem.Value.Usable && treasureitem.Value.MpCost >= 1) //Abilites
+                                        treasureItems.Add(treasureitem.Value.ObjectType);
+                                if (treasureitem.Value.Tier <= 11 && treasureitem.Value.SlotType == 11) //Rings
+                                    treasureItems.Add(treasureitem.Value.ObjectType);
+                                if (treasureitem.Value.Tier <= 11 && treasureitem.Value.SlotType == 6) //Leather
+                                    treasureItems.Add(treasureitem.Value.ObjectType);
+                                if (treasureitem.Value.Tier <= 11 && treasureitem.Value.SlotType == 7) //Armor
+                                    treasureItems.Add(treasureitem.Value.ObjectType);
+                                if (treasureitem.Value.Tier <= 11 && treasureitem.Value.SlotType == 14) //Robe
+                                    treasureItems.Add(treasureitem.Value.ObjectType);
+                                if (treasureitem.Value.Tier == -1) treasureItems.Remove(treasureitem.Value.ObjectType); //No Uts
                                 #endregion
                                 TreasureFind = "The Uncommon Marked Spot";
                             }
-                            if (eff.treaureTier == 5) //Recieves Treasure Tier (Shatters)
+                            if (eff.TreaureTier == 5) //Recieves Treasure Tier (Shatters)
                             {
                                 #region ItemData
-                                if (Treasureitem.Value.ObjectId == "The Forgotten Crown")
-                                    TreasureItems.Add(Treasureitem.Value.ObjectType);
-                                if (Treasureitem.Value.ObjectId == "The Twilight Gemstone")
-                                    TreasureItems.Add(Treasureitem.Value.ObjectType);
-                                if (Treasureitem.Value.ObjectId == "Bracer of the Guardian")
-                                    TreasureItems.Add(Treasureitem.Value.ObjectType);
+                                if (treasureitem.Value.ObjectId == "The Forgotten Crown")
+                                    treasureItems.Add(treasureitem.Value.ObjectType);
+                                if (treasureitem.Value.ObjectId == "The Twilight Gemstone")
+                                    treasureItems.Add(treasureitem.Value.ObjectType);
+                                if (treasureitem.Value.ObjectId == "Bracer of the Guardian")
+                                    treasureItems.Add(treasureitem.Value.ObjectType);
                                 #endregion
                                 TreasureFind = "The Shatters Marked Spot";
                             }
                         }
 
-                        TreasureItemsExe = TreasureItems.ToArray();
+                        treasureItemsExe = treasureItems.ToArray();
 
-                        Entity ground = this.GetNearestEntity(3, Manager.GameData.IdToObjectType[TreasureFind]) as Entity; //find treasure
+                        Entity ground = this.GetNearestEntity(3, Manager.GameData.IdToObjectType[TreasureFind]); //find treasure
 
                         if (ground == null) //If no treasure in sight
                         {
                             SendInfo("Can't find any treasure...");
                             break;
                         }
-                        TreasureItemsExe.Shuffle();
-                        foreach (var t1 in TreasureItemsExe) //chooses item
+                        treasureItemsExe.Shuffle();
+                        foreach (var t1 in treasureItemsExe) //chooses item
                         {
                                 for (int i = 3; i < Client.Player.Inventory.Length; i++) //Checks all open slots in inventory (not weapon slots)
                                 {
@@ -1201,7 +1196,7 @@ namespace wServer.realm.entities.player
                                     "New skin unlocked successfully. Change skins in your Vault, or start a new character to use.");
                                 Client.SendPacket(new UnlockedSkinPacket
                                 {
-                                    SkinID = item.ActivateEffects[0].SkinType
+                                    SkinId = item.ActivateEffects[0].SkinType
                                 });
                             });
                             endMethod = false;
@@ -1212,7 +1207,7 @@ namespace wServer.realm.entities.player
                         break;
 
                     case ActivateEffects.Pet:
-                        Entity en = Entity.Resolve(Manager, eff.ObjectId);
+                        Entity en = Resolve(Manager, eff.ObjectId);
                         en.Move(X, Y);
                         en.SetPlayerOwner(this);
                         Owner.EnterWorld(en);
@@ -1246,8 +1241,7 @@ namespace wServer.realm.entities.player
                         Pet.Create(Manager, this, item);
                         break;
                     case ActivateEffects.MysteryPortal:
-                        string[] dungeons = new []
-                        {
+                        string[] dungeons = {
                             "Pirate Cave Portal",
                             "Forest Maze Portal",
                             "Spider Den Portal",
@@ -1275,10 +1269,10 @@ namespace wServer.realm.entities.player
                             "Lair of Shaitan Portal"
                         };
 
-                        var descs = Manager.GameData.Portals.Where(_ => dungeons.Contains<string>(_.Value.ObjectId)).Select(_ => _.Value).ToArray();
+                        var descs = Manager.GameData.Portals.Where(_ => dungeons.Contains(_.Value.ObjectId)).Select(_ => _.Value).ToArray();
                         var portalDesc = descs[Random.Next(0, descs.Count())];
-                        Entity por = Entity.Resolve(Manager, portalDesc.ObjectId);
-                        por.Move(this.X, this.Y);
+                        Entity por = Resolve(Manager, portalDesc.ObjectId);
+                        por.Move(X, Y);
                         Owner.EnterWorld(por);
 
                         Client.SendPacket(new NotificationPacket
@@ -1306,7 +1300,7 @@ namespace wServer.realm.entities.player
                             }
                             catch (Exception ex)
                             {
-                                log.ErrorFormat("Couldn't despawn portal.\n{0}", ex);
+                                Log.ErrorFormat("Couldn't despawn portal.\n{0}", ex);
                             }
                         }));
                         break;
@@ -1315,7 +1309,7 @@ namespace wServer.realm.entities.player
                         var centerPlayer = eff.Center.Equals("player");
                         var duration = (eff.UseWisMod) ?
                             (int)(UseWisMod(eff.DurationSec) * 1000) :
-                            eff.DurationMS;
+                            eff.DurationMs;
                         var range = (eff.UseWisMod)
                             ? UseWisMod(eff.Range)
                             : eff.Range;
@@ -1327,16 +1321,16 @@ namespace wServer.realm.entities.player
                                 !entity.HasConditionEffect(ConditionEffectIndex.Invincible))
                             {
                                 entity.ApplyConditionEffect(
-                                new ConditionEffect()
+                                new ConditionEffect
                                 {
                                     Effect = eff.ConditionEffect.Value,
-                                    DurationMS = duration
+                                    DurationMs = duration
                                 });
                             }
                         });
 
                         // replaced this last bit with what I had, never noticed any issue with it. Perhaps I'm wrong?
-                        BroadcastSync(new ShowEffectPacket()
+                        BroadcastSync(new ShowEffectPacket
                         {
                             EffectType = (EffectType)eff.VisualEffect,
                             TargetId = Id,

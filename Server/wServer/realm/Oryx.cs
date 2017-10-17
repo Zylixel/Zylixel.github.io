@@ -10,7 +10,6 @@ using wServer.realm.entities;
 using wServer.realm.entities.player;
 using wServer.realm.setpieces;
 using wServer.realm.worlds;
-using wServer.networking;
 
 #endregion
 
@@ -32,7 +31,7 @@ namespace wServer.realm
             Tuple.Create("Hermit God", (ISetPiece) new Hermit()),
             Tuple.Create("Ghost Ship", (ISetPiece) new GhostShip()),
             Tuple.Create("Cube God", (ISetPiece) new CubeGod()),
-            Tuple.Create("Avatar", (ISetPiece) new Avatar()),
+            Tuple.Create("Avatar", (ISetPiece) new Avatar())
         };
 
         private readonly Random rand = new Random();
@@ -193,7 +192,7 @@ namespace wServer.realm
                         Tuple.Create("Arena Headless Horseman", 0.01),
                         Tuple.Create("The Uncommon Marked Spot", 0.1) 
                     })
-                },
+                }
             };
 
         #endregion "Spawn data"

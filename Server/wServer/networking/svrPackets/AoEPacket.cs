@@ -1,6 +1,6 @@
 ﻿namespace wServer.networking.svrPackets
 {
-    public class AOEPacket : ServerPacket
+    public class AoePacket : ServerPacket
     {
         public Position Position { get; set; }
         public float Radius { get; set; }
@@ -10,14 +10,14 @@
         public short OriginType { get; set; }
         //public ARGB Color { get; set; }
 
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.AOE; }
         }
 
         public override Packet CreateInstance()
         {
-            return new AOEPacket();
+            return new AoePacket();
         }
 
         protected override void Read(Client psr, NReader rdr)

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using wServer.realm;
+﻿using wServer.realm;
 using wServer.realm.entities;
 
 namespace wServer.logic.behaviors
@@ -26,7 +21,7 @@ namespace wServer.logic.behaviors
             this.max = max;
             this.probability = (float) probability;
             this.returnToSpawn = returnToSpawn;
-            this.targetStateName = targetState;
+            targetStateName = targetState;
             this.range = range;
         }
 
@@ -68,7 +63,7 @@ namespace wServer.logic.behaviors
         protected override void TickCore(Entity host, RealmTime time, ref object state)
         {
             if (targetState == null)
-                targetState = FindState(host.Manager.Behaviors.Definitions[(ushort)target].Item1, targetStateName);
+                targetState = FindState(host.Manager.Behaviors.Definitions[target].Item1, targetStateName);
             foreach (Entity i in host.GetNearestEntities(range, target))
                 if (!i.CurrentState.Is(targetState))
                     i.SwitchTo(targetState);

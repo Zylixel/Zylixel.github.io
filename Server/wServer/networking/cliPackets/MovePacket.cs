@@ -7,7 +7,7 @@
         public Position Position { get; set; }
         public TimedPosition[] Records { get; set; }
 
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.MOVE; }
         }

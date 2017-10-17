@@ -3,11 +3,9 @@
 using System;
 using System.Collections.Generic;
 using log4net;
-using wServer.realm.entities.player;
 using wServer.networking.svrPackets;
+using wServer.realm.entities.player;
 using wServer.realm.worlds;
-using wServer.networking;
-
 
 #endregion
 
@@ -125,29 +123,26 @@ namespace wServer.realm.commands
                 player.SendError("That command can't be used here!");
                 return false;
             }
-            else
+            player.Move(1000 + 0.5f, 1000 + 0.5f);
+            if (player.Pet != null)
+                player.Pet.Move(1000 + 0.5f, 1000 + 0.5f);
+            player.UpdateCount++;
+            player.ApplyConditionEffect(new ConditionEffect
             {
-                player.Move(1000 + 0.5f, 1000 + 0.5f);
-                if (player.Pet != null)
-                    player.Pet.Move(1000 + 0.5f, 1000 + 0.5f);
-                player.UpdateCount++;
-                player.ApplyConditionEffect(new ConditionEffect
+                Effect = ConditionEffectIndex.Invincible,
+                DurationMs = 2000
+            });
+            player.Owner.BroadcastPacket(new GotoPacket
+            {
+                ObjectId = player.Id,
+                Position = new Position
                 {
-                    Effect = ConditionEffectIndex.Invincible,
-                    DurationMS = 2000
-                });
-                player.Owner.BroadcastPacket(new GotoPacket
-                {
-                    ObjectId = player.Id,
-                    Position = new Position
-                    {
-                        X = player.X,
-                        Y = player.Y
-                    }
-                }, null);
-                player.SendInfo("Success!");
-                return true;
-            }
+                    X = player.X,
+                    Y = player.Y
+                }
+            }, null);
+            player.SendInfo("Success!");
+            return true;
         }
     }
     internal class TpMarket : Command
@@ -165,7 +160,7 @@ namespace wServer.realm.commands
                 Port = 2050,
                 GameId = World.FMARKET,
                 Name = "Market",
-                Key = Empty<byte>.Array,
+                Key = Empty<byte>.Array
             });
             return true;
         }

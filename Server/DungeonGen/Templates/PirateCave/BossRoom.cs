@@ -24,27 +24,27 @@ using RotMG.Common.Rasterizer;
 
 namespace DungeonGenerator.Templates.PirateCave {
 	internal class BossRoom : Room {
-		readonly int radius;
+		readonly int _radius;
 
 		public BossRoom(int radius) {
-			this.radius = radius;
+			this._radius = radius;
 		}
 
 		public override RoomType Type { get { return RoomType.Target; } }
 
-		public override int Width { get { return radius * 2 + 1; } }
+		public override int Width { get { return _radius * 2 + 1; } }
 
-		public override int Height { get { return radius * 2 + 1; } }
+		public override int Height { get { return _radius * 2 + 1; } }
 
 		public override void Rasterize(BitmapRasterizer<DungeonTile> rasterizer, Random rand) {
 			var tile = new DungeonTile {
 				TileType = PirateCaveTemplate.BrownLines
 			};
 
-			var cX = Pos.X + radius + 0.5;
-			var cY = Pos.Y + radius + 0.5;
+			var cX = Pos.X + _radius + 0.5;
+			var cY = Pos.Y + _radius + 0.5;
 			var bounds = Bounds;
-			var r2 = radius * radius;
+			var r2 = _radius * _radius;
 			var buf = rasterizer.Bitmap;
 
 			for (int x = bounds.X; x < bounds.MaxX; x++)
@@ -57,7 +57,7 @@ namespace DungeonGenerator.Templates.PirateCave {
 			int numBoss = new Range(4, 7).Random(rand);
 			int numMinion = new Range(4, 7).Random(rand);
 
-			r2 = (radius - 2) * (radius - 2);
+			r2 = (_radius - 2) * (_radius - 2);
 			while (numKing > 0 || numBoss > 0 || numMinion > 0) {
 				int x = rand.Next(bounds.X, bounds.MaxX);
 				int y = rand.Next(bounds.Y, bounds.MaxY);

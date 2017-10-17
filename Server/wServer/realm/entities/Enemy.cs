@@ -20,7 +20,7 @@ namespace wServer.realm.entities
         public Enemy(RealmManager manager, ushort objType)
             : base(manager, objType, new wRandom())
         {
-            stat = ObjectDesc.MaxHP == 0;
+            stat = ObjectDesc.MaxHp == 0;
             counter = new DamageCounter(this);
             LootState = "";
             Name = ObjectDesc.ObjectId;
@@ -44,7 +44,7 @@ namespace wServer.realm.entities
         protected override void ExportStats(IDictionary<StatsType, object> stats)
         {
             stats[StatsType.AltTextureIndex] = AltTextureIndex;
-            stats[StatsType.HP] = HP;
+            stats[StatsType.Hp] = HP;
             base.ExportStats(stats);
         }
 
@@ -55,7 +55,7 @@ namespace wServer.realm.entities
                 ApplyConditionEffect(new ConditionEffect
                 {
                     Effect = ConditionEffectIndex.StasisImmune,
-                    DurationMS = -1
+                    DurationMs = -1
                 });
         }
 

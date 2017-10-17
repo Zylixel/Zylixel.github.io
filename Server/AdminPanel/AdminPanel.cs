@@ -1,25 +1,17 @@
-﻿using MetroFramework;
-using MetroFramework.Components;
-using MetroFramework.Forms;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+﻿using System;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web;
 using System.Windows.Forms;
+using MetroFramework;
+using MetroFramework.Forms;
 
 namespace AdminPanel
 {
     public partial class AdminPanel : MetroForm
     {
-        private Account account;
-        private string wServerPath;
+        private Account _account;
+        private string _wServerPath;
 
         public AdminPanel()
         {
@@ -27,16 +19,14 @@ namespace AdminPanel
 
             var login = new Login();
             DialogResult res;
-            while ((res = login.ShowDialog(out account)) != DialogResult.OK)
+            while ((res = login.ShowDialog(out _account)) != DialogResult.OK)
             {
-                if (res != DialogResult.OK)
-                {
-                    Close();
-                    return;
-                }
+                if (res == DialogResult.OK) continue;
+                Close();
+                return;
             }
 
-            Text = "Welcome " + account.Name;
+            Text = "Welcome " + _account.Name;
             var vars = SendCommand("init").Split('\n');
             if (vars.Length < 3)
             {
@@ -44,8 +34,8 @@ namespace AdminPanel
                 return;
             }
 
-            metroLabel1.Text = String.Format("Server Path: {0}", vars[1]);
-            metroLabel2.Text = String.Format("WServer Path: {0}", wServerPath = vars[2]);
+            metroLabel1.Text = string.Format("Server Path: {0}", vars[1]);
+            metroLabel2.Text = string.Format("WServer Path: {0}", _wServerPath = vars[2]);
 
             toolTip1.SetToolTip(metroLabel1, vars[1]);
             toolTip1.SetToolTip(metroLabel2, vars[2]);
@@ -70,7 +60,7 @@ namespace AdminPanel
         {
             try
             {
-                var webRequest = WebRequest.CreateHttp(String.Format("http://127.0.0.1/admin/performCommand?guid={0}&password={1}&command={2}", account.Email, account.Password, command));
+                var webRequest = WebRequest.CreateHttp(String.Format("http://127.0.0.1/admin/performCommand?guid={0}&password={1}&command={2}", _account.Email, _account.Password, command));
                 using (StreamReader rdr = new StreamReader(webRequest.GetResponse().GetResponseStream()))
                 {
                     var xml = rdr.ReadToEnd().Trim();
@@ -114,14 +104,14 @@ namespace AdminPanel
 
         private void metroButton9_Click(object sender, EventArgs e)
         {
-            var edit = new EditForm("wServer.cfg", SendCommand("startEditWServerCFG&path=" + wServerPath.Remove(wServerPath.LastIndexOf('\\')) + "\\wServer.cfg"));
+            var edit = new EditForm("wServer.cfg", SendCommand("startEditWServerCFG&path=" + _wServerPath.Remove(_wServerPath.LastIndexOf('\\')) + "\\wServer.cfg"));
             if (edit.ShowDialog() == DialogResult.OK)
-                SendCommand("endEditWServerCFG&path=" + wServerPath.Remove(wServerPath.LastIndexOf('\\')) + "\\wServer.cfg&content=" + HttpUtility.UrlEncode(edit.Content.Replace("\r\n", "\n")) + "");
+                SendCommand("endEditWServerCFG&path=" + _wServerPath.Remove(_wServerPath.LastIndexOf('\\')) + "\\wServer.cfg&content=" + HttpUtility.UrlEncode(edit.Content.Replace("\r\n", "\n")) + "");
         }
 
         private void metroButton8_Click(object sender, EventArgs e)
         {
-            SendCommand("startWServer&path=" + wServerPath);
+            SendCommand("startWServer&path=" + _wServerPath);
         }
 
         private void metroButton7_Click(object sender, EventArgs e)

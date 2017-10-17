@@ -11,7 +11,7 @@ namespace wServer.realm.entities.player
 {
     public partial class Player
     {
-        private static readonly Dictionary<string, Tuple<int, int, int>> questDat =
+        private static readonly Dictionary<string, Tuple<int, int, int>> QuestDat =
             new Dictionary<string, Tuple<int, int, int>> //Priority, Min, Max
             {
                 {"Scorpion Queen", Tuple.Create(1, 1, 6)},
@@ -71,7 +71,7 @@ namespace wServer.realm.entities.player
                 {"Stone Guardian Right", Tuple.Create(20, 1, 1000)},
                 {"Oryx the Mad God 1", Tuple.Create(20, 1, 1000)},
                 {"Oryx the Mad God 2", Tuple.Create(20, 1, 1000)},
-                {"Keeper Gilgor Boss", Tuple.Create(20, 1, 1000)},
+                {"Keeper Gilgor Boss", Tuple.Create(20, 1, 1000)}
             };
 
         public Entity Quest { get; private set; }
@@ -127,7 +127,7 @@ namespace wServer.realm.entities.player
                     .OrderBy(quest => MathsUtils.DistSqr(quest.X, quest.Y, X, Y)).Where(i => i.ObjectDesc != null && i.ObjectDesc.Quest))
                 {
                     Tuple<int, int, int> x;
-                    if (!questDat.TryGetValue(i.ObjectDesc.ObjectId, out x)) continue;
+                    if (!QuestDat.TryGetValue(i.ObjectDesc.ObjectId, out x)) continue;
 
                     if ((Level < x.Item2 || Level > x.Item3)) continue;
                     var score = (20 - Math.Abs((i.ObjectDesc.Level ?? 0) - Level))*x.Item1 -
@@ -142,7 +142,7 @@ namespace wServer.realm.entities.player
             }
             catch (Exception ex)
             {
-                log.Error(ex);
+                Log.Error(ex);
             }
             return ret;
         }
@@ -162,7 +162,7 @@ namespace wServer.realm.entities.player
             Quest = newQuest;
         }
 
-        public void tryUpgrade(string arg = "Random")
+        public void TryUpgrade(string arg = "Random")
         {
             ushort[] levelable =
             {
@@ -177,7 +177,7 @@ namespace wServer.realm.entities.player
                 0x6129,
                 0x612a,
                 0x612b,
-                0x612c,
+                0x612c
             };
             ushort[] tolevel =
             {
@@ -192,7 +192,7 @@ namespace wServer.realm.entities.player
                 0x612a,
                 0x612b,
                 0x612c,
-                0x612d,
+                0x612d
             };
             string[] type =
             {
@@ -207,7 +207,7 @@ namespace wServer.realm.entities.player
                 "Wand",
                 "Wand",
                 "Wand",
-                "Wand",
+                "Wand"
             };
 
             bool upgraded = false;
@@ -235,7 +235,7 @@ namespace wServer.realm.entities.player
                             {
                                 ObjectId = Id,
                                 Color = new ARGB(0xFF6600),
-                                Text = "{\"key\":\"blank\",\"tokens\":{\"data\":\"" + type[q] + " Piece Found!\"}}",
+                                Text = "{\"key\":\"blank\",\"tokens\":{\"data\":\"" + type[q] + " Piece Found!\"}}"
                             }, null);
                             Inventory[i] = Manager.GameData.Items[tolevel[q]];
                             UpdateCount++;
@@ -259,7 +259,7 @@ namespace wServer.realm.entities.player
             if (Experience < 200*1000) newFame = Experience/1000;
             else newFame = 200 + (Experience - 200*1000)/1000;
             if (newFame == Fame) return;
-            tryUpgrade();
+            TryUpgrade();
             Fame = newFame;
             int newGoal;
             var state =
@@ -274,7 +274,7 @@ namespace wServer.realm.entities.player
                 {
                     ObjectId = Id,
                     Color = new ARGB(0xFF00FF00),
-                    Text = "{\"key\":\"blank\",\"tokens\":{\"data\":\"Class Quest Complete!\"}}",
+                    Text = "{\"key\":\"blank\",\"tokens\":{\"data\":\"Class Quest Complete!\"}}"
                 }, null);
                 Stars = GetStars();
             }
@@ -328,7 +328,7 @@ namespace wServer.realm.entities.player
                 {
                     ObjectId = Id,
                     Color = new ARGB(0xFF00FF00),
-                    Text = "{\"key\":\"blank\",\"tokens\":{\"data\":\"Quest Complete!\"}}",
+                    Text = "{\"key\":\"blank\",\"tokens\":{\"data\":\"Quest Complete!\"}}"
                 }, null);
             if (exp > 0)
             {
@@ -347,7 +347,7 @@ namespace wServer.realm.entities.player
                     }
                     catch (Exception ex)
                     {
-                        log.Error(ex);
+                        Log.Error(ex);
                     }
                 }
             }

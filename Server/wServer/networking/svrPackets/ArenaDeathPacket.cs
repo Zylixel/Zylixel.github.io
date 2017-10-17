@@ -4,7 +4,7 @@
     {
         public int RestartPrice { get; set; }
 
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.ARENADEATH; }
         }

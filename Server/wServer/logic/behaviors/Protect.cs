@@ -91,7 +91,7 @@ namespace wServer.logic.behaviors
         {
             DontKnowWhere,
             Protecting,
-            Protected,
+            Protected
         }
     }
 }

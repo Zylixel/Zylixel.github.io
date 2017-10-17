@@ -1,8 +1,6 @@
 ﻿#region
 
 using System;
-using System.Text;
-using System.Threading.Tasks;
 using wServer.networking.cliPackets;
 
 #endregion
@@ -11,7 +9,7 @@ namespace wServer.networking.handlers
 {
     internal class PlayerTextHandler : PacketHandlerBase<PlayerTextPacket>
     {
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.PLAYERTEXT; }
         }

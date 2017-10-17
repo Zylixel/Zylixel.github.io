@@ -59,7 +59,7 @@ namespace wServer.logic.behaviors
                 new Position
                 {
                     X = host.X + (float)(range * Math.Cos(tossAngle.Value)),
-                    Y = host.Y + (float)(range * Math.Sin(tossAngle.Value)),
+                    Y = host.Y + (float)(range * Math.Sin(tossAngle.Value))
                 };
                 host.Owner.BroadcastPacket(new ShowEffectPacket
                 {

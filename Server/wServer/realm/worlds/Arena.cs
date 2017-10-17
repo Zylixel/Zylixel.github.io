@@ -53,8 +53,7 @@ namespace wServer.realm.worlds
         {
             if (Map.Height >= y && Map.Width >= x && x > -1 && y > 0)
                 return (Map[(int)x, (int)y].Region == TileRegion.Outside_Arena);
-            else
-                return true;
+            return true;
         }
 
         public override void Tick(RealmTime time)
@@ -62,7 +61,7 @@ namespace wServer.realm.worlds
             base.Tick(time);
             CheckOutOfBounds();
 
-            if (CheckPopulation())
+            if (Enemies.Count == 0)
             {
                 if (ready)
                 {

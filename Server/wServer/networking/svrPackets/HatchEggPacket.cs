@@ -5,7 +5,7 @@
         public string PetName { get; set; }
         public int PetSkinId { get; set; }
 
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.HATCHEGG; }
         }

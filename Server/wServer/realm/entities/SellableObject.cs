@@ -1,8 +1,6 @@
 ﻿#region
 
 using System.Collections.Generic;
-using db;
-using wServer.networking;
 using wServer.networking.svrPackets;
 using wServer.realm.entities.player;
 using wServer.realm.worlds;
@@ -87,7 +85,7 @@ namespace wServer.realm.entities
                 }
                 if (ObjectType == 0x0736)
                 {
-                    player.Client.SendPacket(new BuyResultPacket()
+                    player.Client.SendPacket(new BuyResultPacket
                     {
                         Result = 9,
                         Message = "{\"key\":\"server.not_enough_game\"}"

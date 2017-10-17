@@ -1,29 +1,28 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
-using System.Collections.Generic;
 
 namespace AdminPanel
 {
     internal class Database
     {
-        private readonly string connStr;
-        private readonly MySqlConnection conn;
+        private readonly string _connStr;
+        private readonly MySqlConnection _conn;
 
         public Database(string connStr)
         {
-            this.connStr = connStr;
-            this.conn = new MySqlConnection(this.connStr);
+            _connStr = connStr;
+            _conn = new MySqlConnection(_connStr);
         }
 
         public Task OpenAsync()
         {
-            return this.conn.OpenAsync();
+            return _conn.OpenAsync();
         }
 
         public MySqlCommand CreateQuery(string query)
         {
-            var cmd = conn.CreateCommand();
+            var cmd = _conn.CreateCommand();
             cmd.CommandText = query;
             return cmd;
         }

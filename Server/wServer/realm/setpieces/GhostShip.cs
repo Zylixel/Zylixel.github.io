@@ -1,19 +1,11 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using wServer.logic.loot;
-using wServer.realm.entities;
 using db.data;
 
 namespace wServer.realm.setpieces
 {
     class GhostShip : ISetPiece
     {
-        public int Size
-        {
-            get { return 50; }
-        }
+        public int Size => 50;
 
         private static readonly string Tree = "Tree Jungle";
         private static readonly string Water = "GhostWater";

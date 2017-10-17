@@ -1,11 +1,15 @@
-﻿namespace AdminPanel
+﻿using System.ComponentModel;
+using MetroFramework.Components;
+using MetroFramework.Controls;
+
+namespace AdminPanel
 {
     partial class DatabaseView
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -224,12 +228,12 @@
 
         #endregion
 
-        private MetroFramework.Controls.MetroTabControl metroTabControl1;
-        private MetroFramework.Controls.MetroTabPage accountsTabPage;
-        private MetroFramework.Controls.MetroTabPage charsTabPage;
-        private MetroFramework.Controls.MetroTabPage deathsTabPage;
-        private MetroFramework.Controls.MetroGrid accountsTableGrid;
-        private MetroFramework.Components.MetroStyleManager metroStyleManager1;
-        private MetroFramework.Controls.MetroGrid charactersTableGrid;
+        private MetroTabControl metroTabControl1;
+        private MetroTabPage accountsTabPage;
+        private MetroTabPage charsTabPage;
+        private MetroTabPage deathsTabPage;
+        private MetroGrid accountsTableGrid;
+        private MetroStyleManager metroStyleManager1;
+        private MetroGrid charactersTableGrid;
     }
 }

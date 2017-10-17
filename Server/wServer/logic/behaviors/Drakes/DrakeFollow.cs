@@ -1,9 +1,4 @@
 ﻿using Mono.Game;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using wServer.realm;
 using wServer.realm.entities.player;
 
@@ -57,13 +52,13 @@ namespace wServer.logic.behaviors.Drakes
                         if (vect.Length > 2)
                             dist = host.GetSpeed(1.2f + ((float)player.Stats[4] / 100)) * (time.thisTickTimes / 1000f);
                         else if (vect.Length > 3.5)
-                            dist = host.GetSpeed(1.2f + ((float)player.Stats[4] + (float)player.Boost[4] / 100)) * (time.thisTickTimes / 1000f);
+                            dist = host.GetSpeed(1.2f + (player.Stats[4] + (float)player.Boost[4] / 100)) * (time.thisTickTimes / 1000f);
                         else if (vect.Length > 5)
-                            dist = host.GetSpeed(1.3f + ((float)player.Stats[4] + (float)player.Boost[4] / 100)) * (time.thisTickTimes / 1000f);
+                            dist = host.GetSpeed(1.3f + (player.Stats[4] + (float)player.Boost[4] / 100)) * (time.thisTickTimes / 1000f);
                         else if (vect.Length > 6)
-                            dist = host.GetSpeed(1.4f + ((float)player.Stats[4] + (float)player.Boost[4] / 100)) * (time.thisTickTimes / 1000f);
+                            dist = host.GetSpeed(1.4f + (player.Stats[4] + (float)player.Boost[4] / 100)) * (time.thisTickTimes / 1000f);
                         else if (vect.Length > 7)
-                            dist = host.GetSpeed(1.5f + ((float)player.Stats[4] + (float)player.Boost[4] / 100)) * (time.thisTickTimes / 1000f);
+                            dist = host.GetSpeed(1.5f + (player.Stats[4] + (float)player.Boost[4] / 100)) * (time.thisTickTimes / 1000f);
 
                         Status = CycleStatus.InProgress;
                         vect.X -= Random.Next(-2, 2) / 2f;
@@ -82,7 +77,7 @@ namespace wServer.logic.behaviors.Drakes
         private enum F
         {
             DontKnowWhere,
-            Acquired,
+            Acquired
         }
 
         private class FollowState

@@ -7,82 +7,81 @@ using log4net;
 
 namespace wServer.networking
 {
-    //hackish code
     internal class NetworkHandler
     {
-        public const int BUFFER_SIZE = 0x10000;
-        private static readonly ILog log = LogManager.GetLogger(typeof(NetworkHandler));
-        private readonly Client parent;
-        private readonly ConcurrentQueue<Packet> pendingPackets = new ConcurrentQueue<Packet>();
-        private readonly object sendLock = new object();
-        private readonly Socket skt;
+        public const int BufferSize = 0x10000;
+        private static readonly ILog Log = LogManager.GetLogger(typeof(NetworkHandler));
+        private readonly Client _parent;
+        private readonly ConcurrentQueue<Packet> _pendingPackets = new ConcurrentQueue<Packet>();
+        private readonly object _sendLock = new object();
+        private readonly Socket _skt;
 
-        private SocketAsyncEventArgs receive;
-        private byte[] receiveBuff;
-        private ReceiveState receiveState = ReceiveState.Awaiting;
+        private SocketAsyncEventArgs _receive;
+        public byte[] ReceiveBuff { get; private set; }
+        private ReceiveState _receiveState = ReceiveState.Awaiting;
 
-        private SocketAsyncEventArgs send;
-        private byte[] sendBuff;
-        private SendState sendState = SendState.Awaiting;
+        private SocketAsyncEventArgs _send;
+        private byte[] _sendBuff;
+        private SendState _sendState = SendState.Awaiting;
 
         public NetworkHandler(Client parent, Socket skt)
         {
-            this.parent = parent;
-            this.skt = skt;
+            _parent = parent;
+            _skt = skt;
         }
 
         public void BeginHandling()
         {
-            skt.NoDelay = true;
-            skt.UseOnlyOverlappedIO = true;
+            _skt.NoDelay = true;
+            _skt.UseOnlyOverlappedIO = true;
 
-            send = new SocketAsyncEventArgs();
-            send.Completed += SendCompleted;
-            send.UserToken = new SendToken();
-            send.SetBuffer(sendBuff = new byte[BUFFER_SIZE], 0, BUFFER_SIZE);
+            _send = new SocketAsyncEventArgs();
+            _send.Completed += SendCompleted;
+            _send.UserToken = new SendToken();
+            _send.SetBuffer(_sendBuff = new byte[BufferSize], 0, BufferSize);
 
-            receive = new SocketAsyncEventArgs();
-            receive.Completed += ReceiveCompleted;
-            receive.UserToken = new ReceiveToken();
-            receive.SetBuffer(receiveBuff = new byte[BUFFER_SIZE], 0, BUFFER_SIZE);
+            _receive = new SocketAsyncEventArgs();
+            _receive.Completed += ReceiveCompleted;
+            _receive.UserToken = new ReceiveToken();
+            _receive.SetBuffer(ReceiveBuff = new byte[BufferSize], 0, BufferSize);
 
-            receiveState = ReceiveState.ReceivingHdr;
-            receive.SetBuffer(0, 5);
-            if (!skt.ReceiveAsync(receive))
-                ReceiveCompleted(this, receive);
+            _receiveState = ReceiveState.ReceivingHdr;
+            _receive.SetBuffer(0, 5);
+            if (!_skt.ReceiveAsync(_receive))
+                ReceiveCompleted(this, _receive);
         }
 
         private void ProcessPolicyFile() //WUT.
         {
-            var s = new NetworkStream(skt);
+            var s = new NetworkStream(_skt);
             var wtr = new NWriter(s);
             wtr.WriteNullTerminatedString(@"<cross-domain-policy>
      <allow-access-from domain=""*"" to-ports=""*"" />
 </cross-domain-policy>");
             wtr.Write((byte)'\r');
             wtr.Write((byte)'\n');
-            parent.Disconnect();
+            _parent.Disconnect();
         }
 
         private void ReceiveCompleted(object sender, SocketAsyncEventArgs e)
         {
             try
             {
-                if (!skt.Connected)
+                if (!_skt.Connected)
                 {
-                    parent.Disconnect();
+                    _parent.Disconnect();
                     return;
                 }
 
                 if (e.SocketError != SocketError.Success)
                     throw new SocketException((int)e.SocketError);
 
-                switch (receiveState)
+                switch (_receiveState)
                 {
                     case ReceiveState.ReceivingHdr:
                         if (e.BytesTransferred < 5)
                         {
-                            parent.Disconnect();
+                            _parent.Disconnect();
                             return;
                         }
 
@@ -93,37 +92,37 @@ namespace wServer.networking
                             return;
                         }
 
-                        int len = (e.UserToken as ReceiveToken).Length =
+                        int len = ((ReceiveToken) e.UserToken).Length =
                             IPAddress.NetworkToHostOrder(BitConverter.ToInt32(e.Buffer, 0)) - 5;
-                        if (len < 0 || len > BUFFER_SIZE)
-                            log.ErrorFormat("Buffer not large enough!", len);
-                        (e.UserToken as ReceiveToken).PacketBody = new byte[len];
-                        (e.UserToken as ReceiveToken).ID = (PacketID)e.Buffer[4];
+                        if (len < 0 || len > BufferSize)
+                            Log.ErrorFormat("Buffer not large enough!");
+                        ((ReceiveToken) e.UserToken).PacketBody = new byte[len];
+                        ((ReceiveToken) e.UserToken).Id = (PacketID)e.Buffer[4];
 
-                        receiveState = ReceiveState.ReceivingBody;
+                        _receiveState = ReceiveState.ReceivingBody;
                         e.SetBuffer(0, len);
-                        skt.ReceiveAsync(e);
+                        _skt.ReceiveAsync(e);
 
                         break;
                     case ReceiveState.ReceivingBody:
-                        if (e.BytesTransferred < (e.UserToken as ReceiveToken).Length)
+                        if (e.BytesTransferred < ((ReceiveToken) e.UserToken).Length)
                         {
-                            parent.Disconnect();
+                            _parent.Disconnect();
                             return;
                         }
 
-                        byte[] body = (e.UserToken as ReceiveToken).PacketBody;
-                        PacketID id = (e.UserToken as ReceiveToken).ID;
+                        byte[] body = ((ReceiveToken) e.UserToken).PacketBody;
+                        PacketID id = ((ReceiveToken) e.UserToken).Id;
                         Buffer.BlockCopy(e.Buffer, 0, body, 0, body.Length);
 
-                        receiveState = ReceiveState.Processing;
+                        _receiveState = ReceiveState.Processing;
                         bool cont = OnPacketReceived(id, body);
 
-                        if (cont && skt.Connected)
+                        if (cont && _skt.Connected)
                         {
-                            receiveState = ReceiveState.ReceivingHdr;
+                            _receiveState = ReceiveState.ReceivingHdr;
                             e.SetBuffer(0, 5);
-                            skt.ReceiveAsync(e);
+                            _skt.ReceiveAsync(e);
                         }
                         break;
                     default:
@@ -140,28 +139,28 @@ namespace wServer.networking
         {
             try
             {
-                if (!skt.Connected) return;
+                if (!_skt.Connected) return;
 
                 int len;
-                switch (sendState)
+                switch (_sendState)
                 {
                     case SendState.Ready:
-                        len = (e.UserToken as SendToken).Packet.Write(parent, sendBuff, 0);
+                        len = ((SendToken) e.UserToken).Packet.Write(_parent, _sendBuff, 0);
 
-                        sendState = SendState.Sending;
+                        _sendState = SendState.Sending;
                         e.SetBuffer(0, len);
-                        skt.SendAsync(e);
+                        _skt.SendAsync(e);
                         break;
                     case SendState.Sending:
-                        (e.UserToken as SendToken).Packet = null;
+                        ((SendToken) e.UserToken).Packet = null;
 
                         if (CanSendPacket(e, true))
                         {
-                            len = (e.UserToken as SendToken).Packet.Write(parent, sendBuff, 0);
+                            len = ((SendToken) e.UserToken).Packet.Write(_parent, _sendBuff, 0);
 
-                            sendState = SendState.Sending;
+                            _sendState = SendState.Sending;
                             e.SetBuffer(0, len);
-                            skt.SendAsync(e);
+                            _skt.SendAsync(e);
                         }
                         break;
                 }
@@ -175,68 +174,61 @@ namespace wServer.networking
 
         private void OnError(Exception ex)
         {
-            log.Error("Socket error.", ex);
-            parent.Disconnect();
+            Log.Error("Socket error.", ex);
+            _parent.Disconnect();
         }
 
         private bool OnPacketReceived(PacketID id, byte[] pkt)
         {
-            if (parent.IsReady())
-            {
-                parent.Manager.Network.AddPendingPacket(parent, id, pkt);
-                return true;
-            }
-            return false;
+            if (!_parent.IsReady()) return false;
+            _parent.Manager.Network.AddPendingPacket(_parent, id, pkt);
+            return true;
         }
 
         private bool CanSendPacket(SocketAsyncEventArgs e, bool ignoreSending)
         {
-            lock (sendLock)
+            lock (_sendLock)
             {
-                if (sendState == SendState.Ready ||
-                    (!ignoreSending && sendState == SendState.Sending))
+                if (_sendState == SendState.Ready ||
+                    (!ignoreSending && _sendState == SendState.Sending))
                     return false;
                 Packet packet;
-                if (pendingPackets.TryDequeue(out packet))
+                if (_pendingPackets.TryDequeue(out packet))
                 {
-                    (e.UserToken as SendToken).Packet = packet;
-                    sendState = SendState.Ready;
+                    ((SendToken) e.UserToken).Packet = packet;
+                    _sendState = SendState.Ready;
                     return true;
                 }
-                sendState = SendState.Awaiting;
+                _sendState = SendState.Awaiting;
                 return false;
             }
         }
 
         public void SendPacket(Packet pkt)
         {
-            if (!skt.Connected) return;
-            pendingPackets.Enqueue(pkt);
-            if (CanSendPacket(send, false))
-            {
-                int len = (send.UserToken as SendToken).Packet.Write(parent, sendBuff, 0);
+            if (!_skt.Connected) return;
+            _pendingPackets.Enqueue(pkt);
+            if (!CanSendPacket(_send, false)) return;
+            int len = ((SendToken) _send.UserToken).Packet.Write(_parent, _sendBuff, 0);
 
-                sendState = SendState.Sending;
-                send.SetBuffer(sendBuff, 0, len);
-                if (!skt.SendAsync(send))
-                    SendCompleted(this, send);
-            }
+            _sendState = SendState.Sending;
+            _send.SetBuffer(_sendBuff, 0, len);
+            if (!_skt.SendAsync(_send))
+                SendCompleted(this, _send);
         }
 
         public void SendPackets(IEnumerable<Packet> pkts)
         {
-            if (!skt.Connected) return;
+            if (!_skt.Connected) return;
             foreach (Packet i in pkts)
-                pendingPackets.Enqueue(i);
-            if (CanSendPacket(send, false))
-            {
-                int len = (send.UserToken as SendToken).Packet.Write(parent, sendBuff, 0);
+                _pendingPackets.Enqueue(i);
+            if (!CanSendPacket(_send, false)) return;
+            int len = ((SendToken) _send.UserToken).Packet.Write(_parent, _sendBuff, 0);
 
-                sendState = SendState.Sending;
-                send.SetBuffer(sendBuff, 0, len);
-                if (!skt.SendAsync(send))
-                    SendCompleted(this, send);
-            }
+            _sendState = SendState.Sending;
+            _send.SetBuffer(_sendBuff, 0, len);
+            if (!_skt.SendAsync(_send))
+                SendCompleted(this, _send);
         }
 
         private enum ReceiveState
@@ -249,7 +241,7 @@ namespace wServer.networking
 
         private class ReceiveToken
         {
-            public PacketID ID;
+            public PacketID Id;
             public int Length;
             public byte[] PacketBody;
         }

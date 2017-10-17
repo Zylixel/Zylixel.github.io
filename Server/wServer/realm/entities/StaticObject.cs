@@ -61,9 +61,9 @@ namespace wServer.realm.entities
         protected override void ExportStats(IDictionary<StatsType, object> stats)
         {
             if (!Vulnerable)
-                stats[StatsType.HP] = 0;
+                stats[StatsType.Hp] = 0;
             else
-                stats[StatsType.HP] = HP;
+                stats[StatsType.Hp] = HP;
             base.ExportStats(stats);
         }
 

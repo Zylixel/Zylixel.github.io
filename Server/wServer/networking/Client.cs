@@ -2,15 +2,14 @@
 
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Net.Sockets;
+using System.Threading.Tasks;
 using log4net;
 using log4net.Core;
 using wServer.networking.cliPackets;
 using wServer.networking.svrPackets;
 using wServer.realm;
 using wServer.realm.entities.player;
-using System.Threading.Tasks;
 
 #endregion
 
@@ -26,14 +25,14 @@ namespace wServer.networking
 
     public class Client : IDisposable
     {
-        public const string SERVER_VERSION = "27.7.X2";
-        private bool disposed;
+        public const string ServerVersion = "27.7.X2";
+        private bool _disposed;
 
-        private static readonly ILog log = LogManager.GetLogger(typeof (Client));
+        private static readonly ILog Log = LogManager.GetLogger(typeof (Client));
 
         public uint UpdateAckCount = 0;
 
-        private NetworkHandler handler;
+        private NetworkHandler _handler;
 
         public Client(RealmManager manager, Socket skt)
         {
@@ -67,19 +66,19 @@ namespace wServer.networking
 
         public void BeginProcess()
         {
-            log.InfoFormat($"Received client @ {Socket.RemoteEndPoint}.");
-            handler = new NetworkHandler(this, Socket);
-            handler.BeginHandling();
+            Log.InfoFormat($"Received client @ {Socket.RemoteEndPoint}.");
+            _handler = new NetworkHandler(this, Socket);
+            _handler.BeginHandling();
         }
 
         public void SendPacket(Packet pkt)
         {
-            handler?.SendPacket(pkt);
+            _handler?.SendPacket(pkt);
         }
 
         public void SendPackets(IEnumerable<Packet> pkts)
         {
-            handler?.SendPackets(pkts);
+            _handler?.SendPackets(pkts);
         }
 
         public bool IsReady()
@@ -93,18 +92,18 @@ namespace wServer.networking
         {
             try
             {
-                log.Logger.Log(typeof (Client), Level.Verbose,
+                Log.Logger.Log(typeof (Client), Level.Verbose,
                    $"Handling packet '{pkt}'...", null);
-                if (pkt.ID == (PacketID) 255) return;
+                if (pkt.Id == (PacketID) 255) return;
                 IPacketHandler handler;
-                if (!PacketHandlers.Handlers.TryGetValue(pkt.ID, out handler))
-                    log.Warn($"Unhandled packet '{pkt.ID}'.");
+                if (!PacketHandlers.Handlers.TryGetValue(pkt.Id, out handler))
+                    Log.Warn($"Unhandled packet '{pkt.Id}'.");
                 else
                     handler.Handle(this, (ClientPacket) pkt);
             }
             catch (Exception e)
             {
-                log.Error($"Error when handling packet '{pkt}'...", e);
+                Log.Error($"Error when handling packet '{pkt}'...", e);
                 Disconnect();
             }
         }
@@ -122,7 +121,7 @@ namespace wServer.networking
             }
             catch (Exception e)
             {
-                log.Error(e);
+                Log.Error(e);
             }
         }
 
@@ -153,7 +152,7 @@ namespace wServer.networking
                 }
                 catch (Exception ex)
                 {
-                    log.Fatal("SaveException", ex);
+                    Log.Fatal("SaveException", ex);
                 }
             });
         }
@@ -179,8 +178,8 @@ namespace wServer.networking
 
         public void Dispose()
         {
-            if (disposed) return;
-            handler = null;
+            if (_disposed) return;
+            _handler = null;
             ReceiveKey = null;
             SendKey = null;
             Manager = null;
@@ -191,7 +190,7 @@ namespace wServer.networking
             Player = null;
             Random = null;
             ConnectedBuild = null;
-            disposed = true;
+            _disposed = true;
         }
     }
 }

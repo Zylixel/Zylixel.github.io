@@ -1,10 +1,7 @@
 ﻿#region
 
 using System.Collections.Generic;
-using System.IO;
-using wServer.realm.entities;
 using wServer.realm.entities.player;
-using wServer.realm.terrain;
 
 #endregion
 
@@ -67,7 +64,7 @@ namespace wServer.realm.worlds
                 {
                     if (i.Value.Name.StartsWith(j))
                     {
-                        if (i.Value.Name == j) (i.Value as Portal).PortalName = i.Value.Name;
+                        if (i.Value.Name == j) i.Value.PortalName = i.Value.Name;
                         i.Value.Name = j + " (" + i.Key.Players.Count + "/" + RealmManager.MAX_REALM_PLAYERS + ")";
                         i.Value.UpdateCount++;
                         break;

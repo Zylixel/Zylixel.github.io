@@ -2,7 +2,7 @@
 {
     public class EscapePacket : ClientPacket
     {
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.ESCAPE; }
         }

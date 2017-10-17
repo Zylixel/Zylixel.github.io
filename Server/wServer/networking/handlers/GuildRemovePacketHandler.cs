@@ -1,19 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using wServer.networking.cliPackets;
-using wServer.realm;
 using wServer.networking.svrPackets;
-using db;
-using wServer.realm.entities;
-using wServer.realm.entities.player;
 
 namespace wServer.networking.handlers
 {
     class GuildRemovePacketHandler : PacketHandlerBase<GuildRemovePacket>
     {
-        public override PacketID ID { get { return PacketID.GUILDREMOVE; } }
+        public override PacketID Id { get { return PacketID.GUILDREMOVE; } }
 
         protected override void HandlePacket(Client client, GuildRemovePacket packet)
         {
@@ -52,7 +45,7 @@ namespace wServer.networking.handlers
                             }
                             catch (Exception e)
                             {
-                                client.SendPacket(new TextPacket()
+                                client.SendPacket(new TextPacket
                                 {
                                     BubbleTime = 0,
                                     Stars = -1,
@@ -65,7 +58,7 @@ namespace wServer.networking.handlers
                 }
                 catch (Exception e)
                 {
-                    client.SendPacket(new TextPacket()
+                    client.SendPacket(new TextPacket
                     {
                         BubbleTime = 0,
                         Stars = -1,
@@ -73,7 +66,7 @@ namespace wServer.networking.handlers
                         Text = e.Message
                     });
                 }
-                client.SendPacket(new CreateGuildResultPacket()
+                client.SendPacket(new CreateGuildResultPacket
                 {
                     Success = true,
                     ErrorText = ""

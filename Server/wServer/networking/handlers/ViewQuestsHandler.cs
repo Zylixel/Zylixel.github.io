@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using wServer.networking.cliPackets;
+﻿using wServer.networking.cliPackets;
 using wServer.networking.svrPackets;
 
 namespace wServer.networking.handlers
 {
     internal class ViewQuestsHandler : PacketHandlerBase<ViewQuestsPacket>
     {
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.VIEWQUESTS; }
         }

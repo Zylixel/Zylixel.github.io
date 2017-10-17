@@ -45,7 +45,7 @@ public enum Ability : uint
     MagicHeal = 408,
     Savage = 409,
     Decoy = 410,
-    RisingFury = 411,
+    RisingFury = 411
 }
 
 [Flags]
@@ -90,8 +90,8 @@ public enum ConditionEffects : ulong
     PetDisable = (ulong)1 << 36,
     Curse = (ulong)1 << 37,
     CurseImmune = (ulong)1 << 38,
-    HPBoost = (ulong)1 << 39,
-    MPBoost = (ulong)1 << 40,
+    HpBoost = (ulong)1 << 39,
+    MpBoost = (ulong)1 << 40,
     AttBoost = (ulong)1 << 41,
     DefBoost = (ulong)1 << 42,
     SpdBoost = (ulong)1 << 43,
@@ -142,8 +142,8 @@ public enum ConditionEffectIndex
     PetDisable = 36,
     Curse = 37,
     CurseImmune = 38,
-    HPBoost = 39,
-    MPBoost = 40,
+    HpBoost = 39,
+    MpBoost = 40,
     AttBoost = 41,
     DefBoost = 42,
     SpdBoost = 43,
@@ -157,9 +157,9 @@ public class PetStruct
 {
     public PetStruct(ushort type, XElement elem)
     {
-        ObjectId = elem.Attribute("id").Value;
+        ObjectId = elem.Attribute("id")?.Value;
         ObjectType = type;
-        if (elem.Element("Family").Value == "? ? ? ?")
+        if (elem.Element("Family")?.Value == "? ? ? ?")
             PetFamily = Family.Unknown;
         else
             PetFamily = (Family)Enum.Parse(typeof(Family), elem.Element("Family").Value);
@@ -171,14 +171,14 @@ public class PetStruct
         DisplayId = elem.Element("DisplayId").Value;
     }
 
-    public string ObjectId { get; private set; }
-    public ushort ObjectType { get; private set; }
-    public string DisplayId { get; private set; }
-    public Family PetFamily { get; private set; }
-    public Rarity PetRarity { get; private set; }
-    public Ability? FirstAbility { get; private set; }
-    public string DefaultSkin { get; private set; }
-    public int Size { get; private set; }
+    public string ObjectId { get; }
+    public ushort ObjectType { get; }
+    public string DisplayId { get; }
+    public Family PetFamily { get; }
+    public Rarity PetRarity { get; }
+    public Ability? FirstAbility { get; }
+    public string DefaultSkin { get; }
+    public int Size { get; }
 }
 
 public class PetSkin
@@ -190,9 +190,9 @@ public class PetSkin
         DisplayId = elem.Element("DisplayId").Value;
     }
 
-    public string ObjectId { get; private set; }
-    public ushort ObjectType { get; private set; }
-    public string DisplayId { get; private set; }
+    public string ObjectId { get; }
+    public ushort ObjectType { get; }
+    public string DisplayId { get; }
 }
 
 public class ConditionEffect
@@ -207,7 +207,7 @@ public class ConditionEffect
         ci.NumberFormat.CurrencyDecimalSeparator = ".";
         Effect = (ConditionEffectIndex) Enum.Parse(typeof (ConditionEffectIndex), elem.Value.Replace(" ", ""));
         if (elem.Attribute("duration") != null)
-            DurationMS = (int) (float.Parse(elem.Attribute("duration").Value, NumberStyles.Any, ci)*1000);
+            DurationMs = (int) (float.Parse(elem.Attribute("duration").Value, NumberStyles.Any, ci)*1000);
         if (elem.Attribute("range") != null)
             Range = float.Parse(elem.Attribute("range").Value, NumberStyles.Any, ci);
         if(elem.Attribute("target") != null)
@@ -215,7 +215,7 @@ public class ConditionEffect
     }
 
     public ConditionEffectIndex Effect { get; set; }
-    public int DurationMS { get; set; }
+    public int DurationMs { get; set; }
     public int Target { get; set; }
     public float Range { get; set; }
     public int Duration { get; set; }
@@ -231,7 +231,7 @@ public class ProjectileDesc
         if (elem.Attribute("id") != null)
             BulletType = Utils.FromString(elem.Attribute("id").Value);
         ObjectId = elem.Element("ObjectId").Value;
-        LifetimeMS = Utils.FromString(elem.Element("LifetimeMS").Value);
+        LifetimeMs = Utils.FromString(elem.Element("LifetimeMS").Value);
         Speed = float.Parse(elem.Element("Speed").Value, NumberStyles.Any, ci);
         if ((n = elem.Element("Size")) != null)
             Size = Utils.FromString(n.Value);
@@ -263,27 +263,27 @@ public class ProjectileDesc
         Magnitude = n != null ? float.Parse(n.Value, NumberStyles.Any, ci) : 3; 
     }
 
-    public int BulletType { get; private set; }
-    public string ObjectId { get; private set; }
-    public int LifetimeMS { get; private set; }
-    public float Speed { get; private set; }
-    public int Size { get; private set; }
-    public int MinDamage { get; private set; }
-    public int MaxDamage { get; private set; }
+    public int BulletType { get; }
+    public string ObjectId { get; }
+    public int LifetimeMs { get; }
+    public float Speed { get; }
+    public int Size { get; }
+    public int MinDamage { get; }
+    public int MaxDamage { get; }
 
-    public ConditionEffect[] Effects { get; private set; }
+    public ConditionEffect[] Effects { get; }
 
-    public bool MultiHit { get; private set; }
-    public bool PassesCover { get; private set; }
-    public bool ArmorPiercing { get; private set; }
-    public bool ParticleTrail { get; private set; }
-    public bool Wavy { get; private set; }
-    public bool Parametric { get; private set; }
-    public bool Boomerang { get; private set; }
+    public bool MultiHit { get; }
+    public bool PassesCover { get; }
+    public bool ArmorPiercing { get; }
+    public bool ParticleTrail { get; }
+    public bool Wavy { get; }
+    public bool Parametric { get; }
+    public bool Boomerang { get; }
 
-    public float Amplitude { get; private set; }
-    public float Frequency { get; private set; }
-    public float Magnitude { get; private set; }
+    public float Amplitude { get; }
+    public float Frequency { get; }
+    public float Magnitude { get; }
 }
 
 public enum ActivateEffects
@@ -347,10 +347,10 @@ public class ActivateEffect
         if (elem.Attribute("duration") != null)
         {
             DurationSec = float.Parse(elem.Attribute("duration").Value, NumberStyles.Any, ci);
-            DurationMS = (int)(DurationSec * 1000);
+            DurationMs = (int)(DurationSec * 1000);
         }
         if (elem.Attribute("duration2") != null)
-            DurationMS2 = (int) (float.Parse(elem.Attribute("duration2").Value, NumberStyles.Any, ci)*1000);
+            DurationMs2 = (int) (float.Parse(elem.Attribute("duration2").Value, NumberStyles.Any, ci)*1000);
         if (elem.Attribute("effect") != null)
             ConditionEffect =
                 (ConditionEffectIndex) Enum.Parse(typeof (ConditionEffectIndex), elem.Attribute("effect").Value);
@@ -402,75 +402,73 @@ public class ActivateEffect
             VisualEffect = float.Parse(elem.Attribute("visualEffect").Value, NumberStyles.Any, ci);
         if (elem.Attribute("center") != null)
             Center = elem.Attribute("center").Value;
-		noStack = elem.Attribute("noStack") != null;
+		NoStack = elem.Attribute("noStack") != null;
         if (elem.Attribute("random") != null)
         {
-            random = (int)float.Parse(elem.Attribute("random").Value, NumberStyles.Any, ci);
+            Random = (int)float.Parse(elem.Attribute("random").Value, NumberStyles.Any, ci);
         }
         if (elem.Attribute("treaureTier") != null)
-            treaureTier = Utils.FromString(elem.Attribute("treaureTier").Value);
+            TreaureTier = Utils.FromString(elem.Attribute("treaureTier").Value);
     }
 
-    public ActivateEffects Effect { get; private set; }
-    public int Stats { get; private set; }
-    public int Amount { get; private set; }
-    public float Range { get; private set; }
-    public float DurationSec { get; private set; }
-    public int DurationMS { get; private set; }
-    public int DurationMS2 { get; private set; }
-    public ConditionEffectIndex? ConditionEffect { get; private set; }
-    public float EffectDuration { get; private set; }
-    public int MaximumDistance { get; private set; }
-    public float Radius { get; private set; }
-    public int TotalDamage { get; private set; }
-    public string ObjectId { get; private set; }
-    public int AngleOffset { get; private set; }
-    public int MaxTargets { get; private set; }
-    public string Id { get; private set; }
-    public int SkinType { get; private set; }
-    public int PetType { get; private set; }
-    public string DungeonName { get; private set; }
-    public string LockedName { get; private set; }
-    public string Target { get; private set; }
-    public string Center { get; private set; }
-    public bool UseWisMod { get; private set; }
-    public bool noStack { get; private set; }
-    public float VisualEffect { get; private set; }
-    public uint? Color { get; private set; }
-    public int random { get; private set; } //Used for prism of fallen chaos
-    public int treaureTier { get; private set; } //Treasure Chest Stuff
+    public ActivateEffects Effect { get; }
+    public int Stats { get; }
+    public int Amount { get; }
+    public float Range { get; }
+    public float DurationSec { get; }
+    public int DurationMs { get; }
+    public int DurationMs2 { get; }
+    public ConditionEffectIndex? ConditionEffect { get; }
+    public float EffectDuration { get; }
+    public int MaximumDistance { get; }
+    public float Radius { get; }
+    public int TotalDamage { get; }
+    public string ObjectId { get; }
+    public int AngleOffset { get; }
+    public int MaxTargets { get; }
+    public string Id { get; }
+    public int SkinType { get; }
+    public int PetType { get; }
+    public string DungeonName { get; }
+    public string LockedName { get; }
+    public string Target { get; }
+    public string Center { get; }
+    public bool UseWisMod { get; }
+    public bool NoStack { get; }
+    public float VisualEffect { get; }
+    public uint? Color { get; }
+    public int Random { get; } //Used for prism of fallen chaos
+    public int TreaureTier { get; } //Treasure Chest Stuff
 }
 
 public class PortalDesc
 {
     public PortalDesc(ushort type, XElement elem)
     {
-        XElement n;
         ObjectType = type;
         ObjectId = elem.Attribute("id").Value;
-        DisplayId = elem.Element("DisplayId") != null ? elem.Element("DisplayId").Value : String.Empty;
-        if ((n = elem.Element("NexusPortal")) != null) //<NexusPortal/>
+        DisplayId = elem.Element("DisplayId") != null ? elem.Element("DisplayId").Value : string.Empty;
+        if (elem.Element("NexusPortal") != null) //<NexusPortal/>
         {
             NexusPortal = true;
         }
-        if ((n = elem.Element("DungeonName")) != null) //<NexusPortal/>
+        if (elem.Element("DungeonName") != null) //<NexusPortal/>
         {
             DungeonName = elem.Element("DungeonName").Value;
         }
         TimeoutTime = ObjectId == "The Shatters" ? 70 : 30;
     }
 
-    public ushort ObjectType { get; private set; }
-    public string DisplayId { get; private set; }
+    public ushort ObjectType { get; }
+    public string DisplayId { get; }
     public string ObjectId { get; }
     public string DungeonName { get; set; }
-    public int TimeoutTime { get; private set; }
-    public bool NexusPortal { get; private set; }
+    public int TimeoutTime { get; }
+    public bool NexusPortal { get; }
 }
 
 public class Item : IFeedable
 {
-    private const bool DISABLE_SOULBOUND_UT = false;
 
     public Item(ushort type, XElement elem)
     {
@@ -512,13 +510,10 @@ public class Item : IFeedable
             DisplayId = (n = elem.Element("DisplayId")) != null ? n.Value : null;
             Doses = (n = elem.Element("Doses")) != null ? Utils.FromString(n.Value) : 0;
             SuccessorId = (n = elem.Element("SuccessorId")) != null ? n.Value : null;
-            if (elem.Element("Soulbound") != null)
+            /*if (elem.Element("Soulbound") != null)
             {
-                var s = Utils.FromString(elem.Element("SlotType").Value);
-                if (s == 10 || s == 26 || elem.Element("ActivateOnEquip") == null || !DISABLE_SOULBOUND_UT)
-                    Soulbound = true;
-                else Soulbound = false;
-            }
+                Soulbound = false; //Zy's Realm in a Nutshell
+            }*/
             Secret = elem.Element("Secret") != null;
             IsBackpack = elem.Element("Backpack") != null;
             Maxy = elem.Element("Maxy") != null;
@@ -526,7 +521,7 @@ public class Item : IFeedable
             Resurrects = elem.Element("Resurrects") != null;
             Texture1 = (n = elem.Element("Tex1")) != null ? Convert.ToInt32(n.Value, 16) : 0;
             Texture2 = (n = elem.Element("Tex2")) != null ? Convert.ToInt32(n.Value, 16) : 0;
-            Class = elem.Element("Class").Value;
+            Class = elem.Element("Class")?.Value;
             Family = (n = elem.Element("PetFamily")) != null
                 ? n.Value == "? ? ? ?"
                     ? (Family)Enum.Parse(typeof(Family), "Unknown", true)
@@ -541,7 +536,7 @@ public class Item : IFeedable
                     .Select(
                         i =>
                             new KeyValuePair<int, int>(int.Parse(i.Attribute("stat").Value),
-                                int.Parse(i.Attribute("amount").Value)))
+                                int.Parse(i.Attribute("amount")?.Value)))
                     .ToArray();
 
             ActivateEffects = elem.Elements("Activate").Select(i => new ActivateEffect(i)).ToArray();
@@ -560,46 +555,46 @@ public class Item : IFeedable
         }
     }
 
-    public ushort ObjectType { get; private set; }
-    public string ObjectId { get; private set; }
-    public int SlotType { get; private set; }
+    public ushort ObjectType { get; }
+    public string ObjectId { get; }
+    public int SlotType { get; }
     public ushort FeedPower { get; set; }
-    public int Tier { get; private set; }
-    public string Description { get; private set; }
-    public float RateOfFire { get; private set; }
-    public bool Usable { get; private set; }
-    public int BagType { get; private set; }
-    public int MpCost { get; private set; }
-    public int FameBonus { get; private set; }
-    public int NumProjectiles { get; private set; }
-    public float ArcGap { get; private set; }
-    public bool Consumable { get; private set; }
-    public bool Potion { get; private set; }
-    public string DisplayId { get; private set; }
-    public string SuccessorId { get; private set; }
+    public int Tier { get; }
+    public string Description { get; }
+    public float RateOfFire { get; }
+    public bool Usable { get; }
+    public int BagType { get; }
+    public int MpCost { get; }
+    public int FameBonus { get; }
+    public int NumProjectiles { get; }
+    public float ArcGap { get; }
+    public bool Consumable { get; }
+    public bool Potion { get; }
+    public string DisplayId { get; }
+    public string SuccessorId { get; }
     public bool Soulbound { get; private set; }
-    public float Cooldown { get; private set; }
-    public bool Resurrects { get; private set; }
-    public int Texture1 { get; private set; }
-    public int Texture2 { get; private set; }
-    public bool Secret { get; private set; }
-    public bool IsBackpack { get; private set; }
-    public Rarity? Rarity { get; private set; }
-    public Family? Family { get; private set; }
-    public string Class { get; private set; }
+    public float Cooldown { get; }
+    public bool Resurrects { get; }
+    public int Texture1 { get; }
+    public int Texture2 { get; }
+    public bool Secret { get; }
+    public bool IsBackpack { get; }
+    public Rarity? Rarity { get; }
+    public Family? Family { get; }
+    public string Class { get; }
 
     public int Doses { get; set; }
 
-    public KeyValuePair<int, int>[] StatsBoost { get; private set; }
-    public ActivateEffect[] ActivateEffects { get; private set; }
-    public ProjectileDesc[] Projectiles { get; private set; }
+    public KeyValuePair<int, int>[] StatsBoost { get; }
+    public ActivateEffect[] ActivateEffects { get; }
+    public ProjectileDesc[] Projectiles { get; }
 
-    public int? MpEndCost { get; private set; }
-    public float? Timer { get; private set; }
-    public bool XpBooster { get; private set; }
-    public bool LootDropBooster { get; private set; }
-    public bool LootTierBooster { get; private set; }
-    public int SetType { get; private set; }
+    public int? MpEndCost { get; }
+    public float? Timer { get; }
+    public bool XpBooster { get; }
+    public bool LootDropBooster { get; }
+    public bool LootTierBooster { get; }
+    public int SetType { get; }
     public bool BrokenResurrect { get; set; }
     public bool NotBrokenResurrect { get; set; }
     public bool MantleResurrect { get; set; }
@@ -618,10 +613,10 @@ public class SpawnCount
         Max = Utils.FromString(elem.Element("Max").Value);
     }
 
-    public int Mean { get; private set; }
-    public int StdDev { get; private set; }
-    public int Min { get; private set; }
-    public int Max { get; private set; }
+    public int Mean { get; }
+    public int StdDev { get; }
+    public int Min { get; }
+    public int Max { get; }
 }
 
 public class ObjectDesc
@@ -670,7 +665,7 @@ public class ObjectDesc
         if ((n = elem.Element("MaxHitPoints")) != null)
         {
             MaxHitPoints = n.Attribute("max") != null ? Utils.FromString(n.Attribute("max").Value) : -1;
-            MaxHP = Utils.FromString(n.Value);
+            MaxHp = Utils.FromString(n.Value);
         }
         if ((n = elem.Element("MaxMagicPoints")) != null)
             MaxMagicPoints = n.Attribute("max") != null ? Utils.FromString(n.Attribute("max").Value) : -1;
@@ -728,59 +723,59 @@ public class ObjectDesc
             ExpMultiplier = null;
     }
 
-    public int UnlockCost { get; private set; }
-    public int MaxHitPoints { get; private set; }
-    public int MaxMagicPoints { get; private set; }
-    public int MaxAttack { get; private set; }
-    public int MaxDefense { get; private set; }
-    public int MaxSpeed { get; private set; }
-    public int MaxDexterity { get; private set; }
-    public int MaxHpRegen { get; private set; }
-    public int MaxMpRegen { get; private set; }
+    public int UnlockCost { get; }
+    public int MaxHitPoints { get; }
+    public int MaxMagicPoints { get; }
+    public int MaxAttack { get; }
+    public int MaxDefense { get; }
+    public int MaxSpeed { get; }
+    public int MaxDexterity { get; }
+    public int MaxHpRegen { get; }
+    public int MaxMpRegen { get; }
 
-    public ushort ObjectType { get; private set; }
-    public string ObjectId { get; private set; }
-    public string DisplayId { get; private set; }
-    public string Group { get; private set; }
-    public string Class { get; private set; }
-    public bool Player { get; private set; }
-    public bool Enemy { get; private set; }
+    public ushort ObjectType { get; }
+    public string ObjectId { get; }
+    public string DisplayId { get; }
+    public string Group { get; }
+    public string Class { get; }
+    public bool Player { get; }
+    public bool Enemy { get; }
     public bool NoElectric { get; private set; }
-    public bool OccupySquare { get; private set; }
-    public bool FullOccupy { get; private set; }
-    public bool EnemyOccupySquare { get; private set; }
-    public bool Static { get; private set; }
-    public bool NoMiniMap { get; private set; }
-    public bool ProtectFromGroundDamage { get; private set; }
-    public bool ProtectFromSink { get; private set; }
-    public bool Flying { get; private set; }
-    public bool ShowName { get; private set; }
-    public bool DontFaceAttacks { get; private set; }
-    public bool BlocksSight { get; private set; }
-    public int MinSize { get; private set; }
-    public int MaxSize { get; private set; }
-    public int SizeStep { get; private set; }
-    public TagList Tags { get; private set; }
-    public ProjectileDesc[] Projectiles { get; private set; }
+    public bool OccupySquare { get; }
+    public bool FullOccupy { get; }
+    public bool EnemyOccupySquare { get; }
+    public bool Static { get; }
+    public bool NoMiniMap { get; }
+    public bool ProtectFromGroundDamage { get; }
+    public bool ProtectFromSink { get; }
+    public bool Flying { get; }
+    public bool ShowName { get; }
+    public bool DontFaceAttacks { get; }
+    public bool BlocksSight { get; }
+    public int MinSize { get; }
+    public int MaxSize { get; }
+    public int SizeStep { get; }
+    public TagList Tags { get; }
+    public ProjectileDesc[] Projectiles { get; }
 
 
-    public double MaxHP { get; private set; }
-    public int Defense { get; private set; }
-    public string Terrain { get; private set; }
-    public float SpawnProbability { get; private set; }
-    public SpawnCount Spawn { get; private set; }
-    public bool Cube { get; private set; }
-    public bool God { get; private set; }
-    public bool Quest { get; private set; }
-    public int? Level { get; private set; }
-    public bool StasisImmune { get; private set; }
-    public bool StunImmune { get; private set; }
-    public bool ParalyzedImmune { get; private set; }
-    public bool DazedImmune { get; private set; }
-    public bool Oryx { get; private set; }
-    public bool Hero { get; private set; }
-    public int? PerRealmMax { get; private set; }
-    public float? ExpMultiplier { get; private set; } //Exp gained = level total / 10 * multi
+    public double MaxHp { get; }
+    public int Defense { get; }
+    public string Terrain { get; }
+    public float SpawnProbability { get; }
+    public SpawnCount Spawn { get; }
+    public bool Cube { get; }
+    public bool God { get; }
+    public bool Quest { get; }
+    public int? Level { get; }
+    public bool StasisImmune { get; }
+    public bool StunImmune { get; }
+    public bool ParalyzedImmune { get; }
+    public bool DazedImmune { get; }
+    public bool Oryx { get; }
+    public bool Hero { get; }
+    public int? PerRealmMax { get; }
+    public float? ExpMultiplier { get; } //Exp gained = level total / 10 * multi
 }
 
 public class TagList : List<Tag>
@@ -812,8 +807,8 @@ public class Tag
         }
     }
 
-    public string Name { get; private set; }
-    public Dictionary<string, string> Values { get; private set; }
+    public string Name { get; }
+    public Dictionary<string, string> Values { get; }
 }
 
 public class TileDesc
@@ -849,16 +844,16 @@ public class TileDesc
         }
     }
 
-    public ushort ObjectType { get; private set; }
-    public string ObjectId { get; private set; }
-    public bool NoWalk { get; private set; }
-    public bool Damaging { get; private set; }
-    public int MinDamage { get; private set; }
-    public int MaxDamage { get; private set; }
-    public float Speed { get; private set; }
-    public bool Push { get; private set; }
-    public float PushX { get; private set; }
-    public float PushY { get; private set; }
+    public ushort ObjectType { get; }
+    public string ObjectId { get; }
+    public bool NoWalk { get; }
+    public bool Damaging { get; }
+    public int MinDamage { get; }
+    public int MaxDamage { get; }
+    public float Speed { get; }
+    public bool Push { get; }
+    public float PushX { get; }
+    public float PushY { get; }
 }
 
 public class DungeonDesc
@@ -874,23 +869,23 @@ public class DungeonDesc
         Json = elem.Element("Json").Value;
     }
 
-    public string Name { get; private set; }
-    public ushort PortalId { get; private set; }
-    public int Background { get; private set; }
-    public bool AllowTeleport { get; private set; }
-    public string Json { get; private set; }
+    public string Name { get; }
+    public ushort PortalId { get; }
+    public int Background { get; }
+    public bool AllowTeleport { get; }
+    public string Json { get; }
 }
 
 public class SetTypeSkin
 {
-    public ushort ObjectType { get; private set; }
-    public string ObjectId { get; private set; }
-    public ushort SkinType { get; private set; }
-    public int Size { get; private set; }
-    public uint Color { get; private set; }
-    public string BulletType { get; private set; }
-    public KeyValuePair<int, int>[] StatsBoost { get; private set; }
-    public Dictionary<int, int> Setpiece { get; private set; }
+    public ushort ObjectType { get; }
+    public string ObjectId { get; }
+    public ushort SkinType { get; }
+    public int Size { get; }
+    public uint Color { get; }
+    public string BulletType { get; }
+    public KeyValuePair<int, int>[] StatsBoost { get; }
+    public Dictionary<int, int> Setpiece { get; }
 
     public SetTypeSkin(XElement elem, ushort type)
     {

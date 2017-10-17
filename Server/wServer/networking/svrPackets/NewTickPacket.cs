@@ -6,7 +6,7 @@
         public int TickTime { get; set; }
         public ObjectStats[] UpdateStatuses { get; set; }
 
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.NEW_TICK; }
         }

@@ -1,19 +1,15 @@
 ﻿#region
 
-using System.Collections.Specialized;
-using System.IO;
-using System.Net;
 using System.Text;
-using System.Web;
+using System.Text.RegularExpressions;
 using db;
 using MySql.Data.MySqlClient;
-using System.Text.RegularExpressions;
 
 #endregion
 
 namespace server.account
 {
-    internal class setName : RequestHandler
+    internal class SetName : RequestHandler
     {
         protected override void HandleRequest()
         {

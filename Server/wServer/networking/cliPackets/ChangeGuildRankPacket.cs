@@ -5,7 +5,7 @@
         public string Name { get; set; }
         public int GuildRank { get; set; }
 
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.CHANGEGUILDRANK; }
         }

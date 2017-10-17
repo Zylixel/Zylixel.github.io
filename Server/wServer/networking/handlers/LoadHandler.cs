@@ -3,7 +3,6 @@
 using db;
 using wServer.networking.cliPackets;
 using wServer.networking.svrPackets;
-using wServer.realm;
 using wServer.realm.entities.player;
 using FailurePacket = wServer.networking.svrPackets.FailurePacket;
 
@@ -13,7 +12,7 @@ namespace wServer.networking.handlers
 {
     internal class LoadHandler : PacketHandlerBase<LoadPacket>
     {
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.LOAD; }
         }
@@ -35,10 +34,10 @@ namespace wServer.networking.handlers
                     }
                     else
                     {
-                        client.SendPacket(new Create_SuccessPacket
+                        client.SendPacket(new CreateSuccessPacket
                         {
-                            CharacterID = client.Character.CharacterId,
-                            ObjectID =
+                            CharacterId = client.Character.CharacterId,
+                            ObjectId =
                                 client.Manager.Worlds[client.TargetWorld].EnterWorld(
                                     client.Player = new Player(client.Manager, client))
                         });

@@ -5,7 +5,7 @@
         public int ErrorId { get; set; }
         public string ErrorDescription { get; set; }
 
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.FAILURE; }
         }

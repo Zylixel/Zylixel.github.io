@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace wServer.networking.cliPackets
+﻿namespace wServer.networking.cliPackets
 {
     public class TinkerQuestPacket : ClientPacket
     {
         public ObjectSlot Object { get; set; }
 
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.TINKERQUEST; }
         }

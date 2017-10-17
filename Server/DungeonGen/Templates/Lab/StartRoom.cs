@@ -24,22 +24,22 @@ using RotMG.Common.Rasterizer;
 
 namespace DungeonGenerator.Templates.Lab {
 	internal class StartRoom : FixedRoom {
-		static readonly Rect template = new Rect(0, 96, 26, 128);
+		static readonly Rect Template = new Rect(0, 96, 26, 128);
 
 		public override RoomType Type { get { return RoomType.Start; } }
 
-		public override int Width { get { return template.MaxX - template.X; } }
+		public override int Width { get { return Template.MaxX - Template.X; } }
 
-		public override int Height { get { return template.MaxY - template.Y; } }
+		public override int Height { get { return Template.MaxY - Template.Y; } }
 
-		static readonly Tuple<Direction, int>[] connections = {
+		static readonly Tuple<Direction, int>[] Connections = {
 			Tuple.Create(Direction.North, 11)
 		};
 
-		public override Tuple<Direction, int>[] ConnectionPoints { get { return connections; } }
+		public override Tuple<Direction, int>[] ConnectionPoints { get { return Connections; } }
 
 		public override void Rasterize(BitmapRasterizer<DungeonTile> rasterizer, Random rand) {
-			rasterizer.Copy(LabTemplate.MapTemplate, template, Pos);
+			rasterizer.Copy(LabTemplate.MapTemplate, Template, Pos);
 			LabTemplate.DrawSpiderWeb(rasterizer, Bounds, rand);
 		}
 	}

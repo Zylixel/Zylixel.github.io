@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using wServer.realm;
 
 namespace wServer.logic.transitions
@@ -16,7 +12,7 @@ namespace wServer.logic.transitions
             : base(targetState)
         {
             this.texts = texts ?? Empty<string>.Array;
-            this.transit = false;
+            transit = false;
         }
 
         protected override void OnStateEntry(Entity host, RealmTime time, ref object state)

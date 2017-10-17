@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using wServer.realm.entities.player;
 using wServer.networking.svrPackets;
+using wServer.realm.entities.player;
 using wServer.realm.worlds;
 
 namespace wServer.realm
@@ -93,8 +90,8 @@ namespace wServer.realm
         {
             _guildStructs = new Dictionary<string, Guild>();
             GuildHall = guildInfo.Name == "" ? null : manager.AddWorld(new GuildHall(guildInfo.Name));
-            this.name = guildInfo.Name;
-            this.id = guildInfo.Id;
+            name = guildInfo.Name;
+            id = guildInfo.Id;
         }
 
         public bool Contains(string accountId)
@@ -105,7 +102,7 @@ namespace wServer.realm
         public void Remove(string accountId)
         {
             _guildStructs.Remove(accountId);
-            base.RemoveAt(this.FindIndex(_ => _.AccountId == accountId));
+            RemoveAt(FindIndex(_ => _.AccountId == accountId));
         }
 
         public new void Remove(Player player)
@@ -145,15 +142,11 @@ namespace wServer.realm
                 Id = Id
             });
             player.Guild = this;
-            this.Add(player);
+            Add(player);
             player.UpdateCount++;
             foreach (Player p in this)
             {
-                p.SendInfoWithTokens("server.guild_join", new KeyValuePair<string, object>[2]
-                {
-                    new KeyValuePair<string, object>("name", player.Name),
-                    new KeyValuePair<string, object>("guild", Name)
-                });
+                p.SendInfoWithTokens("server.guild_join", new KeyValuePair<string, object>("name", player.Name), new KeyValuePair<string, object>("guild", Name));
             }
         }
 
@@ -168,7 +161,7 @@ namespace wServer.realm
                     p.SendInfo(sender.Name + " removed " + player.Name + " from " + Name);
 
             player.Guild = GetDefaultGuild();
-            this.Remove(player);
+            Remove(player);
             player.UpdateCount++;
         }
 

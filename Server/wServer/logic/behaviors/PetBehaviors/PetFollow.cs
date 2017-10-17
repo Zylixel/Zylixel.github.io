@@ -92,7 +92,7 @@ namespace wServer.logic.behaviors.PetBehaviors
         private enum F
         {
             DontKnowWhere,
-            Acquired,
+            Acquired
         }
 
         private class FollowState

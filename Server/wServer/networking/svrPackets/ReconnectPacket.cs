@@ -10,7 +10,7 @@
         public bool IsFromArena { get; set; }
         public byte[] Key { get; set; }
 
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.RECONNECT; }
         }

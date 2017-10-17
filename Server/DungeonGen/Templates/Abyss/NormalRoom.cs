@@ -24,19 +24,19 @@ using RotMG.Common.Rasterizer;
 
 namespace DungeonGenerator.Templates.Abyss {
 	internal class NormalRoom : Room {
-		readonly int w;
-		readonly int h;
+		readonly int _w;
+		readonly int _h;
 
 		public NormalRoom(int w, int h) {
-			this.w = w;
-			this.h = h;
+			this._w = w;
+			this._h = h;
 		}
 
 		public override RoomType Type { get { return RoomType.Normal; } }
 
-		public override int Width { get { return w; } }
+		public override int Width { get { return _w; } }
 
-		public override int Height { get { return h; } }
+		public override int Height { get { return _h; } }
 
 		public override void Rasterize(BitmapRasterizer<DungeonTile> rasterizer, Random rand) {
 			rasterizer.FillRect(Bounds, new DungeonTile {

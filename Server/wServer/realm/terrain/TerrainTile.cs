@@ -20,7 +20,7 @@ namespace wServer.realm.terrain
         LowPlains,
         LowForest,
         ShoreSand,
-        ShorePlains,
+        ShorePlains
     }
 
     internal struct TerrainTile : IEquatable<TerrainTile>

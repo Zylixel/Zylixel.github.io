@@ -1,10 +1,6 @@
 ﻿#region
 
-using System;
-using System.Collections.Specialized;
 using System.IO;
-using System.Net;
-using System.Web;
 using db;
 using MySql.Data.MySqlClient;
 
@@ -12,7 +8,7 @@ using MySql.Data.MySqlClient;
 
 namespace server.account
 {
-    internal class verifyage : RequestHandler
+    internal class Verifyage : RequestHandler
     {
         protected override void HandleRequest()
         {

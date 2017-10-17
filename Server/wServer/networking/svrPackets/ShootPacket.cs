@@ -11,7 +11,7 @@
         public byte NumShots { get; set; }
         public float AngleInc { get; set; }
 
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.SHOOT; }
         }

@@ -1,8 +1,5 @@
-﻿using System;
+﻿using System.Linq;
 using wServer.realm;
-using wServer.realm.entities;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace wServer.logic.behaviors
 {

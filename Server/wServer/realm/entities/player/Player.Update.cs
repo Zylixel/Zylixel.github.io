@@ -14,29 +14,29 @@ namespace wServer.realm.entities.player
         public int UpdatesSend { get; private set; }
         public int UpdatesReceived { get; set; }
 
-        public const int SIGHTRADIUS = 15;
+        public const int Sightradius = 15;
 
-        private const int APPOX_AREA_OF_SIGHT = (int)(Math.PI * SIGHTRADIUS * SIGHTRADIUS + 1);
+        private const int AppoxAreaOfSight = (int)(Math.PI * Sightradius * Sightradius + 1);
 
-        private readonly HashSet<Entity> clientEntities = new HashSet<Entity>();
-        private readonly HashSet<IntPoint> clientStatic = new HashSet<IntPoint>(new IntPointComparer());
-        private readonly Dictionary<Entity, int> lastUpdate = new Dictionary<Entity, int>();
-        private int mapHeight;
-        private int mapWidth;
-        private int tickId;
+        private readonly HashSet<Entity> _clientEntities = new HashSet<Entity>();
+        private readonly HashSet<IntPoint> _clientStatic = new HashSet<IntPoint>(new IntPointComparer());
+        private readonly Dictionary<Entity, int> _lastUpdate = new Dictionary<Entity, int>();
+        private int _mapHeight;
+        private int _mapWidth;
+        private int _tickId;
 
         private IEnumerable<Entity> GetNewEntities()
         {
-            foreach (var i in Owner.Players.Where(i => clientEntities.Add(i.Value)))
+            foreach (var i in Owner.Players.Where(i => _clientEntities.Add(i.Value)))
                 yield return i.Value;
 
-            foreach (var i in Owner.PlayersCollision.HitTest(X, Y, SIGHTRADIUS).OfType<Decoy>().Where(i => clientEntities.Add(i)))
+            foreach (var i in Owner.PlayersCollision.HitTest(X, Y, Sightradius).OfType<Decoy>().Where(i => _clientEntities.Add(i)))
                 yield return i;
 
-            foreach (var i in Owner.PlayersCollision.HitTest(X, Y, SIGHTRADIUS).OfType<Pet>().Where(i => clientEntities.Add(i)))
+            foreach (var i in Owner.PlayersCollision.HitTest(X, Y, Sightradius).OfType<Pet>().Where(i => _clientEntities.Add(i)))
                 yield return i;
 
-            foreach (var i in Owner.EnemiesCollision.HitTest(X, Y, SIGHTRADIUS))
+            foreach (var i in Owner.EnemiesCollision.HitTest(X, Y, Sightradius))
             {
                 if (i is Container)
                 {
@@ -48,19 +48,19 @@ namespace wServer.realm.entities.player
                             (i as Container).BoostedBag = true; //boosted bag
 
                 }
-                if (!(MathsUtils.DistSqr(i.X, i.Y, X, Y) <= SIGHTRADIUS * SIGHTRADIUS)) continue;
-                if (clientEntities.Add(i))
+                if (!(MathsUtils.DistSqr(i.X, i.Y, X, Y) <= Sightradius * Sightradius)) continue;
+                if (_clientEntities.Add(i))
                     yield return i;
             }
-            if (Quest != null && clientEntities.Add(Quest))
+            if (Quest != null && _clientEntities.Add(Quest))
                 yield return Quest;
         }
 
         private IEnumerable<int> GetRemovedEntities()
         {
-            foreach (var i in clientEntities.Where(i => !(i is Player) || i.Owner == null))
+            foreach (var i in _clientEntities.Where(i => !(i is Player) || i.Owner == null))
             {
-                if (MathsUtils.DistSqr(i.X, i.Y, X, Y) > SIGHTRADIUS * SIGHTRADIUS &&
+                if (MathsUtils.DistSqr(i.X, i.Y, X, Y) > Sightradius * Sightradius &&
                     !(i is StaticObject && (i as StaticObject).Static) &&
                     i != Quest)
                 {
@@ -79,16 +79,16 @@ namespace wServer.realm.entities.player
         private IEnumerable<ObjectDef> GetNewStatics(int xBase, int yBase)
         {
             var ret = new List<ObjectDef>();
-            foreach (var i in Sight.GetSightCircle(SIGHTRADIUS))
+            foreach (var i in Sight.GetSightCircle(Sightradius))
             {
                 var x = i.X + xBase;
                 var y = i.Y + yBase;
-                if (x < 0 || x >= mapWidth ||
-                    y < 0 || y >= mapHeight) continue;
+                if (x < 0 || x >= _mapWidth ||
+                    y < 0 || y >= _mapHeight) continue;
 
                 var tile = Owner.Map[x, y];
 
-                if (tile.ObjId == 0 || tile.ObjType == 0 || !clientStatic.Add(new IntPoint(x, y))) continue;
+                if (tile.ObjId == 0 || tile.ObjType == 0 || !_clientStatic.Add(new IntPoint(x, y))) continue;
                 var def = tile.ToDef(x, y);
                 var cls = Manager.GameData.ObjectDescs[tile.ObjType].Class;
                 if (cls == "ConnectedWall" || cls == "CaveWall")
@@ -107,11 +107,11 @@ namespace wServer.realm.entities.player
 
         private IEnumerable<IntPoint> GetRemovedStatics(int xBase, int yBase)
         {
-            return from i in clientStatic
+            return from i in _clientStatic
                    let dx = i.X - xBase
                    let dy = i.Y - yBase
                    let tile = Owner.Map[i.X, i.Y]
-                   where dx * dx + dy * dy > SIGHTRADIUS * SIGHTRADIUS ||
+                   where dx * dx + dy * dy > Sightradius * Sightradius ||
                          tile.ObjType == 0
                    let objId = Owner.Map[i.X, i.Y].ObjId
                    where objId != 0
@@ -120,25 +120,25 @@ namespace wServer.realm.entities.player
 
         public void SendUpdate(RealmTime time)
         {
-            mapWidth = Owner.Map.Width;
-            mapHeight = Owner.Map.Height;
+            _mapWidth = Owner.Map.Width;
+            _mapHeight = Owner.Map.Height;
             var map = Owner.Map;
             var xBase = (int)X;
             var yBase = (int)Y;
 
             var sendEntities = new HashSet<Entity>(GetNewEntities());
 
-            var list = new List<UpdatePacket.TileData>(APPOX_AREA_OF_SIGHT);
+            var list = new List<UpdatePacket.TileData>(AppoxAreaOfSight);
             var sent = 0;
-            foreach (var i in Sight.GetSightCircle(SIGHTRADIUS))
+            foreach (var i in Sight.GetSightCircle(Sightradius))
             {
                 var x = i.X + xBase;
                 var y = i.Y + yBase;
 
                 WmapTile tile;
-                if (x < 0 || x >= mapWidth ||
-                    y < 0 || y >= mapHeight ||
-                    tiles[x, y] >= (tile = map[x, y]).UpdateCount) continue;
+                if (x < 0 || x >= _mapWidth ||
+                    y < 0 || y >= _mapHeight ||
+                    _tiles[x, y] >= (tile = map[x, y]).UpdateCount) continue;
 
                 var world = Manager.GetWorld(Owner.Id);
                 if (world.Dungeon)
@@ -146,25 +146,25 @@ namespace wServer.realm.entities.player
                     //Todo add blocksight
                 }
 
-                list.Add(new UpdatePacket.TileData()
+                list.Add(new UpdatePacket.TileData
                 {
                     X = (short)x,
                     Y = (short)y,
                     Tile = tile.TileId
                 });
-                tiles[x, y] = tile.UpdateCount;
+                _tiles[x, y] = tile.UpdateCount;
                 sent++;
             }
             FameCounter.TileSent(sent);
 
             var dropEntities = GetRemovedEntities().Distinct().ToArray();
-            clientEntities.RemoveWhere(_ => Array.IndexOf(dropEntities, _.Id) != -1);
+            _clientEntities.RemoveWhere(_ => Array.IndexOf(dropEntities, _.Id) != -1);
 
-            var toRemove = lastUpdate.Keys.Where(i => !clientEntities.Contains(i)).ToList();
-            toRemove.ForEach(i => lastUpdate.Remove(i));
+            var toRemove = _lastUpdate.Keys.Where(i => !_clientEntities.Contains(i)).ToList();
+            toRemove.ForEach(i => _lastUpdate.Remove(i));
 
             foreach (var i in sendEntities)
-                lastUpdate[i] = i.UpdateCount;
+                _lastUpdate[i] = i.UpdateCount;
 
             var newStatics = GetNewStatics(xBase, yBase).ToArray();
             var removeStatics = GetRemovedStatics(xBase, yBase).ToArray();
@@ -172,12 +172,12 @@ namespace wServer.realm.entities.player
             foreach (var i in removeStatics)
             {
                 removedIds.Add(Owner.Map[i.X, i.Y].ObjId);
-                clientStatic.Remove(i);
+                _clientStatic.Remove(i);
             }
 
             if (sendEntities.Count <= 0 && list.Count <= 0 && dropEntities.Length <= 0 && newStatics.Length <= 0 &&
                 removedIds.Count <= 0) return;
-            var packet = new UpdatePacket()
+            var packet = new UpdatePacket
             {
                 Tiles = list.ToArray(),
                 NewObjects = sendEntities.Select(_ => _.ToDefinition()).Concat(newStatics).ToArray(),
@@ -192,25 +192,25 @@ namespace wServer.realm.entities.player
             var sendEntities = new List<Entity>();
             try
             {
-                foreach (var i in clientEntities.Where(i => i.UpdateCount > lastUpdate[i]))
+                foreach (var i in _clientEntities.Where(i => i.UpdateCount > _lastUpdate[i]))
                 {
                     sendEntities.Add(i);
-                    lastUpdate[i] = i.UpdateCount;
+                    _lastUpdate[i] = i.UpdateCount;
                 }
             }
             catch (Exception e)
             {
-                log.Error(e);
+                Log.Error(e);
             }
             if (Quest != null &&
-                (!lastUpdate.ContainsKey(Quest) || Quest.UpdateCount > lastUpdate[Quest]))
+                (!_lastUpdate.ContainsKey(Quest) || Quest.UpdateCount > _lastUpdate[Quest]))
             {
                 sendEntities.Add(Quest);
-                lastUpdate[Quest] = Quest.UpdateCount;
+                _lastUpdate[Quest] = Quest.UpdateCount;
             }
             var p = new NewTickPacket();
-            tickId++;
-            p.TickId = tickId;
+            _tickId++;
+            p.TickId = _tickId;
             p.TickTime = time.thisTickTimes;
             p.UpdateStatuses = sendEntities.Select(_ => _.ExportStats()).ToArray();
             Client.SendPacket(p);

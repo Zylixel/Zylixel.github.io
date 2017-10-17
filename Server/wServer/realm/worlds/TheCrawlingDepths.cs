@@ -1,7 +1,5 @@
 ﻿#region
 
-using wServer.networking;
-
 #endregion
 
 namespace wServer.realm.worlds

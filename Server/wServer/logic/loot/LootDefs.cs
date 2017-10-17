@@ -180,7 +180,7 @@ namespace wServer.logic.loot
         {
             Lootstate = lootState;
             //if (playerDat != null && playerDat.Item2/enemy.ObjectDesc.MaxHP >= threshold)
-            if (playerDat != null && playerDat.Item2 / enemy.ObjectDesc.MaxHP >= 0)
+            if (playerDat != null && playerDat.Item2 / enemy.ObjectDesc.MaxHp >= 0)
             //Removes Loot Threshhold
             {
                 foreach (ILootDef i in children)

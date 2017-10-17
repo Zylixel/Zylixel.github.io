@@ -9,11 +9,11 @@ namespace wServer.realm.entities.player
 {
     public partial class Player
     {
-        private long b;
+        private long _b;
 
         public void HandleGround(RealmTime time)
         {
-            if (time.tickTimes - b <= 100) return;
+            if (time.tickTimes - _b <= 100) return;
             try
             {
                 if (Owner.Name == "Ocean Trench")
@@ -41,11 +41,11 @@ namespace wServer.realm.entities.player
                     }
                 }
 
-                b = time.tickTimes;
+                _b = time.tickTimes;
             }
             catch (Exception ex)
             {
-                log.Error(ex);
+                Log.Error(ex);
             }
         }
     }

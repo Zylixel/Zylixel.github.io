@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Threading;
-using wServer.networking;
 using log4net;
+using wServer.networking;
 
 namespace wServer.realm
 {
@@ -14,7 +14,7 @@ namespace wServer.realm
         public RealmManager Manager { get; private set; }
         public NetworkTicker(RealmManager manager)
         {
-            this.Manager = manager;
+            Manager = manager;
         }
 
         public void AddPendingPacket(Client client, PacketID id, byte[] packet)

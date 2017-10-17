@@ -5,8 +5,8 @@ namespace AdminPanel
 {
     public partial class AddItemForm : Form
     {
-        private int count;
-        private int item;
+        private int _count;
+        private int _item;
 
         public AddItemForm()
         {
@@ -15,8 +15,8 @@ namespace AdminPanel
 
         private void button1_Click(object sender, EventArgs e)
         {
-            count = (int)numericUpDown1.Value;
-            item = (int)numericUpDown2.Value;
+            _count = (int)numericUpDown1.Value;
+            _item = (int)numericUpDown2.Value;
             DialogResult = DialogResult.OK;
             Close();
         }
@@ -24,8 +24,8 @@ namespace AdminPanel
         public DialogResult ShowDialog(out int count, out int item)
         {
             var ret = ShowDialog();
-            count = this.count;
-            item = this.item;
+            count = _count;
+            item = _item;
             return ret;
         }
     }

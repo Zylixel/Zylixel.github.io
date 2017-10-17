@@ -59,11 +59,8 @@ namespace wServer.realm.commands
                         player.SendHelp("Usage: /g <text>");
                         return false;
                     }
-                    else
-                    {
-                        player.Guild.Chat(player, saytext.ToSafeText());
-                        return true;
-                    }
+                    player.Guild.Chat(player, saytext.ToSafeText());
+                    return true;
                 }
                 catch
                 {
@@ -82,7 +79,7 @@ namespace wServer.realm.commands
 
         protected override bool Process(Player player, RealmTime time, string[] args)
         {
-            if (String.IsNullOrWhiteSpace(args[0]))
+            if (string.IsNullOrWhiteSpace(args[0]))
             {
                 player.SendInfo("Usage: /invite <player name>");
                 return false;
@@ -90,7 +87,7 @@ namespace wServer.realm.commands
 
             if (player.Guild[player.AccountId].Rank >= 20)
             {
-                foreach (var i in player.Owner.Players.Values)
+                foreach (var unused in player.Owner.Players.Values)
                 {
                     Player target = player.Owner.GetPlayerByName(args[0]);
 
@@ -101,38 +98,28 @@ namespace wServer.realm.commands
                     }
                     if (!target.NameChosen || player.Dist(target) > 20)
                     {
-                        player.SendInfoWithTokens("server.invite_notfound", new KeyValuePair<string, object>[1]
-                        {
-                            new KeyValuePair<string, object>("player", args[0])
-                        });
+                        player.SendInfoWithTokens("server.invite_notfound", new KeyValuePair<string, object>("player", args[0]));
                         return false;
                     }
 
                     if (target.Guild.IsDefault)
                     {
-                        target.Client.SendPacket(new InvitedToGuildPacket()
+                        target.Client.SendPacket(new InvitedToGuildPacket
                         {
                             Name = player.Name,
                             GuildName = player.Guild[player.AccountId].Name
                         });
                         target.Invited = true;
-                        player.SendInfoWithTokens("server.invite_succeed", new KeyValuePair<string, object>[2]
-                        {
-                            new KeyValuePair<string, object>("player", args[0]),
-                            new KeyValuePair<string, object>("guild", player.Guild[player.AccountId].Name)
-                        });
+                        player.SendInfoWithTokens("server.invite_succeed", new KeyValuePair<string, object>("player", args[0]), new KeyValuePair<string, object>("guild", player.Guild[player.AccountId].Name));
                         return true;
                     }
-                    else
-                    {
-                        player.SendError("Player is already in a guild!");
-                        return false;
-                    }
+                    player.SendError("Player is already in a guild!");
+                    return false;
                 }
             }
             else
             {
-                player.Client.SendPacket(new TextPacket()
+                player.Client.SendPacket(new TextPacket
                 {
                     BubbleTime = 0,
                     Stars = -1,
@@ -157,10 +144,7 @@ namespace wServer.realm.commands
             }
             if (!player.Invited)
             {
-                player.SendInfoWithTokens("server.guild_not_invited", new KeyValuePair<string, object>[1]
-                {
-                    new KeyValuePair<string, object>("guild", args[0])
-                });
+                player.SendInfoWithTokens("server.guild_not_invited", new KeyValuePair<string, object>("guild", args[0]));
                 return false;
             }
             player.Manager.Database.DoActionAsync(db =>
@@ -181,10 +165,7 @@ namespace wServer.realm.commands
                 }
                 else
                 {
-                    player.SendInfoWithTokens("server.guild_join_fail", new KeyValuePair<string, object>[1]
-                    {
-                        new KeyValuePair<string, object>("error", "Guild does not exist")
-                    });
+                    player.SendInfoWithTokens("server.guild_join_fail", new KeyValuePair<string, object>("error", "Guild does not exist"));
                 }
             });
             return true;

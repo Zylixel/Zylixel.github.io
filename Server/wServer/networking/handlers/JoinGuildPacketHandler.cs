@@ -1,19 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using wServer.networking.cliPackets;
 using wServer.realm;
-using wServer.networking.svrPackets;
-using db;
-using wServer.realm.entities;
-using wServer.realm.entities.player;
 
 namespace wServer.networking.handlers
 {
     class JoinGuildPacketHandler : PacketHandlerBase<JoinGuildPacket>
     {
-        public override PacketID ID { get { return PacketID.JOINGUILD; } }
+        public override PacketID Id { get { return PacketID.JOINGUILD; } }
 
         protected override void HandlePacket(Client client, JoinGuildPacket packet)
         {
@@ -24,10 +17,7 @@ namespace wServer.networking.handlers
         {
             if(!client.Player.Invited)
             {
-                client.Player.SendInfoWithTokens("server.guild_not_invited", new KeyValuePair<string, object>[1]
-                {
-                    new KeyValuePair<string, object>("guild", packet.GuildName)
-                });
+                client.Player.SendInfoWithTokens("server.guild_not_invited", new KeyValuePair<string, object>("guild", packet.GuildName));
                 return;
             }
             client.Manager.Database.DoActionAsync(db =>
@@ -48,10 +38,7 @@ namespace wServer.networking.handlers
                 }
                 else
                 {
-                    client.Player.SendInfoWithTokens("server.guild_join_fail", new KeyValuePair<string, object>[1]
-                    {
-                        new KeyValuePair<string, object>("error", "Guild does not exist")
-                    });
+                    client.Player.SendInfoWithTokens("server.guild_join_fail", new KeyValuePair<string, object>("error", "Guild does not exist"));
                 }
             });
         }

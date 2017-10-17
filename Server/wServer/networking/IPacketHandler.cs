@@ -4,9 +4,8 @@ using System;
 using System.Collections.Generic;
 using log4net;
 using wServer.networking.cliPackets;
-using wServer.networking.svrPackets;
-using FailurePacket = wServer.networking.svrPackets.FailurePacket;
 using wServer.realm;
+using FailurePacket = wServer.networking.svrPackets.FailurePacket;
 
 #endregion
 
@@ -14,36 +13,36 @@ namespace wServer.networking
 {
     internal interface IPacketHandler
     {
-        PacketID ID { get; }
+        PacketID Id { get; }
         void Handle(Client client, ClientPacket packet);
     }
 
     internal abstract class PacketHandlerBase<T> : IPacketHandler where T : ClientPacket
     {
-        protected ILog log;
-        private Client client;
+        protected ILog Log;
+        private Client _client;
 
         public PacketHandlerBase()
         {
-            log = LogManager.GetLogger(GetType());
+            Log = LogManager.GetLogger(GetType());
         }
 
-        public abstract PacketID ID { get; }
+        public abstract PacketID Id { get; }
 
         public void Handle(Client client, ClientPacket packet)
         {
-            this.client = client;
+            this._client = client;
             HandlePacket(client, (T) packet);
         }
 
-        public RealmManager Manager { get { return client.Manager; } }
-        public Client Client { get { return client; } }
+        public RealmManager Manager { get { return _client.Manager; } }
+        public Client Client { get { return _client; } }
 
         protected abstract void HandlePacket(Client client, T packet);
 
         protected void SendFailure(string text)
         {
-            client.SendPacket(new FailurePacket {ErrorId = 0, ErrorDescription = text});
+            _client.SendPacket(new FailurePacket {ErrorId = 0, ErrorDescription = text});
         }
     }
 
@@ -59,7 +58,7 @@ namespace wServer.networking
                     !i.IsAbstract && !i.IsInterface)
                 {
                     IPacketHandler pkt = (IPacketHandler) Activator.CreateInstance(i);
-                    Handlers.Add(pkt.ID, pkt);
+                    Handlers.Add(pkt.Id, pkt);
                 }
             }
         }

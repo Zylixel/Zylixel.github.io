@@ -18,7 +18,6 @@
 
 */
 
-using System;
 using System.Collections.Generic;
 using DungeonGenerator.Dungeon;
 using RotMG.Common;
@@ -43,11 +42,11 @@ namespace DungeonGenerator {
 			}
 		}
 
-		readonly Dictionary<RoomKey, HashSet<Room>> rooms = new Dictionary<RoomKey, HashSet<Room>>();
+		readonly Dictionary<RoomKey, HashSet<Room>> _rooms = new Dictionary<RoomKey, HashSet<Room>>();
 
 		void Add(int x, int y, Room rm) {
 			var key = new RoomKey(x, y);
-			var roomList = rooms.GetValueOrCreate(key, k => new HashSet<Room>());
+			var roomList = _rooms.GetValueOrCreate(key, k => new HashSet<Room>());
 			roomList.Add(rm);
 		}
 
@@ -63,7 +62,7 @@ namespace DungeonGenerator {
 		void Remove(int x, int y, Room rm) {
 			var key = new RoomKey(x, y);
 			HashSet<Room> roomList;
-			if (rooms.TryGetValue(key, out roomList))
+			if (_rooms.TryGetValue(key, out roomList))
 				roomList.Remove(rm);
 		}
 
@@ -78,7 +77,7 @@ namespace DungeonGenerator {
 
 		bool HitTest(int x, int y, Rect bounds) {
 			var key = new RoomKey(x, y);
-			var roomList = rooms.GetValueOrDefault(key, (HashSet<Room>)null);
+			var roomList = _rooms.GetValueOrDefault(key, (HashSet<Room>)null);
 			if (roomList != null) {
 				foreach (var room in roomList)
 					if (!room.Bounds.Intersection(bounds).IsEmpty)

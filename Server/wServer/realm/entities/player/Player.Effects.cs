@@ -8,12 +8,12 @@ namespace wServer.realm.entities.player
 {
     partial class Player
     {
-        private int CanTPCooldownTime;
-        private float bleeding;
-        private int healCount;
-        private float healing;
-        private int newbieTime;
-        private int PendantReady;
+        private int _canTpCooldownTime;
+        private float _bleeding;
+        private int _healCount;
+        private float _healing;
+        private int _newbieTime;
+        private int _pendantReady;
 
         public bool IsVisibleToEnemy()
         {
@@ -21,7 +21,7 @@ namespace wServer.realm.entities.player
                 return false;
             if (HasConditionEffect(ConditionEffectIndex.Invisible))
                 return false;
-            if (newbieTime > 0)
+            if (_newbieTime > 0)
                 return false;
             return true;
         }
@@ -30,14 +30,14 @@ namespace wServer.realm.entities.player
         {
             if (HasConditionEffect(ConditionEffectIndex.Healing))
             {
-                if (healing > 1)
+                if (_healing > 1)
                 {
-                    HP = Math.Min(Stats[0] + Boost[0], HP + (int) healing);
-                    healing -= (int) healing;
+                    HP = Math.Min(Stats[0] + Boost[0], HP + (int) _healing);
+                    _healing -= (int) _healing;
                     UpdateCount++;
-                    healCount++;
+                    _healCount++;
                 }
-                healing += 28*(time.thisTickTimes/1000f);
+                _healing += 28*(time.thisTickTimes/1000f);
             }
             if (HasConditionEffect(ConditionEffectIndex.Quiet) &&
                 Mp > 0)
@@ -48,26 +48,26 @@ namespace wServer.realm.entities.player
             if (HasConditionEffect(ConditionEffectIndex.Bleeding) &&
                 HP > 1)
             {
-                if (bleeding > 1)
+                if (_bleeding > 1)
                 {
-                    HP -= (int) bleeding;
-                    bleeding -= (int) bleeding;
+                    HP -= (int) _bleeding;
+                    _bleeding -= (int) _bleeding;
                     UpdateCount++;
                 }
-                bleeding += 28*(time.thisTickTimes/1000f);
+                _bleeding += 28*(time.thisTickTimes/1000f);
             }
 
-            if (newbieTime > 0)
+            if (_newbieTime > 0)
             {
-                newbieTime -= time.thisTickTimes;
-                if (newbieTime < 0)
-                    newbieTime = 0;
+                _newbieTime -= time.thisTickTimes;
+                if (_newbieTime < 0)
+                    _newbieTime = 0;
             }
-            if (CanTPCooldownTime > 0)
+            if (_canTpCooldownTime > 0)
             {
-                CanTPCooldownTime -= time.thisTickTimes;
-                if (CanTPCooldownTime < 0)
-                    CanTPCooldownTime = 0;
+                _canTpCooldownTime -= time.thisTickTimes;
+                if (_canTpCooldownTime < 0)
+                    _canTpCooldownTime = 0;
             }
         }
 
@@ -80,7 +80,7 @@ namespace wServer.realm.entities.player
 
         private bool CanMpRegen()
         {
-            if (HasConditionEffect(ConditionEffectIndex.Quiet) || ninjaShoot)
+            if (HasConditionEffect(ConditionEffectIndex.Quiet) || _ninjaShoot)
                 return false;
             return true;
         }
@@ -88,17 +88,17 @@ namespace wServer.realm.entities.player
 
         internal void SetNewbiePeriod()
         {
-            newbieTime = 3000;
+            _newbieTime = 3000;
         }
 
-        internal void SetTPDisabledPeriod()
+        internal void SetTpDisabledPeriod()
         {
-            CanTPCooldownTime = 10*1000;
+            _canTpCooldownTime = 10*1000;
         }
 
-        public bool TPCooledDown()
+        public bool TpCooledDown()
         {
-            if (CanTPCooldownTime > 0)
+            if (_canTpCooldownTime > 0)
                 return false;
             return true;
         }

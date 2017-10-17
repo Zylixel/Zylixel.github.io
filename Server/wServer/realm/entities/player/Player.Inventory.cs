@@ -8,9 +8,9 @@ namespace wServer.realm.entities.player
 {
     public partial class Player
     {
-        private readonly Random invRand = new Random();
+        private readonly Random _invRand = new Random();
 
-        private int[] setTypeBoosts;
+        private int[] _setTypeBoosts;
 
         private void CheckSetTypeSkin()
         {
@@ -23,16 +23,16 @@ namespace wServer.realm.entities.player
                 var item = Inventory[0];
                 if (item != null && !Manager.GameData.SetTypeSkins.TryGetValue((ushort)item.SetType, out setType)) return;
 
-                setTypeSkin = setType;
-                if (setTypeBoosts != null || setTypeSkin == null) return;
-                setTypeBoosts = new int[8];
+                _setTypeSkin = setType;
+                if (_setTypeBoosts != null || _setTypeSkin == null) return;
+                _setTypeBoosts = new int[8];
 
-                foreach (var i in setTypeSkin.StatsBoost)
+                foreach (var i in _setTypeSkin.StatsBoost)
                 {
                     var idx = -1;
 
-                    if (i.Key == StatsType.MaximumHP) idx = 0;
-                    else if (i.Key == StatsType.MaximumMP) idx = 1;
+                    if (i.Key == StatsType.MaximumHp) idx = 0;
+                    else if (i.Key == StatsType.MaximumMp) idx = 1;
                     else if (i.Key == StatsType.Attack) idx = 2;
                     else if (i.Key == StatsType.Defense) idx = 3;
                     else if (i.Key == StatsType.Speed) idx = 4;
@@ -40,13 +40,13 @@ namespace wServer.realm.entities.player
                     else if (i.Key == StatsType.Wisdom) idx = 6;
                     else if (i.Key == StatsType.Dexterity) idx = 7;
                     if (idx == -1) continue;
-                    setTypeBoosts[idx] = i.Value;
+                    _setTypeBoosts[idx] = i.Value;
                 }
                 return;
             }
-            if (setTypeSkin == null) return;
-            setTypeSkin = null;
-            setTypeBoosts = null;
+            if (_setTypeSkin == null) return;
+            _setTypeSkin = null;
+            _setTypeBoosts = null;
         }
 
         public bool HasSlot(int slot) => Inventory[slot] != null;
@@ -65,8 +65,8 @@ namespace wServer.realm.entities.player
             if (soulbound)
                 container.BagOwners = new [] { AccountId };
             container.Inventory[0] = i;
-            container.Move(X + (float) ((invRand.NextDouble()*2 - 1)*0.5),
-                Y + (float) ((invRand.NextDouble()*2 - 1)*0.5));
+            container.Move(X + (float) ((_invRand.NextDouble()*2 - 1)*0.5),
+                Y + (float) ((_invRand.NextDouble()*2 - 1)*0.5));
             container.Size = 75;
             Owner.EnterWorld(container);
         }

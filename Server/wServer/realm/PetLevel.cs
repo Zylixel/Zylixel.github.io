@@ -1,6 +1,5 @@
 ﻿#region
 
-using System;
 using System.Collections.Generic;
 using wServer.realm.entities;
 
@@ -117,7 +116,7 @@ namespace wServer.realm
             {96, 403973},
             {97, 436311},
             {98, 471236},
-            {99, 508954},
+            {99, 508954}
         };
 
         private Pet pet;

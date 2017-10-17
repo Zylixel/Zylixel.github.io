@@ -3,7 +3,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
 using db.data;
 using Ionic.Zlib;
@@ -17,14 +16,14 @@ namespace terrain
     {
         public static byte[] Convert(XmlData data, string json)
         {
-            var obj = JsonConvert.DeserializeObject<json_dat>(json);
+            var obj = JsonConvert.DeserializeObject<JsonDat>(json);
             var dat = ZlibStream.UncompressBuffer(obj.data);
 
             Dictionary<short, TerrainTile> tileDict = new Dictionary<short, TerrainTile>();
             for (int i = 0; i < obj.dict.Length; i++)
             {
                 var o = obj.dict[i];
-                tileDict[(short)i] = new TerrainTile()
+                tileDict[(short)i] = new TerrainTile
                 {
                     TileId = o.ground == null ? (ushort)0xff : data.IdToTileType[o.ground],
                     TileObj = o.objs == null ? null : o.objs[0].id,
@@ -48,7 +47,7 @@ namespace terrain
                         tiles[x, y] = tileDict[rdr.ReadInt16()];
                         if (tiles[x, y].TileId.ToString().Length == 2)
                         {
-                            File.AppendAllText("Tiles.txt", tiles[x, y].TileId.ToString() + "  ");
+                            File.AppendAllText("Tiles.txt", tiles[x, y].TileId + "  ");
                         }
                         else if (String.IsNullOrEmpty(tiles[x, y].TileId.ToString()))
                         {
@@ -56,7 +55,7 @@ namespace terrain
                         }
                         else
                         {
-                            File.AppendAllText("Tiles.txt", tiles[x, y].TileId.ToString() + " ");
+                            File.AppendAllText("Tiles.txt", tiles[x, y].TileId + " ");
                         }
                         if (tiles[x, y].TileObj == null)
                         {
@@ -69,9 +68,9 @@ namespace terrain
                             {
                             }
                             if (objType.ToString().Length == 3)
-                                File.AppendAllText("Objects.txt", objType.ToString() + "  ");
+                                File.AppendAllText("Objects.txt", objType + "  ");
                             else
-                                File.AppendAllText("Objects.txt", objType.ToString() + " ");
+                                File.AppendAllText("Objects.txt", objType + " ");
                         }
                     }
                     File.AppendAllText("Objects.txt", Environment.NewLine);
@@ -87,24 +86,24 @@ namespace terrain
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct json_dat
+        public struct JsonDat
         {
             public byte[] data;
             public int width;
             public int height;
-            public loc[] dict;
+            public Loc[] dict;
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct loc
+        public struct Loc
         {
             public string ground;
-            public obj[] objs;
-            public obj[] regions;
+            public Obj[] objs;
+            public Obj[] regions;
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct obj
+        public struct Obj
         {
             public string name;
             public string id;

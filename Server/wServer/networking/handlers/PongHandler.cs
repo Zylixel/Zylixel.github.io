@@ -8,7 +8,7 @@ namespace wServer.networking.handlers
 {
     internal class PongHandler : PacketHandlerBase<PongPacket>
     {
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.PONG; }
         }

@@ -9,36 +9,36 @@ namespace terrain
 {
     internal unsafe class BitmapBuffer
     {
-        private readonly Bitmap bmp;
-        private readonly int h;
-        private readonly int w;
-        private BitmapData dat;
-        private byte* ptr;
-        private int s;
+        private readonly Bitmap _bmp;
+        private readonly int _h;
+        private readonly int _w;
+        private BitmapData _dat;
+        private byte* _ptr;
+        private int _s;
 
         public BitmapBuffer(Bitmap bmp)
         {
-            this.bmp = bmp;
-            w = bmp.Width;
-            h = bmp.Height;
+            this._bmp = bmp;
+            _w = bmp.Width;
+            _h = bmp.Height;
         }
 
         public uint this[int x, int y]
         {
-            get { return *(uint*) (ptr + x*4 + y*s); }
-            set { *(uint*) (ptr + x*4 + y*s) = value; }
+            get { return *(uint*) (_ptr + x*4 + y*_s); }
+            set { *(uint*) (_ptr + x*4 + y*_s) = value; }
         }
 
         public void Lock()
         {
-            dat = bmp.LockBits(new Rectangle(0, 0, w, h), ImageLockMode.ReadWrite, PixelFormat.Format32bppPArgb);
-            s = dat.Stride;
-            ptr = (byte*) dat.Scan0;
+            _dat = _bmp.LockBits(new Rectangle(0, 0, _w, _h), ImageLockMode.ReadWrite, PixelFormat.Format32bppPArgb);
+            _s = _dat.Stride;
+            _ptr = (byte*) _dat.Scan0;
         }
 
         public void Unlock()
         {
-            bmp.UnlockBits(dat);
+            _bmp.UnlockBits(_dat);
         }
     }
 }

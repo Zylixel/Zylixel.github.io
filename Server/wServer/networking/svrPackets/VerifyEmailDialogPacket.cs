@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace wServer.networking.svrPackets
+﻿namespace wServer.networking.svrPackets
 {
     public class VerifyEmailDialogPacket : ServerPacket
     {
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.VERIFYEMAILDIALOG; }
         }

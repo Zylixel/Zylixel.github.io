@@ -1,8 +1,6 @@
 ﻿#region
 
-using System;
 using wServer.realm;
-using wServer.realm.entities;
 
 #endregion
 
@@ -32,7 +30,7 @@ namespace wServer.logic.behaviors
         {
             this.target = target;
             this.area = area;
-            this.usearea = true;
+            usearea = true;
         }
 
         protected override void TickCore(Entity host, RealmTime time, ref object state)

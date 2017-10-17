@@ -11,9 +11,9 @@ namespace wServer.realm.entities.player
 {
     partial class Player
     {
-        private bool worldBroadcast = true;
+        private bool _worldBroadcast = true;
 
-        private readonly Queue<Tuple<Packet, Predicate<Player>>> pendingPackets =
+        private readonly Queue<Tuple<Packet, Predicate<Player>>> _pendingPackets =
             new Queue<Tuple<Packet, Predicate<Player>>>();
 
         internal void Flush()
@@ -21,10 +21,10 @@ namespace wServer.realm.entities.player
             if (Owner != null)
             {
                 foreach (var i in Owner.Players.Values)
-                    foreach (var j in pendingPackets.Where(j => j.Item2(i)))
+                    foreach (var j in _pendingPackets.Where(j => j.Item2(i)))
                         i.Client.SendPacket(j.Item1);
             }
-            pendingPackets.Clear();
+            _pendingPackets.Clear();
         }
 
         public void BroadcastSync(Packet packet) //sync at Move
@@ -34,10 +34,10 @@ namespace wServer.realm.entities.player
 
         public void BroadcastSync(Packet packet, Predicate<Player> cond)
         {
-            if(worldBroadcast)
+            if(_worldBroadcast)
                 Owner.BroadcastPacketSync(packet, cond);
             else
-                pendingPackets.Enqueue(Tuple.Create(packet, cond));
+                _pendingPackets.Enqueue(Tuple.Create(packet, cond));
         }
 
         private void BroadcastSync(IEnumerable<Packet> packets)

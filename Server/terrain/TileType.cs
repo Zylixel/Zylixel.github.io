@@ -25,7 +25,7 @@ namespace terrain
 
         public const ushort Road = 0xd0;
 
-        public static readonly Dictionary<ushort, string> id = new Dictionary<ushort, string>
+        public static readonly Dictionary<ushort, string> Id = new Dictionary<ushort, string>
         {
             {0xbc, "Dark Water"},
             {0x72, "Water"},
@@ -41,10 +41,10 @@ namespace terrain
             {0x6b, "Ice"},
             {0x6a, "Snowy Rock"},
             {0x60, "Rock"},
-            {0xd0, "Road"},
+            {0xd0, "Road"}
         };
 
-        public static readonly Dictionary<ushort, uint> color = new Dictionary<ushort, uint>
+        public static readonly Dictionary<ushort, uint> Color = new Dictionary<ushort, uint>
         {
             {0xbc, 0xFF000080},
             {0x72, 0xFF0000FF},
@@ -60,10 +60,10 @@ namespace terrain
             {0x6b, 0xFFFFFFFF},
             {0x6a, 0xFFCCCCCC},
             {0x60, 0xFF5E5E5E},
-            {0xd0, 0xFF9C5000},
+            {0xd0, 0xFF9C5000}
         };
 
-        public static readonly Dictionary<TerrainType, uint> terrainColor = new Dictionary<TerrainType, uint>
+        public static readonly Dictionary<TerrainType, uint> TerrainColor = new Dictionary<TerrainType, uint>
         {
             {TerrainType.None, 0xFF000000},
             {TerrainType.Mountains, 0xFF5E5E5E},
@@ -77,7 +77,7 @@ namespace terrain
             {TerrainType.MidForest, 0xFF107D1D},
             {TerrainType.MidSand, 0xFF10517D},
             {TerrainType.MidPlains, 0xFFFFFFFF},
-            {TerrainType.ShoreSand, 0xFFCCCCCC},
+            {TerrainType.ShoreSand, 0xFFCCCCCC}
         };
     }
 }

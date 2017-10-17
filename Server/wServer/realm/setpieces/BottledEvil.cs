@@ -1,30 +1,16 @@
 ﻿using db.data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace wServer.realm.setpieces
 {
     internal class BottledEvil : ISetPiece
     {
-        public int Size
-        {
-            get { return 1; }
-        }
+        public int Size => 1;
 
-        private byte[,] SetPiece
+        private byte[,] SetPiece => new byte[,]
         {
-            get
-            {
-                return new byte[,]
-                {
-                    {1},
+            {1}
 
-                };
-            }
-        }
+        };
 
         public void RenderSetPiece(World world, IntPoint pos)
         {

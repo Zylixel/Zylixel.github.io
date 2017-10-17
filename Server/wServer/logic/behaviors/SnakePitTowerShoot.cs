@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using wServer.networking.svrPackets;
 using wServer.realm;
 using wServer.realm.entities;
@@ -21,9 +17,9 @@ namespace wServer.logic.behaviors
             base.OnStateEntry(host, time, ref state);
             WmapTile tile = host.Owner.Map[(int)host.X + 1, (int)host.Y].Clone();
             if (tile.ObjType != 0)
-                base.fixedAngle = 140;
+                fixedAngle = 140;
             else
-                base.fixedAngle = 0;
+                fixedAngle = 0;
         }
 
         protected override void TickCore(Entity host, RealmTime time, ref object state)
@@ -41,9 +37,9 @@ namespace wServer.logic.behaviors
                 WmapTile tile = host.Owner.Map[(int)host.X + 1, (int)host.Y].Clone();
 
                 if (tile.ObjType != 0)
-                    base.fixedAngle = 180 * Math.PI / 180;
+                    fixedAngle = 180 * Math.PI / 180;
                 else
-                    base.fixedAngle = 0 * Math.PI / 180;
+                    fixedAngle = 0 * Math.PI / 180;
 
 
                 if (player != null || defaultAngle != null || fixedAngle != null)
@@ -82,7 +78,7 @@ namespace wServer.logic.behaviors
                         Damage = (short)dmg,
                         BulletType = (byte)(desc.BulletType),
                         AngleInc = (float)shootAngle,
-                        NumShots = (byte)count,
+                        NumShots = (byte)count
                     }, null);
                 }
                 cool = coolDown.Next(Random);

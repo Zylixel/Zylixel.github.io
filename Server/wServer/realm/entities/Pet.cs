@@ -3,8 +3,8 @@
 using System;
 using System.Collections.Generic;
 using MySql.Data.MySqlClient;
-using wServer.realm.entities.player;
 using wServer.networking.svrPackets;
+using wServer.realm.entities.player;
 using wServer.realm.worlds;
 
 #endregion
@@ -106,10 +106,10 @@ namespace wServer.realm.entities
             UpdateNeeded = true;
             UpdateCount++;
 
-            this.Owner.Players.ToArray()[0].Value.Client.SendPacket(new UpdatePacket
+            Owner.Players.ToArray()[0].Value.Client.SendPacket(new UpdatePacket
             {
                 Tiles = new UpdatePacket.TileData[0],
-                NewObjects = new ObjectDef[1] { this.ToDefinition() },
+                NewObjects = new ObjectDef[1] { ToDefinition() },
                 RemovedObjectIds = new int[0]
             });
         }
@@ -389,16 +389,16 @@ namespace wServer.realm.entities
 
         public void FuseResult(int level, int rarity)
         {
-            this.MaximumLevel = level;
-            this.PetRarity = (Rarity)rarity;
+            MaximumLevel = level;
+            PetRarity = (Rarity)rarity;
         }
 
         public void EvolveResult(int level, int rarity, ref PetStruct newPetStruct)
         {
             FuseResult(level, rarity);
             PetStruct s = GetPetStruct(Manager, PetFamily, (Rarity)rarity);
-            this.Skin = Manager.GameData.IdToPetSkin[s.DefaultSkin].DisplayId;
-            this.SkinId = Manager.GameData.IdToPetSkin[s.DefaultSkin].ObjectType;
+            Skin = Manager.GameData.IdToPetSkin[s.DefaultSkin].DisplayId;
+            SkinId = Manager.GameData.IdToPetSkin[s.DefaultSkin].ObjectType;
             newPetStruct = s;
         }
 

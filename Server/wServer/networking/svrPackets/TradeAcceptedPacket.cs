@@ -5,7 +5,7 @@
         public bool[] MyOffers { get; set; }
         public bool[] YourOffers { get; set; }
 
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.TRADEACCEPTED; }
         }

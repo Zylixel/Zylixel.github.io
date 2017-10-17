@@ -5,7 +5,7 @@
         public int ClassType { get; set; }
         public int SkinType { get; set; }
 
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.CREATE; }
         }

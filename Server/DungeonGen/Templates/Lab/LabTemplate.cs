@@ -55,8 +55,8 @@ namespace DungeonGenerator.Templates.Lab {
 
 		public override int MaxDepth { get { return 20; } }
 
-		NormDist targetDepth;
-		public override NormDist TargetDepth { get { return targetDepth; } }
+		NormDist _targetDepth;
+		public override NormDist TargetDepth { get { return _targetDepth; } }
 
 		public override NormDist SpecialRmCount { get { return null; } }
 
@@ -68,11 +68,11 @@ namespace DungeonGenerator.Templates.Lab {
 
 		public override Range NumRoomRate { get { return new Range(2, 3); } }
 
-		bool generatedEvilRoom;
+		bool _generatedEvilRoom;
 
 		public override void Initialize() {
-			targetDepth = new NormDist(3, 10, 7, 15, Rand.Next());
-			generatedEvilRoom = false;
+			_targetDepth = new NormDist(3, 10, 7, 15, Rand.Next());
+			_generatedEvilRoom = false;
 		}
 
 		public override Room CreateStart(int depth) {
@@ -88,9 +88,9 @@ namespace DungeonGenerator.Templates.Lab {
 		}
 
 		public override Room CreateNormal(int depth, Room prev) {
-			var rm = new NormalRoom(prev as NormalRoom, Rand, generatedEvilRoom);
+			var rm = new NormalRoom(prev as NormalRoom, Rand, _generatedEvilRoom);
 			if ((rm.Flags & NormalRoom.RoomFlags.Evil) != 0)
-				generatedEvilRoom = true;
+				_generatedEvilRoom = true;
 			return rm;
 		}
 

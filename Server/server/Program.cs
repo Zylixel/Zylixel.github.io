@@ -4,20 +4,22 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
-using System.Linq;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Net.NetworkInformation;
+using System.Text;
 using System.Threading;
 using db;
 using db.data;
 using log4net;
 using log4net.Config;
-using server.sfx;
-using System.Text;
-using MailKit.Net.Smtp;
 using MimeKit;
+using server.account;
+using server.sfx;
+using SmtpClient = MailKit.Net.Smtp.SmtpClient;
 
 #endregion
 
@@ -25,9 +27,9 @@ namespace server
 {
     internal class Program
     {
-        private static readonly List<HttpListenerContext> currentRequests = new List<HttpListenerContext>();
+        private static readonly List<HttpListenerContext> CurrentRequests = new List<HttpListenerContext>();
 
-        private static HttpListener listener;
+        private static HttpListener _listener;
 
         internal static SimpleSettings Settings { get; set; }
         internal static XmlData GameData { get; set; }
@@ -58,11 +60,11 @@ namespace server
 
             if (RunPreCheck(port))
             {
-                listener = new HttpListener();
-                listener.Prefixes.Add($"http://*:{port}/");
-                listener.Start();
+                _listener = new HttpListener();
+                _listener.Prefixes.Add($"http://*:{port}/");
+                _listener.Start();
 
-                listener.BeginGetContext(ListenerCallback, null);
+                _listener.BeginGetContext(ListenerCallback, null);
                 Logger.Info($"Listening at port {port}...");
             }
             else
@@ -73,8 +75,8 @@ namespace server
             Logger.Info("Terminating...");
             //To prevent a char/list account in use if
             //both servers are closed at the same time
-            while (currentRequests.Count > 0);
-            listener?.Stop();
+            while (CurrentRequests.Count > 0);
+            _listener?.Stop();
             GameData.Dispose();
         }
 
@@ -84,9 +86,9 @@ namespace server
         {
             try
             {
-                if (!listener.IsListening) return;
-                var context = listener.EndGetContext(ar);
-                listener.BeginGetContext(ListenerCallback, null);
+                if (!_listener.IsListening) return;
+                var context = _listener.EndGetContext(ar);
+                _listener.BeginGetContext(ListenerCallback, null);
                 ProcessRequest(context);
             }
             catch
@@ -157,7 +159,7 @@ namespace server
             }
             catch (Exception e)
             {
-                currentRequests.Remove(context);
+                CurrentRequests.Remove(context);
                 using (var wtr = new StreamWriter(context.Response.OutputStream))
                     wtr.Write(e.ToString());
                 Logger.Error(e);
@@ -166,12 +168,12 @@ namespace server
             context.Response.Close();
         }
 
-        private static readonly Dictionary<string, string> replaceVars = new Dictionary<string, string>()
+        private static readonly Dictionary<string, string> ReplaceVars = new Dictionary<string, string>
         {
             {"{URL}", "PROPERTYCALL:RawUrl"},
             {"{GAMECLIENT}", "PATH:game/version.txt"},
             {"{TESTINGCLIENT}", "PATH:game/testingVersion.txt"},
-            {"{TRANSFERENGINEVERSION}", account.getProdAccount.TRANSFERENGINEVERSION},
+            {"{TRANSFERENGINEVERSION}", GetProdAccount.Transferengineversion}
         };
 
         public static void SendFile(string path, HttpListenerContext context)
@@ -179,7 +181,7 @@ namespace server
             var ext = new FileInfo(path).Extension;
             if (ext.StartsWith("."))
                 ext = ext.Remove(0, 1);
-            context.Response.ContentType = getContentType(ext);
+            context.Response.ContentType = GetContentType(ext);
 
             byte[] buffer;
 
@@ -203,7 +205,7 @@ namespace server
                         send = p.StandardOutput.ReadToEnd();
                     }
 
-                    foreach (var toReplace in replaceVars)
+                    foreach (var toReplace in ReplaceVars)
                     {
                         var tmp = String.Empty;
                         if (toReplace.Value.StartsWith("PATH"))
@@ -248,7 +250,7 @@ namespace server
             return sb.ToString();
         }
 
-        private static string getContentType(string fileExtention)
+        private static string GetContentType(string fileExtention)
         {
             var ret = "text/html";
 
@@ -280,7 +282,7 @@ namespace server
             return ret;
         }
 
-        public static void SendEmail(System.Net.Mail.MailMessage message, bool enableSsl)
+        public static void SendEmail(MailMessage message, bool enableSsl)
         {
             try
             {

@@ -1,19 +1,16 @@
 ﻿#region
 
-using db;
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.IO;
-using System.Net;
-using System.Web;
 using System.Xml;
+using db;
 
 #endregion
 
 namespace server.package
 {
-    internal class getPackages : RequestHandler
+    internal class GetPackages : RequestHandler
     {
         internal static Dictionary<string, Package> CurrentPackages { get; set; }
 
@@ -98,7 +95,7 @@ namespace server.package
         public int Quantity { get; set; }
         public int MaxPurchase { get; set; }
         public int Weight { get; set; }
-        public string BgURL { get; set; }
+        public string BgUrl { get; set; }
         public DateTime EndDate { get; set; }
         public string Contents { get; set; }
 
@@ -117,7 +114,7 @@ namespace server.package
 
                     return new Package
                     {
-                        BgURL = rdr.GetString("bgUrl"),
+                        BgUrl = rdr.GetString("bgUrl"),
                         EndDate = rdr.GetDateTime("endDate"),
                         Weight = rdr.GetInt32("weight"),
                         MaxPurchase = rdr.GetInt32("maxPurchase"),

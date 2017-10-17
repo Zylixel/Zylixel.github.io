@@ -1,32 +1,18 @@
 ﻿using db.data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace wServer.realm.setpieces
 {
     internal class AbyssDeath : ISetPiece
     {
-        public int Size
-        {
-            get { return 3; }
-        }
+        public int Size => 3;
 
-        private byte[,] SetPiece
+        private byte[,] SetPiece => new byte[,]
         {
-            get
-            {
-                return new byte[,]
-                {
-                    {1, 1, 1},
-                    {1, 2, 1},
-                    {1, 1, 1},
+            {1, 1, 1},
+            {1, 2, 1},
+            {1, 1, 1}
 
-                };
-            }
-        }
+        };
 
         public void RenderSetPiece(World world, IntPoint pos)
         {

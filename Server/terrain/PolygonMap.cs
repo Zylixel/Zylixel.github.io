@@ -46,13 +46,13 @@ namespace terrain
 
     internal class PolygonMap
     {
-        private readonly HashSet<MapNode> oceans = new HashSet<MapNode>();
-        private readonly int seed;
-        private readonly HashSet<MapNode> waters = new HashSet<MapNode>();
+        private readonly HashSet<MapNode> _oceans = new HashSet<MapNode>();
+        private readonly int _seed;
+        private readonly HashSet<MapNode> _waters = new HashSet<MapNode>();
 
         public PolygonMap(int seed)
         {
-            this.seed = seed;
+            this._seed = seed;
         }
 
         public IGeometryCollection VoronoiDiagram { get; private set; }
@@ -60,7 +60,7 @@ namespace terrain
 
         public IEnumerable<MapNode> Oceans
         {
-            get { return oceans; }
+            get { return _oceans; }
         }
 
         private static IGeometryCollection ClipGeometryCollection(IGeometryCollection geom, Envelope clipEnv)
@@ -91,8 +91,8 @@ namespace terrain
 
         private void DetermineLandmass() // Perlin
         {
-            waters.Clear();
-            Noise noise = new Noise(seed);
+            _waters.Clear();
+            Noise noise = new Noise(_seed);
             foreach (MapPolygon i in Polygons)
             {
                 int total = 0;
@@ -106,7 +106,7 @@ namespace terrain
                         (Math.Abs(j.X) > 0.9 || Math.Abs(j.Y) > 0.9))
                     {
                         j.IsWater = true;
-                        waters.Add(j);
+                        _waters.Add(j);
                         water++;
                     }
                     total++;
@@ -154,8 +154,8 @@ namespace terrain
 
         private void FindOceans()
         {
-            oceans.Clear();
-            foreach (MapNode i in waters)
+            _oceans.Clear();
+            foreach (MapNode i in _waters)
             {
                 if (i.X == -1 || i.X == 1 ||
                     i.Y == -1 || i.Y == 1 ||
@@ -196,7 +196,7 @@ namespace terrain
                     do
                     {
                         MapNode current = q.Dequeue();
-                        oceans.Add(current);
+                        _oceans.Add(current);
                         current.IsOcean = true;
                         foreach (MapEdge j in current.Edges)
                         {
@@ -249,7 +249,7 @@ namespace terrain
         {
             Queue<MapNode> queue = new Queue<MapNode>();
             HashSet<MapNode> visited = new HashSet<MapNode>();
-            foreach (MapNode i in oceans)
+            foreach (MapNode i in _oceans)
             {
                 i.DistanceToCoast = 0;
                 queue.Enqueue(i);
@@ -319,7 +319,7 @@ namespace terrain
             //Generate random points
             HashSet<Coordinate> hashSet = new HashSet<Coordinate>();
             {
-                Random rand = new Random(seed);
+                Random rand = new Random(_seed);
                 while (hashSet.Count < pointCount)
                 {
                     double x = rand.NextDouble()*2 - 1;

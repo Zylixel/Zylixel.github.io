@@ -22,13 +22,13 @@ namespace wServer.realm.worlds
             LoadMap(mapLocation, MapType.Json);
             Entity en = Entity.Resolve(Manager, "shtrs Bridge Titanum");
             en.Move(233.5f, 36.5f);
-            this.EnterWorld(en);
+            EnterWorld(en);
             en = Entity.Resolve(Manager, "shtrs Bridge Titanum");
             en.Move(212.5f, 49.5f);
-            this.EnterWorld(en);
+            EnterWorld(en);
             en = Entity.Resolve(Manager, "shtrs Bridge Titanum");
             en.Move(212.5f, 36.5f);
-            this.EnterWorld(en);
+            EnterWorld(en);
         }
 
         public override World GetInstance(Client psr)

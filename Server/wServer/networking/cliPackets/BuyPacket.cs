@@ -5,7 +5,7 @@
         public int ObjectId { get; set; }
         public int Quantity { get; set; }
 
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.BUY; }
         }

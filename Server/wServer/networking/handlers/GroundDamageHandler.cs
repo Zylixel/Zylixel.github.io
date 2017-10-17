@@ -10,7 +10,7 @@ namespace wServer.networking.handlers
 {
     internal class GroundDamageHandler : PacketHandlerBase<GroundDamagePacket>
     {
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.GROUNDDAMAGE; }
         }
@@ -42,7 +42,7 @@ namespace wServer.networking.handlers
                 }
                 catch (Exception ex)
                 {
-                    log.Error(ex);
+                    Log.Error(ex);
                 }
             }, PendingPriority.Networking);
         }

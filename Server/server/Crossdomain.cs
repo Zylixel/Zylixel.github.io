@@ -1,13 +1,12 @@
 ﻿#region
 
-using System.Net;
 using System.Text;
 
 #endregion
 
 namespace server
 {
-    internal class crossdomain : RequestHandler
+    internal class Crossdomain : RequestHandler
     {
         protected override void HandleRequest()
         {

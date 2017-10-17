@@ -16,14 +16,14 @@ namespace wServer.networking.handlers
 {
     internal class HelloHandler : PacketHandlerBase<HelloPacket>
     {
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.HELLO; }
         }
 
         protected override void HandlePacket(Client client, HelloPacket packet)
         {
-            if (Client.SERVER_VERSION != packet.BuildVersion)
+            if (Client.ServerVersion != packet.BuildVersion)
             {
                 client.SendPacket(new FailurePacket
                 {
@@ -33,21 +33,21 @@ namespace wServer.networking.handlers
                 client.SendPacket(new FailurePacket
                 {
                     ErrorId = 4,
-                    ErrorDescription = Client.SERVER_VERSION
+                    ErrorDescription = Client.ServerVersion
                 });
                 client.Disconnect();
                 return;
             }
             client.Manager.Database.DoActionAsync(db =>
             {
-                if ((client.Account = db.Verify(packet.GUID, packet.Password, Manager.GameData)) == null)
+                if ((client.Account = db.Verify(packet.Guid, packet.Password, Manager.GameData)) == null)
                 {
-                    log.Info(@"Account not verified.");
-                    client.Account = Database.CreateGuestAccount(packet.GUID);
+                    Log.Info(@"Account not verified.");
+                    client.Account = Database.CreateGuestAccount(packet.Guid);
 
                     if (client.Account == null)
                     {
-                        log.Info(@"Account is null!");
+                        Log.Info(@"Account is null!");
                         client.SendPacket(new FailurePacket
                         {
                             ErrorDescription = "Invalid account."
@@ -95,7 +95,7 @@ namespace wServer.networking.handlers
                         return;
                     }
                 }
-                log.Info(@"Client trying to connect!");
+                Log.Info(@"Client trying to connect!");
                 client.ConnectedBuild = packet.BuildVersion;
                 if (!client.Manager.TryConnect(client))
                 {
@@ -105,11 +105,11 @@ namespace wServer.networking.handlers
                         ErrorDescription = "Failed to connect."
                     });
                     client.Disconnect();
-                    log.Warn(@"Failed to connect.");
+                    Log.Warn(@"Failed to connect.");
                 }
                 else
                 {
-                    log.Info(@"Client loading world");
+                    Log.Info(@"Client loading world");
                     if (packet.GameId == World.NEXUS_LIMBO) packet.GameId = World.NEXUS_ID;
                     World world = client.Manager.GetWorld(packet.GameId);
                     if (world == null && packet.GameId == World.TUT_ID) world = client.Manager.AddWorld(new Tutorial(false));
@@ -146,7 +146,7 @@ namespace wServer.networking.handlers
                             return;
                         }
                     }
-                    log.Info(@"Client joined world " + world.Id);
+                    Log.Info(@"Client joined world " + world.Id);
                     if (packet.MapInfo.Length > 0) //Test World
                         (world as Test).LoadJson(Encoding.Default.GetString(packet.MapInfo));
 
@@ -165,8 +165,8 @@ namespace wServer.networking.handlers
                         Background = world.Background,
                         AllowTeleport = world.AllowTeleport,
                         ShowDisplays = world.ShowDisplays,
-                        ClientXML = world.ClientXml,
-                        ExtraXML = Manager.GameData.AdditionXml
+                        ClientXml = world.ClientXml,
+                        ExtraXml = Manager.GameData.AdditionXml
                     });
                     client.Stage = ProtocalStage.Handshaked;
                 }

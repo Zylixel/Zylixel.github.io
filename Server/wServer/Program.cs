@@ -3,14 +3,14 @@
 using System;
 using System.Globalization;
 using System.IO;
+using System.Net;
+using System.Net.Mail;
 using System.Threading;
 using db;
 using log4net;
 using log4net.Config;
 using wServer.networking;
 using wServer.realm;
-using System.Net.Mail;
-using System.Net;
 
 #endregion
 

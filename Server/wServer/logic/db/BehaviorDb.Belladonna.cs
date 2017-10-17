@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using wServer.logic.behaviors;
-using wServer.logic.transitions;
+﻿using wServer.logic.behaviors;
 using wServer.logic.loot;
+using wServer.logic.transitions;
 
 namespace wServer.logic
 {
@@ -32,9 +27,9 @@ namespace wServer.logic
                     ),
                     new State("Start",
                         new Taunt("You are nothing more than nutiment for my roots."),
-                        new Shoot(10, count: 4, shootAngle: (float)(180 / 4), predictive: 0.7, coolDown: 1000),
-                        new Shoot(10, count: 2, shootAngle: (float)30, angleOffset: (float)45, projectileIndex: 3, coolDown: 1000),
-                        new Shoot(10, count: 2, shootAngle: (float)30, angleOffset: (float)-45, projectileIndex: 3, coolDown: 1000),
+                        new Shoot(10, count: 4, shootAngle: 180 / 4, predictive: 0.7, coolDown: 1000),
+                        new Shoot(10, count: 2, shootAngle: 30, angleOffset: 45, projectileIndex: 3, coolDown: 1000),
+                        new Shoot(10, count: 2, shootAngle: 30, angleOffset: -45, projectileIndex: 3, coolDown: 1000),
                         new HpLessTransition(0.9, "Ring_Attack")
                     ),
                     new State("Ring_Attack",
@@ -101,8 +96,8 @@ namespace wServer.logic
                         ),
                         new State("-Ring6",
                             new Shoot(10, count: 6, projectileIndex: 2, fixedAngle: 0),
-                            new Timed(200, new Shoot(10, count: 2, shootAngle: (float)30, defaultAngle: (float)45, projectileIndex: 3)),
-                            new Timed(200, new Shoot(10, count: 2, shootAngle: (float)30, defaultAngle: (float)135, projectileIndex: 3)),
+                            new Timed(200, new Shoot(10, count: 2, shootAngle: 30, defaultAngle: 45, projectileIndex: 3)),
+                            new Timed(200, new Shoot(10, count: 2, shootAngle: 30, defaultAngle: 135, projectileIndex: 3)),
                             new TimedTransition(200, "StartTheFun")
                         )
                     ),

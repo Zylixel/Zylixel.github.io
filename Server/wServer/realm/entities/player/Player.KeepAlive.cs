@@ -9,9 +9,9 @@ namespace wServer.realm.entities.player
 {
     public partial class Player
     {
-        private const int PING_PERIOD = 1000;
+        private const int PingPeriod = 1000;
 
-        private int updateLastSeen;
+        private int _updateLastSeen;
 
         private static bool KeepAlive(RealmTime time)
         {
@@ -23,20 +23,20 @@ namespace wServer.realm.entities.player
             try
             {
 
-                updateLastSeen++;
+                _updateLastSeen++;
 
-                if (updateLastSeen >= 60)
+                if (_updateLastSeen >= 60)
                 {
                     Manager.Database.DoActionAsync(db =>
                     {
                         db.UpdateLastSeen(Client.Account.AccountId, Client.Character.CharacterId, WorldInstance.Name);
-                        updateLastSeen = 0;
+                        _updateLastSeen = 0;
                     });
                 }
             }
             catch (Exception e)
             {
-                log.Error(e);
+                Log.Error(e);
             }
         }
 

@@ -4,7 +4,6 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using db;
 using MySql.Data.MySqlClient;
 using wServer.networking;
 using wServer.realm.entities;
@@ -165,7 +164,7 @@ namespace wServer.realm.worlds
         {
             Manager.Database.DoActionAsync(db =>
             {
-                this.AccountId = accId;
+                AccountId = accId;
 
                 MySqlCommand cmd = db.CreateQuery();
                 cmd.CommandText = "SELECT name FROM accounts WHERE id=@accId";

@@ -43,10 +43,7 @@ namespace wServer.realm.setpieces
                             : (a[y][x] == '=' ? 2 : 0);
         }
 
-        public int Size
-        {
-            get { return 27; }
-        }
+        public int Size => 27;
 
         public void RenderSetPiece(World world, IntPoint pos)
         {

@@ -5,7 +5,7 @@
         public bool Success { get; set; }
         public string ErrorText { get; set; }
 
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.CREATEGUILDRESULT; }
         }

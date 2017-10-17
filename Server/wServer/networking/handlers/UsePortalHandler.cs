@@ -1,6 +1,8 @@
 ﻿#region
+
 using System;
 using System.Globalization;
+using System.Reflection;
 using wServer.networking.cliPackets;
 using wServer.networking.svrPackets;
 using wServer.realm;
@@ -14,7 +16,7 @@ namespace wServer.networking.handlers
 {
     internal class UsePortalHandler : PacketHandlerBase<UsePortalPacket>
     {
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.USEPORTAL; }
         }
@@ -107,14 +109,14 @@ namespace wServer.networking.handlers
                                     try
                                     {
                                         world = client.Manager.AddWorld((World) Activator.CreateInstance(worldType,
-                                            System.Reflection.BindingFlags.CreateInstance, null, null,
+                                            BindingFlags.CreateInstance, null, null,
                                             CultureInfo.InvariantCulture, null));
                                     }
                                     catch (Exception ex)
                                     {
                                         client.Player.SendError("Error while creating world instance:");
                                         client.Player.SendError(ex.ToString());
-                                        log.Error(ex);
+                                        Log.Error(ex);
                                     }
                                 }
                                 else
@@ -149,7 +151,7 @@ namespace wServer.networking.handlers
                         Port = Program.Settings.GetValue<int>("port"),
                         GameId = world.Id,
                         Name = world.Name,
-                        Key = world.PortalKey,
+                        Key = world.PortalKey
                     });
                 }
             }, PendingPriority.Networking);

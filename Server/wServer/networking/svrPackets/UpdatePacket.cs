@@ -1,6 +1,4 @@
-﻿using System.IO;
-
-namespace wServer.networking.svrPackets
+﻿namespace wServer.networking.svrPackets
 {
     public class UpdatePacket : ServerPacket
     {
@@ -8,7 +6,7 @@ namespace wServer.networking.svrPackets
         public ObjectDef[] NewObjects { get; set; }
         public int[] RemovedObjectIds { get; set; }
 
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.UPDATE; }
         }

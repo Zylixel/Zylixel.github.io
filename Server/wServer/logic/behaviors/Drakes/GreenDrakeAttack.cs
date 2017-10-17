@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using wServer.networking.svrPackets;
+﻿using wServer.networking.svrPackets;
 using wServer.realm;
 using wServer.realm.entities;
 
@@ -38,7 +33,7 @@ namespace wServer.logic.behaviors.Drakes
                         EffectType = EffectType.AreaBlast,
                         Color = new ARGB(0x48D747),
                         TargetId = en.Id,
-                        PosA = new Position { X = 1, }
+                        PosA = new Position { X = 1 }
                     }, null);
                     en.Owner.BroadcastPacket(new ShowEffectPacket
                     {
@@ -50,7 +45,7 @@ namespace wServer.logic.behaviors.Drakes
                     en.ApplyConditionEffect(new ConditionEffect
                     {
                         Effect = ConditionEffectIndex.Slowed,
-                        DurationMS = 10000
+                        DurationMs = 10000
                     });
                     
                 }

@@ -51,13 +51,13 @@ namespace wServer.logic.behaviors
                         target = new Position
                         {
                             X = (float) (range*Math.Cos(fixedAngle.Value)),
-                            Y = (float) (range*Math.Sin(fixedAngle.Value)),
+                            Y = (float) (range*Math.Sin(fixedAngle.Value))
                         };
                     else
                         target = new Position
                         {
                             X = player.X,
-                            Y = player.Y,
+                            Y = player.Y
                         };
                     host.Owner.BroadcastPacket(new ShowEffectPacket
                     {
@@ -68,7 +68,7 @@ namespace wServer.logic.behaviors
                     }, null);
                     host.Owner.Timers.Add(new WorldTimer(1500, (world, t) =>
                     {
-                        world.BroadcastPacket(new AOEPacket
+                        world.BroadcastPacket(new AoePacket
                         {
                             Position = target,
                             Radius = radius,

@@ -4,7 +4,7 @@
     {
         public BitmapData BitmapData { get; set; }
 
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.PIC; }
         }

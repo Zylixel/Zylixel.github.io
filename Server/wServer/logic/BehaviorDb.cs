@@ -22,7 +22,7 @@ namespace wServer.logic
 
         private static int initializing;
         internal static BehaviorDb InitDb;
-        private static int randCount = 0;
+        private static int randCount;
 
         internal static wRandom Random
         {
@@ -83,7 +83,7 @@ namespace wServer.logic
         public void ResolveBehavior(Entity entity)
         {
             Tuple<State, Loot> def;
-            if (Definitions.TryGetValue((ushort) entity.ObjectType, out def))
+            if (Definitions.TryGetValue(entity.ObjectType, out def))
                 entity.SwitchTo(def.Item1);
         }
 
@@ -106,10 +106,10 @@ namespace wServer.logic
                 {
                     var loot = new Loot(defs);
                     rootState.Death += (sender, e) => loot.Handle((Enemy)e.Host, e.Time);
-                    InitDb.Definitions.Add((ushort) dat.IdToObjectType[objType], new Tuple<State, Loot>(rootState, loot));
+                    InitDb.Definitions.Add(dat.IdToObjectType[objType], new Tuple<State, Loot>(rootState, loot));
                 }
                 else
-                    InitDb.Definitions.Add((ushort) dat.IdToObjectType[objType], new Tuple<State, Loot>(rootState, null));
+                    InitDb.Definitions.Add(dat.IdToObjectType[objType], new Tuple<State, Loot>(rootState, null));
                 return this;
             }
         }

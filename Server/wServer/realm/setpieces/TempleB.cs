@@ -12,10 +12,7 @@ namespace wServer.realm.setpieces
     {
         private readonly Random rand = new Random();
 
-        public override int Size
-        {
-            get { return 60; }
-        }
+        public override int Size => 60;
 
         public override void RenderSetPiece(World world, IntPoint pos)
         {

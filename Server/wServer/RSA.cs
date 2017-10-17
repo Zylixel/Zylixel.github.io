@@ -12,9 +12,9 @@ using Org.BouncyCastle.OpenSsl;
 
 namespace wServer
 {
-    public class RSA
+    public class Rsa
     {
-        public static readonly RSA Instance = new RSA(@"
+        public static readonly Rsa Instance = new Rsa(@"
 -----BEGIN RSA PRIVATE KEY-----
 MIICXAIBAAKBgQCbqweYUxzW0IiCwuBAzx6HtskrhWW+B0iX4LMu2xqRh4gh52HU
 Vu9nNiXso7utTKCv/HNK19v5xoWp3Cne23sicp2oVGgKMFSowBFbtr+fhsq0yHv+
@@ -40,14 +40,14 @@ iIPdpI1PxFDcnFbdRQIDAQAB
 -----END PUBLIC KEY-----
 */
 
-        private readonly RsaEngine engine;
-        private readonly AsymmetricKeyParameter key;
+        private readonly RsaEngine _engine;
+        private readonly AsymmetricKeyParameter _key;
 
-        private RSA(string privPem)
+        private Rsa(string privPem)
         {
-            key = (new PemReader(new StringReader(privPem.Trim())).ReadObject() as AsymmetricCipherKeyPair).Private;
-            engine = new RsaEngine();
-            engine.Init(true, key);
+            _key = ((AsymmetricCipherKeyPair) new PemReader(new StringReader(privPem.Trim())).ReadObject()).Private;
+            _engine = new RsaEngine();
+            _engine.Init(true, _key);
         }
 
         public string Decrypt(string str)
@@ -55,8 +55,8 @@ iIPdpI1PxFDcnFbdRQIDAQAB
             if (string.IsNullOrEmpty(str))
                 return "";
             byte[] dat = Convert.FromBase64String(str);
-            Pkcs1Encoding encoding = new Pkcs1Encoding(engine);
-            encoding.Init(false, key);
+            Pkcs1Encoding encoding = new Pkcs1Encoding(_engine);
+            encoding.Init(false, _key);
             return Encoding.UTF8.GetString(encoding.ProcessBlock(dat, 0, dat.Length));
         }
 
@@ -65,8 +65,8 @@ iIPdpI1PxFDcnFbdRQIDAQAB
             if (string.IsNullOrEmpty(str))
                 return "";
             byte[] dat = Encoding.UTF8.GetBytes(str);
-            Pkcs1Encoding encoding = new Pkcs1Encoding(engine);
-            encoding.Init(true, key);
+            Pkcs1Encoding encoding = new Pkcs1Encoding(_engine);
+            encoding.Init(true, _key);
             return Convert.ToBase64String(encoding.ProcessBlock(dat, 0, dat.Length));
         }
     }

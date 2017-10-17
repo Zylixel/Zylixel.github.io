@@ -1,12 +1,20 @@
 ﻿#region
 
-using db;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
 using System.Net;
 using System.Web;
+using db;
+using server.account;
+using server.app;
+using server.@char;
+using server.credits;
+using server.guild;
+using server.mysterybox;
+using server.picture;
+using server.playerMuledump;
 
 #endregion
 
@@ -19,7 +27,7 @@ namespace server
 
         public void HandleRequest(HttpListenerContext context)
         {
-            this.Context = context;
+            Context = context;
             if (ParseQueryString())
             {
                 Query = new NameValueCollection();
@@ -45,7 +53,7 @@ namespace server
                 WriteErrorLine("Account credentials not valid");
                 return false;
             }
-            else if (acc == null && String.IsNullOrWhiteSpace(Query["password"]))
+            if (acc == null && String.IsNullOrWhiteSpace(Query["password"]))
                 return true;
 
             if (acc.Banned)
@@ -81,46 +89,46 @@ namespace server
         internal static readonly Dictionary<string, RequestHandler> Handlers = new Dictionary<string, RequestHandler>
         {
      //       {"/crossdomain.xml", new Crossdomain()},
-            {"/mysterybox/getBoxes", new mysterybox.getBoxes()},
+            {"/mysterybox/getBoxes", new GetBoxes()},
    //         {"/package/getPackages", new packages.getPackages()},
   //          {"/arena/getPersonalBest", new ArenaPersonalBest()},
   //          {"/arena/getRecords", new ArenaRecords()},
   //          {"/app/globalNews", new app.globalNews()},
   //          {"/app/getLanguageStrings", new app.languageSettings()},
-            {"/app/init", new app.init()},
+            {"/app/init", new Init()},
   //      {"/clientError/add", new Add()},
-            {"/account/purchaseSkin", new account.purchaseSkin()},
-            {"/app/globalNews", new app.globalnews()},
-            {"/account/verifyage", new account.verifyage()},
-            {"/account/purchasePackage", new account.purchasePackage()},
-            {"/playerMuledump/view", new playerMuledump.view()},
-            {"/account/acceptTOS", new account.acceptTOS()},
-            {"/account/playFortuneGame", new account.playFortuneGame()},
-            {"/account/resetPassword", new account.resetPassword()},
-            {"/account/validateEmail", new account.validateEmail()},
-            {"/account/changeEmail", new account.changeEmail()},
-            {"/account/purchaseMysteryBox", new account.purchaseMysteryBox()},
-            {"/account/getProdAccount", new account.getProdAccount()},
-            {"/account/register", new account.register()},
-            {"/account/verify", new account.verify()},
-            {"/account/forgotPassword", new account.forgotPassword()},
-            {"/account/sendVerifyEmail", new account.sendVerifyEmail()},
-            {"/account/changePassword", new account.changePassword()},
-            {"/account/purchaseCharSlot", new account.purchaseCharSlot()},
-            {"/account/setName", new account.setName()},
-            {"/char/list", new @char.list()},
+            {"/account/purchaseSkin", new PurchaseSkin()},
+            {"/app/globalNews", new Globalnews()},
+            {"/account/verifyage", new Verifyage()},
+            {"/account/purchasePackage", new PurchasePackage()},
+            {"/playerMuledump/view", new View()},
+            {"/account/acceptTOS", new AcceptTos()},
+            {"/account/playFortuneGame", new PlayFortuneGame()},
+            {"/account/resetPassword", new ResetPassword()},
+            {"/account/validateEmail", new ValidateEmail()},
+            {"/account/changeEmail", new ChangeEmail()},
+            {"/account/purchaseMysteryBox", new PurchaseMysteryBox()},
+            {"/account/getProdAccount", new GetProdAccount()},
+            {"/account/register", new Register()},
+            {"/account/verify", new Verify()},
+            {"/account/forgotPassword", new ForgotPassword()},
+            {"/account/sendVerifyEmail", new SendVerifyEmail()},
+            {"/account/changePassword", new ChangePassword()},
+            {"/account/purchaseCharSlot", new PurchaseCharSlot()},
+            {"/account/setName", new SetName()},
+            {"/char/list", new List()},
        //     {"/friends/getList", new friends.list()},
-            {"/char/delete", new @char.delete()},
-            {"/char/fame", new @char.fame()},
-            {"/credits/getoffers", new credits.getoffers()},
-            {"/credits/add", new credits.add()},
-            {"/credits/kabamadd", new credits.kabamadd()},
-            {"/char/purchaseClassUnlock", new @char.purchaseClassUnlock()},
-            {"/fame/list", new fame.list()},
-            {"/picture/get", new picture.get()},
-            {"/guild/getBoard", new guild.getBoard()},
-            {"/guild/setBoard", new guild.setBoard()},
-            {"/guild/listMembers", new guild.listMembers()}
+            {"/char/delete", new Delete()},
+            {"/char/fame", new @char.Fame()},
+            {"/credits/getoffers", new Getoffers()},
+            {"/credits/add", new Add()},
+            {"/credits/kabamadd", new Kabamadd()},
+            {"/char/purchaseClassUnlock", new PurchaseClassUnlock()},
+            {"/fame/list", new fame.List()},
+            {"/picture/get", new Get()},
+            {"/guild/getBoard", new GetBoard()},
+            {"/guild/setBoard", new SetBoard()},
+            {"/guild/listMembers", new ListMembers()}
         };
     }
 }

@@ -1,24 +1,16 @@
-﻿using MetroFramework;
-using MetroFramework.Forms;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+﻿using System;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml;
 using System.Xml.Serialization;
+using MetroFramework;
+using MetroFramework.Forms;
 
 namespace AdminPanel
 {
     public partial class Login : MetroForm
     {
-        private Account account;
+        private Account _account;
 
         public Login()
         {
@@ -28,7 +20,7 @@ namespace AdminPanel
         public DialogResult ShowDialog(out Account user)
         {
             var ret = ShowDialog();
-            user = this.account;
+            user = _account;
             return ret;
         }
 
@@ -47,16 +39,16 @@ namespace AdminPanel
                         return;
                     }
                     var serializer = new XmlSerializer(typeof(Account));
-                    account = (Account)serializer.Deserialize(new StringReader(xml));
+                    _account = (Account)serializer.Deserialize(new StringReader(xml));
 
-                    if (!account.Admin)
+                    if (!_account.Admin)
                     {
                         DialogResult = DialogResult.None;
                         MetroMessageBox.Show(this, "\n\nYou are not an admin.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
-                    account.Password = passwordTextBox.Text;
-                    account.Email = emailTextBox.Text;
+                    _account.Password = passwordTextBox.Text;
+                    _account.Email = emailTextBox.Text;
                     DialogResult = DialogResult.OK;
                 }
             }

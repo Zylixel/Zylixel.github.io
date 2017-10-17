@@ -1,5 +1,5 @@
-﻿using Mono.Game;
-using System;
+﻿using System;
+using Mono.Game;
 using wServer.realm;
 
 namespace wServer.logic.behaviors

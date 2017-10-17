@@ -1,13 +1,12 @@
 ﻿#region
 
-using System.Net;
 using System.Text;
 
 #endregion
 
 namespace server.credits
 {
-    internal class getoffers : RequestHandler
+    internal class Getoffers : RequestHandler
     {
         protected override void HandleRequest()
         {

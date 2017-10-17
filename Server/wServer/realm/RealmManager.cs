@@ -14,9 +14,8 @@ using wServer.logic;
 using wServer.networking;
 using wServer.realm.commands;
 using wServer.realm.entities;
-using wServer.realm.worlds;
-using wServer.networking.svrPackets;
 using wServer.realm.entities.player;
+using wServer.realm.worlds;
 
 #endregion
 
@@ -28,7 +27,7 @@ namespace wServer.realm
         Destruction,
         Networking,
         Normal,
-        Creation,
+        Creation
     }
 
     public struct RealmTime

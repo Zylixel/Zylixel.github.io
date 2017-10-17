@@ -60,8 +60,7 @@ namespace wServer
 
             if (rand < percent)
                 return true;
-            else
-                return false;
+            return false;
         }
 
         public static bool GenerateProb(double percent)
@@ -71,8 +70,7 @@ namespace wServer
 
             if (rand < percent)
                 return true;
-            else
-                return false;
+            return false;
         }
     }
 }

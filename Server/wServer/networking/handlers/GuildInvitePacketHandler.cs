@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using wServer.networking.cliPackets;
-using wServer.realm;
 using wServer.networking.svrPackets;
-using db;
-using wServer.realm.entities;
+using wServer.realm;
 using wServer.realm.entities.player;
 
 namespace wServer.networking.handlers
 {
     class GuildInvitePacketHandler : PacketHandlerBase<GuildInvitePacket>
     {
-        public override PacketID ID { get { return PacketID.GUILDINVITE; } }
+        public override PacketID Id { get { return PacketID.GUILDINVITE; } }
 
         protected override void HandlePacket(Client client, GuildInvitePacket packet)
         {
@@ -35,39 +30,28 @@ namespace wServer.networking.handlers
 
                     if (target == null)
                     {
-                        player.SendInfoWithTokens("server.invite_notfound", new KeyValuePair<string, object>[1]
-                        {
-                            new KeyValuePair<string, object>("player", packet.Name)
-                        });
+                        player.SendInfoWithTokens("server.invite_notfound", new KeyValuePair<string, object>("player", packet.Name));
                         return;
                     }
                     if (!target.NameChosen || player.Dist(target) > 20)
                     {
-                        player.SendInfoWithTokens("server.invite_notfound", new KeyValuePair<string, object>[1]
-                        {
-                            new KeyValuePair<string, object>("player", packet.Name)
-                        });
+                        player.SendInfoWithTokens("server.invite_notfound", new KeyValuePair<string, object>("player", packet.Name));
                         return;
                     }
 
                     if (target.Guild.IsDefault)
                     {
                         if (target.Ignored.Contains(Client.Account.AccountId)) return;
-                        target.Client.SendPacket(new InvitedToGuildPacket()
+                        target.Client.SendPacket(new InvitedToGuildPacket
                         {
                             Name = player.Name,
                             GuildName = player.Guild[player.AccountId].Name
                         });
                         target.Invited = true;
-                        player.SendInfoWithTokens("server.invite_succeed", new KeyValuePair<string, object>[2]
-                        {
-                            new KeyValuePair<string, object>("player", packet.Name),
-                            new KeyValuePair<string, object>("guild", player.Guild[player.AccountId].Name)
-                        });
+                        player.SendInfoWithTokens("server.invite_succeed", new KeyValuePair<string, object>("player", packet.Name), new KeyValuePair<string, object>("guild", player.Guild[player.AccountId].Name));
                         return;
                     }
-                    else
-                        player.SendError("Player is already in a guild!");
+                    player.SendError("Player is already in a guild!");
                 }
             }
             else

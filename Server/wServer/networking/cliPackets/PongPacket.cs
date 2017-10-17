@@ -5,7 +5,7 @@
         public int Serial { get; set; }
         public int Time { get; set; }
 
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.PONG; }
         }

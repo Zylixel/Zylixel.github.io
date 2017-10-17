@@ -9,7 +9,7 @@ namespace terrain
 {
     internal class Decoration
     {
-        private static readonly Dictionary<string, Tuple<double, string>[]> decors = new Dictionary
+        private static readonly Dictionary<string, Tuple<double, string>[]> Decors = new Dictionary
             <string, Tuple<double, string>[]>
         {
             {
@@ -207,10 +207,10 @@ namespace terrain
 
                     new Tuple<double, string>(1, null)
                 }
-            },
+            }
         };
 
-        private static readonly Dictionary<string, Tuple<int, int, int>> decorSizes = new Dictionary
+        private static readonly Dictionary<string, Tuple<int, int, int>> DecorSizes = new Dictionary
             <string, Tuple<int, int, int>>
         {
             {"Tree A", new Tuple<int, int, int>(130, 160, 5)},
@@ -234,13 +234,13 @@ namespace terrain
             {"Prickly Pear Cactus 1", new Tuple<int, int, int>(130, 160, 5)},
             {"Prickly Pear Cactus 2", new Tuple<int, int, int>(130, 160, 5)},
             {"Succulent Plant 1", new Tuple<int, int, int>(130, 160, 5)},
-            {"Succulent Plant 2", new Tuple<int, int, int>(130, 160, 5)},
+            {"Succulent Plant 2", new Tuple<int, int, int>(130, 160, 5)}
         };
 
         public static string GetDecor(string biome, Random rand)
         {
             Tuple<double, string>[] dat;
-            if (!decors.TryGetValue(biome, out dat)) return null;
+            if (!Decors.TryGetValue(biome, out dat)) return null;
 
             double val = rand.NextDouble();
             double c = 0;
@@ -255,7 +255,7 @@ namespace terrain
         public static int? GetSize(string id, Random rand)
         {
             Tuple<int, int, int> dat;
-            if (!decorSizes.TryGetValue(id, out dat))
+            if (!DecorSizes.TryGetValue(id, out dat))
                 return null;
             int min = dat.Item1;
             int max = dat.Item2;

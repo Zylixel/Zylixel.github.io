@@ -1,7 +1,6 @@
 ﻿#region
 
-using System.Collections.Generic;
-using wServer.realm.entities;
+using wServer.networking.svrPackets;
 using wServer.realm.entities.player;
 
 #endregion
@@ -34,7 +33,7 @@ namespace wServer.realm.worlds
                     Manager.Database.DoActionAsync(db =>
                     {
                         var q = db.GetDailyQuest((entity as Player).AccountId, Manager.GameData);
-                        (entity as Player).Client.SendPacket(new networking.svrPackets.QuestFetchResponsePacket
+                        (entity as Player).Client.SendPacket(new QuestFetchResponsePacket
                         {
                             Tier = q.Tier,
                             Image = q.Image,

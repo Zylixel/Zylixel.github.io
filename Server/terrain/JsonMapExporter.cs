@@ -17,7 +17,7 @@ namespace terrain
             byte[] dat = new byte[w*h*2];
             int i = 0;
             Dictionary<TerrainTile, ushort> idxs = new Dictionary<TerrainTile, ushort>(new TileComparer());
-            List<loc> dict = new List<loc>();
+            List<Loc> dict = new List<Loc>();
             for (int y = 0; y < h; y++)
                 for (int x = 0; x < w; x++)
                 {
@@ -26,25 +26,25 @@ namespace terrain
                     if (!idxs.TryGetValue(tile, out idx))
                     {
                         idxs.Add(tile, idx = (ushort) dict.Count);
-                        dict.Add(new loc
+                        dict.Add(new Loc
                         {
-                            ground = TileTypes.id[tile.TileId],
-                            objs = tile.TileObj == null
+                            Ground = TileTypes.Id[tile.TileId],
+                            Objs = tile.TileObj == null
                                 ? null
                                 : new[]
                                 {
-                                    new obj
+                                    new Obj
                                     {
-                                        id = tile.TileObj,
-                                        name = tile.Name == null ? null : tile.Name
+                                        Id = tile.TileObj,
+                                        Name = tile.Name == null ? null : tile.Name
                                     }
                                 },
-                            regions = tile.TileId == TileTypes.Beach
+                            Regions = tile.TileId == TileTypes.Beach
                                 ? new[]
                                 {
-                                    new obj
+                                    new Obj
                                     {
-                                        id = "Spawn"
+                                        Id = "Spawn"
                                     }
                                 }
                                 : null
@@ -54,12 +54,8 @@ namespace terrain
                     dat[i] = (byte) (idx >> 8);
                     i += 2;
                 }
-            json_dat ret = new json_dat
+            JsonDat ret = new JsonDat
             {
-                data = ZlibStream.CompressBuffer(dat),
-                width = w,
-                height = h,
-                dict = dict.ToArray()
             };
             return JsonConvert.SerializeObject(ret);
         }
@@ -79,25 +75,21 @@ namespace terrain
         }
 
 
-        private struct json_dat
+        private struct JsonDat
         {
-            public byte[] data;
-            public loc[] dict;
-            public int height;
-            public int width;
         }
 
-        private struct loc
+        private struct Loc
         {
-            public string ground;
-            public obj[] objs;
-            public obj[] regions;
+            public string Ground;
+            public Obj[] Objs;
+            public Obj[] Regions;
         }
 
-        private struct obj
+        private struct Obj
         {
-            public string id;
-            public string name;
+            public string Id;
+            public string Name;
         }
     }
 }

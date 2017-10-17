@@ -1,9 +1,5 @@
-﻿using db;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using db;
 using wServer.networking.cliPackets;
 using wServer.networking.svrPackets;
 using wServer.realm;
@@ -15,7 +11,7 @@ namespace wServer.networking.handlers
 {
     internal class PetYardCommandHandler : PacketHandlerBase<PetYardCommandPacket>
     {
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.PETYARDCOMMAND; }
         }
@@ -26,13 +22,13 @@ namespace wServer.networking.handlers
             {
                 switch (packet.CommandId)
                 {
-                    case PetYardCommandPacket.UPGRADE_PET_YARD:
+                    case PetYardCommandPacket.UpgradePetYard:
                         UpgradePetYard(client, packet);
                         break;
-                    case PetYardCommandPacket.FEED_PET:
+                    case PetYardCommandPacket.FeedPet:
                         FeedPet(client, packet);
                         break;
-                    case PetYardCommandPacket.FUSE_PET:
+                    case PetYardCommandPacket.FusePet:
                         FusePet(client, packet);
                         break;
                 }
@@ -167,7 +163,7 @@ namespace wServer.networking.handlers
             }
             catch (Exception ex)
             {
-                log.Error(ex);
+                Log.Error(ex);
                 client.Player.SendError("Internal server error: " + ex.Message);
             }
         }

@@ -1,7 +1,4 @@
-﻿using wServer.networking.svrPackets;
-using wServer.realm;
-using wServer.logic;
-using wServer.realm.entities;
+﻿using wServer.realm;
 
 namespace wServer.logic.behaviors
 {

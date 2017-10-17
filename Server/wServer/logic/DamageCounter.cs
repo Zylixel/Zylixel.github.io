@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using wServer.realm;
 using wServer.realm.entities;
 using wServer.realm.entities.player;
-using wServer.realm.worlds;
 
 #endregion
 
@@ -85,7 +84,7 @@ namespace wServer.logic
             }
             if (totalPlayer != 0)
             {
-                float totalExp = totalPlayer*((float) enemy.ObjectDesc.MaxHP/10f)*(enemy.ObjectDesc.ExpMultiplier ?? 1);
+                float totalExp = totalPlayer*((float) enemy.ObjectDesc.MaxHp/10f)*(enemy.ObjectDesc.ExpMultiplier ?? 1);
                 float lowerLimit = totalExp/totalPlayer*0.1f;
                 int lvUps = 0;
                 foreach (Tuple<Player, int> i in eligiblePlayers)

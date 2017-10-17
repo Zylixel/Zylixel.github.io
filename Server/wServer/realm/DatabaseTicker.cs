@@ -1,9 +1,10 @@
-﻿using db;
-using log4net;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using db;
+using log4net;
 
 namespace wServer.realm
 {
@@ -70,7 +71,7 @@ namespace wServer.realm
                 }
             }
 
-            private Database getDatabase() => databases.Where(_ => _.Value && _.Key.Connection.State == System.Data.ConnectionState.Open).Select(_ => _.Key).FirstOrDefault();
+            private Database getDatabase() => databases.Where(_ => _.Value && _.Key.Connection.State == ConnectionState.Open).Select(_ => _.Key).FirstOrDefault();
         }
     }
 }

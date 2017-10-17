@@ -24,14 +24,14 @@ using System.IO.Compression;
 
 namespace DungeonGenerator {
 	public static class Zlib {
-		static uint ADLER32(byte[] data) {
-			const uint MODULO = 0xfff1;
-			uint A = 1, B = 0;
+		static uint Adler32(byte[] data) {
+			const uint modulo = 0xfff1;
+			uint a = 1, b = 0;
 			for (int i = 0; i < data.Length; i++) {
-				A = (A + data[i]) % MODULO;
-				B = (B + A) % MODULO;
+				a = (a + data[i]) % modulo;
+				b = (b + a) % modulo;
 			}
-			return (B << 16) | A;
+			return (b << 16) | a;
 		}
 
 		public static byte[] Compress(byte[] buffer) {
@@ -43,17 +43,17 @@ namespace DungeonGenerator {
 			}
 
 			// Refer to http://www.ietf.org/rfc/rfc1950.txt for zlib format
-			const byte CM = 8;
-			const byte CINFO = 7;
-			const byte CMF = CM | (CINFO << 4);
-			const byte FLG = 0xDA;
+			const byte cm = 8;
+			const byte cinfo = 7;
+			const byte cmf = cm | (cinfo << 4);
+			const byte flg = 0xDA;
 
 			byte[] result = new byte[comp.Length + 6];
-			result[0] = CMF;
-			result[1] = FLG;
+			result[0] = cmf;
+			result[1] = flg;
 			Buffer.BlockCopy(comp, 0, result, 2, comp.Length);
 
-			uint cksum = ADLER32(buffer);
+			uint cksum = Adler32(buffer);
 			var index = result.Length - 4;
 			result[index++] = (byte)(cksum >> 24);
 			result[index++] = (byte)(cksum >> 16);

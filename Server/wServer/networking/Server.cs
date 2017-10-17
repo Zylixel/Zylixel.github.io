@@ -13,7 +13,7 @@ namespace wServer.networking
 {
     internal class Server
     {
-        private static readonly ILog log = LogManager.GetLogger(typeof (Server));
+        private static readonly ILog Log = LogManager.GetLogger(typeof (Server));
 
         public Server(RealmManager manager)
         {
@@ -26,7 +26,7 @@ namespace wServer.networking
 
         public void Start()
         {
-            log.Info("Starting server...");
+            Log.Info("Starting server...");
             Socket.Bind(new IPEndPoint(IPAddress.Any, Program.Settings.GetValue<int>("port")));
             Socket.Listen(0xff);
             Socket.BeginAccept(Listen, null);
@@ -55,7 +55,7 @@ namespace wServer.networking
 
         public async void Stop()
         {
-            log.Info("Stoping server...");
+            Log.Info("Stoping server...");
             foreach (Client i in Manager.Clients.Values.ToArray())
             {
                 await i.Save();

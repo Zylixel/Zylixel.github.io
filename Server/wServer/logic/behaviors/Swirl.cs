@@ -29,7 +29,7 @@ namespace wServer.logic.behaviors
             state = new SwirlState
             {
                 Center = targeted ? Vector2.Zero : new Vector2(host.X, host.Y),
-                Acquired = !targeted,
+                Acquired = !targeted
             };
         }
 

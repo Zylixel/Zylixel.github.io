@@ -9,13 +9,13 @@ namespace terrain
     internal class Rasterizer<T>
     {
         private const float StepFactor = 2f;
-        private readonly int h;
-        private readonly int w;
+        private readonly int _h;
+        private readonly int _w;
 
         public Rasterizer(int w, int h)
         {
-            this.w = w;
-            this.h = h;
+            this._w = w;
+            this._h = h;
             Buffer = new T[w, h];
         }
 
@@ -29,12 +29,12 @@ namespace terrain
 
         public int Height
         {
-            get { return h; }
+            get { return _h; }
         }
 
         public int Width
         {
-            get { return w; }
+            get { return _w; }
         }
 
         public void Plot(double x, double y, T val)
@@ -100,8 +100,8 @@ namespace terrain
 
         public void Clear(T val)
         {
-            for (int y = 0; y < h; y++)
-                for (int x = 0; x < w; x++)
+            for (int y = 0; y < _h; y++)
+                for (int x = 0; x < _w; x++)
                     Buffer[x, y] = val;
         }
 

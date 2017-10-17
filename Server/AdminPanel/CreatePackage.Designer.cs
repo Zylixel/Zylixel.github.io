@@ -1,11 +1,15 @@
-﻿namespace AdminPanel
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+using MetroFramework.Controls;
+
+namespace AdminPanel
 {
     partial class CreatePackage
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -345,28 +349,28 @@
 
         #endregion
 
-        private MetroFramework.Controls.MetroLabel metroLabel1;
-        private MetroFramework.Controls.MetroLabel metroLabel2;
-        private MetroFramework.Controls.MetroLabel metroLabel3;
-        private System.Windows.Forms.ListBox itemsList;
-        private MetroFramework.Controls.MetroTextBox charSlotsBox;
-        private MetroFramework.Controls.MetroTextBox vaultChestsBox;
-        private MetroFramework.Controls.MetroButton addItem;
-        private MetroFramework.Controls.MetroButton removeItem;
-        private MetroFramework.Controls.MetroButton saveBox;
-        private MetroFramework.Controls.MetroTextBox packageName;
-        private MetroFramework.Controls.MetroLabel metroLabel4;
-        private MetroFramework.Controls.MetroTextBox maxPurchase;
-        private MetroFramework.Controls.MetroLabel metroLabel5;
-        private MetroFramework.Controls.MetroTextBox weight;
-        private MetroFramework.Controls.MetroLabel metroLabel6;
-        private MetroFramework.Controls.MetroTextBox bgUrl;
-        private MetroFramework.Controls.MetroLabel metroLabel7;
-        private MetroFramework.Controls.MetroTextBox price;
-        private MetroFramework.Controls.MetroLabel metroLabel8;
-        private MetroFramework.Controls.MetroTextBox quantity;
-        private MetroFramework.Controls.MetroLabel metroLabel9;
-        private MetroFramework.Controls.MetroLabel metroLabel10;
-        private MetroFramework.Controls.MetroDateTime endDate;
+        private MetroLabel metroLabel1;
+        private MetroLabel metroLabel2;
+        private MetroLabel metroLabel3;
+        private ListBox itemsList;
+        private MetroTextBox charSlotsBox;
+        private MetroTextBox vaultChestsBox;
+        private MetroButton addItem;
+        private MetroButton removeItem;
+        private MetroButton saveBox;
+        private MetroTextBox packageName;
+        private MetroLabel metroLabel4;
+        private MetroTextBox maxPurchase;
+        private MetroLabel metroLabel5;
+        private MetroTextBox weight;
+        private MetroLabel metroLabel6;
+        private MetroTextBox bgUrl;
+        private MetroLabel metroLabel7;
+        private MetroTextBox price;
+        private MetroLabel metroLabel8;
+        private MetroTextBox quantity;
+        private MetroLabel metroLabel9;
+        private MetroLabel metroLabel10;
+        private MetroDateTime endDate;
     }
 }

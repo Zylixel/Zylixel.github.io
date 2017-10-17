@@ -1,22 +1,17 @@
-﻿using db;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
+using db;
 
 namespace server.account
 {
-    internal class playFortuneGame : RequestHandler
+    internal class PlayFortuneGame : RequestHandler
     {
-        private static Dictionary<string, int[]> CurrentGames = new Dictionary<string, int[]>();
+        private static Dictionary<string, int[]> _currentGames = new Dictionary<string, int[]>();
 
-        private const int GOLD = 0;
-        private const int FORTUNETOKENS = 2;
+        private const int Gold = 0;
+        private const int Fortunetokens = 2;
 
         protected override void HandleRequest()
         {
@@ -51,13 +46,13 @@ namespace server.account
                                     candidates.Add(item);
                             } while (candidates.Count < 3);
 
-                            if (currency == GOLD)
+                            if (currency == Gold)
                             {
                                 if (Query["status"] == "0")
                                 {
-                                    if (CurrentGames.ContainsKey(acc.AccountId))
-                                        CurrentGames.Remove(acc.AccountId);
-                                    CurrentGames.Add(acc.AccountId, candidates.ToArray());
+                                    if (_currentGames.ContainsKey(acc.AccountId))
+                                        _currentGames.Remove(acc.AccountId);
+                                    _currentGames.Add(acc.AccountId, candidates.ToArray());
                                     price = rdr.GetInt32("priceFirstInGold");
                                     status = "<Success><Candidates>" +
                                         Utils.GetCommaSepString(candidates.ToArray()) +
@@ -67,36 +62,36 @@ namespace server.account
                                 }
                                 else if (Query["status"] == "1")
                                 {
-                                    if (CurrentGames.ContainsKey(acc.AccountId))
+                                    if (_currentGames.ContainsKey(acc.AccountId))
                                     {
-                                        candidates = CurrentGames[acc.AccountId].ToList();
+                                        candidates = _currentGames[acc.AccountId].ToList();
                                         candidates.Shuffle();
                                         status = "<Success><Awards>" + candidates[int.Parse(Query["choice"])] + "</Awards></Success>";
                                         gifts.Add(candidates[int.Parse(Query["choice"])]);
                                         candidates.Remove(candidates[int.Parse(Query["choice"])]);
-                                        CurrentGames[acc.AccountId] = candidates.ToArray();
+                                        _currentGames[acc.AccountId] = candidates.ToArray();
                                     }
                                 }
                                 else if (Query["status"] == "2")
                                 {
-                                    if (CurrentGames.ContainsKey(acc.AccountId))
+                                    if (_currentGames.ContainsKey(acc.AccountId))
                                     {
-                                        candidates = CurrentGames[acc.AccountId].ToList();
+                                        candidates = _currentGames[acc.AccountId].ToList();
                                         candidates.Shuffle();
                                         price = rdr.GetInt32("priceSecondInGold");
                                         status = "<Success><Awards>" + candidates[int.Parse(Query["choice"])] + "</Awards></Success>";
                                         gifts.Add(candidates[int.Parse(Query["choice"])]);
-                                        CurrentGames.Remove(acc.AccountId);
+                                        _currentGames.Remove(acc.AccountId);
                                     }
                                 }
                             }
-                            else if (currency == FORTUNETOKENS)
+                            else if (currency == Fortunetokens)
                             {
                                 if (Query["status"] == "0")
                                 {
-                                    if (CurrentGames.ContainsKey(acc.AccountId))
-                                        CurrentGames.Remove(acc.AccountId);
-                                    CurrentGames.Add(acc.AccountId, candidates.ToArray());
+                                    if (_currentGames.ContainsKey(acc.AccountId))
+                                        _currentGames.Remove(acc.AccountId);
+                                    _currentGames.Add(acc.AccountId, candidates.ToArray());
                                     price = rdr.GetInt32("priceFirstInToken");
                                     status = "<Success><Candidates>" +
                                         Utils.GetCommaSepString(candidates.ToArray()) +
@@ -106,14 +101,14 @@ namespace server.account
                                 }
                                 else if (Query["status"] == "1")
                                 {
-                                    if (CurrentGames.ContainsKey(acc.AccountId))
+                                    if (_currentGames.ContainsKey(acc.AccountId))
                                     {
-                                        candidates = CurrentGames[acc.AccountId].ToList();
+                                        candidates = _currentGames[acc.AccountId].ToList();
                                         candidates.Shuffle();
                                         status = "<Success><Awards>" + candidates[int.Parse(Query["choice"])] + "</Awards></Success>";
                                         gifts.Add(candidates[int.Parse(Query["choice"])]);
                                         candidates.Remove(candidates[int.Parse(Query["choice"])]);
-                                        CurrentGames[acc.AccountId] = candidates.ToArray();
+                                        _currentGames[acc.AccountId] = candidates.ToArray();
                                     }
                                 }
                                 else if (Query["status"] == "2")
@@ -127,9 +122,9 @@ namespace server.account
                         else
                             status = "<Error>Invalid gameId</Error>";
                     }
-                    if (currency == GOLD)
+                    if (currency == Gold)
                         db.UpdateCredit(acc, price == -1 ? 0 : -price);
-                    else if (currency == FORTUNETOKENS)
+                    else if (currency == Fortunetokens)
                         db.UpdateFortuneToken(acc, price == -1 ? 0 : -price);
 
                     db.AddGifts(acc, gifts);

@@ -8,6 +8,7 @@ using wServer.logic;
 using wServer.networking;
 using wServer.networking.cliPackets;
 using wServer.networking.svrPackets;
+using FailurePacket = wServer.networking.svrPackets.FailurePacket;
 
 #endregion
 
@@ -29,23 +30,22 @@ namespace wServer.realm.entities.player
 
     public partial class Player : Character, IContainer, IPlayer
     {
-        private static readonly ILog log = LogManager.GetLogger(typeof(Player));
 
-        private bool dying;
+        private bool _dying;
 
-        private Item[] inventory;
+        private Item[] _inventory;
 
-        private float hpRegenCounter;
-        private float mpRegenCounter;
-        private bool resurrecting;
+        private float _hpRegenCounter;
+        private float _mpRegenCounter;
+        private bool _resurrecting;
 
-        public int checkForDex = 0;
-        public int lastShootTime = -1;
-        public int shootCounter = 0;
+        public int CheckForDex = 0;
+        public int LastShootTime = -1;
+        public int ShootCounter = 0;
 
-        private byte[,] tiles;
-        private int pingSerial;
-        private SetTypeSkin setTypeSkin;
+        private byte[,] _tiles;
+        private int _pingSerial;
+        private SetTypeSkin _setTypeSkin;
 
         public Player(RealmManager manager, Client psr)
             : base(manager, (ushort)psr.Character.ObjectType, psr.Random)
@@ -74,11 +74,11 @@ namespace wServer.realm.entities.player
                 Fame = psr.Character.CurrentFame;
                 XpBoosted = psr.Character.XpBoosted;
                 XpBoostTimeLeft = psr.Character.XpTimer;
-                xpFreeTimer = XpBoostTimeLeft != -1.0;
+                _xpFreeTimer = XpBoostTimeLeft != -1.0;
                 LootDropBoostTimeLeft = psr.Character.LDTimer;
-                lootDropBoostFreeTimer = LootDropBoost;
+                _lootDropBoostFreeTimer = LootDropBoost;
                 LootTierBoostTimeLeft = psr.Character.LTTimer;
-                lootTierBoostFreeTimer = LootTierBoost;
+                _lootTierBoostFreeTimer = LootTierBoost;
                 var state =
                     psr.Account.Stats.ClassStates.SingleOrDefault(_ => Utils.FromString(_.ObjectType) == ObjectType);
                 FameGoal = GetFameGoal(state?.BestFame ?? 0);
@@ -107,7 +107,7 @@ namespace wServer.realm.entities.player
                 }
                 catch (Exception ex)
                 {
-                    log.Error(ex);
+                    Log.Error(ex);
                 }
 
                 if (HasBackpack)
@@ -177,7 +177,7 @@ namespace wServer.realm.entities.player
             }
             catch (Exception e)
             {
-                log.Error(e);
+                Log.Error(e);
             }
         }
 
@@ -277,15 +277,15 @@ namespace wServer.realm.entities.player
 
         public Item[] Inventory
         {
-            get { return inventory; }
-            set { inventory = value; }
+            get { return _inventory; }
+            set { _inventory = value; }
         }
 
         public GuildManager Guild { get; set; }
 
         public int[] SlotTypes { get; set; }
-        public int MaximumHP { get; private set; }
-        public ushort dmg { get; private set; }
+        public int MaximumHp { get; private set; }
+        public ushort Dmg { get; private set; }
         public int AshCooldown { get; private set; }
 
         public void Damage(int dmg, Entity chr)
@@ -332,7 +332,7 @@ namespace wServer.realm.entities.player
             }
             catch (Exception e)
             {
-                log.Error("Error while processing playerDamage: ", e);
+                Log.Error("Error while processing playerDamage: ", e);
             }
         }
 
@@ -363,28 +363,28 @@ namespace wServer.realm.entities.player
             if (Glowing)
                 stats[StatsType.Glowing] = 1;
 
-            stats[StatsType.HP] = HP;
-            stats[StatsType.MP] = Mp;
+            stats[StatsType.Hp] = HP;
+            stats[StatsType.Mp] = Mp;
 
-            stats[StatsType.Inventory0] = (int)(Inventory[0]?.ObjectType ?? -1);
-            stats[StatsType.Inventory1] = (int)(Inventory[1]?.ObjectType ?? -1);
-            stats[StatsType.Inventory2] = (int)(Inventory[2]?.ObjectType ?? -1);
-            stats[StatsType.Inventory3] = (int)(Inventory[3]?.ObjectType ?? -1);
-            stats[StatsType.Inventory4] = (int)(Inventory[4]?.ObjectType ?? -1);
-            stats[StatsType.Inventory5] = (int)(Inventory[5]?.ObjectType ?? -1);
-            stats[StatsType.Inventory6] = (int)(Inventory[6]?.ObjectType ?? -1);
-            stats[StatsType.Inventory7] = (int)(Inventory[7]?.ObjectType ?? -1);
-            stats[StatsType.Inventory8] = (int)(Inventory[8]?.ObjectType ?? -1);
-            stats[StatsType.Inventory9] = (int)(Inventory[9]?.ObjectType ?? -1);
-            stats[StatsType.Inventory10] = (int)(Inventory[10]?.ObjectType ?? -1);
-            stats[StatsType.Inventory11] = (int)(Inventory[11]?.ObjectType ?? -1);
+            stats[StatsType.Inventory0] = Inventory[0]?.ObjectType ?? -1;
+            stats[StatsType.Inventory1] = Inventory[1]?.ObjectType ?? -1;
+            stats[StatsType.Inventory2] = Inventory[2]?.ObjectType ?? -1;
+            stats[StatsType.Inventory3] = Inventory[3]?.ObjectType ?? -1;
+            stats[StatsType.Inventory4] = Inventory[4]?.ObjectType ?? -1;
+            stats[StatsType.Inventory5] = Inventory[5]?.ObjectType ?? -1;
+            stats[StatsType.Inventory6] = Inventory[6]?.ObjectType ?? -1;
+            stats[StatsType.Inventory7] = Inventory[7]?.ObjectType ?? -1;
+            stats[StatsType.Inventory8] = Inventory[8]?.ObjectType ?? -1;
+            stats[StatsType.Inventory9] = Inventory[9]?.ObjectType ?? -1;
+            stats[StatsType.Inventory10] = Inventory[10]?.ObjectType ?? -1;
+            stats[StatsType.Inventory11] = Inventory[11]?.ObjectType ?? -1;
 
             if (Boost == null) CalcBoost();
 
             if (Boost != null)
             {
-                stats[StatsType.MaximumHP] = Stats[0] + Boost[0];
-                stats[StatsType.MaximumMP] = Stats[1] + Boost[1];
+                stats[StatsType.MaximumHp] = Stats[0] + Boost[0];
+                stats[StatsType.MaximumMp] = Stats[1] + Boost[1];
                 stats[StatsType.Attack] = Stats[2] + Boost[2];
                 stats[StatsType.Defense] = Stats[3] + Boost[3];
                 stats[StatsType.Speed] = Stats[4] + Boost[4];
@@ -402,19 +402,19 @@ namespace wServer.realm.entities.player
                 stats[StatsType.DexterityBonus] = Boost[7];
             }
 
-            stats[StatsType.Size] = setTypeSkin?.Size ?? Size;
-            stats[StatsType.Has_Backpack] = HasBackpack.GetHashCode();
+            stats[StatsType.Size] = _setTypeSkin?.Size ?? Size;
+            stats[StatsType.HasBackpack] = HasBackpack.GetHashCode();
 
-            stats[StatsType.Backpack0] = (int)(HasBackpack ? (Inventory[12]?.ObjectType ?? -1) : -1);
-            stats[StatsType.Backpack1] = (int)(HasBackpack ? (Inventory[13]?.ObjectType ?? -1) : -1);
-            stats[StatsType.Backpack2] = (int)(HasBackpack ? (Inventory[14]?.ObjectType ?? -1) : -1);
-            stats[StatsType.Backpack3] = (int)(HasBackpack ? (Inventory[15]?.ObjectType ?? -1) : -1);
-            stats[StatsType.Backpack4] = (int)(HasBackpack ? (Inventory[16]?.ObjectType ?? -1) : -1);
-            stats[StatsType.Backpack5] = (int)(HasBackpack ? (Inventory[17]?.ObjectType ?? -1) : -1);
-            stats[StatsType.Backpack6] = (int)(HasBackpack ? (Inventory[18]?.ObjectType ?? -1) : -1);
-            stats[StatsType.Backpack7] = (int)(HasBackpack ? (Inventory[19]?.ObjectType ?? -1) : -1);
+            stats[StatsType.Backpack0] = HasBackpack ? (Inventory[12]?.ObjectType ?? -1) : -1;
+            stats[StatsType.Backpack1] = HasBackpack ? (Inventory[13]?.ObjectType ?? -1) : -1;
+            stats[StatsType.Backpack2] = HasBackpack ? (Inventory[14]?.ObjectType ?? -1) : -1;
+            stats[StatsType.Backpack3] = HasBackpack ? (Inventory[15]?.ObjectType ?? -1) : -1;
+            stats[StatsType.Backpack4] = HasBackpack ? (Inventory[16]?.ObjectType ?? -1) : -1;
+            stats[StatsType.Backpack5] = HasBackpack ? (Inventory[17]?.ObjectType ?? -1) : -1;
+            stats[StatsType.Backpack6] = HasBackpack ? (Inventory[18]?.ObjectType ?? -1) : -1;
+            stats[StatsType.Backpack7] = HasBackpack ? (Inventory[19]?.ObjectType ?? -1) : -1;
 
-            stats[StatsType.Skin] = setTypeSkin?.SkinType ?? PlayerSkin;
+            stats[StatsType.Skin] = _setTypeSkin?.SkinType ?? PlayerSkin;
             stats[StatsType.HealStackCount] = HealthPotions;
             stats[StatsType.MagicStackCount] = MagicPotions;
 
@@ -439,8 +439,8 @@ namespace wServer.realm.entities.player
                 if (Inventory[i] == null) continue;
                 foreach (var pair in Inventory[i].StatsBoost)
                 {
-                    if (pair.Key == StatsType.MaximumHP) Boost[0] += pair.Value;
-                    if (pair.Key == StatsType.MaximumMP) Boost[1] += pair.Value;
+                    if (pair.Key == StatsType.MaximumHp) Boost[0] += pair.Value;
+                    if (pair.Key == StatsType.MaximumMp) Boost[1] += pair.Value;
                     if (pair.Key == StatsType.Attack) Boost[2] += pair.Value;
                     if (pair.Key == StatsType.Defense) Boost[3] += pair.Value;
                     if (pair.Key == StatsType.Speed) Boost[4] += pair.Value;
@@ -450,9 +450,9 @@ namespace wServer.realm.entities.player
                 }
             }
 
-            if (setTypeBoosts == null) return;
+            if (_setTypeBoosts == null) return;
             for (var i = 0; i < 8; i++)
-                Boost[i] += setTypeBoosts[i];
+                Boost[i] += _setTypeBoosts[i];
         }
 
         public bool CompareName(string name)
@@ -469,8 +469,8 @@ namespace wServer.realm.entities.player
                 return;
             if (CheckNotBrokenAmulet(MathsUtils.GenerateProb(100)))
                 return;
-            if (dying) return;
-            dying = true;
+            if (_dying) return;
+            _dying = true;
             var killPlayer = true;
             switch (Owner.Name)
 
@@ -485,14 +485,14 @@ namespace wServer.realm.entities.player
                         ApplyConditionEffect(new ConditionEffect
                         {
                             Effect = ConditionEffectIndex.Invulnerable,
-                            DurationMS = -1
+                            DurationMs = -1
                         });
                         return;
                     }
             }
 
 
-            if (Client.Stage == ProtocalStage.Disconnected || resurrecting)
+            if (Client.Stage == ProtocalStage.Disconnected || _resurrecting)
                 return;
             if (CheckResurrection())
                 return;
@@ -541,8 +541,8 @@ namespace wServer.realm.entities.player
                             AccountId = AccountId,
                             CharId = Client.Character.CharacterId,
                             Killer = killer,
-                            obf0 = -1,
-                            obf1 = -1,
+                            Obf0 = -1,
+                            Obf1 = -1
                         });
                         Owner.Timers.Add(new WorldTimer(1000, (w, t) => Client.Disconnect()));
                         Owner.LeaveWorld(this);
@@ -552,7 +552,7 @@ namespace wServer.realm.entities.player
                 }
                 catch (Exception e)
                 {
-                    log.Error(e);
+                    Log.Error(e);
                 }
             }
             else
@@ -580,7 +580,7 @@ namespace wServer.realm.entities.player
                     ApplyConditionEffect(new ConditionEffect
                     {
                         Effect = ConditionEffectIndex.Invulnerable,
-                        DurationMS = 100000000
+                        DurationMs = 100000000
                     });
 
                     Client.Reconnect(new ReconnectPacket
@@ -589,18 +589,15 @@ namespace wServer.realm.entities.player
                         Port = 2050,
                         GameId = World.NEXUS_ID,
                         Name = "Nexus",
-                        Key = Empty<byte>.Array,
+                        Key = Empty<byte>.Array
                     });
-                    newbieTime += 1000;
+                    _newbieTime += 1000;
 
-                    resurrecting = true;
+                    _resurrecting = true;
                     return true;
                 }
-                else
-                {
-                    foreach (Player player in Owner.Players.Values)
-                        player.SendInfo($"{Name}'s {item.ObjectId} unfortunately did not save him from death");
-                }
+                foreach (Player player in Owner.Players.Values)
+                    player.SendInfo($"{Name}'s {item.ObjectId} unfortunately did not save him from death");
             }
             return false;
         }
@@ -623,7 +620,7 @@ namespace wServer.realm.entities.player
                     ApplyConditionEffect(new ConditionEffect
                     {
                         Effect = ConditionEffectIndex.Invulnerable,
-                        DurationMS = 1000000
+                        DurationMs = 1000000
                     });
 
                     Client.Reconnect(new ReconnectPacket
@@ -632,18 +629,15 @@ namespace wServer.realm.entities.player
                         Port = 2050,
                         GameId = World.NEXUS_ID,
                         Name = "Nexus",
-                        Key = Empty<byte>.Array,
+                        Key = Empty<byte>.Array
                     });
-                    newbieTime += 1000;
+                    _newbieTime += 1000;
 
-                    resurrecting = true;
+                    _resurrecting = true;
                     return true;
                 }
-                else
-                {
-                    foreach (Player player in Owner.Players.Values)
-                        player.SendInfo($"{Name}'s {item.ObjectId} fortunately did not save him from death. CHEATER!");
-                }
+                foreach (Player player in Owner.Players.Values)
+                    player.SendInfo($"{Name}'s {item.ObjectId} fortunately did not save him from death. CHEATER!");
             }
             return false;
         }
@@ -656,7 +650,7 @@ namespace wServer.realm.entities.player
 
                 if (item == null || !item.MantleResurrect) continue;
 
-                if (PendantReady == 1)
+                if (_pendantReady == 1)
                 {
 
                     if (HP < MaxHp / 5)
@@ -666,23 +660,23 @@ namespace wServer.realm.entities.player
                         ApplyConditionEffect(new ConditionEffect
                         {
                             Effect = ConditionEffectIndex.Stasis,
-                            DurationMS = 1500
+                            DurationMs = 1500
 
                         });
 
                         ApplyConditionEffect(new ConditionEffect
                         {
                             Effect = ConditionEffectIndex.Paralyzed,
-                            DurationMS = 1500
+                            DurationMs = 1500
                         });
                         ApplyConditionEffect(new ConditionEffect
 
                         {
                             Effect = ConditionEffectIndex.Stunned,
-                            DurationMS = 1500
+                            DurationMs = 1500
 
                         });
-                        PendantReady = 0;
+                        _pendantReady = 0;
                         return true;
                     }
                 }
@@ -735,7 +729,7 @@ namespace wServer.realm.entities.player
                 y = rand.Next(0, owner.Map.Height);
             } while (owner.Map[x, y].Region != TileRegion.Spawn);
             Move(x + 0.5f, y + 0.5f);
-            tiles = new byte[owner.Map.Width, owner.Map.Height];
+            _tiles = new byte[owner.Map.Width, owner.Map.Height];
             SetNewbiePeriod();
             base.Init(owner);
 
@@ -744,15 +738,15 @@ namespace wServer.realm.entities.player
 
             if (owner.Id == World.NEXUS_ID || owner.Name == "Vault")
             {
-                Client.SendPacket(new Global_NotificationPacket
+                Client.SendPacket(new GlobalNotificationPacket
                 {
                     Type = 0,
                     Text = Client.Account.Gifts.Count > 0 ? "giftChestOccupied" : "giftChestEmpty"
                 });
             }
 
-            SendAccountList(Locked, AccountListPacket.LOCKED_LIST_ID);
-            SendAccountList(Ignored, AccountListPacket.IGNORED_LIST_ID);
+            SendAccountList(Locked, AccountListPacket.LockedListId);
+            SendAccountList(Ignored, AccountListPacket.IgnoredListId);
 
             WorldTimer[] accTimer = {null};
             owner.Timers.Add(accTimer[0] = new WorldTimer(5000, (w, t) =>
@@ -770,9 +764,9 @@ namespace wServer.realm.entities.player
             }));
 
             WorldTimer[] pingTimer = {null};
-            owner.Timers.Add(pingTimer[0] = new WorldTimer(PING_PERIOD, (w, t) =>
+            owner.Timers.Add(pingTimer[0] = new WorldTimer(PingPeriod, (w, t) =>
             {
-                Client.SendPacket(new PingPacket { Serial = pingSerial++ });
+                Client.SendPacket(new PingPacket { Serial = _pingSerial++ });
                 pingTimer[0].Reset();
                 Manager.Logic.AddPendingAction(_ => w.Timers.Add(pingTimer[0]), PendingPriority.Creation);
             }));
@@ -785,14 +779,14 @@ namespace wServer.realm.entities.player
             if (Client.Account.IsGuestAccount)
             {
                 owner.Timers.Add(new WorldTimer(1000, (w, t) => Client.Disconnect()));
-                Client.SendPacket(new networking.svrPackets.FailurePacket
+                Client.SendPacket(new FailurePacket
                 {
                     ErrorId = 8,
                     ErrorDescription = "Registration needed."
                 });
                 Client.SendPacket(new PasswordPromtPacket
                 {
-                    CleanPasswordStatus = PasswordPromtPacket.REGISTER
+                    CleanPasswordStatus = PasswordPromtPacket.Register
                 });
                 return;
             }
@@ -855,7 +849,7 @@ namespace wServer.realm.entities.player
             try
             {
                 if (obj == null) return;
-                if (!TPCooledDown())
+                if (!TpCooledDown())
                 {
                     SendError("Player.teleportCoolDown");
                     return;
@@ -887,7 +881,7 @@ namespace wServer.realm.entities.player
                     return;
                 }
 
-                SetTPDisabledPeriod();
+                SetTpDisabledPeriod();
                 Move(obj.X, obj.Y);
                 Pet?.Move(obj.X, obj.X);
                 FameCounter.Teleport();
@@ -896,7 +890,7 @@ namespace wServer.realm.entities.player
             }
             catch (Exception ex)
             {
-                log.Error(ex);
+                Log.Error(ex);
                 SendError("player.cannotTeleportTo");
                 return;
             }
@@ -947,7 +941,7 @@ namespace wServer.realm.entities.player
             }
             catch (Exception e)
             {
-                log.Error(e);
+                Log.Error(e);
             }
 
             if (Stats != null && Boost != null)
@@ -958,7 +952,7 @@ namespace wServer.realm.entities.player
 
             if (!KeepAlive(time)) return;
 
-            if (HP > MaxHp /2) PendantReady = 1;          
+            if (HP > MaxHp /2) _pendantReady = 1;          
 
             if (Boost == null) CalcBoost();
 
@@ -994,13 +988,13 @@ namespace wServer.realm.entities.player
                     SendUpdate(time);
                     if (!Owner.IsPassable((int)X, (int)Y))
                     {
-                        log.Fatal($"Player {Name} No-Cliped at position: {X}, {Y}");
+                        Log.Fatal($"Player {Name} No-Cliped at position: {X}, {Y}");
                     }
                 }
             }
             catch (Exception e)
             {
-                log.Error(e);
+                Log.Error(e);
             }
             try
             {
@@ -1008,10 +1002,10 @@ namespace wServer.realm.entities.player
             }
             catch (Exception e)
             {
-                log.Error(e);
+                Log.Error(e);
             }
 
-            if (HP < 0 && !dying)
+            if (HP < 0 && !_dying)
             {
                 Client.Player.SendError("Woooooah there cowboy! you almost died to 'Unknown' Lucky thats a dumb way to die so I'm not gonna let that happen!");
                 Client.Reconnect(new ReconnectPacket
@@ -1020,7 +1014,7 @@ namespace wServer.realm.entities.player
                     Port = Program.Settings.GetValue<int>("port"),
                     GameId = World.NEXUS_ID,
                     Name = "Nexus",
-                    Key = Empty<byte>.Array,
+                    Key = Empty<byte>.Array
                 });
                 return;
             }
@@ -1056,10 +1050,10 @@ namespace wServer.realm.entities.player
                     Port = Program.Settings.GetValue<int>("port"),
                     GameId = World.NEXUS_ID,
                     Name = "Nexus",
-                    Key = Empty<byte>.Array,
+                    Key = Empty<byte>.Array
                 });
 
-                resurrecting = true;
+                _resurrecting = true;
                 return true;
             }
             return false;
@@ -1069,65 +1063,38 @@ namespace wServer.realm.entities.player
         {
             var maxed = (from i in Manager.GameData.ObjectTypeToElement[ObjectType].Elements("LevelIncrease") let xElement = Manager.GameData.ObjectTypeToElement[ObjectType].Element(i.Value) where xElement != null let limit = int.Parse(xElement.Attribute("max").Value) let idx = StatsManager.StatsNameToIndex(i.Value) where Stats[idx] >= limit select limit).Count();
 
-            ushort objType;
-            int? time;
             switch (maxed)
             {
                 case 8:
-                    objType = 0x0735;
-                    time = null;
                     break;
 
                 case 7:
-                    objType = 0x0734;
-                    time = null;
                     break;
 
                 case 6:
-                    objType = 0x072b;
-                    time = null;
                     break;
 
                 case 5:
-                    objType = 0x072a;
-                    time = null;
                     break;
 
                 case 4:
-                    objType = 0x0729;
-                    time = null;
                     break;
 
                 case 3:
-                    objType = 0x0728;
-                    time = null;
                     break;
 
                 case 2:
-                    objType = 0x0727;
-                    time = null;
                     break;
 
                 case 1:
-                    objType = 0x0726;
-                    time = null;
                     break;
 
                 default:
                     if (Level <= 1)
                     {
-                        objType = 0x0723;
-                        time = 30 * 1000;
                     }
                     else if (Level < 20)
                     {
-                        objType = 0x0724;
-                        time = 60 * 1000;
-                    }
-                    else
-                    {
-                        objType = 0x0725;
-                        time = 5 * 60 * 1000;
                     }
                     break;
 
@@ -1138,35 +1105,35 @@ namespace wServer.realm.entities.player
         private void HandleRegen(RealmTime time)
         {
             if (HP == Stats[0] + Boost[0] || !CanHpRegen())
-                hpRegenCounter = 0;
+                _hpRegenCounter = 0;
             else
             {
-                hpRegenCounter += StatsManager.GetHPRegen() * time.thisTickTimes / 1000f;
-                var regen = (int)hpRegenCounter;
+                _hpRegenCounter += StatsManager.GetHPRegen() * time.thisTickTimes / 1000f;
+                var regen = (int)_hpRegenCounter;
                 if (regen > 0)
                 {
                     HP = Math.Min(Stats[0] + Boost[0], HP + regen);
-                    hpRegenCounter -= regen;
+                    _hpRegenCounter -= regen;
                     UpdateCount++;
                 }
             }
 
             if (Mp == Stats[1] + Boost[1] || !CanMpRegen())
-                mpRegenCounter = 0;
+                _mpRegenCounter = 0;
             else
             {
-                mpRegenCounter += StatsManager.GetMPRegen() * time.thisTickTimes / 1000f;
-                var regen = (int)mpRegenCounter;
+                _mpRegenCounter += StatsManager.GetMPRegen() * time.thisTickTimes / 1000f;
+                var regen = (int)_mpRegenCounter;
                 if (regen <= 0) return;
                 Mp = Math.Min(Stats[1] + Boost[1], Mp + regen);
-                mpRegenCounter -= regen;
+                _mpRegenCounter -= regen;
                 UpdateCount++;
             }
         }
 
         public new void Dispose()
         {
-            tiles = null;
+            _tiles = null;
             Guild.Remove(this);
         }
     }

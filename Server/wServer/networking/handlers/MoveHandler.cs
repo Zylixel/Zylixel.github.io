@@ -2,7 +2,6 @@
 
 using wServer.networking.cliPackets;
 using wServer.realm;
-using wServer.realm.entities.player;
 
 #endregion
 
@@ -10,7 +9,7 @@ namespace wServer.networking.handlers
 {
     internal class MoveHandler : PacketHandlerBase<MovePacket>
     {
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.MOVE; }
         }

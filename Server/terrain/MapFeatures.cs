@@ -11,13 +11,13 @@ namespace terrain
 {
     internal class MapFeatures
     {
-        private readonly PolygonMap map;
-        private readonly Random rand;
+        private readonly PolygonMap _map;
+        private readonly Random _rand;
 
         public MapFeatures(PolygonMap map, int seed)
         {
-            this.map = map;
-            rand = new Random(seed);
+            this._map = map;
+            _rand = new Random(seed);
         }
 
         private static MapEdge SelectDownhill(MapNode node)
@@ -33,14 +33,14 @@ namespace terrain
         public IEnumerable<MapNode[]> GenerateRivers()
         {
             int c = 0;
-            MapNode[] eligibleRivers = map.Polygons
+            MapNode[] eligibleRivers = _map.Polygons
                 .SelectMany(_ => _.Nodes)
                 .Where(_ => _.DistanceToCoast > 0.25 && _.DistanceToCoast < 0.8)
                 .ToArray();
             List<MapNode[]> ret = new List<MapNode[]>();
             do
             {
-                MapNode node = eligibleRivers[rand.Next(0, eligibleRivers.Length)];
+                MapNode node = eligibleRivers[_rand.Next(0, eligibleRivers.Length)];
                 Stack<MapEdge> edges = new Stack<MapEdge>();
                 HashSet<MapNode> visited = new HashSet<MapNode>();
                 edges.Push(SelectDownhill(node));
@@ -67,7 +67,7 @@ namespace terrain
 
         public IEnumerable<Coordinate[]> GenerateRoads()
         {
-            double[] heights = map.Polygons
+            double[] heights = _map.Polygons
                 .Select(_ => _.DistanceToCoast.Value)
                 .Distinct()
                 .OrderBy(_ => _).ToArray();
@@ -80,7 +80,7 @@ namespace terrain
             };
             Dictionary<MapPolygon, int> centerContour = new Dictionary<MapPolygon, int>();
             Queue<MapPolygon> queue = new Queue<MapPolygon>();
-            foreach (MapPolygon i in map.Polygons)
+            foreach (MapPolygon i in _map.Polygons)
                 if (i.IsOcean)
                     queue.Enqueue(i);
             do
@@ -108,7 +108,7 @@ namespace terrain
             } while (queue.Count > 0);
 
             Dictionary<MapNode, int> cornerContour = new Dictionary<MapNode, int>();
-            foreach (MapPolygon i in map.Polygons)
+            foreach (MapPolygon i in _map.Polygons)
                 foreach (MapNode j in i.Nodes)
                 {
                     int curr;
@@ -120,7 +120,7 @@ namespace terrain
 
             List<Coordinate>[] points = new List<Coordinate>[roadHeights.Length - 1];
             for (int i = 0; i < points.Length; i++) points[i] = new List<Coordinate>();
-            foreach (MapEdge i in map.Polygons.SelectMany(_ => _.Nodes).SelectMany(_ => _.Edges).Distinct())
+            foreach (MapEdge i in _map.Polygons.SelectMany(_ => _.Nodes).SelectMany(_ => _.Edges).Distinct())
             {
                 if (cornerContour[i.From] < cornerContour[i.To])
                 {

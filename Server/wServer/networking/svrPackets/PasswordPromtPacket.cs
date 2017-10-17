@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace wServer.networking.svrPackets
+﻿namespace wServer.networking.svrPackets
 {
     public class PasswordPromtPacket : ServerPacket
     {
-        public const int SIGN_IN = 2;
-        public const int SEND_EMAIL_AND_SIGN_IN = 3;
-        public const int REGISTER = 4;
+        public const int SignIn = 2;
+        public const int SendEmailAndSignIn = 3;
+        public const int Register = 4;
 
         public int CleanPasswordStatus { get; set; }
 
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.PASSWORDPROMPT; }
         }

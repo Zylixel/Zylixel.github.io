@@ -17,7 +17,7 @@ namespace wServer.networking.handlers
 {
     internal class InvSwapHandler : PacketHandlerBase<InvSwapPacket>
     {
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.INVSWAP; }
         }
@@ -141,7 +141,7 @@ namespace wServer.networking.handlers
                         }
                         catch (Exception ex)
                         {
-                            log.Error(ex);
+                            Log.Error(ex);
                         }
                     }
                     con1.Inventory[packet.SlotObject1.SlotId] = null;
@@ -221,7 +221,7 @@ namespace wServer.networking.handlers
 
                 if (!ret)
                 {
-                    log.FatalFormat("Cheat engine detected for player {0},\nInvalid InvSwap. {1} instead of {2}",
+                    Log.FatalFormat("Cheat engine detected for player {0},\nInvalid InvSwap. {1} instead of {2}",
                             client.Player.Name, client.Manager.GameData.Items[packet.SlotObject1.ObjectType].ObjectId, item1.ObjectId);
                     foreach (Player player in client.Player.Owner.Players.Values)
                         if (player.Client.Account.Rank >= 2)
@@ -235,7 +235,7 @@ namespace wServer.networking.handlers
 
                 if (!ret)
                 {
-                    log.FatalFormat("Cheat engine detected for player {0},\nInvalid InvSwap. {1} instead of {2}",
+                    Log.FatalFormat("Cheat engine detected for player {0},\nInvalid InvSwap. {1} instead of {2}",
                             client.Player.Name, item1.ObjectId, client.Manager.GameData.Items[packet.SlotObject2.ObjectType].ObjectId);
                     foreach (Player player in client.Player.Owner.Players.Values)
                         if (player.Client.Account.Rank >= 2)

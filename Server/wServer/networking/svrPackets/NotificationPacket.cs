@@ -6,7 +6,7 @@
         public string Text { get; set; }
         public ARGB Color { get; set; }
 
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.NOTIFICATION; }
         }

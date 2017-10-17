@@ -10,7 +10,7 @@ namespace wServer.networking.handlers
 {
     internal class PlayerHitHander : PacketHandlerBase<PlayerHitPacket>
     {
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.PLAYERHIT; }
         }
@@ -44,12 +44,12 @@ namespace wServer.networking.handlers
                         client.Player.Damage(proj.Damage, proj.ProjectileOwner.Self);
                     }
                     else
-                        log.Error("Can't register playerhit." + packet.ObjectId + " - " + packet.BulletId);
+                        Log.Error("Can't register playerhit." + packet.ObjectId + " - " + packet.BulletId);
                 }
             }
             catch (Exception ex)
             {
-                log.ErrorFormat("Error in PlayerHit: {0}", ex);
+                Log.ErrorFormat("Error in PlayerHit: {0}", ex);
             }
         }
     }

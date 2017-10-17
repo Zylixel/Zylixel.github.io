@@ -1,13 +1,9 @@
 ﻿#region
 
-using db;
-using db.data;
-using MySql.Data.MySqlClient;
 using System;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using System.Threading.Tasks;
-using wServer.logic;
+using db;
+using MySql.Data.MySqlClient;
 using wServer.networking.cliPackets;
 using wServer.realm;
 using wServer.realm.entities;
@@ -19,7 +15,7 @@ namespace wServer.networking.handlers
 {
     internal class UseItemHandler : PacketHandlerBase<UseItemPacket>
     {
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.USEITEM; }
         }
@@ -40,7 +36,7 @@ namespace wServer.networking.handlers
 
                         if (item.ObjectId != "Health Potion")
                         {
-                            log.FatalFormat("Cheat engine detected for player {0},\nItem should be a Health Potion, but its {1}.",
+                            Log.FatalFormat("Cheat engine detected for player {0},\nItem should be a Health Potion, but its {1}.",
                                 client.Player.Name, item.ObjectId);
                             foreach (Player player in client.Player.Owner.Players.Values)
                                 if (player.Client.Account.Rank >= 2)
@@ -143,7 +139,7 @@ namespace wServer.networking.handlers
 
                         if (item.ObjectId != "Magic Potion")
                         {
-                            log.FatalFormat("Cheat engine detected for player {0},\nItem should be a Magic Potion, but its {1}.",
+                            Log.FatalFormat("Cheat engine detected for player {0},\nItem should be a Magic Potion, but its {1}.",
                                 client.Player.Name, item.ObjectId);
                             foreach (var player in client.Player.Owner.Players.Values.Where(player => player.Client.Account.Rank >= 2))
                                 player.SendInfo($"Cheat engine detected for player {client.Player.Name},\nItem should be a Magic Potion, but its {item.ObjectId}.");

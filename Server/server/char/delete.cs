@@ -1,10 +1,6 @@
 ﻿#region
 
-using System.Collections.Specialized;
-using System.IO;
-using System.Net;
 using System.Text;
-using System.Web;
 using db;
 using MySql.Data.MySqlClient;
 
@@ -12,7 +8,7 @@ using MySql.Data.MySqlClient;
 
 namespace server.@char
 {
-    internal class delete : RequestHandler
+    internal class Delete : RequestHandler
     {
         protected override void HandleRequest()
         {

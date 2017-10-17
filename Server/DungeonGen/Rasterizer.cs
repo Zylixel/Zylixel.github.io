@@ -37,18 +37,18 @@ namespace DungeonGenerator {
 	}
 
 	public class Rasterizer {
-		readonly Random rand;
-		readonly DungeonGraph graph;
-		readonly BitmapRasterizer<DungeonTile> rasterizer;
+		readonly Random _rand;
+		readonly DungeonGraph _graph;
+		readonly BitmapRasterizer<DungeonTile> _rasterizer;
 
 		static readonly TileType Space = new TileType(0x00fe, "Space");
 
 		public RasterizationStep Step { get; set; }
 
 		public Rasterizer(int seed, DungeonGraph graph) {
-			rand = new Random(seed);
-			this.graph = graph;
-			rasterizer = new BitmapRasterizer<DungeonTile>(graph.Width, graph.Height);
+			_rand = new Random(seed);
+			this._graph = graph;
+			_rasterizer = new BitmapRasterizer<DungeonTile>(graph.Width, graph.Height);
 			Step = RasterizationStep.Initialize;
 		}
 
@@ -61,15 +61,15 @@ namespace DungeonGenerator {
 		void RunStep() {
 			switch (Step) {
 				case RasterizationStep.Initialize:
-					rasterizer.Clear(new DungeonTile {
+					_rasterizer.Clear(new DungeonTile {
 						TileType = Space
 					});
-					graph.Template.InitializeRasterization(graph);
+					_graph.Template.InitializeRasterization(_graph);
 					break;
 
 				case RasterizationStep.Background:
-					var bg = graph.Template.CreateBackground();
-					bg.Init(rasterizer, graph, rand);
+					var bg = _graph.Template.CreateBackground();
+					bg.Init(_rasterizer, _graph, _rand);
 					bg.Rasterize();
 					break;
 
@@ -82,8 +82,8 @@ namespace DungeonGenerator {
 					break;
 
 				case RasterizationStep.Overlay:
-					var overlay = graph.Template.CreateOverlay();
-					overlay.Init(rasterizer, graph, rand);
+					var overlay = _graph.Template.CreateOverlay();
+					overlay.Init(_rasterizer, _graph, _rand);
 					overlay.Rasterize();
 					break;
 			}
@@ -91,10 +91,10 @@ namespace DungeonGenerator {
 		}
 
 		void RasterizeCorridors() {
-			var corridor = graph.Template.CreateCorridor();
-			corridor.Init(rasterizer, graph, rand);
+			var corridor = _graph.Template.CreateCorridor();
+			corridor.Init(_rasterizer, _graph, _rand);
 
-			foreach (var room in graph.Rooms)
+			foreach (var room in _graph.Rooms)
 				foreach (var edge in room.Edges) {
 					if (edge.RoomA != room)
 						continue;
@@ -125,12 +125,12 @@ namespace DungeonGenerator {
 		}
 
 		void RasterizeRooms() {
-			foreach (var room in graph.Rooms)
-				room.Rasterize(rasterizer, rand);
+			foreach (var room in _graph.Rooms)
+				room.Rasterize(_rasterizer, _rand);
 		}
 
 		public DungeonTile[,] ExportMap() {
-			return rasterizer.Bitmap;
+			return _rasterizer.Bitmap;
 		}
 	}
 }

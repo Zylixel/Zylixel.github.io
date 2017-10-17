@@ -11,67 +11,67 @@ namespace terrain
 {
     internal class TerrainDisplay : Form
     {
-        private readonly PictureBox pic;
-        private readonly PictureBox pic2;
-        private readonly TerrainTile[,] tilesBak;
-        private Bitmap bmp;
-        private Mode mode;
-        private Panel panel;
-        private TerrainTile[,] tiles;
+        private readonly PictureBox _pic;
+        private readonly PictureBox _pic2;
+        private readonly TerrainTile[,] _tilesBak;
+        private Bitmap _bmp;
+        private Mode _mode;
+        private Panel _panel;
+        private TerrainTile[,] _tiles;
 
         public TerrainDisplay(TerrainTile[,] tiles)
         {
-            mode = Mode.Erase;
-            tilesBak = (TerrainTile[,]) tiles.Clone();
-            this.tiles = tiles;
+            _mode = Mode.Erase;
+            _tilesBak = (TerrainTile[,]) tiles.Clone();
+            this._tiles = tiles;
             ClientSize = new Size(800, 800);
             BackColor = Color.Black;
             WindowState = FormWindowState.Maximized;
-            panel = new Panel
+            _panel = new Panel
             {
                 Dock = DockStyle.Fill,
                 AutoScroll = true,
                 Controls =
                 {
-                    (pic = new PictureBox
+                    (_pic = new PictureBox
                     {
-                        Image = bmp = RenderColorBmp(tiles),
-                        SizeMode = PictureBoxSizeMode.AutoSize,
+                        Image = _bmp = RenderColorBmp(tiles),
+                        SizeMode = PictureBoxSizeMode.AutoSize
                     })
                 }
             };
-            panel.HorizontalScroll.Enabled = true;
-            panel.VerticalScroll.Enabled = true;
-            panel.HorizontalScroll.Visible = true;
-            panel.VerticalScroll.Visible = true;
-            Controls.Add(panel);
-            pic2 = new PictureBox
+            _panel.HorizontalScroll.Enabled = true;
+            _panel.VerticalScroll.Enabled = true;
+            _panel.HorizontalScroll.Visible = true;
+            _panel.VerticalScroll.Visible = true;
+            Controls.Add(_panel);
+            _pic2 = new PictureBox
             {
-                Image = bmp,
+                Image = _bmp,
                 Width = 250,
                 Height = 250,
                 SizeMode = PictureBoxSizeMode.Zoom
             };
-            Controls.Add(pic2);
-            pic2.BringToFront();
+            Controls.Add(_pic2);
+            _pic2.BringToFront();
 
-            Text = mode.ToString();
+            Text = _mode.ToString();
 
-            pic.MouseMove += pic_MouseMove;
-            pic.MouseDoubleClick += pic_MouseDoubleClick;
+            _pic.MouseMove += pic_MouseMove;
+            _pic.MouseDoubleClick += pic_MouseDoubleClick;
         }
 
         private void pic_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            tiles[e.X, e.Y].Region = TileRegion.Spawn;
-            bmp.SetPixel(e.X, e.Y, Color.FromArgb((int) GetColor(tiles[e.X, e.Y])));
-            pic.Invalidate();
-            pic2.Invalidate();
+            _tiles[e.X, e.Y].Region = TileRegion.Spawn;
+            _bmp.SetPixel(e.X, e.Y, Color.FromArgb((int) GetColor(_tiles[e.X, e.Y])));
+            _pic.Invalidate();
+            _pic2.Invalidate();
         }
 
         private void pic_MouseMove(object sender, MouseEventArgs e)
         {
-            if (mode == Mode.Erase && (MouseButtons & MouseButtons.Left) != 0)
+            if (_mode == Mode.Erase && (MouseButtons & MouseButtons.Left) != 0)
             {
                 Point center = e.Location;
                 for (int y = -10; y <= 10; y++)
@@ -79,21 +79,21 @@ namespace terrain
                     {
                         if (x*x + y*y <= 10*10)
                         {
-                            tiles[center.X + x, center.Y + y].Terrain = TerrainType.None;
-                            tiles[center.X + x, center.Y + y].Elevation = 0;
-                            tiles[center.X + x, center.Y + y].Biome = "ocean";
-                            tiles[center.X + x, center.Y + y].TileObj = "";
-                            tiles[center.X + x, center.Y + y].TileId = TileTypes.DeepWater;
-                            tiles[center.X + x, center.Y + y].Region = TileRegion.None;
-                            tiles[center.X + x, center.Y + y].Name = "";
-                            bmp.SetPixel(center.X + x, center.Y + y, Color.FromArgb(
-                                (int) GetColor(tiles[center.X + x, center.Y + y])));
+                            _tiles[center.X + x, center.Y + y].Terrain = TerrainType.None;
+                            _tiles[center.X + x, center.Y + y].Elevation = 0;
+                            _tiles[center.X + x, center.Y + y].Biome = "ocean";
+                            _tiles[center.X + x, center.Y + y].TileObj = "";
+                            _tiles[center.X + x, center.Y + y].TileId = TileTypes.DeepWater;
+                            _tiles[center.X + x, center.Y + y].Region = TileRegion.None;
+                            _tiles[center.X + x, center.Y + y].Name = "";
+                            _bmp.SetPixel(center.X + x, center.Y + y, Color.FromArgb(
+                                (int) GetColor(_tiles[center.X + x, center.Y + y])));
                         }
                     }
-                pic.Invalidate();
-                pic2.Invalidate();
+                _pic.Invalidate();
+                _pic2.Invalidate();
             }
-            else if (mode == Mode.Average && (MouseButtons & MouseButtons.Left) != 0)
+            else if (_mode == Mode.Average && (MouseButtons & MouseButtons.Left) != 0)
             {
                 Point center = e.Location;
                 Dictionary<TerrainTile, int> dict = new Dictionary<TerrainTile, int>();
@@ -101,7 +101,7 @@ namespace terrain
                     for (int x = -10; x <= 10; x++)
                         if (x*x + y*y <= 10*10)
                         {
-                            TerrainTile t = tiles[center.X + x, center.Y + y];
+                            TerrainTile t = _tiles[center.X + x, center.Y + y];
                             if (dict.ContainsKey(t))
                                 dict[t]++;
                             else
@@ -113,12 +113,12 @@ namespace terrain
                     for (int x = -10; x <= 10; x++)
                         if (x*x + y*y <= 10*10)
                         {
-                            tiles[center.X + x, center.Y + y] = targetTile;
-                            bmp.SetPixel(center.X + x, center.Y + y, Color.FromArgb(
-                                (int) GetColor(tiles[center.X + x, center.Y + y])));
+                            _tiles[center.X + x, center.Y + y] = targetTile;
+                            _bmp.SetPixel(center.X + x, center.Y + y, Color.FromArgb(
+                                (int) GetColor(_tiles[center.X + x, center.Y + y])));
                         }
-                pic.Invalidate();
-                pic2.Invalidate();
+                _pic.Invalidate();
+                _pic2.Invalidate();
             }
         }
 
@@ -126,7 +126,7 @@ namespace terrain
         {
             if (tile.Region == TileRegion.Spawn)
                 return 0xffff0000;
-            return TileTypes.color[tile.TileId];
+            return TileTypes.Color[tile.TileId];
         }
 
         private static Bitmap RenderColorBmp(TerrainTile[,] tiles)
@@ -147,22 +147,22 @@ namespace terrain
 
         protected override void OnKeyUp(KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter) mode = mode + 1;
-            if (mode == Mode.MAX) mode = 0;
-            Text = mode.ToString();
+            if (e.KeyCode == Keys.Enter) _mode = _mode + 1;
+            if (_mode == Mode.Max) _mode = 0;
+            Text = _mode.ToString();
 
             if (e.KeyCode == Keys.S)
             {
                 SaveFileDialog sfd = new SaveFileDialog();
                 sfd.Filter = "WMap files (*.wmap)|*.wmap|All Files (*.*)|*.*";
                 if (sfd.ShowDialog() != DialogResult.Cancel)
-                    WorldMapExporter.Export(tiles, sfd.FileName);
+                    WorldMapExporter.Export(_tiles, sfd.FileName);
             }
             else if (e.KeyCode == Keys.R)
             {
-                tiles = (TerrainTile[,]) tilesBak.Clone();
-                bmp = RenderColorBmp(tiles);
-                pic.Image = pic2.Image = bmp;
+                _tiles = (TerrainTile[,]) _tilesBak.Clone();
+                _bmp = RenderColorBmp(_tiles);
+                _pic.Image = _pic2.Image = _bmp;
             }
             base.OnKeyUp(e);
         }
@@ -171,7 +171,7 @@ namespace terrain
         {
             Erase,
             Average,
-            MAX
+            Max
         }
     }
 }

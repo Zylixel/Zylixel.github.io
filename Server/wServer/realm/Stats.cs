@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace wServer.realm
 {
     public enum CurrencyType
@@ -11,128 +12,114 @@ namespace wServer.realm
 
     public struct StatsType
     {
-        public readonly static StatsType MaximumHP = 0;
-        public readonly static StatsType HP = 1;
-        public readonly static StatsType Size = 2;
-        public readonly static StatsType MaximumMP = 3;
-        public readonly static StatsType MP = 4;
-        public readonly static StatsType ExperienceGoal = 5;
-        public readonly static StatsType Experience = 6;
-        public readonly static StatsType Level = 7;
-        public readonly static StatsType Inventory0 = 8;
-        public readonly static StatsType Inventory1 = 9;
-        public readonly static StatsType Inventory2 = 10;
-        public readonly static StatsType Inventory3 = 11;
-        public readonly static StatsType Inventory4 = 12;
-        public readonly static StatsType Inventory5 = 13;
-        public readonly static StatsType Inventory6 = 14;
-        public readonly static StatsType Inventory7 = 15;
-        public readonly static StatsType Inventory8 = 16;
-        public readonly static StatsType Inventory9 = 17;
-        public readonly static StatsType Inventory10 = 18;
-        public readonly static StatsType Inventory11 = 19;
-        public readonly static StatsType Attack = 20;
-        public readonly static StatsType Defense = 21;
-        public readonly static StatsType Speed = 22;
-        public readonly static StatsType Vitality = 26;
-        public readonly static StatsType Wisdom = 27;
-        public readonly static StatsType Dexterity = 28;
-        public readonly static StatsType Effects = 29;
-        public readonly static StatsType Stars = 30;
-        public readonly static StatsType Name = 31; //Is UTF
-        public readonly static StatsType Texture1 = 32;
-        public readonly static StatsType Texture2 = 33;
-        public readonly static StatsType MerchantMerchandiseType = 34;
-        public readonly static StatsType Credits = 35;
-        public readonly static StatsType SellablePrice = 36;
-        public readonly static StatsType PortalUsable = 37;
-        public readonly static StatsType AccountId = 38; //Is UTF
-        public readonly static StatsType CurrentFame = 39;
-        public readonly static StatsType SellablePriceCurrency = 40;
-        public readonly static StatsType ObjectConnection = 41;
-        public readonly static StatsType Inventory12 = 42;
-        /*
-         * Mask :F0F0F0F0
-         * each byte > type
-         * 0:Dot
-         * 1:ushortLine
-         * 2:L
-         * 3:Line
-         * 4:T
-         * 5:Cross
-         * 0x21222112
-        */
-        public readonly static StatsType MerchantRemainingCount = 42;
-        public readonly static StatsType MerchantRemainingMinute = 43;
-        public readonly static StatsType MerchantDiscount = 44;
-        public readonly static StatsType SellableRankRequirement = 45;
-        public readonly static StatsType HPBoost = 46;
-        public readonly static StatsType MPBoost = 47;
-        public readonly static StatsType AttackBonus = 48;
-        public readonly static StatsType DefenseBonus = 49;
-        public readonly static StatsType SpeedBonus = 50;
-        public readonly static StatsType VitalityBonus = 51;
-        public readonly static StatsType WisdomBonus = 52;
-        public readonly static StatsType DexterityBonus = 53;
-        public readonly static StatsType OwnerAccountId = 54; //Is UTF
-        public readonly static StatsType NameChangerStar = 55;
-        public readonly static StatsType NameChosen = 56;
-        public readonly static StatsType Fame = 57;
-        public readonly static StatsType FameGoal = 58;
-        public readonly static StatsType Glowing = 59;
-        public readonly static StatsType SinkOffset = 60;
-        public readonly static StatsType AltTextureIndex = 61;
-        public readonly static StatsType Guild = 62; //Is UTF
-        public readonly static StatsType GuildRank = 63;
-        public readonly static StatsType OxygenBar = 64;
-        public readonly static StatsType XpBoosterActive = 65;
-        public readonly static StatsType XpBoosterTime = 66;
-        public readonly static StatsType LootDropBoostTimer = 67;
-        public readonly static StatsType LootTierBoostTimer = 68;
-        public readonly static StatsType HealStackCount = 69;
-        public readonly static StatsType MagicStackCount = 70;
-        public readonly static StatsType Backpack0 = 71;
-        public readonly static StatsType Backpack1 = 72;
-        public readonly static StatsType Backpack2 = 73;
-        public readonly static StatsType Backpack3 = 74;
-        public readonly static StatsType Backpack4 = 75;
-        public readonly static StatsType Backpack5 = 76;
-        public readonly static StatsType Backpack6 = 77;
-        public readonly static StatsType Backpack7 = 78;
-        public readonly static StatsType Has_Backpack = 79;
-        public readonly static StatsType Skin = 80;
-        public readonly static StatsType PetId = 81;
-        public readonly static StatsType PetSkin = 82; //Is UTF
-        public readonly static StatsType PetType = 83;
-        public readonly static StatsType PetRarity = 84;
-        public readonly static StatsType PetMaximumLevel = 85;
-        public readonly static StatsType PetNothing = 86; //This does do nothing in the client
-        public readonly static StatsType PetPoints0 = 87;
-        public readonly static StatsType PetPoints1 = 88;
-        public readonly static StatsType PetPoints2 = 89;
-        public readonly static StatsType PetLevel0 = 90;
-        public readonly static StatsType PetLevel1 = 91;
-        public readonly static StatsType PetLevel2 = 92;
-        public readonly static StatsType PetAbilityType0 = 93;
-        public readonly static StatsType PetAbilityType1 = 94;
-        public readonly static StatsType PetAbilityType2 = 95;
-        public readonly static StatsType Effects2 = 96;
-        //case StatData._-04I:
-        //   param1.condition_[ConditionEffect._-KL]=_loc8_;
-        //   break;
-        public readonly static StatsType Tokens = 97;
+        public static readonly StatsType MaximumHp = 0;
+        public static readonly StatsType Hp = 1;
+        public static readonly StatsType Size = 2;
+        public static readonly StatsType MaximumMp = 3;
+        public static readonly StatsType Mp = 4;
+        public static readonly StatsType ExperienceGoal = 5;
+        public static readonly StatsType Experience = 6;
+        public static readonly StatsType Level = 7;
+        public static readonly StatsType Inventory0 = 8;
+        public static readonly StatsType Inventory1 = 9;
+        public static readonly StatsType Inventory2 = 10;
+        public static readonly StatsType Inventory3 = 11;
+        public static readonly StatsType Inventory4 = 12;
+        public static readonly StatsType Inventory5 = 13;
+        public static readonly StatsType Inventory6 = 14;
+        public static readonly StatsType Inventory7 = 15;
+        public static readonly StatsType Inventory8 = 16;
+        public static readonly StatsType Inventory9 = 17;
+        public static readonly StatsType Inventory10 = 18;
+        public static readonly StatsType Inventory11 = 19;
+        public static readonly StatsType Attack = 20;
+        public static readonly StatsType Defense = 21;
+        public static readonly StatsType Speed = 22;
+        public static readonly StatsType Vitality = 26;
+        public static readonly StatsType Wisdom = 27;
+        public static readonly StatsType Dexterity = 28;
+        public static readonly StatsType Effects = 29;
+        public static readonly StatsType Stars = 30;
+        public static readonly StatsType Name = 31; //Is UTF
+        public static readonly StatsType Texture1 = 32;
+        public static readonly StatsType Texture2 = 33;
+        public static readonly StatsType MerchantMerchandiseType = 34;
+        public static readonly StatsType Credits = 35;
+        public static readonly StatsType SellablePrice = 36;
+        public static readonly StatsType PortalUsable = 37;
+        public static readonly StatsType AccountId = 38; //Is UTF
+        public static readonly StatsType CurrentFame = 39;
+        public static readonly StatsType SellablePriceCurrency = 40;
+        public static readonly StatsType ObjectConnection = 41;
+        public static readonly StatsType Inventory12 = 42;
+        public static readonly StatsType MerchantRemainingCount = 42;
+        public static readonly StatsType MerchantRemainingMinute = 43;
+        public static readonly StatsType MerchantDiscount = 44;
+        public static readonly StatsType SellableRankRequirement = 45;
+        public static readonly StatsType HPBoost = 46;
+        public static readonly StatsType MPBoost = 47;
+        public static readonly StatsType AttackBonus = 48;
+        public static readonly StatsType DefenseBonus = 49;
+        public static readonly StatsType SpeedBonus = 50;
+        public static readonly StatsType VitalityBonus = 51;
+        public static readonly StatsType WisdomBonus = 52;
+        public static readonly StatsType DexterityBonus = 53;
+        public static readonly StatsType OwnerAccountId = 54; //Is UTF
+        public static readonly StatsType NameChangerStar = 55;
+        public static readonly StatsType NameChosen = 56;
+        public static readonly StatsType Fame = 57;
+        public static readonly StatsType FameGoal = 58;
+        public static readonly StatsType Glowing = 59;
+        public static readonly StatsType SinkOffset = 60;
+        public static readonly StatsType AltTextureIndex = 61;
+        public static readonly StatsType Guild = 62; //Is UTF
+        public static readonly StatsType GuildRank = 63;
+        public static readonly StatsType OxygenBar = 64;
+        public static readonly StatsType XpBoosterActive = 65;
+        public static readonly StatsType XpBoosterTime = 66;
+        public static readonly StatsType LootDropBoostTimer = 67;
+        public static readonly StatsType LootTierBoostTimer = 68;
+        public static readonly StatsType HealStackCount = 69;
+        public static readonly StatsType MagicStackCount = 70;
+        public static readonly StatsType Backpack0 = 71;
+        public static readonly StatsType Backpack1 = 72;
+        public static readonly StatsType Backpack2 = 73;
+        public static readonly StatsType Backpack3 = 74;
+        public static readonly StatsType Backpack4 = 75;
+        public static readonly StatsType Backpack5 = 76;
+        public static readonly StatsType Backpack6 = 77;
+        public static readonly StatsType Backpack7 = 78;
+        public static readonly StatsType HasBackpack = 79;
+        public static readonly StatsType Skin = 80;
+        public static readonly StatsType PetId = 81;
+        public static readonly StatsType PetSkin = 82; //Is UTF
+        public static readonly StatsType PetType = 83;
+        public static readonly StatsType PetRarity = 84;
+        public static readonly StatsType PetMaximumLevel = 85;
+        public static readonly StatsType PetNothing = 86; //This does do nothing in the client
+        public static readonly StatsType PetPoints0 = 87;
+        public static readonly StatsType PetPoints1 = 88;
+        public static readonly StatsType PetPoints2 = 89;
+        public static readonly StatsType PetLevel0 = 90;
+        public static readonly StatsType PetLevel1 = 91;
+        public static readonly StatsType PetLevel2 = 92;
+        public static readonly StatsType PetAbilityType0 = 93;
+        public static readonly StatsType PetAbilityType1 = 94;
+        public static readonly StatsType PetAbilityType2 = 95;
+        public static readonly StatsType Effects2 = 96;
+        public static readonly StatsType Tokens = 97;
 
-        private byte _type;
+        private readonly byte _type;
 
         private StatsType(byte type)
         {
-            this._type = type;
+            _type = type;
         }
 
-        public bool IsUTF()
+        public bool IsUtf()
         {
-            if(this == StatsType.Name || this == StatsType.AccountId || this == StatsType.OwnerAccountId
-               || this == StatsType.Guild || this == StatsType.PetSkin)
+            if(this == Name || this == AccountId || this == OwnerAccountId
+               || this == Guild || this == PetSkin)
                     return true;
             return false;
         }

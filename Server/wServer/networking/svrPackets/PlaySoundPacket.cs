@@ -5,7 +5,7 @@
         public int OwnerId { get; set; }
         public int SoundId { get; set; }
 
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.PLAYSOUND; }
         }

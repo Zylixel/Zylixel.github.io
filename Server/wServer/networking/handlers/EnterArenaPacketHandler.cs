@@ -12,7 +12,7 @@ namespace wServer.networking.handlers
 {
     internal class EnterArenaPacketHandler : PacketHandlerBase<EnterArenaPacket>
     {
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.ENTER_ARENA; }
         }
@@ -47,7 +47,7 @@ namespace wServer.networking.handlers
                 Port = Program.Settings.GetValue<int>("port"),
                 GameId = world.Id,
                 Name = world.Name,
-                Key = Empty<byte>.Array,
+                Key = Empty<byte>.Array
             });
         }
     }

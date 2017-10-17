@@ -4,7 +4,7 @@
     {
         public string Name { get; set; }
 
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.TRADEREQUESTED; }
         }

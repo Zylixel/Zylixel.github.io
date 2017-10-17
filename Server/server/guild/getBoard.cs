@@ -1,18 +1,14 @@
 ﻿#region
 
 using System;
-using System.Collections.Specialized;
-using System.IO;
-using System.Net;
 using System.Text;
-using System.Web;
 using db;
 
 #endregion
 
 namespace server.guild
 {
-    internal class getBoard : RequestHandler
+    internal class GetBoard : RequestHandler
     {
         protected override void HandleRequest()
         {

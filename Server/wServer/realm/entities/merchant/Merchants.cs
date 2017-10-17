@@ -3,11 +3,11 @@
 using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
+using db;
 using log4net;
+using MySql.Data.MySqlClient;
 using wServer.networking.svrPackets;
 using wServer.realm.entities.player;
-using db;
-using MySql.Data.MySqlClient;
 
 #endregion
 
@@ -15,17 +15,17 @@ namespace wServer.realm.entities.merchant
 {
     public class Merchants : SellableObject
     {
-        private const int BUY_NO_FAME = 6;
-        private const int MERCHANT_SIZE = 100;
+        private const int BuyNoFame = 6;
+        private const int MerchantSize = 100;
         private static readonly ILog log = LogManager.GetLogger(typeof(Merchants));
 
-        private readonly Dictionary<int, Tuple<int, CurrencyType>> prices = MerchantLists.prices;
+        private readonly Dictionary<int, Tuple<int, CurrencyType>> _prices = MerchantLists.prices;
 
-        private bool closing;
-        private bool newMerchant;
-        private int tickcount;
-        private int accID;
-        int itemChange;
+        private bool _closing;
+        private bool _newMerchant;
+        private int _tickcount;
+        private int _accId;
+        int _itemChange;
 
         public static Random Random { get; private set; }
 
@@ -33,11 +33,11 @@ namespace wServer.realm.entities.merchant
             : base(manager, objType)
         {
             MType = -1;
-            Size = MERCHANT_SIZE;
+            Size = MerchantSize;
             if (owner != null)
                 Owner = owner;
 
-            itemChange = itemChangeLocal;
+            _itemChange = itemChangeLocal;
 
             if (Random == null) Random = new Random();
             if (AddedTypes == null) AddedTypes = new List<KeyValuePair<string, int>>();
@@ -50,13 +50,13 @@ namespace wServer.realm.entities.merchant
         public int MRemaining { get; set; }
         public int MTime { get; set; }
         public int Discount { get; set; }
-        public static int refreshMerchants { get; internal set; }
+        public static int RefreshMerchants { get; internal set; }
 
         protected override void ExportStats(IDictionary<StatsType, object> stats)
         {
             stats[StatsType.MerchantMerchandiseType] = MType;
             stats[StatsType.MerchantRemainingCount] = MRemaining;
-            stats[StatsType.MerchantRemainingMinute] = newMerchant ? Int32.MaxValue : MTime;
+            stats[StatsType.MerchantRemainingMinute] = _newMerchant ? int.MaxValue : MTime;
             stats[StatsType.MerchantDiscount] = Discount;
             stats[StatsType.SellablePrice] = Price;
             stats[StatsType.SellableRankRequirement] = RankReq;
@@ -121,18 +121,18 @@ namespace wServer.realm.entities.merchant
                                         using (MySqlDataReader rdr = cmd.ExecuteReader())
                                         {
                                             if (!rdr.HasRows)
-                                                accID = 0;
+                                                _accId = 0;
                                             rdr.Read();
-                                            accID = rdr.GetInt32("id");
+                                            _accId = rdr.GetInt32("id");
                                         }
                                     }
                                     {
                                         log.Error("Updating Player Info...");
                                         MySqlCommand cmd1 = db.CreateQuery();
                                         cmd1.CommandText = "UPDATE stats SET fame = fame + @Price WHERE accId=@accId";
-                                        cmd1.Parameters.AddWithValue("@accId", accID);
+                                        cmd1.Parameters.AddWithValue("@accId", _accId);
                                         cmd1.Parameters.AddWithValue("@Price", Price);
-                                        log.Error("Attempted to give Player " + accID + ", " + Price + " fame");
+                                        log.Error("Attempted to give Player " + _accId + ", " + Price + " fame");
                                         cmd1.ExecuteNonQuery();
                                     }
                                     player.Client.SendPacket(new BuyResultPacket
@@ -165,7 +165,7 @@ namespace wServer.realm.entities.merchant
                             case CurrencyType.Fame:
                                 player.Client.SendPacket(new BuyResultPacket
                                 {
-                                    Result = BUY_NO_FAME,
+                                    Result = BuyNoFame,
                                     Message = "{\"key\":\"server.not_enough_fame\"}"
                                 });
                                 break;
@@ -181,30 +181,30 @@ namespace wServer.realm.entities.merchant
             {
                 if (Size == 0 && MType != -1)
                 {
-                    Size = MERCHANT_SIZE;
+                    Size = MerchantSize;
                     UpdateCount++;
                 }
-                if (refreshMerchants > 0)
+                if (RefreshMerchants > 0)
                 {
                     foreach (var t1 in MerchantLists.ZyList)
                     {
                         log.Info("Looking for updates on item | " + t1);
-                        if (refreshMerchants == t1)
+                        if (RefreshMerchants == t1)
                         {
                             log.Info("Found Update on Item | " + t1);
-                            itemChange = t1;
+                            _itemChange = t1;
                             Refresh(this, t1);
                             UpdateCount++;
                         }
                     }
-                    refreshMerchants = 0;
+                    RefreshMerchants = 0;
                 }
                 
 
-                if (!closing)
+                if (!_closing)
                 {
-                    tickcount++;
-                    if (tickcount % (Manager?.TPS * 60) == 0) //once per minute after spawning
+                    _tickcount++;
+                    if (_tickcount % (Manager?.TPS * 60) == 0) //once per minute after spawning
                     {
                         MTime--;
                         UpdateCount++;
@@ -227,9 +227,9 @@ namespace wServer.realm.entities.merchant
                     UpdateCount++;
                 }
 
-                if (MTime == 1 && !closing)
+                if (MTime == 1 && !_closing)
                 {
-                    closing = true;
+                    _closing = true;
                     Owner?.Timers.Add(new WorldTimer(30 * 1000, (w1, t1) =>
                     {
                         MTime--;
@@ -273,7 +273,7 @@ namespace wServer.realm.entities.merchant
             try
             {
                 Tuple<int, CurrencyType> price;
-                if (prices.TryGetValue(MType, out price))
+                if (_prices.TryGetValue(MType, out price))
                 {
                     var mrc = new Merchants(Manager, x.ObjectType, item, x.Owner);
                     log.Info("Attempting to refresh Merchant | " + item);
@@ -299,12 +299,12 @@ namespace wServer.realm.entities.merchant
             foreach (var t1 in list)
             {
                 AddedTypes.Add(new KeyValuePair<string, int>(Owner.Name, t1));
-                if (itemChange > 0)
+                if (_itemChange > 0)
                 {
-                    MType = itemChange;
+                    MType = _itemChange;
                     log.Info("Refreshing Merchant | " + MType);
                 }
-                if (itemChange <= 0)
+                if (_itemChange <= 0)
                 {
                     MType = t1;
                     log.Info("Randomizing Merchant to be item | " + MType);
@@ -312,12 +312,12 @@ namespace wServer.realm.entities.merchant
 
                 MTime = Random.Next(2, 5);
                 MRemaining = 1;
-                newMerchant = false;
+                _newMerchant = false;
 
                 Discount = 0;
 
                 Tuple<int, CurrencyType> price;
-                if (prices.TryGetValue(MType, out price))
+                if (_prices.TryGetValue(MType, out price))
                 {
                     using (Database db = new Database())
                         Price = db.GetMarketInfo(price.Item1, 1);

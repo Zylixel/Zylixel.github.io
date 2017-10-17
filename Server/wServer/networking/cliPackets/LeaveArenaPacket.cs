@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace wServer.networking.cliPackets
+﻿namespace wServer.networking.cliPackets
 {
     public class LeaveArenaPacket : ClientPacket
     {
-        public int _li { get; set; }
+        public int Li { get; set; }
 
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.LEAVEARENA; }
         }
@@ -22,12 +16,12 @@ namespace wServer.networking.cliPackets
 
         protected override void Read(Client client, NReader rdr)
         {
-            _li = rdr.ReadInt32();
+            Li = rdr.ReadInt32();
         }
 
         protected override void Write(Client client, NWriter wtr)
         {
-            wtr.Write(_li);
+            wtr.Write(Li);
         }
     }
 }

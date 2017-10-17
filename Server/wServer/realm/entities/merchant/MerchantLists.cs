@@ -1,11 +1,11 @@
 ﻿#region
 
-using db;
-using db.data;
-using log4net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using db;
+using db.data;
+using log4net;
 
 #endregion
 namespace wServer.realm.entities
@@ -30,7 +30,7 @@ namespace wServer.realm.entities
         public static int[] ClothingDyeList;
         public static int[] ZyList;
 
-        public static Dictionary<int, Tuple<int, CurrencyType>> prices = new Dictionary<int, Tuple<int, CurrencyType>>{};
+        public static Dictionary<int, Tuple<int, CurrencyType>> prices = new Dictionary<int, Tuple<int, CurrencyType>>();
 
         public static int[] store10List = {0xb41, 0xbab, 0xbad, 0xbac};
         public static int[] store11List = {0xb41, 0xbab, 0xbad, 0xbac};

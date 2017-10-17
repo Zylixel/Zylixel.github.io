@@ -30,11 +30,11 @@ namespace DungeonGenerator.Templates.Abyss {
 
 		public override int Height { get { return 21; } }
 
-		static readonly Tuple<Direction, int>[] connections = {
+		static readonly Tuple<Direction, int>[] Connections = {
 			Tuple.Create(Direction.South, 6)
 		};
 
-		public override Tuple<Direction, int>[] ConnectionPoints { get { return connections; } }
+		public override Tuple<Direction, int>[] ConnectionPoints { get { return Connections; } }
 
 		public override void Rasterize(BitmapRasterizer<DungeonTile> rasterizer, Random rand) {
 			rasterizer.Copy(AbyssTemplate.MapTemplate, new Rect(70, 10, 85, 31), Pos, tile => tile.TileType.Name == "Space");

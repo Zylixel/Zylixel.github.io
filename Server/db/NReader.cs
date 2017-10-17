@@ -45,14 +45,14 @@ public class NReader : BinaryReader
 
     public override float ReadSingle()
     {
-        byte[] arr = base.ReadBytes(4);
+        byte[] arr = ReadBytes(4);
         Array.Reverse(arr);
         return BitConverter.ToSingle(arr, 0);
     }
 
     public override double ReadDouble()
     {
-        byte[] arr = base.ReadBytes(8);
+        byte[] arr = ReadBytes(8);
         Array.Reverse(arr);
         return BitConverter.ToDouble(arr, 0);
     }

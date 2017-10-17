@@ -9,7 +9,7 @@
         public float Angle { get; set; }
         public short Damage { get; set; }
 
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.SHOOT2; }
         }

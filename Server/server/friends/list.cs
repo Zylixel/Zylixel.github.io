@@ -1,21 +1,20 @@
 ﻿#region
 
-using server;
 using System.IO;
-using System.Net;
 using System.Text;
+using server;
 
 #endregion
 
 namespace friends
 {
-    internal class list : RequestHandler
+    internal class List : RequestHandler
     {
-        private readonly string text = File.ReadAllText("init.txt");
+        private readonly string _text = File.ReadAllText("init.txt");
 
         protected override void HandleRequest()
         {
-            byte[] buf = Encoding.ASCII.GetBytes(text);
+            byte[] buf = Encoding.ASCII.GetBytes(_text);
             Context.Response.OutputStream.Write(buf, 0, buf.Length);
         }
     }

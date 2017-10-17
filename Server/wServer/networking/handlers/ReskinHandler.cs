@@ -9,7 +9,7 @@ namespace wServer.networking.handlers
 {
     internal class ReskinHandler : PacketHandlerBase<ReskinPacket>
     {
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.RESKIN; }
         }

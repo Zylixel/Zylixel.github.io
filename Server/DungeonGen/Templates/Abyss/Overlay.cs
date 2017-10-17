@@ -24,11 +24,11 @@ using RotMG.Common.Rasterizer;
 
 namespace DungeonGenerator.Templates.Abyss {
 	internal class Overlay : MapRender {
-		static readonly DungeonObject floor = new DungeonObject {
+		static readonly DungeonObject Floor = new DungeonObject {
 			ObjectType = AbyssTemplate.PartialRedFloor
 		};
 
-		static readonly DungeonObject broken = new DungeonObject {
+		static readonly DungeonObject Broken = new DungeonObject {
 			ObjectType = AbyssTemplate.BrokenRedPillar
 		};
 
@@ -77,11 +77,11 @@ namespace DungeonGenerator.Templates.Abyss {
 		}
 
 		void RenderBackground() {
-			const int Sample = 4;
+			const int sample = 4;
 
 			int w = Rasterizer.Width, h = Rasterizer.Height;
 			var buf = Rasterizer.Bitmap;
-			var hm = GenerateHeightMap(w / Sample + 2, h / Sample + 2);
+			var hm = GenerateHeightMap(w / sample + 2, h / sample + 2);
 
 			for (int x = 0; x < w; x++)
 				for (int y = 0; y < h; y++) {
@@ -94,15 +94,15 @@ namespace DungeonGenerator.Templates.Abyss {
 						continue;
 					}
 
-					int dx = x / Sample, dy = y / Sample;
-					var hx1 = Lerp(hm[dx, dy], hm[dx + 1, dy], (x % Sample) / (float)Sample);
-					var hx2 = Lerp(hm[dx, dy + 1], hm[dx + 1, dy + 1], (x % Sample) / (float)Sample);
-					var hv = Lerp(hx1, hx2, (y % Sample) / (float)Sample);
+					int dx = x / sample, dy = y / sample;
+					var hx1 = Lerp(hm[dx, dy], hm[dx + 1, dy], (x % sample) / (float)sample);
+					var hx2 = Lerp(hm[dx, dy + 1], hm[dx + 1, dy + 1], (x % sample) / (float)sample);
+					var hv = Lerp(hx1, hx2, (y % sample) / (float)sample);
 
 					if ((hv / 10) % 2 == 0) {
 						buf[x, y].TileType = AbyssTemplate.Lava;
 						if (Rand.NextDouble() > 0.9 && buf[x, y].Object == null)
-							buf[x, y].Object = floor;
+							buf[x, y].Object = Floor;
 					}
 				}
 		}
@@ -119,7 +119,7 @@ namespace DungeonGenerator.Templates.Abyss {
 				return;
 
 			var buf = Rasterizer.Bitmap;
-			var pos = startRm.portalPos;
+			var pos = startRm.PortalPos;
 			for (int dx = -1; dx <= 1; dx++)
 				for (int dy = -1; dy <= 1; dy++) {
 					var tile = buf[pos.X + dx, pos.Y + dy];
@@ -137,7 +137,7 @@ namespace DungeonGenerator.Templates.Abyss {
 				if (Rasterizer.Bitmap[x, y].TileType == AbyssTemplate.Lava)
 					return new DungeonTile {
 						TileType = AbyssTemplate.Lava,
-						Object = floor
+						Object = Floor
 					};
 				return Rasterizer.Bitmap[x, y];
 			}, 1);
@@ -221,7 +221,7 @@ namespace DungeonGenerator.Templates.Abyss {
 				}
 
 				if (room is StartRoom)
-					RenderLavaGround(((StartRoom)room).portalPos, pt);
+					RenderLavaGround(((StartRoom)room).PortalPos, pt);
 			}
 		}
 
@@ -232,7 +232,7 @@ namespace DungeonGenerator.Templates.Abyss {
 				for (int y = 0; y < h; y++) {
 					if (buf[x, y].Object != null && buf[x, y].Object.ObjectType == AbyssTemplate.RedPillar &&
 					    Rand.NextDouble() > 0.7)
-						buf[x, y].Object = broken;
+						buf[x, y].Object = Broken;
 				}
 		}
 

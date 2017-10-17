@@ -510,19 +510,19 @@ namespace Json
 #endif
 		static class SimpleJson
 	{
-		private const int TOKEN_NONE = 0;
-		private const int TOKEN_CURLY_OPEN = 1;
-		private const int TOKEN_CURLY_CLOSE = 2;
-		private const int TOKEN_SQUARED_OPEN = 3;
-		private const int TOKEN_SQUARED_CLOSE = 4;
-		private const int TOKEN_COLON = 5;
-		private const int TOKEN_COMMA = 6;
-		private const int TOKEN_STRING = 7;
-		private const int TOKEN_NUMBER = 8;
-		private const int TOKEN_TRUE = 9;
-		private const int TOKEN_FALSE = 10;
-		private const int TOKEN_NULL = 11;
-		private const int BUILDER_CAPACITY = 2000;
+		private const int TokenNone = 0;
+		private const int TokenCurlyOpen = 1;
+		private const int TokenCurlyClose = 2;
+		private const int TokenSquaredOpen = 3;
+		private const int TokenSquaredClose = 4;
+		private const int TokenColon = 5;
+		private const int TokenComma = 6;
+		private const int TokenString = 7;
+		private const int TokenNumber = 8;
+		private const int TokenTrue = 9;
+		private const int TokenFalse = 10;
+		private const int TokenNull = 11;
+		private const int BuilderCapacity = 2000;
 
 		private static readonly char[] EscapeTable;
 		private static readonly char[] EscapeCharacters = { '"', '\\', '\b', '\f', '\n', '\r', '\t' };
@@ -611,7 +611,7 @@ namespace Json
 		/// <returns>A JSON encoded string, or null if object 'json' is not serializable</returns>
 		public static string SerializeObject(object json, IJsonSerializerStrategy jsonSerializerStrategy)
 		{
-			var builder = new StringBuilder(BUILDER_CAPACITY);
+			var builder = new StringBuilder(BuilderCapacity);
 			bool success = SerializeValue(jsonSerializerStrategy, json, builder);
 			return (success ? builder.ToString() : null);
 		}
@@ -691,14 +691,14 @@ namespace Json
 			while (!done)
 			{
 				token = LookAhead(json, index);
-				if (token == TOKEN_NONE)
+				if (token == TokenNone)
 				{
 					success = false;
 					return null;
 				}
-				if (token == TOKEN_COMMA)
+				if (token == TokenComma)
 					NextToken(json, ref index);
-				else if (token == TOKEN_CURLY_CLOSE)
+				else if (token == TokenCurlyClose)
 				{
 					NextToken(json, ref index);
 					return table;
@@ -714,7 +714,7 @@ namespace Json
 					}
 					// :
 					token = NextToken(json, ref index);
-					if (token != TOKEN_COLON)
+					if (token != TokenColon)
 					{
 						success = false;
 						return null;
@@ -743,14 +743,14 @@ namespace Json
 			while (!done)
 			{
 				int token = LookAhead(json, index);
-				if (token == TOKEN_NONE)
+				if (token == TokenNone)
 				{
 					success = false;
 					return null;
 				}
-				if (token == TOKEN_COMMA)
+				if (token == TokenComma)
 					NextToken(json, ref index);
-				else if (token == TOKEN_SQUARED_CLOSE)
+				else if (token == TokenSquaredClose)
 				{
 					NextToken(json, ref index);
 					break;
@@ -770,24 +770,24 @@ namespace Json
 		{
 			switch (LookAhead(json, index))
 			{
-				case TOKEN_STRING:
+				case TokenString:
 					return ParseString(json, ref index, ref success);
-				case TOKEN_NUMBER:
+				case TokenNumber:
 					return ParseNumber(json, ref index, ref success);
-				case TOKEN_CURLY_OPEN:
+				case TokenCurlyOpen:
 					return ParseObject(json, ref index, ref success);
-				case TOKEN_SQUARED_OPEN:
+				case TokenSquaredOpen:
 					return ParseArray(json, ref index, ref success);
-				case TOKEN_TRUE:
+				case TokenTrue:
 					NextToken(json, ref index);
 					return true;
-				case TOKEN_FALSE:
+				case TokenFalse:
 					NextToken(json, ref index);
 					return false;
-				case TOKEN_NULL:
+				case TokenNull:
 					NextToken(json, ref index);
 					return null;
-				case TOKEN_NONE:
+				case TokenNone:
 					break;
 			}
 			success = false;
@@ -796,7 +796,7 @@ namespace Json
 
 		private static string ParseString(char[] json, ref int index, ref bool success)
 		{
-			var s = new StringBuilder(BUILDER_CAPACITY);
+			var s = new StringBuilder(BuilderCapacity);
 			char c;
 
 			EatWhitespace(json, ref index);
@@ -955,23 +955,23 @@ namespace Json
 		{
 			EatWhitespace(json, ref index);
 			if (index == json.Length)
-				return TOKEN_NONE;
+				return TokenNone;
 			char c = json[index];
 			index++;
 			switch (c)
 			{
 				case '{':
-					return TOKEN_CURLY_OPEN;
+					return TokenCurlyOpen;
 				case '}':
-					return TOKEN_CURLY_CLOSE;
+					return TokenCurlyClose;
 				case '[':
-					return TOKEN_SQUARED_OPEN;
+					return TokenSquaredOpen;
 				case ']':
-					return TOKEN_SQUARED_CLOSE;
+					return TokenSquaredClose;
 				case ',':
-					return TOKEN_COMMA;
+					return TokenComma;
 				case '"':
-					return TOKEN_STRING;
+					return TokenString;
 				case '0':
 				case '1':
 				case '2':
@@ -983,9 +983,9 @@ namespace Json
 				case '8':
 				case '9':
 				case '-':
-					return TOKEN_NUMBER;
+					return TokenNumber;
 				case ':':
-					return TOKEN_COLON;
+					return TokenColon;
 			}
 			index--;
 			int remainingLength = json.Length - index;
@@ -996,7 +996,7 @@ namespace Json
 				    json[index + 4] == 'e')
 				{
 					index += 5;
-					return TOKEN_FALSE;
+					return TokenFalse;
 				}
 			}
 			// true
@@ -1005,7 +1005,7 @@ namespace Json
 				if (json[index] == 't' && json[index + 1] == 'r' && json[index + 2] == 'u' && json[index + 3] == 'e')
 				{
 					index += 4;
-					return TOKEN_TRUE;
+					return TokenTrue;
 				}
 			}
 			// null
@@ -1014,10 +1014,10 @@ namespace Json
 				if (json[index] == 'n' && json[index + 1] == 'u' && json[index + 2] == 'l' && json[index + 3] == 'l')
 				{
 					index += 4;
-					return TOKEN_NULL;
+					return TokenNull;
 				}
 			}
-			return TOKEN_NONE;
+			return TokenNone;
 		}
 
 		private static bool SerializeValue(IJsonSerializerStrategy jsonSerializerStrategy, object value, StringBuilder builder)
@@ -2000,8 +2000,7 @@ namespace Json
 					? Expression.TypeAs(value, propertyInfo.PropertyType)
 					: Expression.Convert(value, propertyInfo.PropertyType);
 				Action<object, object> compiled =
-					Expression.Lambda<Action<object, object>>(Expression.Call(instanceCast, setMethodInfo, valueCast),
-						new ParameterExpression[] { instance, value }).Compile();
+					Expression.Lambda<Action<object, object>>(Expression.Call(instanceCast, setMethodInfo, valueCast), instance, value).Compile();
 				return delegate(object source, object val) { compiled(source, val); };
 			}
 
@@ -2028,10 +2027,10 @@ namespace Json
 
 			private static class Assigner<T>
 			{
-				public static T Assign(ref T left, T right)
+				/*public static T Assign(ref T left, T right)
 				{
 					return (left = right);
-				}
+				}*/
 			}
 
 #endif

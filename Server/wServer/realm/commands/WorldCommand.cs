@@ -107,7 +107,7 @@ namespace wServer.realm.commands
                 player.ApplyConditionEffect(new ConditionEffect
                 {
                     Effect = ConditionEffectIndex.Paused,
-                    DurationMS = 0
+                    DurationMs = 0
                 });
                 player.SendInfo("Game resumed.");
             }
@@ -124,7 +124,7 @@ namespace wServer.realm.commands
                 player.ApplyConditionEffect(new ConditionEffect
                 {
                     Effect = ConditionEffectIndex.Paused,
-                    DurationMS = -1
+                    DurationMs = -1
                 });
                 player.SendInfo("Game paused.");
             }

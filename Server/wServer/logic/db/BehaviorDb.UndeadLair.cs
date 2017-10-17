@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using wServer.logic.behaviors;
+﻿using wServer.logic.behaviors;
+using wServer.logic.behaviors.Drakes;
 using wServer.logic.loot;
 using wServer.logic.transitions;
-using wServer.logic.behaviors.Drakes;
 
 namespace wServer.logic
 {

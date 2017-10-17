@@ -1,74 +1,78 @@
-﻿using MetroFramework.Forms;
+﻿using System;
+using System.Drawing;
+using System.Windows.Forms;
+using MetroFramework.Controls;
+using MetroFramework.Forms;
 
 namespace AdminPanel
 {
     internal class EditForm : MetroForm
     {
-        private MetroFramework.Controls.MetroTextBox metroTextBox1;
-        private MetroFramework.Controls.MetroButton metroButton1;
-        private string content;
+        private MetroTextBox _metroTextBox1;
+        private MetroButton _metroButton1;
+        private string _content;
 
-        public string Content { get { return this.metroTextBox1.Text; } }
+        public string Content { get { return _metroTextBox1.Text; } }
 
         public EditForm(string title, string content)
         {
             InitializeComponent();
             Text = title;
-            this.content = content.Replace("\n", "\r\n");
-            this.metroTextBox1.Text = this.content;
+            _content = content.Replace("\n", "\r\n");
+            _metroTextBox1.Text = _content;
         }
 
         private void InitializeComponent()
         {
-            this.metroTextBox1 = new MetroFramework.Controls.MetroTextBox();
-            this.metroButton1 = new MetroFramework.Controls.MetroButton();
-            this.SuspendLayout();
+            _metroTextBox1 = new MetroTextBox();
+            _metroButton1 = new MetroButton();
+            SuspendLayout();
             // 
             // metroTextBox1
             // 
-            this.metroTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.metroTextBox1.Lines = new string[] {
+            _metroTextBox1.Anchor = ((AnchorStyles.Top | AnchorStyles.Bottom) 
+                                    | AnchorStyles.Left) 
+                                   | AnchorStyles.Right;
+            _metroTextBox1.Lines = new[] {
         "metroTextBox1"};
-            this.metroTextBox1.Location = new System.Drawing.Point(24, 64);
-            this.metroTextBox1.MaxLength = 32767;
-            this.metroTextBox1.Multiline = true;
-            this.metroTextBox1.Name = "metroTextBox1";
-            this.metroTextBox1.PasswordChar = '\0';
-            this.metroTextBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.metroTextBox1.SelectedText = "";
-            this.metroTextBox1.Size = new System.Drawing.Size(453, 364);
-            this.metroTextBox1.TabIndex = 0;
-            this.metroTextBox1.Text = "metroTextBox1";
-            this.metroTextBox1.UseSelectable = true;
+            _metroTextBox1.Location = new Point(24, 64);
+            _metroTextBox1.MaxLength = 32767;
+            _metroTextBox1.Multiline = true;
+            _metroTextBox1.Name = "_metroTextBox1";
+            _metroTextBox1.PasswordChar = '\0';
+            _metroTextBox1.ScrollBars = ScrollBars.Both;
+            _metroTextBox1.SelectedText = "";
+            _metroTextBox1.Size = new Size(453, 364);
+            _metroTextBox1.TabIndex = 0;
+            _metroTextBox1.Text = "metroTextBox1";
+            _metroTextBox1.UseSelectable = true;
             // 
             // metroButton1
             // 
-            this.metroButton1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.metroButton1.Location = new System.Drawing.Point(23, 434);
-            this.metroButton1.Name = "metroButton1";
-            this.metroButton1.Size = new System.Drawing.Size(454, 37);
-            this.metroButton1.TabIndex = 1;
-            this.metroButton1.Text = "Save Settings";
-            this.metroButton1.UseSelectable = true;
-            this.metroButton1.Click += new System.EventHandler(this.metroButton1_Click);
+            _metroButton1.Anchor = (AnchorStyles.Bottom | AnchorStyles.Left) 
+                                  | AnchorStyles.Right;
+            _metroButton1.Location = new Point(23, 434);
+            _metroButton1.Name = "_metroButton1";
+            _metroButton1.Size = new Size(454, 37);
+            _metroButton1.TabIndex = 1;
+            _metroButton1.Text = "Save Settings";
+            _metroButton1.UseSelectable = true;
+            _metroButton1.Click += metroButton1_Click;
             // 
             // EditForm
             // 
-            this.ClientSize = new System.Drawing.Size(500, 494);
-            this.Controls.Add(this.metroButton1);
-            this.Controls.Add(this.metroTextBox1);
-            this.Name = "EditForm";
-            this.Text = "Edit";
-            this.ResumeLayout(false);
+            ClientSize = new Size(500, 494);
+            Controls.Add(_metroButton1);
+            Controls.Add(_metroTextBox1);
+            Name = "EditForm";
+            Text = "Edit";
+            ResumeLayout(false);
 
         }
 
-        private void metroButton1_Click(object sender, System.EventArgs e)
+        private void metroButton1_Click(object sender, EventArgs e)
         {
-            DialogResult = System.Windows.Forms.DialogResult.OK;
+            DialogResult = DialogResult.OK;
             Close();
         }
     }

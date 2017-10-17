@@ -2,14 +2,14 @@
 {
     public class AccountListPacket : ServerPacket
     {
-        public const int LOCKED_LIST_ID = 0;
-        public const int IGNORED_LIST_ID = 1;
+        public const int LockedListId = 0;
+        public const int IgnoredListId = 1;
 
         public int AccountListId { get; set; }
         public string[] AccountIds { get; set; }
         public int LockAction { get; set; }
 
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.ACCOUNTLIST; }
         }

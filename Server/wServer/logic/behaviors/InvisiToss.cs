@@ -44,7 +44,7 @@ namespace wServer.logic.behaviors
                 Position target = new Position
                 {
                     X = host.X + (float) (range*Math.Cos(angle.Value)),
-                    Y = host.Y + (float) (range*Math.Sin(angle.Value)),
+                    Y = host.Y + (float) (range*Math.Sin(angle.Value))
                 };
                 host.Owner.Timers.Add(new WorldTimer(0, (world, t) =>
                 {

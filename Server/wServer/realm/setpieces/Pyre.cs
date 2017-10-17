@@ -30,10 +30,7 @@ namespace wServer.realm.setpieces
 
         private readonly Random rand = new Random();
 
-        public int Size
-        {
-            get { return 30; }
-        }
+        public int Size => 30;
 
         public void RenderSetPiece(World world, IntPoint pos)
         {

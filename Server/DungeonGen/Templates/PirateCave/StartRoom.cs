@@ -24,30 +24,30 @@ using RotMG.Common.Rasterizer;
 
 namespace DungeonGenerator.Templates.PirateCave {
 	internal class StartRoom : Room {
-		readonly int radius;
+		readonly int _radius;
 
 		public StartRoom(int radius) {
-			this.radius = radius;
+			this._radius = radius;
 		}
 
 		public override RoomType Type { get { return RoomType.Start; } }
 
-		public override int Width { get { return radius * 2 + 1; } }
+		public override int Width { get { return _radius * 2 + 1; } }
 
-		public override int Height { get { return radius * 2 + 1; } }
+		public override int Height { get { return _radius * 2 + 1; } }
 
 		public override void Rasterize(BitmapRasterizer<DungeonTile> rasterizer, Random rand) {
 			var tile = new DungeonTile {
 				TileType = PirateCaveTemplate.LightSand
 			};
 
-			var cX = Pos.X + radius + 0.5;
-			var cY = Pos.Y + radius + 0.5;
+			var cX = Pos.X + _radius + 0.5;
+			var cY = Pos.Y + _radius + 0.5;
 			var bounds = Bounds;
-			var r2 = radius * radius;
+			var r2 = _radius * _radius;
 			var buf = rasterizer.Bitmap;
 
-			double pR = rand.NextDouble() * (radius - 2), pA = rand.NextDouble() * 2 * Math.PI;
+			double pR = rand.NextDouble() * (_radius - 2), pA = rand.NextDouble() * 2 * Math.PI;
 			int pX = (int)(cX + Math.Cos(pR) * pR);
 			int pY = (int)(cY + Math.Sin(pR) * pR);
 

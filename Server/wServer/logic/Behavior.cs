@@ -1,7 +1,7 @@
 ﻿#region
 
-using log4net;
 using System;
+using log4net;
 using wServer.realm;
 
 #endregion
@@ -12,7 +12,7 @@ namespace wServer.logic
     {
         [ThreadStatic]
         private static Random rand;
-        private static int randomCount = 0;
+        private static int randomCount;
         public static ILog log = LogManager.GetLogger(typeof(Behavior));
 
         protected static Random Random

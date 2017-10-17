@@ -9,14 +9,14 @@ namespace terrain
     public class Noise
     {
         // simplex noise in 2D, 3D and 4D
-        private readonly int[][] grad3 =
+        private readonly int[][] _grad3 =
         {
             new[] {1, 1, 0}, new[] {-1, 1, 0}, new[] {1, -1, 0}, new[] {-1, -1, 0},
             new[] {1, 0, 1}, new[] {-1, 0, 1}, new[] {1, 0, -1}, new[] {-1, 0, -1},
             new[] {0, 1, 1}, new[] {0, -1, 1}, new[] {0, 1, -1}, new[] {0, -1, -1}
         };
 
-        private readonly int[] p =
+        private readonly int[] _p =
         {
             151, 160, 137, 91, 90, 15,
             131, 13, 201, 95, 96, 53, 194, 233, 7, 225, 140, 36, 103, 30, 69, 142, 8, 99, 37, 240, 21, 10, 23,
@@ -34,24 +34,24 @@ namespace terrain
         };
 
         // To remove the need for index wrapping, double the permutation table length
-        private readonly int[] perm = new int[512];
+        private readonly int[] _perm = new int[512];
 
         public Noise(int seed)
         {
             Random rand = new Random(seed);
-            for (int i = 0; i < p.Length; i++)
-                p[i] = (byte) rand.Next();
+            for (int i = 0; i < _p.Length; i++)
+                _p[i] = (byte) rand.Next();
             for (int i = 0; i < 512; i++)
-                perm[i] = p[i & 255];
+                _perm[i] = _p[i & 255];
         }
 
         // This method is a *lot* faster than using (int)Math.floor(x)
-        private int fastfloor(double x)
+        private int Fastfloor(double x)
         {
             return x > 0 ? (int) x : (int) x - 1;
         }
 
-        private double dot(int[] g, double x, double y, double z)
+        private double Dot(int[] g, double x, double y, double z)
         {
             return g[0]*x + g[1]*y + g[2]*z;
         }
@@ -60,13 +60,13 @@ namespace terrain
         {
             double n0, n1, n2, n3; // Noise contributions from the four corners
             // Skew the input space to determine which simplex cell we're in
-            double F3 = 1.0/3.0;
-            double s = (pX + pY + pZ)*F3; // Very nice and simple skew factor for 3D
-            int i = fastfloor(pX + s);
-            int j = fastfloor(pY + s);
-            int k = fastfloor(pZ + s);
-            double G3 = 1.0/6.0; // Very nice and simple unskew factor, too
-            double t = (i + j + k)*G3;
+            double f3 = 1.0/3.0;
+            double s = (pX + pY + pZ)*f3; // Very nice and simple skew factor for 3D
+            int i = Fastfloor(pX + s);
+            int j = Fastfloor(pY + s);
+            int k = Fastfloor(pZ + s);
+            double g3 = 1.0/6.0; // Very nice and simple unskew factor, too
+            double t = (i + j + k)*g3;
             double X0 = i - t; // Unskew the cell origin back to (x,y,z) space
             double Y0 = j - t;
             double Z0 = k - t;
@@ -143,23 +143,23 @@ namespace terrain
             // a step of (0,0,1) in (i,j,k) means a step of (-c,-c,1-c) in (x,y,z), where
             // c = 1/6.
 
-            double x1 = x0 - i1 + G3; // Offsets for second corner in (x,y,z) coords
-            double y1 = y0 - j1 + G3;
-            double z1 = z0 - k1 + G3;
-            double x2 = x0 - i2 + 2.0*G3; // Offsets for third corner in (x,y,z) coords
-            double y2 = y0 - j2 + 2.0*G3;
-            double z2 = z0 - k2 + 2.0*G3;
-            double x3 = x0 - 1.0 + 3.0*G3; // Offsets for last corner in (x,y,z) coords
-            double y3 = y0 - 1.0 + 3.0*G3;
-            double z3 = z0 - 1.0 + 3.0*G3;
+            double x1 = x0 - i1 + g3; // Offsets for second corner in (x,y,z) coords
+            double y1 = y0 - j1 + g3;
+            double z1 = z0 - k1 + g3;
+            double x2 = x0 - i2 + 2.0*g3; // Offsets for third corner in (x,y,z) coords
+            double y2 = y0 - j2 + 2.0*g3;
+            double z2 = z0 - k2 + 2.0*g3;
+            double x3 = x0 - 1.0 + 3.0*g3; // Offsets for last corner in (x,y,z) coords
+            double y3 = y0 - 1.0 + 3.0*g3;
+            double z3 = z0 - 1.0 + 3.0*g3;
             // Work out the hashed gradient indices of the four simplex corners
             int ii = i & 255;
             int jj = j & 255;
             int kk = k & 255;
-            int gi0 = perm[ii + perm[jj + perm[kk]]]%12;
-            int gi1 = perm[ii + i1 + perm[jj + j1 + perm[kk + k1]]]%12;
-            int gi2 = perm[ii + i2 + perm[jj + j2 + perm[kk + k2]]]%12;
-            int gi3 = perm[ii + 1 + perm[jj + 1 + perm[kk + 1]]]%12;
+            int gi0 = _perm[ii + _perm[jj + _perm[kk]]]%12;
+            int gi1 = _perm[ii + i1 + _perm[jj + j1 + _perm[kk + k1]]]%12;
+            int gi2 = _perm[ii + i2 + _perm[jj + j2 + _perm[kk + k2]]]%12;
+            int gi3 = _perm[ii + 1 + _perm[jj + 1 + _perm[kk + 1]]]%12;
             // Calculate the contribution from the four corners
             double t0 = 0.6 - x0*x0 - y0*y0 - z0*z0;
             if (t0 < 0)
@@ -167,7 +167,7 @@ namespace terrain
             else
             {
                 t0 *= t0;
-                n0 = t0*t0*dot(grad3[gi0], x0, y0, z0);
+                n0 = t0*t0*Dot(_grad3[gi0], x0, y0, z0);
             }
             double t1 = 0.6 - x1*x1 - y1*y1 - z1*z1;
             if (t1 < 0)
@@ -175,7 +175,7 @@ namespace terrain
             else
             {
                 t1 *= t1;
-                n1 = t1*t1*dot(grad3[gi1], x1, y1, z1);
+                n1 = t1*t1*Dot(_grad3[gi1], x1, y1, z1);
             }
             double t2 = 0.6 - x2*x2 - y2*y2 - z2*z2;
             if (t2 < 0)
@@ -183,7 +183,7 @@ namespace terrain
             else
             {
                 t2 *= t2;
-                n2 = t2*t2*dot(grad3[gi2], x2, y2, z2);
+                n2 = t2*t2*Dot(_grad3[gi2], x2, y2, z2);
             }
             double t3 = 0.6 - x3*x3 - y3*y3 - z3*z3;
             if (t3 < 0)
@@ -191,7 +191,7 @@ namespace terrain
             else
             {
                 t3 *= t3;
-                n3 = t3*t3*dot(grad3[gi3], x3, y3, z3);
+                n3 = t3*t3*Dot(_grad3[gi3], x3, y3, z3);
             }
             // Add contributions from each corner to get the final noise value.
             // The result is scaled to stay just inside [-1, 1] - now [0, 1]

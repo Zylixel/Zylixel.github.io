@@ -1,22 +1,19 @@
 ﻿#region
 
 using System;
-using System.Collections.Specialized;
 using System.Globalization;
 using System.IO;
-using System.Net;
+using System.Net.Mail;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Web;
 using db;
 using MySql.Data.MySqlClient;
-using System.Net.Mail;
 
 #endregion
 
 namespace server.account
 {
-    internal class register : RequestHandler
+    internal class Register : RequestHandler
     {
         protected override void HandleRequest()
         {
@@ -96,7 +93,7 @@ namespace server.account
             if (String.IsNullOrEmpty(strIn))
                 return false;
 
-            MatchEvaluator DomainMapper = match =>
+            MatchEvaluator domainMapper = match =>
             {
                 // IdnMapping class with default property values.
                 IdnMapping idn = new IdnMapping();
@@ -114,7 +111,7 @@ namespace server.account
             };
 
             // Use IdnMapping class to convert Unicode domain names. 
-            strIn = Regex.Replace(strIn, @"(@)(.+)$", DomainMapper);
+            strIn = Regex.Replace(strIn, @"(@)(.+)$", domainMapper);
             if (invalid)
                 return false;
 

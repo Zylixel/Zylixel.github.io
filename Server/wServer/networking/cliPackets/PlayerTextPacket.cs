@@ -4,7 +4,7 @@
     {
         public string Text { get; set; }
 
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.PLAYERTEXT; }
         }

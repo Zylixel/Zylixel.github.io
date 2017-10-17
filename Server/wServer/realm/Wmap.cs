@@ -5,8 +5,8 @@ using System.Collections.Generic;
 using System.IO;
 using db.data;
 using Ionic.Zlib;
-using wServer.realm.entities;
 using log4net;
+using wServer.realm.entities;
 
 #endregion
 
@@ -109,7 +109,7 @@ namespace wServer.realm
                                 Utils.FromString(kv[1])));
                             break;
                         case "hp":
-                            stats.Add(new KeyValuePair<StatsType, object>(StatsType.HP, Utils.FromString(kv[1])));
+                            stats.Add(new KeyValuePair<StatsType, object>(StatsType.Hp, Utils.FromString(kv[1])));
                             break;
                         case "mcost":
                             stats.Add(new KeyValuePair<StatsType, object>(StatsType.SellablePrice,
@@ -165,7 +165,7 @@ namespace wServer.realm
                 ObjType = ObjType,
                 Terrain = Terrain,
                 Region = Region,
-                ObjId = ObjId,
+                ObjId = ObjId
             };
         }
     }

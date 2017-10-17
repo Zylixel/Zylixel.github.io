@@ -8,7 +8,7 @@
         public Position PosB { get; set; }
         public ARGB Color { get; set; }
 
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.SHOW_EFFECT; }
         }

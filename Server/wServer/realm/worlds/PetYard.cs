@@ -2,7 +2,6 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using db;
 using MySql.Data.MySqlClient;
 using wServer.networking;
 using wServer.realm.entities;
@@ -70,9 +69,9 @@ namespace wServer.realm.worlds
                     int x, y;
                     do
                     {
-                        x = player.Random.Next(0, this.Map.Width);
-                        y = player.Random.Next(0, this.Map.Height);
-                    } while (this.Map[x, y].Region != TileRegion.PetRegion || this.Map[x, y].ObjType != 0);
+                        x = player.Random.Next(0, Map.Width);
+                        y = player.Random.Next(0, Map.Height);
+                    } while (Map[x, y].Region != TileRegion.PetRegion || Map[x, y].ObjType != 0);
                     obj.Move(x + 0.5f, y + 0.5f);
                     EnterWorld(obj);
                 }
@@ -82,9 +81,9 @@ namespace wServer.realm.worlds
         public Pet FindPetById(int petId)
         {
             Pet ret = null;
-            for (int i = 0; i < this.Pets.Values.Count; i++)
+            for (int i = 0; i < Pets.Values.Count; i++)
             {
-                ret = this.Pets.Values.ToArray()[i];
+                ret = Pets.Values.ToArray()[i];
                 if (ret != null)
                 {
                     if (ret.PlayerOwner != null)

@@ -10,7 +10,7 @@ namespace wServer.networking.handlers
 {
     internal class BuyHandler : PacketHandlerBase<BuyPacket>
     {
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.BUY; }
         }

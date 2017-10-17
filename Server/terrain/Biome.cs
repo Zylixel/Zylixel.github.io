@@ -10,18 +10,18 @@ namespace terrain
 {
     internal class Biome
     {
-        private readonly PolygonMap map;
-        private readonly Random rand;
-        private HashSet<MapPolygon> beaches;
+        private readonly PolygonMap _map;
+        private readonly Random _rand;
+        private HashSet<MapPolygon> _beaches;
 
 
-        private double[] elevationThreshold;
-        private double[] moistureThreshold;
+        private double[] _elevationThreshold;
+        private double[] _moistureThreshold;
 
         public Biome(int seed, PolygonMap map)
         {
-            rand = new Random(seed);
-            this.map = map;
+            _rand = new Random(seed);
+            this._map = map;
         }
 
         public void ComputeBiomes(TerrainTile[,] buff)
@@ -29,19 +29,19 @@ namespace terrain
             Dictionary<MapNode, double> nodeMoist = ComputeMoisture();
             Dictionary<MapPolygon, double> polyMoist = RedistributeMoisture(nodeMoist);
 
-            double[] elevs = map.Polygons
+            double[] elevs = _map.Polygons
                 .SelectMany(_ => _.Nodes)
                 .Select(_ => _.DistanceToCoast.Value)
                 .OrderBy(_ => _)
                 .Distinct().ToArray();
-            elevationThreshold = new[]
+            _elevationThreshold = new[]
             {
                 0/5.0,
                 1/5.0,
                 3/5.0,
                 4/5.0
             };
-            beaches = new HashSet<MapPolygon>(map.Polygons.Where(b =>
+            _beaches = new HashSet<MapPolygon>(_map.Polygons.Where(b =>
                 !b.IsWater &&
                 b.Neighbour.Any(w1 => (w1.IsCoast && w1.IsOcean) || w1.Neighbour.Any(w2 => w2.IsCoast && w2.IsOcean))));
 
@@ -49,7 +49,7 @@ namespace terrain
                 .Select(_ => _.Value)
                 .OrderBy(_ => _)
                 .Distinct().ToArray();
-            moistureThreshold = new[]
+            _moistureThreshold = new[]
             {
                 1/7.0,
                 2/7.0,
@@ -68,10 +68,10 @@ namespace terrain
         private Dictionary<MapNode, double> ComputeMoisture()
         {
             Dictionary<MapNode, double> moisture = new Dictionary<MapNode, double>();
-            int totalCount = map.Polygons
+            int totalCount = _map.Polygons
                 .SelectMany(_ => _.Nodes)
                 .Distinct().Count();
-            MapNode[] waterNodes = map.Polygons
+            MapNode[] waterNodes = _map.Polygons
                 .Where(_ => !_.IsOcean) //no ocean
                 .Where(_ => !_.Neighbour.Any(__ => __.IsOcean)) //no beaches
                 .SelectMany(_ => _.Nodes)
@@ -124,7 +124,7 @@ namespace terrain
             }
 
             Dictionary<MapPolygon, double> ret = new Dictionary<MapPolygon, double>();
-            foreach (MapPolygon i in map.Polygons)
+            foreach (MapPolygon i in _map.Polygons)
             {
                 ret[i] = i.Nodes.Average(_ => nodes[_]);
             }
@@ -173,39 +173,39 @@ namespace terrain
             if (tile.PolygonId == -1 ||
                 tile.TileId == TileTypes.Road ||
                 tile.TileId == TileTypes.Water) return TerrainType.None;
-            MapPolygon poly = map.Polygons[tile.PolygonId];
+            MapPolygon poly = _map.Polygons[tile.PolygonId];
 
-            if (!poly.IsWater && beaches.Contains(poly))
+            if (!poly.IsWater && _beaches.Contains(poly))
                 return TerrainType.ShoreSand;
             if (poly.IsWater)
                 return TerrainType.None;
-            if (tile.Elevation >= elevationThreshold[3])
+            if (tile.Elevation >= _elevationThreshold[3])
                 return TerrainType.Mountains;
-            if (tile.Elevation > elevationThreshold[2])
+            if (tile.Elevation > _elevationThreshold[2])
             {
-                if (tile.Moisture > moistureThreshold[4])
+                if (tile.Moisture > _moistureThreshold[4])
                     return TerrainType.HighPlains;
-                if (tile.Moisture > moistureThreshold[2])
+                if (tile.Moisture > _moistureThreshold[2])
                     return TerrainType.HighForest;
                 return TerrainType.HighSand;
             }
-            if (tile.Elevation > elevationThreshold[1])
+            if (tile.Elevation > _elevationThreshold[1])
             {
-                if (tile.Moisture > moistureThreshold[4])
+                if (tile.Moisture > _moistureThreshold[4])
                     return TerrainType.MidForest;
-                if (tile.Moisture > moistureThreshold[2])
+                if (tile.Moisture > _moistureThreshold[2])
                     return TerrainType.MidPlains;
                 return TerrainType.MidSand;
             }
-            if (poly.Neighbour.Any(_ => beaches.Contains(_)))
+            if (poly.Neighbour.Any(_ => _beaches.Contains(_)))
             {
-                if (tile.Moisture > moistureThreshold[2])
+                if (tile.Moisture > _moistureThreshold[2])
                     return TerrainType.ShorePlains;
             }
 
-            if (tile.Moisture > moistureThreshold[3])
+            if (tile.Moisture > _moistureThreshold[3])
                 return TerrainType.LowForest;
-            if (tile.Moisture > moistureThreshold[2])
+            if (tile.Moisture > _moistureThreshold[2])
                 return TerrainType.LowPlains;
             return TerrainType.LowSand;
             //return TerrainType.None;
@@ -216,11 +216,11 @@ namespace terrain
             if (tile.PolygonId == -1) return "unknown";
             if (tile.TileId == TileTypes.Road) return "road";
             if (tile.TileId == TileTypes.Water) return "river";
-            MapPolygon poly = map.Polygons[tile.PolygonId];
+            MapPolygon poly = _map.Polygons[tile.PolygonId];
 
             if (tile.TileId == 0xb4) return "towel";
 
-            if (beaches.Contains(poly))
+            if (_beaches.Contains(poly))
                 return "beach";
             if (poly.IsWater)
             {
@@ -228,33 +228,33 @@ namespace terrain
                 if (poly.IsOcean) return "ocean";
                 return "water";
             }
-            if (tile.Elevation >= elevationThreshold[3])
+            if (tile.Elevation >= _elevationThreshold[3])
             {
-                if (tile.Moisture > moistureThreshold[4])
+                if (tile.Moisture > _moistureThreshold[4])
                     return "snowy";
                 return "mountain";
             }
-            if (tile.Elevation > elevationThreshold[2])
+            if (tile.Elevation > _elevationThreshold[2])
             {
-                if (tile.Moisture > moistureThreshold[4])
+                if (tile.Moisture > _moistureThreshold[4])
                     return "dryland";
-                if (tile.Moisture > moistureThreshold[2])
+                if (tile.Moisture > _moistureThreshold[2])
                     return "taiga";
                 return "desert";
             }
-            if (tile.Elevation > elevationThreshold[1])
+            if (tile.Elevation > _elevationThreshold[1])
             {
-                if (tile.Moisture > moistureThreshold[4])
+                if (tile.Moisture > _moistureThreshold[4])
                     return "forest";
-                if (tile.Moisture > moistureThreshold[2])
+                if (tile.Moisture > _moistureThreshold[2])
                     return "shrub";
                 return "desert";
             }
-            if (tile.Moisture > moistureThreshold[4])
+            if (tile.Moisture > _moistureThreshold[4])
                 return "rainforest";
-            if (tile.Moisture > moistureThreshold[3])
+            if (tile.Moisture > _moistureThreshold[3])
                 return "forest";
-            if (tile.Moisture > moistureThreshold[2])
+            if (tile.Moisture > _moistureThreshold[2])
                 return "grassland";
             return "desert";
             //return "unknown";
@@ -264,8 +264,8 @@ namespace terrain
         {
             int w = buff.GetLength(0);
             int h = buff.GetLength(1);
-            Noise elevationNoise = new Noise(rand.Next());
-            Noise moistureNoise = new Noise(rand.Next());
+            Noise elevationNoise = new Noise(_rand.Next());
+            Noise moistureNoise = new Noise(_rand.Next());
             //var elevationNoise = PerlinNoise.GetPerlinNoise(rand.Next(), 256, 256, 2);
             //var moistureNoise = PerlinNoise.GetPerlinNoise(rand.Next(), 256, 256, 2);
             for (int y = 0; y < w; y++)
@@ -274,7 +274,7 @@ namespace terrain
                     TerrainTile tile = buff[x, y];
                     if (tile.PolygonId != -1)
                     {
-                        MapPolygon poly = map.Polygons[tile.PolygonId];
+                        MapPolygon poly = _map.Polygons[tile.PolygonId];
 
                         tile.Elevation = Math.Min(1, (float) (poly.DistanceToCoast + poly.DistanceToCoast*
                                                               elevationNoise.GetNoise(x*128.0/w, y*128.0/h, 0.3)*0.01f)*
@@ -308,17 +308,17 @@ namespace terrain
                 {
                     TerrainTile tile = buff[x, y];
 
-                    if (tile.TileId == TileTypes.Water && tile.Elevation >= elevationThreshold[3])
+                    if (tile.TileId == TileTypes.Water && tile.Elevation >= _elevationThreshold[3])
                         tile.TileId = TileTypes.SnowRock;
                     else if (tile.TileId != TileTypes.Water && tile.TileId != TileTypes.Road &&
                              tile.TileId != TileTypes.Beach && tile.TileId != TileTypes.MovingWater &&
                              tile.TileId != TileTypes.DeepWater)
                     {
-                        ushort id = tmp[x + rand.Next(-3, 4), y + rand.Next(-3, 4)].TileId;
+                        ushort id = tmp[x + _rand.Next(-3, 4), y + _rand.Next(-3, 4)].TileId;
                         while (id == TileTypes.Water || id == TileTypes.Road ||
                                id == TileTypes.Beach || id == TileTypes.MovingWater ||
                                id == TileTypes.DeepWater)
-                            id = tmp[x + rand.Next(-3, 4), y + rand.Next(-3, 4)].TileId;
+                            id = tmp[x + _rand.Next(-3, 4), y + _rand.Next(-3, 4)].TileId;
                         tile.TileId = id;
                     }
 
@@ -329,11 +329,11 @@ namespace terrain
                     if (tile.TileId == TileTypes.Beach) biome = "beach";
                     else if (tile.TileId == TileTypes.MovingWater) biome = "coast";
 
-                    string biomeObj = Decoration.GetDecor(biome, rand);
+                    string biomeObj = Decoration.GetDecor(biome, _rand);
                     if (biomeObj != null)
                     {
                         tile.TileObj = biomeObj;
-                        int? size = Decoration.GetSize(biomeObj, rand);
+                        int? size = Decoration.GetSize(biomeObj, _rand);
                         if (size != null)
                             tile.Name = "size:" + size;
                     }

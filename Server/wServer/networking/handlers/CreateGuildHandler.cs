@@ -1,19 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using wServer.networking.cliPackets;
-using wServer.realm;
 using wServer.networking.svrPackets;
-using db;
-using wServer.realm.entities;
+using wServer.realm;
 using wServer.realm.entities.player;
 
 namespace wServer.networking.handlers
 {
     class CreateGuildHandler : PacketHandlerBase<CreateGuildPacket>
     {
-        public override PacketID ID { get { return PacketID.CREATEGUILD; } }
+        public override PacketID Id { get { return PacketID.CREATEGUILD; } }
 
         protected override void HandlePacket(Client client, CreateGuildPacket packet)
         {
@@ -34,7 +29,7 @@ namespace wServer.networking.handlers
                         {
                             if (db.GetGuild(name) != null)
                             {
-                                player.Client.SendPacket(new CreateGuildResultPacket()
+                                player.Client.SendPacket(new CreateGuildResultPacket
                                 {
                                     Success = false,
                                     ErrorText = "{\"key\":\"server.create_guild_error\",\"tokens\":{\"error\":\"Guild already exists.\"}}"
@@ -51,48 +46,44 @@ namespace wServer.networking.handlers
                                         player.Client.Account.Guild.Name = g.Name;
                                         player.Client.Account.Guild.Rank = g.Rank;
                                         player.Guild = GuildManager.Add(player, g);
-                                        player.Client.SendPacket(new CreateGuildResultPacket()
+                                        player.Client.SendPacket(new CreateGuildResultPacket
                                         {
                                             Success = true,
                                             ErrorText = "{\"key\":\"server.buy_success\"}"
                                         });
                                         player.CurrentFame = player.Client.Account.Stats.Fame = db.UpdateFame(player.Client.Account, -1000);
                                         player.UpdateCount++;
-                                        return;
                                     }
                                     else
                                     {
-                                        player.Client.SendPacket(new CreateGuildResultPacket()
+                                        player.Client.SendPacket(new CreateGuildResultPacket
                                         {
                                             Success = false,
                                             ErrorText = "{\"key\":\"server.create_guild_error\",\"tokens\":{\"error\":\"Guild name cannot be blank.\"}}"
                                         });
-                                        return;
                                     }
                                 }
                                 else
                                 {
-                                    player.Client.SendPacket(new CreateGuildResultPacket()
+                                    player.Client.SendPacket(new CreateGuildResultPacket
                                     {
                                         Success = false,
                                         ErrorText = "{\"key\":\"server.create_guild_error\",\"tokens\":{\"error\":\"You cannot create a guild as a guild member.\"}}"
                                     });
-                                    return;
                                 }
                             }
                             catch (Exception e)
                             {
-                                player.Client.SendPacket(new CreateGuildResultPacket()
+                                player.Client.SendPacket(new CreateGuildResultPacket
                                 {
                                     Success = false,
                                     ErrorText = "{\"key\":\"server.create_guild_error\",\"tokens\":{\"error\":\"" + e.Message + "\"}}"
                                 });
-                                return;
                             }
                         }
                         else
                         {
-                            player.Client.SendPacket(new CreateGuildResultPacket()
+                            player.Client.SendPacket(new CreateGuildResultPacket
                             {
                                 Success = false,
                                 ErrorText = "{\"key\":\"server.create_guild_error\",\"tokens\":{\"error\":\"Guild name cannot be blank.\"}}"
@@ -101,7 +92,7 @@ namespace wServer.networking.handlers
                     }
                     else
                     {
-                        player.Client.SendPacket(new CreateGuildResultPacket()
+                        player.Client.SendPacket(new CreateGuildResultPacket
                         {
                             Success = false,
                             ErrorText = "{\"key\":\"server.not_enough_fame\"}"
@@ -111,7 +102,7 @@ namespace wServer.networking.handlers
             }
             catch (Exception e)
             {
-                client.SendPacket(new CreateGuildResultPacket()
+                client.SendPacket(new CreateGuildResultPacket
                 {
                     Success = false,
                     ErrorText = "{\"key\":\"server.create_guild_error\",\"tokens\":{\"error\":\"" + e.Message + "\"}}"

@@ -38,7 +38,7 @@ namespace wServer.logic.behaviors
                 if (group == "Self")
                 {
                     Enemy entity = host as Enemy;
-                    int newHp = (int)entity.ObjectDesc.MaxHP;
+                    int newHp = (int)entity.ObjectDesc.MaxHp;
                     if (newHp != entity.HP)
                     {
                         int n = newHp - entity.HP;
@@ -62,7 +62,7 @@ namespace wServer.logic.behaviors
                 {
                     foreach (Enemy entity in host.GetNearestEntitiesByGroup(range, group).OfType<Enemy>())
                     {
-                        int newHp = (int)entity.ObjectDesc.MaxHP;
+                        int newHp = (int)entity.ObjectDesc.MaxHp;
                         if (newHp != entity.HP)
                         {
                             int n = newHp - entity.HP;

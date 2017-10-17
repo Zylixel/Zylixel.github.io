@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using wServer.networking.svrPackets;
+﻿using wServer.networking.svrPackets;
 using wServer.realm;
 using wServer.realm.entities;
 
@@ -38,7 +33,7 @@ namespace wServer.logic.behaviors.Drakes
                         EffectType = EffectType.AreaBlast,
                         Color = new ARGB(0x3E3A78),
                         TargetId = en.Id,
-                        PosA = new Position { X = 1, }
+                        PosA = new Position { X = 1 }
                     }, null);
                     en.Owner.BroadcastPacket(new ShowEffectPacket
                     {
@@ -47,7 +42,7 @@ namespace wServer.logic.behaviors.Drakes
                         PosA = new Position { X = en.X, Y = en.Y },
                         Color = new ARGB(0x3E3A78)
                     }, null);
-                    en.Damage(host.GetPlayerOwner(), time, 35, false, new ConditionEffect[] { });
+                    en.Damage(host.GetPlayerOwner(), time, 35, false);
                 }
                 cool = 300;
             }

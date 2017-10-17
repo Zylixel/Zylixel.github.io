@@ -2,16 +2,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Xml.Linq;
 using db.data;
-using Ionic.Zlib;
-using MySql.Data.MySqlClient;
-using System.IO;
-using System.Text;
-using System.Text.RegularExpressions;
 using log4net;
-
+using MySql.Data.MySqlClient;
 
 #endregion
 
@@ -36,7 +34,7 @@ namespace db
 
         private static string _host, _databaseName, _user, _password;
         private readonly MySqlConnection _con;
-        public MySqlConnection Connection { get { return _con; } }
+        public MySqlConnection Connection => _con;
 
         public Database(string host, string database, string user, string password)
         {
@@ -83,7 +81,7 @@ namespace db
         {
             if (disposing)
             {
-                if (_con.State == System.Data.ConnectionState.Open)
+                if (_con.State == ConnectionState.Open)
                 {
                     _con.Close();
                     _con.Dispose();
@@ -125,7 +123,7 @@ namespace db
                         Title = rdr.GetString("title"),
                         TagLine = rdr.GetString("text"),
                         Link = rdr.GetString("link"),
-                        Date = DateTimeToUnixTimestamp(rdr.GetDateTime("date")),
+                        Date = DateTimeToUnixTimestamp(rdr.GetDateTime("date"))
                     });
             }
             if (acc != null)
@@ -148,7 +146,7 @@ AND characters.charId=death.chrId;";
                             TagLine = string.Format("You earned {0} glorious Fame",
                                 rdr.GetInt32("totalFame")),
                             Link = "fame:" + rdr.GetInt32("charId"),
-                            Date = DateTimeToUnixTimestamp(rdr.GetDateTime("time")),
+                            Date = DateTimeToUnixTimestamp(rdr.GetDateTime("time"))
                         });
                 }
             }
@@ -252,7 +250,7 @@ AND characters.charId=death.chrId;";
             MySqlCommand cmd = CreateQuery();
             cmd.CommandText = "SELECT muted FROM accounts WHERE id=@accId";
             cmd.Parameters.AddWithValue("@accId", accId);
-            if ((int)cmd.ExecuteNonQuery() == 1) return true;
+            if (cmd.ExecuteNonQuery() == 1) return true;
             return false;
         }
 
@@ -1246,7 +1244,7 @@ VALUES(@accId, @chrId, @name, @objType, @tex1, @tex2, @skin, @items, @fame, @exp
         public bool AddLock(string accId, string lockId)
         {
             List<string> x = GetLockeds(accId);
-            x.Add(lockId.ToString());
+            x.Add(lockId);
             string s = Utils.GetCommaSepString(x.ToArray());
             MySqlCommand cmd = CreateQuery();
             cmd.CommandText = "UPDATE accounts SET locked=@newlocked WHERE id=@accId";
@@ -1260,7 +1258,7 @@ VALUES(@accId, @chrId, @name, @objType, @tex1, @tex2, @skin, @items, @fame, @exp
         public bool RemoveLock(string accId, string lockId)
         {
             List<string> x = GetLockeds(accId);
-            x.Remove(lockId.ToString());
+            x.Remove(lockId);
             string s = Utils.GetCommaSepString(x.ToArray());
             MySqlCommand cmd = CreateQuery();
             cmd.CommandText = "UPDATE accounts SET locked=@newlocked WHERE id=@accId";
@@ -1274,7 +1272,7 @@ VALUES(@accId, @chrId, @name, @objType, @tex1, @tex2, @skin, @items, @fame, @exp
         public bool AddIgnore(string accId, string ignoreId)
         {
             List<string> x = GetIgnoreds(accId);
-            x.Add(ignoreId.ToString());
+            x.Add(ignoreId);
             string s = Utils.GetCommaSepString(x.ToArray());
             MySqlCommand cmd = CreateQuery();
             cmd.CommandText = "UPDATE accounts SET ignored=@newignored WHERE id=@accId";
@@ -1288,7 +1286,7 @@ VALUES(@accId, @chrId, @name, @objType, @tex1, @tex2, @skin, @items, @fame, @exp
         public bool RemoveIgnore(string accId, string ignoreId)
         {
             List<string> x = GetIgnoreds(accId);
-            x.Remove(ignoreId.ToString());
+            x.Remove(ignoreId);
             string s = Utils.GetCommaSepString(x.ToArray());
             MySqlCommand cmd = CreateQuery();
             cmd.CommandText = "UPDATE accounts SET ignored=@newignored WHERE id=@accId";
@@ -1407,28 +1405,6 @@ VALUES(@accId, @petId, @objType, @skinName, @skin, @rarity, @maxLevel, @abilitie
             cmd.ExecuteScalar();
         }
 
-        private string generateGiftCode(int blocks, int blockLength)
-        {
-            var builder = new StringBuilder();
-            var rand = new Random();
-            for (var i = 0; i < blocks; i++)
-            {
-                builder.Append(GenerateRandomString(blockLength, rand));
-                if(i < blocks-1)
-                    builder.Append("-");
-            }
-            return builder.ToString();
-        }
-
-        private bool giftCodeExists(string code)
-        {
-            var cmd = CreateQuery();
-            cmd.CommandText = "SELECT code FROM giftCodes WHERE code=@code";
-            cmd.Parameters.AddWithValue("@code", code);
-            using (var rdr = cmd.ExecuteReader())
-                return rdr.HasRows;
-        }
-
         public bool SaveChars(string oldAccId, Chars oldChars, Chars chrs, XmlData data)
         {
             try
@@ -1470,7 +1446,7 @@ ON DUPLICATE KEY UPDATE
 bestLv = GREATEST(bestLv, @bestLv), 
 bestFame = GREATEST(bestFame, @bestFame);";
                     cmd.Parameters.AddWithValue("@accId", oldAccId);
-                    cmd.Parameters.AddWithValue("@objType", Utils.FromString(stat.ObjectType.ToString()));
+                    cmd.Parameters.AddWithValue("@objType", Utils.FromString(stat.ObjectType));
                     cmd.Parameters.AddWithValue("@bestLv", stat.BestLevel);
                     cmd.Parameters.AddWithValue("@bestFame", stat.BestFame);
                     cmd.ExecuteNonQuery();
@@ -1499,8 +1475,7 @@ bestFame = GREATEST(bestFame, @bestFame);";
                 {
                     var chr = CreateCharacter(data, (ushort)@char.ObjectType, @char.CharacterId);
 
-                    int[] stats = new[]
-                    {
+                    int[] stats = {
                         @char.MaxHitPoints,
                         @char.MaxMagicPoints,
                         @char.Attack,

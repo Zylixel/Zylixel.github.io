@@ -2,41 +2,41 @@
 {
     public partial class Player
     {
-        private bool lootDropBoostFreeTimer;
-        private bool lootTierBoostFreeTimer;
-        private bool ninjaShoot;
-        private bool ninjaFreeTimer;
-        private bool xpFreeTimer;
+        private bool _lootDropBoostFreeTimer;
+        private bool _lootTierBoostFreeTimer;
+        private bool _ninjaShoot;
+        private bool _ninjaFreeTimer;
+        private bool _xpFreeTimer;
 
         public void HandleBoosts()
         {
-            if (ninjaShoot && ninjaFreeTimer)
+            if (_ninjaShoot && _ninjaFreeTimer)
             {
                 if (Mp > 0)
                 {
-                    ninjaFreeTimer = false;
+                    _ninjaFreeTimer = false;
                     Owner.Timers.Add(new WorldTimer(100, (w, t) =>
                     {
                         Mp -= 1;
                         if (Mp <= 0)
-                            ApplyConditionEffect(new ConditionEffect { Effect = ConditionEffectIndex.Speedy, DurationMS = 0 });
-                        ninjaFreeTimer = true;
+                            ApplyConditionEffect(new ConditionEffect { Effect = ConditionEffectIndex.Speedy, DurationMs = 0 });
+                        _ninjaFreeTimer = true;
                         UpdateCount++;
                     }));
                 }
             }
 
-                if (XpBoosted && xpFreeTimer)
+                if (XpBoosted && _xpFreeTimer)
             {
                 if (XpBoostTimeLeft > 0)
                 {
-                    xpFreeTimer = false;
+                    _xpFreeTimer = false;
                     Owner.Timers.Add(new WorldTimer(1000, (w, t) =>
                     {
                         XpBoostTimeLeft -= 1;
                         if (XpBoostTimeLeft <= 0)
                             XpBoosted = false;
-                        xpFreeTimer = true;
+                        _xpFreeTimer = true;
                         UpdateCount++;
                     }));
                 }
@@ -44,29 +44,29 @@
                     XpBoosted = false;
             }
 
-            if (LootDropBoost && lootDropBoostFreeTimer)
+            if (LootDropBoost && _lootDropBoostFreeTimer)
             {
                 if (LootDropBoostTimeLeft > 0)
                 {
-                    lootDropBoostFreeTimer = false;
+                    _lootDropBoostFreeTimer = false;
                     Owner.Timers.Add(new WorldTimer(1000, (w, t) =>
                     {
                         LootDropBoostTimeLeft -= 1;
-                        lootDropBoostFreeTimer = true;
+                        _lootDropBoostFreeTimer = true;
                         UpdateCount++;
                     }));
                 }
             }
 
-            if (LootTierBoost && lootTierBoostFreeTimer)
+            if (LootTierBoost && _lootTierBoostFreeTimer)
             {
                 if (LootTierBoostTimeLeft > 0)
                 {
-                    lootTierBoostFreeTimer = false;
+                    _lootTierBoostFreeTimer = false;
                     Owner.Timers.Add(new WorldTimer(1000, (w, t) =>
                     {
                         LootTierBoostTimeLeft -= 1;
-                        lootTierBoostFreeTimer = true;
+                        _lootTierBoostFreeTimer = true;
                         UpdateCount++;
                     }));
                 }

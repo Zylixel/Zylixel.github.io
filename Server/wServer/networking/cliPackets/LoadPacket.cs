@@ -5,7 +5,7 @@
         public int CharacterId { get; set; }
         public bool IsFromArena { get; set; }
 
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.LOAD; }
         }

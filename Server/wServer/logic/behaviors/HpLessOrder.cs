@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using wServer.realm;
+﻿using wServer.realm;
 using wServer.realm.entities;
 
 namespace wServer.logic.behaviors
@@ -28,7 +23,7 @@ namespace wServer.logic.behaviors
         {
             if (threshold > 1.0)
                 return (host as Enemy).HP < threshold;
-            return ((host as Enemy).HP / host.ObjectDesc.MaxHP) < threshold;
+            return ((host as Enemy).HP / host.ObjectDesc.MaxHp) < threshold;
         }
 
         private static State FindState(State state, string name)
@@ -49,7 +44,7 @@ namespace wServer.logic.behaviors
             if (CheckHp(host, threshold))
             {
                 if (targetState == null)
-                    targetState = FindState(host.Manager.Behaviors.Definitions[(ushort)children].Item1, targetStateName);
+                    targetState = FindState(host.Manager.Behaviors.Definitions[children].Item1, targetStateName);
                 foreach (Entity i in host.GetNearestEntities(dist, children))
                     if (!i.CurrentState.Is(targetState))
                         i.SwitchTo(targetState);

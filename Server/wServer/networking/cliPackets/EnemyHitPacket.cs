@@ -7,7 +7,7 @@
         public int TargetId { get; set; }
         public bool Killed { get; set; }
 
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.ENEMYHIT; }
         }

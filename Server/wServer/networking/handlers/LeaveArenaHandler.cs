@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using wServer.networking.cliPackets;
+﻿using wServer.networking.cliPackets;
 using wServer.networking.svrPackets;
 using wServer.realm;
 
@@ -11,7 +6,7 @@ namespace wServer.networking.handlers
 {
     internal class LeaveArenaHandler : PacketHandlerBase<LeaveArenaPacket>
     {
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.LEAVEARENA; }
         }
@@ -37,7 +32,7 @@ namespace wServer.networking.handlers
                 Port = Program.Settings.GetValue<int>("port"),
                 GameId = World.NEXUS_ID,
                 Name = "nexus.Nexus",
-                Key = Empty<byte>.Array,
+                Key = Empty<byte>.Array
             });
         }
     }

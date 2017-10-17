@@ -1,9 +1,8 @@
-﻿using log4net;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using log4net;
 using wServer.networking.cliPackets;
 using wServer.networking.svrPackets;
 using wServer.realm.entities.player;
@@ -33,8 +32,8 @@ namespace wServer.realm
 
         public TradeManager(Player player1, Player player2)
         {
-            this.player1Trades = new bool[12];
-            this.player2Trades = new bool[12];
+            player1Trades = new bool[12];
+            player2Trades = new bool[12];
             this.player1 = player1;
             this.player2 = player2;
             TradingPlayers.Add(player1);
@@ -215,12 +214,9 @@ namespace wServer.realm
                         foreach (var item in toTakeFromPlayer2)
                         {
                             if (player1.SlotTypes[i] != 10 && player1.SlotTypes[i] != item.SlotType) continue;
-                            else
-                            {
-                                player1.Inventory[i] = item;
-                                toTakeFromPlayer2.Remove(item);
-                                break;
-                            }
+                            player1.Inventory[i] = item;
+                            toTakeFromPlayer2.Remove(item);
+                            break;
                         }
                     }
                 }
@@ -232,12 +228,9 @@ namespace wServer.realm
                         foreach (var item in toTakeFromPlayer1)
                         {
                             if (player2.SlotTypes[i] != 10 && player2.SlotTypes[i] != item.SlotType) continue;
-                            else
-                            {
-                                player2.Inventory[i] = item;
-                                toTakeFromPlayer1.Remove(item);
-                                break;
-                            }
+                            player2.Inventory[i] = item;
+                            toTakeFromPlayer1.Remove(item);
+                            break;
                         }
                     }
                 }

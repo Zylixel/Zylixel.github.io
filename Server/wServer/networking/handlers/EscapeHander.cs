@@ -10,7 +10,7 @@ namespace wServer.networking.handlers
 {
     internal class EscapeHander : PacketHandlerBase<EscapePacket>
     {
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.ESCAPE; }
         }
@@ -36,7 +36,7 @@ namespace wServer.networking.handlers
                 Port = Program.Settings.GetValue<int>("port"),
                 GameId = World.NEXUS_ID,
                 Name = "nexus.Nexus",
-                Key = Empty<byte>.Array,
+                Key = Empty<byte>.Array
             });
         }
     }

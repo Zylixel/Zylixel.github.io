@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using wServer.realm;
+﻿using wServer.realm;
 
 namespace wServer.networking.cliPackets
 {
     public class PetYardCommandPacket : ClientPacket
     {
-        public const int UPGRADE_PET_YARD = 1;
-        public const int FEED_PET = 2;
-        public const int FUSE_PET = 3;
+        public const int UpgradePetYard = 1;
+        public const int FeedPet = 2;
+        public const int FusePet = 3;
 
         public byte CommandId { get; set; }
         public int PetId1 { get; set; }
@@ -20,7 +15,7 @@ namespace wServer.networking.cliPackets
         public ObjectSlot ObjectSlot { get; set; }
         public CurrencyType Currency { get; set; }
 
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.PETYARDCOMMAND; }
         }

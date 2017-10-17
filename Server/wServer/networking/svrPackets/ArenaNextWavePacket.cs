@@ -4,7 +4,7 @@
     {
         public int Type { get; set; } //Not sure for what the type is, but u need it
 
-        public override PacketID ID
+        public override PacketID Id
         {
             get { return PacketID.ARENANEXTWAVE; }
         }

@@ -5,10 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using log4net;
 using wServer.logic;
-using wServer.realm.entities;
-using wServer.realm.entities.player;
 using wServer.logic.transitions;
+using wServer.realm.entities;
 using wServer.realm.entities.merchant;
+using wServer.realm.entities.player;
 
 #endregion
 
@@ -70,7 +70,7 @@ namespace wServer.realm
             if (objType == 0x0d60) ApplyConditionEffect(new ConditionEffect
             {
                 Effect = ConditionEffectIndex.Invincible,
-                DurationMS = -1
+                DurationMs = -1
             });
         }
 
@@ -215,8 +215,8 @@ namespace wServer.realm
         {
             stats[StatsType.Name] = Name ?? ""; //Name was null for some reason O.o
             stats[StatsType.Size] = Size;
-            stats[StatsType.Effects] = (int)_conditionEffects1;
-            stats[StatsType.Effects2] = (int)_conditionEffects2;
+            stats[StatsType.Effects] = _conditionEffects1;
+            stats[StatsType.Effects2] = _conditionEffects2;
         }
 
         public virtual ObjectStats ExportStats()
@@ -431,7 +431,7 @@ namespace wServer.realm
 
         public bool IsOneHit(int dmg, int hpBeforeHit)
         {
-            return ObjectDesc.MaxHP == hpBeforeHit && ObjectDesc.MaxHP <= dmg;
+            return ObjectDesc.MaxHp == hpBeforeHit && ObjectDesc.MaxHp <= dmg;
         }
 
         void ProcessConditionEffects(RealmTime time)
@@ -487,7 +487,7 @@ namespace wServer.realm
         public void ApplyConditionEffect(params ConditionEffect[] effs)
         {
             foreach (var eff in effs)
-                ApplyConditionEffect(eff.Effect, eff.DurationMS);
+                ApplyConditionEffect(eff.Effect, eff.DurationMs);
         }
 
         private bool ApplyCondition(ConditionEffectIndex effect)

@@ -1,19 +1,15 @@
 ﻿#region
 
-using db;
 using System;
-using System.Collections.Specialized;
 using System.IO;
-using System.Net;
 using System.Net.Mail;
-using System.Text;
-using System.Web;
+using db;
 
 #endregion
 
 namespace server.account
 {
-    internal class forgotPassword : RequestHandler
+    internal class ForgotPassword : RequestHandler
     {
         protected override void HandleRequest()
         {
@@ -30,7 +26,7 @@ namespace server.account
                     message.To.Add(Query["guid"]);
                     message.Subject = "Forgot Password";
                     message.From = new MailAddress(Program.Settings.GetValue<string>("serverEmail", ""), "Forgot Passowrd");
-                    message.Body = emailBody.
+                    message.Body = EmailBody.
                         Replace("{RPLINK}", String.Format("{0}/{1}{2}", Program.Settings.GetValue<string>("serverDomain", "localhost"), "account/resetPassword?authToken=", authKey)).
                         Replace("{SUPPORTLINK}", String.Format("{0}", Program.Settings.GetValue<string>("supportLink", "localhost"))).
                         Replace("{SERVERDOMAIN}", Program.Settings.GetValue<string>("serverDomain", "localhost"));
@@ -43,7 +39,7 @@ namespace server.account
             }
         }
 
-        const string emailBody = @"Hello,
+        const string EmailBody = @"Hello,
 
 If your wish to reset your password in Fabiano Swagger of Doom, please use the 
 link below:

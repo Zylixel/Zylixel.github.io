@@ -24,18 +24,18 @@ using RotMG.Common.Rasterizer;
 
 namespace DungeonGenerator.Templates.Abyss {
 	internal class StartRoom : Room {
-		readonly int len;
-		internal Point portalPos;
+		readonly int _len;
+		internal Point PortalPos;
 
 		public StartRoom(int len) {
-			this.len = len;
+			this._len = len;
 		}
 
 		public override RoomType Type { get { return RoomType.Start; } }
 
-		public override int Width { get { return len; } }
+		public override int Width { get { return _len; } }
 
-		public override int Height { get { return len; } }
+		public override int Height { get { return _len; } }
 
 		public override void Rasterize(BitmapRasterizer<DungeonTile> rasterizer, Random rand) {
 			rasterizer.FillRect(Bounds, new DungeonTile {
@@ -56,7 +56,7 @@ namespace DungeonGenerator.Templates.Abyss {
 				buf[x, y].Object = new DungeonObject {
 					ObjectType = AbyssTemplate.CowardicePortal
 				};
-				portalPos = new Point(x, y);
+				PortalPos = new Point(x, y);
 				portalPlaced = true;
 			}
 		}
