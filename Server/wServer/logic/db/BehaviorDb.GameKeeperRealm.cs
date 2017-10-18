@@ -66,7 +66,7 @@ namespace wServer.logic
                     new TimedTransition(10, "spawn")
                     ),
                 new State("spawn",
-                    new Spawn("Keeper Minion", maxChildren: 1, initialSpawn: 0.5),
+                    new Spawn("Keeper Minion", 1),
                     new Suicide()
                     )
                 )
@@ -79,7 +79,7 @@ namespace wServer.logic
                      new HpLessTransition(0.2, "dosomethingcool")
                     ),
                 new State("dosomethingcool",
-                    new ConditionalEffect(ConditionEffectIndex.Invincible, false),
+                    new ConditionalEffect(ConditionEffectIndex.Invincible),
                     new Flash(0xffffff, 0.5, 6),
                     new SpecificHeal(1, 50, "Self", 500),
                     new TimedTransition(3000, "gettemAgain")
@@ -134,7 +134,7 @@ namespace wServer.logic
         .Init("Keeper Boss Anchor",
                 new State(
                     new State("begin",
-                        new Spawn("Keeper Gilgor Boss", maxChildren: 1)
+                        new Spawn("Keeper Gilgor Boss", 1)
                         )
                     )
             )
@@ -278,7 +278,7 @@ namespace wServer.logic
                 new State(
                     new State("init"),
                     new State("begin",
-                        new ConditionalEffect(ConditionEffectIndex.Invulnerable, false),
+                        new ConditionalEffect(ConditionEffectIndex.Invulnerable),
                         new Flash(0xffffff, 0.5, 6),
                         new TimedTransition(3000, "gettem")
                         ),
@@ -293,7 +293,7 @@ namespace wServer.logic
                 new State(
                     new EntityNotExistsTransition("Keeper Gilgor Boss", 999, "die"),
                     new State("begin",
-                        new ConditionalEffect(ConditionEffectIndex.Invulnerable, false),
+                        new ConditionalEffect(ConditionEffectIndex.Invulnerable),
                         new Flash(0xffffff, 0.5, 6),
                         new TimedTransition(3000, "gettem")
                         ),
@@ -347,7 +347,7 @@ namespace wServer.logic
                  new Prioritize(
                     new Orbit(1, 3, 30, "Keeper Gilgor Boss")
                  ),
-                    new Shoot(4, count: 1, coolDown: 500, predictive: 1)
+                    new Shoot(4, 1, coolDown: 500, predictive: 1)
                  )
                  )
 
@@ -355,8 +355,8 @@ namespace wServer.logic
                 new State(
                     new TransformOnDeath("Keeper Craig"),
                     new State("init",
-                        new ConditionalEffect(ConditionEffectIndex.Invincible, perm: true),
-                        new Spawn("Keeper Gilgor Boss Appear", maxChildren: 1),
+                        new ConditionalEffect(ConditionEffectIndex.Invincible, true),
+                        new Spawn("Keeper Gilgor Boss Appear", 1),
                         new TimedTransition(800, "sneakIn0")
                         ),
                     new State("sneakIn0",
@@ -378,7 +378,7 @@ namespace wServer.logic
                         ),
                     new State("fadeOut1",
                         new SetAltTexture(2),
-                        new Spawn("Keeper Gilgor Boss Disappear", maxChildren: 1),
+                        new Spawn("Keeper Gilgor Boss Disappear", 1),
                         new TimedTransition(800, "moveToSpawn1")
                         ),
                     new State("moveToSpawn1",
@@ -386,11 +386,11 @@ namespace wServer.logic
                         new TimedTransition(4000, "moveToTomb")
                         ),
                     new State("moveToTomb",
-                        new MoveTo(8, 9, speed: 1, isMapPosition: false, once: true, instant: false),
+                        new MoveTo(8, 9, 1, isMapPosition: false, once: true),
                         new TimedTransition(50, "fadeIn1")
                         ),
                     new State("fadeIn1",
-                        new Spawn("Keeper Gilgor Boss Appear", maxChildren: 1),
+                        new Spawn("Keeper Gilgor Boss Appear", 1),
                         new TimedTransition(700, "fadeIn2")
                         ),
                     new State("fadeIn2",
@@ -399,13 +399,13 @@ namespace wServer.logic
                         ),
                     new State("shootTomb1",
                         new Taunt(true, "Say goodbye to your precious Gods!"),
-                        new Shoot(100, count: 1, projectileIndex: 0, shootAngle: 200, fixedAngle: 200, coolDown: 10000000),
+                        new Shoot(100, 1, projectileIndex: 0, shootAngle: 200, fixedAngle: 200, coolDown: 10000000),
                         new TimedTransition(500, "kill1")
                         ),
                     new State("kill1",
                         new Order(999, "Keeper Attacker", "die"),
                         new SetAltTexture(2),
-                        new Spawn("Keeper Gilgor Boss Disappear", maxChildren: 1),
+                        new Spawn("Keeper Gilgor Boss Disappear", 1),
                         new TimedTransition(100, "moveToTomb2")
                         ),
                     new State("moveToTomb2",
@@ -413,7 +413,7 @@ namespace wServer.logic
                         new TimedTransition(500, "fadeIn3")
                         ),
                     new State("fadeIn3",
-                        new Spawn("Keeper Gilgor Boss Appear", maxChildren: 1),
+                        new Spawn("Keeper Gilgor Boss Appear", 1),
                         new TimedTransition(700, "fadeIn4")
                         ),
                     new State("fadeIn4",
@@ -421,13 +421,13 @@ namespace wServer.logic
                         new TimedTransition(200, "shootTomb2")
                         ),
                     new State("shootTomb2",
-                        new Shoot(100, count: 1, projectileIndex: 0, shootAngle: 200, fixedAngle: 200, coolDown: 10000000),
+                        new Shoot(100, 1, projectileIndex: 0, shootAngle: 200, fixedAngle: 200, coolDown: 10000000),
                         new TimedTransition(500, "kill2")
                         ),
                     new State("kill2",
                         new Order(999, "Keeper Defender", "die"),
                         new SetAltTexture(2),
-                        new Spawn("Keeper Gilgor Boss Disappear", maxChildren: 1),
+                        new Spawn("Keeper Gilgor Boss Disappear", 1),
                         new TimedTransition(100, "moveToTomb3")
                         ),
                     new State("moveToTomb3",
@@ -435,7 +435,7 @@ namespace wServer.logic
                         new TimedTransition(500, "fadeIn5")
                         ),
                     new State("fadeIn5",
-                        new Spawn("Keeper Gilgor Boss Appear", maxChildren: 1),
+                        new Spawn("Keeper Gilgor Boss Appear", 1),
                         new TimedTransition(700, "fadeIn6")
                         ),
                     new State("fadeIn6",
@@ -443,7 +443,7 @@ namespace wServer.logic
                         new TimedTransition(200, "shootTomb3")
                         ),
                     new State("shootTomb3",
-                        new Shoot(100, count: 1, projectileIndex: 0, shootAngle: 200, fixedAngle: 200, coolDown: 10000000),
+                        new Shoot(100, 1, projectileIndex: 0, shootAngle: 200, fixedAngle: 200, coolDown: 10000000),
                         new TimedTransition(200, "kill3")
                         ),
                     new State("kill3",
@@ -453,7 +453,7 @@ namespace wServer.logic
                         ),
                     new State("disappear",
                         new SetAltTexture(2),
-                        new Spawn("Keeper Gilgor Boss Disappear", maxChildren: 1),
+                        new Spawn("Keeper Gilgor Boss Disappear", 1),
                         new TimedTransition(500, "initShatts")
                         ),
                      new State("initShatts",
@@ -462,7 +462,7 @@ namespace wServer.logic
                         new TimedTransition(1000, "fadeIn7")
                         ),
                      new State("fadeIn7",
-                        new Spawn("Keeper Gilgor Boss Appear", maxChildren: 1),
+                        new Spawn("Keeper Gilgor Boss Appear", 1),
                         new TimedTransition(700, "fadeIn8")
                         ),
                     new State("fadeIn8",
@@ -474,9 +474,9 @@ namespace wServer.logic
                         new TimedTransition(2000, "ItsHappening")
                         ),
                     new State("ItsHappening",
-                        new TossObject("Pillar of Gilgor", 8, 0, coolDown: 1000000),
-                        new TossObject("Pillar of Gilgor", 8, 180, coolDown: 1000000),
-                        new ConditionalEffect(ConditionEffectIndex.Invincible, false),
+                        new TossObject("Pillar of Gilgor", 8, 0, 1000000),
+                        new TossObject("Pillar of Gilgor", 8, 180, 1000000),
+                        new ConditionalEffect(ConditionEffectIndex.Invincible),
                         new TimedTransition(3000, "ShootThePillars1")
                             ),
                     new State("ShootThePillars1",
@@ -488,14 +488,14 @@ namespace wServer.logic
                         new SetAltTexture(3),
                         new ConditionalEffect(ConditionEffectIndex.Invincible, true),
                         new Taunt(true, "MINIONS, STOP THEM!"),
-                        new TossObject("Minion of Gilgor", 3, 0, coolDown: 10000),
-                        new TossObject("Minion of Gilgor", 3, 45, coolDown: 10000, coolDownOffset: 200),
-                        new TossObject("Minion of Gilgor", 3, 90, coolDown: 10000, coolDownOffset: 400),
-                        new TossObject("Minion of Gilgor", 3, 135, coolDown: 10000, coolDownOffset: 600),
-                        new TossObject("Minion of Gilgor", 3, 180, coolDown: 10000, coolDownOffset: 800),
-                        new TossObject("Minion of Gilgor", 3, 225, coolDown: 10000, coolDownOffset: 1000),
-                        new TossObject("Minion of Gilgor", 3, 270, coolDown: 10000, coolDownOffset: 1200),
-                        new TossObject("Minion of Gilgor", 3, 315, coolDown: 10000, coolDownOffset: 1400),
+                        new TossObject("Minion of Gilgor", 3, 0, 10000),
+                        new TossObject("Minion of Gilgor", 3, 45, 10000, 200),
+                        new TossObject("Minion of Gilgor", 3, 90, 10000, 400),
+                        new TossObject("Minion of Gilgor", 3, 135, 10000, 600),
+                        new TossObject("Minion of Gilgor", 3, 180, 10000, 800),
+                        new TossObject("Minion of Gilgor", 3, 225, 10000, 1000),
+                        new TossObject("Minion of Gilgor", 3, 270, 10000, 1200),
+                        new TossObject("Minion of Gilgor", 3, 315, 10000, 1400),
                         new TimedTransition(2800, "startMinions")
                         ),
                     new State("startMinions",
@@ -503,13 +503,13 @@ namespace wServer.logic
                         new TimedTransition(1, "getouttathere")
                         ),
                     new State("getouttathere",
-                        new ConditionalEffect(ConditionEffectIndex.Invincible, false),
+                        new ConditionalEffect(ConditionEffectIndex.Invincible),
                         new EntitiesNotExistsTransition(999, "getAngery2", "Minion of Gilgor")
                         ),
                     new State("getAngery2",
                         new Taunt(true, "You. Will. Stop."),
-                        new TossObject("Pillar of Gilgor2", 8, 90, coolDown: 1000000),
-                        new TossObject("Pillar of Gilgor2", 8, 270, coolDown: 1000000),
+                        new TossObject("Pillar of Gilgor2", 8, 90, 1000000),
+                        new TossObject("Pillar of Gilgor2", 8, 270, 1000000),
                         new HpLessTransition(0.7, "oryxfake")
                         ),
                     new State("oryxfake",
@@ -570,45 +570,45 @@ namespace wServer.logic
                         new Shoot(99, 1, projectileIndex: 1, shootAngle: 225, fixedAngle: 225, coolDown: 1800, coolDownOffset: 1000),
                         new Shoot(99, 1, projectileIndex: 1, shootAngle: 270, fixedAngle: 270, coolDown: 1800, coolDownOffset: 1200),
                         new Shoot(99, 1, projectileIndex: 1, shootAngle: 315, fixedAngle: 315, coolDown: 1800, coolDownOffset: 1400),
-                        new TossObject("Minion of Gilgor2", 3, 0, coolDown: 7000),
-                        new TossObject("Minion of Gilgor2", 3, 45, coolDown: 7000, coolDownOffset: 200),
-                        new TossObject("Minion of Gilgor2", 3, 90, coolDown: 7000, coolDownOffset: 400),
-                        new TossObject("Minion of Gilgor2", 3, 135, coolDown: 7000, coolDownOffset: 600),
-                        new TossObject("Minion of Gilgor2", 3, 180, coolDown: 7000, coolDownOffset: 800),
-                        new TossObject("Minion of Gilgor2", 3, 225, coolDown: 7000, coolDownOffset: 1000),
-                        new TossObject("Minion of Gilgor2", 3, 270, coolDown: 7000, coolDownOffset: 1200),
-                        new TossObject("Minion of Gilgor2", 3, 315, coolDown: 7000, coolDownOffset: 1400),
+                        new TossObject("Minion of Gilgor2", 3, 0, 7000),
+                        new TossObject("Minion of Gilgor2", 3, 45, 7000, 200),
+                        new TossObject("Minion of Gilgor2", 3, 90, 7000, 400),
+                        new TossObject("Minion of Gilgor2", 3, 135, 7000, 600),
+                        new TossObject("Minion of Gilgor2", 3, 180, 7000, 800),
+                        new TossObject("Minion of Gilgor2", 3, 225, 7000, 1000),
+                        new TossObject("Minion of Gilgor2", 3, 270, 7000, 1200),
+                        new TossObject("Minion of Gilgor2", 3, 315, 7000, 1400),
                         new HpLessTransition(0.2, "fakeit")
                         ),
                     new State("fakeit",
                         new SetAltTexture(8),
-                        new ConditionalEffect(ConditionEffectIndex.Invincible, false),
+                        new ConditionalEffect(ConditionEffectIndex.Invincible),
                         new ReturnToSpawn(true, 0.5),
                         new Flash(0xff0000, 0.5, 8),
                         new Taunt("Hero, You have done the impossible, and you shall be rewarded with..."),
                         new TimedTransition(4000, "prankit")
                     ),
                     new State("prankit",
-                        new ConditionalEffect(ConditionEffectIndex.Invincible, false),
+                        new ConditionalEffect(ConditionEffectIndex.Invincible),
                         new SetAltTexture(5),
                         new Taunt(true, "A SWIFT DEATH!!!"),
                         new TimedTransition(2000, "ragerage")
                         ),
                     new State("ragerage",
                         new SetAltTexture(8),
-                        new ConditionalEffect(ConditionEffectIndex.Invincible, false),
-                        new TossObject("Minion of Gilgor2", 3, 0, coolDown: 1000000),
-                        new TossObject("Minion of Gilgor2", 3, 45, coolDown: 1000000, coolDownOffset: 200),
-                        new TossObject("Minion of Gilgor2", 3, 90, coolDown: 1000000, coolDownOffset: 400),
-                        new TossObject("Minion of Gilgor2", 3, 135, coolDown: 1000000, coolDownOffset: 600),
-                        new TossObject("Minion of Gilgor2", 3, 180, coolDown: 1000000, coolDownOffset: 800),
-                        new TossObject("Minion of Gilgor2", 3, 225, coolDown: 1000000, coolDownOffset: 1000),
-                        new TossObject("Minion of Gilgor2", 3, 270, coolDown: 1000000, coolDownOffset: 1200),
-                        new TossObject("Minion of Gilgor2", 3, 315, coolDown: 1000000, coolDownOffset: 1400),
-                        new TossObject("Pillar of Gilgor2", 8, 0, coolDown: 1000000),
-                        new TossObject("Pillar of Gilgor2", 8, 180, coolDown: 1000000),
-                        new TossObject("Pillar of Gilgor2", 8, 90, coolDown: 1000000),
-                        new TossObject("Pillar of Gilgor2", 8, 270, coolDown: 1000000),
+                        new ConditionalEffect(ConditionEffectIndex.Invincible),
+                        new TossObject("Minion of Gilgor2", 3, 0, 1000000),
+                        new TossObject("Minion of Gilgor2", 3, 45, 1000000, 200),
+                        new TossObject("Minion of Gilgor2", 3, 90, 1000000, 400),
+                        new TossObject("Minion of Gilgor2", 3, 135, 1000000, 600),
+                        new TossObject("Minion of Gilgor2", 3, 180, 1000000, 800),
+                        new TossObject("Minion of Gilgor2", 3, 225, 1000000, 1000),
+                        new TossObject("Minion of Gilgor2", 3, 270, 1000000, 1200),
+                        new TossObject("Minion of Gilgor2", 3, 315, 1000000, 1400),
+                        new TossObject("Pillar of Gilgor2", 8, 0, 1000000),
+                        new TossObject("Pillar of Gilgor2", 8, 180, 1000000),
+                        new TossObject("Pillar of Gilgor2", 8, 90, 1000000),
+                        new TossObject("Pillar of Gilgor2", 8, 270, 1000000),
                         new TimedTransition(3000, "BegintheChaos")
                         ),
                     new State("BegintheChaos",
@@ -617,14 +617,14 @@ namespace wServer.logic
                         new TimedTransition(1, "KeepBegin")
                         ),
                     new State("KeepBegin",
-                        new TossObject("Minion of Gilgor2", 3, 0, coolDown: 7000),
-                        new TossObject("Minion of Gilgor2", 3, 45, coolDown: 7000, coolDownOffset: 200),
-                        new TossObject("Minion of Gilgor2", 3, 90, coolDown: 7000, coolDownOffset: 400),
-                        new TossObject("Minion of Gilgor2", 3, 135, coolDown: 7000, coolDownOffset: 600),
-                        new TossObject("Minion of Gilgor2", 3, 180, coolDown: 7000, coolDownOffset: 800),
-                        new TossObject("Minion of Gilgor2", 3, 225, coolDown: 7000, coolDownOffset: 1000),
-                        new TossObject("Minion of Gilgor2", 3, 270, coolDown: 7000, coolDownOffset: 1200),
-                        new TossObject("Minion of Gilgor2", 3, 315, coolDown: 7000, coolDownOffset: 1400),
+                        new TossObject("Minion of Gilgor2", 3, 0, 7000),
+                        new TossObject("Minion of Gilgor2", 3, 45, 7000, 200),
+                        new TossObject("Minion of Gilgor2", 3, 90, 7000, 400),
+                        new TossObject("Minion of Gilgor2", 3, 135, 7000, 600),
+                        new TossObject("Minion of Gilgor2", 3, 180, 7000, 800),
+                        new TossObject("Minion of Gilgor2", 3, 225, 7000, 1000),
+                        new TossObject("Minion of Gilgor2", 3, 270, 7000, 1200),
+                        new TossObject("Minion of Gilgor2", 3, 315, 7000, 1400),
                         new Shoot(99, 1, projectileIndex: 2, shootAngle: 0, fixedAngle: 0, coolDown: 1500),
                         new Shoot(99, 1, projectileIndex: 2, shootAngle: 22.5, fixedAngle: 22.5, coolDown: 1500),
                         new Shoot(99, 1, projectileIndex: 2, shootAngle: 45, fixedAngle: 45, coolDown: 1500, coolDownOffset: 100),

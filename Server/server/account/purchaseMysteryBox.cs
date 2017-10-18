@@ -3,24 +3,24 @@
 using System;
 using System.IO;
 using System.Linq;
-using System.Xml;
 using db;
 using MySql.Data.MySqlClient;
 using server.mysterybox;
+using System.Xml;
 
 #endregion
 
 namespace server.account
 {
-    internal class PurchaseMysteryBox : RequestHandler
+    internal class purchaseMysteryBox : RequestHandler
     {
         //Thanks to Liinkii for purchasing me a MysteryBox
         //<Success><Awards>ITEM ID</Awards><Gold>GOLD LEFT</Gold></Success>
-        private Random _rand;
+        private Random rand;
 
         protected override void HandleRequest()
         {
-            _rand = Query["ignore"] != null ? new Random(int.Parse(Query["ignore"])) : new Random();
+            rand = Query["ignore"] != null ? new Random(int.Parse(Query["ignore"])) : new Random();
 
             using (Database db = new Database())
             {
@@ -103,7 +103,7 @@ namespace server.account
                     else
                         res.Currency = box.Price.Currency;
 
-                    SendMysteryBoxResult(Context.Response.OutputStream, res);
+                    sendMysteryBoxResult(Context.Response.OutputStream, res);
 
                     int[] gifts = Utils.FromCommaSepString32(res.Awards);
                     foreach (int item in gifts)
@@ -127,11 +127,11 @@ namespace server.account
         {
             int[] ret = new int[items.Split(';').Length];
             for (int i = 0; i < ret.Length; i++)
-                ret[i] = Utils.FromString(items.Split(';')[0].Split(',')[_rand.Next(items.Split(';')[0].Split(',').Length)]);
+                ret[i] = Utils.FromString(items.Split(';')[0].Split(',')[rand.Next(items.Split(';')[0].Split(',').Length)]);
             return ret.ToArray();
         }
 
-        private void SendMysteryBoxResult(Stream stream, MysteryBoxResult res)
+        private void sendMysteryBoxResult(Stream stream, MysteryBoxResult res)
         {
             XmlDocument doc = new XmlDocument();
             XmlNode success = doc.CreateElement("Success");

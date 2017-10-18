@@ -94,26 +94,29 @@ namespace db.data
             log.InfoFormat("{0} Additions", addition.Elements().Count());
         }
 
-        private static string AssemblyDirectory => Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+        private static string AssemblyDirectory
+        {
+            get { return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location); }
+        }
 
 
-        public IDictionary<ushort, XElement> ObjectTypeToElement { get; }
+        public IDictionary<ushort, XElement> ObjectTypeToElement { get; private set; }
 
-        public IDictionary<ushort, string> ObjectTypeToId { get; }
-        public IDictionary<string, ushort> IdToObjectType { get; }
+        public IDictionary<ushort, string> ObjectTypeToId { get; private set; }
+        public IDictionary<string, ushort> IdToObjectType { get; private set; }
 
-        public IDictionary<ushort, XElement> TileTypeToElement { get; }
+        public IDictionary<ushort, XElement> TileTypeToElement { get; private set; }
 
-        public IDictionary<ushort, string> TileTypeToId { get; }
-        public IDictionary<string, ushort> IdToTileType { get; }
+        public IDictionary<ushort, string> TileTypeToId { get; private set; }
+        public IDictionary<string, ushort> IdToTileType { get; private set; }
 
-        public IDictionary<ushort, TileDesc> Tiles { get; }
-        public IDictionary<ushort, Item> Items { get; }
-        public IDictionary<ushort, ObjectDesc> ObjectDescs { get; }
-        public IDictionary<ushort, PortalDesc> Portals { get; }
-        public IDictionary<ushort, PetStruct> TypeToPet { get; }
-        public IDictionary<string, PetSkin> IdToPetSkin { get; }
-        public IDictionary<ushort, SetTypeSkin> SetTypeSkins { get; }
+        public IDictionary<ushort, TileDesc> Tiles { get; private set; }
+        public IDictionary<ushort, Item> Items { get; private set; }
+        public IDictionary<ushort, ObjectDesc> ObjectDescs { get; private set; }
+        public IDictionary<ushort, PortalDesc> Portals { get; private set; }
+        public IDictionary<ushort, PetStruct> TypeToPet { get; private set; }
+        public IDictionary<string, PetSkin> IdToPetSkin { get; private set; }
+        public IDictionary<ushort, SetTypeSkin> SetTypeSkins { get; private set; }
 
 
         public string[] AdditionXml

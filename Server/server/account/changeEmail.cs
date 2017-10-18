@@ -1,9 +1,13 @@
-﻿using System.Net.Mail;
-using db;
+﻿using db;
+using System.Collections.Specialized;
+using System.IO;
+using System.Net;
+using System.Net.Mail;
+using System.Web;
 
 namespace server.account
 {
-    internal class ChangeEmail : RequestHandler
+    internal class changeEmail : RequestHandler
     {
         protected override void HandleRequest()
         {

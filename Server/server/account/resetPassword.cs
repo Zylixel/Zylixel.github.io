@@ -1,9 +1,12 @@
-﻿using System.IO;
-using db;
+﻿using db;
+using System.Collections.Specialized;
+using System.IO;
+using System.Net;
+using System.Web;
 
 namespace server.account
 {
-    internal class ResetPassword : RequestHandler
+    internal class resetPassword : RequestHandler
     {
         protected override void HandleRequest()
         {
@@ -18,14 +21,14 @@ namespace server.account
                 using (StreamWriter wtr = new StreamWriter(Context.Response.OutputStream))
                 {
                     if (success)
-                        wtr.Write(ResetPasswordSuccess.Replace("{PASSWORD}", password).Replace("{SERVERDOMAIN}", Program.Settings.GetValue<string>("serverDomain", "localhost")));
+                        wtr.Write(resetPasswordSuccess.Replace("{PASSWORD}", password).Replace("{SERVERDOMAIN}", Program.Settings.GetValue<string>("serverDomain", "localhost")));
                     else
-                        wtr.Write(ResetPasswordFailure);
+                        wtr.Write(resetPasswordFailure);
                 }
             }
         }
 
-        private const string ResetPasswordSuccess =
+        private const string resetPasswordSuccess =
 @"<html>
 <body bgcolor=""#000000"">
     <div align=""center"">
@@ -34,7 +37,7 @@ namespace server.account
 </body>
 </html>";
 
-        private const string ResetPasswordFailure =
+        private const string resetPasswordFailure =
 @"<html>
 <body bgcolor=""#000000"">
     <div align=""center"">

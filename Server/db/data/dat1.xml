@@ -12439,9 +12439,13 @@
       <DisplayId>{manorOfTheImmortals.Lil_Feratu}</DisplayId>
    </Object>
 ^(?([^
-])\s)*?$?
+])\s)*
+?$
+?
 ^(?([^
-])\s)*?$?
+])\s)*
+?$
+?
    <Object type="0x0dc0" id="Great Temple Snake">
       <Class>Character</Class>
       <Enemy/>

@@ -1,7 +1,10 @@
 ﻿#region
 
 using System;
+using System.Collections.Specialized;
 using System.IO;
+using System.Net;
+using System.Web;
 using db;
 using MySql.Data.MySqlClient;
 
@@ -9,7 +12,7 @@ using MySql.Data.MySqlClient;
 
 namespace server.@char
 {
-    internal class PurchaseClassUnlock : RequestHandler
+    internal class purchaseClassUnlock : RequestHandler
     {
         protected override void HandleRequest()
         {

@@ -1,6 +1,9 @@
 ﻿#region
 
+using System.Collections.Specialized;
 using System.IO;
+using System.Net;
+using System.Web;
 using db;
 using MySql.Data.MySqlClient;
 
@@ -8,7 +11,7 @@ using MySql.Data.MySqlClient;
 
 namespace server.@char
 {
-    internal class Fame : RequestHandler
+    internal class fame : RequestHandler
     {
         protected override void HandleRequest()
         {

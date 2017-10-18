@@ -1,9 +1,12 @@
-﻿using System.IO;
-using db;
+﻿using db;
+using System.Collections.Specialized;
+using System.IO;
+using System.Net;
+using System.Web;
 
 namespace server.account
 {
-    internal class ValidateEmail : RequestHandler
+    internal class validateEmail : RequestHandler
     {
         protected override void HandleRequest()
         {

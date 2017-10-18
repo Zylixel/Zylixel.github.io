@@ -1,15 +1,19 @@
 ﻿#region
 
+using System;
+using System.Collections.Specialized;
 using System.IO;
+using System.Net;
 using System.Text;
+using System.Web;
 
 #endregion
 
 namespace server.picture
 {
-    internal class Get : RequestHandler
+    internal class get : RequestHandler
     {
-        private readonly byte[] _buff = new byte[0x10000];
+        private readonly byte[] buff = new byte[0x10000];
 
         protected override void HandleRequest()
         {
@@ -29,8 +33,8 @@ namespace server.picture
                 using (FileStream i = File.OpenRead(path))
                 {
                     int c;
-                    while ((c = i.Read(_buff, 0, _buff.Length)) > 0)
-                        Context.Response.OutputStream.Write(_buff, 0, c);
+                    while ((c = i.Read(buff, 0, buff.Length)) > 0)
+                        Context.Response.OutputStream.Write(buff, 0, c);
                 }
             }
         }

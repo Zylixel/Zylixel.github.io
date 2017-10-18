@@ -1,31 +1,36 @@
-﻿using System;
+﻿using db;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
-using System.Management;
 using System.Runtime.InteropServices;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
-using db;
+using System.Management;
+using System.IO;
+using System.Web;
 using Newtonsoft.Json;
 
 namespace server.admin
 {
-    public class PerformCommand : RequestHandler
+    public class performCommand : RequestHandler
     {
         [DllImport("user32.dll")]
         public static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
         [DllImport("user32.dll")]
-        public static extern IntPtr SendMessage(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
+        public static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
         [DllImport("user32.dll")]
-        public static extern IntPtr PostMessage(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
+        public static extern IntPtr PostMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         private static extern int GetWindowThreadProcessId(IntPtr hWnd, out uint pid);
         [DllImport("kernel32.dll", SetLastError = true, CallingConvention = CallingConvention.Winapi)]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool IsWow64Process([In] IntPtr hProcess, [Out] out bool lpSystemInfo);
 
-        private const uint WmKeydown = 0x100;
+        private const uint WM_KEYDOWN = 0x100;
+        private const uint WM_SYSCOMMAND = 0x018;
+        private const uint SC_CLOSE = 0x053;
 
         protected override void HandleRequest()
         {
@@ -103,17 +108,17 @@ namespace server.admin
                         WriteLine("World server config has been written.");
                         break;
                     case "createPackage":
-                        var p = Package.Deserialize(Query["package"]);
+                        var p = package.Deserialize(Query["package"]);
                         var cmd = db.CreateQuery();
                         cmd.CommandText = "INSERT INTO packages(name, maxPurchase, weight, contents, bgUrl, price, quantity, endDate) VALUES(@name, @maxPurchase, @weight, @contents, @bgUrl, @price, @quantity, @endDate)";
-                        cmd.Parameters.AddWithValue("@name", p.Name);
-                        cmd.Parameters.AddWithValue("@maxPurchase", p.MaxPurchase);
-                        cmd.Parameters.AddWithValue("@weight", p.Weight);
-                        cmd.Parameters.AddWithValue("@contents", p.Content.ToString());
-                        cmd.Parameters.AddWithValue("@bgUrl", p.BgUrl);
-                        cmd.Parameters.AddWithValue("@price", p.Price);
-                        cmd.Parameters.AddWithValue("@quantity", p.Quantity);
-                        cmd.Parameters.AddWithValue("@endDate", p.EndDate);
+                        cmd.Parameters.AddWithValue("@name", p.name);
+                        cmd.Parameters.AddWithValue("@maxPurchase", p.maxPurchase);
+                        cmd.Parameters.AddWithValue("@weight", p.weight);
+                        cmd.Parameters.AddWithValue("@contents", p.content.ToString());
+                        cmd.Parameters.AddWithValue("@bgUrl", p.bgUrl);
+                        cmd.Parameters.AddWithValue("@price", p.price);
+                        cmd.Parameters.AddWithValue("@quantity", p.quantity);
+                        cmd.Parameters.AddWithValue("@endDate", p.endDate);
                         cmd.ExecuteNonQuery();
                         break;
                     default:
@@ -125,14 +130,14 @@ namespace server.admin
 
         public static void SendKeystroke(IntPtr hWnd, ushort key)
         {
-            SendMessage(hWnd, WmKeydown, ((IntPtr)key), (IntPtr)0);
+            SendMessage(hWnd, WM_KEYDOWN, ((IntPtr)key), (IntPtr)0);
         }
 
         public static string GetProcessPath(IntPtr hWnd, out bool error)
         {
             try
             {
-                uint pid;
+                uint pid = 0;
                 GetWindowThreadProcessId(hWnd, out pid);
                 if (Is64Bit(Process.GetProcessById((int)pid).Handle))
                 {
@@ -182,22 +187,26 @@ namespace server.admin
             return retVal;
         }
 
-        struct Package
+        struct package
         {
-            public string Name;
-            public int MaxPurchase;
-            public int Weight;
-            public Content Content;
-            public string BgUrl;
-            public int Price;
-            public int Quantity;
-            public int EndDate;
+            public string name;
+            public int maxPurchase;
+            public int weight;
+            public content content;
+            public string bgUrl;
+            public int price;
+            public int quantity;
+            public int endDate;
 
-            public static Package Deserialize(string json) => new JsonSerializer().Deserialize<Package>(new JsonTextReader(new StringReader(json)));
+            public static package Deserialize(string json) => new JsonSerializer().Deserialize<package>(new JsonTextReader(new StringReader(json)));
         }
 
-        struct Content
+        struct content
         {
+            public int[] items;
+            public int charSlots;
+            public int vaultChests;
+
             public override string ToString()
             {
                 var wtr = new StringWriter();

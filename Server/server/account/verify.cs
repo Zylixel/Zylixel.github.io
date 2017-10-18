@@ -1,6 +1,10 @@
 ﻿#region
 
+using System.Collections.Specialized;
+using System.IO;
+using System.Net;
 using System.Text;
+using System.Web;
 using System.Xml;
 using System.Xml.Serialization;
 using db;
@@ -9,7 +13,7 @@ using db;
 
 namespace server.account
 {
-    internal class Verify : RequestHandler
+    internal class verify : RequestHandler
     {
         protected override void HandleRequest()
         {

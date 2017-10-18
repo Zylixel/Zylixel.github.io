@@ -639,14 +639,12 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
-    <EmbeddedResource Include="realm\worlds\maps\nexus.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\world2.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\world3.wmap" />
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
     <EmbeddedResource Include="realm\worlds\maps\vault.wmap" />
-    <EmbeddedResource Include="realm\worlds\maps\nexusprod.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\world1.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\kitchen.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\oceantrench.wmap" />
@@ -655,7 +653,6 @@
     <EmbeddedResource Include="realm\worlds\maps\tutorial.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\arena.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\winecellar.wmap" />
-    <EmbeddedResource Include="realm\worlds\maps\nexusLimbo.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\tomb.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\belladonnasGarden.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\PetYard_Common.wmap" />
@@ -672,18 +669,13 @@
     <EmbeddedResource Include="realm\worlds\maps\dailyQuest.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\candyland.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\spriteworld.wmap" />
-    <EmbeddedResource Include="realm\worlds\maps\nexus_winter.jm" />
-    <EmbeddedResource Include="realm\worlds\maps\nexus_summer.jm" />
     <EmbeddedResource Include="realm\worlds\maps\LoD.jm" />
-    <EmbeddedResource Include="realm\worlds\maps\nexus2.jm" />
-    <EmbeddedResource Include="realm\worlds\maps\nexus3.jm" />
     <EmbeddedResource Include="realm\worlds\maps\UDL.jm" />
     <EmbeddedResource Include="realm\worlds\maps\ddocks.jm" />
     <EmbeddedResource Include="realm\worlds\maps\bgrotto.jm" />
     <EmbeddedResource Include="realm\worlds\maps\icecave.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\innersanctum.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\jungles.jm" />
-    <EmbeddedResource Include="realm\worlds\maps\Nexus_for_meh.jm" />
     <EmbeddedResource Include="realm\worlds\maps\SpiderCave.jm" />
     <EmbeddedResource Include="realm\worlds\maps\CandylandHuntingGrounds.jm" />
     <EmbeddedResource Include="realm\worlds\maps\DavyJonesLocker.jm" />

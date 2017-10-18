@@ -159,7 +159,7 @@ namespace wServer.realm.commands
                 player.ApplyConditionEffect(new ConditionEffect
                 {
                     Effect = (ConditionEffectIndex)Enum.Parse(typeof(ConditionEffectIndex), args[0].Trim(), true),
-                    DurationMs = -1
+                    DurationMS = -1
                 });
                 {
                     player.SendInfo("Success!");
@@ -193,7 +193,7 @@ namespace wServer.realm.commands
                 player.ApplyConditionEffect(new ConditionEffect
                 {
                     Effect = (ConditionEffectIndex)Enum.Parse(typeof(ConditionEffectIndex), args[0].Trim(), true),
-                    DurationMs = 0
+                    DurationMS = 0
                 });
                 player.SendInfo("Success!");
             }
@@ -1417,7 +1417,7 @@ namespace wServer.realm.commands
                 player.ApplyConditionEffect(new ConditionEffect
                 {
                     Effect = ConditionEffectIndex.Invincible,
-                    DurationMs = 0
+                    DurationMS = 0
                 });
                 player.SendInfo("Godmode Off");
             }
@@ -1426,7 +1426,7 @@ namespace wServer.realm.commands
                 player.ApplyConditionEffect(new ConditionEffect
                 {
                     Effect = ConditionEffectIndex.Invincible,
-                    DurationMs = -1
+                    DurationMS = -1
                 });
                 player.SendInfo("Godmode On");
             }

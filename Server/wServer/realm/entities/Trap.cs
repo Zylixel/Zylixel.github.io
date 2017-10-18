@@ -73,7 +73,7 @@ namespace wServer.realm.entities
                 (enemy as Enemy).Damage(player, time, dmg, false, new ConditionEffect
                 {
                     Effect = effect,
-                    DurationMs = duration
+                    DurationMS = duration
                 });
             });
             Owner.LeaveWorld(this);

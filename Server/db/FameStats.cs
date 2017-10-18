@@ -81,7 +81,8 @@ public class FameStats
 
     public byte[] Write()
     {
-        Tuple<byte, int>[] dat = {
+        Tuple<byte, int>[] dat = new[]
+        {
             new Tuple<byte, int>(0, Shots),
             new Tuple<byte, int>(1, ShotsThatDamage),
             new Tuple<byte, int>(2, SpecialAbilityUses),

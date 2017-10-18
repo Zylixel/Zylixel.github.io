@@ -130,7 +130,7 @@ namespace wServer.realm.commands
             player.ApplyConditionEffect(new ConditionEffect
             {
                 Effect = ConditionEffectIndex.Invincible,
-                DurationMs = 2000
+                DurationMS = 2000
             });
             player.Owner.BroadcastPacket(new GotoPacket
             {

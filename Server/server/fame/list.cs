@@ -1,16 +1,16 @@
 ﻿#region
 
+using db;
+using MySql.Data.MySqlClient;
 using System;
 using System.Text;
 using System.Xml;
-using db;
-using MySql.Data.MySqlClient;
 
 #endregion
 
 namespace server.fame
 {
-    internal class List : RequestHandler
+    internal class list : RequestHandler
     {
         protected override void HandleRequest()
         {

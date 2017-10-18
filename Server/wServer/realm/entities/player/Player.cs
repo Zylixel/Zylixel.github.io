@@ -485,7 +485,7 @@ namespace wServer.realm.entities.player
                         ApplyConditionEffect(new ConditionEffect
                         {
                             Effect = ConditionEffectIndex.Invulnerable,
-                            DurationMs = -1
+                            DurationMS = -1
                         });
                         return;
                     }
@@ -580,7 +580,7 @@ namespace wServer.realm.entities.player
                     ApplyConditionEffect(new ConditionEffect
                     {
                         Effect = ConditionEffectIndex.Invulnerable,
-                        DurationMs = 100000000
+                        DurationMS = 100000000
                     });
 
                     Client.Reconnect(new ReconnectPacket
@@ -620,7 +620,7 @@ namespace wServer.realm.entities.player
                     ApplyConditionEffect(new ConditionEffect
                     {
                         Effect = ConditionEffectIndex.Invulnerable,
-                        DurationMs = 1000000
+                        DurationMS = 1000000
                     });
 
                     Client.Reconnect(new ReconnectPacket
@@ -660,20 +660,20 @@ namespace wServer.realm.entities.player
                         ApplyConditionEffect(new ConditionEffect
                         {
                             Effect = ConditionEffectIndex.Stasis,
-                            DurationMs = 1500
+                            DurationMS = 1500
 
                         });
 
                         ApplyConditionEffect(new ConditionEffect
                         {
                             Effect = ConditionEffectIndex.Paralyzed,
-                            DurationMs = 1500
+                            DurationMS = 1500
                         });
                         ApplyConditionEffect(new ConditionEffect
 
                         {
                             Effect = ConditionEffectIndex.Stunned,
-                            DurationMs = 1500
+                            DurationMS = 1500
 
                         });
                         _pendantReady = 0;

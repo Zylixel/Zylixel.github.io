@@ -64,7 +64,7 @@ namespace wServer.realm.entities
             }
             else if (Descriptor.Parametric)
             {
-                double theta = (double)elapsedTicks / Descriptor.LifetimeMs * 2 * Math.PI;
+                double theta = (double)elapsedTicks / Descriptor.LifetimeMS * 2 * Math.PI;
                 double a = Math.Sin(theta) * (ProjectileId % 2 != 0 ? 1 : -1);
                 double b = Math.Sin(theta * 2) * (ProjectileId % 4 < 2 ? 1 : -1);
                 double c = Math.Sin(Angle);
@@ -76,7 +76,7 @@ namespace wServer.realm.entities
             {
                 if (Descriptor.Boomerang)
                 {
-                    double d = (Descriptor.LifetimeMs / 1000.0) * (Descriptor.Speed / 10.0) / 2;
+                    double d = (Descriptor.LifetimeMS / 1000.0) * (Descriptor.Speed / 10.0) / 2;
                     if (dist > d)
                         dist = d - (dist - d);
                 }
@@ -86,7 +86,7 @@ namespace wServer.realm.entities
                 {
                     double d = Descriptor.Amplitude *
                                Math.Sin(period +
-                                        (double)elapsedTicks / Descriptor.LifetimeMs * Descriptor.Frequency * 2 * Math.PI);
+                                        (double)elapsedTicks / Descriptor.LifetimeMS * Descriptor.Frequency * 2 * Math.PI);
                     x += d * Math.Cos(Angle + Math.PI / 2);
                     y += d * Math.Sin(Angle + Math.PI / 2);
                 }
@@ -102,7 +102,7 @@ namespace wServer.realm.entities
                     : Owner.PlayersCollision;
 
             long elapsedTicks = time.tickTimes - BeginTime;
-            if (elapsedTicks > Descriptor.LifetimeMs)
+            if (elapsedTicks > Descriptor.LifetimeMS)
             {
                 Destroy(true);
                 return;

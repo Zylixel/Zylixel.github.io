@@ -45,7 +45,7 @@ namespace wServer.logic.behaviors.Drakes
                     en.ApplyConditionEffect(new ConditionEffect
                     {
                         Effect = ConditionEffectIndex.Slowed,
-                        DurationMs = 10000
+                        DurationMS = 10000
                     });
                     
                 }

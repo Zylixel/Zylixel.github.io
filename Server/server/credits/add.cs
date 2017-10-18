@@ -1,12 +1,12 @@
 ﻿#region
-
+using System.Net;
 using System.Text;
 
 #endregion
 
 namespace server.credits
 {
-    internal class Add : RequestHandler
+    internal class add : RequestHandler
     {
         protected override void HandleRequest()
         {

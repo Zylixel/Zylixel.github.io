@@ -46,7 +46,7 @@ namespace wServer.logic.behaviors.Drakes
                     en.ApplyConditionEffect(new ConditionEffect
                     {
                         Effect = ConditionEffectIndex.Paralyzed,
-                        DurationMs = 5000
+                        DurationMS = 5000
                     });
                 }
 

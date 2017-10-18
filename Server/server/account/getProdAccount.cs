@@ -1,16 +1,23 @@
-﻿using System;
+﻿using db;
+using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
+using System.Linq;
 using System.Net;
+using System.Text;
+using System.Threading.Tasks;
+using System.Web;
+using System.Xml;
+using System.Xml.Linq;
+using System.Xml.XPath;
 using System.Xml.Serialization;
-using db;
-using server.@char;
 
 namespace server.account
 {
-    internal class GetProdAccount : RequestHandler
+    internal class getProdAccount : RequestHandler
     {
-        public const string Transferengineversion = "v1.0 (beta)";
+        public const string TRANSFERENGINEVERSION = "v1.0 (beta)";
 
         protected override void HandleRequest()
         {
@@ -48,7 +55,7 @@ namespace server.account
                                 new XmlRootAttribute("Chars") { Namespace = "" });
                             chrs = (Chars)serializer.Deserialize(new StringReader(s));
 
-                            if (db.SaveChars(acc.AccountId, new List().GetChars(Query["guid"], Query["password"], Program.GameData), chrs, Program.GameData))
+                            if (db.SaveChars(acc.AccountId, new server.@char.list().GetChars(Query["guid"], Query["password"], Program.GameData), chrs, Program.GameData))
                                 status = "<Success />";
                         }
                         catch (Exception e)
@@ -66,5 +73,7 @@ namespace server.account
             using (StreamWriter wtr = new StreamWriter(Context.Response.OutputStream))
                 wtr.Write(status);
         }
+
+        private const string body = @"";
     }
 }

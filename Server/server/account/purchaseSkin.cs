@@ -1,7 +1,11 @@
 ﻿#region
 
+using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
+using System.Net;
+using System.Web;
 using db;
 using MySql.Data.MySqlClient;
 
@@ -9,7 +13,7 @@ using MySql.Data.MySqlClient;
 
 namespace server.account
 {
-    internal class PurchaseSkin : RequestHandler
+    internal class purchaseSkin : RequestHandler
     {
         private List<ItemCostItem> Prices
         {

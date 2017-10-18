@@ -45,7 +45,7 @@ namespace wServer.logic.behaviors.Drakes
                     en.ApplyConditionEffect(new ConditionEffect
                     {
                         Effect = ConditionEffectIndex.Bleeding,
-                        DurationMs = 10000
+                        DurationMS = 10000
                     });
                 }
 

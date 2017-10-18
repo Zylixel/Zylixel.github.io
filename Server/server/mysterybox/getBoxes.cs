@@ -1,15 +1,18 @@
 ﻿#region
 
-using System;
-using System.IO;
-using System.Xml;
 using db;
+using System;
+using System.Collections.Specialized;
+using System.IO;
+using System.Net;
+using System.Web;
+using System.Xml;
 
 #endregion
 
 namespace server.mysterybox
 {
-    internal class GetBoxes : RequestHandler
+    internal class getBoxes : RequestHandler
     {
         protected override void HandleRequest()
         {
@@ -72,7 +75,8 @@ namespace server.mysterybox
                             }
                         };
                     }
-                    return null;
+                    else
+                        return null;
                 }
             }
         }

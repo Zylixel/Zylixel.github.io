@@ -46,7 +46,7 @@ namespace wServer.logic.behaviors.PetBehaviors
 
                         e.ApplyConditionEffect(new ConditionEffect
                         {
-                            DurationMs = level.Level * 40,
+                            DurationMS = level.Level * 40,
                             Effect = ConditionEffectIndex.Paralyzed
                         });
 
@@ -66,7 +66,7 @@ namespace wServer.logic.behaviors.PetBehaviors
 
                         e.Damage(null, time, level.Level, true, new ConditionEffect
                         {
-                            DurationMs = level.Level * 40,
+                            DurationMS = level.Level * 40,
                             Effect = ConditionEffectIndex.Paralyzed
                         });
                     }

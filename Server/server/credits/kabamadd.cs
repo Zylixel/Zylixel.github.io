@@ -1,8 +1,9 @@
 ﻿using System.IO;
+using System.Net;
 
 namespace server.credits
 {
-    internal class Kabamadd : RequestHandler
+    internal class kabamadd : RequestHandler
     {
         protected override void HandleRequest()
         {

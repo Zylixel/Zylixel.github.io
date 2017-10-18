@@ -1,10 +1,12 @@
 ﻿#region
 
+using System;
+
 #endregion
 
 namespace server.friends
 {
-    internal class GetRequests : RequestHandler
+    internal class getRequests : RequestHandler
     {
         protected override void HandleRequest()
         {

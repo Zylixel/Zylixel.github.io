@@ -55,7 +55,7 @@ namespace wServer.realm.entities
                 ApplyConditionEffect(new ConditionEffect
                 {
                     Effect = ConditionEffectIndex.StasisImmune,
-                    DurationMs = -1
+                    DurationMS = -1
                 });
         }
 

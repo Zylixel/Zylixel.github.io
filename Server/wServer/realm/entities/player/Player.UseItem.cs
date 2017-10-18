@@ -21,77 +21,77 @@ namespace wServer.realm.entities.player
             new ConditionEffect
             {
                 Effect = ConditionEffectIndex.Slowed,
-                DurationMs = 0
+DurationMS= 0
             },
             new ConditionEffect
             {
                 Effect = ConditionEffectIndex.Paralyzed,
-                DurationMs = 0
+DurationMS= 0
             },
             new ConditionEffect
             {
                 Effect = ConditionEffectIndex.Weak,
-                DurationMs = 0
+                DurationMS = 0
             },
             new ConditionEffect
             {
                 Effect = ConditionEffectIndex.Stunned,
-                DurationMs = 0
+                DurationMS = 0
             },
             new ConditionEffect
             {
                 Effect = ConditionEffectIndex.Confused,
-                DurationMs = 0
+                DurationMS = 0
             },
             new ConditionEffect
             {
                 Effect = ConditionEffectIndex.Blind,
-                DurationMs = 0
+                DurationMS = 0
             },
             new ConditionEffect
             {
                 Effect = ConditionEffectIndex.Quiet,
-                DurationMs = 0
+                DurationMS = 0
             },
             new ConditionEffect
             {
                 Effect = ConditionEffectIndex.ArmorBroken,
-                DurationMs = 0
+                DurationMS = 0
             },
             new ConditionEffect
             {
                 Effect = ConditionEffectIndex.Bleeding,
-                DurationMs = 0
+                DurationMS = 0
             },
             new ConditionEffect
             {
                 Effect = ConditionEffectIndex.Dazed,
-                DurationMs = 0
+                DurationMS = 0
             },
             new ConditionEffect
             {
                 Effect = ConditionEffectIndex.Sick,
-                DurationMs = 0
+                DurationMS = 0
             },
             new ConditionEffect
             {
                 Effect = ConditionEffectIndex.Drunk,
-                DurationMs = 0
+                DurationMS = 0
             },
             new ConditionEffect
             {
                 Effect = ConditionEffectIndex.Hallucinating,
-                DurationMs = 0
+                DurationMS = 0
             },
             new ConditionEffect
             {
                 Effect = ConditionEffectIndex.Hexed,
-                DurationMs = 0
+                DurationMS = 0
             },
             new ConditionEffect
             {
                 Effect = ConditionEffectIndex.Unstable,
-                DurationMs = 0
+                DurationMS = 0
             }
         };
 
@@ -180,10 +180,10 @@ namespace wServer.realm.entities.player
                     enemy.ApplyConditionEffect(new ConditionEffect
                     {
                         Effect = (ConditionEffectIndex) eff.ConditionEffect,
-                        DurationMs = (int) eff.EffectDuration
+                        DurationMS = (int) eff.EffectDuration
                     });
                 int remainingDmg = (int) StatsManager.GetDefenseDamage(enemy, eff.TotalDamage, enemy.ObjectDesc.Defense);
-                int perDmg = remainingDmg*1000/eff.DurationMs;
+                int perDmg = remainingDmg*1000/eff.DurationMS;
                 WorldTimer tmr = null;
                 int x = 0;
                 tmr = new WorldTimer(100, (w, t) =>
@@ -383,11 +383,11 @@ namespace wServer.realm.entities.player
                         Boost[idx] += s;
                         ApplyConditionEffect(new ConditionEffect
                         {
-                            DurationMs = eff.DurationMs,
+                            DurationMS = eff.DurationMS,
                             Effect = (ConditionEffectIndex)bit
                         });
                         UpdateCount++;
-                        Owner.Timers.Add(new WorldTimer(eff.DurationMs, (world, t) =>
+                        Owner.Timers.Add(new WorldTimer(eff.DurationMS, (world, t) =>
                         {
                             Boost[idx] = oGstat;
                             UpdateCount++;
@@ -404,7 +404,7 @@ namespace wServer.realm.entities.player
                     case ActivateEffects.StatBoostAura:
                         {
                             var amountSba = eff.Amount;
-                            var durationSba = eff.DurationMs;
+                            var durationSba = eff.DurationMS;
                             var rangeSba = eff.Range;
                             int idx = -1;
 
@@ -426,12 +426,10 @@ namespace wServer.realm.entities.player
                                 durationSba = (int)(UseWisMod(eff.DurationSec) * 1000);
                                 rangeSba = UseWisMod(eff.Range);
                             }
-                            if (HasConditionEffect(ConditionEffectIndex.HpBoost))
+                            if (HasConditionEffect(ConditionEffectIndex.HPBoost))
                             {
                                 if (amountSba >= 1)
                                 {
-                                    amountSba = 0;
-                                    durationSba = 0;
                                     return false;
                                 }
                             } 
@@ -440,7 +438,7 @@ namespace wServer.realm.entities.player
                             {
                                 ApplyConditionEffect(new ConditionEffect
                                 {
-                                    DurationMs = durationSba,
+                                    DurationMS = durationSba,
                                     Effect = (ConditionEffectIndex)bit
                                 });
                                 (player as Player).Boost[idx] += amountSba;
@@ -463,7 +461,7 @@ namespace wServer.realm.entities.player
 
                     case ActivateEffects.ConditionEffectSelf:
                     {
-                        var durationCes = eff.DurationMs;
+                        var durationCes = eff.DurationMS;
                         if (eff.UseWisMod)
                             durationCes = (int) (UseWisMod(eff.DurationSec)*1000);
 
@@ -481,7 +479,7 @@ namespace wServer.realm.entities.player
                         ApplyConditionEffect(new ConditionEffect
                         {
                             Effect = eff.ConditionEffect.Value,
-                            DurationMs = durationCes
+                            DurationMS = durationCes
                         });
                         Owner.BroadcastPacket(new ShowEffectPacket
                         {
@@ -495,7 +493,7 @@ namespace wServer.realm.entities.player
 
                     case ActivateEffects.ConditionEffectAura:
                     {
-                        var durationCea = eff.DurationMs;
+                        var durationCea = eff.DurationMS;
                         var rangeCea = eff.Range;
                         if (eff.UseWisMod)
                         {
@@ -508,7 +506,7 @@ namespace wServer.realm.entities.player
                             player.ApplyConditionEffect(new ConditionEffect
                             {
                                 Effect = eff.ConditionEffect.Value,
-                                DurationMs = durationCea
+                                DurationMS = durationCea
                             });
                         });
 
@@ -726,14 +724,14 @@ namespace wServer.realm.entities.player
                                 enemy.ApplyConditionEffect(new ConditionEffect
                                 {
                                     Effect = ConditionEffectIndex.Stasis,
-                                    DurationMs = eff.DurationMs
+                                    DurationMS = eff.DurationMS
                                 });
-                                Owner.Timers.Add(new WorldTimer(eff.DurationMs, (world, t) =>
+                                Owner.Timers.Add(new WorldTimer(eff.DurationMS, (world, t) =>
                                 {
                                     enemy.ApplyConditionEffect(new ConditionEffect
                                     {
                                         Effect = ConditionEffectIndex.StasisImmune,
-                                        DurationMs = 3000
+                                        DurationMS = 3000
                                     });
                                 }));
                                 pkts.Add(new NotificationPacket
@@ -750,7 +748,7 @@ namespace wServer.realm.entities.player
 
                     case ActivateEffects.Decoy:
                     {
-                        Decoy decoy = new Decoy(Manager, this, eff.DurationMs, StatsManager.GetSpeed(), eff.Random);
+                        Decoy decoy = new Decoy(Manager, this, eff.DurationMS, StatsManager.GetSpeed(), eff.random);
                         decoy.Move(X, Y);
                         Owner.EnterWorld(decoy);
                     }
@@ -800,7 +798,7 @@ namespace wServer.realm.entities.player
                                 targets[i].ApplyConditionEffect(new ConditionEffect
                                 {
                                     Effect = eff.ConditionEffect.Value,
-                                    DurationMs = (int) (eff.EffectDuration*1000)
+                                    DurationMS = (int) (eff.EffectDuration*1000)
                                 });
                             pkts.Add(new ShowEffectPacket
                             {
@@ -1014,7 +1012,7 @@ namespace wServer.realm.entities.player
                                 ApplyConditionEffect(new ConditionEffect
                                 {
                                     Effect = ConditionEffectIndex.Speedy,
-                                    DurationMs = -1
+                                    DurationMS = -1
                                 });
                                 _ninjaFreeTimer = true;
                                 _ninjaShoot = true;
@@ -1024,7 +1022,7 @@ namespace wServer.realm.entities.player
                                 ApplyConditionEffect(new ConditionEffect
                                 {
                                     Effect = ConditionEffectIndex.Speedy,
-                                    DurationMs = 0
+                                    DurationMS = 0
                                 });
                                 ushort obj;
                                 Manager.GameData.IdToObjectType.TryGetValue(item.ObjectId, out obj);
@@ -1054,11 +1052,11 @@ namespace wServer.realm.entities.player
                             0x6119  //Twilight Archmage
                         };
 
-                        var succeed = false;
+                        bool succeed = false;
                         for (int i = 5; i < Client.Player.Inventory.Length; i++)
                             if (Client.Player.Inventory[i] == null)
                             {
-                                Client.Player.Inventory[pkt.SlotObject.SlotId] = Client.Player.Manager.GameData.Items[(ushort)items[new Random().Next(0, items.Length)]];
+                                Client.Player.Inventory[i] = Client.Player.Manager.GameData.Items[(ushort)items[new Random().Next(0, items.Length)]];
                                 succeed = true;
                                 endMethod = false;
                                 break;
@@ -1079,7 +1077,7 @@ namespace wServer.realm.entities.player
 
                         foreach (KeyValuePair<ushort, Item> treasureitem in data.Items.Where(_ => noItems.All(i => i != _.Value.ObjectId)))
                         {
-                            if (eff.TreaureTier == 1) //Recieves Treasure Tier (Common, Uncommon, etc)
+                            if (eff.treaureTier == 1) //Recieves Treasure Tier (Common, Uncommon, etc)
                             {
                                 TreasureFind = "The Marked Spot";
                                 #region ItemData
@@ -1105,7 +1103,7 @@ namespace wServer.realm.entities.player
                                 if (treasureitem.Value.Tier == -1) treasureItems.Remove(treasureitem.Value.ObjectType); //No Uts
                                 #endregion
                             }
-                            if (eff.TreaureTier == 2) //Recieves Treasure Tier (Common, Uncommon, etc)
+                            if (eff.treaureTier == 2) //Recieves Treasure Tier (Common, Uncommon, etc)
                             {
                                 #region ItemData
                                 if (treasureitem.Value.Tier <= 11 && treasureitem.Value.SlotType <= 3) //sword, dag, bow
@@ -1131,7 +1129,7 @@ namespace wServer.realm.entities.player
                                 #endregion
                                 TreasureFind = "The Uncommon Marked Spot";
                             }
-                            if (eff.TreaureTier == 5) //Recieves Treasure Tier (Shatters)
+                            if (eff.treaureTier == 5) //Recieves Treasure Tier (Shatters)
                             {
                                 #region ItemData
                                 if (treasureitem.Value.ObjectId == "The Forgotten Crown")
@@ -1309,7 +1307,7 @@ namespace wServer.realm.entities.player
                         var centerPlayer = eff.Center.Equals("player");
                         var duration = (eff.UseWisMod) ?
                             (int)(UseWisMod(eff.DurationSec) * 1000) :
-                            eff.DurationMs;
+                            eff.DurationMS;
                         var range = (eff.UseWisMod)
                             ? UseWisMod(eff.Range)
                             : eff.Range;
@@ -1324,7 +1322,7 @@ namespace wServer.realm.entities.player
                                 new ConditionEffect
                                 {
                                     Effect = eff.ConditionEffect.Value,
-                                    DurationMs = duration
+                                    DurationMS = duration
                                 });
                             }
                         });

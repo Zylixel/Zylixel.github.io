@@ -19,7 +19,7 @@
                     {
                         Mp -= 1;
                         if (Mp <= 0)
-                            ApplyConditionEffect(new ConditionEffect { Effect = ConditionEffectIndex.Speedy, DurationMs = 0 });
+                            ApplyConditionEffect(new ConditionEffect { Effect = ConditionEffectIndex.Speedy, DurationMS = 0 });
                         _ninjaFreeTimer = true;
                         UpdateCount++;
                     }));

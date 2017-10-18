@@ -24,7 +24,7 @@ namespace wServer.logic.behaviors
             host.ApplyConditionEffect(new ConditionEffect
             {
                 Effect = effect,
-                DurationMs = -1
+                DurationMS = -1
             });
         }
 
@@ -35,7 +35,7 @@ namespace wServer.logic.behaviors
                 host.ApplyConditionEffect(new ConditionEffect
                 {
                     Effect = effect,
-                    DurationMs = 0
+                    DurationMS = 0
                 });
             }
         }

@@ -44,7 +44,7 @@ namespace wServer.logic.behaviors.Drakes
                     }, null);
                     en.Damage(null, time, 125, true, new ConditionEffect
                     {
-                        DurationMs = 4000,
+                        DurationMS = 4000,
                         Effect = ConditionEffectIndex.Curse
                     });
                 }

@@ -1,0 +1,55 @@
+﻿<Objects>  
+  <Object type="0x7000" id="Test staff">
+      <Class>Equipment</Class>
+      <Item/>
+      <Texture>
+        <File>lofiObj5</File>
+        <Index>0xbb</Index>
+      </Texture>
+      <SlotType>17</SlotType>
+      <Tier>1</Tier>
+      <Description>{equip.A_staff_imbued_with_potent_magical_fire.}</Description>
+      <RateOfFire>1</RateOfFire>
+      <Sound>weapon/missile_wand</Sound>
+      <Projectile>
+        <ObjectId>Fire Missile</ObjectId>
+        <Speed>200</Speed>
+        <MinDamage>100</MinDamage>
+        <MaxDamage>400</MaxDamage>
+        <LifetimeMS>475</LifetimeMS>
+        <Amplitude>0.5</Amplitude>
+        <Frequency>2</Frequency>
+      </Projectile>
+      <BagType>4</BagType>
+      <NumProjectiles>2</NumProjectiles>
+      <ArcGap>0</ArcGap>
+      <OldSound>magicShoot</OldSound>
+      <feedPower>10000</feedPower>
+      <DisplayId>Test Staff</DisplayId>
+    </Object>
+  <Object type="0x7001" id="Test Spell">
+    <Class>Equipment</Class>
+    <Item/>
+    <Texture>
+      <File>lofiObj6</File>
+      <Index>0x5a</Index>
+    </Texture>
+    <SlotType>11</SlotType>
+    <Description>{equip.A_spell_that_shoots_fire_in_all_directions.}</Description>
+    <Sound>spell/fire_spray</Sound>
+    <Projectile>
+      <ObjectId>Fire Bolt</ObjectId>
+      <Speed>160</Speed>
+      <MinDamage>100</MinDamage>
+      <MaxDamage>250</MaxDamage>
+      <LifetimeMS>1000</LifetimeMS>
+    </Projectile>
+    <Usable/>
+    <BagType>6</BagType>
+    <MpCost>95</MpCost>
+    <Activate effect="Berserk" duration="4">ConditionEffectSelf</Activate>
+    <Activate>BulletNova</Activate>
+    <feedPower>5000</feedPower>
+    <DisplayId>Test Spell</DisplayId>
+  </Object>
+</Objects>

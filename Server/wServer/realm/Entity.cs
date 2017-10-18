@@ -70,7 +70,7 @@ namespace wServer.realm
             if (objType == 0x0d60) ApplyConditionEffect(new ConditionEffect
             {
                 Effect = ConditionEffectIndex.Invincible,
-                DurationMs = -1
+                DurationMS = -1
             });
         }
 
@@ -469,15 +469,15 @@ namespace wServer.realm
             return (ConditionEffects & (ConditionEffects)((ulong)1 << (int)eff)) != 0;
         }
 
-        public void ApplyConditionEffect(ConditionEffectIndex effect, int durationMs = -1)
+        public void ApplyConditionEffect(ConditionEffectIndex effect, int DurationMS = -1)
         {
             if (!ApplyCondition(effect))
                 return;
 
             var eff = (int)effect;
 
-            effects[eff] = durationMs;
-            if (durationMs != 0)
+            effects[eff] = DurationMS;
+            if (DurationMS != 0)
                 ConditionEffects |= (ConditionEffects)((ulong)1 << eff);
 
             tickingEffects = true;
@@ -487,7 +487,7 @@ namespace wServer.realm
         public void ApplyConditionEffect(params ConditionEffect[] effs)
         {
             foreach (var eff in effs)
-                ApplyConditionEffect(eff.Effect, eff.DurationMs);
+                ApplyConditionEffect(eff.Effect, eff.DurationMS);
         }
 
         private bool ApplyCondition(ConditionEffectIndex effect)
