@@ -1,4 +1,5 @@
-﻿using log4net;
+﻿using db;
+using log4net;
 using wServer.networking;
 using wServer.networking.svrPackets;
 using wServer.realm.entities.player;
@@ -58,10 +59,11 @@ namespace wServer.realm
                 {
                     BubbleTime = 0,
                     Stars = -1,
-                    Name = "@NEWS",
+                    Name = "#Zylixel News",
                     Text = text.ToSafeText()
                 });
-            log.InfoFormat("<NEWS> {0}", text);
+            if (CheckConfig.IsDebugOn())
+                log.InfoFormat("<Zylixel News> {0}", text);
         }
 
         public void Announce(string text)
@@ -74,7 +76,7 @@ namespace wServer.realm
                     Name = "@Announcement",
                     Text = text.ToSafeText()
                 });
-            log.InfoFormat("<Announcement> {0}", text);
+                log.InfoFormat("<Announcement> {0}", text);
         }
 
         public void Oryx(World world, string text)
@@ -86,7 +88,8 @@ namespace wServer.realm
                 Name = "#Oryx the Mad God",
                 Text = text.ToSafeText()
             }, null);
-            log.InfoFormat("[{0}({1})] <Oryx the Mad God> {2}", world.Name, world.Id, text);
+            if (CheckConfig.IsDebugOn())
+                log.InfoFormat("[{0}({1})] <Oryx the Mad God> {2}", world.Name, world.Id, text);
         }
     }
 }

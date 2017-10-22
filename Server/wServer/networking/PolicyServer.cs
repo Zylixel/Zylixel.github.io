@@ -4,6 +4,7 @@ using System;
 using System.Net;
 using System.Net.Sockets;
 using log4net;
+using wServer.logic;
 
 #endregion
 
@@ -49,7 +50,8 @@ namespace wServer.networking
 
         public void Start()
         {
-            Log.Info("Starting policy server...");
+            if (CheckConfig.IsDebugOn())
+                Log.Info("Starting policy server...");
             try
             {
                 _listener.Start();
@@ -67,7 +69,8 @@ namespace wServer.networking
 
         public void Stop()
         {
-            if (!_started) return;
+            if (CheckConfig.IsDebugOn())
+                if (!_started) return;
             Log.Info("Stopping policy server...");
             _listener.Stop();
         }

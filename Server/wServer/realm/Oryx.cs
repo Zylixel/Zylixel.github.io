@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using log4net;
+using wServer.logic;
 using wServer.networking.svrPackets;
 using wServer.realm.entities;
 using wServer.realm.entities.player;
@@ -316,8 +317,8 @@ namespace wServer.realm
 
         public void TimedSpawn()
         {
-            log.Info("Players in Realm: " + world.Players.Count);
-            //Use this to check players in realm
+            if (CheckConfig.IsDebugOn())
+                log.Info("Players in Realm: " + world.Players.Count); //checks players in realm
             if (world.Players.Count > 0) //Makes sure player is in the realm
             {
                 var evt = events[rand.Next(0, events.Count)];
@@ -345,7 +346,8 @@ namespace wServer.realm
 
         public void Init()
         {
-            log.InfoFormat("Oryx is controlling world {0}({1})...", world.Id, world.Name);
+            if (CheckConfig.IsDebugOn())
+                log.InfoFormat("Oryx is controlling world {0}({1})...", world.Id, world.Name);
             var w = world.Map.Width;
             var h = world.Map.Height;
             var stats = new int[12];
@@ -356,8 +358,8 @@ namespace wServer.realm
                     if (tile.Terrain != WmapTerrain.None)
                         stats[(int)tile.Terrain - 1]++;
                 }
-
-            log.Info("Spawning minions...");
+            if (CheckConfig.IsDebugOn())
+                log.Info("Spawning minions...");
             foreach (var i in spawn)
             {
                 var terrain = i.Key;
@@ -374,12 +376,14 @@ namespace wServer.realm
                     if (enemyCounts[idx] >= enemyCount) break;
                 }
             }
-            log.Info("Oryx is done.");
+            if (CheckConfig.IsDebugOn())
+                log.Info("Oryx is done.");
         }
 
         public void InitCloseRealm()
         {
-            log.InfoFormat("Oryx has closed realm {0}...", world.Name);
+            if (CheckConfig.IsDebugOn())
+                log.InfoFormat("Oryx has closed realm {0}...", world.Name);
             ClosingStarted = true;
             foreach (var i in world.Players.Values)
             {
@@ -429,7 +433,8 @@ namespace wServer.realm
 
         private void EnsurePopulation()
         {
-            log.Info("Oryx is controlling population...");
+            if (CheckConfig.IsDebugOn())
+                log.Info("Oryx is controlling population...");
             RecalculateEnemyCount();
             var state = new int[12];
             var diff = new int[12];
@@ -488,7 +493,8 @@ namespace wServer.realm
             RecalculateEnemyCount();
 
             GC.Collect();
-            log.Info("Oryx is back to sleep.");
+            if (CheckConfig.IsDebugOn())
+                log.Info("Oryx is back to sleep.");
         }
 
         private ushort GetRandomObjType(Tuple<string, double>[] dat)
@@ -627,7 +633,8 @@ namespace wServer.realm
             pt.X -= (setpiece.Size - 1) / 2;
             pt.Y -= (setpiece.Size - 1) / 2;
             setpiece.RenderSetPiece(world, pt);
-            log.InfoFormat("Oryx spawned {0} at ({1}, {2}).", name, pt.X, pt.Y);
+            if (CheckConfig.IsDebugOn())
+                log.InfoFormat("Oryx spawned {0} at ({1}, {2}).", name, pt.X, pt.Y);
         }
 
         private struct TauntData
@@ -639,8 +646,7 @@ namespace wServer.realm
         }
 
         #region "Taunt data"
-
-        //https://forums.wildshadow.com/node/119997
+        
         private static readonly Tuple<string, TauntData>[] criticalEnemies =
         {
             Tuple.Create("Lich", new TauntData

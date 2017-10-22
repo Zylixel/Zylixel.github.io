@@ -131,6 +131,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="GeneratorCache.cs" />
+    <Compile Include="logic\CheckConfig.cs" />
     <Compile Include="logic\behaviors\ChangeGroundOnDeath.cs" />
     <Compile Include="logic\behaviors\OrderOnce.cs" />
     <Compile Include="logic\behaviors\RemoveEffect.cs" />
@@ -609,6 +610,10 @@
     <Content Include="air_icon.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AdminPanel\AdminPanel.csproj">
+      <Project>{81ea05d9-07b9-4454-b037-305f2bf876c4}</Project>
+      <Name>AdminPanel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\db\db.csproj">
       <Project>{A417BDBC-8D6F-4661-9B23-2BEE92E295AB}</Project>
       <Name>db</Name>
@@ -616,6 +621,14 @@
     <ProjectReference Include="..\DungeonGen\DungeonGen.csproj">
       <Project>{e3061024-61ed-46aa-8a0d-cd9747e7bfae}</Project>
       <Name>DungeonGen</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\server\server.csproj">
+      <Project>{2ada25d1-158e-4e88-b91b-f79981372136}</Project>
+      <Name>server</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\terrain\terrain.csproj">
+      <Project>{c400fdd3-6250-4f9b-9516-b3463d6761f5}</Project>
+      <Name>terrain</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

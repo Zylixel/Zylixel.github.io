@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using log4net;
+using wServer.logic;
 
 #endregion
 
@@ -79,7 +80,8 @@ namespace wServer.realm.setpieces
 
         public static void ApplySetPieces(World world)
         {
-            log.InfoFormat("Applying set pieces to world {0}({1}).", world.Id, world.Name);
+            if (CheckConfig.IsDebugOn())
+                log.InfoFormat("Applying set pieces to world {0}({1}).", world.Id, world.Name);
 
             Wmap map = world.Map;
             int w = map.Width, h = map.Height;
@@ -110,8 +112,8 @@ namespace wServer.realm.setpieces
                     rects.Add(rect);
                 }
             }
-
-            log.Info("Set pieces applied.");
+            if (CheckConfig.IsDebugOn())
+                log.Info("Set pieces applied.");
         }
 
         private struct Rect

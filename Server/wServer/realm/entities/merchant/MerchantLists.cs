@@ -6,6 +6,7 @@ using System.Linq;
 using db;
 using db.data;
 using log4net;
+using wServer.logic;
 
 #endregion
 namespace wServer.realm.entities.merchant
@@ -99,7 +100,8 @@ namespace wServer.realm.entities.merchant
 
         public static void InitMerchatLists(XmlData data)
         {
-            //Log.Info("Loading merchant lists..."); Nobody Cares
+            if (logic.CheckConfig.IsDebugOn())
+                Log.Info("Loading merchant lists...");
             List<int> zyList = new List<int>();
 
             foreach (KeyValuePair<ushort, Item> item in data.Items.Where(_ => NoShopItems.All(i => i != _.Value.ObjectId)))
@@ -118,7 +120,8 @@ namespace wServer.realm.entities.merchant
                                                         {
                                                      Prices.Add(item.Value.ObjectType, new Tuple<int, CurrencyType>(item.Value.ObjectType, CurrencyType.Fame));
                                                      zyList.Add(item.Value.ObjectType);
-                                                    Log.Info("Loading: " + item.Value.ObjectId);
+                                                        if (logic.CheckConfig.IsDebugOn())
+                                                                Log.Info("Loading: " + item.Value.ObjectId);
 
                                                     /* using (Database db = new Database())
                                                     {
@@ -131,7 +134,8 @@ namespace wServer.realm.entities.merchant
                 
             }
             ZyList = zyList.ToArray();
-            Log.Info("Merchat lists added.");
+            if (logic.CheckConfig.IsDebugOn())
+                Log.Info("Merchat lists added.");
         }
 
         private static readonly string[] NoShopItems =

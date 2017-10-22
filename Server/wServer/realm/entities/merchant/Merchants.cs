@@ -6,6 +6,7 @@ using System.Xml.Linq;
 using db;
 using log4net;
 using MySql.Data.MySqlClient;
+using wServer.logic;
 using wServer.networking.svrPackets;
 using wServer.realm.entities.player;
 
@@ -105,7 +106,8 @@ namespace wServer.realm.entities.merchant
                                             db.UpdateFame(player.Client.Account, -Price);
                                     using (Database db2 = new Database())
                                     {
-                                        LogIt.Error("Attemping to delete item from database: " + MType + " | " + Price);
+                                        if (logic.CheckConfig.IsDebugOn())
+                                            LogIt.Error("Attemping to delete item from database: " + MType + " | " + Price);
                                         MySqlCommand cmd = db2.CreateQuery();
                                         cmd.CommandText = "DELETE FROM market WHERE itemid=@itemid AND fame=@fame";
                                         cmd.Parameters.AddWithValue("@itemID", MType);
@@ -113,7 +115,8 @@ namespace wServer.realm.entities.merchant
                                         cmd.ExecuteNonQuery();
                                     }
                                     {
-                                        LogIt.Error("Attemping to find player to give fame to: " + MType + " | " + Price);
+                                        if (logic.CheckConfig.IsDebugOn())
+                                            LogIt.Error("Attemping to find player to give fame to: " + MType + " | " + Price);
                                         MySqlCommand cmd = db.CreateQuery();
                                         cmd.CommandText = "SELECT * FROM market WHERE itemid='@itemID' AND fame='@fame' LIMIT 1";
                                         cmd.Parameters.AddWithValue("@itemID", MType);
@@ -127,7 +130,8 @@ namespace wServer.realm.entities.merchant
                                         }
                                     }
                                     {
-                                        LogIt.Error("Updating Player Info...");
+                                        if (logic.CheckConfig.IsDebugOn())
+                                            LogIt.Error("Updating Player Info...");
                                         MySqlCommand cmd1 = db.CreateQuery();
                                         cmd1.CommandText = "UPDATE stats SET fame = fame + @Price WHERE accId=@accId";
                                         cmd1.Parameters.AddWithValue("@accId", _accId);
@@ -188,11 +192,12 @@ namespace wServer.realm.entities.merchant
                 {
                     foreach (var t1 in MerchantLists.ZyList)
                     {
-
-                        LogIt.Info("Looking for updates on item | " + t1);
+                        if (logic.CheckConfig.IsDebugOn())
+                            LogIt.Info("Looking for updates on item | " + t1);
                         if (RefreshMerchants == t1)
                         {
-                            LogIt.Info("Found Update on Item | " + t1);
+                            if (logic.CheckConfig.IsDebugOn())
+                                LogIt.Info("Found Update on Item | " + t1);
                             _itemChange = t1;
                             Refresh(this, t1);
                             UpdateCount++;
@@ -277,7 +282,8 @@ namespace wServer.realm.entities.merchant
                 if (_prices.TryGetValue(MType, out price))
                 {
                     var mrc = new Merchants(Manager, x.ObjectType, item, x.Owner);
-                    LogIt.Info("Attempting to refresh Merchant | " + item);
+                    if (logic.CheckConfig.IsDebugOn())
+                        LogIt.Info("Attempting to refresh Merchant | " + item);
                     mrc.Move(x.X, x.Y);
                     var w = Owner;
                     Owner.LeaveWorld(this);
@@ -303,12 +309,14 @@ namespace wServer.realm.entities.merchant
                 if (_itemChange > 0)
                 {
                     MType = _itemChange;
-                    LogIt.Info("Refreshing Merchant | " + MType);
+                    if (logic.CheckConfig.IsDebugOn())
+                        LogIt.Info("Refreshing Merchant | " + MType);
                 }
                 if (_itemChange <= 0)
                 {
                     MType = t1;
-                    LogIt.Info("Randomizing Merchant to be item | " + MType);
+                    if (logic.CheckConfig.IsDebugOn())
+                        LogIt.Info("Randomizing Merchant to be item | " + MType);
                 }
 
                 MTime = Random.Next(2, 5);

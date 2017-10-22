@@ -82,16 +82,20 @@ namespace db.data
             string[] xmls = Directory.EnumerateFiles(basePath, "*.xml", SearchOption.AllDirectories).ToArray();
             for (int i = 0; i < xmls.Length; i++)
             {
-                log.InfoFormat("Loading '{0}'({1}/{2})...", xmls[i], i + 1, xmls.Length);
+                if (CheckConfig.IsDebugOn())
+                    log.InfoFormat("Loading '{0}'({1}/{2})...", xmls[i], i + 1, xmls.Length);
                 using (Stream stream = File.OpenRead(xmls[i]))
                     ProcessXml(XElement.Load(stream));
             }
-            log.Info("Finish loading game data.");
-            log.InfoFormat("{0} Items", items.Count);
-            log.InfoFormat("{0} Tiles", tiles.Count);
-            log.InfoFormat("{0} Objects", objDescs.Count);
-            log.InfoFormat("{0} Portals", portals.Count);
-            log.InfoFormat("{0} Additions", addition.Elements().Count());
+            if (CheckConfig.IsDebugOn())
+            {
+                log.Info("Finish loading game data.");
+                log.InfoFormat("{0} Items", items.Count);
+                log.InfoFormat("{0} Tiles", tiles.Count);
+                log.InfoFormat("{0} Objects", objDescs.Count);
+                log.InfoFormat("{0} Portals", portals.Count);
+                log.InfoFormat("{0} Additions", addition.Elements().Count());
+            }
         }
 
         private static string AssemblyDirectory

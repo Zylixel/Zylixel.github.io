@@ -77,6 +77,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CheckConfig.cs" />
     <Compile Include="DailyQuestConstants.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="Database.Guilds.cs" />

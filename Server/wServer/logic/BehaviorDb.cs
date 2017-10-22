@@ -40,7 +40,8 @@ namespace wServer.logic
 
         public BehaviorDb(RealmManager manager)
         {
-            log.Info("Initializing Behavior Database...");
+            if (CheckConfig.IsDebugOn())
+                log.Info("Initializing Behavior Database...");
 
             Manager = manager;
 
@@ -60,7 +61,8 @@ namespace wServer.logic
             for (int i = 0; i < fields.Length; i++)
             {
                 FieldInfo field = fields[i];
-                log.InfoFormat("Loading behavior for '{0}'({1}/{2})...", field.Name, i + 1, fields.Length);
+                if (CheckConfig.IsDebugOn())
+                    log.InfoFormat("Loading behavior for '{0}'({1}/{2})...", field.Name, i + 1, fields.Length);
                 ((_) field.GetValue(this))();
                 field.SetValue(this, null);
             }
@@ -68,7 +70,8 @@ namespace wServer.logic
             InitDb = null;
             initializing = 0;
 
-            log.Info("Behavior Database initialized...");
+            if (CheckConfig.IsDebugOn())
+                log.Info("Behavior Database initialized...");
         }
 
         public RealmManager Manager { get; private set; }

@@ -106,7 +106,8 @@ namespace wServer.networking.handlers
                 }
                 else
                 {
-                    Log.Info(@"Client loading world");
+                    if (CheckConfig.IsDebugOn())
+                        Log.Info(@"Client loading world");
                     if (packet.GameId == World.NEXUS_LIMBO) packet.GameId = World.NEXUS_ID;
                     World world = client.Manager.GetWorld(packet.GameId);
                     if (world == null && packet.GameId == World.TUT_ID) world = client.Manager.AddWorld(new Tutorial(false));

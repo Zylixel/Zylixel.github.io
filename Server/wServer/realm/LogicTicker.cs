@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using log4net;
+using wServer.logic;
 using wServer.realm.entities.player;
 
 #endregion
@@ -47,7 +48,8 @@ namespace wServer.realm
 
         public void TickLoop()
         {
-            log.Info("Logic loop started.");
+            if (CheckConfig.IsDebugOn())
+                log.Info("Logic loop started.");
             Stopwatch watch = new Stopwatch();
             long dt = 0;
             long count = 0;
@@ -99,29 +101,6 @@ namespace wServer.realm
                 foreach (var players in requestPlayers)
                     TradeManager.CurrentRequests.Remove(players);
 
-                //string[] accIds = Manager.Clients.Select(_ => _.Value.Account.AccountId).ToArray();
-
-                //List<string> curGStructAccIds = new List<string>();
-
-                //foreach(var i in GuildManager.CurrentManagers.Values)
-                //    curGStructAccIds.AddRange(i.GuildStructs.Select(_ => _.Key));
-
-                //foreach (var i in curGStructAccIds)
-                //    if (!accIds.Contains(i))
-                //        GuildManager.RemovePlayerWithId(i);
-
-                //var m = GuildManager.CurrentManagers;
-                //try
-                //{
-                //    foreach (var g in m)
-                //        if (g.Value.Count == 0)
-                //            GuildManager.CurrentManagers.Remove(g.Key);
-                //}
-                //catch (Exception ex)
-                //{
-                //    log.Error(ex);
-                //}
-
                 try
                 {
                     GuildManager.Tick(CurrentTime);
@@ -142,28 +121,6 @@ namespace wServer.realm
             CurrentTime = t;
             foreach (World i in Manager.Worlds.Values.Distinct())
                 i.Tick(t);
-            //if (EnableMonitor)
-            //    svrMonitor.Mon.Tick(t);
         }
-
-        //private void TickWorlds2(RealmTime t) //Discrete simulation
-        //{
-        //    long counter = t.thisTickTimes;
-        //    long c = t.tickCount - t.thisTickCounts;
-        //    long x = t.tickTimes - t.thisTickTimes;
-        //    while (counter >= MsPT)
-        //    {
-        //        c++;
-        //        x += MsPT;
-        //        TickWorlds1(new RealmTime
-        //        {
-        //            thisTickCounts = 1,
-        //            thisTickTimes = MsPT,
-        //            tickCount = c,
-        //            tickTimes = x
-        //        });
-        //        counter -= MsPT;
-        //    }
-        //}
     }
 }

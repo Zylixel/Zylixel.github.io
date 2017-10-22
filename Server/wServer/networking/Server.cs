@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using log4net;
+using wServer.logic;
 using wServer.realm;
 
 #endregion
@@ -26,7 +27,8 @@ namespace wServer.networking
 
         public void Start()
         {
-            Log.Info("Starting server...");
+            if (CheckConfig.IsDebugOn())
+                Log.Info("Starting server...");
             Socket.Bind(new IPEndPoint(IPAddress.Any, Program.Settings.GetValue<int>("port")));
             Socket.Listen(0xff);
             Socket.BeginAccept(Listen, null);
@@ -55,7 +57,8 @@ namespace wServer.networking
 
         public async void Stop()
         {
-            Log.Info("Stoping server...");
+            if (CheckConfig.IsDebugOn())
+                Log.Info("Stoping server...");
             foreach (Client i in Manager.Clients.Values.ToArray())
             {
                 await i.Save();

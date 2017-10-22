@@ -42,9 +42,8 @@ namespace db
             "Tal", "Tiar", "Uoro", "Urake", "Utanu",
             "Vorck", "Vorv", "Yangu", "Yimi", "Zhiar"
         };
-        readonly SimpleSettings Settings = new SimpleSettings("wServer");
 
-
+        private readonly SimpleSettings Settings = new SimpleSettings("wServer");
         private static string _host, _databaseName, _user, _password;
         private readonly MySqlConnection _con;
         public MySqlConnection Connection { get { return _con; } }

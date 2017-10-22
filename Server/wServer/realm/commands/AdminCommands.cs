@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using db;
 using MySql.Data.MySqlClient;
+using wServer.logic;
 using wServer.networking;
 using wServer.networking.svrPackets;
 using wServer.realm.entities.merchant;
@@ -1625,7 +1626,8 @@ namespace wServer.realm.commands
                                                         player.SaveToCharacter();
                                                         player.Client.Save();
                                                         player.UpdateCount++;
-                                                        log.Error("Requesting Update for Item | " + itemID);
+                                                        if (logic.CheckConfig.IsDebugOn())
+                                                            log.Error("Requesting Update for Item | " + itemID);
                                                         Merchants.RefreshMerchants = itemID;
                                                     }
                                                     catch (Exception e)

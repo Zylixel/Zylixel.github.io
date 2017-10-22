@@ -2,6 +2,7 @@
 
 using System;
 using log4net;
+using wServer.logic;
 using wServer.realm.entities.player;
 using wServer.realm.setpieces;
 
@@ -32,14 +33,16 @@ namespace wServer.realm.worlds
 
         protected override void Init()
         {
-            log.InfoFormat("Initializing Game World {0}({1}) from map {2}...", Id, Name, _mapId);
+            if (CheckConfig.IsDebugOn())
+                log.InfoFormat("Initializing Game World {0}({1}) from map {2}...", Id, Name, _mapId);
             LoadMap("wServer.realm.worlds.maps.world" + _mapId + ".wmap", MapType.Wmap);
             SetPieces.ApplySetPieces(this);
             if (_oryxPresent)
                 Overseer = new Oryx(this);
             else
                 Overseer = null;
-            log.Info("Game World initalized.");
+            if (CheckConfig.IsDebugOn())
+                log.Info("Game World initalized.");
         }
 
         public static GameWorld AutoName(int mapId, bool oryxPresent)

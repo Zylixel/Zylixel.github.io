@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Threading;
 using log4net;
+using wServer.logic;
 using wServer.networking;
 
 namespace wServer.realm
@@ -27,7 +28,8 @@ namespace wServer.realm
 
         public void TickLoop()
         {
-            log.Info("Procces: Starting network loop.");
+            if (CheckConfig.IsDebugOn())
+                log.Info("Procces: Starting network loop.");
             Work work;
             while (true)
             {
@@ -53,7 +55,8 @@ namespace wServer.realm
                 while (pendings.Count == 0 && !Manager.Terminating)
                     loopLock.SpinOnce();
             }
-            log.Info("Procces: Stopping network loop.");
+            if (CheckConfig.IsDebugOn())
+                log.Info("Procces: Stopping network loop.");
         }
     }
 }

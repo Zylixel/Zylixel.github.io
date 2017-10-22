@@ -176,7 +176,8 @@ namespace wServer.realm
 
         public void Initialize()
         {
-            log.Info("Initializing Realm Manager...");
+            if (wServer.logic.CheckConfig.IsDebugOn())
+                log.Info("Initializing Realm Manager...");
 
             GameData = new XmlData();
             Behaviors = new BehaviorDb(this);
@@ -194,7 +195,8 @@ namespace wServer.realm
             Chat = new ChatManager(this);
             Commands = new CommandManager(this);
 
-            log.Info("Realm Manager initialized.");
+            if (wServer.logic.CheckConfig.IsDebugOn())
+                log.Info("Realm Manager initialized.");
         }
 
         public Vault PlayerVault(Client processor)
@@ -235,7 +237,8 @@ namespace wServer.realm
 
         public void Run()
         {
-            log.Info("Starting Realm Manager...");
+            if (wServer.logic.CheckConfig.IsDebugOn())
+                log.Info("Starting Realm Manager...");
 
             Network = new NetworkTicker(this);
             Logic = new LogicTicker(this);
@@ -254,12 +257,14 @@ namespace wServer.realm
             logic.Start();
             network.Start();
 
-            log.Info("Realm Manager started.");
+            if (wServer.logic.CheckConfig.IsDebugOn())
+                log.Info("Realm Manager started.");
         }
 
         public void Stop()
         {
-            log.Info("Stopping Realm Manager...");
+            if (wServer.logic.CheckConfig.IsDebugOn())
+                log.Info("Stopping Realm Manager...");
 
             Terminating = true;
             List<Client> saveAccountUnlock = new List<Client>();
@@ -277,7 +282,8 @@ namespace wServer.realm
             logic.Join();
             network.Join();
 
-            log.Info("Realm Manager stopped.");
+            if (wServer.logic.CheckConfig.IsDebugOn())
+                log.Info("Realm Manager stopped.");
         }
 
         public bool TryConnect(Client psr)
@@ -302,7 +308,8 @@ namespace wServer.realm
                 world.Manager = this;
             if (world is GameWorld)
                 Monitor.WorldAdded(world);
-            log.InfoFormat("World {0}({1}) added.", world.Id, world.Name);
+            if (wServer.logic.CheckConfig.IsDebugOn())
+                log.InfoFormat("World {0}({1}) added.", world.Id, world.Name);
         }
 
         private void OnWorldRemoved(World world)
@@ -310,7 +317,8 @@ namespace wServer.realm
             world.Manager = null;
             if (world is GameWorld)
                 Monitor.WorldRemoved(world);
-            log.InfoFormat("World {0}({1}) removed.", world.Id, world.Name);
+            if (wServer.logic.CheckConfig.IsDebugOn())
+                log.InfoFormat("World {0}({1}) removed.", world.Id, world.Name);
         }
     }
 
