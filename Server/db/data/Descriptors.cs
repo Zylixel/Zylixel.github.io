@@ -390,6 +390,9 @@ public class ActivateEffect
         if (elem.Attribute("petType") != null)
             PetType = Utils.FromString(elem.Attribute("petType").Value);
 
+        if (elem.Attribute("newSize") != null)
+            newSize = Utils.FromString(elem.Attribute("newSize").Value);
+
         if (elem.Attribute("lockedName") != null)
             LockedName = elem.Attribute("lockedName").Value;
 
@@ -429,6 +432,7 @@ public class ActivateEffect
     public string Id { get; private set; }
     public int SkinType { get; private set; }
     public int PetType { get; private set; }
+    public int newSize { get; private set; }
     public string DungeonName { get; private set; }
     public string LockedName { get; private set; }
     public string Target { get; private set; }

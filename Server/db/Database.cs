@@ -11,7 +11,16 @@ using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using log4net;
-
+using System;
+using System.Globalization;
+using System.IO;
+using System.Net;
+using System.Net.Mail;
+using System.Threading;
+using db;
+using log4net;
+using log4net.Config;
+using System.Runtime;
 
 #endregion
 
@@ -33,6 +42,8 @@ namespace db
             "Tal", "Tiar", "Uoro", "Urake", "Utanu",
             "Vorck", "Vorv", "Yangu", "Yimi", "Zhiar"
         };
+        readonly SimpleSettings Settings = new SimpleSettings("wServer");
+
 
         private static string _host, _databaseName, _user, _password;
         private readonly MySqlConnection _con;
@@ -810,7 +821,8 @@ SELECT MAX(chestId) FROM vaults WHERE accId = @accId;";
             using (Database db = new Database())
             {
                 int accID;
-                log.Error("Attemping to find player to give fame to: " + MType + " | " + Price);
+                if (isDebugOn())
+                    log.Error("Attemping to find player to give fame to: " + MType + " | " + Price);
                 MySqlCommand cmd = db.CreateQuery();
                 cmd.CommandText = "SELECT * FROM market WHERE itemid='@itemID' AND fame='@fame' LIMIT 1";
                 cmd.Parameters.AddWithValue("@itemID", MType);
@@ -828,13 +840,13 @@ SELECT MAX(chestId) FROM vaults WHERE accId = @accId;";
 
         public int GetMarketInfo(int id, int type)
         {
-            int info = 5;
             MySqlCommand cmd = CreateQuery();
             cmd.CommandText = "SELECT MIN( fame ) FROM market WHERE itemid=@itemid LIMIT 1";
             cmd.Parameters.AddWithValue("@itemid", id);
             using (MySqlDataReader rdr = cmd.ExecuteReader())
             {
-                log.Info("GetMarketInfo | Attemping to call ItemID: " + id);
+                if (isDebugOn())
+                    log.Info("GetMarketInfo | Attemping to call ItemID: " + id);
                 rdr.Read();
                 if (!rdr.HasRows)
                 {
@@ -844,13 +856,38 @@ SELECT MAX(chestId) FROM vaults WHERE accId = @accId;";
                 var ordinal = rdr.GetOrdinal("MIN( fame )");
                 if (rdr.IsDBNull(ordinal))
                 {
-                    log.Info("GetMarketInfo | " + 0);
+                    if (isDebugOn())
+                        log.Info("GetMarketInfo | " + 0);
                     return 0;
                 }
-                if (type == 1)
-                    info = rdr.GetInt32("MIN( fame )");
-                log.Info("GetMarketInfo | " + info);
-                return info;
+                if (isDebugOn())
+                    log.Info("GetMarketInfo | " + rdr.GetInt32("MIN( fame )"));
+                return rdr.GetInt32("MIN( fame )");
+            }
+        }
+
+        public int getPetSize(int id, int pet)
+        {
+            MySqlCommand cmd = CreateQuery();
+            cmd.CommandText = "SELECT size FROM pets WHERE accId = @accId and petId = @petId LIMIT 1";
+            cmd.Parameters.AddWithValue("@accId", id);
+            cmd.Parameters.AddWithValue("@petId", pet);
+            using (MySqlDataReader rdr = cmd.ExecuteReader())
+            {
+                if (isDebugOn())
+                    log.Info("Checking PetSize with accId: " + id + " and petId: " + pet);
+                rdr.Read();
+                if (!rdr.HasRows)
+                {
+                    log.Error("Error in database, pet is missing a size");
+                    return 0;
+                }
+                var ordinal = rdr.GetOrdinal("size");
+                if (rdr.IsDBNull(ordinal))
+                {
+                    return 0;
+                }
+                return rdr.GetInt32("size");
             }
         }
 
@@ -865,7 +902,10 @@ SELECT MAX(chestId) FROM vaults WHERE accId = @accId;";
             cmd.ExecuteNonQuery();
         }
 
-
+        public bool isDebugOn()
+        {
+            return Settings.GetValue<bool>("debugMode", "false");
+        }
 
         public bool HasEmail(string email)
         {

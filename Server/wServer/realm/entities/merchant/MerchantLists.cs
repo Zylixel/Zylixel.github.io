@@ -18,7 +18,6 @@ namespace wServer.realm.entities.merchant
             {
                 using (Database db = new Database())
                 {
-
                     return db.GetMarketInfo(item, 1);
                 }
             }

@@ -16139,6 +16139,7 @@
                <Index>0x56c</Index>
              </Texture>
              <SlotType>10</SlotType>
+             <Description>Consume this Item to turn change the skin of your current pet\n\nThis Result is permanent</Description>
              <Consumable/>
              <BagType>0</BagType>
              <Activate>PetSkin</Activate>
@@ -16172,6 +16173,7 @@
          <Index>0x56d</Index>
        </Texture>
        <SlotType>10</SlotType>
+       <Description>Consume this Item to turn change the skin of your current pet\n\nThis Result is permanent</Description>
        <Consumable/>
        <BagType>0</BagType>
        <Activate petType="24694">PetSkin</Activate>
@@ -16213,6 +16215,7 @@
        </AnimatedTexture>
        <SlotType>10</SlotType>
        <Description></Description>
+       <Description>Consume this Item to turn change the skin of your current pet\n\nThis Result is permanent</Description>
        <Consumable/>
        <BagType>0</BagType>
        <Activate petType="24704">PetSkin</Activate>
@@ -16237,6 +16240,7 @@
          <Index>0x04</Index>
        </AnimatedTexture>
        <SlotType>10</SlotType>
+       <Description>Consume this Item to turn change the skin of your current pet\n\nThis Result is permanent</Description>
        <Consumable/>
        <BagType>0</BagType>
        <Activate petType="24706">PetSkin</Activate>
@@ -16261,7 +16265,7 @@
          <Index>0x05</Index>
        </AnimatedTexture>
        <SlotType>10</SlotType>
-       <Description></Description>
+       <Description>Consume this Item to turn change the skin of your current pet\n\nThis Result is permanent</Description>
        <Consumable/>
        <BagType>0</BagType>
        <Activate petType="24708">PetSkin</Activate>
@@ -16363,7 +16367,7 @@
                   <Index>0x06</Index>
                 </AnimatedTexture>
                 <SlotType>10</SlotType>
-                <Description></Description>
+                <Description>Consume this Item to turn change the skin of your current pet\n\nThis Result is permanent</Description>
                 <Consumable/>
                 <BagType>0</BagType>
                 <Activate petType="24720">PetSkin</Activate>
@@ -16388,7 +16392,7 @@
                                     <Index>0x07</Index>
                                   </AnimatedTexture>
                                   <SlotType>10</SlotType>
-                                  <Description></Description>
+                                  <Description>Consume this Item to turn change the skin of your current pet\n\nThis Result is permanent</Description>
                                   <Consumable/>
                                   <BagType>0</BagType>
                                   <Activate petType="24722">PetSkin</Activate>
@@ -16425,7 +16429,7 @@
             <Index>0x08</Index>
           </AnimatedTexture>
           <SlotType>10</SlotType>
-          <Description></Description>
+          <Description>Consume this Item to turn change the skin of your current pet\n\nThis Result is permanent</Description>
           <Consumable/>
           <BagType>0</BagType>
           <Activate petType="24725">PetSkin</Activate>
@@ -16450,7 +16454,7 @@
          <Index>0x09</Index>
        </AnimatedTexture>
        <SlotType>10</SlotType>
-       <Description></Description>
+       <Description>Consume this Item to turn change the skin of your current pet\n\nThis Result is permanent</Description>
        <Consumable/>
        <BagType>0</BagType>
        <Activate petType="24727">PetSkin</Activate>
@@ -20201,7 +20205,7 @@ An awe-inspiring sword gifted to only the most worthy mortals from the heavens t
           </Object>
           <Object type="0x6118" id="Bridge Sentinel Pet Stone">
               <Class>Equipment</Class>
-              <Item />
+              <Item/>
               <AnimatedTexture>
                 <File>chars8x8rPets2</File>
                 <Index>0x0c</Index>
@@ -20209,10 +20213,10 @@ An awe-inspiring sword gifted to only the most worthy mortals from the heavens t
               <SlotType>10</SlotType>
               <Activate petType="24858">PetSkin</Activate>
               <Sound>use_potion</Sound>
-              <Description></Description>
+              <Description>Consume this Item to turn change the skin of your current pet\n\nThis Result is permanent</Description>
               <Consumable/>
               <feedPower>5000</feedPower>
-              <DisplayId>Bridge Sentinel Skin</DisplayId>
+              <DisplayId>Bridge Sentinel Pet Stone</DisplayId>
             </Object>
             <Object type="0x6119" id="Twilight Archmage Pet Stone">
               <Class>Equipment</Class>
@@ -20224,7 +20228,7 @@ An awe-inspiring sword gifted to only the most worthy mortals from the heavens t
               <SlotType>10</SlotType>
               <Activate petType="24859">PetSkin</Activate>
               <Sound>use_potion</Sound>
-              <Description></Description>
+              <Description>Consume this Item to turn change the skin of your current pet\n\nThis Result is permanent</Description>
               <Consumable/>
               <feedPower>5000</feedPower>
               <DisplayId>Twilight Archmage Pet Stone</DisplayId>

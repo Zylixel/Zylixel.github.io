@@ -20,6 +20,7 @@ namespace wServer
     {
         public static bool WhiteList { get; private set; }
         public static bool Verify { get; private set; }
+        public static bool DebugMode { get; private set; }
         internal static SimpleSettings Settings;
 
         private static readonly ILog log = LogManager.GetLogger("Server");
@@ -50,6 +51,7 @@ namespace wServer
 
                 WhiteList = Settings.GetValue<bool>("whiteList", "false");
                 Verify = Settings.GetValue<bool>("verifyEmail", "false");
+                DebugMode = Settings.GetValue<bool>("debugMode", "false");
                 WhiteListTurnOff = Settings.GetValue<DateTime>("whitelistTurnOff");
 
                 manager.Initialize();

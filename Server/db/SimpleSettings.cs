@@ -19,7 +19,6 @@ namespace db
 
         public SimpleSettings(string id)
         {
-            log.InfoFormat("Loading settings for '{0}'...", id);
 
             values = new Dictionary<string, string>();
             this.id = id;

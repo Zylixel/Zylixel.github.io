@@ -128,8 +128,8 @@ namespace wServer.realm
                 return false;
             if (Manager.GameData.ObjectDescs.TryGetValue(tile.ObjType, out desc))
             {
-                if (!desc.Static)
-                    return false;
+                //if (!desc.Static)
+                    //return false;
                 if (desc.OccupySquare || desc.EnemyOccupySquare || desc.FullOccupy)
                     return false;
             }

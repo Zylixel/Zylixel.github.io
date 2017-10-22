@@ -1220,14 +1220,30 @@ DurationMS= 0
                         Manager.Database.DoActionAsync(db =>
                         {
                             MySqlCommand cmd = db.CreateQuery();
-                            cmd.CommandText = "Update pets SET skin=@petStone WHERE accId=@id AND petId=@petId";
+                            cmd.CommandText =
+                                "Update pets SET skin=@petStone WHERE accId=@id AND petId=@petId";
                             cmd.Parameters.AddWithValue("@petId", Client.Player.Pet.PetId);
                             cmd.Parameters.AddWithValue("@id", AccountId);
                             cmd.Parameters.AddWithValue("@petStone", eff.PetType);
                             cmd.ExecuteNonQuery();
-                            SendInfo(
-                                "Pet Skin activated! Enter a new world (Or relog) to see it!");
                         });
+
+                        if (eff.newSize != 0)
+                        {
+                            Manager.Database.DoActionAsync(db =>
+                            {
+                                MySqlCommand cmd = db.CreateQuery();
+                                cmd.CommandText =
+                                        "Update pets SET size=@size WHERE accId=@id AND petId=@petId";
+                                cmd.Parameters.AddWithValue("@petId", Client.Player.Pet.PetId);
+                                cmd.Parameters.AddWithValue("@id", AccountId);
+                                cmd.Parameters.AddWithValue("@size", eff.newSize);
+                                cmd.ExecuteNonQuery();
+                            });
+                        }
+
+                        SendInfo(
+                            "Pet Skin activated! Enter a new world (Or relog) to see it!");
                         break;
 
                     case ActivateEffects.CreatePet:

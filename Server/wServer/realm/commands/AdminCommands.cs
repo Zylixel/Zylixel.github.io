@@ -35,7 +35,7 @@ namespace wServer.realm.commands
     internal class BanCommand : Command
     {
         public BanCommand() : 
-            base("ban", permLevel: 1)
+            base("ban", 1)
         {
         }
 

@@ -77053,7 +77053,7 @@
     <Description>Consume this Item to turn change the skin of your current pet/n/nThis Result is permanent</Description>
     <Consumable/>
     <BagType>0</BagType>
-    <Activate petType="24692">PetSkin</Activate>
+    <Activate petType="24692" newSize="200">PetSkin</Activate>
     <Sound>use_potion</Sound>
     <feedPower>5000</feedPower>
     <DisplayId>Gigacorn Pet Stone</DisplayId>
@@ -81081,7 +81081,7 @@ The solid honey on this ring renews its wearer with incredible energy.
     <Description>Consume this Item to turn change the skin of your current pet/n/nThis Result is permanent</Description>
     <Consumable/>
     <feedPower>5000</feedPower>
-    <DisplayId>Bridge Sentinel Skin</DisplayId>
+    <DisplayId>Bridge Sentinel Pet Stone</DisplayId>
   </Object>
   <Object type="0x6119" id="Twilight Archmage Pet Stone">
     <Class>Equipment</Class>

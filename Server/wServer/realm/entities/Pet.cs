@@ -6,6 +6,8 @@ using MySql.Data.MySqlClient;
 using wServer.networking.svrPackets;
 using wServer.realm.entities.player;
 using wServer.realm.worlds;
+using db;
+using db.data;
 
 #endregion
 
@@ -39,7 +41,16 @@ namespace wServer.realm.entities
                         Utils.GetEnumByName<Ability>(Utils.GetEnumName<Ability>(petData.Abilities[2].Type)),
                         petData.Abilities[2].Points, petData.Abilities[2].Power, this);
 
-                    Size = manager.GameData.TypeToPet[(ushort)petData.Type].Size;
+                    {
+                        using (Database db = new Database())
+                        {
+                            Size = db.getPetSize(Convert.ToInt32(PlayerOwner.AccountId), petData.InstanceId);
+                        }
+                    }
+
+                    if (Size == 0)
+                        Size = manager.GameData.TypeToPet[(ushort)petData.Type].Size;
+
                     PetRarity = (Rarity)petData.Rarity;
                     PetFamily = manager.GameData.TypeToPet[(ushort)petData.Type].PetFamily;
                     MaximumLevel = petData.MaxAbilityPower;
@@ -52,11 +63,8 @@ namespace wServer.realm.entities
             }
             catch (Exception e)
             {
-                if (PlayerOwner != null)
-                    PlayerOwner.SendError(
-                        String.Format(
-                            "An error ocurred while loading your pet data, please report this to an Admin: {0}",
-                            e.Message));
+                PlayerOwner?.SendError(
+                    $"An error ocurred while loading your pet data, please report this to an Admin: {e.Message}");
             }
         }
 
@@ -74,10 +82,7 @@ namespace wServer.realm.entities
         public PetLevel ThirdPetLevel { get; private set; }
         public Player PlayerOwner { get; set; }
 
-        public Position SpawnPoint
-        {
-            get { return spawn ?? new Position(X, Y); }
-        }
+        public Position SpawnPoint => spawn ?? new Position(X, Y);
 
         public Rarity PetRarity { get; private set; }
         public Family PetFamily { get; private set; }
@@ -97,9 +102,9 @@ namespace wServer.realm.entities
                 cmd.Parameters.AddWithValue("@petId", PetId);
                 cmd.Parameters.AddWithValue("@accId", Owner.Players.ToArray()[0].Value.AccountId);
                 cmd.Parameters.AddWithValue("@newLevels",
-                    String.Format("{0}, {1}, {2}", FirstPetLevel.Level, SecondPetLevel.Level, ThirdPetLevel.Level));
+                    $"{FirstPetLevel.Level}, {SecondPetLevel.Level}, {ThirdPetLevel.Level}");
                 cmd.Parameters.AddWithValue("@newXp",
-                    String.Format("{0}, {1}, {2}", FirstPetLevel.Power, SecondPetLevel.Power, ThirdPetLevel.Power));
+                    $"{FirstPetLevel.Power}, {SecondPetLevel.Power}, {ThirdPetLevel.Power}");
                 cmd.ExecuteNonQuery();
             });
 

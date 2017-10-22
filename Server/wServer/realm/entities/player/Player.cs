@@ -965,21 +965,7 @@ namespace wServer.realm.entities.player
 
             FameCounter.Tick(time);
 
-            //if(pingSerial > 5)
-            //    if (!Enumerable.Range(UpdatesSend, 5000).Contains(UpdatesReceived))
-            //        Client.Disconnect();
-
             if (Mp < 0) Mp = 0;
-
-            /* try
-                * {
-                *     psr.Database.SaveCharacter(psr.Account, psr.Character);
-                *     UpdateCount++;
-                * }
-                * catch (ex)
-                * {
-                * }
-            */
 
             try
             {
@@ -988,10 +974,20 @@ namespace wServer.realm.entities.player
                     SendUpdate(time);
                     if (!Owner.IsPassable((int)X, (int)Y))
                     {
-                        Log.Fatal($"Player {Name} No-Cliped at position: {X}, {Y}");
+                        Log.Fatal($"Player {Name} No-Clipped at position: {X}, {Y}");
+                        Client.Player.SendError("Uhhh, No. Don't Noclip");
+                        Client.Reconnect(new ReconnectPacket
+                        {
+                            Host = "",
+                            Port = Program.Settings.GetValue<int>("port"),
+                            GameId = World.NEXUS_ID,
+                            Name = "Nexus",
+                            Key = Empty<byte>.Array
+                        });
                     }
                 }
             }
+
             catch (Exception e)
             {
                 Log.Error(e);
@@ -1007,7 +1003,7 @@ namespace wServer.realm.entities.player
 
             if (HP < 0 && !_dying)
             {
-                Client.Player.SendError("Woooooah there cowboy! you almost died to 'Unknown' Lucky thats a dumb way to die so I'm not gonna let that happen!");
+                Client.Player.SendError("Woooooah there cowboy! you almost died to 'Unknown' Luckily thats a dumb way to die so I'm not gonna let that happen!");
                 Client.Reconnect(new ReconnectPacket
                 {
                     Host = "",
@@ -1022,8 +1018,7 @@ namespace wServer.realm.entities.player
             {
                 AshCooldown = 0;
             }
-
-
+            
             base.Tick(time);
         }
 
@@ -1063,43 +1058,70 @@ namespace wServer.realm.entities.player
         {
             var maxed = (from i in Manager.GameData.ObjectTypeToElement[ObjectType].Elements("LevelIncrease") let xElement = Manager.GameData.ObjectTypeToElement[ObjectType].Element(i.Value) where xElement != null let limit = int.Parse(xElement.Attribute("max").Value) let idx = StatsManager.StatsNameToIndex(i.Value) where Stats[idx] >= limit select limit).Count();
 
+            ushort objType;
+            int? time;
             switch (maxed)
             {
                 case 8:
+                    objType = 0x0735;
+                    time = null;
                     break;
 
                 case 7:
+                    objType = 0x0734;
+                    time = null;
                     break;
 
                 case 6:
+                    objType = 0x072b;
+                    time = null;
                     break;
 
                 case 5:
+                    objType = 0x072a;
+                    time = null;
                     break;
 
                 case 4:
+                    objType = 0x0729;
+                    time = null;
                     break;
 
                 case 3:
+                    objType = 0x0728;
+                    time = null;
                     break;
 
                 case 2:
+                    objType = 0x0727;
+                    time = null;
                     break;
 
                 case 1:
+                    objType = 0x0726;
+                    time = null;
                     break;
 
                 default:
                     if (Level <= 1)
                     {
+                        objType = 0x0723;
+                        time = 30 * 1000;
                     }
                     else if (Level < 20)
                     {
+                        objType = 0x0724;
+                        time = 60 * 1000;
+                    }
+                    else
+                    {
+                        objType = 0x0725;
+                        time = 5 * 60 * 1000;
                     }
                     break;
 
             }
-            
+
         }
 
         private void HandleRegen(RealmTime time)

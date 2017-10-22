@@ -188,6 +188,7 @@ namespace wServer.realm.entities.merchant
                 {
                     foreach (var t1 in MerchantLists.ZyList)
                     {
+
                         LogIt.Info("Looking for updates on item | " + t1);
                         if (RefreshMerchants == t1)
                         {

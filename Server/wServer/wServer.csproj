@@ -131,6 +131,9 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="GeneratorCache.cs" />
+    <Compile Include="logic\behaviors\ChangeGroundOnDeath.cs" />
+    <Compile Include="logic\behaviors\OrderOnce.cs" />
+    <Compile Include="logic\behaviors\RemoveEffect.cs" />
     <Compile Include="logic\ConditionalBehavior.cs" />
     <Compile Include="logic\Behavior.cs" />
     <Compile Include="logic\behaviors\EntityCount.cs" />
@@ -140,7 +143,7 @@
     <Compile Include="logic\behaviors\BackAndForth.cs" />
     <Compile Include="logic\behaviors\Buzz.cs" />
     <Compile Include="logic\behaviors\CallWorldMethod.cs" />
-    <Compile Include="logic\behaviors\ChangeGroundOnDeath.cs" />
+    <Compile Include="logic\behaviors\ChangeGround.cs" />
     <Compile Include="logic\behaviors\ChangeSize.cs" />
     <Compile Include="logic\behaviors\Charge.cs" />
     <Compile Include="logic\behaviors\Drakes\BeesC.cs" />
@@ -200,6 +203,7 @@
     <Compile Include="logic\db\BehaviorDb.EpicUndeadLair .cs" />
     <Compile Include="logic\db\BehaviorDb.FERAL.cs" />
     <Compile Include="logic\db\BehaivorDb.OryxMobs.cs" />
+    <Compile Include="logic\db\BehaviorDbShaitan.cs" />
     <Compile Include="logic\db\BehaviorDbBattleoftheNexus.cs" />
     <Compile Include="logic\db\NexusGreeter.cs" />
     <Compile Include="logic\transitions\ChatTransition.cs" />
@@ -699,6 +703,7 @@
     <EmbeddedResource Include="realm\worlds\maps\woodlandlabyrinth.jm" />
     <EmbeddedResource Include="realm\worlds\maps\crawling.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\shaitansmap.wmap" />
+    <EmbeddedResource Include="realm\worlds\maps\LairofShaitan.jm" />
     <None Include="wServer.cfg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
