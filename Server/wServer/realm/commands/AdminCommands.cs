@@ -1601,15 +1601,15 @@ namespace wServer.realm.commands
                 int itemID = player.Inventory[slot].ObjectType;
                 string checker = player.Manager.GameData.ObjectTypeToId[player.Inventory[slot].ObjectType];
 
-                if (!(checker.Contains("Egg")))
-                    if (!(checker.Contains("Skin")))
-                        if (!(checker.Contains("Cloth")))
-                            if (!(checker.Contains("Dye")))
-                                if (!(checker.Contains("Tincture")))
-                                    if (!(checker.Contains("Effusion")))
-                                        if (!(checker.Contains("Elixir")))
-                                            if (!(checker.Contains("Tarot")))
-                                                if (!(checker.Contains("Gunball")))
+                if (!checker.Contains("Egg"))
+                    if (!checker.Contains("Skin"))
+                        if (!checker.Contains("Cloth"))
+                            if (!checker.Contains("Dye"))
+                                if (!checker.Contains("Tincture"))
+                                    if (!checker.Contains("Effusion"))
+                                        if (!checker.Contains("Elixir"))
+                                            if (!checker.Contains("Tarot"))
+                                                if (!checker.Contains("Gunball"))
                                                         {
 
                                                     
@@ -1628,7 +1628,7 @@ namespace wServer.realm.commands
                                                         player.UpdateCount++;
                                                         if (logic.CheckConfig.IsDebugOn())
                                                             log.Error("Requesting Update for Item | " + itemID);
-                                                        Merchants.RefreshMerchants = itemID;
+                                                        //Merchants.RefreshMerchants = itemID;
                                                     }
                                                     catch (Exception e)
                                                     {

@@ -44,7 +44,7 @@ namespace wServer.realm.entities
                     {
                         using (Database db = new Database())
                         {
-                            Size = db.getPetSize(Convert.ToInt32(PlayerOwner.AccountId), petData.InstanceId);
+                            Size = db.GetPetSize(Convert.ToInt32(PlayerOwner.AccountId), petData.InstanceId);
                         }
                     }
 

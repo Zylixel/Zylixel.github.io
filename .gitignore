@@ -1,3 +1,4 @@
 Server/wServer/wServer.cfg
 Server/server/server.cfg
 Client/src/kabam/rotmg/application/impl/ProductionSetup.as
+Client/src/kabam/rotmg/servers/Production/ZySetup.as

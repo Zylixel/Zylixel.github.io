@@ -22,7 +22,7 @@ public class ZySetup implements ApplicationSetup {
     }
 
     public function useLocalTextures():Boolean {
-        return (false);
+        return (true);
     }
 
     public function isToolingEnabled():Boolean {

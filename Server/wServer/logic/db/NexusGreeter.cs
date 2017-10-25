@@ -36,7 +36,7 @@ namespace wServer.logic
             )
               .Init("NiceZylixel",
                   new State(
-                          new Spawn("NiceZylixel2", maxChildren: 1),
+                          new Spawn("NiceZylixel2", 1),
                           new State("Idle",
                                new ChatTransition("hi", "Hi"),
                                new ChatTransition("hi", "Hi!"),
@@ -85,7 +85,8 @@ namespace wServer.logic
                                new ChatTransition("Tier", "Tiers?"),
                                new ChatTransition("Tier", "tiers?"),
                                new ChatTransition("Tier", "Tier?"),
-                               new ChatTransition("Tier", "tier?")
+                               new ChatTransition("Tier", "tier?"),
+                              new ChatTransition("Hiddin", "Who is the best person in the world?")
                               ),
                     new State("hi",
                     new Taunt("Hello {PLAYER}!"),
@@ -116,6 +117,10 @@ namespace wServer.logic
                     new Taunt("Ha! I can't die!"),
                     new TimedTransition(1500, "Idle")
                         ),
+                    new State("Hiddin",
+                        new Taunt("That would be desens of course!"),
+                        new TimedTransition(1500, "Idle")
+                    ),
                     new State("Tier",
                     new Taunt("Tiers in Zy's Realm are all the same, but there are many new ones that you may enjoy!"),
                     new TimedTransition(1500, "Idle")

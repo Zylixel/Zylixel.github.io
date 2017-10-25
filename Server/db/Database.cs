@@ -28,8 +28,8 @@ namespace db
 {
     public partial class Database : IDisposable
     {
-        private static readonly List<string> emails = new List<string>();
-        private static readonly ILog log = LogManager.GetLogger(typeof(Database));
+        private static readonly List<string> Emails = new List<string>();
+        private static readonly ILog Log = LogManager.GetLogger(typeof(Database));
         private static readonly string[] Names =
         {
             "Darq", "Deyst", "Drac", "Drol",
@@ -43,7 +43,7 @@ namespace db
             "Vorck", "Vorv", "Yangu", "Yimi", "Zhiar"
         };
 
-        private readonly SimpleSettings Settings = new SimpleSettings("wServer");
+        private readonly SimpleSettings _settings = new SimpleSettings("wServer");
         private static string _host, _databaseName, _user, _password;
         private readonly MySqlConnection _con;
         public MySqlConnection Connection { get { return _con; } }
@@ -69,8 +69,8 @@ namespace db
                     {
                         s = rdr.ReadLine();
                         if (s != null && !s.StartsWith("#"))
-                            if(!emails.Contains(s))
-                                emails.Add(s);
+                            if(!Emails.Contains(s))
+                                Emails.Add(s);
                     } while (s != null);
                 }
             }
@@ -301,7 +301,7 @@ AND characters.charId=death.chrId;";
             cmd.Parameters.AddWithValue("@authToken", GenerateRandomString(128));
             cmd.Parameters.AddWithValue("@empty", "");
 
-            if (emails.Contains(uuid))
+            if (Emails.Contains(uuid))
                 cmd.Parameters.AddWithValue("@rank", 1);
             else
                 cmd.Parameters.AddWithValue("@rank", 0);
@@ -325,7 +325,7 @@ AND characters.charId=death.chrId;";
             return Verify(uuid, password, data);
         }
 
-        public QuestItem GenerateDailyQuest(string accId, XmlData data, DateTime pst5pm)
+        public QuestItem GenerateDailyQuest(string accId, XmlData data, DateTime pst5Pm)
         {
             if (accId == "0") return null;
             Random rand = new Random();
@@ -364,7 +364,7 @@ AND characters.charId=death.chrId;";
             cmd.Parameters.AddWithValue("@tier", 1);
             cmd.Parameters.AddWithValue("@accId", accId);
             cmd.Parameters.AddWithValue("@goals", Utils.GetCommaSepString(items.ToArray()));
-            cmd.Parameters.AddWithValue("@time", pst5pm.ToString("yyyy-MM-dd HH:mm:ss"));
+            cmd.Parameters.AddWithValue("@time", pst5Pm.ToString("yyyy-MM-dd HH:mm:ss"));
             cmd.ExecuteNonQuery();
             return GetDailyQuest(accId, data);
         }
@@ -815,25 +815,22 @@ SELECT MAX(chestId) FROM vaults WHERE accId = @accId;";
             }
         }
 
-        public int GetMarketCharID(int MType, int Price)
+        public int GetMarketCharId(int mType, int price)
         {
-            using (Database db = new Database())
-            {
-                int accID;
-                if (isDebugOn())
-                    log.Error("Attemping to find player to give fame to: " + MType + " | " + Price);
-                MySqlCommand cmd = db.CreateQuery();
-                cmd.CommandText = "SELECT * FROM market WHERE itemid='@itemID' AND fame='@fame' LIMIT 1";
-                cmd.Parameters.AddWithValue("@itemID", MType);
-                cmd.Parameters.AddWithValue("@fame", Price);
+                int accId;
+                if (IsDebugOn())
+                    Log.Error("Attemping to find player to give fame to: " + mType + " | " + price);
+                MySqlCommand cmd = CreateQuery();
+                cmd.CommandText = "SELECT id FROM market WHERE itemid=@itemID AND fame=@fame";
+                cmd.Parameters.AddWithValue("@itemID", mType);
+                cmd.Parameters.AddWithValue("@fame", price);
                 using (MySqlDataReader rdr = cmd.ExecuteReader())
                 {
                     if (!rdr.HasRows) return 0;
                     rdr.Read();
-                    accID = rdr.GetInt32("id");
+                    accId = rdr.GetInt32("id");
                 }
-                return accID;
-            }
+                return accId;
         }
 
 
@@ -844,28 +841,28 @@ SELECT MAX(chestId) FROM vaults WHERE accId = @accId;";
             cmd.Parameters.AddWithValue("@itemid", id);
             using (MySqlDataReader rdr = cmd.ExecuteReader())
             {
-                if (isDebugOn())
-                    log.Info("GetMarketInfo | Attemping to call ItemID: " + id);
+                if (IsDebugOn())
+                    Log.Info("GetMarketInfo | Attemping to call ItemID: " + id);
                 rdr.Read();
                 if (!rdr.HasRows)
                 {
-                    log.Error("GetMarketInfo | Missing ID ");
+                    Log.Error("GetMarketInfo | Missing ID ");
                     return 0;
                 }
                 var ordinal = rdr.GetOrdinal("MIN( fame )");
                 if (rdr.IsDBNull(ordinal))
                 {
-                    if (isDebugOn())
-                        log.Info("GetMarketInfo | " + 0);
+                    if (IsDebugOn())
+                        Log.Info("GetMarketInfo | " + 0);
                     return 0;
                 }
-                if (isDebugOn())
-                    log.Info("GetMarketInfo | " + rdr.GetInt32("MIN( fame )"));
+                if (IsDebugOn())
+                    Log.Info("GetMarketInfo | " + rdr.GetInt32("MIN( fame )"));
                 return rdr.GetInt32("MIN( fame )");
             }
         }
 
-        public int getPetSize(int id, int pet)
+        public int GetPetSize(int id, int pet)
         {
             MySqlCommand cmd = CreateQuery();
             cmd.CommandText = "SELECT size FROM pets WHERE accId = @accId and petId = @petId LIMIT 1";
@@ -873,12 +870,12 @@ SELECT MAX(chestId) FROM vaults WHERE accId = @accId;";
             cmd.Parameters.AddWithValue("@petId", pet);
             using (MySqlDataReader rdr = cmd.ExecuteReader())
             {
-                if (isDebugOn())
-                    log.Info("Checking PetSize with accId: " + id + " and petId: " + pet);
+                if (IsDebugOn())
+                    Log.Info("Checking PetSize with accId: " + id + " and petId: " + pet);
                 rdr.Read();
                 if (!rdr.HasRows)
                 {
-                    log.Error("Error in database, pet is missing a size");
+                    Log.Error("Error in database, pet is missing a size");
                     return 0;
                 }
                 var ordinal = rdr.GetOrdinal("size");
@@ -901,9 +898,9 @@ SELECT MAX(chestId) FROM vaults WHERE accId = @accId;";
             cmd.ExecuteNonQuery();
         }
 
-        public bool isDebugOn()
+        public bool IsDebugOn()
         {
-            return Settings.GetValue<bool>("debugMode", "false");
+            return _settings.GetValue<bool>("debugMode", "false");
         }
 
         public bool HasEmail(string email)
@@ -1446,7 +1443,7 @@ VALUES(@accId, @petId, @objType, @skinName, @skin, @rarity, @maxLevel, @abilitie
             cmd.ExecuteScalar();
         }
 
-        private string generateGiftCode(int blocks, int blockLength)
+        private string GenerateGiftCode(int blocks, int blockLength)
         {
             var builder = new StringBuilder();
             var rand = new Random();
@@ -1459,7 +1456,7 @@ VALUES(@accId, @petId, @objType, @skinName, @skin, @rarity, @maxLevel, @abilitie
             return builder.ToString();
         }
 
-        private bool giftCodeExists(string code)
+        private bool GiftCodeExists(string code)
         {
             var cmd = CreateQuery();
             cmd.CommandText = "SELECT code FROM giftCodes WHERE code=@code";

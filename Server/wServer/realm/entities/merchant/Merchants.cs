@@ -6,7 +6,6 @@ using System.Xml.Linq;
 using db;
 using log4net;
 using MySql.Data.MySqlClient;
-using wServer.logic;
 using wServer.networking.svrPackets;
 using wServer.realm.entities.player;
 
@@ -26,7 +25,7 @@ namespace wServer.realm.entities.merchant
         private bool _newMerchant;
         private int _tickcount;
         private int _accId;
-        int _itemChange;
+        private int _itemChange;
 
         public static Random Random { get; private set; }
 
@@ -76,8 +75,7 @@ namespace wServer.realm.entities.merchant
 
         protected override bool TryDeduct(Player player)
         {
-            if (player.Client.Account.Stats.Fame < Price) return false;
-            return true;
+            return player.Client.Account.Stats.Fame >= Price;
         }
 
         public override void Buy(Player player)
@@ -97,47 +95,34 @@ namespace wServer.realm.entities.merchant
                                 if (player.Inventory[i] == null &&
                                     (player.SlotTypes[i] == 10 ||
                                      player.SlotTypes[i] == Convert.ToInt16(ist.Element("SlotType").Value)))
-                                // Exploit fix - No more mnovas as weapons!
                                 {
                                     player.Inventory[i] = Manager.GameData.Items[(ushort)MType];
                                     
                                     player.CurrentFame =
                                         player.Client.Account.Stats.Fame =
                                             db.UpdateFame(player.Client.Account, -Price);
-                                    using (Database db2 = new Database())
+
+                                    {
+                                        _accId = db.GetMarketCharId(MType, Price);
+                                    }
                                     {
                                         if (logic.CheckConfig.IsDebugOn())
                                             LogIt.Error("Attemping to delete item from database: " + MType + " | " + Price);
-                                        MySqlCommand cmd = db2.CreateQuery();
-                                        cmd.CommandText = "DELETE FROM market WHERE itemid=@itemid AND fame=@fame";
-                                        cmd.Parameters.AddWithValue("@itemID", MType);
+                                        MySqlCommand cmd = db.CreateQuery();
+                                        cmd.CommandText = "DELETE FROM market WHERE itemid=@itemid AND fame=@fame AND id=@id";
+                                        cmd.Parameters.AddWithValue("@itemid", MType);
                                         cmd.Parameters.AddWithValue("@fame", Price);
+                                        cmd.Parameters.AddWithValue("@id", _accId);
                                         cmd.ExecuteNonQuery();
                                     }
                                     {
                                         if (logic.CheckConfig.IsDebugOn())
-                                            LogIt.Error("Attemping to find player to give fame to: " + MType + " | " + Price);
+                                            LogIt.Error("Attempted to give Player " + _accId + ", " + Price + " fame");
                                         MySqlCommand cmd = db.CreateQuery();
-                                        cmd.CommandText = "SELECT * FROM market WHERE itemid='@itemID' AND fame='@fame' LIMIT 1";
-                                        cmd.Parameters.AddWithValue("@itemID", MType);
-                                        cmd.Parameters.AddWithValue("@fame", Price);
-                                        using (MySqlDataReader rdr = cmd.ExecuteReader())
-                                        {
-                                            if (!rdr.HasRows)
-                                                _accId = 0;
-                                            rdr.Read();
-                                            _accId = rdr.GetInt32("id");
-                                        }
-                                    }
-                                    {
-                                        if (logic.CheckConfig.IsDebugOn())
-                                            LogIt.Error("Updating Player Info...");
-                                        MySqlCommand cmd1 = db.CreateQuery();
-                                        cmd1.CommandText = "UPDATE stats SET fame = fame + @Price WHERE accId=@accId";
-                                        cmd1.Parameters.AddWithValue("@accId", _accId);
-                                        cmd1.Parameters.AddWithValue("@Price", Price);
-                                        LogIt.Error("Attempted to give Player " + _accId + ", " + Price + " fame");
-                                        cmd1.ExecuteNonQuery();
+                                        cmd.CommandText = "UPDATE stats SET fame = fame + @Price WHERE accId=@accId";
+                                        cmd.Parameters.AddWithValue("@accId", _accId);
+                                        cmd.Parameters.AddWithValue("@Price", Price);
+                                        cmd.ExecuteNonQuery();
                                     }
                                     player.Client.SendPacket(new BuyResultPacket
                                     {
@@ -286,7 +271,7 @@ namespace wServer.realm.entities.merchant
                         LogIt.Info("Attempting to refresh Merchant | " + item);
                     mrc.Move(x.X, x.Y);
                     var w = Owner;
-                    Owner.LeaveWorld(this);
+                    w.LeaveWorld(this);
                     w.Timers.Add(new WorldTimer(Random.Next(1000, 2000), (world, time) => w.EnterWorld(mrc)));
                 }
             }
@@ -305,37 +290,40 @@ namespace wServer.realm.entities.merchant
             list.Shuffle();
             foreach (var t1 in list)
             {
-                AddedTypes.Add(new KeyValuePair<string, int>(Owner.Name, t1));
-                if (_itemChange > 0)
+                if (_itemChange > 0 && _itemChange == t1)
                 {
                     MType = _itemChange;
                     if (logic.CheckConfig.IsDebugOn())
                         LogIt.Info("Refreshing Merchant | " + MType);
+                    break;
                 }
-                if (_itemChange <= 0)
+                if (!AddedTypes.Contains(new KeyValuePair<string, int>(Owner.Name, t1)))
                 {
-                    MType = t1;
-                    if (logic.CheckConfig.IsDebugOn())
-                        LogIt.Info("Randomizing Merchant to be item | " + MType);
+                    AddedTypes.Add(new KeyValuePair<string, int>(Owner.Name, t1));
+                    if (_itemChange <= 0)
+                    {
+                        MType = t1;
+                        if (logic.CheckConfig.IsDebugOn())
+                            LogIt.Info("Randomizing Merchant to be item | " + MType);
+                    }
+
+                    MTime = Random.Next(2, 5);
+                    MRemaining = 1;
+                    _newMerchant = false;
+
+                    Discount = 0;
+
+                    Tuple<int, CurrencyType> price;
+                    if (_prices.TryGetValue(MType, out price))
+                    {
+                        using (Database db = new Database())
+                            Price = db.GetMarketInfo(price.Item1, 1);
+                        Currency = price.Item2;
+                    }
+                    break;
                 }
-
-                MTime = Random.Next(2, 5);
-                MRemaining = 1;
-                _newMerchant = false;
-
-                Discount = 0;
-
-                Tuple<int, CurrencyType> price;
-                if (_prices.TryGetValue(MType, out price))
-                {
-                    using (Database db = new Database())
-                        Price = db.GetMarketInfo(price.Item1, 1);
-                    Currency = price.Item2;
-                }
-
-                break;
+                UpdateCount++;
             }
-            UpdateCount++;
         }
     }
 }
