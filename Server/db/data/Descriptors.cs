@@ -296,7 +296,6 @@ public enum ActivateEffects
     ConditionEffectSelf,
     Heal,
     HealNova,
-    AddGold,
     AddFame,
     Magic,
     MagicNova,

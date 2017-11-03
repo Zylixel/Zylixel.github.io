@@ -18,8 +18,8 @@ namespace wServer.realm.entities
                 if (SlotTypes[i] == 0) SlotTypes[i] = 10;
         }
 
-        public int[] SlotTypes { get; private set; }
-        public Item[] Inventory { get; private set; }
+        public int[] SlotTypes { get; }
+        public Item[] Inventory { get; }
 
         protected override void ExportStats(IDictionary<StatsType, object> stats)
         {

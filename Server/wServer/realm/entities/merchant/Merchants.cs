@@ -28,7 +28,7 @@ namespace wServer.realm.entities.merchant
         private int _itemChange;
 
         public static Random Random { get; private set; }
-
+          
         public Merchants(RealmManager manager, ushort objType, int itemChangeLocal, World owner = null)
             : base(manager, objType)
         {
@@ -51,6 +51,7 @@ namespace wServer.realm.entities.merchant
         public int MTime { get; set; }
         public int Discount { get; set; }
         public static int RefreshMerchants { get; internal set; }
+        public static int RefreshMerchantsCooldown { get; internal set; }
 
         protected override void ExportStats(IDictionary<StatsType, object> stats)
         {
@@ -173,24 +174,27 @@ namespace wServer.realm.entities.merchant
                     Size = MerchantSize;
                     UpdateCount++;
                 }
+
+                if (RefreshMerchantsCooldown <= 0)
+                    RefreshMerchants = 0;
+
                 if (RefreshMerchants > 0)
                 {
-                    foreach (var t1 in MerchantLists.ZyList)
+                    MerchantLists.RefreshMerchatLists();
+                    if (logic.CheckConfig.IsDebugOn())
+                        LogIt.Info("Looking for updates on item | " + MType);
+                    if (RefreshMerchants == MType)
                     {
                         if (logic.CheckConfig.IsDebugOn())
-                            LogIt.Info("Looking for updates on item | " + t1);
-                        if (RefreshMerchants == t1)
-                        {
-                            if (logic.CheckConfig.IsDebugOn())
-                                LogIt.Info("Found Update on Item | " + t1);
-                            _itemChange = t1;
-                            Refresh(this, t1);
-                            UpdateCount++;
-                        }
+                            LogIt.Info("Found Update on Item | " + RefreshMerchants);
+                        _itemChange = RefreshMerchants;
+                        Refresh(this, RefreshMerchants);
+                        RefreshMerchants = 0;
+                        UpdateCount++;
                     }
-                    RefreshMerchants = 0;
+                    else
+                        RefreshMerchantsCooldown--;
                 }
-                
 
                 if (!_closing)
                 {
@@ -251,7 +255,7 @@ namespace wServer.realm.entities.merchant
                 mrc.Move(x.X, x.Y);
                 var w = Owner;
                 Owner.LeaveWorld(this);
-                w.Timers.Add(new WorldTimer(Random.Next(100, 500), (world, time) => w.EnterWorld(mrc)));
+                w.Timers.Add(new WorldTimer(Random.Next(1, 2), (world, time) => w.EnterWorld(mrc)));
             }
             catch (Exception e)
             {
@@ -272,7 +276,7 @@ namespace wServer.realm.entities.merchant
                     mrc.Move(x.X, x.Y);
                     var w = Owner;
                     w.LeaveWorld(this);
-                    w.Timers.Add(new WorldTimer(Random.Next(1000, 2000), (world, time) => w.EnterWorld(mrc)));
+                    w.Timers.Add(new WorldTimer(Random.Next(1, 2), (world, time) => w.EnterWorld(mrc)));
                 }
             }
             catch (Exception e)
@@ -290,24 +294,25 @@ namespace wServer.realm.entities.merchant
             list.Shuffle();
             foreach (var t1 in list)
             {
-                if (_itemChange > 0 && _itemChange == t1)
+                if (_itemChange > 0)
                 {
                     MType = _itemChange;
                     if (logic.CheckConfig.IsDebugOn())
                         LogIt.Info("Refreshing Merchant | " + MType);
-                    break;
                 }
-                if (!AddedTypes.Contains(new KeyValuePair<string, int>(Owner.Name, t1)))
+                else
                 {
-                    AddedTypes.Add(new KeyValuePair<string, int>(Owner.Name, t1));
-                    if (_itemChange <= 0)
+                    if (!AddedTypes.Contains(new KeyValuePair<string, int>(Owner.Name, t1)))
                     {
+                        AddedTypes.Add(new KeyValuePair<string, int>(Owner.Name, t1));
                         MType = t1;
                         if (logic.CheckConfig.IsDebugOn())
                             LogIt.Info("Randomizing Merchant to be item | " + MType);
                     }
+                }
+                
 
-                    MTime = Random.Next(2, 5);
+                MTime = Random.Next(2, 5);
                     MRemaining = 1;
                     _newMerchant = false;
 
@@ -320,9 +325,9 @@ namespace wServer.realm.entities.merchant
                             Price = db.GetMarketInfo(price.Item1, 1);
                         Currency = price.Item2;
                     }
-                    break;
-                }
+
                 UpdateCount++;
+                    break;
             }
         }
     }

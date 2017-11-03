@@ -179,7 +179,6 @@
     <Compile Include="logic\db\BehaviorDb.Drakes.cs" />
     <Compile Include="logic\db\BehaviorDb.EpicForestMaze.cs" />
     <Compile Include="logic\db\BehaviorDb.ForestMaze.cs" />
-    <Compile Include="logic\db\BehaviorDb.NewWorld.cs" />
     <Compile Include="logic\db\BehaviorDb.GhostShip.cs" />
     <Compile Include="logic\db\BehaviorDb.IceCave.cs" />
     <Compile Include="logic\db\BehaviorDb.Janus.cs" />
@@ -201,7 +200,6 @@
     <Compile Include="logic\db\BehaviorDb.SpriteWorld.cs" />
     <Compile Include="logic\db\BehaviorDb.DeadWaterDocks.cs" />
     <Compile Include="logic\db\BehaviorDb.EventSpawner.cs" />
-    <Compile Include="logic\db\BehaviorDb.EpicUndeadLair .cs" />
     <Compile Include="logic\db\BehaviorDb.FERAL.cs" />
     <Compile Include="logic\db\BehaivorDb.OryxMobs.cs" />
     <Compile Include="logic\db\BehaviorDbShaitan.cs" />
@@ -461,7 +459,6 @@
     <Compile Include="realm\setpieces\KeeperMain.cs" />
     <Compile Include="realm\setpieces\KeeperOryx.cs" />
     <Compile Include="realm\setpieces\NexusDark.cs" />
-    <Compile Include="realm\setpieces\NewWorldWaterFill.cs" />
     <Compile Include="realm\setpieces\NexusLight.cs" />
     <Compile Include="realm\setpieces\NexusFloral.cs" />
     <Compile Include="realm\setpieces\KeeperOcean.cs" />
@@ -509,6 +506,7 @@
     <Compile Include="realm\Wmap.cs" />
     <Compile Include="realm\World.cs" />
     <Compile Include="realm\worlds\BattleNexus.cs" />
+    <Compile Include="realm\worlds\RandomRealm.cs" />
     <Compile Include="realm\worlds\Test.cs" />
     <Compile Include="realm\worlds\WoodlandLadybrinth.cs" />
     <Compile Include="realm\worlds\TheCrawlingDepths.cs" />
@@ -516,7 +514,6 @@
     <Compile Include="realm\worlds\HauntedCemeteryFinalRest.cs" />
     <Compile Include="realm\worlds\HauntedCemeteryGates.cs" />
     <Compile Include="realm\worlds\HauntedCemeteryGraves.cs" />
-    <Compile Include="realm\worlds\TheNewWorld.cs" />
     <Compile Include="realm\worlds\TheIvoryWyvern.cs" />
     <Compile Include="realm\worlds\TheRealmKeeper.cs" />
     <Compile Include="realm\worlds\ZysArena.cs" />
@@ -555,7 +552,6 @@
     <Compile Include="realm\worlds\OceanTrench.cs" />
     <Compile Include="realm\worlds\OryxCastle.cs" />
     <Compile Include="realm\worlds\Tutorial.cs" />
-    <Compile Include="realm\worlds\EpicUndeadLair.cs" />
     <Compile Include="realm\worlds\UndeadLair.cs" />
     <Compile Include="realm\worlds\Vault.cs" />
     <Compile Include="realm\worlds\WineCellar.cs" />
@@ -697,7 +693,6 @@
     <EmbeddedResource Include="realm\worlds\maps\CandylandHuntingGrounds.jm" />
     <EmbeddedResource Include="realm\worlds\maps\DavyJonesLocker.jm" />
     <EmbeddedResource Include="realm\worlds\maps\Market.jm" />
-    <EmbeddedResource Include="realm\worlds\maps\EpicUDL.jm" />
     <EmbeddedResource Include="realm\worlds\maps\puppet.jm" />
     <EmbeddedResource Include="realm\worlds\maps\ShattersMike2.jm" />
     <EmbeddedResource Include="realm\worlds\maps\oryxchamber.jm" />
@@ -706,7 +701,6 @@
     <EmbeddedResource Include="realm\worlds\maps\TheRealmKeeper.jm" />
     <EmbeddedResource Include="realm\worlds\maps\NozenNexus.jm" />
     <EmbeddedResource Include="realm\worlds\maps\ivory.jm" />
-    <EmbeddedResource Include="realm\worlds\maps\TheNewWorld.jm" />
     <EmbeddedResource Include="realm\worlds\maps\spiderden.jm" />
     <EmbeddedResource Include="realm\worlds\maps\forestmaze.jm" />
     <EmbeddedResource Include="realm\worlds\maps\ceme1.jm" />

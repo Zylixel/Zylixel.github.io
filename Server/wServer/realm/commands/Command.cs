@@ -112,7 +112,7 @@ namespace wServer.realm.commands
     internal class Godland : Command
     {
         public Godland()
-            : base("gland", 0)
+            : base("gland")
         {
         }
 
@@ -142,26 +142,6 @@ namespace wServer.realm.commands
                 }
             }, null);
             player.SendInfo("Success!");
-            return true;
-        }
-    }
-    internal class TpMarket : Command
-    {
-        public TpMarket()
-            : base("Market", 0)
-        {
-        }
-
-        protected override bool Process(Player player, RealmTime time, string[] args)
-        {
-            player.Client.Reconnect(new ReconnectPacket
-            {
-                Host = "",
-                Port = 2050,
-                GameId = World.FMARKET,
-                Name = "Market",
-                Key = Empty<byte>.Array
-            });
             return true;
         }
     }

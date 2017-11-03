@@ -1565,7 +1565,7 @@ namespace wServer.realm.commands
     internal class Sell : Command
     {
         public Sell()
-            : base("Sell", 0)
+            : base("Sell")
         {
         }
         protected override bool Process(Player player, RealmTime time, string[] args)
@@ -1628,7 +1628,8 @@ namespace wServer.realm.commands
                                                         player.UpdateCount++;
                                                         if (logic.CheckConfig.IsDebugOn())
                                                             log.Error("Requesting Update for Item | " + itemID);
-                                                        //Merchants.RefreshMerchants = itemID;
+                                                        Merchants.RefreshMerchants = itemID;
+                                                        Merchants.RefreshMerchantsCooldown = 100;
                                                     }
                                                     catch (Exception e)
                                                     {

@@ -196,7 +196,7 @@ namespace wServer.realm.commands
                 return false;
             }
 
-            if (playername.ToLower() == "muledump")
+            /*if (playername.ToLower() == "muledump")
             {
                 if (msg.ToLower() == "private muledump")
                 {
@@ -285,7 +285,7 @@ namespace wServer.realm.commands
                     });
                 }
                 return true;
-            }
+            }*/
 
             foreach (var i in player.Manager.Clients.Values)
             {
@@ -317,6 +317,46 @@ namespace wServer.realm.commands
             }
             player.SendError(string.Format("{0} not found.", playername));
             return false;
+        }
+    }
+    internal class TpMarket : Command
+    {
+        public TpMarket()
+            : base("Market")
+        {
+        }
+
+        protected override bool Process(Player player, RealmTime time, string[] args)
+        {
+            player.Client.Reconnect(new ReconnectPacket
+            {
+                Host = "",
+                Port = 2050,
+                GameId = World.FMARKET,
+                Name = "Market",
+                Key = Empty<byte>.Array
+            });
+            return true;
+        }
+    }
+    internal class TpRealm : Command
+    {
+        public TpRealm()
+            : base("Realm")
+        {
+        }
+
+        protected override bool Process(Player player, RealmTime time, string[] args)
+        {
+            player.Client.Reconnect(new ReconnectPacket
+            {
+                Host = "",
+                Port = 2050,
+                GameId = World.RAND_REALM,
+                Name = "Zy's Realm",
+                Key = Empty<byte>.Array
+            });
+            return true;
         }
     }
 }

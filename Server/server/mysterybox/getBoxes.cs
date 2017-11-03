@@ -32,6 +32,8 @@ namespace server.mysterybox
         internal int Weight { get; set; }
         internal string Description { get; set; }
         internal string Contents { get; set; }
+        internal string Jackpot { get; set; }
+        internal int JackpotOdds { get; set; }
         internal string Image { get; set; }
         internal string Icon { get; set; }
         internal Price Price { get; set; }
@@ -55,6 +57,8 @@ namespace server.mysterybox
                         {
                             BoxId = id,
                             Contents = rdr.GetString("contents"),
+                            Jackpot = rdr.GetString("jackpot"),
+                            JackpotOdds = rdr.GetInt32("jackpotOdds"),
                             Weight = rdr.GetInt32("weight"),
                             Title = rdr.GetString("title"),
                             Description = rdr.GetString("description"),
@@ -116,6 +120,14 @@ namespace server.mysterybox
                         XmlNode contents = doc.CreateElement("Contents");
                         contents.InnerText = rdr.GetString("contents");
                         boxElem.AppendChild(contents);
+
+                        XmlNode jackpot = doc.CreateElement("Jackpot");
+                        jackpot.InnerText = rdr.GetString("jackpot");
+                        boxElem.AppendChild(jackpot);
+
+                        XmlNode jackpotOdds = doc.CreateElement("JackpotOdds");
+                        jackpotOdds.InnerText = rdr.GetString("jackpotOdds");
+                        boxElem.AppendChild(jackpotOdds);
 
                         XmlNode price = doc.CreateElement("Price");
                         XmlAttribute priceAmount = doc.CreateAttribute("amount");

@@ -23,7 +23,7 @@ namespace wServer.logic.loot
     public class ItemLoot : ILootDef
     {
         private readonly string item;
-        private readonly double probability;
+        private double probability;
 
         public string Lootstate { get; set; }
 
@@ -36,6 +36,7 @@ namespace wServer.logic.loot
         public void Populate(RealmManager manager, Enemy enemy, Tuple<Player, int> playerDat,
             Random rand, string lootState, IList<LootDef> lootDefs)
         {
+            probability = probability * 100000000;
             Lootstate = lootState;
             if (playerDat != null) return;
             XmlData dat = manager.GameData;
@@ -114,7 +115,7 @@ namespace wServer.logic.loot
         public static readonly int[] ArmorT = {6, 7, 14};
         public static readonly int[] RingT = {9};
         public static readonly int[] PotionT = {10};
-        private readonly double probability;
+        private double probability;
 
         private readonly byte tier;
         private readonly int[] types;
@@ -150,6 +151,7 @@ namespace wServer.logic.loot
         public void Populate(RealmManager manager, Enemy enemy, Tuple<Player, int> playerDat,
             Random rand, string lootState, IList<LootDef> lootDefs)
         {
+            probability = probability * 100000000;
             Lootstate = lootState;
             if (playerDat != null) return;
             Item[] candidates = manager.GameData.Items
@@ -165,13 +167,11 @@ namespace wServer.logic.loot
     public class Threshold : ILootDef
     {
         private readonly ILootDef[] children;
-        private readonly double threshold;
 
         public string Lootstate { get; set; }
 
         public Threshold(double threshold, params ILootDef[] children)
         {
-            this.threshold = threshold;
             this.children = children;
         }
 
@@ -194,7 +194,7 @@ namespace wServer.logic.loot
                     .Select(item => item.Value)
                     .ToArray();
                 foreach (Item i in candidates)
-                    if (!(i.Tier == -1))
+                    if (i.Tier != -1)
                         lootDefs.Add(new LootDef(i, ((i.Tier * -2) + 10) * 0.0005, lootState));
             }
         }

@@ -14885,11 +14885,11 @@
             </Texture>
          </RandomTexture>
        <Top>
-         <Texture>
-           <File>lofiObj3</File>
-           <Index>0x574</Index>
-         </Texture>
-       </Top>
+             <Texture>
+               <File>lofiObj3</File>
+               <Index>0x453</Index>
+             </Texture>
+           </Top>
        <HitSound>monster/wooden_walls_hit</HitSound>
        <DeathSound>monster/wooden_walls_death</DeathSound>
        <FullOccupy/>
@@ -14920,11 +14920,11 @@
             </Texture>
          </RandomTexture>
        <Top>
-         <Texture>
-           <File>lofiObj3</File>
-           <Index>0x574</Index>
-         </Texture>
-       </Top>
+             <Texture>
+               <File>lofiObj3</File>
+               <Index>0x453</Index>
+             </Texture>
+           </Top>
        <HitSound>monster/wooden_walls_hit</HitSound>
        <DeathSound>monster/wooden_walls_death</DeathSound>
        <FullOccupy/>
@@ -20260,178 +20260,150 @@ An awe-inspiring sword gifted to only the most worthy mortals from the heavens t
                 <AngleCorrection>1</AngleCorrection>
               </Object>
               <Object type="0x611c" id="Crystal Dagger of Evolution 1">
-                <DisplayId>Crystal Dagger of Evolution</DisplayId>
-                <Class>Equipment</Class>
-                <Item/>
-                <Texture>
-                  <File>lofiObj3</File>
-                  <Index>0x573</Index>
-                </Texture>
-                <SlotType>2</SlotType>
-                <RateOfFire>0.85</RateOfFire>
-                <Description>
-                  The blade of this dagger went missing long ago. Its pieces remain in the realm, waiting to be reunited.
-                </Description>
-                <OldSound>bladeSwing</OldSound>
-                 <Level1/>
-                <Projectile>
-                  <ObjectId>Crystal Dagger Shot</ObjectId>
-                  <Speed>140</Speed>
-                  <MinDamage>50</MinDamage>
-                  <MaxDamage>155</MaxDamage>
-                  <LifetimeMS>357</LifetimeMS>
-                  <Size>100</Size>
-                  <MultiHit/>
-                  <ArmorPiercing/>
-                </Projectile>
-                <BagType>6</BagType>
-                <FameBonus>2</FameBonus>
-                <feedPower>250</feedPower>
-              </Object>
-			  <Object type="0x7000" id="Test staff">
-      <Class>Equipment</Class>
-      <Item/>
-      <Texture>
-         <File>lofiObj5</File>
-         <Index>0xaa</Index>
-      </Texture>
-      <SlotType>17</SlotType>
-      <Tier>1</Tier>
-      <Description>{equip.A_staff_imbued_with_potent_magical_fire.}</Description>
-      <RateOfFire>1</RateOfFire>
-      <Sound>weapon/missile_wand</Sound>
-      <Projectile>
-         <ObjectId>Fire Missile</ObjectId>
-         <Speed>200</Speed>
-         <MinDamage>100</MinDamage>
-         <MaxDamage>400</MaxDamage>
-         <LifetimeMS>475</LifetimeMS>
-         <Amplitude>0.5</Amplitude>
-         <Frequency>2</Frequency>
-      </Projectile>
-      <BagType>6</BagType>
-      <NumProjectiles>2</NumProjectiles>
-      <ArcGap>0</ArcGap>
-      <OldSound>magicShoot</OldSound>
-      <feedPower>2500</feedPower>
-      <DisplayId>Test Staff</DisplayId>
-	  </Object>
-              <Object type="0x611d" id="Crystal Dagger of Evolution 2">
-                <DisplayId>Crystal Dagger of Evolution</DisplayId>
-                <Class>Equipment</Class>
-                <Item/>
-                <Texture>
-                  <File>lofiObj3</File>
-                  <Index>0x575</Index>
-                </Texture>
-                <SlotType>2</SlotType>
-                <RateOfFire>0.9</RateOfFire>
-                <Description>
-                  The blade of this dagger went missing long ago. Its pieces remain in the realm, waiting to be reunited.
-                </Description>
-                <OldSound>bladeSwing</OldSound>
-                <Level2/>
-                <Projectile>
-                  <ObjectId>Crystal Dagger Shot</ObjectId>
-                  <Speed>140</Speed>
-                  <MinDamage>55</MinDamage>
-                  <MaxDamage>155</MaxDamage>
-                  <LifetimeMS>357</LifetimeMS>
-                  <Size>100</Size>
-                  <MultiHit/>
-                  <ArmorPiercing/>
-                </Projectile>
-                <BagType>6</BagType>
-                <FameBonus>3</FameBonus>
-                <feedPower>500</feedPower>
-              </Object>
-              <Object type="0x611e" id="Crystal Dagger of Evolution 3">
-                <DisplayId>Crystal Dagger of Evolution</DisplayId>
-                <Class>Equipment</Class>
-                <Item/>
-                <Texture>
-                  <File>lofiObj3</File>
-                  <Index>0x575</Index>
-                </Texture>
-                <SlotType>2</SlotType>
-                <RateOfFire>0.95</RateOfFire>
-                <Description>
-                  The blade of this dagger went missing long ago. Its pieces remain in the realm, waiting to be reunited.
-                </Description>
-                <OldSound>bladeSwing</OldSound>
-                 <Level3/>
-                <Projectile>
-                  <ObjectId>Crystal Dagger Shot</ObjectId>
-                  <Speed>140</Speed>
-                  <MinDamage>60</MinDamage>
-                  <MaxDamage>155</MaxDamage>
-                  <LifetimeMS>357</LifetimeMS>
-                  <Size>100</Size>
-                  <MultiHit/>
-                  <ArmorPiercing/>
-                </Projectile>
-                <BagType>6</BagType>
-                <FameBonus>4</FameBonus>
-                <feedPower>750</feedPower>
-              </Object>
-              <Object type="0x611f" id="Crystal Dagger of Evolution 4">
-                <DisplayId>Crystal Dagger of Evolution</DisplayId>
-                <Class>Equipment</Class>
-                <Item/>
-                <Texture>
-                  <File>lofiObj3</File>
-                  <Index>0x576</Index>
-                </Texture>
-                <SlotType>2</SlotType>
-                <RateOfFire>1</RateOfFire>
-                <Description>
-                  The blade of this dagger went missing long ago. Its pieces remain in the realm, waiting to be reunited.
-                </Description>
-                <OldSound>bladeSwing</OldSound>
-                <Level4/>
-                <Projectile>
-                  <ObjectId>Crystal Dagger Shot</ObjectId>
-                  <Speed>140</Speed>
-                  <MinDamage>65</MinDamage>
-                  <MaxDamage>155</MaxDamage>
-                  <LifetimeMS>357</LifetimeMS>
-                  <Size>100</Size>
-                  <MultiHit/>
-                  <ArmorPiercing/>
-                </Projectile>
-                <BagType>6</BagType>
-                <FameBonus>5</FameBonus>
-                <feedPower>1000</feedPower>
-              </Object>
-              <Object type="0x6121" id="Crystal Dagger of Evolution 5">
-                <DisplayId>Crystal Dagger of Evolution</DisplayId>
-                <Class>Equipment</Class>
-                <Item/>
-                <Texture>
-                  <File>lofiObj3</File>
-                  <Index>0x577</Index>
-                </Texture>
-                <SlotType>2</SlotType>
-                <RateOfFire>1.1</RateOfFire>
-                <Description>
-                  The blade of this dagger went missing long ago. Its pieces remain in the realm, waiting to be reunited.
-                </Description>
-                <OldSound>bladeSwing</OldSound>
-                 <Level5/>
-                <Projectile>
-                  <ObjectId>Crystal Dagger Shot</ObjectId>
-                  <Speed>140</Speed>
-                  <MinDamage>70</MinDamage>
-                  <MaxDamage>155</MaxDamage>
-                  <LifetimeMS>357</LifetimeMS>
-                  <Size>100</Size>
-                  <MultiHit/>
-                  <ArmorPiercing/>
-                </Projectile>
-                <BagType>6</BagType>
-                <FameBonus>6</FameBonus>
-                <feedPower>1250</feedPower>
-              </Object>
+                  <DisplayId>Crystal Dagger of Evolution</DisplayId>
+                  <Class>Equipment</Class>
+                  <Item/>
+                  <Texture>
+                    <File>lofiObj3</File>
+                    <Index>0x573</Index>
+                  </Texture>
+                  <SlotType>2</SlotType>
+                  <RateOfFire>0.85</RateOfFire>
+                  <Description>
+                    The blade of this dagger went missing long ago. Its pieces remain in the realm, waiting to be reunited.
+                  </Description>
+                  <OldSound>bladeSwing</OldSound>
+                  <Level1/>
+                  <Projectile>
+                    <ObjectId>Crystal Dagger Shot</ObjectId>
+                    <Speed>140</Speed>
+                    <MinDamage>50</MinDamage>
+                    <MaxDamage>155</MaxDamage>
+                    <LifetimeMS>357</LifetimeMS>
+                    <Size>100</Size>
+                    <MultiHit/>
+                    <ArmorPiercing/>
+                  </Projectile>
+                  <BagType>6</BagType>
+                  <FameBonus>2</FameBonus>
+                  <feedPower>250</feedPower>
+                </Object>
+                <Object type="0x611d" id="Crystal Dagger of Evolution 2">
+                  <DisplayId>Crystal Dagger of Evolution</DisplayId>
+                  <Class>Equipment</Class>
+                  <Item/>
+                  <Texture>
+                    <File>lofiObj3</File>
+                    <Index>0x575</Index>
+                  </Texture>
+                  <SlotType>2</SlotType>
+                  <RateOfFire>0.9</RateOfFire>
+                  <Description>
+                    The blade of this dagger went missing long ago. Its pieces remain in the realm, waiting to be reunited.
+                  </Description>
+                  <OldSound>bladeSwing</OldSound>
+                  <Level2/>
+                  <Projectile>
+                    <ObjectId>Crystal Dagger Shot</ObjectId>
+                    <Speed>140</Speed>
+                    <MinDamage>55</MinDamage>
+                    <MaxDamage>155</MaxDamage>
+                    <LifetimeMS>357</LifetimeMS>
+                    <Size>100</Size>
+                    <MultiHit/>
+                    <ArmorPiercing/>
+                  </Projectile>
+                  <BagType>6</BagType>
+                  <FameBonus>3</FameBonus>
+                  <feedPower>500</feedPower>
+                </Object>
+                <Object type="0x611e" id="Crystal Dagger of Evolution 3">
+                  <DisplayId>Crystal Dagger of Evolution</DisplayId>
+                  <Class>Equipment</Class>
+                  <Item/>
+                  <Texture>
+                    <File>lofiObj3</File>
+                    <Index>0x576</Index>
+                  </Texture>
+                  <SlotType>2</SlotType>
+                  <RateOfFire>0.95</RateOfFire>
+                  <Description>
+                    The blade of this dagger went missing long ago. Its pieces remain in the realm, waiting to be reunited.
+                  </Description>
+                  <OldSound>bladeSwing</OldSound>
+                  <Level3/>
+                  <Projectile>
+                    <ObjectId>Crystal Dagger Shot</ObjectId>
+                    <Speed>140</Speed>
+                    <MinDamage>60</MinDamage>
+                    <MaxDamage>155</MaxDamage>
+                    <LifetimeMS>357</LifetimeMS>
+                    <Size>100</Size>
+                    <MultiHit/>
+                    <ArmorPiercing/>
+                  </Projectile>
+                  <BagType>6</BagType>
+                  <FameBonus>4</FameBonus>
+                  <feedPower>750</feedPower>
+                </Object>
+                <Object type="0x611f" id="Crystal Dagger of Evolution 4">
+                  <DisplayId>Crystal Dagger of Evolution</DisplayId>
+                  <Class>Equipment</Class>
+                  <Item/>
+                  <Texture>
+                    <File>lofiObj3</File>
+                    <Index>0x577</Index>
+                  </Texture>
+                  <SlotType>2</SlotType>
+                  <RateOfFire>1</RateOfFire>
+                  <Description>
+                    The blade of this dagger went missing long ago. Its pieces remain in the realm, waiting to be reunited.
+                  </Description>
+                  <OldSound>bladeSwing</OldSound>
+                  <Level4/>
+                  <Projectile>
+                    <ObjectId>Crystal Dagger Shot</ObjectId>
+                    <Speed>140</Speed>
+                    <MinDamage>65</MinDamage>
+                    <MaxDamage>155</MaxDamage>
+                    <LifetimeMS>357</LifetimeMS>
+                    <Size>100</Size>
+                    <MultiHit/>
+                    <ArmorPiercing/>
+                  </Projectile>
+                  <BagType>6</BagType>
+                  <FameBonus>5</FameBonus>
+                  <feedPower>1000</feedPower>
+                </Object>
+                <Object type="0x6121" id="Crystal Dagger of Evolution 5">
+                  <DisplayId>Crystal Dagger of Evolution</DisplayId>
+                  <Class>Equipment</Class>
+                  <Item/>
+                  <Texture>
+                    <File>lofiObj3</File>
+                    <Index>0x578</Index>
+                  </Texture>
+                  <SlotType>2</SlotType>
+                  <RateOfFire>1.1</RateOfFire>
+                  <Description>
+                    The blade of this dagger went missing long ago. Its pieces remain in the realm, waiting to be reunited.
+                  </Description>
+                  <OldSound>bladeSwing</OldSound>
+                  <Level5/>
+                  <Projectile>
+                    <ObjectId>Crystal Dagger Shot</ObjectId>
+                    <Speed>140</Speed>
+                    <MinDamage>70</MinDamage>
+                    <MaxDamage>155</MaxDamage>
+                    <LifetimeMS>357</LifetimeMS>
+                    <Size>100</Size>
+                    <MultiHit/>
+                    <ArmorPiercing/>
+                  </Projectile>
+                  <BagType>6</BagType>
+                  <FameBonus>6</FameBonus>
+                  <feedPower>1250</feedPower>
+                </Object>
               <Object type="0x6122" id="Crystal Blade Shot">
                 <Class>Projectile</Class>
                 <Texture>
@@ -21100,4 +21072,186 @@ An awe-inspiring sword gifted to only the most worthy mortals from the heavens t
                     <feedPower>250</feedPower>
                     <DisplayId>Fragment of the Other Side Key</DisplayId>
                   </Object>
+                  <Object type="0x6203" id="Amulet of Actual Resurrection">
+                      <Class>Equipment</Class>
+                      <Item />
+                      <Texture>
+                        <File>lofiObj2</File>
+                        <Index>0x50</Index>
+                      </Texture>
+                      <SlotType>9</SlotType>
+                      <Description>0w0 What is this?</Description>
+                      <ActivateOnEquip stat="20" amount="4">IncrementStat</ActivateOnEquip>
+                      <ActivateOnEquip stat="21" amount="4">IncrementStat</ActivateOnEquip>
+                      <ActivateOnEquip stat="22" amount="4">IncrementStat</ActivateOnEquip>
+                      <ActivateOnEquip stat="26" amount="4">IncrementStat</ActivateOnEquip>
+                      <ActivateOnEquip stat="27" amount="4">IncrementStat</ActivateOnEquip>
+                      <ActivateOnEquip stat="28" amount="4">IncrementStat</ActivateOnEquip>
+                      <ActivateOnEquip stat="0" amount="40">IncrementStat</ActivateOnEquip>
+                      <ActivateOnEquip stat="3" amount="40">IncrementStat</ActivateOnEquip>
+                      <BrokenResurrect />
+                      <BagType>4</BagType>
+                    </Object>
+                    <Object type="0x6204" id="Amulet of Broken Resurrection">
+                      <Class>Equipment</Class>
+                      <Item />
+                      <Texture>
+                        <File>lofiObj2</File>
+                        <Index>0x50</Index>
+                      </Texture>
+                      <SlotType>9</SlotType>
+                      <Description>0w0 GONE SEXUAL YOU SHOULD NOT HAVE THIS ITEM</Description>
+                      <ActivateOnEquip stat="20" amount="4">IncrementStat</ActivateOnEquip>
+                      <ActivateOnEquip stat="21" amount="4">IncrementStat</ActivateOnEquip>
+                      <ActivateOnEquip stat="22" amount="4">IncrementStat</ActivateOnEquip>
+                      <ActivateOnEquip stat="26" amount="4">IncrementStat</ActivateOnEquip>
+                      <ActivateOnEquip stat="27" amount="4">IncrementStat</ActivateOnEquip>
+                      <ActivateOnEquip stat="28" amount="4">IncrementStat</ActivateOnEquip>
+                      <ActivateOnEquip stat="0" amount="40">IncrementStat</ActivateOnEquip>
+                      <ActivateOnEquip stat="3" amount="40">IncrementStat</ActivateOnEquip>
+                      <NotBrokenResurrect />
+                      <BagType>4</BagType>
+                    </Object>
+                    <Object type="0x6205" id="Oryx the Mad God 3">
+                      <DisplayId>Oryx the Mad God</DisplayId>
+                      <Enemy/>
+                      <Class>Character</Class>
+                      <Texture>
+                        <File>lofiChar16x16</File>
+                        <Index>0x54</Index>
+                      </Texture>
+                      <HitSound>monster/oryx_hit</HitSound>
+                      <DeathSound>monster/oryx_death</DeathSound>
+                      <Size>140</Size>
+                      <MaxHitPoints>150000</MaxHitPoints>
+                      <Defense>60</Defense>
+                      <Quest/>
+                      <God/>
+                      <Oryx/>
+                      <StasisImmune/>
+                      <Level>1</Level>
+                      <XpMult>1</XpMult>
+                      <NoArticle/>
+                      <Projectile id="0">
+                        <ObjectId>Fire Bolt</ObjectId>
+                        <Damage>150</Damage>
+                        <Speed>70</Speed>
+                        <LifetimeMS>2500</LifetimeMS>
+                      </Projectile>
+                      <Projectile id="1">
+                        <ObjectId>Green Star</ObjectId>
+                        <Damage>170</Damage>
+                        <Speed>70</Speed>
+                        <LifetimeMS>2500</LifetimeMS>
+                        <ConditionEffect duration="15">Slowed</ConditionEffect>
+                      </Projectile>
+                      <Projectile id="2">
+                        <ObjectId>Blade</ObjectId>
+                        <Damage>260</Damage>
+                        <Speed>100</Speed>
+                        <LifetimeMS>450</LifetimeMS>
+                      </Projectile>
+                      <Projectile id="3">
+                        <ObjectId>Purple Star</ObjectId>
+                        <Damage>180</Damage>
+                        <Speed>55</Speed>
+                        <LifetimeMS>3000</LifetimeMS>
+                        <ConditionEffect duration="10">Blind</ConditionEffect>
+                      </Projectile>
+                      <Projectile id="4">
+                        <ObjectId>Blue Star</ObjectId>
+                        <Damage>180</Damage>
+                        <Speed>105</Speed>
+                        <LifetimeMS>1200</LifetimeMS>
+                        <ConditionEffect duration="10">Confused</ConditionEffect>
+                      </Projectile>
+                      <Projectile id="5">
+                        <ObjectId>Grey Star</ObjectId>
+                        <Damage>180</Damage>
+                        <Speed>45</Speed>
+                        <LifetimeMS>3000</LifetimeMS>
+                        <ConditionEffect duration="8">Quiet</ConditionEffect>
+                      </Projectile>
+                      <Projectile id="6">
+                        <ObjectId>Red Star</ObjectId>
+                        <Damage>180</Damage>
+                        <Speed>55</Speed>
+                        <LifetimeMS>3000</LifetimeMS>
+                        <ArmorPiercing/>
+                      </Projectile>
+                      <Projectile id="13">
+                        <ObjectId>Dark Gray Spinner</ObjectId>
+                        <Speed>90</Speed>
+                        <Size>100</Size>
+                        <Damage>1</Damage>
+                        <LifetimeMS>1800</LifetimeMS>
+                        <ConditionEffect duration="30">Quiet</ConditionEffect>
+                        <MultiHit/>
+                      </Projectile>
+                      <Projectile id="14">
+                        <ObjectId>Gray Spinner</ObjectId>
+                        <Speed>90</Speed>
+                        <Size>100</Size>
+                        <Damage>1</Damage>
+                        <LifetimeMS>1800</LifetimeMS>
+                        <ConditionEffect duration="90">Weak</ConditionEffect>
+                        <MultiHit/>
+                      </Projectile>
+                    </Object>
+                    <Object type="0x6206" id="100 fame">
+                        <Class>Equipment</Class>
+                        <Item/>
+                        <Texture>
+                          <File>lofiObj3</File>
+                          <Index>0x59c</Index>
+                        </Texture>
+                        <SlotType>10</SlotType>
+                        <Description>Consume this item to give yourself 100 fame! This item may be traded with other players to exchange goods and services</Description>
+                        <Sound>use_potion</Sound>
+                        <Activate amount="100">AddFame</Activate>
+                        <Consumable/>
+                        <DisplayId>100 Fame</DisplayId>
+                      </Object>
+                      <Object type="0x6207" id="500 fame">
+                        <Class>Equipment</Class>
+                        <Item/>
+                        <Texture>
+                          <File>lofiObj3</File>
+                          <Index>0x59d</Index>
+                        </Texture>
+                        <SlotType>10</SlotType>
+                        <Description>Consume this item to give yourself 500 fame! This item may be traded with other players to exchange goods and services</Description>
+                        <Sound>use_potion</Sound>
+                        <Activate amount="500">AddFame</Activate>
+                        <Consumable/>
+                        <DisplayId>500 Fame</DisplayId>
+                      </Object>
+                      <Object type="0x6208" id="1000 fame">
+                        <Class>Equipment</Class>
+                        <Item/>
+                        <Texture>
+                          <File>lofiObj3</File>
+                          <Index>0x59e</Index>
+                        </Texture>
+                        <SlotType>10</SlotType>
+                        <Description>Consume this item to give yourself 1000 fame! This item may be traded with other players to exchange goods and services</Description>
+                        <Sound>use_potion</Sound>
+                        <Activate amount="1000">AddFame</Activate>
+                        <Consumable/>
+                        <DisplayId>1000 Fame</DisplayId>
+                      </Object>
+                      <Object type="0x6209" id="5000 fame">
+                        <Class>Equipment</Class>
+                        <Item/>
+                        <Texture>
+                          <File>lofiObj3</File>
+                          <Index>0x59f</Index>
+                        </Texture>
+                        <SlotType>10</SlotType>
+                        <Description>Consume this item to give yourself 5000 fame! This item may be traded with other players to exchange goods and services</Description>
+                        <Sound>use_potion</Sound>
+                        <Activate amount="5000">AddFame</Activate>
+                        <Consumable/>
+                        <DisplayId>5000 Fame</DisplayId>
+                      </Object>
 </Objects>

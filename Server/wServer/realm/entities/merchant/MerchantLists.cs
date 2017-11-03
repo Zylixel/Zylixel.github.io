@@ -6,26 +6,20 @@ using System.Linq;
 using db;
 using db.data;
 using log4net;
-using wServer.logic;
+using CheckConfig = wServer.logic.CheckConfig;
 
 #endregion
+
 namespace wServer.realm.entities.merchant
 {
     internal class MerchantLists
     {
-
-        public static int HandleRequest(int item)
-        {
-            {
-                using (Database db = new Database())
-                {
-                    return db.GetMarketInfo(item, 1);
-                }
-            }
-        }
         public static int[] ZyList;
 
-        public static Dictionary<int, Tuple<int, CurrencyType>> Prices = new Dictionary<int, Tuple<int, CurrencyType>>();
+        public static XmlData PublicData;
+
+        public static Dictionary<int, Tuple<int, CurrencyType>> Prices = new Dictionary<int, Tuple<int, CurrencyType>>()
+            ;
 
         public static int[] Store10List = {0xb41, 0xbab, 0xbad, 0xbac};
         public static int[] Store11List = {0xb41, 0xbab, 0xbad, 0xbac};
@@ -96,15 +90,33 @@ namespace wServer.realm.entities.merchant
         // rings
         public static int[] Store9List = {0xb41, 0xbab, 0xbad, 0xbac};
 
-        private static readonly ILog Log = LogManager.GetLogger(typeof (MerchantLists));
+        private static readonly ILog Log = LogManager.GetLogger(typeof(MerchantLists));
+
+        private static readonly string[] NoShopItems =
+        {
+            "Crown", "Muscat", "Cabernet", "Vial of Pure Darkness", "Omnipotence Ring", "Draconis Potion",
+            "Sauvignon Blanc", "Snake Oil", "Pollen Powder",
+            "XP Booster Test", "Gravel"
+        };
+
+        public static int HandleRequest(int item)
+        {
+            {
+                using (var db = new Database())
+                {
+                    return db.GetMarketInfo(item, 1);
+                }
+            }
+        }
+
 
         public static void InitMerchatLists(XmlData data)
         {
-            if (logic.CheckConfig.IsDebugOn())
+            if (CheckConfig.IsDebugOn())
                 Log.Info("Loading merchant lists...");
-            List<int> zyList = new List<int>();
-
-            foreach (KeyValuePair<ushort, Item> item in data.Items.Where(_ => NoShopItems.All(i => i != _.Value.ObjectId)))
+            var zyList = new List<int>();
+            PublicData = data;
+            foreach (var item in data.Items.Where(_ => NoShopItems.All(i => i != _.Value.ObjectId)))
             {
                 if (!item.Value.ObjectId.Contains("Egg"))
                     if (!item.Value.ObjectId.Contains("Skin"))
@@ -117,32 +129,59 @@ namespace wServer.realm.entities.merchant
                                                 if (!item.Value.ObjectId.Contains("Gunball"))
                                                     if (item.Value.Tier == -1 || item.Value.Tier >= 4)
                                                         if (item.Value.Treasure == false)
-                                                        {
-                                                     Prices.Add(item.Value.ObjectType, new Tuple<int, CurrencyType>(item.Value.ObjectType, CurrencyType.Fame));
-                                                     zyList.Add(item.Value.ObjectType);
-                                                        if (logic.CheckConfig.IsDebugOn())
-                                                                Log.Info("Loading: " + item.Value.ObjectId);
-
-                                                    /* using (Database db = new Database())
-                                                    {
-                                                        db.SetMarketInfo(item.Value.ObjectType, 2140000000);
-                                                    }
-                                                    */ 
-                                                    //Use this to fill database
-
-                }
-                
+                                                            using (var db = new Database())
+                                                            {
+                                                                if (db.GetMarketInfo(item.Value.ObjectType, 1) > 0)
+                                                                {
+                                                                    Prices.Add(item.Value.ObjectType,
+                                                                        new Tuple<int, CurrencyType>(
+                                                                            item.Value.ObjectType,
+                                                                            CurrencyType.Fame));
+                                                                    zyList.Add(item.Value.ObjectType);
+                                                                    if (CheckConfig.IsDebugOn())
+                                                                        Log.Info("Loading: " + item.Value.ObjectId);
+                                                                }
+                                                            }
             }
             ZyList = zyList.ToArray();
-            if (logic.CheckConfig.IsDebugOn())
+            if (CheckConfig.IsDebugOn())
                 Log.Info("Merchat lists added.");
         }
 
-        private static readonly string[] NoShopItems =
+        public static void RefreshMerchatLists()
         {
-           "Crown", "Muscat", "Cabernet", "Vial of Pure Darkness", "Omnipotence Ring", "Draconis Potion", "Sauvignon Blanc", "Snake Oil", "Pollen Powder",
-           "XP Booster Test"
-
-        };
+            if (CheckConfig.IsDebugOn())
+                Log.Info("Reloading merchant lists...");
+            var zyList = new List<int>();
+            foreach (var item in PublicData.Items.Where(_ =>
+                NoShopItems.All(i => i != _.Value.ObjectId)))
+                if (!item.Value.ObjectId.Contains("Egg"))
+                    if (!item.Value.ObjectId.Contains("Skin"))
+                        if (!item.Value.ObjectId.Contains("Cloth"))
+                            if (!item.Value.ObjectId.Contains("Dye"))
+                                if (!item.Value.ObjectId.Contains("Tincture"))
+                                    if (!item.Value.ObjectId.Contains("Effusion"))
+                                        if (!item.Value.ObjectId.Contains("Elixir"))
+                                            if (!item.Value.ObjectId.Contains("Tarot"))
+                                                if (!item.Value.ObjectId.Contains("Gunball"))
+                                                    if (item.Value.Tier == -1 || item.Value.Tier >= 4)
+                                                        if (item.Value.Treasure == false)
+                                                            using (var db = new Database())
+                                                            {
+                                                                if (db.GetMarketInfo(item.Value.ObjectType, 1) != 0)
+                                                                {
+                                                                    Prices.Add(item.Value.ObjectType,
+                                                                        new Tuple<int, CurrencyType>(
+                                                                            item.Value.ObjectType,
+                                                                            CurrencyType.Fame));
+                                                                    zyList.Add(item.Value.ObjectType);
+                                                                    if (CheckConfig.IsDebugOn())
+                                                                        Log.Info("Loading: " + item.Value.ObjectId);
+                                                                }
+                                                            }
+            ZyList = zyList.ToArray();
+            if (CheckConfig.IsDebugOn())
+                Log.Info("Merchat lists Reloaded.");
+        }
     }
 }

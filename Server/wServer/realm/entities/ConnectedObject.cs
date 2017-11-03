@@ -42,9 +42,9 @@ namespace wServer.realm.entities
         }
 
 
-        public ConnectionType Type { get; private set; }
-        public int Rotation { get; private set; }
-        public uint Bits { get; private set; }
+        public ConnectionType Type { get; }
+        public int Rotation { get; }
+        public uint Bits { get; }
 
         private static void Build(uint bits, ConnectionType type)
         {

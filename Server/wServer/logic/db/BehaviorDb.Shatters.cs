@@ -77,15 +77,28 @@ namespace wServer.logic
                         )
                     )
             )
+                .Init("shtrs Soul Spawner",
+                    new State(
+                        new EntitiesNotExistsTransition(999, "die", "shtrs the forgotten king", "shtrs the cursed crown"),
+                        new State("waitforsomethingcool"),
+                        new State("somethingcool",
+                            new Spawn("shtrs Lava Souls", initialSpawn: 4),
+                            new TimedTransition(5000, "somethingcool")
+                            ),
+                        new State("die",
+                            new Suicide()
+                        )
+                    )
+                )
         .Init("shtrs Lava Souls",
                 new State(
                     new State("active",
-                        new Follow(.7, range: 0),
+                        new Follow(.7, range: 0, acquireRange: 100),
                         new PlayerWithinTransition(2, "blink")
                     ),
                     new State("blink",
                         new Flash(0xfFF0000, flashRepeats: 10000, flashPeriod: 0.1),
-                        new TimedTransition(2000, "explode")
+                        new TimedTransition(1500, "explode")
                     ),
                     new State("explode",
                         new Flash(0xfFF0000, flashRepeats: 5, flashPeriod: 0.1),
@@ -1317,7 +1330,7 @@ namespace wServer.logic
             .Init("shtrs Wooden Gate",
                 new State(
                     new State("Idle",
-                        new EntityNotExistsTransition("shtrs Abandoned Switch 1", 10, "Despawn")
+                        new EntityNotExistsTransition("shtrs Abandoned Switch 1", 100, "Despawn")
                         ),
                     new State("Despawn",
                         new Decay(0)
@@ -1729,6 +1742,7 @@ namespace wServer.logic
                             new TimedTransition(1800, "God")
                             ),
                         new State("God",
+                            new Order(999,"shtrs soul spawner", "somethingcool"),
                             new Taunt("YOU TEST THE PATIENCE OF A GOD"),
                             new ConditionalEffect(ConditionEffectIndex.Invincible),
                             new Shoot(15, 1, projectileIndex: 1, fixedAngle: 85, coolDown: 500),
@@ -1870,7 +1884,7 @@ namespace wServer.logic
                             new TimedTransition(10800, "Hahaha")
                             ),
                         new State("Hahaha",
-                            new Taunt("Ha....Haaaa...haaaa"),
+                            new Taunt(true, "Ha....Haaaa...haaaa"),
                             new TimedTransition(4000, "God")
                             ),
                         new State("Death",
@@ -1968,7 +1982,7 @@ namespace wServer.logic
                         new TimedTransition(7000, "ThrowPortal")
                         ),
                     new State("ThrowPortal",
-                        new TossObject("shtrs Fire Portal", 5, coolDown: 8000),
+                        new TossObject("shtrs Ice Portal", 5, coolDown: 8000),
                         new TimedTransition(25, "orbit")
                         )
                     )

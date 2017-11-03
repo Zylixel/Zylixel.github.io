@@ -15,9 +15,9 @@ namespace wServer.realm.setpieces
         private static readonly string TileDark = "Castle Stone Floor Tile Dark";
         private static readonly string Stone = "Cracked Purple Stone";
         private static readonly string PillarA = "Blue Pillar";
-        private static readonly string PillarB = "Broken Blue Pillar";
+        private const string PillarB = "Broken Blue Pillar";
 
-        private readonly Random rand = new Random();
+        private readonly Random _rand = new Random();
 
         public int Size => 33;
 
@@ -28,8 +28,8 @@ namespace wServer.realm.setpieces
             for (int x = 0; x < 33; x++) //Grassing
                 for (int y = 0; y < 33; y++)
                 {
-                    if (Math.Abs(x - Size/2)/(Size/2.0) + rand.NextDouble()*0.3 < 0.95 &&
-                        Math.Abs(y - Size/2)/(Size/2.0) + rand.NextDouble()*0.3 < 0.95)
+                    if (Math.Abs(x - Size/2)/(Size/2.0) + _rand.NextDouble()*0.3 < 0.95 &&
+                        Math.Abs(y - Size/2)/(Size/2.0) + _rand.NextDouble()*0.3 < 0.95)
                         t[x, y] = 1;
                 }
 
@@ -59,10 +59,10 @@ namespace wServer.realm.setpieces
 
             for (int i = 0; i < 4; i++) //Pillars
             {
-                t[13, 7] = rand.Next()%3 == 0 ? 6 : 5;
-                t[19, 7] = rand.Next()%3 == 0 ? 6 : 5;
-                t[13, 10] = rand.Next()%3 == 0 ? 6 : 5;
-                t[19, 10] = rand.Next()%3 == 0 ? 6 : 5;
+                t[13, 7] = _rand.Next()%3 == 0 ? 6 : 5;
+                t[19, 7] = _rand.Next()%3 == 0 ? 6 : 5;
+                t[13, 10] = _rand.Next()%3 == 0 ? 6 : 5;
+                t[19, 10] = _rand.Next()%3 == 0 ? 6 : 5;
                 t = SetPieces.rotateCW(t);
             }
 

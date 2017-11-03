@@ -40,13 +40,13 @@ namespace wServer.realm.entities
                     ThirdPetLevel = new PetLevel(AbilityType.Third,
                         Utils.GetEnumByName<Ability>(Utils.GetEnumName<Ability>(petData.Abilities[2].Type)),
                         petData.Abilities[2].Points, petData.Abilities[2].Power, this);
-
+                    if (playerOwner != null)
                     {
                         using (Database db = new Database())
-                        {
                             Size = db.GetPetSize(Convert.ToInt32(PlayerOwner.AccountId), petData.InstanceId);
-                        }
                     }
+                    else
+                        Size = 0;
 
                     if (Size == 0)
                         Size = manager.GameData.TypeToPet[(ushort)petData.Type].Size;
@@ -76,16 +76,16 @@ namespace wServer.realm.entities
 
         public bool UpdateNeeded { get; set; }
 
-        public PetItem Info { get; private set; }
-        public PetLevel FirstPetLevel { get; private set; }
-        public PetLevel SecondPetLevel { get; private set; }
-        public PetLevel ThirdPetLevel { get; private set; }
+        public PetItem Info { get; }
+        public PetLevel FirstPetLevel { get; }
+        public PetLevel SecondPetLevel { get; }
+        public PetLevel ThirdPetLevel { get; }
         public Player PlayerOwner { get; set; }
 
         public Position SpawnPoint => spawn ?? new Position(X, Y);
 
         public Rarity PetRarity { get; private set; }
-        public Family PetFamily { get; private set; }
+        public Family PetFamily { get; }
         public PetLevel PetSkinName { get; private set; }
 
         public void Feed(IFeedable petFoodNOMNOMNOM)
@@ -116,17 +116,6 @@ namespace wServer.realm.entities
                 Tiles = new UpdatePacket.TileData[0],
                 NewObjects = new ObjectDef[1] { ToDefinition() },
                 RemovedObjectIds = new int[0]
-            });
-        }
-
-        public void PetSkinUpdate(Player player)
-        {
-            player.SendInfo("Attemping to contact database...");
-            Manager.Database.DoActionAsync(db =>
-            {
-                var cmd = db.CreateQuery();
-                cmd.CommandText = "Update pets SET skinName=Now WHERE accId=@accId;";
-                cmd.Parameters.AddWithValue("@accId", Owner.Players.ToArray()[0].Value.AccountId);
             });
         }
 

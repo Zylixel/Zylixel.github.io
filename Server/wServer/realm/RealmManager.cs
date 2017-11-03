@@ -16,6 +16,7 @@ using wServer.realm.commands;
 using wServer.realm.entities.merchant;
 using wServer.realm.entities.player;
 using wServer.realm.worlds;
+using CheckConfig = wServer.logic.CheckConfig;
 
 #endregion
 
@@ -43,29 +44,24 @@ namespace wServer.realm
 
     public class RealmManager
     {
+        public const int MAX_REALM_PLAYERS = 20;
+
         public static List<string> Realms = new List<string>(44)
         {
             "Zylixel's Realm"
         };
+
         public static List<string> CurrentRealmNames = new List<string>();
-        public const int MAX_REALM_PLAYERS = 20;
 
         private static readonly ILog log = LogManager.GetLogger(typeof(RealmManager));
-
-        public ConcurrentDictionary<string, Client> Clients { get; private set; }
-        public ConcurrentDictionary<int, World> Worlds { get; private set; }
-        public ConcurrentDictionary<string, GuildHall> GuildHalls { get; private set; }
-        public ConcurrentDictionary<string, World> LastWorld { get; private set; }
-
-        private ConcurrentDictionary<string, Vault> vaults;
-
-        public Random Random { get; }
 
         private Thread logic;
         private Thread network;
         private int nextClientId;
 
         private int nextWorldId;
+
+        private readonly ConcurrentDictionary<string, Vault> vaults;
 
         public RealmManager(int maxClients, int tps)
         {
@@ -79,6 +75,13 @@ namespace wServer.realm
             Random = new Random();
         }
 
+        public ConcurrentDictionary<string, Client> Clients { get; }
+        public ConcurrentDictionary<int, World> Worlds { get; }
+        public ConcurrentDictionary<string, GuildHall> GuildHalls { get; }
+        public ConcurrentDictionary<string, World> LastWorld { get; }
+
+        public Random Random { get; }
+
         public BehaviorDb Behaviors { get; private set; }
 
         public ChatManager Chat { get; private set; }
@@ -91,7 +94,7 @@ namespace wServer.realm
 
         public LogicTicker Logic { get; private set; }
 
-        public int MaxClients { get; private set; }
+        public int MaxClients { get; }
 
         public RealmPortalMonitor Monitor { get; private set; }
 
@@ -100,7 +103,7 @@ namespace wServer.realm
 
         public bool Terminating { get; private set; }
 
-        public int TPS { get; private set; }
+        public int TPS { get; }
 
         //public Database Database { get; private set; }
 
@@ -112,6 +115,11 @@ namespace wServer.realm
             Worlds[id] = world;
             OnWorldAdded(world);
             return world;
+        }
+
+        public XmlData GetData()
+        {
+            return GameData;
         }
 
         public World AddWorld(World world)
@@ -135,7 +143,8 @@ namespace wServer.realm
             Client dummy;
             client.Disconnect();
             await client.Save();
-            while (!Clients.TryRemove(client.Account.AccountId, out dummy) && Clients.ContainsKey(client.Account.AccountId));
+            while (!Clients.TryRemove(client.Account.AccountId, out dummy) &&
+                   Clients.ContainsKey(client.Account.AccountId)) ;
             client.Dispose();
         }
 
@@ -143,18 +152,17 @@ namespace wServer.realm
         {
             if (name.Split(' ').Length > 1)
                 name = name.Split(' ')[1];
-
             return (from i in Worlds
-                    where i.Key != 0
-                    from e in i.Value.Players
-                    where String.Equals(e.Value.Client.Account.Name, name, StringComparison.CurrentCultureIgnoreCase)
-                    select e.Value).FirstOrDefault();
+                where i.Key != 0
+                from e in i.Value.Players
+                where string.Equals(e.Value.Client.Account.Name, name, StringComparison.CurrentCultureIgnoreCase)
+                select e.Value).FirstOrDefault();
         }
 
         public Player FindPlayerRough(string name)
         {
             Player dummy;
-            foreach (KeyValuePair<int, World> i in Worlds)
+            foreach (var i in Worlds)
                 if (i.Key != 0)
                     if ((dummy = i.Value.GetUniqueNamedPlayerRough(name)) != null)
                         return dummy;
@@ -176,34 +184,30 @@ namespace wServer.realm
 
         public void Initialize()
         {
-            if (wServer.logic.CheckConfig.IsDebugOn())
+            if (CheckConfig.IsDebugOn())
                 log.Info("Initializing Realm Manager...");
-
             GameData = new XmlData();
             Behaviors = new BehaviorDb(this);
             GeneratorCache.Init();
             MerchantLists.InitMerchatLists(GameData);
-
             AddWorld(World.NEXUS_ID, Worlds[0] = new Nexus());
             AddWorld(World.MARKET, new ClothBazaar());
             AddWorld(World.TUT_ID, new Tutorial(true));
             AddWorld(World.FMARKET, new Market());
             Monitor = new RealmPortalMonitor(this);
-
-            Task.Factory.StartNew(() => GameWorld.AutoName(1, true)).ContinueWith(_ => AddWorld(_.Result), TaskScheduler.Default);
-
+            Task.Factory.StartNew(() => GameWorld.AutoName(1, true))
+                .ContinueWith(_ => AddWorld(_.Result), TaskScheduler.Default);
             Chat = new ChatManager(this);
             Commands = new CommandManager(this);
-
-            if (wServer.logic.CheckConfig.IsDebugOn())
+            if (CheckConfig.IsDebugOn())
                 log.Info("Realm Manager initialized.");
         }
 
         public Vault PlayerVault(Client processor)
         {
             Vault v;
-            if(!vaults.TryGetValue(processor.Account.AccountId, out v))
-                vaults.TryAdd(processor.Account.AccountId, v = (Vault)AddWorld(new Vault(false, processor)));
+            if (!vaults.TryGetValue(processor.Account.AccountId, out v))
+                vaults.TryAdd(processor.Account.AccountId, v = (Vault) AddWorld(new Vault(false, processor)));
             else
                 v.Reload(processor);
             return v;
@@ -229,7 +233,9 @@ namespace wServer.realm
                     GC.Collect();
                 }
                 catch (Exception e)
-                { log.Fatal(e); }
+                {
+                    log.Fatal(e);
+                }
                 return true;
             }
             return false;
@@ -237,9 +243,8 @@ namespace wServer.realm
 
         public void Run()
         {
-            if (wServer.logic.CheckConfig.IsDebugOn())
+            if (CheckConfig.IsDebugOn())
                 log.Info("Starting Realm Manager...");
-
             Network = new NetworkTicker(this);
             Logic = new LogicTicker(this);
             Database = new DatabaseTicker();
@@ -256,39 +261,37 @@ namespace wServer.realm
             //Start logic loop first
             logic.Start();
             network.Start();
-
-            if (wServer.logic.CheckConfig.IsDebugOn())
+            if (CheckConfig.IsDebugOn())
                 log.Info("Realm Manager started.");
         }
 
         public void Stop()
         {
-            if (wServer.logic.CheckConfig.IsDebugOn())
+            if (CheckConfig.IsDebugOn())
                 log.Info("Stopping Realm Manager...");
-
             Terminating = true;
-            List<Client> saveAccountUnlock = new List<Client>();
-            foreach (Client c in Clients.Values)
+            var saveAccountUnlock = new List<Client>();
+            foreach (var c in Clients.Values)
             {
                 saveAccountUnlock.Add(c);
                 c.Disconnect();
             }
             //To prevent a buggy Account in use.
-            using(var db = new Database())
-                foreach (Client c in saveAccountUnlock)
+            using (var db = new Database())
+            {
+                foreach (var c in saveAccountUnlock)
                     db.UnlockAccount(c.Account);
-
+            }
             GameData.Dispose();
             logic.Join();
             network.Join();
-
-            if (wServer.logic.CheckConfig.IsDebugOn())
+            if (CheckConfig.IsDebugOn())
                 log.Info("Realm Manager stopped.");
         }
 
         public bool TryConnect(Client psr)
         {
-            Account acc = psr.Account;
+            var acc = psr.Account;
             if (Clients.Count >= MaxClients)
                 return false;
             if (acc.Banned)
@@ -298,17 +301,17 @@ namespace wServer.realm
             if (Clients.ContainsKey(acc.AccountId))
                 if (!Clients[acc.AccountId].Socket.Connected)
                     Clients.TryRemove(acc.AccountId, out dummy);
-            bool ret = Clients.TryAdd(psr.Account.AccountId, psr);
+            var ret = Clients.TryAdd(psr.Account.AccountId, psr);
             return ret;
         }
 
         private void OnWorldAdded(World world)
         {
-            if(world.Manager == null)
+            if (world.Manager == null)
                 world.Manager = this;
             if (world is GameWorld)
                 Monitor.WorldAdded(world);
-            if (wServer.logic.CheckConfig.IsDebugOn())
+            if (CheckConfig.IsDebugOn())
                 log.InfoFormat("World {0}({1}) added.", world.Id, world.Name);
         }
 
@@ -317,7 +320,7 @@ namespace wServer.realm
             world.Manager = null;
             if (world is GameWorld)
                 Monitor.WorldRemoved(world);
-            if (wServer.logic.CheckConfig.IsDebugOn())
+            if (CheckConfig.IsDebugOn())
                 log.InfoFormat("World {0}({1}) removed.", world.Id, world.Name);
         }
     }
@@ -329,6 +332,6 @@ namespace wServer.realm
             Time = time;
         }
 
-        public RealmTime Time { get; private set; }
+        public RealmTime Time { get; }
     }
 }

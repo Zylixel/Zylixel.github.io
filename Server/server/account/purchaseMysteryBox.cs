@@ -14,8 +14,6 @@ namespace server.account
 {
     internal class purchaseMysteryBox : RequestHandler
     {
-        //Thanks to Liinkii for purchasing me a MysteryBox
-        //<Success><Awards>ITEM ID</Awards><Gold>GOLD LEFT</Gold></Success>
         private Random rand;
 
         protected override void HandleRequest()
@@ -85,29 +83,55 @@ namespace server.account
                         }
                     }
 
-                    MysteryBoxResult res = new MysteryBoxResult
+
+                    if (rand.Next(1, 100) <= box.JackpotOdds)
+                    { //jackpot
+                        MysteryBoxResult res = new MysteryBoxResult{Awards = Utils.GetCommaSepString(GetAwards(box.Jackpot))};
+
+                        if (box.Sale != null && DateTime.UtcNow <= box.Sale.SaleEnd)
+                            res.GoldLeft = box.Sale.Currency == 0
+                                ? db.UpdateCredit(acc, -box.Sale.Price)
+                                : db.UpdateFame(acc, -box.Sale.Price);
+                        else
+                            res.GoldLeft = box.Price.Currency == 0
+                                ? db.UpdateCredit(acc, -box.Price.Amount)
+                                : db.UpdateFame(acc, -box.Price.Amount);
+
+                        if (box.Sale != null && DateTime.UtcNow <= box.Sale.SaleEnd)
+                            res.Currency = box.Sale.Currency;
+                        else
+                            res.Currency = box.Price.Currency;
+
+                        sendMysteryBoxResult(Context.Response.OutputStream, res);
+
+                        int[] gifts = Utils.FromCommaSepString32(res.Awards);
+                        foreach (int item in gifts)
+                            acc.Gifts.Add(item);
+                    }
+                    else
                     {
-                        Awards = Utils.GetCommaSepString(GetAwards(box.Contents))
-                    };
-                    if (box.Sale != null && DateTime.UtcNow <= box.Sale.SaleEnd)
-                        res.GoldLeft = box.Sale.Currency == 0
-                            ? db.UpdateCredit(acc, -box.Sale.Price)
-                            : db.UpdateFame(acc, -box.Sale.Price);
-                    else
-                        res.GoldLeft = box.Price.Currency == 0
-                            ? db.UpdateCredit(acc, -box.Price.Amount)
-                            : db.UpdateFame(acc, -box.Price.Amount);
+                        MysteryBoxResult res = new MysteryBoxResult { Awards = Utils.GetCommaSepString(GetAwards(box.Contents)) };
 
-                    if (box.Sale != null && DateTime.UtcNow <= box.Sale.SaleEnd)
-                        res.Currency = box.Sale.Currency;
-                    else
-                        res.Currency = box.Price.Currency;
+                        if (box.Sale != null && DateTime.UtcNow <= box.Sale.SaleEnd)
+                            res.GoldLeft = box.Sale.Currency == 0
+                                ? db.UpdateCredit(acc, -box.Sale.Price)
+                                : db.UpdateFame(acc, -box.Sale.Price);
+                        else
+                            res.GoldLeft = box.Price.Currency == 0
+                                ? db.UpdateCredit(acc, -box.Price.Amount)
+                                : db.UpdateFame(acc, -box.Price.Amount);
 
-                    sendMysteryBoxResult(Context.Response.OutputStream, res);
+                        if (box.Sale != null && DateTime.UtcNow <= box.Sale.SaleEnd)
+                            res.Currency = box.Sale.Currency;
+                        else
+                            res.Currency = box.Price.Currency;
 
-                    int[] gifts = Utils.FromCommaSepString32(res.Awards);
-                    foreach (int item in gifts)
-                        acc.Gifts.Add(item);
+                        sendMysteryBoxResult(Context.Response.OutputStream, res);
+
+                        int[] gifts = Utils.FromCommaSepString32(res.Awards);
+                        foreach (int item in gifts)
+                            acc.Gifts.Add(item);
+                    }
 
                     MySqlCommand cmd = db.CreateQuery();
                     cmd.CommandText =
@@ -127,7 +151,7 @@ namespace server.account
         {
             int[] ret = new int[items.Split(';').Length];
             for (int i = 0; i < ret.Length; i++)
-                ret[i] = Utils.FromString(items.Split(';')[0].Split(',')[rand.Next(items.Split(';')[0].Split(',').Length)]);
+                ret[i] = Utils.FromString(items.Split(';')[i].Split(',')[rand.Next(items.Split(';')[i].Split(',').Length)]);
             return ret.ToArray();
         }
 

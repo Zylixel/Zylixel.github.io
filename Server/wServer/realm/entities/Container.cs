@@ -44,7 +44,7 @@ namespace wServer.realm.entities
         }
 
         public string[] BagOwners { get; set; }
-        public int[] SlotTypes { get; private set; }
+        public int[] SlotTypes { get; }
         public Item[] Inventory { get; set; }
         public bool BoostedBag { get; set; }
 

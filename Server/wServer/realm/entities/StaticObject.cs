@@ -26,11 +26,11 @@ namespace wServer.realm.entities
             Hittestable = hittestable;
         }
 
-        public bool Vulnerable { get; private set; }
-        public bool Static { get; private set; }
-        public bool Hittestable { get; private set; }
+        public bool Vulnerable { get; }
+        public bool Static { get; }
+        public bool Hittestable { get; }
         public int HP { get; set; }
-        public bool Dying { get; private set; }
+        public bool Dying { get; }
 
         public static bool GetStatic(XElement elem)
         {
