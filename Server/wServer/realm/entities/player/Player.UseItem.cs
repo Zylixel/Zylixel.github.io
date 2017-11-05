@@ -3,7 +3,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using db;
 using db.data;
 using wServer.networking;
 using wServer.networking.cliPackets;
@@ -920,7 +919,7 @@ namespace wServer.realm.entities.player
                                 }
                                 catch (Exception ex)
                                 {
-                                    Log.ErrorFormat("Couldn't despawn portal.\n{0}", ex);
+                                    Log.ErrorFormat($"Couldn't despawn portal.\n{ex}");
                                 }
                             }));
                     }

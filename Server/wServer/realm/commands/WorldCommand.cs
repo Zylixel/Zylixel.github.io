@@ -8,6 +8,7 @@ using wServer.networking.cliPackets;
 using wServer.networking.svrPackets;
 using wServer.realm.entities;
 using wServer.realm.entities.player;
+using wServer.realm.worlds;
 
 #endregion
 
@@ -43,7 +44,7 @@ namespace wServer.realm.commands
 
         protected override bool Process(Player player, RealmTime time, string[] args)
         {
-            if(String.IsNullOrWhiteSpace(args[0]))
+            if(string.IsNullOrWhiteSpace(args[0]))
             {
                 player.SendInfo("Usage: /trade <player name>");
                 return false;
@@ -160,7 +161,7 @@ namespace wServer.realm.commands
                         return true;
                     }
                 }
-                player.SendInfo(string.Format("Cannot teleport, {0} not found!", args[0].Trim()));
+                player.SendInfo($"Cannot teleport, {args[0].Trim()} not found!");
             }
             catch
             {
@@ -190,7 +191,7 @@ namespace wServer.realm.commands
             string playername = args[0].Trim();
             string msg = string.Join(" ", args, 1, args.Length - 1);
 
-            if (String.Equals(player.Name.ToLower(), playername.ToLower()))
+            if (string.Equals(player.Name.ToLower(), playername.ToLower()))
             {
                 player.SendInfo("Quit telling yourself!");
                 return false;
@@ -315,7 +316,7 @@ namespace wServer.realm.commands
                     return true;
                 }
             }
-            player.SendError(string.Format("{0} not found.", playername));
+            player.SendError($"{playername} not found.");
             return false;
         }
     }
@@ -348,14 +349,51 @@ namespace wServer.realm.commands
 
         protected override bool Process(Player player, RealmTime time, string[] args)
         {
+            log.Error("Trying to connect to: " + RealmManager.CurrentWorldId);
             player.Client.Reconnect(new ReconnectPacket
             {
                 Host = "",
                 Port = 2050,
-                GameId = World.RAND_REALM,
+                GameId = RealmManager.CurrentWorldId,
                 Name = "Zy's Realm",
                 Key = Empty<byte>.Array
             });
+            return true;
+        }
+    }
+    internal class Godland : Command
+    {
+        public Godland()
+            : base("gland")
+        {
+        }
+
+        protected override bool Process(Player player, RealmTime time, string[] args)
+        {
+            if (!(player.Owner is GameWorld))
+            {
+                player.SendError("That command can't be used here!");
+                return false;
+            }
+            player.Move(1000 + 0.5f, 1000 + 0.5f);
+            if (player.Pet != null)
+                player.Pet.Move(1000 + 0.5f, 1000 + 0.5f);
+            player.UpdateCount++;
+            player.ApplyConditionEffect(new ConditionEffect
+            {
+                Effect = ConditionEffectIndex.Invincible,
+                DurationMS = 2000
+            });
+            player.Owner.BroadcastPacket(new GotoPacket
+            {
+                ObjectId = player.Id,
+                Position = new Position
+                {
+                    X = player.X,
+                    Y = player.Y
+                }
+            }, null);
+            player.SendInfo("Success!");
             return true;
         }
     }

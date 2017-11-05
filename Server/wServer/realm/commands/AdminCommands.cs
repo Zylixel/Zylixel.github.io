@@ -210,7 +210,7 @@ namespace wServer.realm.commands
     internal class GiveCommand : Command
     {
         public GiveCommand()
-            : base("give", 2)
+            : base("give", 0) //Todo Fix this
         {
         }
 
@@ -221,11 +221,22 @@ namespace wServer.realm.commands
                 player.SendHelp("Usage: /give <Itemname>");
                 return false;
             }
+
             string name = string.Join(" ", args.ToArray()).Trim();
             ushort objType;
+
+
+            if (player.Client.Account.Rank < 2)
+                if (name != "Death Arena Key" || name != "Marble Seal")
+                {
+                    player.SendHelp("No Permission!");
+                    return false;
+                }
+
             //creates a new case insensitive dictionary based on the XmlDatas
-            Dictionary<string, ushort> icdatas = new Dictionary<string, ushort>(player.Manager.GameData.IdToObjectType,
+                Dictionary<string, ushort> icdatas = new Dictionary<string, ushort>(player.Manager.GameData.IdToObjectType,
                 StringComparer.OrdinalIgnoreCase);
+
             if (!icdatas.TryGetValue(name, out objType))
             {
                 player.SendError("Unknown type!");
@@ -629,7 +640,7 @@ namespace wServer.realm.commands
     internal class PetSizeCommand : Command
     {
         public PetSizeCommand()
-            : base("PetSize", 3)
+            : base("PetSize", 2)
         {
         }
 
@@ -637,21 +648,37 @@ namespace wServer.realm.commands
         {
             try
             {
-                if (args.Length == 0)
+                if (args.Length < 2)
                 {
-                    player.SendHelp("Use /petsize <Pet Size>");
+                    player.SendHelp("Use /petsize <Player> <Pet Size>");
                     return false;
                 }
-                if (args.Length == 1)
+                if (Convert.ToInt32(args[1]) <= 0)
                 {
-                    player.Pet.Size = int.Parse(args[0]);
-                    player.UpdateCount++;
-                    player.SendInfo("Success!");
+                    player.SendHelp("Make sure your Pet Size is an integer above -1");
+                    return false;
+                }
+                foreach (Client i in player.Manager.Clients.Values)
+                {
+                    if (i.Account.Name.EqualsIgnoreCase(args[0]))
+                    {
+                        i.Player.Pet.Size = int.Parse(args[1]);
+                        i.Player.UpdateCount++;
+                        i.Player.SendInfo(player.Name + " changed your pets size to " + args[1]);
+                        player.SendInfo("Success!");
+                        using (Database db = new Database())
+                            db.UpdatePetSize(i.Player.Id, i.Player.Pet.PetId, Convert.ToInt32(args[1]));
+                        return true;
+                    }
+                }
+                {
+                    player.SendInfo("Cannot Find Account");
                 }
             }
-            catch
+            catch(Exception ex)
             {
                 player.SendError("Error!");
+                log.Error(ex);
                 return false;
             }
             return true;
@@ -1531,24 +1558,6 @@ namespace wServer.realm.commands
         }
     }
 
-    internal class KeeperCloseRealmCmd : Command
-    {
-        public KeeperCloseRealmCmd()
-            : base("Keepercloserealm", 3)
-        {
-        }
-        protected override bool Process(Player player, RealmTime time, string[] args)
-        {
-            if (player.Owner is GameWorld)
-            {
-                var gw = player.Owner as GameWorld;
-                gw.Overseer.KeeperCloseRealm();
-                return true;
-            }
-            return false;
-        }
-    }
-
     internal class ForceUp : Command
     {
         public ForceUp()
@@ -1570,24 +1579,18 @@ namespace wServer.realm.commands
         }
         protected override bool Process(Player player, RealmTime time, string[] args)
         {
-            using (Database db = new Database())
             {
-                if (args[0] == "")
+                player.SendError("Selling is currently Disabled");
+                return false;
+            }
+            using (var db = new Database())
+            {
+                if (args.Length < 2)
                 {
-                    player.SendHelp("Usage: /sell <slot> <price>");
+                    player.SendError("Usage: /sell <slot> <price>");
                     return false;
                 }
-                if (args[1] == "")
-                {
-                    player.SendHelp("Usage: /sell <slot> <price>");
-                    return false;
-                }
-                if (Convert.ToInt32(args[0]) > 8)
-                {
-                    player.SendError("Slot Number Invalid, please only choose items in slot 1-8");
-                    return false;
-                }
-                if (Convert.ToInt32(args[0]) < 1)
+                if (Convert.ToInt32(args[0]) > 8 || Convert.ToInt32(args[0]) < 1)
                 {
                     player.SendError("Slot Number Invalid, please only choose items in slot 1-8");
                     return false;

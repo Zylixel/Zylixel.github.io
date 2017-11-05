@@ -134,9 +134,7 @@ namespace wServer.realm.entities.merchant
                                                                 if (db.GetMarketInfo(item.Value.ObjectType, 1) > 0)
                                                                 {
                                                                     Prices.Add(item.Value.ObjectType,
-                                                                        new Tuple<int, CurrencyType>(
-                                                                            item.Value.ObjectType,
-                                                                            CurrencyType.Fame));
+                                                                        new Tuple<int, CurrencyType>(item.Value.ObjectType, CurrencyType.Fame));
                                                                     zyList.Add(item.Value.ObjectType);
                                                                     if (CheckConfig.IsDebugOn())
                                                                         Log.Info("Loading: " + item.Value.ObjectId);

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Xml.Linq;
+// ReSharper disable PossibleNullReferenceException
 
 #endregion
 
@@ -45,7 +46,7 @@ public enum Ability : uint
     MagicHeal = 408,
     Savage = 409,
     Decoy = 410,
-    RisingFury = 411,
+    RisingFury = 411
 }
 
 [Flags]
@@ -82,22 +83,22 @@ public enum ConditionEffects : ulong
     NinjaSpeedy = 1 << 28,
     Unstable = 1 << 29,
     Darkness = 1 << 30,
-    SlowedImmune = (ulong)1 << 31,
-    DazedImmune = (ulong)1 << 32,
-    ParalyzeImmune = (ulong)1 << 33,
-    Petrify = (ulong)1 << 34,
-    PetrifyImmune = (ulong)1 << 35,
-    PetDisable = (ulong)1 << 36,
-    Curse = (ulong)1 << 37,
-    CurseImmune = (ulong)1 << 38,
-    HPBoost = (ulong)1 << 39,
-    MPBoost = (ulong)1 << 40,
-    AttBoost = (ulong)1 << 41,
-    DefBoost = (ulong)1 << 42,
-    SpdBoost = (ulong)1 << 43,
-    VitBoost = (ulong)1 << 44,
-    WisBoost = (ulong)1 << 45,
-    DexBoost = (ulong)1 << 46,
+    SlowedImmune = (ulong) 1 << 31,
+    DazedImmune = (ulong) 1 << 32,
+    ParalyzeImmune = (ulong) 1 << 33,
+    Petrify = (ulong) 1 << 34,
+    PetrifyImmune = (ulong) 1 << 35,
+    PetDisable = (ulong) 1 << 36,
+    Curse = (ulong) 1 << 37,
+    CurseImmune = (ulong) 1 << 38,
+    HPBoost = (ulong) 1 << 39,
+    MPBoost = (ulong) 1 << 40,
+    AttBoost = (ulong) 1 << 41,
+    DefBoost = (ulong) 1 << 42,
+    SpdBoost = (ulong) 1 << 43,
+    VitBoost = (ulong) 1 << 44,
+    WisBoost = (ulong) 1 << 45,
+    DexBoost = (ulong) 1 << 46,
     TimeFreeze = 1 << 47
 }
 
@@ -162,23 +163,24 @@ public class PetStruct
         if (elem.Element("Family").Value == "? ? ? ?")
             PetFamily = Family.Unknown;
         else
-            PetFamily = (Family)Enum.Parse(typeof(Family), elem.Element("Family").Value);
-        PetRarity = (Rarity)Enum.Parse(typeof(Rarity), elem.Element("Rarity").Value);
-        if(elem.Element("FirstAbility") != null)
-            FirstAbility = (Ability)Enum.Parse(typeof(Ability), elem.Element("FirstAbility").Value.Replace(" ", String.Empty));
+            PetFamily = (Family) Enum.Parse(typeof(Family), elem.Element("Family").Value);
+        PetRarity = (Rarity) Enum.Parse(typeof(Rarity), elem.Element("Rarity").Value);
+        if (elem.Element("FirstAbility") != null)
+            FirstAbility = (Ability) Enum.Parse(typeof(Ability),
+                elem.Element("FirstAbility").Value.Replace(" ", string.Empty));
         DefaultSkin = elem.Element("DefaultSkin").Value;
         Size = int.Parse(elem.Element("Size").Value);
         DisplayId = elem.Element("DisplayId").Value;
     }
 
-    public string ObjectId { get; private set; }
-    public ushort ObjectType { get; private set; }
-    public string DisplayId { get; private set; }
-    public Family PetFamily { get; private set; }
-    public Rarity PetRarity { get; private set; }
-    public Ability? FirstAbility { get; private set; }
-    public string DefaultSkin { get; private set; }
-    public int Size { get; private set; }
+    public string ObjectId { get; }
+    public ushort ObjectType { get; }
+    public string DisplayId { get; }
+    public Family PetFamily { get; }
+    public Rarity PetRarity { get; }
+    public Ability? FirstAbility { get; }
+    public string DefaultSkin { get; }
+    public int Size { get; }
 }
 
 public class PetSkin
@@ -190,9 +192,9 @@ public class PetSkin
         DisplayId = elem.Element("DisplayId").Value;
     }
 
-    public string ObjectId { get; private set; }
-    public ushort ObjectType { get; private set; }
-    public string DisplayId { get; private set; }
+    public string ObjectId { get; }
+    public ushort ObjectType { get; }
+    public string DisplayId { get; }
 }
 
 public class ConditionEffect
@@ -203,14 +205,14 @@ public class ConditionEffect
 
     public ConditionEffect(XElement elem)
     {
-        CultureInfo ci = (CultureInfo) CultureInfo.CurrentCulture.Clone();
+        var ci = (CultureInfo) CultureInfo.CurrentCulture.Clone();
         ci.NumberFormat.CurrencyDecimalSeparator = ".";
-        Effect = (ConditionEffectIndex) Enum.Parse(typeof (ConditionEffectIndex), elem.Value.Replace(" ", ""));
+        Effect = (ConditionEffectIndex) Enum.Parse(typeof(ConditionEffectIndex), elem.Value.Replace(" ", ""));
         if (elem.Attribute("duration") != null)
-            DurationMS = (int) (float.Parse(elem.Attribute("duration").Value, NumberStyles.Any, ci)*1000);
+            DurationMS = (int) (float.Parse(elem.Attribute("duration").Value, NumberStyles.Any, ci) * 1000);
         if (elem.Attribute("range") != null)
             Range = float.Parse(elem.Attribute("range").Value, NumberStyles.Any, ci);
-        if(elem.Attribute("target") != null)
+        if (elem.Attribute("target") != null)
             Target = int.Parse(elem.Attribute("target").Value, NumberStyles.Any, ci);
     }
 
@@ -225,7 +227,7 @@ public class ProjectileDesc
 {
     public ProjectileDesc(XElement elem)
     {
-        CultureInfo ci = (CultureInfo) CultureInfo.CurrentCulture.Clone();
+        var ci = (CultureInfo) CultureInfo.CurrentCulture.Clone();
         ci.NumberFormat.CurrencyDecimalSeparator = ".";
         XElement n;
         if (elem.Attribute("id") != null)
@@ -235,18 +237,17 @@ public class ProjectileDesc
         Speed = float.Parse(elem.Element("Speed").Value, NumberStyles.Any, ci);
         if ((n = elem.Element("Size")) != null)
             Size = Utils.FromString(n.Value);
-
-        XElement dmg = elem.Element("Damage");
+        var dmg = elem.Element("Damage");
         if (dmg != null)
+        {
             MinDamage = MaxDamage = Utils.FromString(dmg.Value);
+        }
         else
         {
             MinDamage = Utils.FromString(elem.Element("MinDamage").Value);
             MaxDamage = Utils.FromString(elem.Element("MaxDamage").Value);
         }
-
         Effects = elem.Elements("ConditionEffect").Select(i => new ConditionEffect(i)).ToArray();
-
         MultiHit = elem.Element("MultiHit") != null;
         PassesCover = elem.Element("PassesCover") != null;
         ArmorPiercing = elem.Element("ArmorPiercing") != null;
@@ -254,36 +255,35 @@ public class ProjectileDesc
         Wavy = elem.Element("Wavy") != null;
         Parametric = elem.Element("Parametric") != null;
         Boomerang = elem.Element("Boomerang") != null;
-
         n = elem.Element("Amplitude");
         Amplitude = n != null ? float.Parse(n.Value, NumberStyles.Any, ci) : 0;
         n = elem.Element("Frequency");
         Frequency = n != null ? float.Parse(n.Value, NumberStyles.Any, ci) : 1;
         n = elem.Element("Magnitude");
-        Magnitude = n != null ? float.Parse(n.Value, NumberStyles.Any, ci) : 3; 
+        Magnitude = n != null ? float.Parse(n.Value, NumberStyles.Any, ci) : 3;
     }
 
-    public int BulletType { get; private set; }
-    public string ObjectId { get; private set; }
-    public int LifetimeMS { get; private set; }
-    public float Speed { get; private set; }
-    public int Size { get; private set; }
-    public int MinDamage { get; private set; }
-    public int MaxDamage { get; private set; }
+    public int BulletType { get; }
+    public string ObjectId { get; }
+    public int LifetimeMS { get; }
+    public float Speed { get; }
+    public int Size { get; }
+    public int MinDamage { get; }
+    public int MaxDamage { get; }
 
-    public ConditionEffect[] Effects { get; private set; }
+    public ConditionEffect[] Effects { get; }
 
-    public bool MultiHit { get; private set; }
-    public bool PassesCover { get; private set; }
-    public bool ArmorPiercing { get; private set; }
-    public bool ParticleTrail { get; private set; }
-    public bool Wavy { get; private set; }
-    public bool Parametric { get; private set; }
-    public bool Boomerang { get; private set; }
+    public bool MultiHit { get; }
+    public bool PassesCover { get; }
+    public bool ArmorPiercing { get; }
+    public bool ParticleTrail { get; }
+    public bool Wavy { get; }
+    public bool Parametric { get; }
+    public bool Boomerang { get; }
 
-    public float Amplitude { get; private set; }
-    public float Frequency { get; private set; }
-    public float Magnitude { get; private set; }
+    public float Amplitude { get; }
+    public float Frequency { get; }
+    public float Magnitude { get; }
 }
 
 public enum ActivateEffects
@@ -332,69 +332,54 @@ public class ActivateEffect
 {
     public ActivateEffect(XElement elem)
     {
-        CultureInfo ci = (CultureInfo) CultureInfo.CurrentCulture.Clone();
+        var ci = (CultureInfo) CultureInfo.CurrentCulture.Clone();
         ci.NumberFormat.CurrencyDecimalSeparator = ".";
-        Effect = (ActivateEffects) Enum.Parse(typeof (ActivateEffects), elem.Value);
+        Effect = (ActivateEffects) Enum.Parse(typeof(ActivateEffects), elem.Value);
         if (elem.Attribute("stat") != null)
             Stats = Utils.FromString(elem.Attribute("stat").Value);
-
         if (elem.Attribute("amount") != null)
             Amount = Utils.FromString(elem.Attribute("amount").Value);
-
         if (elem.Attribute("range") != null)
             Range = float.Parse(elem.Attribute("range").Value, NumberStyles.Any, ci);
         if (elem.Attribute("duration") != null)
         {
             DurationSec = float.Parse(elem.Attribute("duration").Value, NumberStyles.Any, ci);
-            DurationMS = (int)(DurationSec * 1000);
+            DurationMS = (int) (DurationSec * 1000);
         }
         if (elem.Attribute("duration2") != null)
-            DurationMS2 = (int) (float.Parse(elem.Attribute("duration2").Value, NumberStyles.Any, ci)*1000);
+            DurationMS2 = (int) (float.Parse(elem.Attribute("duration2").Value, NumberStyles.Any, ci) * 1000);
         if (elem.Attribute("effect") != null)
             ConditionEffect =
-                (ConditionEffectIndex) Enum.Parse(typeof (ConditionEffectIndex), elem.Attribute("effect").Value);
+                (ConditionEffectIndex) Enum.Parse(typeof(ConditionEffectIndex), elem.Attribute("effect").Value);
         if (elem.Attribute("condEffect") != null)
             ConditionEffect =
-                (ConditionEffectIndex) Enum.Parse(typeof (ConditionEffectIndex), elem.Attribute("condEffect").Value);
+                (ConditionEffectIndex) Enum.Parse(typeof(ConditionEffectIndex), elem.Attribute("condEffect").Value);
         if (elem.Attribute("condDuration") != null)
             EffectDuration = float.Parse(elem.Attribute("condDuration").Value, NumberStyles.Any, ci);
-
         if (elem.Attribute("maxDistance") != null)
             MaximumDistance = Utils.FromString(elem.Attribute("maxDistance").Value);
-
         if (elem.Attribute("radius") != null)
             Radius = float.Parse(elem.Attribute("radius").Value, NumberStyles.Any, ci);
-
         if (elem.Attribute("totalDamage") != null)
             TotalDamage = Utils.FromString(elem.Attribute("totalDamage").Value);
-
         if (elem.Attribute("objectId") != null)
             ObjectId = elem.Attribute("objectId").Value;
-
         if (elem.Attribute("angleOffset") != null)
             AngleOffset = Utils.FromString(elem.Attribute("angleOffset").Value);
-
         if (elem.Attribute("maxTargets") != null)
             MaxTargets = Utils.FromString(elem.Attribute("maxTargets").Value);
-
         if (elem.Attribute("id") != null)
             Id = elem.Attribute("id").Value;
-
         if (elem.Attribute("dungeonName") != null)
             DungeonName = elem.Attribute("dungeonName").Value;
-
         if (elem.Attribute("skinType") != null)
             SkinType = int.Parse(elem.Attribute("skinType").Value);
-
         if (elem.Attribute("petType") != null)
             PetType = Utils.FromString(elem.Attribute("petType").Value);
-
         if (elem.Attribute("newSize") != null)
             newSize = Utils.FromString(elem.Attribute("newSize").Value);
-
         if (elem.Attribute("lockedName") != null)
             LockedName = elem.Attribute("lockedName").Value;
-
         if (elem.Attribute("color") != null)
             Color = uint.Parse(elem.Attribute("color").Value.Substring(2), NumberStyles.AllowHexSpecifier);
         if (elem.Attribute("target") != null)
@@ -404,71 +389,64 @@ public class ActivateEffect
             VisualEffect = float.Parse(elem.Attribute("visualEffect").Value, NumberStyles.Any, ci);
         if (elem.Attribute("center") != null)
             Center = elem.Attribute("center").Value;
-		noStack = elem.Attribute("noStack") != null;
+        noStack = elem.Attribute("noStack") != null;
         if (elem.Attribute("random") != null)
-        {
-            random = (int)float.Parse(elem.Attribute("random").Value, NumberStyles.Any, ci);
-        }
+            random = (int) float.Parse(elem.Attribute("random").Value, NumberStyles.Any, ci);
         if (elem.Attribute("treaureTier") != null)
             treaureTier = Utils.FromString(elem.Attribute("treaureTier").Value);
     }
 
-    public ActivateEffects Effect { get; private set; }
-    public int Stats { get; private set; }
-    public int Amount { get; private set; }
-    public float Range { get; private set; }
-    public float DurationSec { get; private set; }
-    public int DurationMS { get; private set; }
-    public int DurationMS2 { get; private set; }
-    public ConditionEffectIndex? ConditionEffect { get; private set; }
-    public float EffectDuration { get; private set; }
-    public int MaximumDistance { get; private set; }
-    public float Radius { get; private set; }
-    public int TotalDamage { get; private set; }
-    public string ObjectId { get; private set; }
-    public int AngleOffset { get; private set; }
-    public int MaxTargets { get; private set; }
-    public string Id { get; private set; }
-    public int SkinType { get; private set; }
-    public int PetType { get; private set; }
-    public int newSize { get; private set; }
-    public string DungeonName { get; private set; }
-    public string LockedName { get; private set; }
-    public string Target { get; private set; }
-    public string Center { get; private set; }
-    public bool UseWisMod { get; private set; }
-    public bool noStack { get; private set; }
-    public float VisualEffect { get; private set; }
-    public uint? Color { get; private set; }
-    public int random { get; private set; } //Used for prism of fallen chaos
-    public int treaureTier { get; private set; } //Treasure Chest Stuff
+    public ActivateEffects Effect { get; }
+    public int Stats { get; }
+    public int Amount { get; }
+    public float Range { get; }
+    public float DurationSec { get; }
+    public int DurationMS { get; }
+    public int DurationMS2 { get; }
+    public ConditionEffectIndex? ConditionEffect { get; }
+    public float EffectDuration { get; }
+    public int MaximumDistance { get; }
+    public float Radius { get; }
+    public int TotalDamage { get; }
+    public string ObjectId { get; }
+    public int AngleOffset { get; }
+    public int MaxTargets { get; }
+    public string Id { get; }
+    public int SkinType { get; }
+    public int PetType { get; }
+    public int newSize { get; }
+    public string DungeonName { get; }
+    public string LockedName { get; }
+    public string Target { get; }
+    public string Center { get; }
+    public bool UseWisMod { get; }
+    public bool noStack { get; }
+    public float VisualEffect { get; }
+    public uint? Color { get; }
+    public int random { get; } //Used for prism of fallen chaos
+    public int treaureTier { get; } //Treasure Chest Stuff
 }
 
 public class PortalDesc
 {
     public PortalDesc(ushort type, XElement elem)
     {
-        XElement n;
         ObjectType = type;
-        ObjectId = elem.Attribute("id").Value;
-        DisplayId = elem.Element("DisplayId") != null ? elem.Element("DisplayId").Value : String.Empty;
-        if ((n = elem.Element("NexusPortal")) != null) //<NexusPortal/>
-        {
+        ObjectId = elem.Attribute("id")?.Value;
+        DisplayId = elem.Element("DisplayId") != null ? elem.Element("DisplayId")?.Value : string.Empty;
+        if (elem.Element("NexusPortal") != null) //<NexusPortal/>
             NexusPortal = true;
-        }
-        if ((n = elem.Element("DungeonName")) != null) //<NexusPortal/>
-        {
+        if (elem.Element("DungeonName") != null) //<NexusPortal/>
             DungeonName = elem.Element("DungeonName").Value;
-        }
         TimeoutTime = ObjectId == "The Shatters" ? 70 : 30;
     }
 
-    public ushort ObjectType { get; private set; }
-    public string DisplayId { get; private set; }
+    public ushort ObjectType { get; }
+    public string DisplayId { get; }
     public string ObjectId { get; }
     public string DungeonName { get; set; }
-    public int TimeoutTime { get; private set; }
-    public bool NexusPortal { get; private set; }
+    public int TimeoutTime { get; }
+    public bool NexusPortal { get; }
 }
 
 public class Item : IFeedable
@@ -479,7 +457,7 @@ public class Item : IFeedable
     {
         try
         {
-            CultureInfo ci = (CultureInfo) CultureInfo.CurrentCulture.Clone();
+            var ci = (CultureInfo) CultureInfo.CurrentCulture.Clone();
             ci.NumberFormat.CurrencyDecimalSeparator = ".";
             XElement n;
             ObjectType = type;
@@ -532,13 +510,12 @@ public class Item : IFeedable
             Class = elem.Element("Class").Value;
             Family = (n = elem.Element("PetFamily")) != null
                 ? n.Value == "? ? ? ?"
-                    ? (Family)Enum.Parse(typeof(Family), "Unknown", true)
-                    : (Family)Enum.Parse(typeof(Family), n.Value, true)
+                    ? (Family) Enum.Parse(typeof(Family), "Unknown", true)
+                    : (Family) Enum.Parse(typeof(Family), n.Value, true)
                 : null as Family?;
             Rarity = (n = elem.Element("Rarity")) != null
-                ? (Rarity)Enum.Parse(typeof(Rarity), n.Value, true)
+                ? (Rarity) Enum.Parse(typeof(Rarity), n.Value, true)
                 : null as Rarity?;
-
             StatsBoost =
                 elem.Elements("ActivateOnEquip")
                     .Select(
@@ -546,10 +523,11 @@ public class Item : IFeedable
                             new KeyValuePair<int, int>(int.Parse(i.Attribute("stat").Value),
                                 int.Parse(i.Attribute("amount").Value)))
                     .ToArray();
-
             ActivateEffects = elem.Elements("Activate").Select(i => new ActivateEffect(i)).ToArray();
             Projectiles = elem.Elements("Projectile").Select(i => new ProjectileDesc(i)).ToArray();
-            MpEndCost = (n = elem.Element("MpEndCost")) != null ? int.Parse(elem.Element("MpEndCost").Value) : null as int?;
+            MpEndCost = (n = elem.Element("MpEndCost")) != null
+                ? int.Parse(elem.Element("MpEndCost").Value)
+                : null as int?;
             Timer = (n = elem.Element("Timer")) != null ? float.Parse(elem.Element("Timer").Value) : null as float?;
             XpBooster = elem.Element("XpBoost") != null;
             LootDropBooster = elem.Element("LDBoosted") != null;
@@ -563,52 +541,52 @@ public class Item : IFeedable
         }
     }
 
-    public ushort ObjectType { get; private set; }
-    public string ObjectId { get; private set; }
-    public int SlotType { get; private set; }
-    public ushort FeedPower { get; set; }
-    public int Tier { get; private set; }
-    public string Description { get; private set; }
-    public float RateOfFire { get; private set; }
-    public bool Usable { get; private set; }
-    public int BagType { get; private set; }
-    public int MpCost { get; private set; }
-    public int FameBonus { get; private set; }
-    public int NumProjectiles { get; private set; }
-    public float ArcGap { get; private set; }
-    public bool Consumable { get; private set; }
-    public bool Potion { get; private set; }
-    public string DisplayId { get; private set; }
-    public string SuccessorId { get; private set; }
-    public bool Soulbound { get; private set; }
-    public float Cooldown { get; private set; }
-    public bool Resurrects { get; private set; }
-    public int Texture1 { get; private set; }
-    public int Texture2 { get; private set; }
-    public bool Secret { get; private set; }
-    public bool IsBackpack { get; private set; }
-    public Rarity? Rarity { get; private set; }
-    public Family? Family { get; private set; }
-    public string Class { get; private set; }
+    public ushort ObjectType { get; }
+    public string ObjectId { get; }
+    public int SlotType { get; }
+    public int Tier { get; }
+    public string Description { get; }
+    public float RateOfFire { get; }
+    public bool Usable { get; }
+    public int BagType { get; }
+    public int MpCost { get; }
+    public int FameBonus { get; }
+    public int NumProjectiles { get; }
+    public float ArcGap { get; }
+    public bool Consumable { get; }
+    public bool Potion { get; }
+    public string DisplayId { get; }
+    public string SuccessorId { get; }
+    public bool Soulbound { get; }
+    public float Cooldown { get; }
+    public bool Resurrects { get; }
+    public int Texture1 { get; }
+    public int Texture2 { get; }
+    public bool Secret { get; }
+    public bool IsBackpack { get; }
+    public Rarity? Rarity { get; }
+    public Family? Family { get; }
+    public string Class { get; }
 
     public int Doses { get; set; }
 
-    public KeyValuePair<int, int>[] StatsBoost { get; private set; }
-    public ActivateEffect[] ActivateEffects { get; private set; }
-    public ProjectileDesc[] Projectiles { get; private set; }
+    public KeyValuePair<int, int>[] StatsBoost { get; }
+    public ActivateEffect[] ActivateEffects { get; }
+    public ProjectileDesc[] Projectiles { get; }
 
-    public int? MpEndCost { get; private set; }
-    public float? Timer { get; private set; }
-    public bool XpBooster { get; private set; }
-    public bool LootDropBooster { get; private set; }
-    public bool LootTierBooster { get; private set; }
-    public int SetType { get; private set; }
+    public int? MpEndCost { get; }
+    public float? Timer { get; }
+    public bool XpBooster { get; }
+    public bool LootDropBooster { get; }
+    public bool LootTierBooster { get; }
+    public int SetType { get; }
     public bool BrokenResurrect { get; set; }
     public bool NotBrokenResurrect { get; set; }
     public bool MantleResurrect { get; set; }
     public bool AshRobe { get; set; }
     public bool Treasure { get; set; }
     public bool Maxy { get; set; }
+    public ushort FeedPower { get; set; }
 }
 
 public class SpawnCount
@@ -621,22 +599,22 @@ public class SpawnCount
         Max = Utils.FromString(elem.Element("Max").Value);
     }
 
-    public int Mean { get; private set; }
-    public int StdDev { get; private set; }
-    public int Min { get; private set; }
-    public int Max { get; private set; }
+    public int Mean { get; }
+    public int StdDev { get; }
+    public int Min { get; }
+    public int Max { get; }
 }
 
 public class ObjectDesc
 {
     public ObjectDesc(ushort type, XElement elem)
     {
-        CultureInfo ci = (CultureInfo) CultureInfo.CurrentCulture.Clone();
+        var ci = (CultureInfo) CultureInfo.CurrentCulture.Clone();
         ci.NumberFormat.CurrencyDecimalSeparator = ".";
         XElement n;
         ObjectType = type;
         ObjectId = elem.Attribute("id").Value;
-        XElement xElement = elem.Element("Class");
+        var xElement = elem.Element("Class");
         if (xElement != null) Class = xElement.Value;
         Group = (n = elem.Element("Group")) != null ? n.Value : null;
         DisplayId = (n = elem.Element("DisplayId")) != null ? n.Value : null;
@@ -653,7 +631,6 @@ public class ObjectDesc
         ShowName = elem.Element("ShowName") != null;
         DontFaceAttacks = elem.Element("DontFaceAttacks") != null;
         BlocksSight = elem.Element("BlocksSight") != null;
-
         if ((n = elem.Element("Size")) != null)
         {
             MinSize = MaxSize = Utils.FromString(n.Value);
@@ -665,9 +642,7 @@ public class ObjectDesc
             MaxSize = (n = elem.Element("MaxSize")) != null ? Utils.FromString(n.Value) : 100;
             SizeStep = (n = elem.Element("SizeStep")) != null ? Utils.FromString(n.Value) : 0;
         }
-
         Projectiles = elem.Elements("Projectile").Select(i => new ProjectileDesc(i)).ToArray();
-
         if ((n = elem.Element("UnlockCost")) != null)
             UnlockCost = int.Parse(n.Value);
         if ((n = elem.Element("MaxHitPoints")) != null)
@@ -677,7 +652,6 @@ public class ObjectDesc
         }
         if ((n = elem.Element("MaxMagicPoints")) != null)
             MaxMagicPoints = n.Attribute("max") != null ? Utils.FromString(n.Attribute("max").Value) : -1;
-
         if ((n = elem.Element("Attack")) != null)
             MaxAttack = n.Attribute("max") != null ? Utils.FromString(n.Attribute("max").Value) : -1;
         if ((n = elem.Element("Dexterity")) != null)
@@ -688,7 +662,6 @@ public class ObjectDesc
             MaxHpRegen = n.Attribute("max") != null ? Utils.FromString(n.Attribute("max").Value) : -1;
         if ((n = elem.Element("MpRegen")) != null)
             MaxMpRegen = n.Attribute("max") != null ? Utils.FromString(n.Attribute("max").Value) : -1;
-
         if ((n = elem.Element("Defense")) != null)
         {
             Defense = Utils.FromString(n.Value);
@@ -700,7 +673,6 @@ public class ObjectDesc
             SpawnProbability = float.Parse(n.Value, NumberStyles.Any, ci);
         if ((n = elem.Element("Spawn")) != null)
             Spawn = new SpawnCount(n);
-
         God = elem.Element("God") != null;
         Cube = elem.Element("Cube") != null;
         Quest = elem.Element("Quest") != null;
@@ -708,19 +680,16 @@ public class ObjectDesc
             Level = Utils.FromString(n.Value);
         else
             Level = null;
-
         Tags = new TagList();
         if (elem.Elements("Tag").Any())
-            foreach (XElement i in elem.Elements("Tag"))
+            foreach (var i in elem.Elements("Tag"))
                 Tags.Add(new Tag(i));
-
         StasisImmune = elem.Element("StasisImmune") != null;
         StunImmune = elem.Element("StunImmune") != null;
         ParalyzedImmune = elem.Element("ParalyzeImmune") != null;
         DazedImmune = elem.Element("DazedImmune") != null;
         Oryx = elem.Element("Oryx") != null;
         Hero = elem.Element("Hero") != null;
-
         if ((n = elem.Element("PerRealmMax")) != null)
             PerRealmMax = Utils.FromString(n.Value);
         else
@@ -731,59 +700,59 @@ public class ObjectDesc
             ExpMultiplier = null;
     }
 
-    public int UnlockCost { get; private set; }
-    public int MaxHitPoints { get; private set; }
-    public int MaxMagicPoints { get; private set; }
-    public int MaxAttack { get; private set; }
-    public int MaxDefense { get; private set; }
-    public int MaxSpeed { get; private set; }
-    public int MaxDexterity { get; private set; }
-    public int MaxHpRegen { get; private set; }
-    public int MaxMpRegen { get; private set; }
+    public int UnlockCost { get; }
+    public int MaxHitPoints { get; }
+    public int MaxMagicPoints { get; }
+    public int MaxAttack { get; }
+    public int MaxDefense { get; }
+    public int MaxSpeed { get; }
+    public int MaxDexterity { get; }
+    public int MaxHpRegen { get; }
+    public int MaxMpRegen { get; }
 
-    public ushort ObjectType { get; private set; }
-    public string ObjectId { get; private set; }
-    public string DisplayId { get; private set; }
-    public string Group { get; private set; }
-    public string Class { get; private set; }
-    public bool Player { get; private set; }
-    public bool Enemy { get; private set; }
+    public ushort ObjectType { get; }
+    public string ObjectId { get; }
+    public string DisplayId { get; }
+    public string Group { get; }
+    public string Class { get; }
+    public bool Player { get; }
+    public bool Enemy { get; }
     public bool NoElectric { get; private set; }
-    public bool OccupySquare { get; private set; }
-    public bool FullOccupy { get; private set; }
-    public bool EnemyOccupySquare { get; private set; }
-    public bool Static { get; private set; }
-    public bool NoMiniMap { get; private set; }
-    public bool ProtectFromGroundDamage { get; private set; }
-    public bool ProtectFromSink { get; private set; }
-    public bool Flying { get; private set; }
-    public bool ShowName { get; private set; }
-    public bool DontFaceAttacks { get; private set; }
-    public bool BlocksSight { get; private set; }
-    public int MinSize { get; private set; }
-    public int MaxSize { get; private set; }
-    public int SizeStep { get; private set; }
-    public TagList Tags { get; private set; }
-    public ProjectileDesc[] Projectiles { get; private set; }
+    public bool OccupySquare { get; }
+    public bool FullOccupy { get; }
+    public bool EnemyOccupySquare { get; }
+    public bool Static { get; }
+    public bool NoMiniMap { get; }
+    public bool ProtectFromGroundDamage { get; }
+    public bool ProtectFromSink { get; }
+    public bool Flying { get; }
+    public bool ShowName { get; }
+    public bool DontFaceAttacks { get; }
+    public bool BlocksSight { get; }
+    public int MinSize { get; }
+    public int MaxSize { get; }
+    public int SizeStep { get; }
+    public TagList Tags { get; }
+    public ProjectileDesc[] Projectiles { get; }
 
 
-    public double MaxHp { get; private set; }
-    public int Defense { get; private set; }
-    public string Terrain { get; private set; }
-    public float SpawnProbability { get; private set; }
-    public SpawnCount Spawn { get; private set; }
-    public bool Cube { get; private set; }
-    public bool God { get; private set; }
-    public bool Quest { get; private set; }
-    public int? Level { get; private set; }
-    public bool StasisImmune { get; private set; }
-    public bool StunImmune { get; private set; }
-    public bool ParalyzedImmune { get; private set; }
-    public bool DazedImmune { get; private set; }
-    public bool Oryx { get; private set; }
-    public bool Hero { get; private set; }
-    public int? PerRealmMax { get; private set; }
-    public float? ExpMultiplier { get; private set; } //Exp gained = level total / 10 * multi
+    public double MaxHp { get; }
+    public int Defense { get; }
+    public string Terrain { get; }
+    public float SpawnProbability { get; }
+    public SpawnCount Spawn { get; }
+    public bool Cube { get; }
+    public bool God { get; }
+    public bool Quest { get; }
+    public int? Level { get; }
+    public bool StasisImmune { get; }
+    public bool StunImmune { get; }
+    public bool ParalyzedImmune { get; }
+    public bool DazedImmune { get; }
+    public bool Oryx { get; }
+    public bool Hero { get; }
+    public int? PerRealmMax { get; }
+    public float? ExpMultiplier { get; } //Exp gained = level total / 10 * multi
 }
 
 public class TagList : List<Tag>
@@ -797,7 +766,7 @@ public class TagList : List<Tag>
     {
         return
             (from i in this where i.Name == name where i.Values.ContainsKey(value) select i.Values[value])
-                .FirstOrDefault();
+            .FirstOrDefault();
     }
 }
 
@@ -807,7 +776,7 @@ public class Tag
     {
         Name = elem.Attribute("name").Value;
         Values = new Dictionary<string, string>();
-        foreach (XElement i in elem.Elements())
+        foreach (var i in elem.Elements())
         {
             if (Values.ContainsKey(i.Name.ToString()))
                 Values.Remove(i.Name.ToString());
@@ -815,15 +784,15 @@ public class Tag
         }
     }
 
-    public string Name { get; private set; }
-    public Dictionary<string, string> Values { get; private set; }
+    public string Name { get; }
+    public Dictionary<string, string> Values { get; }
 }
 
 public class TileDesc
 {
     public TileDesc(ushort type, XElement elem)
     {
-        CultureInfo ci = (CultureInfo) CultureInfo.CurrentCulture.Clone();
+        var ci = (CultureInfo) CultureInfo.CurrentCulture.Clone();
         ci.NumberFormat.CurrencyDecimalSeparator = ".";
         XElement n;
         ObjectType = type;
@@ -844,7 +813,7 @@ public class TileDesc
         Push = elem.Element("Push") != null;
         if (Push)
         {
-            XElement anim = elem.Element("Animate");
+            var anim = elem.Element("Animate");
             if (anim.Attribute("dx") != null)
                 PushX = float.Parse(anim.Attribute("dx").Value, NumberStyles.Any, ci);
             if (elem.Attribute("dy") != null)
@@ -852,23 +821,23 @@ public class TileDesc
         }
     }
 
-    public ushort ObjectType { get; private set; }
-    public string ObjectId { get; private set; }
-    public bool NoWalk { get; private set; }
-    public bool Damaging { get; private set; }
-    public int MinDamage { get; private set; }
-    public int MaxDamage { get; private set; }
-    public float Speed { get; private set; }
-    public bool Push { get; private set; }
-    public float PushX { get; private set; }
-    public float PushY { get; private set; }
+    public ushort ObjectType { get; }
+    public string ObjectId { get; }
+    public bool NoWalk { get; }
+    public bool Damaging { get; }
+    public int MinDamage { get; }
+    public int MaxDamage { get; }
+    public float Speed { get; }
+    public bool Push { get; }
+    public float PushX { get; }
+    public float PushY { get; }
 }
 
 public class DungeonDesc
 {
     public DungeonDesc(XElement elem)
     {
-        CultureInfo ci = (CultureInfo) CultureInfo.CurrentCulture.Clone();
+        var ci = (CultureInfo) CultureInfo.CurrentCulture.Clone();
         ci.NumberFormat.CurrencyDecimalSeparator = ".";
         Name = elem.Attribute("name").Value;
         PortalId = (ushort) Utils.FromString(elem.Attribute("type").Value);
@@ -877,38 +846,41 @@ public class DungeonDesc
         Json = elem.Element("Json").Value;
     }
 
-    public string Name { get; private set; }
-    public ushort PortalId { get; private set; }
-    public int Background { get; private set; }
-    public bool AllowTeleport { get; private set; }
-    public string Json { get; private set; }
+    public string Name { get; }
+    public ushort PortalId { get; }
+    public int Background { get; }
+    public bool AllowTeleport { get; }
+    public string Json { get; }
 }
 
 public class SetTypeSkin
 {
-    public ushort ObjectType { get; private set; }
-    public string ObjectId { get; private set; }
-    public ushort SkinType { get; private set; }
-    public int Size { get; private set; }
-    public uint Color { get; private set; }
-    public string BulletType { get; private set; }
-    public KeyValuePair<int, int>[] StatsBoost { get; private set; }
-    public Dictionary<int, int> Setpiece { get; private set; }
-
     public SetTypeSkin(XElement elem, ushort type)
     {
         ObjectType = type;
         ObjectId = elem.Attribute("id").Value;
-
-        SkinType = elem.Elements("ActivateOnEquipAll").Where(i => i.Attribute("skinType") != null).Select(i => (ushort)Utils.FromString(i.Attribute("skinType").Value)).FirstOrDefault();
-        Size = elem.Elements("ActivateOnEquipAll").Where(i => i.Attribute("size") != null).Select(i => int.Parse(i.Attribute("size").Value)).FirstOrDefault();
-        Color = elem.Elements("ActivateOnEquipAll").Where(i => i.Attribute("color") != null).Select(i => (uint)Utils.FromString(i.Attribute("color").Value)).FirstOrDefault();
-        BulletType = elem.Elements("ActivateOnEquipAll").Where(i => i.Attribute("bulletType") != null).Select(i => i.Attribute("bulletType").Value).FirstOrDefault();
-
-        StatsBoost = elem.Elements("ActivateOnEquipAll").Where(i => i.Attribute("stat") != null && i.Attribute("amount") != null)
-                    .Select(i => new KeyValuePair<int, int>(int.Parse(i.Attribute("stat").Value),
-                                int.Parse(i.Attribute("amount").Value))).ToArray();
-
-        Setpiece = elem.Elements("Setpiece").ToDictionary(i => int.Parse(i.Attribute("slot").Value), i => Utils.FromString(i.Attribute("itemtype").Value));
+        SkinType = elem.Elements("ActivateOnEquipAll").Where(i => i.Attribute("skinType") != null)
+            .Select(i => (ushort) Utils.FromString(i.Attribute("skinType").Value)).FirstOrDefault();
+        Size = elem.Elements("ActivateOnEquipAll").Where(i => i.Attribute("size") != null)
+            .Select(i => int.Parse(i.Attribute("size").Value)).FirstOrDefault();
+        Color = elem.Elements("ActivateOnEquipAll").Where(i => i.Attribute("color") != null)
+            .Select(i => (uint) Utils.FromString(i.Attribute("color").Value)).FirstOrDefault();
+        BulletType = elem.Elements("ActivateOnEquipAll").Where(i => i.Attribute("bulletType") != null)
+            .Select(i => i.Attribute("bulletType").Value).FirstOrDefault();
+        StatsBoost = elem.Elements("ActivateOnEquipAll")
+            .Where(i => i.Attribute("stat") != null && i.Attribute("amount") != null)
+            .Select(i => new KeyValuePair<int, int>(int.Parse(i.Attribute("stat").Value),
+                int.Parse(i.Attribute("amount").Value))).ToArray();
+        Setpiece = elem.Elements("Setpiece").ToDictionary(i => int.Parse(i.Attribute("slot").Value),
+            i => Utils.FromString(i.Attribute("itemtype").Value));
     }
+
+    public ushort ObjectType { get; }
+    public string ObjectId { get; }
+    public ushort SkinType { get; }
+    public int Size { get; }
+    public uint Color { get; }
+    public string BulletType { get; }
+    public KeyValuePair<int, int>[] StatsBoost { get; }
+    public Dictionary<int, int> Setpiece { get; }
 }

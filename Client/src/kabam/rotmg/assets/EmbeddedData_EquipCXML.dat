@@ -15403,21 +15403,6 @@
               </Texture>
                <Rotation>50</Rotation>
            </Object>
-            <Object id="Epic Undead Lair Key" type="0x6028">
-               <Class>Equipment</Class>
-               <Item/>
-               <Texture>
-                 <File>lofiObj3</File>
-                 <Index>0xf4</Index>
-               </Texture>
-               <SlotType>10</SlotType>
-               <Description>May Zepts spare your life</Description>
-               <Sound>use_key</Sound>
-               <Consumable/>
-               <Activate id="Epic Undead Lair Portal">Create</Activate>
-               <feedPower>145</feedPower>
-               <DisplayId>Epic Undead Lair Key</DisplayId>
-             </Object>
   <Object type="0xf26" id="Souleater Skull">
     <Class>Equipment</Class>
     <Item/>
@@ -21254,4 +21239,50 @@ An awe-inspiring sword gifted to only the most worthy mortals from the heavens t
                         <Consumable/>
                         <DisplayId>5000 Fame</DisplayId>
                       </Object>
+                      <Object type="0x0243" id="Marble Seal">
+                          <DisplayId>Marble Seal</DisplayId>
+                          <Class>Equipment</Class>
+                          <Item/>
+                          <Texture>
+                            <File>lofiObj10</File>
+                            <Index>39</Index>
+                          </Texture>
+                          <Usable/>
+                          <SlotType>12</SlotType>
+                          <BagType>6</BagType>
+                          <FameBonus>6</FameBonus>
+                          <MpCost>135</MpCost>
+                          <Description>
+                            A seal made from the Marble Colossus' head. The power of a pure and mighty paladin still remains within.
+                          </Description>
+                          <ExtraTooltipData>
+                            <EffectInfo name="" description="Summon a Marble Pillar for 4.5 seconds"/>
+                            <EffectInfo name="Pillar Effect" description="Armored within 3 sqrs"/>
+                            <EffectInfo name="Pillar Effect" description="Damaging within 3 sqrs"/>
+                          </ExtraTooltipData>
+                          <ActivateOnEquip stat="21" amount="5">IncrementStat</ActivateOnEquip>
+                          <Activate objectId="Marble Pillar">Pet</Activate>
+                          <Cooldown>5.5</Cooldown>
+                          <feedPower>1300</feedPower>
+                          <Soulbound/>
+                        </Object>
+                        <Object type="0xb053" id="Marble Pillar">
+                          <Class>Character</Class>
+                          <Texture>
+                            <File>lofiObjBig</File>
+                            <Index>0x179</Index>
+                          </Texture>
+                          <Size>140</Size>
+                          <NoMiniMap/>
+                          <Effect color="0xF2C43C" rate="50" life=".5" lifeVariance="0" speed="0" speedVariance="0" size="5" rise="0" riseVariance="0" rangeX="3" rangeY="3">CustomParticles</Effect>
+                        </Object>
+                        <Object type="0xb101" id="Golem Decoy">
+                          <Class>Character</Class>
+                          <Texture>
+                            <File>lofiObj10</File>
+                            <Index>0xbe</Index>
+                          </Texture>
+                          <Friendly/>
+                          <NoMiniMap/>
+                        </Object>
 </Objects>

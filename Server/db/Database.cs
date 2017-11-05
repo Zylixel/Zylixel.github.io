@@ -490,6 +490,17 @@ SELECT credits FROM stats WHERE accId=@accId;";
             return (int) cmd.ExecuteScalar();
         }
 
+        public void UpdatePetSize(int acc, int pet, int amount)
+        {
+            var cmd = CreateQuery();
+            cmd.CommandText = "UPDATE pets SET size=@amount WHERE accId=@accId AND petId=@petId;";
+            cmd.Parameters.AddWithValue("@accId", acc);
+            cmd.Parameters.AddWithValue("@petId", pet);
+            cmd.Parameters.AddWithValue("@amount", amount);
+            Log.Error("UPDATE pets SET size = "+ amount + " WHERE accId = "+ acc +" AND petId = "+ pet +";");
+            cmd.ExecuteNonQuery();
+        }
+
         public void ReadStats(Account acc)
         {
             var cmd = CreateQuery();

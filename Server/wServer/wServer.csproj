@@ -131,6 +131,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="GeneratorCache.cs" />
+    <Compile Include="logic\behaviors\AoeEffect.cs" />
     <Compile Include="logic\CheckConfig.cs" />
     <Compile Include="logic\behaviors\ChangeGroundOnDeath.cs" />
     <Compile Include="logic\behaviors\OrderOnce.cs" />
@@ -202,6 +203,7 @@
     <Compile Include="logic\db\BehaviorDb.EventSpawner.cs" />
     <Compile Include="logic\db\BehaviorDb.FERAL.cs" />
     <Compile Include="logic\db\BehaivorDb.OryxMobs.cs" />
+    <Compile Include="logic\db\BehaviorDb.Items.cs" />
     <Compile Include="logic\db\BehaviorDbShaitan.cs" />
     <Compile Include="logic\db\BehaviorDbBattleoftheNexus.cs" />
     <Compile Include="logic\db\NexusGreeter.cs" />
@@ -689,7 +691,6 @@
     <EmbeddedResource Include="realm\worlds\maps\icecave.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\innersanctum.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\jungles.jm" />
-    <EmbeddedResource Include="realm\worlds\maps\SpiderCave.jm" />
     <EmbeddedResource Include="realm\worlds\maps\CandylandHuntingGrounds.jm" />
     <EmbeddedResource Include="realm\worlds\maps\DavyJonesLocker.jm" />
     <EmbeddedResource Include="realm\worlds\maps\Market.jm" />

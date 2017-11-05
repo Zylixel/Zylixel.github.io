@@ -307,7 +307,7 @@ namespace wServer.realm.entities.merchant
                         AddedTypes.Add(new KeyValuePair<string, int>(Owner.Name, t1));
                         MType = t1;
                         if (logic.CheckConfig.IsDebugOn())
-                            LogIt.Info("Randomizing Merchant to be item | " + MType);
+                            LogIt.Info("Randomizing Merchant to be item | " + t1);
                     }
                 }
                 

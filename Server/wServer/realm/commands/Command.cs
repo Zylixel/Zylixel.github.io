@@ -109,42 +109,6 @@ namespace wServer.realm.commands
             return command.Execute(player, time, args);
         }
     }
-    internal class Godland : Command
-    {
-        public Godland()
-            : base("gland")
-        {
-        }
-
-        protected override bool Process(Player player, RealmTime time, string[] args)
-        {
-            if (!(player.Owner is GameWorld))
-            {
-                player.SendError("That command can't be used here!");
-                return false;
-            }
-            player.Move(1000 + 0.5f, 1000 + 0.5f);
-            if (player.Pet != null)
-                player.Pet.Move(1000 + 0.5f, 1000 + 0.5f);
-            player.UpdateCount++;
-            player.ApplyConditionEffect(new ConditionEffect
-            {
-                Effect = ConditionEffectIndex.Invincible,
-                DurationMS = 2000
-            });
-            player.Owner.BroadcastPacket(new GotoPacket
-            {
-                ObjectId = player.Id,
-                Position = new Position
-                {
-                    X = player.X,
-                    Y = player.Y
-                }
-            }, null);
-            player.SendInfo("Success!");
-            return true;
-        }
-    }
 }
 
  

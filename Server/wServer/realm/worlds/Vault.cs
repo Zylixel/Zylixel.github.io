@@ -27,8 +27,8 @@ namespace wServer.realm.worlds
             Name = "Vault";
             ClientWorldName = "Vault";
             Background = 2;
-            this._psr = psr;
-            this._isLimbo = isLimbo;
+            _psr = psr;
+            _isLimbo = isLimbo;
             ShowDisplays = true;
             if (psr != null)
                 AccountId = psr.Account != null ? psr.Account.AccountId : "-1";

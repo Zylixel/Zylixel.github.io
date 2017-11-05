@@ -5,6 +5,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using db;
@@ -93,6 +94,8 @@ namespace wServer.realm
         public string InstanceId { get; private set; }
 
         public LogicTicker Logic { get; private set; }
+
+        public static int CurrentWorldId { get; private set; }
 
         public int MaxClients { get; }
 
@@ -304,13 +307,16 @@ namespace wServer.realm
             var ret = Clients.TryAdd(psr.Account.AccountId, psr);
             return ret;
         }
-
+        
         private void OnWorldAdded(World world)
         {
             if (world.Manager == null)
                 world.Manager = this;
             if (world is GameWorld)
+            {
                 Monitor.WorldAdded(world);
+                CurrentWorldId = world.Id;
+            }
             if (CheckConfig.IsDebugOn())
                 log.InfoFormat("World {0}({1}) added.", world.Id, world.Name);
         }

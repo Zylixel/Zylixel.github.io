@@ -12,7 +12,8 @@ namespace wServer.realm.worlds
 {
     public class Arena : World
     {
-        private bool _ready = true;
+        private bool _ready;
+        private bool _waitforplayers = true;
         private bool _waiting;
         public int Wave = 1;
 
@@ -27,17 +28,19 @@ namespace wServer.realm.worlds
         protected override void Init()
         {
             LoadMap("wServer.realm.worlds.maps.arena.wmap", MapType.Wmap);
+
+            Timers.Add(new WorldTimer(60000, (world, t) =>
+            {
+                _waitforplayers = false;
+            }));
+            
+            InformPlayers();
         }
 
-        private readonly string[] _weakEnemies =
-        {
-            "Flamer King", "Lair Skeleton King", "Native Fire Sprite", "Native Ice Sprite", "Native Magic Sprite", "Nomadic Shaman", "Ogre King", "Orc King", "Red Spider", "Sand Phantom",
-            "Swarm", "Tawny Warg", "Vampire Bat", "Wasp Queen", "Weretiger"
-        };
         private readonly string[] _normalEnemies =
         {
-            "Aberrant of Oryx", "Abomination of Oryx", "Adult White Dragon", "Assassin of Oryx", "Bile of Oryx", "Gigacorn",
-            "Great Lizard", "Minotaur", "Monstrosity of Oryx", "Phoenix Reborn", "Shambling Sludge", "Urgle"
+            "Aberrant of Oryx", "Abomination of Oryx", "Assassin of Oryx", "Bile of Oryx", "Gigacorn",
+            "Monstrosity of Oryx", "Phoenix Reborn", "Shambling Sludge", "Urgle"
         };
         private readonly string[] _gods =
         {
@@ -45,8 +48,18 @@ namespace wServer.realm.worlds
         };
         private readonly string[] _bosses =
         {
-            "Tomb Defender", "Tomb Attacker", "Tomb Support", "Arachna the Spider Queen", "Archdemon Malphas", "Crystal Prisoner", "Grand Sphinx", "Limon the Sprite God",
-            "Lord Ruthven", "Oryx the Mad God 1", "Septavius the Ghost God", "Stheno the Snake Queen", "Thessal the Mermaid Goddess"
+            "Archdemon Malphas", "Limon the Sprite God",
+            "Lord Ruthven", "Septavius the Ghost God", "Stheno the Snake Queen",  "Arachna the Spider Queen"
+        };
+        private readonly string[] _bosses2 =
+        {
+            "Tomb Defender", "Tomb Attacker", "Tomb Support", "Crystal Prisoner", "Grand Sphinx", 
+            "Oryx the Mad God 2", "Thessal the Mermaid Goddess"
+        };
+        private readonly string[] _bosses3 =
+        {
+            "shtrs the forgotten king", "shtrs Bridge Sentinel",
+            "Oryx the Mad God 3", "Keeper Boss Anchor"
         };
 
         public bool OutOfBounds(float x, float y)
@@ -56,45 +69,70 @@ namespace wServer.realm.worlds
             return true;
         }
 
+        public void InformPlayers()
+        {
+            if (_waitforplayers)
+            {
+                foreach (KeyValuePair<int, Player> i in Players)
+                {
+                    i.Value.Client.SendPacket(new TextPacket
+                    {
+                        BubbleTime = 0,
+                        Stars = -1,
+                        Name = "Arena Overseer",
+                        Text = "The battle will soon commence once the dungeon has closed"
+                    });
+                }
+            }
+            Timers.Add(new WorldTimer(60000, (world, t) =>
+            {
+                InformPlayers();
+            }));
+        }
+
         public override void Tick(RealmTime time)
         {
             base.Tick(time);
             CheckOutOfBounds();
 
-            if (Enemies.Count == 0)
+            if (!_waitforplayers)
             {
-                if (_ready)
+                if (Enemies.Count == 0)
                 {
-                    if (_waiting) return;
-                    _ready = false;
-                    Wave++;
-                    foreach (KeyValuePair<int, Player> i in Players)
+                    if (_ready)
                     {
-                        i.Value.Client.SendPacket(new ArenaNextWavePacket
-                        {
-                            Type = Wave
-                        });
-                    }
-                    _waiting = true;
-                    Timers.Add(new WorldTimer(5000, (world, t) =>
-                    {
+                        if (_waiting) return;
                         _ready = false;
-                        Spawn();
-                        _waiting = false;
-                    }));
+                        Wave++;
+                        foreach (KeyValuePair<int, Player> i in Players)
+                        {
+                            i.Value.Client.SendPacket(new ArenaNextWavePacket
+                            {
+                                Type = Wave
+                            });
+                            i.Value.Client.SendPacket(new TextPacket
+                            {
+                                BubbleTime = 0,
+                                Stars = -1,
+                                Name = "Arena Overseer",
+                                Text = "The next wave will start in 5 seconds"
+                            });
+                        }
+                        _waiting = true;
+                        Timers.Add(new WorldTimer(5000, (world, t) =>
+                        {
+                            _ready = false;
+                            Spawn();
+                            _waiting = false;
+                        }));
+                    }
+                    _ready = true;
                 }
-                _ready = true;
             }
         }
 
         private void Spawn()
         {
-            /*
-             * if(wave % 5 == 0)
-             * {
-             *      nextDifficulty();
-             * }
-             */
             try
             {
                 List<string> enems = new List<string>();
@@ -108,10 +146,7 @@ namespace wServer.realm.worlds
                 {
                     enems.Add(_normalEnemies[r.Next(0, _normalEnemies.Length)]);
                 }
-                for (int i = 0; i < Wave/3 + 1; i++)
-                {
-                    enems.Add(_weakEnemies[r.Next(0, _weakEnemies.Length)]);
-                }
+
                 Random r2 = new Random();
                 foreach (string i in enems)
                 {
@@ -122,40 +157,52 @@ namespace wServer.realm.worlds
                     enemy.Move(xloc, yloc);
                     EnterWorld(enemy);
                 }
+
+                if (Wave < 11)
+                {
+                    List<string> boss = new List<string> { _bosses[r.Next(0, _bosses.Length)] };
+                    foreach (string i in boss)
+                    {
+                        ushort id = Manager.GameData.IdToObjectType[i];
+                        int xloc = Map.Width / 2;
+                        int yloc = Map.Height / 2;
+                        Entity enemy = Entity.Resolve(Manager, id);
+                        enemy.Move(xloc, yloc);
+                        EnterWorld(enemy);
+                    }
+                }
+                if (Wave >= 10 && Wave < 19)
+                {
+                    List<string> boss = new List<string> {_bosses2[r.Next(0, _bosses2.Length)]};
+                    foreach (string i in boss)
+                    {
+                        ushort id = Manager.GameData.IdToObjectType[i];
+                        int xloc = Map.Width / 2;
+                        int yloc = Map.Height / 2;
+                        Entity enemy = Entity.Resolve(Manager, id);
+                        enemy.Move(xloc, yloc);
+                        EnterWorld(enemy);
+                    }
+                }
+                if (Wave >= 20)
+                {
+                    List<string> boss = new List<string> { _bosses3[r.Next(0, _bosses3.Length)] };
+                    foreach (string i in boss)
+                    {
+                        ushort id = Manager.GameData.IdToObjectType[i];
+                        int xloc = Map.Width / 2;
+                        int yloc = Map.Height / 2;
+                        Entity enemy = Entity.Resolve(Manager, id);
+                        enemy.Move(xloc, yloc);
+                        EnterWorld(enemy);
+                    }
+                }
+
             }
             catch (Exception ex)
             {
                 Log.Error(ex);
             }
-        }
-
-        //private void SpawnBosses()
-        //{
-        //    List<string> enems = new List<string>();
-        //    Random r = new Random();
-        //    for (int i = 0; i < (1); i++)
-        //    {
-        //        enems.Add(Bosses[r.Next(0, Bosses.Length)]);
-        //    }
-        //    Random r2 = new Random();
-        //    foreach (string i in enems)
-        //    {
-        //        ushort id = Manager.GameData.IdToObjectType[i];
-        //        int xloc = r2.Next(10, Map.Width) - 6;
-        //        int yloc = r2.Next(10, Map.Height) - 6;
-        //        Entity enemy = Entity.Resolve(Manager, id);
-        //        enemy.Move(xloc, yloc);
-        //        EnterWorld(enemy);
-        //    }
-        //}
-
-        private bool CheckPopulation()
-        {
-            if (Enemies.Count == 0)
-            {
-                return true;
-            }
-            return false;
         }
 
         private void CheckOutOfBounds()

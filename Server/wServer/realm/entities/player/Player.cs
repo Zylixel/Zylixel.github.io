@@ -472,7 +472,7 @@ namespace wServer.realm.entities.player
             if (_dying) return;
             _dying = true;
             var killPlayer = true;
-            switch (Owner.Name)
+            /*switch (Owner.Name)
 
             {
                 case "Arena":
@@ -489,7 +489,7 @@ namespace wServer.realm.entities.player
                         });
                         return;
                     }
-            }
+            }*/
 
 
             if (Client.Stage == ProtocalStage.Disconnected || _resurrecting)

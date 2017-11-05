@@ -36,7 +36,7 @@ namespace wServer.logic.loot
         public void Populate(RealmManager manager, Enemy enemy, Tuple<Player, int> playerDat,
             Random rand, string lootState, IList<LootDef> lootDefs)
         {
-            probability = probability * 100000000;
+            probability = probability * 1;
             Lootstate = lootState;
             if (playerDat != null) return;
             XmlData dat = manager.GameData;
@@ -151,7 +151,7 @@ namespace wServer.logic.loot
         public void Populate(RealmManager manager, Enemy enemy, Tuple<Player, int> playerDat,
             Random rand, string lootState, IList<LootDef> lootDefs)
         {
-            probability = probability * 100000000;
+            probability = probability * 1;
             Lootstate = lootState;
             if (playerDat != null) return;
             Item[] candidates = manager.GameData.Items
@@ -195,7 +195,7 @@ namespace wServer.logic.loot
                     .ToArray();
                 foreach (Item i in candidates)
                     if (i.Tier != -1)
-                        lootDefs.Add(new LootDef(i, ((i.Tier * -2) + 10) * 0.0005, lootState));
+                        lootDefs.Add(new LootDef(i, (i.Tier * -2 + 10) * 0.0005, lootState));
             }
         }
     }
