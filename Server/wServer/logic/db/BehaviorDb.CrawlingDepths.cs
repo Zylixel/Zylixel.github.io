@@ -7,71 +7,6 @@ namespace wServer.logic
     partial class BehaviorDb
     {
         private _ CrawlingDepths = () => Behav()
-                        /*  .Init("Son of Arachna",
-                              new State(
-                                  new RealmPortalDrop(),
-                                  new State("default",
-                                      new PlayerWithinTransition(7.2, "fight")
-                                      ),
-                                  new State("fight",
-                                  new If(
-                                       new EntityCountGreaterThan("Yellow Son of Arachna Giant Egg Sac", 9999, 0),
-                                       new Shoot(25, projectileIndex: 0, count: 8, coolDown: 3000, coolDownOffset: 4000)
-                                      )
-                                      ),
-                                  new State("shrink",
-                                      new Wander(0.4),
-                                      new ConditionalEffect(ConditionEffectIndex.Invulnerable),
-                                      new ChangeSize(-15, 25),
-                                      new TimedTransition(1000, "smallAttack")
-                                      ),
-                                  new State("smallAttack",
-                                      new Prioritize(
-                                          new Follow(1, acquireRange: 15, range: 8),
-                                          new Wander(1)
-                                      ),
-                                      new Shoot(10, predictive: 1, coolDown: 750),
-                                      new Shoot(10, 6, projectileIndex: 1, predictive: 1, coolDown: 1000),
-                                      new TimedTransition(10000, "grow")
-                                      ),
-                                  new State("grow",
-                                      new Wander(0.1),
-                                      new ConditionalEffect(ConditionEffectIndex.Invulnerable),
-                                      new ChangeSize(35, 200),
-                                      new TimedTransition(1050, "bigAttack")
-                                      ),
-                                  new State("bigAttack",
-                                      new Prioritize(
-                                          new Follow(0.2),
-                                          new Wander(0.1)
-                                      ),
-                                      new Shoot(10, projectileIndex: 2, predictive: 1, coolDown: 2000),
-                                      new Shoot(10, projectileIndex: 2, predictive: 1, coolDownOffset: 300, coolDown: 2000),
-                                      new Shoot(10, 3, projectileIndex: 3, predictive: 1, coolDownOffset: 100, coolDown: 2000),
-                                      new Shoot(10, 3, projectileIndex: 3, predictive: 1, coolDownOffset: 400, coolDown: 2000),
-                                      new TimedTransition(10000, "normalize")
-                                      ),
-                                  new State("normalize",
-                                      new Wander(0.3),
-                                      new ConditionalEffect(ConditionEffectIndex.Invulnerable),
-                                      new ChangeSize(-20, 100),
-                                      new TimedTransition(1000, "basic")
-                                      )
-                                  ),
-                              new Threshold(0.03,
-                                  new TierLoot(10, ItemType.Weapon, 0.06),
-                                  new TierLoot(11, ItemType.Weapon, 0.05),
-                                  new TierLoot(12, ItemType.Weapon, 0.04),
-                                  new TierLoot(5, ItemType.Ability, 0.06),
-                                  new TierLoot(6, ItemType.Ability, 0.04),
-                                  new TierLoot(11, ItemType.Armor, 0.06),
-                                  new TierLoot(12, ItemType.Armor, 0.05),
-                                  new TierLoot(13, ItemType.Armor, 0.04),
-                                  new TierLoot(5, ItemType.Ring, 0.05),
-                                  new ItemLoot("Potion of Mana", 1),
-                                  new ItemLoot("Doku No Ken", 0.01)
-                                  )
-                          )*/
                         .Init("Son of Arachna",
                 new State(
                     new RealmPortalDrop(),
@@ -81,15 +16,15 @@ namespace wServer.logic
                     ),
                     new State("MakeWeb",
                         new ConditionalEffect(ConditionEffectIndex.Invulnerable),
-                        new TossObject("Epic Arachna Web Spoke 1", range: 10, angle: 0, coolDown: 100000),
-                        new TossObject("Epic Arachna Web Spoke 7", range: 6, angle: 0, coolDown: 100000),
-                        new TossObject("Epic Arachna Web Spoke 2", range: 10, angle: 60, coolDown: 100000),
-                        new TossObject("Epic Arachna Web Spoke 3", range: 10, angle: 120, coolDown: 100000),
-                        new TossObject("Epic Arachna Web Spoke 8", range: 6, angle: 120, coolDown: 100000),
-                        new TossObject("Epic Arachna Web Spoke 4", range: 10, angle: 180, coolDown: 100000),
-                        new TossObject("Epic Arachna Web Spoke 5", range: 10, angle: 240, coolDown: 100000),
-                        new TossObject("Epic Arachna Web Spoke 9", range: 6, angle: 240, coolDown: 100000),
-                        new TossObject("Epic Arachna Web Spoke 6", range: 10, angle: 300, coolDown: 100000),
+                        new TossObject("Epic Arachna Web Spoke 1", 10, 0, 100000),
+                        new TossObject("Epic Arachna Web Spoke 7", 6, 0, 100000),
+                        new TossObject("Epic Arachna Web Spoke 2", 10, 60, 100000),
+                        new TossObject("Epic Arachna Web Spoke 3", 10, 120, 100000),
+                        new TossObject("Epic Arachna Web Spoke 8", 6, 120, 100000),
+                        new TossObject("Epic Arachna Web Spoke 4", 10, 180, 100000),
+                        new TossObject("Epic Arachna Web Spoke 5", 10, 240, 100000),
+                        new TossObject("Epic Arachna Web Spoke 9", 6, 240, 100000),
+                        new TossObject("Epic Arachna Web Spoke 6", 10, 300, 100000),
                         new TimedTransition(3500, "AttackFINE")
                         ),
                     new State("Attack",
@@ -104,7 +39,7 @@ namespace wServer.logic
                         new State("Follow",
                             new Prioritize(
                                 //new StayAbove(.2, 1),
-                                new StayBack(.2, distance: 6),
+                                new StayBack(.2, 6),
                                 new Wander(.3)
                                 ),
                             new TimedTransition(1000, "Return")
@@ -138,14 +73,14 @@ namespace wServer.logic
                             new State("FollowFINE",
                                 new Prioritize(
                                     new StayAbove(.6, 1),
-                                    new StayBack(.6, distance: 8),
+                                    new StayBack(.6),
                                     new Wander(.7)
                                     ),
                                 new TimedTransition(1000, "ReturnFINE")
                                     ),
                             new State("ReturnFINE",
                                 //new StayCloseToSpawn(.4, 1),
-                                new ReturnToSpawn(true, 2),
+                                new ReturnToSpawn(true),
                                 new TimedTransition(3000, "FollowFINE")
                                 )
                             )
@@ -180,8 +115,8 @@ namespace wServer.logic
                     new Prioritize(
                         new Wander(.4)
                     ),
-                    new Shoot(7, count: 1, shootAngle: 0, coolDown: 650),
-                    new Shoot(7, count: 1, shootAngle: 0, projectileIndex: 1, predictive: 1, coolDown: 850)
+                    new Shoot(7, 1, 0, coolDown: 650),
+                    new Shoot(7, 1, 0, 1, predictive: 1, coolDown: 850)
                 )
             )
                  .Init("Crawling Grey Spotted Spider",
@@ -190,7 +125,7 @@ namespace wServer.logic
                         new Charge(2, 8, 1050),
                         new Wander(.4)
                     ),
-                    new Shoot(10, count: 1, shootAngle: 0, coolDown: 500)
+                    new Shoot(10, 1, 0, coolDown: 500)
                 ),
                 new ItemLoot("Healing Ichor", 0.2),
                 new ItemLoot("Magic Potion", 0.3)
@@ -201,7 +136,7 @@ namespace wServer.logic
                         new Charge(2, 8, 1050),
                         new Wander(.4)
                     ),
-                    new Shoot(9, count: 1, shootAngle: 0, coolDown: 850)
+                    new Shoot(9, 1, 0, coolDown: 850)
                 ),
                 new ItemLoot("Healing Ichor", 0.2),
                 new ItemLoot("Magic Potion", 0.3)
@@ -211,7 +146,7 @@ namespace wServer.logic
                     new Prioritize(
                         new Wander(.4)
                     ),
-                    new Shoot(8, count: 1, shootAngle: 0, coolDown: 750)
+                    new Shoot(8, 1, 0, coolDown: 750)
                 ),
                 new ItemLoot("Healing Ichor", 0.2),
                 new ItemLoot("Magic Potion", 0.3)
@@ -222,7 +157,7 @@ namespace wServer.logic
                         new Follow(.6, 11, 1),
                         new Wander(.4)
                     ),
-                    new Shoot(8, count: 3, shootAngle: 10, coolDown: 400)
+                    new Shoot(8, 3, 10, coolDown: 400)
                 ),
                 new ItemLoot("Healing Ichor", 0.2),
                 new ItemLoot("Magic Potion", 0.3)
@@ -318,78 +253,113 @@ namespace wServer.logic
             )
          .Init("Epic Arachna Web Spoke 1",
                 new State(
+                    new EntityNotExistsTransition("Son of Arachna", 30, "die"),
                     new ConditionalEffect(ConditionEffectIndex.Invulnerable),
-                new Shoot(200, count: 1, fixedAngle: 180, coolDown: 1500),
-                new Shoot(200, count: 1, fixedAngle: 120, coolDown: 1500),
-                new Shoot(200, count: 1, fixedAngle: 240, coolDown: 1500)
+                new Shoot(200, 1, fixedAngle: 180, coolDown: 1500),
+                new Shoot(200, 1, fixedAngle: 120, coolDown: 1500),
+                new Shoot(200, 1, fixedAngle: 240, coolDown: 1500),
+                    new State("die",
+                        new Suicide()
+                    )
                     )
             )
            .Init("Epic Arachna Web Spoke 2",
                 new State(
+                    new EntityNotExistsTransition("Son of Arachna", 30, "die"),
                     new ConditionalEffect(ConditionEffectIndex.Invulnerable),
-                new Shoot(200, count: 1, fixedAngle: 240, coolDown: 1500),
-                new Shoot(200, count: 1, fixedAngle: 180, coolDown: 1500),
-                new Shoot(200, count: 1, fixedAngle: 300, coolDown: 1500)
+                new Shoot(200, 1, fixedAngle: 240, coolDown: 1500),
+                new Shoot(200, 1, fixedAngle: 180, coolDown: 1500),
+                new Shoot(200, 1, fixedAngle: 300, coolDown: 1500),
+                    new State("die",
+                        new Suicide()
+                    )
                     )
             )
            .Init("Epic Arachna Web Spoke 3",
                 new State(
+                    new EntityNotExistsTransition("Son of Arachna", 30, "die"),
                     new ConditionalEffect(ConditionEffectIndex.Invulnerable),
-                new Shoot(200, count: 1, fixedAngle: 300, coolDown: 1500),
-                new Shoot(200, count: 1, fixedAngle: 240, coolDown: 1500),
-                new Shoot(200, count: 1, fixedAngle: 0, coolDown: 1500)
+                new Shoot(200, 1, fixedAngle: 300, coolDown: 1500),
+                new Shoot(200, 1, fixedAngle: 240, coolDown: 1500),
+                new Shoot(200, 1, fixedAngle: 0, coolDown: 1500),
+                    new State("die",
+                        new Suicide()
+                    )
                     )
             )
            .Init("Epic Arachna Web Spoke 4",
                 new State(
+                    new EntityNotExistsTransition("Son of Arachna", 30, "die"),
                     new ConditionalEffect(ConditionEffectIndex.Invulnerable),
-                new Shoot(200, count: 1, fixedAngle: 0, coolDown: 1500),
-                new Shoot(200, count: 1, fixedAngle: 60, coolDown: 1500),
-                new Shoot(200, count: 1, fixedAngle: 300, coolDown: 1500)
+                new Shoot(200, 1, fixedAngle: 0, coolDown: 1500),
+                new Shoot(200, 1, fixedAngle: 60, coolDown: 1500),
+                new Shoot(200, 1, fixedAngle: 300, coolDown: 1500),
+                    new State("die",
+                        new Suicide()
+                    )
                     )
             )
            .Init("Epic Arachna Web Spoke 5",
                 new State(
+                    new EntityNotExistsTransition("Son of Arachna", 30, "die"),
                     new ConditionalEffect(ConditionEffectIndex.Invulnerable),
-                new Shoot(200, count: 1, fixedAngle: 60, coolDown: 1500),
-                new Shoot(200, count: 1, fixedAngle: 0, coolDown: 1500),
-                new Shoot(200, count: 1, fixedAngle: 120, coolDown: 1500)
+                new Shoot(200, 1, fixedAngle: 60, coolDown: 1500),
+                new Shoot(200, 1, fixedAngle: 0, coolDown: 1500),
+                new Shoot(200, 1, fixedAngle: 120, coolDown: 1500),
+                    new State("die",
+                        new Suicide()
+                    )
      )
             )
            .Init("Epic Arachna Web Spoke 6",
                 new State(
+                    new EntityNotExistsTransition("Son of Arachna", 30, "die"),
                     new ConditionalEffect(ConditionEffectIndex.Invulnerable),
-                new Shoot(200, count: 1, fixedAngle: 120, coolDown: 1500),
-                new Shoot(200, count: 1, fixedAngle: 60, coolDown: 1500),
-                new Shoot(200, count: 1, fixedAngle: 180, coolDown: 1500)
+                new Shoot(200, 1, fixedAngle: 120, coolDown: 1500),
+                new Shoot(200, 1, fixedAngle: 60, coolDown: 1500),
+                new Shoot(200, 1, fixedAngle: 180, coolDown: 1500),
+                    new State("die",
+                        new Suicide()
+                    )
                     )
             )
            .Init("Epic Arachna Web Spoke 7",
                 new State(
+                    new EntityNotExistsTransition("Son of Arachna", 30, "die"),
                     new ConditionalEffect(ConditionEffectIndex.Invulnerable),
-                new Shoot(200, count: 1, fixedAngle: 180, coolDown: 1500),
-                new Shoot(200, count: 1, fixedAngle: 120, coolDown: 1500),
-                new Shoot(200, count: 1, fixedAngle: 240, coolDown: 1500)
+                new Shoot(200, 1, fixedAngle: 180, coolDown: 1500),
+                new Shoot(200, 1, fixedAngle: 120, coolDown: 1500),
+                new Shoot(200, 1, fixedAngle: 240, coolDown: 1500),
+                    new State("die",
+                        new Suicide()
+                    )
                     )
             )
            .Init("Epic Arachna Web Spoke 8",
                 new State(
+                    new EntityNotExistsTransition("Son of Arachna", 30, "die"),
                     new ConditionalEffect(ConditionEffectIndex.Invulnerable),
-                new Shoot(200, count: 1, fixedAngle: 360, coolDown: 1500),
-                new Shoot(200, count: 1, fixedAngle: 240, coolDown: 1500),
-                new Shoot(200, count: 1, fixedAngle: 300, coolDown: 1500)
+                new Shoot(200, 1, fixedAngle: 360, coolDown: 1500),
+                new Shoot(200, 1, fixedAngle: 240, coolDown: 1500),
+                new Shoot(200, 1, fixedAngle: 300, coolDown: 1500),
+                    new State("die",
+                        new Suicide()
+                    )
                     )
             )
            .Init("Epic Arachna Web Spoke 9",
                 new State(
+                    new EntityNotExistsTransition("Son of Arachna", 30, "die"),
                     new ConditionalEffect(ConditionEffectIndex.Invulnerable),
-                new Shoot(200, count: 1, fixedAngle: 0, coolDown: 1500),
-                new Shoot(200, count: 1, fixedAngle: 60, coolDown: 1500),
-                new Shoot(200, count: 1, fixedAngle: 120, coolDown: 1500)
+                new Shoot(200, 1, fixedAngle: 0, coolDown: 1500),
+                new Shoot(200, 1, fixedAngle: 60, coolDown: 1500),
+                new Shoot(200, 1, fixedAngle: 120, coolDown: 1500),
+                    new State("die",
+                        new Suicide()
+                    )
                     )
             );
     }
 }
 
 //Not Gonna Lie, Decided to take this from the LRv2 Source. I mean, why spend time on this when I can dedicate my resources elsewhere.
-//Devwarlt, If you want me to take this out, I will do it without complaints

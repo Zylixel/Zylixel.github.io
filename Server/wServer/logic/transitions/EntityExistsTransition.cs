@@ -7,19 +7,19 @@ namespace wServer.logic.transitions
 
         //State storage: none
 
-        private readonly double dist;
-        private readonly ushort target;
+        private readonly double _dist;
+        private readonly ushort _target;
 
         public EntityExistsTransition(string target, double dist, string targetState)
             : base(targetState)
         {
-            this.dist = dist;
-            this.target = BehaviorDb.InitGameData.IdToObjectType[target];
+            _dist = dist;
+            _target = BehaviorDb.InitGameData.IdToObjectType[target];
         }
 
         protected override bool TickCore(Entity host, RealmTime time, ref object state)
         {
-            return host.GetNearestEntity(dist, target) != null;
+            return host.GetNearestEntity(_dist, _target) != null;
         }
     }
 }

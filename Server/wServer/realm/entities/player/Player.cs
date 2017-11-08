@@ -875,11 +875,12 @@ namespace wServer.realm.entities.player
                     SendError("server.teleport_to_self");
                     return;
                 }
-                if (!Owner.AllowTeleport)
-                {
-                    SendError(GetLanguageString("server.no_teleport_in_realm", new KeyValuePair<string, object>("realm", Owner.Name)));
-                    return;
-                }
+                if (player.Client.Account.Rank < 1)
+                        if (!Owner.AllowTeleport)
+                        {
+                            SendError(GetLanguageString("server.no_teleport_in_realm", new KeyValuePair<string, object>("realm", Owner.Name)));
+                            return;
+                        }
 
                 SetTpDisabledPeriod();
                 Move(obj.X, obj.Y);

@@ -10,17 +10,17 @@ namespace wServer.logic.transitions
     {
         //State storage: none
 
-        private readonly double dist;
+        private readonly double _dist;
 
         public NoPlayerWithinTransition(double dist, string targetState)
             : base(targetState)
         {
-            this.dist = dist;
+            _dist = dist;
         }
 
         protected override bool TickCore(Entity host, RealmTime time, ref object state)
         {
-            return host.GetNearestEntity(dist, objType: null) == null;
+            return host.GetNearestEntity(_dist, null) == null;
         }
     }
 }

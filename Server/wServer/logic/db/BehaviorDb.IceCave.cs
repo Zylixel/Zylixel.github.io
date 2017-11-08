@@ -19,29 +19,24 @@ namespace wServer.logic
                        new Taunt(0.50, "MRRRRRRTTTTTT!"),
                         new Taunt(0.25, "Mwruuuu!"),
                        new Flash(0xFF0000, 2, 18),
-                       new Spawn("Mini Yeti", 1, 4, coolDown: 10000)
+                       new Spawn("Mini Yeti", 1, 4, 10000)
                         )
-
-
                   )
             )
             .Init("Mini Yeti",
                 new State(
                     new Flash(0xFF0000, 2, 6),
-                     new Orbit(0.3, 3, 20, "Big Yeti", speedVariance: 0.1),
-                     new Shoot(8.4, count: 1, projectileIndex: 0, predictive: 1, coolDown: 1750),
-                     new Shoot(8.4, count: 1, projectileIndex: 0, coolDown: 1200)
-
+                     new Orbit(0.3, 3, 20, "Big Yeti", 0.1),
+                     new Shoot(8.4, 1, projectileIndex: 0, predictive: 1, coolDown: 1750),
+                     new Shoot(8.4, 1, projectileIndex: 0, coolDown: 1200)
                                       )
             )
             .Init("Snow Bat",
                 new State(
                     new Flash(0xFF0000, 2, 6),
-                     new Orbit(0.3, 3, 20, "Big Yeti", speedVariance: 0.1),
-                     new Shoot(8.4, count: 1, projectileIndex: 0, predictive: 1, coolDown: 1750),
-                     new Shoot(8.4, count: 1, projectileIndex: 0, coolDown: 1200)
-
-
+                     new Orbit(0.3, 3, 20, "Big Yeti", 0.1),
+                     new Shoot(8.4, 1, projectileIndex: 0, predictive: 1, coolDown: 1750),
+                     new Shoot(8.4, 1, projectileIndex: 0, coolDown: 1200)
                     )
             )
                      .Init("Snow Bat Mama",
@@ -52,30 +47,29 @@ namespace wServer.logic
                         ),
                   new State("leggo",
                      new Follow(0.4, 8, 1),
-                      new Shoot(8.4, count: 1, projectileIndex: 0, predictive: 1, coolDown: 2750),
-                     new Shoot(8.4, count: 1, projectileIndex: 1, coolDown: 2300),
-                      new Shoot(8.4, count: 1, projectileIndex: 2, coolDown: 1000),
-                      new Shoot(8.4, count: 1, projectileIndex: 3, coolDown: 1250),
-                       new Spawn("Snow Bat", 1, 4, coolDown: 10000)
+                      new Shoot(8.4, 1, projectileIndex: 0, predictive: 1, coolDown: 2750),
+                     new Shoot(8.4, 1, projectileIndex: 1, coolDown: 2300),
+                      new Shoot(8.4, 1, projectileIndex: 2, coolDown: 1000),
+                      new Shoot(8.4, 1, projectileIndex: 3, coolDown: 1250),
+                       new Spawn("Snow Bat", 1, 4, 10000)
                         ))
 
               )
-
-
+        
 
         //ESBEN LETS GOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO!
              .Init("ic Esben the Unwilling",
                 new State(
                     new RealmPortalDrop(),
-                    new TransformOnDeath("ic Loot Balloon", 1, 1, 1),
+                    new TransformOnDeath("ic Loot Balloon"),
                     new State("Esben1",
                         new Taunt(0.40, "Your souls will soon nourish me."),
                         new Taunt(0.35, "Icicles, rend their flesh."),
                         new ConditionalEffect(ConditionEffectIndex.Invulnerable),
-                        new Shoot(10, 8, 7, projectileIndex: 3, coolDown: 1350),
-                        new Shoot(10, 6, 7, projectileIndex: 3, coolDown: 4250),
-                        new Shoot(10, 4, 7, projectileIndex: 3, coolDown: 3250),
-                        new Shoot(10, 2, 7, projectileIndex: 3, predictive: 2, coolDown: 2250),
+                        new Shoot(10, 8, 7, 3, coolDown: 1350),
+                        new Shoot(10, 6, 7, 3, coolDown: 4250),
+                        new Shoot(10, 4, 7, 3, coolDown: 3250),
+                        new Shoot(10, 2, 7, 3, predictive: 2, coolDown: 2250),
                         new EntitiesNotExistsTransition(9999, "spooked", "ic boss purifier"),
                         new Spawn("ic boss manager", initialSpawn: 1, maxChildren: 1, coolDown: 10000),
                         new TimedTransition(8750, "Esben2")
@@ -85,15 +79,15 @@ namespace wServer.logic
                         new Taunt(0.50, "Ice is cold, blood is think, you being alive makes me sick!"),
                         new Taunt(0.35, "The ice I throw is of my construction, but when it hits you it means destruction!"),
                         new ConditionalEffect(ConditionEffectIndex.Invulnerable),
-                        new Shoot(8.4, count: 69, shootAngle: 6, projectileIndex: 0, coolDown: 3250),
-                        new Shoot(8.4, count: 2, fixedAngle: 0, projectileIndex: 2, coolDown: 1000),
-                        new Shoot(8.4, count: 2, fixedAngle: 90, projectileIndex: 2, coolDown: 1000),
-                        new Shoot(8.4, count: 2, fixedAngle: 180, projectileIndex: 2, coolDown: 1000),
-                        new Shoot(8.4, count: 2, fixedAngle: 270, projectileIndex: 2, coolDown: 1000),
-                        new Shoot(8.4, count: 1, fixedAngle: 40, projectileIndex: 2, coolDown: 1000),
-                        new Shoot(8.4, count: 1, fixedAngle: 135, projectileIndex: 2, coolDown: 1200),
-                        new Shoot(8.4, count: 1, fixedAngle: 225, projectileIndex: 2, coolDown: 1200),
-                        new Shoot(8.4, count: 1, fixedAngle: 315, projectileIndex: 2, coolDown: 1200),
+                        new Shoot(8.4, 69, 6, 0, coolDown: 3250),
+                        new Shoot(8.4, 2, fixedAngle: 0, projectileIndex: 2, coolDown: 1000),
+                        new Shoot(8.4, 2, fixedAngle: 90, projectileIndex: 2, coolDown: 1000),
+                        new Shoot(8.4, 2, fixedAngle: 180, projectileIndex: 2, coolDown: 1000),
+                        new Shoot(8.4, 2, fixedAngle: 270, projectileIndex: 2, coolDown: 1000),
+                        new Shoot(8.4, 1, fixedAngle: 40, projectileIndex: 2, coolDown: 1000),
+                        new Shoot(8.4, 1, fixedAngle: 135, projectileIndex: 2, coolDown: 1200),
+                        new Shoot(8.4, 1, fixedAngle: 225, projectileIndex: 2, coolDown: 1200),
+                        new Shoot(8.4, 1, fixedAngle: 315, projectileIndex: 2, coolDown: 1200),
                           new EntitiesNotExistsTransition(9999, "spooked", "ic boss purifier"),
                         new TimedTransition(8750, "Esben3")
                         ),
@@ -101,9 +95,9 @@ namespace wServer.logic
                         new Taunt(0.60, "I will cut you to shreds."),
                          new Taunt(0.30, "Bad puns I may use to cause offense, but the pain you feel shall be immense!"),
                         new ConditionalEffect(ConditionEffectIndex.Invulnerable),
-                        new Shoot(18, 2, 7, projectileIndex: 1, coolDown: 700),
-                        new Shoot(10, 6, 7, projectileIndex: 1, predictive: 2, coolDown: 800),
-                        new Shoot(18, 1, 7, projectileIndex: 1, coolDown: 14),
+                        new Shoot(18, 2, 7, 1, coolDown: 700),
+                        new Shoot(10, 6, 7, 1, predictive: 2, coolDown: 800),
+                        new Shoot(18, 1, 7, 1, coolDown: 14),
                           new EntitiesNotExistsTransition(9999, "spooked", "ic boss purifier"),
                         new TimedTransition(8750, "Esben1")
                         ),
@@ -111,7 +105,7 @@ namespace wServer.logic
                         new Wander(0.1),
                         new SetAltTexture(1),
                         new ConditionalEffect(ConditionEffectIndex.Invincible),
-                        new Shoot(8.4, count: 16, shootAngle: 60, projectileIndex: 1, coolDown: 1000),
+                        new Shoot(8.4, 16, 60, 1, coolDown: 1000),
                         new Taunt(1.00, "H..help me...."),
                         new RemoveEntity(9999, "ic boss manager"),
                         new TimedTransition(6200, "spookedwaitforkill")
@@ -193,6 +187,16 @@ namespace wServer.logic
 
                     )
             )
+            .Init("ic boss spawner live",
+                new State(
+                    new DropPortalOnDeath("Inner Sanctum Portal", 100),
+                    new EntitiesNotExistsTransition(99, "die", "Big Yeti", "Snow Bat Mama"),
+                    new State("beABum"),
+                    new State("die",
+                        new Suicide()
+                    )
+                )
+            )
                        .Init("ic Loot Balloon",
                 new State(
                     new State("Idle",
@@ -214,9 +218,6 @@ namespace wServer.logic
                     new ItemLoot("Staff of Esben", 0.01),
                     new ItemLoot("Skullish Remains of Esben", 0.01)
                 )
-
-
-
             );
     }
 }

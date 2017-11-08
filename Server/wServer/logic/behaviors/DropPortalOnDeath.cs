@@ -3,6 +3,7 @@
 using System;
 using wServer.realm;
 using wServer.realm.entities;
+using wServer.realm.worlds;
 
 #endregion
 
@@ -46,6 +47,7 @@ namespace wServer.logic.behaviors
             parent.Death += (sender, e) =>
             {
                 if (e.Host.Owner.Name == "Arena") return;
+                if (e.Host.Owner is CourtOfBereavement) return;
                 if (new Random().Next(1, 100) <= percent)
                 {
                     Portal entity = objType == 0

@@ -96,6 +96,7 @@ namespace wServer.realm
         public LogicTicker Logic { get; private set; }
 
         public static int CurrentWorldId { get; private set; }
+        public static int CurrentCourtId { get; private set; }
 
         public int MaxClients { get; }
 
@@ -317,6 +318,8 @@ namespace wServer.realm
                 Monitor.WorldAdded(world);
                 CurrentWorldId = world.Id;
             }
+            if (world is CourtOfBereavement)
+                CurrentCourtId = world.Id;
             if (CheckConfig.IsDebugOn())
                 log.InfoFormat("World {0}({1}) added.", world.Id, world.Name);
         }

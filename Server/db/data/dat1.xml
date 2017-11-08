@@ -82098,12 +82098,12 @@ The solid honey on this ring renews its wearer with incredible energy.
   <Object type="0x620a" id="Death Arena Portal" ext="true">
     <Class>Portal</Class>
     <IntergamePortal/>
-    <DungeonName>Arena</DungeonName>
+    <DungeonName>Court Of Bereavement</DungeonName>
     <Texture>
       <File>lofiObjBig</File>
       <Index>0x139</Index>
     </Texture>
-    <DisplayId>Death Arena Portal</DisplayId>
+    <DisplayId>Court Of Bereavement Portal</DisplayId>
   </Object>
   <Object type="0x620b" id="Death Arena Key"  ext="true">
     <Class>Equipment</Class>
@@ -82113,12 +82113,12 @@ The solid honey on this ring renews its wearer with incredible energy.
       <Index>0x3af</Index>
     </Texture>
     <SlotType>10</SlotType>
-    <Description>A key which opens a portal to the Death Arena</Description>
+    <Description>A key which opens a portal to the Court Of Bereavement</Description>
     <Sound>use_key</Sound>
     <Consumable/>
     <Activate id="Death Arena Portal">Create</Activate>
     <feedPower>100</feedPower>
-    <DisplayId>Death Arena Key</DisplayId>
+    <DisplayId>Court Of Bereavement Key</DisplayId>
   </Object>
   <Object type="0x0243" id="Marble Seal">
     <DisplayId>Marble Seal</DisplayId>

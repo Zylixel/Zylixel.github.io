@@ -38,11 +38,19 @@ namespace wServer.realm
                 while (pendings.TryDequeue(out work))
                 {
                     if (Manager.Terminating) return;
-                    if (work.Item1.Stage == ProtocalStage.Disconnected)
+                    try
                     {
-                        Client client;
-                        Manager.Clients.TryRemove(work.Item1.Account.AccountId, out client);
-                        continue;
+                        if (work.Item1.Stage == ProtocalStage.Disconnected)
+                        {
+                            Client client;
+                            Manager.Clients.TryRemove(work.Item1.Account.AccountId, out client);
+                            continue;
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                        throw;
                     }
                     try
                     {

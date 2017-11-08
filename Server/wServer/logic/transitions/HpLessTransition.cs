@@ -11,19 +11,19 @@ namespace wServer.logic.transitions
     {
         //State storage: none
 
-        private readonly double threshold;
+        private readonly double _threshold;
 
         public HpLessTransition(double threshold, string targetState)
             : base(targetState)
         {
-            this.threshold = threshold;
+            _threshold = threshold;
         }
 
         protected override bool TickCore(Entity host, RealmTime time, ref object state)
         {
-            if (threshold > 1.0)
-                return (host as Enemy).HP < threshold;
-            return ((host as Enemy).HP/host.ObjectDesc.MaxHp) < threshold;
+            if (_threshold > 1.0)
+                return (host as Enemy).HP < _threshold;
+            return ((host as Enemy).HP/host.ObjectDesc.MaxHp) < _threshold;
         }
     }
 }

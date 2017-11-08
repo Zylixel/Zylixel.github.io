@@ -29,11 +29,11 @@ namespace wServer.logic
                          ),
                      new State("attack",
                          new Wander(1.0),
-                         new Shoot(3000, count: 12, projectileIndex: 0, fixedAngle: fixedAngle_RingAttack2),
+                         new Shoot(3000, 12, projectileIndex: 0, fixedAngle: fixedAngle_RingAttack2),
                          new Shoot(10, 1, 0, defaultAngle: 0, angleOffset: 0, projectileIndex: 0, predictive: 1,
-                         coolDown: 1000, coolDownOffset: 0),
+                         coolDown: 1000),
                          new Shoot(10, 1, 0, defaultAngle: 0, angleOffset: 0, projectileIndex: 1, predictive: 1,
-                         coolDown: 2000, coolDownOffset: 0)
+                         coolDown: 2000)
                          )
                          ),
                     new ItemLoot("Golden Dagger", 0.2),
@@ -45,92 +45,128 @@ namespace wServer.logic
             )
         .Init("Arachna Web Spoke 1",
             new State(
+                new EntityNotExistsTransition("Arachna the Spider Queen", 30, "die"),
                 new State(":D",
                          new ConditionalEffect(ConditionEffectIndex.Invulnerable),
                          new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 120, fixedAngle: 120, coolDown: 5),
                          new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 180, fixedAngle: 180, coolDown: 5),
                          new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 240, fixedAngle: 240, coolDown: 5)
+                    ),
+                new State("die",
+                    new Suicide()
                     )
                 )
             )
        .Init("Arachna Web Spoke 2",
             new State(
+                new EntityNotExistsTransition("Arachna the Spider Queen", 30, "die"),
                 new State(":D",
                          new ConditionalEffect(ConditionEffectIndex.Invulnerable),
                          new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 240, fixedAngle: 240, coolDown: 5),
                          new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 180, fixedAngle: 180, coolDown: 5),
                          new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 300, fixedAngle: 300, coolDown: 5)
-                    )
+                    ),
+                new State("die",
+                    new Suicide()
+                )
                 )
                 )
       .Init("Arachna Web Spoke 3",
             new State(
+                new EntityNotExistsTransition("Arachna the Spider Queen", 30, "die"),
                 new State(":D",
                          new ConditionalEffect(ConditionEffectIndex.Invulnerable),
                          new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 300, fixedAngle: 300, coolDown: 5),
                          new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 240, fixedAngle: 240, coolDown: 5),
                          new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 0, fixedAngle: 0, coolDown: 5)
-                    )
+                    ),
+                new State("die",
+                    new Suicide()
+                )
                 )
                 )
        .Init("Arachna Web Spoke 4",
             new State(
+                new EntityNotExistsTransition("Arachna the Spider Queen", 30, "die"),
                 new State(":D",
                          new ConditionalEffect(ConditionEffectIndex.Invulnerable),
                          new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 0, fixedAngle: 0, coolDown: 5),
                          new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 60, fixedAngle: 60, coolDown: 5),
                          new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 300, fixedAngle: 300, coolDown: 5)
-                    )
+                    ),
+                new State("die",
+                    new Suicide()
+                )
                 )
                 )
       .Init("Arachna Web Spoke 5",
             new State(
+                new EntityNotExistsTransition("Arachna the Spider Queen", 30, "die"),
                 new State(":D",
                          new ConditionalEffect(ConditionEffectIndex.Invulnerable),
                          new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 60, fixedAngle: 60, coolDown: 5),
                          new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 0, fixedAngle: 0, coolDown: 5),
                          new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 120, fixedAngle: 120, coolDown: 5)
-                    )
+                    ),
+                new State("die",
+                    new Suicide()
+                )
                 )
                 )
        .Init("Arachna Web Spoke 6",
             new State(
+                new EntityNotExistsTransition("Arachna the Spider Queen", 30, "die"),
                 new State(":D",
                          new ConditionalEffect(ConditionEffectIndex.Invulnerable),
                          new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 120, fixedAngle: 120, coolDown: 5),
                          new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 60, fixedAngle: 60, coolDown: 5),
                          new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 180, fixedAngle: 180, coolDown: 5)
-                    )
+                    ),
+                new State("die",
+                    new Suicide()
+                )
                 )
                 )
         .Init("Arachna Web Spoke 7",
             new State(
+                new EntityNotExistsTransition("Arachna the Spider Queen", 30, "die"),
                 new State(":D",
                          new ConditionalEffect(ConditionEffectIndex.Invulnerable),
                          new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 180, fixedAngle: 180, coolDown: 5),
                          new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 120, fixedAngle: 120, coolDown: 5),
                          new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 240, fixedAngle: 240, coolDown: 5)
-                    )
+                    ),
+                new State("die",
+                    new Suicide()
+                )
                 )
                 )
         .Init("Arachna Web Spoke 8",
             new State(
+                new EntityNotExistsTransition("Arachna the Spider Queen", 30, "die"),
                 new State(":D",
                          new ConditionalEffect(ConditionEffectIndex.Invulnerable),
                          new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 360, fixedAngle: 360, coolDown: 5),
                          new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 240, fixedAngle: 240, coolDown: 5),
                          new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 300, fixedAngle: 300, coolDown: 5)
-                    )
+                    ),
+                new State("die",
+                    new Suicide()
+                )
                 )
                 )
         .Init("Arachna Web Spoke 9",
             new State(
+                new EntityNotExistsTransition("Arachna the Spider Queen", 30, "die"),
                 new State(":D",
                          new ConditionalEffect(ConditionEffectIndex.Invulnerable),
                          new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 0, fixedAngle: 0, coolDown: 5),
                          new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 60, fixedAngle: 60, coolDown: 5),
                          new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 120, fixedAngle: 120, coolDown: 5)
-                    )
+                    ),
+                new State("die",
+                    new Suicide()
+                )
                 )
              )
         .Init("Black Den Spider",
@@ -139,7 +175,7 @@ namespace wServer.logic
                     new Wander(0.8),
                     new Charge(0.9, 20f, 2000),
                     new Shoot(10, 1, 0, defaultAngle: 0, angleOffset: 0, projectileIndex: 0, predictive: 1,
-                    coolDown: 500, coolDownOffset: 0)
+                    coolDown: 500)
                          )
                      ),
                     new ItemLoot("Healing Ichor", 0.2)
@@ -150,7 +186,7 @@ namespace wServer.logic
                     new Wander(0.8),
                     new Charge(0.9, 40f, 2000),
                     new Shoot(10, 1, 0, defaultAngle: 0, angleOffset: 0, projectileIndex: 0, predictive: 1,
-                    coolDown: 500, coolDownOffset: 0)
+                    coolDown: 500)
                          )
                      ),
                     new ItemLoot("Healing Ichor", 0.2)
@@ -171,7 +207,7 @@ namespace wServer.logic
                     new Wander(0),
                     new Follow(0.8, 0.8, 0),
                     new Shoot(10, 1, 0, defaultAngle: 0, angleOffset: 0, projectileIndex: 0, predictive: 1,
-                    coolDown: 1000, coolDownOffset: 0)
+                    coolDown: 1000)
                     )
                 )
              )
@@ -192,7 +228,7 @@ namespace wServer.logic
                     new Wander(0),
                     new Follow(1.0, 0.8, 0),
                     new Shoot(10, 1, 0, defaultAngle: 0, angleOffset: 0, projectileIndex: 0, predictive: 1,
-                    coolDown: 500, coolDownOffset: 0)
+                    coolDown: 500)
                     )
                 ),
                 new ItemLoot("Healing Ichor", 0.2)

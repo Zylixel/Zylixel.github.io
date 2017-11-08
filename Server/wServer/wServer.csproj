@@ -507,6 +507,7 @@
     <Compile Include="realm\Utils.cs" />
     <Compile Include="realm\Wmap.cs" />
     <Compile Include="realm\World.cs" />
+    <Compile Include="realm\worlds\CourtOfBereavement.cs" />
     <Compile Include="realm\worlds\BattleNexus.cs" />
     <Compile Include="realm\worlds\RandomRealm.cs" />
     <Compile Include="realm\worlds\Test.cs" />
@@ -688,7 +689,6 @@
     <EmbeddedResource Include="realm\worlds\maps\UDL.jm" />
     <EmbeddedResource Include="realm\worlds\maps\ddocks.jm" />
     <EmbeddedResource Include="realm\worlds\maps\bgrotto.jm" />
-    <EmbeddedResource Include="realm\worlds\maps\icecave.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\innersanctum.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\jungles.jm" />
     <EmbeddedResource Include="realm\worlds\maps\CandylandHuntingGrounds.jm" />
@@ -712,6 +712,7 @@
     <EmbeddedResource Include="realm\worlds\maps\crawling.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\shaitansmap.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\LairofShaitan.jm" />
+    <EmbeddedResource Include="realm\worlds\maps\icecave.jm" />
     <None Include="wServer.cfg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

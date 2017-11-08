@@ -7,12 +7,12 @@ namespace wServer.logic.transitions
     {
         //State storage: none
 
-        private int damage;
+        private int _damage;
 
         public DamageTakenTransition(int damage, string targetState)
             : base(targetState)
         {
-            this.damage = damage;
+            _damage = damage;
         }
 
         protected override bool TickCore(Entity host, RealmTime time, ref object state)
@@ -22,7 +22,7 @@ namespace wServer.logic.transitions
             foreach (var i in (host as Enemy).DamageCounter.GetPlayerData())
                 damageSoFar += i.Item2;
 
-            if (damageSoFar >= damage)
+            if (damageSoFar >= _damage)
                 return true;
             return false;
         }

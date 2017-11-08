@@ -189,6 +189,10 @@ public class GameSprite extends AGameSprite {
             this.showTimer();
             this.showWaveCounter();
         }
+        if (map.name_ == "Court Of Bereavement") {
+            this.showTimer();
+            this.showWaveCounter();
+        }
         _local_1 = StaticInjectorContext.getInjector().getInstance(Account);
         if (((this.packageModel.shouldSpam()) && ((map.name_ == Map.NEXUS)))) {
             if (this.beginnersPackageModel.isBeginnerAvailable()) {

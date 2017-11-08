@@ -14,8 +14,8 @@ namespace wServer.logic
             .Init("Marble Pillar",
                 new State(
                     new State("Idle",
-                        new AoeEffect(3, 500, ConditionEffectIndex.Armored),
-                        new AoeEffect(3, 500, ConditionEffectIndex.Damaging),
+                        new AoeEffect(3, 1, ConditionEffectIndex.Armored),
+                        new AoeEffect(3, 1, ConditionEffectIndex.Damaging),
                         new TimedTransition(4500, "die")
                     ),
                     new State("die",

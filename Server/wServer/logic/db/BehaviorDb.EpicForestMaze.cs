@@ -48,7 +48,7 @@ namespace wServer.logic
                 new State("idle",
                     new Wander(0.1),
                     new Protect(1, "Murderous Megamoth", 100, 5, 5),
-                    new Shoot(10, count: 4, projectileIndex: 0, fixedAngle: fixedAngle_RingAttack2)
+                    new Shoot(10, 4, projectileIndex: 0, fixedAngle: fixedAngle_RingAttack2)
                     )
                 )
             )
@@ -98,21 +98,21 @@ namespace wServer.logic
                 new TransformOnDeath("Epic Mama Megamoth"),
                 new PlayerWithinTransition(10, "shoot1"),
                 new State("shoot1",
-                    new Shoot(0, 3, shootAngle: 15, projectileIndex: 0, fixedAngle: 45, coolDownOffset: 1250),
-                    new Shoot(0, 3, shootAngle: 15, projectileIndex: 0, fixedAngle: 135, coolDownOffset: 1250),
-                    new Shoot(0, 3, shootAngle: 15, projectileIndex: 0, fixedAngle: 225, coolDownOffset: 1250),
-                    new Shoot(0, 3, shootAngle: 15, projectileIndex: 0, fixedAngle: 315, coolDownOffset: 1250),
-                    new Shoot(10, count: 8, projectileIndex: 0, fixedAngle: fixedAngle_RingAttack2, coolDownOffset: 1500),
-                    new Shoot(10, count: 4, projectileIndex: 0, fixedAngle: fixedAngle_RingAttack2, coolDownOffset: 2000)
+                    new Shoot(0, 3, 15, 0, 45, coolDownOffset: 1250),
+                    new Shoot(0, 3, 15, 0, 135, coolDownOffset: 1250),
+                    new Shoot(0, 3, 15, 0, 225, coolDownOffset: 1250),
+                    new Shoot(0, 3, 15, 0, 315, coolDownOffset: 1250),
+                    new Shoot(10, 8, projectileIndex: 0, fixedAngle: fixedAngle_RingAttack2, coolDownOffset: 1500),
+                    new Shoot(10, 4, projectileIndex: 0, fixedAngle: fixedAngle_RingAttack2, coolDownOffset: 2000)
                     ),
                 new State("shoot4",
                     //toss Larva Puke
-                    new Shoot(0, 3, shootAngle: 15, projectileIndex: 0, fixedAngle: 45, coolDownOffset: 1250),
-                    new Shoot(0, 3, shootAngle: 15, projectileIndex: 0, fixedAngle: 135, coolDownOffset: 1250),
-                    new Shoot(0, 3, shootAngle: 15, projectileIndex: 0, fixedAngle: 225, coolDownOffset: 1250),
-                    new Shoot(0, 3, shootAngle: 15, projectileIndex: 0, fixedAngle: 315, coolDownOffset: 1250),
-                    new Shoot(10, count: 8, projectileIndex: 0, fixedAngle: fixedAngle_RingAttack2, coolDownOffset: 1500),
-                    new Shoot(10, count: 4, projectileIndex: 0, fixedAngle: fixedAngle_RingAttack2, coolDownOffset: 2000)
+                    new Shoot(0, 3, 15, 0, 45, coolDownOffset: 1250),
+                    new Shoot(0, 3, 15, 0, 135, coolDownOffset: 1250),
+                    new Shoot(0, 3, 15, 0, 225, coolDownOffset: 1250),
+                    new Shoot(0, 3, 15, 0, 315, coolDownOffset: 1250),
+                    new Shoot(10, 8, projectileIndex: 0, fixedAngle: fixedAngle_RingAttack2, coolDownOffset: 1500),
+                    new Shoot(10, 4, projectileIndex: 0, fixedAngle: fixedAngle_RingAttack2, coolDownOffset: 2000)
                     ),
                 new State("change",
                     new ConditionalEffect(ConditionEffectIndex.Invulnerable),
@@ -131,7 +131,7 @@ namespace wServer.logic
                     new Follow(0.4, 6, 1, -1, 0),
                     new Wander(0.3)
                     ),
-                new Shoot(radius: 7, count: 1, projectileIndex: 0, shootAngle: 20, coolDown: 2000)
+                new Shoot(7, 1, projectileIndex: 0, shootAngle: 20, coolDown: 2000)
                 ),
                 new Threshold(0.025,
                     new ItemLoot("Speed Sprout", 0.05)
@@ -141,7 +141,7 @@ namespace wServer.logic
             new State(
                 new Prioritize(
                     new Wander(0.4),
-                    new Shoot(radius: 10, count: 2, projectileIndex: 0, predictive: 1, coolDown: 500, shootAngle: 2)
+                    new Shoot(10, 2, projectileIndex: 0, predictive: 1, coolDown: 500, shootAngle: 2)
                     )
                 ),
                 new Threshold(0.025,
@@ -153,7 +153,7 @@ namespace wServer.logic
                 new Prioritize(
                     new Wander(0.4),
                     new Follow(0.7, 10, 3, -1, 0),
-                    new Shoot(radius: 4, count: 1, projectileIndex: 0, coolDown: 500)
+                    new Shoot(4, 1, projectileIndex: 0, coolDown: 500)
                     )
                 ),
                 new Threshold(0.025,
@@ -165,7 +165,7 @@ namespace wServer.logic
                 new Prioritize(
                     new Follow(0.6, 6, 1, -1, 0),
                     new Wander(0.7),
-                    new Shoot(radius: 7, count: 3, projectileIndex: 0, predictive: 1, coolDown: 1000, shootAngle: 15)
+                    new Shoot(7, 3, projectileIndex: 0, predictive: 1, coolDown: 1000, shootAngle: 15)
                     )
                 ),
                 new Threshold(0.025,
@@ -176,7 +176,7 @@ namespace wServer.logic
             new State(
                 new ConditionalEffect(ConditionEffectIndex.Invincible),
                 new State("idle",
-                    new Shoot(10, count: 8, projectileIndex: 0, fixedAngle: fixedAngle_RingAttack2)
+                    new Shoot(10, 8, projectileIndex: 0, fixedAngle: fixedAngle_RingAttack2)
                     )
                 )
             )
@@ -184,7 +184,7 @@ namespace wServer.logic
             new State(
                 new ConditionalEffect(ConditionEffectIndex.Invincible),
                 new State("idle",
-                    new Shoot(10, count: 8, projectileIndex: 0, fixedAngle: fixedAngle_RingAttack2)
+                    new Shoot(10, 8, projectileIndex: 0, fixedAngle: fixedAngle_RingAttack2)
                     )
                 )
             )
@@ -192,7 +192,7 @@ namespace wServer.logic
             new State(
                 new ConditionalEffect(ConditionEffectIndex.Invincible),
                 new State("idle",
-                    new Shoot(10, count: 8, projectileIndex: 0, fixedAngle: fixedAngle_RingAttack2)
+                    new Shoot(10, 8, projectileIndex: 0, fixedAngle: fixedAngle_RingAttack2)
                     )
                 )
             );

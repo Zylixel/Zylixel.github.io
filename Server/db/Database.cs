@@ -497,7 +497,6 @@ SELECT credits FROM stats WHERE accId=@accId;";
             cmd.Parameters.AddWithValue("@accId", acc);
             cmd.Parameters.AddWithValue("@petId", pet);
             cmd.Parameters.AddWithValue("@amount", amount);
-            Log.Error("UPDATE pets SET size = "+ amount + " WHERE accId = "+ acc +" AND petId = "+ pet +";");
             cmd.ExecuteNonQuery();
         }
 

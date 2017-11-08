@@ -5,30 +5,30 @@ namespace wServer.logic.transitions
 {
     public class ChatTransition : Transition
     {
-        private readonly string[] texts;
-        private bool transit;
+        private readonly string[] _texts;
+        private bool _transit;
 
         public ChatTransition(string targetState, params string[] texts)
             : base(targetState)
         {
-            this.texts = texts ?? Empty<string>.Array;
-            transit = false;
+            _texts = texts ?? Empty<string>.Array;
+            _transit = false;
         }
 
         protected override void OnStateEntry(Entity host, RealmTime time, ref object state)
         {
-            transit = false;
+            _transit = false;
         }
 
         protected override bool TickCore(Entity host, RealmTime time, ref object state)
         {
-            return transit;
+            return _transit;
         }
 
         public void OnChatReceived(string text)
         {
-            if (texts.Contains(text))
-                transit = true;
+            if (_texts.Contains(text))
+                _transit = true;
         }
     }
 }

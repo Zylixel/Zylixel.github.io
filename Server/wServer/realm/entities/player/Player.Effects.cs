@@ -10,7 +10,6 @@ namespace wServer.realm.entities.player
     {
         private int _canTpCooldownTime;
         private float _bleeding;
-        private int _healCount;
         private float _healing;
         private int _newbieTime;
         private int _pendantReady;
@@ -35,7 +34,6 @@ namespace wServer.realm.entities.player
                     HP = Math.Min(Stats[0] + Boost[0], HP + (int) _healing);
                     _healing -= (int) _healing;
                     UpdateCount++;
-                    _healCount++;
                 }
                 _healing += 28*(time.thisTickTimes/1000f);
             }

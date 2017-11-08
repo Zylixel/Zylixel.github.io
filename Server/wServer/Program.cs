@@ -93,23 +93,6 @@ namespace wServer
             }
         }
 
-        public static void SendEmail(MailMessage message, bool enableSsl = true)
-        {
-            SmtpClient client = new SmtpClient
-            {
-                Host = Settings.GetValue<string>("smtpHost", "smtp.gmail.com"),
-                Port = Settings.GetValue<int>("smtpPort", "587"),
-                DeliveryMethod = SmtpDeliveryMethod.Network,
-                UseDefaultCredentials = false,
-                EnableSsl = true,
-                Credentials =
-                    new NetworkCredential(Settings.GetValue<string>("serverEmail"),
-                        Settings.GetValue<string>("serverEmailPassword"))
-            };
-
-            client.Send(message);
-        }
-
         private static void autoBroadcastNews()
         {
                 var news = File.ReadAllLines("news.txt");

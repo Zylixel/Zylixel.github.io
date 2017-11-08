@@ -1,4 +1,5 @@
-﻿using db;
+﻿using System.Windows.Forms;
+using db;
 using log4net;
 using wServer.networking;
 using wServer.networking.svrPackets;
@@ -11,6 +12,9 @@ namespace wServer.realm
         static ILog log = LogManager.GetLogger(typeof(ChatManager));
 
         RealmManager manager;
+
+        static string saved;
+
         public ChatManager(RealmManager manager)
         {
             this.manager = manager;
@@ -78,7 +82,7 @@ namespace wServer.realm
                 });
                 log.InfoFormat("<Announcement> {0}", text);
         }
-
+        
         public void Oryx(World world, string text)
         {
             world.BroadcastPacket(new TextPacket

@@ -10,27 +10,27 @@ namespace wServer.logic.transitions
     {
         //State storage: cooldown timer
 
-        private readonly bool randomized;
-        private readonly int time;
+        private readonly bool _randomized;
+        private readonly int _time;
 
         public TimedTransition(int time, string targetState, bool randomized = false)
             : base(targetState)
         {
-            this.time = time;
-            this.randomized = randomized;
+            _time = time;
+            _randomized = randomized;
         }
 
         protected override bool TickCore(Entity host, RealmTime time, ref object state)
         {
             int cool;
-            if (state == null) cool = randomized ? Random.Next(this.time) : this.time;
+            if (state == null) cool = _randomized ? Random.Next(_time) : _time;
             else cool = (int) state;
 
             bool ret = false;
             if (cool <= 0)
             {
                 ret = true;
-                cool = this.time;
+                cool = _time;
             }
             else
                 cool -= time.thisTickTimes;

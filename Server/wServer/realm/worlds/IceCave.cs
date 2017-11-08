@@ -16,7 +16,7 @@
 
         protected override void Init()
         {
-            LoadMap("wServer.realm.worlds.maps.icecave.wmap", MapType.Wmap);
+            LoadMap("wServer.realm.worlds.maps.icecave.jm", MapType.Json);
         }
     }
 }

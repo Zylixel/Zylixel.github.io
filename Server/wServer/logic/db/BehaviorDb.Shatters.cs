@@ -170,6 +170,7 @@ namespace wServer.logic
         #region portals
             .Init("shtrs Ice Portal",
                 new State(
+                    new TimedTransition(60000, "die"),
                     new State("Idle",
                         new TimedTransition(1000, "Spin")
                     ),
@@ -184,11 +185,25 @@ namespace wServer.logic
                     ),
                     new State("Pause",
                        new TimedTransition(5000, "Idle")
-                    )
+                    ),
+                    new State("die",
+                        new Flash(0xfFF0000, 0.5, 900),
+                        new Shoot(0, projectileIndex: 0, count: 6, shootAngle: 60, fixedAngle: 0, coolDown: 1200),
+                        new Shoot(0, projectileIndex: 0, count: 6, shootAngle: 60, fixedAngle: 15, coolDown: 1200, coolDownOffset: 200),
+                        new Shoot(0, projectileIndex: 0, count: 6, shootAngle: 60, fixedAngle: 30, coolDown: 1200, coolDownOffset: 400),
+                        new Shoot(0, projectileIndex: 0, count: 6, shootAngle: 60, fixedAngle: 45, coolDown: 1200, coolDownOffset: 600),
+                        new Shoot(0, projectileIndex: 0, count: 6, shootAngle: 60, fixedAngle: 60, coolDown: 1200, coolDownOffset: 800),
+                        new Shoot(0, projectileIndex: 0, count: 6, shootAngle: 60, fixedAngle: 75, coolDown: 1200, coolDownOffset: 1000),
+                        new TimedTransition(3000, "Suicide")
+                        ),
+                    new State("Suicide",
+                        new Suicide()
+                        )
                 )
             )
             .Init("shtrs Fire Portal",
                 new State(
+                    new TimedTransition(60000, "die"),
                     new State("Idle",
                         new TimedTransition(1000, "Spin")
                     ),
@@ -203,14 +218,28 @@ namespace wServer.logic
                     ),
                     new State("Pause",
                        new TimedTransition(5000, "Idle")
-                    )
+                    ),
+                    new State("die",
+                        new Flash(0xfFF0000, 0.5, 900),
+                        new Shoot(0, projectileIndex: 0, count: 6, shootAngle: 60, fixedAngle: 0, coolDown: 1200),
+                        new Shoot(0, projectileIndex: 0, count: 6, shootAngle: 60, fixedAngle: 15, coolDown: 1200, coolDownOffset: 200),
+                        new Shoot(0, projectileIndex: 0, count: 6, shootAngle: 60, fixedAngle: 30, coolDown: 1200, coolDownOffset: 400),
+                        new Shoot(0, projectileIndex: 0, count: 6, shootAngle: 60, fixedAngle: 45, coolDown: 1200, coolDownOffset: 600),
+                        new Shoot(0, projectileIndex: 0, count: 6, shootAngle: 60, fixedAngle: 60, coolDown: 1200, coolDownOffset: 800),
+                        new Shoot(0, projectileIndex: 0, count: 6, shootAngle: 60, fixedAngle: 75, coolDown: 1200, coolDownOffset: 1000),
+                        new TimedTransition(3000, "Suicide")
+                        ),
+                    new State("Suicide",
+                        new Suicide()
+                        )
                 )
             )
             .Init("shtrs Ice Shield",
                 new State(
                     new HpLessTransition(.2, "Death"),
+                    new TimedTransition(60000, "Death"),
                     new State(
-                        new Charge(0.6, 7, coolDown: 5000),
+                        new Charge(3, 7, coolDown: 5000),
                         new Shoot(3, 6, 60, projectileIndex: 0, fixedAngle: 0, coolDown: 1200),
                         new Shoot(3, 6, 60, projectileIndex: 0, fixedAngle: 10, coolDown: 1200, coolDownOffset: 200),
                         new Shoot(3, 6, 60, projectileIndex: 0, fixedAngle: 20, coolDown: 1200, coolDownOffset: 400),
@@ -221,7 +250,7 @@ namespace wServer.logic
                     new State("Death",
                         new ConditionalEffect(ConditionEffectIndex.Invulnerable),
                         new Shoot(13, 45, 8, projectileIndex: 1, fixedAngle: 1, coolDown: 10000),
-                        new Timed(1000, new Suicide())
+                        new Timed(1000, new Suicide()) //Todo Hey this is cool
                     )
                 )
             )

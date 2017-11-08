@@ -349,7 +349,6 @@ namespace wServer.realm.commands
 
         protected override bool Process(Player player, RealmTime time, string[] args)
         {
-            log.Error("Trying to connect to: " + RealmManager.CurrentWorldId);
             player.Client.Reconnect(new ReconnectPacket
             {
                 Host = "",
@@ -361,6 +360,33 @@ namespace wServer.realm.commands
             return true;
         }
     }
+
+    internal class TpCourt : Command
+    {
+        public TpCourt()
+            : base("Court")
+        {
+        }
+
+        protected override bool Process(Player player, RealmTime time, string[] args)
+        {
+            if (CourtOfBereavement.canJoin)
+            {
+                player.Client.Reconnect(new ReconnectPacket
+                {
+                    Host = "",
+                    Port = 2050,
+                    GameId = RealmManager.CurrentCourtId,
+                    Name = "Court of Bereavement",
+                    Key = Empty<byte>.Array
+                });
+                return true;
+            }
+            player.SendError("No Court available to join!");
+            return false;
+        }
+    }
+
     internal class Godland : Command
     {
         public Godland()

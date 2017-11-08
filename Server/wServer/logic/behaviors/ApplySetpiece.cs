@@ -1,6 +1,7 @@
 ﻿using System;
 using wServer.realm;
 using wServer.realm.setpieces;
+using wServer.realm.worlds;
 
 namespace wServer.logic.behaviors
 {
@@ -15,6 +16,7 @@ namespace wServer.logic.behaviors
 
         protected override void OnStateEntry(Entity host, RealmTime time, ref object state)
         {
+            if (host.Owner is CourtOfBereavement) return;
             var piece = (ISetPiece)Activator.CreateInstance(Type.GetType(
                 "wServer.realm.setpieces." + name, true, true));
             piece.RenderSetPiece(host.Owner, new IntPoint((int)host.X, (int)host.Y));

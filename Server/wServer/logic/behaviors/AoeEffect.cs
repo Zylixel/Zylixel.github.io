@@ -19,7 +19,7 @@ namespace wServer.logic.behaviors
             this.duration = duration;
         }
 
-        protected override void OnStateEntry(Entity host, RealmTime time, ref object state)
+        protected override void TickCore(Entity host, RealmTime time, ref object state)
         {
             foreach (Player i in host.Owner.PlayersCollision.HitTest(host.X, host.Y, radius).OfType<Player>())
             {
@@ -30,7 +30,5 @@ namespace wServer.logic.behaviors
                 });
             }
         }
-
-        protected override void TickCore(Entity host, RealmTime time, ref object state) { }
     }
 }

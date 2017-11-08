@@ -1,4 +1,5 @@
 ﻿using wServer.realm;
+using wServer.realm.worlds;
 
 namespace wServer.logic.behaviors
 {
@@ -9,6 +10,7 @@ namespace wServer.logic.behaviors
         {
             parent.Death += (e, s) =>
             {
+                if (s.Host.Owner is CourtOfBereavement) return;
                 Entity en = s.Host.GetNearestEntity(100, 0x5e4b);
                 Entity portal = Entity.Resolve(s.Host.Manager, "Realm Portal");
 
@@ -23,6 +25,7 @@ namespace wServer.logic.behaviors
 
         protected override void OnStateEntry(Entity host, RealmTime time, ref object state)
         {
+            if (host.Owner is CourtOfBereavement) return;
             if (host.GetNearestEntity(100, 0x5e4b) != null) return;
             Entity opener = Entity.Resolve(host.Manager, "Realm Portal Opener");
             host.Owner.EnterWorld(opener);
