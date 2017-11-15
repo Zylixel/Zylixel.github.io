@@ -106,9 +106,9 @@ namespace wServer.realm.commands
                     return false;
                 }
                 int c = int.Parse(args[0]);
-                if  (c > 20)
+                if  (c > 25)
                 {
-                    player.SendError("Maximum spawn count is set to 20!");
+                    player.SendError("Maximum spawn count is set to 25!");
                     return false;
                 }
                 for (int i = 0; i < num; i++)
