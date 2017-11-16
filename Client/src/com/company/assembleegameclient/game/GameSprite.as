@@ -185,11 +185,7 @@ public class GameSprite extends AGameSprite {
         if (this.evalIsNotInCombatMapArea()) {
             this.showSafeAreaDisplays();
         }
-        if (map.name_ == "Arena") {
-            this.showTimer();
-            this.showWaveCounter();
-        }
-        if (map.name_ == "Court Of Bereavement") {
+        if (map.name_ == "Arena" || map.name_ == "Court Of Bereavement") {
             this.showTimer();
             this.showWaveCounter();
         }

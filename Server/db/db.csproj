@@ -105,9 +105,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="data\datBrandon.xml">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="data\datDev.xml" />
     <Content Include="data\EquipmentSets.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>

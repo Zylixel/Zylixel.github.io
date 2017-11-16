@@ -217,5 +217,8 @@ pip-log.txt
 
 Server/wServer/wServer.cfg
 Server/server/server.cfg
+Server/.dropbox
+Server/.vs
+Server/packages/
 Client/src/kabam/rotmg/application/impl/ProductionSetup.as
 Client/src/kabam/rotmg/servers/Production/ZySetup.as

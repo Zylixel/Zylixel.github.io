@@ -239,17 +239,17 @@ namespace wServer.logic
                     new HpLessTransition(.2, "Death"),
                     new TimedTransition(60000, "Death"),
                     new State(
-                        new Charge(3, 7, coolDown: 5000),
-                        new Shoot(3, 6, 60, projectileIndex: 0, fixedAngle: 0, coolDown: 1200),
-                        new Shoot(3, 6, 60, projectileIndex: 0, fixedAngle: 10, coolDown: 1200, coolDownOffset: 200),
-                        new Shoot(3, 6, 60, projectileIndex: 0, fixedAngle: 20, coolDown: 1200, coolDownOffset: 400),
-                        new Shoot(3, 6, 60, projectileIndex: 0, fixedAngle: 30, coolDown: 1200, coolDownOffset: 600),
-                        new Shoot(3, 6, 60, projectileIndex: 0, fixedAngle: 40, coolDown: 1200, coolDownOffset: 800),
-                        new Shoot(3, 6, 60, projectileIndex: 0, fixedAngle: 50, coolDown: 1200, coolDownOffset: 1000)
+                        new Charge(3, 7, 5000),
+                        new Shoot(3, 6, 60, 0, 0, coolDown: 1200),
+                        new Shoot(3, 6, 60, 0, 10, coolDown: 1200, coolDownOffset: 200),
+                        new Shoot(3, 6, 60, 0, 20, coolDown: 1200, coolDownOffset: 400),
+                        new Shoot(3, 6, 60, 0, 30, coolDown: 1200, coolDownOffset: 600),
+                        new Shoot(3, 6, 60, 0, 40, coolDown: 1200, coolDownOffset: 800),
+                        new Shoot(3, 6, 60, 0, 50, coolDown: 1200, coolDownOffset: 1000)
                     ),
                     new State("Death",
                         new ConditionalEffect(ConditionEffectIndex.Invulnerable),
-                        new Shoot(13, 45, 8, projectileIndex: 1, fixedAngle: 1, coolDown: 10000),
+                        new Shoot(13, 45, 8, 1, 1, coolDown: 10000),
                         new Timed(1000, new Suicide()) //Todo Hey this is cool
                     )
                 )
@@ -259,8 +259,8 @@ namespace wServer.logic
                 new HpLessTransition(0.3, "Death"),
                 new State(
                     new Orbit(0.5, 5, 1, "shtrs Twilight Archmage"),
-                    new Charge(0.1, 6, coolDown: 10000),
-                new Shoot(13, 10, 8, projectileIndex: 0, coolDown: 1000, fixedAngle: 1)
+                    new Charge(0.1, 6, 10000),
+                new Shoot(13, 10, 8, 0, coolDown: 1000, fixedAngle: 1)
                 ),
             new State("Death",
                 new ConditionalEffect(ConditionEffectIndex.Invincible),
@@ -311,7 +311,7 @@ namespace wServer.logic
                         new State("Wake",
                         new ConditionalEffect(ConditionEffectIndex.Invulnerable),
                         new Taunt("Who has woken me...? Leave this place."),
-                        new Timed(2100, new Shoot(15, 15, 12, projectileIndex: 0, fixedAngle: 180, coolDown: 700, coolDownOffset: 3000)),
+                        new Timed(2100, new Shoot(15, 15, 12, 0, 180, coolDown: 700, coolDownOffset: 3000)),
                         new TimedTransition(8000, "Swirl Shot")
                         ),
                         new State("Swirl Shot",
@@ -365,7 +365,7 @@ namespace wServer.logic
                                     new TimedTransition(10000, "Blobomb"),
                                     new Taunt("FOOLS! YOU DO NOT UNDERSTAND!"),
                                     new ChangeSize(20, 130),
-                            new Shoot(15, 15, 11, projectileIndex: 0, fixedAngle: 180, coolDown: 700, coolDownOffset: 700),
+                            new Shoot(15, 15, 11, 0, 180, coolDown: 700, coolDownOffset: 700),
                                     new State("Swirl1_2",
                             new Shoot(50, projectileIndex: 0, count: 1, shootAngle: 102, fixedAngle: 102, coolDown: 6000),
                             new Shoot(50, projectileIndex: 0, count: 1, shootAngle: 114, fixedAngle: 114, coolDown: 6000, coolDownOffset: 200),
@@ -472,7 +472,7 @@ namespace wServer.logic
                         )
                     ),
                     new State("TossShit",
-                        new TossObject("shtrs Ice Portal", 10, coolDown: 25000, randomToss: false),
+                        new TossObject("shtrs Ice Portal", 10, coolDown: 25000 ),
                         new TossObject("shtrs FireBomb", 15, coolDown: 25000, randomToss: true),
                         new TossObject("shtrs FireBomb", 15, coolDown: 25000, randomToss: true),
                         new TossObject("shtrs FireBomb", 7, coolDown: 25000, randomToss: true),
@@ -486,15 +486,15 @@ namespace wServer.logic
                         new TossObject("shtrs FireBomb", 13, coolDown: 25000, randomToss: true),
                         new TossObject("shtrs FireBomb", 12, coolDown: 25000, randomToss: true),
                         new TossObject("shtrs FireBomb", 10, coolDown: 25000, randomToss: true),
-                        new Spawn("shtrs Ice Shield 2", maxChildren: 1, initialSpawn: 1, coolDown: 25000),
+                        new Spawn("shtrs Ice Shield 2", 1, 1, 25000),
                         new TimedTransition(1, "Shoot")
                         ),
                   new State("Shoot",
-                    new Shoot(15, 5, 5, projectileIndex: 1, coolDown: 800),
-                    new Shoot(15, 5, 5, projectileIndex: 1, coolDown: 800, coolDownOffset: 200),
-                    new Shoot(15, 5, 5, projectileIndex: 1, coolDown: 800, coolDownOffset: 400),
-                    new Shoot(15, 5, 5, projectileIndex: 1, coolDown: 800, coolDownOffset: 600),
-                    new Shoot(15, 5, 5, projectileIndex: 1, coolDown: 800, coolDownOffset: 800),
+                    new Shoot(15, 5, 5, 1, coolDown: 800),
+                    new Shoot(15, 5, 5, 1, coolDown: 800, coolDownOffset: 200),
+                    new Shoot(15, 5, 5, 1, coolDown: 800, coolDownOffset: 400),
+                    new Shoot(15, 5, 5, 1, coolDown: 800, coolDownOffset: 600),
+                    new Shoot(15, 5, 5, 1, coolDown: 800, coolDownOffset: 800),
                     new TimedTransition(800, "Shoot"),
                     new HpLessTransition(0.50, "Pre Birds")
                         ),
@@ -505,8 +505,8 @@ namespace wServer.logic
                         ),
                     new State("Birds",
                         new ConditionalEffect(ConditionEffectIndex.Invulnerable),
-                        new Spawn("shtrs Inferno", maxChildren: 1, initialSpawn: 1, coolDown: 1000000000),
-                        new Spawn("shtrs Blizzard", maxChildren: 1, initialSpawn: 1, coolDown: 1000000000),
+                        new Spawn("shtrs Inferno", 1, 1, 1000000000),
+                        new Spawn("shtrs Blizzard", 1, 1, 1000000000),
                         new EntitiesNotExistsTransition(500, "PreNewShit2", "shtrs Inferno", "shtrs Blizzard")
                         ),
                     new State("PreNewShit2",
@@ -1219,8 +1219,8 @@ namespace wServer.logic
                         new PlayerWithinTransition(5, "spawn")
                             ),
                     new State("spawn",
-                        new Spawn("shtrs Stone Knight", maxChildren: 1, initialSpawn: 1, coolDown: 5000),
-                        new Spawn("shtrs Stone Mage", maxChildren: 1, initialSpawn: 1, coolDown: 7500)
+                        new Spawn("shtrs Stone Knight", 1, 1, 5000),
+                        new Spawn("shtrs Stone Mage", 1, 1, 7500)
                         )
                     )
             )
@@ -1230,7 +1230,7 @@ namespace wServer.logic
                         new PlayerWithinTransition(5, "spawn")
                             ),
                     new State("spawn",
-                        new Spawn("shtrs Stone Paladin", maxChildren: 1, initialSpawn: 1, coolDown: 7500)
+                        new Spawn("shtrs Stone Paladin", 1, 1, 7500)
                         )
                     )
             )
@@ -1241,11 +1241,11 @@ namespace wServer.logic
                             ),
                     new State("fire",
                         new Follow(0.5, range: 1),
-                        new Shoot(10, 5, 10, projectileIndex: 0, coolDown: 1500),
+                        new Shoot(10, 5, 10, 0, coolDown: 1500),
                         new TimedTransition(15000, "Spawn")
                         ),
                     new State("Spawn",
-                        new Spawn("shtrs Ice Shield", maxChildren: 1, initialSpawn: 1, coolDown: 750000000),
+                        new Spawn("shtrs Ice Shield", 1, 1, 750000000),
                         new TimedTransition(25, "fire")
                         )
                     )
@@ -1277,14 +1277,14 @@ namespace wServer.logic
                     new TimedTransition(4000, "Fire")
                     ),
                 new State("Fire",
-                    new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 45, fixedAngle: 45, coolDown: 1, coolDownOffset: 0),
-                    new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 90, fixedAngle: 90, coolDown: 1, coolDownOffset: 0),
-                    new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 135, fixedAngle: 135, coolDown: 1, coolDownOffset: 0),
-                    new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 180, fixedAngle: 180, coolDown: 1, coolDownOffset: 0),
-                    new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 225, fixedAngle: 225, coolDown: 1, coolDownOffset: 0),
-                    new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 270, fixedAngle: 270, coolDown: 1, coolDownOffset: 0),
-                    new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 315, fixedAngle: 315, coolDown: 1, coolDownOffset: 0),
-                    new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 360, fixedAngle: 360, coolDown: 1, coolDownOffset: 0),
+                    new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 45, fixedAngle: 45, coolDown: 1),
+                    new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 90, fixedAngle: 90, coolDown: 1),
+                    new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 135, fixedAngle: 135, coolDown: 1),
+                    new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 180, fixedAngle: 180, coolDown: 1),
+                    new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 225, fixedAngle: 225, coolDown: 1),
+                    new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 270, fixedAngle: 270, coolDown: 1),
+                    new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 315, fixedAngle: 315, coolDown: 1),
+                    new Shoot(0, projectileIndex: 0, count: 1, shootAngle: 360, fixedAngle: 360, coolDown: 1),
                     new TimedTransition(5000, "wait")
                     )
                 )
@@ -1313,7 +1313,7 @@ namespace wServer.logic
                             ),
                     new State("fire",
                         new Follow(0.5, range: 1),
-                        new Shoot(10, 5, 10, projectileIndex: 0, coolDown: 1500),
+                        new Shoot(10, 5, 10, 0, coolDown: 1500),
                         new TimedTransition(10000, "nothing")
                             ),
                     new State("nothing",
@@ -1328,12 +1328,12 @@ namespace wServer.logic
                             ),
                     new State("fire",
                         new Follow(0.5, range: 1),
-                        new Shoot(10, 2, 10, projectileIndex: 1, coolDown: 200),
+                        new Shoot(10, 2, 10, 1, coolDown: 200),
                         new TimedTransition(10000, "invulnerable")
                             ),
                     new State("invulnerable",
                         new ConditionalEffect(ConditionEffectIndex.Invulnerable),
-                        new Shoot(10, 2, 10, projectileIndex: 0, coolDown: 200),
+                        new Shoot(10, 2, 10, 0, coolDown: 200),
                         new TimedTransition(3000, "fire")
                         )
                     )
@@ -1933,7 +1933,7 @@ namespace wServer.logic
                 new State(
                     new State("shoot",
                         new Orbit(1.0, 2, 5, "shtrs The Forgotten King"),
-                        new Shoot(15, 8, projectileIndex: 0)
+                        new Shoot(15, 8)
                         )
                     )
             )
@@ -1941,7 +1941,7 @@ namespace wServer.logic
                 new State(
                     new State("1st",
                         new Follow(1, 8, 5),
-                        new Shoot(15, 20, projectileIndex: 0),
+                        new Shoot(15, 20),
                         new TimedTransition(1000, "2nd")
                         ),
                     new State("2nd",
@@ -1958,7 +1958,7 @@ namespace wServer.logic
             )
             .Init("shtrs Green Crystal",
                 new State(
-                    new Heal(1000, "idkanymore", coolDown: 2000),
+                    new Heal(1000, "idkanymore", 2000),
                     new State("orbit",
                         new Orbit(1.0, 2, 5, "shtrs The Forgotten King"),
                         new TimedTransition(8000, "dafuq")
@@ -1975,12 +1975,12 @@ namespace wServer.logic
                         new TimedTransition(25, "shoot")
                         ),
                     new State("shoot",
-                        new Shoot(5, 4, 4, projectileIndex: 0),
+                        new Shoot(5, 4, 4),
                         new TimedTransition(1, "dafuq")
                         ),
                     new State("dafuq",
                         new Orbit(1.0, 2, 5, "shtrs The Forgotten King"),
-                        new Shoot(5, 4, 4, projectileIndex: 0)
+                        new Shoot(5, 4, 4)
                         )
                     )
             )

@@ -78321,34 +78321,36 @@
          <Index>0x0b</Index>
        </AnimatedTexture>
      </Object>
-<Object type="0x0d42" id="Prism of Dire Instability">
+  <Object type="0x0d42" id="Prism of Dire Instability">
     <Class>Equipment</Class>
-    <Item />
+    <Item/>
     <Texture>
-        <File>d3LofiObjEmbed</File>
-        <Index>0x2c</Index>
+      <File>d3LofiObjEmbed</File>
+      <Index>0x2c</Index>
     </Texture>
     <SlotType>22</SlotType>
-    <Description>Seemingly bleak at first, this prism has erratic magical properties looming inside, which affect the light it scatters in unforeseen ways.</Description>
+    <Description>
+      Seemingly bleak at first, this prism has erratic magical properties looming inside, which affect the light it scatters in unforeseen ways.
+    </Description>
     <Projectile>
-        <ObjectId>Dire Blast</ObjectId>
-        <Speed>60</Speed>
-        <MinDamage>200</MinDamage>
-        <MaxDamage>320</MaxDamage>
-        <LifetimeMS>700</LifetimeMS>
-        <Size>80</Size>
+      <ObjectId>Dire Blast</ObjectId>
+      <Speed>60</Speed>
+      <MinDamage>200</MinDamage>
+      <MaxDamage>320</MaxDamage>
+      <LifetimeMS>700</LifetimeMS>
+      <Size>80</Size>
     </Projectile>
     <ActivateOnEquip stat="20" amount="2">IncrementStat</ActivateOnEquip>
     <ActivateOnEquip stat="27" amount="2">IncrementStat</ActivateOnEquip>
     <ActivateOnEquip stat="3" amount="40">IncrementStat</ActivateOnEquip>
-    <Usable />
+    <Usable/>
     <BagType>6</BagType>
     <FameBonus>6</FameBonus>
     <MpCost>80</MpCost>
     <Activate duration="3" explode="1" bullet="12">Decoy</Activate>
-    <Activate objectId="Dire Blast">Pet</Activate>
     <feedPower>900</feedPower>
-</Object>
+    <Soulbound/>
+  </Object>
   <Object type="0x6148" id="Dire Blast">
       <Class>Character</Class>
       <Texture>
@@ -78444,10 +78446,10 @@
     <SlotType>22</SlotType>
     <Activate maxDistance="20">Teleport</Activate>
     <Description>Powered by a might fnatic long ago, this prism was designed only for those who had a head of disorder.</Description>
-    <Activate duration="3" explode="1" bullet="12" random="1">Decoy</Activate>
-    <Activate duration="3" explode="1" bullet="12" random="1">Decoy</Activate>
-    <Activate duration="3" explode="1" bullet="12" random="1">Decoy</Activate>
-    <Activate duration="3" explode="1" bullet="12" random="1">Decoy</Activate>
+    <Activate duration="3" explode="1" random="1">Decoy</Activate>
+    <Activate duration="3" explode="1" random="1">Decoy</Activate>
+    <Activate duration="3" explode="1" random="1">Decoy</Activate>
+    <Activate duration="3" explode="1" random="1">Decoy</Activate>
     <Usable/>
     <BagType>6</BagType>
     <FameBonus>6</FameBonus>
@@ -82165,5 +82167,33 @@ The solid honey on this ring renews its wearer with incredible energy.
     </Texture>
     <Friendly/>
     <NoMiniMap/>
+  </Object>
+  <Object type="0x620a" id="Pillar of Gilgor">
+    <Group>Nexus</Group>
+    <Class>Character</Class>
+    <ParalyzeImmune/>
+    <NoElectric/>
+    <DazedImmune/>
+    <StasisImmune/>
+    <StunImmune/>
+    <Enemy/>
+    <Projectile id="0">
+      <ObjectId>Pillar Strike</ObjectId>
+      <Damage>150</Damage>
+      <Speed>500</Speed>
+      <Size>200</Size>
+      <LifetimeMS>800</LifetimeMS>
+      <ParticleTrail intensity="1" lifetimeMS="800">0xFF0000</ParticleTrail>
+    </Projectile>
+    <AnimatedTexture>
+      <File>chars16x16dEncounters2</File>
+      <Index>96</Index>
+    </AnimatedTexture>
+    <Size>200</Size>
+    <MaxHitPoints>50000</MaxHitPoints>
+    <Defense>20</Defense>
+    <DisplayId>Pillar of Gilgor</DisplayId>
+    <HitSound>monster/abyss_demons_hit</HitSound>
+    <DeathSound>monster/dwarf_god_hit</DeathSound>
   </Object>
 </Objects>
