@@ -3,6 +3,7 @@
 using wServer.logic.behaviors;
 using wServer.logic.loot;
 using wServer.logic.transitions;
+using wServer.realm.setpieces;
 
 #endregion
 
@@ -80,17 +81,17 @@ namespace wServer.logic
         )
         .Init("GhostShip PurpleDoor Rt",
         new State("now",
-        new State("Idle",
-        new EntityNotExistsTransition("Purple Key", 500, "Cycle")
+            new State("Idle",
+            new EntityNotExistsTransition("Purple Key", 500, "Cycle")
 
-        ),
-        new State("Cycle",
-        new PlayerWithinTransition(2, "Cycle2")
+            ),
+            new State("Cycle",
+            new PlayerWithinTransition(2, "Cycle2")
 
-        ),
-        new State("Cycle2",
-        new Decay(1000)
-        )
+            ),
+            new State("Cycle2",
+            new ApplySetpiece("OneBlockEmpty")
+            )
         //248, 305
         )
         )
@@ -105,7 +106,7 @@ namespace wServer.logic
 
         ),
         new State("Cycle2",
-        new Decay(1000)
+        new Decay(1)
         )
         //248, 305
         )
@@ -162,7 +163,7 @@ namespace wServer.logic
 
         ),
         new State("Cycle2",
-        new Decay(1000)
+        new Decay(1)
         )
         //248, 305
         )
@@ -178,7 +179,7 @@ namespace wServer.logic
 
         ),
         new State("Cycle2",
-        new Decay(1000)
+        new Decay(1)
         )
         //248, 305
         )
@@ -194,7 +195,7 @@ namespace wServer.logic
 
         ),
         new State("Cycle2",
-        new Decay(1000)
+        new Decay(1)
         )
         //248, 305
         )
@@ -210,7 +211,7 @@ namespace wServer.logic
 
         ),
         new State("Cycle2",
-        new Decay(1000)
+        new Decay(1)
         )
         //248, 305
         )
@@ -226,7 +227,7 @@ namespace wServer.logic
 
         ),
         new State("Cycle2",
-        new Decay(1000)
+        new Decay(1)
         )
         //248, 305
         )
@@ -242,7 +243,7 @@ namespace wServer.logic
 
         ),
         new State("Cycle2",
-        new Decay(1000)
+        new Decay(1)
         )
         //248, 305
         )
@@ -254,12 +255,9 @@ namespace wServer.logic
 
         ),
         new State("Cycle",
-        new Taunt(true, "Purple Key has been found!"),
-        new Decay(200)
-
-
-
-        )
+                new Taunt(true, "Purple Key has been found!"),
+                new Suicide()
+            )
         )
         )
         .Init("Red Key",

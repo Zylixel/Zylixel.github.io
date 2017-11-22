@@ -1,4 +1,5 @@
-﻿using wServer.logic.behaviors;
+﻿
+using wServer.logic.behaviors;
 using wServer.logic.loot;
 using wServer.logic.transitions;
 
@@ -28,8 +29,7 @@ namespace wServer.logic
                         new TimedTransition(3500, "AttackFINE")
                         ),
                     new State("Attack",
-                        //new ConditionalEffect(ConditionEffectIndex.Invulnerable),
-                        new EntitiesNotExistsTransition(999, "AttackFINE", "Silver Son of Arachna Giant Egg Sac", "Blue Son of Arachna Giant Egg Sac", /*"Red Son of Arachna Giant Egg Sac",*/ "Yellow Son of Arachna Giant Egg Sac"),
+                        new EntitiesNotExistsTransition(999, "AttackFINE", "Silver Son of Arachna Giant Egg Sac", "Blue Son of Arachna Giant Egg Sac", "Yellow Son of Arachna Giant Egg Sac"),
                         new Shoot(1, projectileIndex: 0, count: 8, coolDown: 2200, shootAngle: 45, fixedAngle: 0),
                         new Shoot(10, projectileIndex: 1, coolDown: 3000),
                         new Shoot(25, projectileIndex: 5, count: 7, coolDown: 3000, coolDownOffset: 14000),
@@ -50,26 +50,9 @@ namespace wServer.logic
                             new TimedTransition(8000, "Follow")
                             ),
                         new State("AttackFINE",
+                            new ConditionalEffect(ConditionEffectIndex.Invulnerable),
                             new Shoot(1, projectileIndex: 0, count: 8, coolDown: 2200, shootAngle: 45, fixedAngle: 0),
                             new Shoot(10, projectileIndex: 1, coolDown: 3000),
-        #region //Check for the Eggs being alive and shoots if they are
-                            new If(
-                                           new EntityCountEqual("Yellow Son of Arachna Giant Egg Sac", 9999, 1),
-                                           new Shoot(25, projectileIndex: 5, count: 7, coolDown: 3000, coolDownOffset: 4000)
-                                          ),
-                            new If(
-                                           new EntityCountEqual("Red Son of Arachna Giant Egg Sac", 9999, 1),
-                                           new Shoot(25, projectileIndex: 3, count: 7, coolDown: 4000, coolDownOffset: 4900)
-                                          ),
-                            new If(
-                                           new EntityCountEqual("Blue Son of Arachna Giant Egg Sac", 9999, 1),
-                                           new Shoot(25, projectileIndex: 4, count: 7, coolDown: 4000, coolDownOffset: 6000)
-                                          ),
-                            new If(
-                                           new EntityCountEqual("Silver Son of Arachna Giant Egg Sac", 9999, 1),
-                                           new Shoot(25, projectileIndex: 2, count: 7, coolDown: 3000, coolDownOffset: 6000)
-                                          ),
-        #endregion
                             new State("FollowFINE",
                                 new Prioritize(
                                     new StayAbove(.6, 1),
@@ -80,7 +63,7 @@ namespace wServer.logic
                                     ),
                             new State("ReturnFINE",
                                 //new StayCloseToSpawn(.4, 1),
-                                new ReturnToSpawn(true),
+                                new ReturnToSpawn(true, 1),
                                 new TimedTransition(3000, "FollowFINE")
                                 )
                             )
@@ -188,8 +171,8 @@ namespace wServer.logic
             new Threshold(0.15,
                 new TierLoot(11, ItemType.Weapon, 0.1),
                 new TierLoot(12, ItemType.Armor, 0.1),
-                new ItemLoot("Doku No Ken", 0.015),
-                new ItemLoot("Wine Cellar Incantation", 0.015)
+                new ItemLoot("Doku No Ken", 0.01),
+                new ItemLoot("Wine Cellar Incantation", 0.01)
                 )
             )
          .Init("Blue Son of Arachna Giant Egg Sac",
@@ -201,8 +184,8 @@ namespace wServer.logic
             new Threshold(0.15,
                 new TierLoot(11, ItemType.Weapon, 0.1),
                 new TierLoot(12, ItemType.Armor, 0.1),
-                new ItemLoot("Doku No Ken", 0.015),
-                new ItemLoot("Wine Cellar Incantation", 0.015)
+                new ItemLoot("Doku No Ken", 0.01),
+                new ItemLoot("Wine Cellar Incantation", 0.01)
                 )
             )
          .Init("Red Son of Arachna Giant Egg Sac",
@@ -214,8 +197,8 @@ namespace wServer.logic
             new Threshold(0.15,
                 new TierLoot(11, ItemType.Weapon, 0.1),
                 new TierLoot(12, ItemType.Armor, 0.1),
-                new ItemLoot("Doku No Ken", 0.015),
-                new ItemLoot("Wine Cellar Incantation", 0.015)
+                new ItemLoot("Doku No Ken", 0.01),
+                new ItemLoot("Wine Cellar Incantation", 0.01)
                 )
             )
          .Init("Silver Son of Arachna Giant Egg Sac",
@@ -227,8 +210,8 @@ namespace wServer.logic
             new Threshold(0.15,
                 new TierLoot(11, ItemType.Weapon, 0.1),
                 new TierLoot(12, ItemType.Armor, 0.1),
-                new ItemLoot("Doku No Ken", 0.015),
-                new ItemLoot("Wine Cellar Incantation", 0.015)
+                new ItemLoot("Doku No Ken", 0.01),
+                new ItemLoot("Wine Cellar Incantation", 0.01)
                 )
             )
          .Init("Silver Egg Summoner",
@@ -253,113 +236,79 @@ namespace wServer.logic
             )
          .Init("Epic Arachna Web Spoke 1",
                 new State(
-                    new EntityNotExistsTransition("Son of Arachna", 30, "die"),
                     new ConditionalEffect(ConditionEffectIndex.Invulnerable),
                 new Shoot(200, 1, fixedAngle: 180, coolDown: 1500),
                 new Shoot(200, 1, fixedAngle: 120, coolDown: 1500),
-                new Shoot(200, 1, fixedAngle: 240, coolDown: 1500),
-                    new State("die",
-                        new Suicide()
-                    )
+                new Shoot(200, 1, fixedAngle: 240, coolDown: 1500)
                     )
             )
            .Init("Epic Arachna Web Spoke 2",
                 new State(
-                    new EntityNotExistsTransition("Son of Arachna", 30, "die"),
                     new ConditionalEffect(ConditionEffectIndex.Invulnerable),
                 new Shoot(200, 1, fixedAngle: 240, coolDown: 1500),
                 new Shoot(200, 1, fixedAngle: 180, coolDown: 1500),
-                new Shoot(200, 1, fixedAngle: 300, coolDown: 1500),
-                    new State("die",
-                        new Suicide()
-                    )
+                new Shoot(200, 1, fixedAngle: 300, coolDown: 1500)
                     )
             )
            .Init("Epic Arachna Web Spoke 3",
                 new State(
-                    new EntityNotExistsTransition("Son of Arachna", 30, "die"),
                     new ConditionalEffect(ConditionEffectIndex.Invulnerable),
                 new Shoot(200, 1, fixedAngle: 300, coolDown: 1500),
                 new Shoot(200, 1, fixedAngle: 240, coolDown: 1500),
-                new Shoot(200, 1, fixedAngle: 0, coolDown: 1500),
-                    new State("die",
-                        new Suicide()
-                    )
+                new Shoot(200, 1, fixedAngle: 0, coolDown: 1500)
                     )
             )
            .Init("Epic Arachna Web Spoke 4",
                 new State(
-                    new EntityNotExistsTransition("Son of Arachna", 30, "die"),
                     new ConditionalEffect(ConditionEffectIndex.Invulnerable),
                 new Shoot(200, 1, fixedAngle: 0, coolDown: 1500),
                 new Shoot(200, 1, fixedAngle: 60, coolDown: 1500),
-                new Shoot(200, 1, fixedAngle: 300, coolDown: 1500),
-                    new State("die",
-                        new Suicide()
-                    )
+                new Shoot(200, 1, fixedAngle: 300, coolDown: 1500)
                     )
             )
            .Init("Epic Arachna Web Spoke 5",
                 new State(
-                    new EntityNotExistsTransition("Son of Arachna", 30, "die"),
                     new ConditionalEffect(ConditionEffectIndex.Invulnerable),
                 new Shoot(200, 1, fixedAngle: 60, coolDown: 1500),
                 new Shoot(200, 1, fixedAngle: 0, coolDown: 1500),
-                new Shoot(200, 1, fixedAngle: 120, coolDown: 1500),
-                    new State("die",
-                        new Suicide()
-                    )
-     )
+                new Shoot(200, 1, fixedAngle: 120, coolDown: 1500)
+                )
             )
            .Init("Epic Arachna Web Spoke 6",
                 new State(
-                    new EntityNotExistsTransition("Son of Arachna", 30, "die"),
                     new ConditionalEffect(ConditionEffectIndex.Invulnerable),
                 new Shoot(200, 1, fixedAngle: 120, coolDown: 1500),
                 new Shoot(200, 1, fixedAngle: 60, coolDown: 1500),
-                new Shoot(200, 1, fixedAngle: 180, coolDown: 1500),
-                    new State("die",
-                        new Suicide()
-                    )
+                new Shoot(200, 1, fixedAngle: 180, coolDown: 1500)
                     )
             )
            .Init("Epic Arachna Web Spoke 7",
                 new State(
-                    new EntityNotExistsTransition("Son of Arachna", 30, "die"),
                     new ConditionalEffect(ConditionEffectIndex.Invulnerable),
                 new Shoot(200, 1, fixedAngle: 180, coolDown: 1500),
                 new Shoot(200, 1, fixedAngle: 120, coolDown: 1500),
-                new Shoot(200, 1, fixedAngle: 240, coolDown: 1500),
-                    new State("die",
-                        new Suicide()
-                    )
+                new Shoot(200, 1, fixedAngle: 240, coolDown: 1500)
                     )
             )
            .Init("Epic Arachna Web Spoke 8",
                 new State(
-                    new EntityNotExistsTransition("Son of Arachna", 30, "die"),
                     new ConditionalEffect(ConditionEffectIndex.Invulnerable),
                 new Shoot(200, 1, fixedAngle: 360, coolDown: 1500),
                 new Shoot(200, 1, fixedAngle: 240, coolDown: 1500),
-                new Shoot(200, 1, fixedAngle: 300, coolDown: 1500),
-                    new State("die",
-                        new Suicide()
-                    )
+                new Shoot(200, 1, fixedAngle: 300, coolDown: 1500)
                     )
             )
            .Init("Epic Arachna Web Spoke 9",
                 new State(
-                    new EntityNotExistsTransition("Son of Arachna", 30, "die"),
                     new ConditionalEffect(ConditionEffectIndex.Invulnerable),
-                new Shoot(200, 1, fixedAngle: 0, coolDown: 1500),
-                new Shoot(200, 1, fixedAngle: 60, coolDown: 1500),
-                new Shoot(200, 1, fixedAngle: 120, coolDown: 1500),
-                    new State("die",
-                        new Suicide()
+                    new State("dont die",
+                        new Shoot(200, 1, fixedAngle: 0, coolDown: 1500),
+                        new Shoot(200, 1, fixedAngle: 60, coolDown: 1500),
+                        new Shoot(200, 1, fixedAngle: 120, coolDown: 1500)
                     )
                     )
             );
     }
 }
 
-//Not Gonna Lie, Decided to take this from the LRv2 Source. I mean, why spend time on this when I can dedicate my resources elsewhere.
+//From LRv2 Source.

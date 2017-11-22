@@ -78,16 +78,16 @@ namespace wServer.realm.commands
     internal class SpawnCommand : Command
     {
         public SpawnCommand()
-            : base("spawn", 1)
+            : base("spawn")
         {
         }
 
 
         protected override bool Process(Player player, RealmTime time, string[] args)
         {
-            if (player.Owner is Vault || player.Owner is PetYard || player.Owner is Nexus || player.Owner is Market || player.Owner is ClothBazaar)
+            if (player.Owner is Vault || player.Owner is PetYard || player.Owner is Nexus || player.Owner is Market || player.Owner is ClothBazaar || player.Owner is GuildHall)
             {
-                player.SendInfo("You cant Spawn in this world.");
+                player.SendInfo("You cannot spawn in this world.");
                 return false;
             }
             int num;
@@ -106,10 +106,21 @@ namespace wServer.realm.commands
                     return false;
                 }
                 int c = int.Parse(args[0]);
-                if  (c > 20)
+                if (player.Client.Account.Rank < 1)
                 {
-                    player.SendError("Maximum spawn count is set to 20!");
-                    return false;
+                    if (c < 1)
+                    {
+                        player.SendError("Maximum spawn count is set to 1 for Unranked users!");
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (c > 20)
+                    {
+                        player.SendError("Maximum spawn count is set to 20!");
+                        return false;
+                    }
                 }
                 for (int i = 0; i < num; i++)
                 {
@@ -227,9 +238,9 @@ namespace wServer.realm.commands
 
 
             if (player.Client.Account.Rank < 2)
-                if (!(name == "Death Arena Key" | name == "Marble Seal" | name == "Shatters Key"))
+                if (!(name.Contains("Key") || name.Contains("key")))
                 {
-                    player.SendError("No Permission! You may only give 'Death Arena Key' and 'Marble Seal'");
+                    player.SendError("No Permission! You may only give yourself keys!");
                     return false;
                 }
 
