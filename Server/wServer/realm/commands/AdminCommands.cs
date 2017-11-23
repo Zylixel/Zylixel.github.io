@@ -77,6 +77,7 @@ namespace wServer.realm.commands
 
     internal class SpawnCommand : Command
     {
+
         public SpawnCommand()
             : base("spawn")
         {
@@ -91,6 +92,7 @@ namespace wServer.realm.commands
                 return false;
             }
             int num;
+            #region multi
             if (args.Length > 0 && int.TryParse(args[0], out num)) //multi
             {
                 string name = string.Join(" ", args.Skip(1).ToArray());
@@ -108,11 +110,8 @@ namespace wServer.realm.commands
                 int c = int.Parse(args[0]);
                 if (player.Client.Account.Rank < 1)
                 {
-                    if (c < 1)
-                    {
-                        player.SendError("Maximum spawn count is set to 1 for Unranked users!");
-                        return false;
-                    }
+                    player.SendError("Unranked Users can not spawn multiple entities");
+                    return false;
                 }
                 else
                 {
@@ -121,15 +120,19 @@ namespace wServer.realm.commands
                         player.SendError("Maximum spawn count is set to 20!");
                         return false;
                     }
+
+                    for (int i = 0; i < num; i++)
+                    {
+                        Entity entity = Entity.Resolve(player.Manager, objType);
+                        name = entity.Name;
+                        entity.Move(player.X, player.Y);
+                        player.Owner.Timers.Add(new WorldTimer(5 * 1000, (world, RealmTime) => player.Owner.EnterWorld(entity)));
+                    }
                 }
-                for (int i = 0; i < num; i++)
-                {
-                    Entity entity = Entity.Resolve(player.Manager, objType);
-                    entity.Move(player.X, player.Y);
-                    player.Owner.EnterWorld(entity);
-                }
-                player.SendInfo("Success!");
+                player.Manager.Chat.Say(player, "Spawning " + c + " " + name + " in 5 seconds...");
             }
+            #endregion
+            #region single
             else
             {
                 string name = string.Join(" ", args);
@@ -144,10 +147,35 @@ namespace wServer.realm.commands
                     player.SendHelp("Usage: /spawn <entityname>");
                     return false;
                 }
-                Entity entity = Entity.Resolve(player.Manager, objType);
-                entity.Move(player.X, player.Y);
-                player.Owner.EnterWorld(entity);
+                if (player.Client.Account.Rank < 1)
+                {
+                    string checkName = name.ToLower();
+                    if (checkName.Contains("gift") || checkName.Contains("balloon"))
+                    {
+                        player.SendError("Entity not allowed for Unranked users!");
+                        return false;
+                    }
+                    Entity entity = Entity.Resolve(player.Manager, objType);
+                    name = entity.Name;
+                    entity.Move(player.X, player.Y);
+                    player.Owner.Timers.Add(new WorldTimer(5 * 1000, (world, RealmTime) => player.Owner.EnterWorld(entity)));
+                    player.Owner.Timers.Add(new WorldTimer(35 * 1000, (world, RealmTime) =>
+                    {
+                        entity.Owner.LeaveWorld(entity);
+                        player.Manager.Chat.Say(player, name + " Despawned");
+                    }));
+                }
+                else
+                {
+                    Entity entity = Entity.Resolve(player.Manager, objType);
+                    name = entity.Name;
+                    entity.Move(player.X, player.Y);
+                    player.Owner.Timers.Add(new WorldTimer(5 * 1000, (world, RealmTime) => player.Owner.EnterWorld(entity)));
+                }
+                player.Manager.Chat.Say(player, "Spawning " + name + " in 5 seconds...");
+                #endregion
             }
+            player.SendInfo("Success!");
             return true;
         }
     }

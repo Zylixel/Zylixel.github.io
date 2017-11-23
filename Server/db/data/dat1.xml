@@ -82168,32 +82168,5 @@ The solid honey on this ring renews its wearer with incredible energy.
     <Friendly/>
     <NoMiniMap/>
   </Object>
-  <Object type="0x620a" id="Pillar of Gilgor">
-    <Group>Nexus</Group>
-    <Class>Character</Class>
-    <ParalyzeImmune/>
-    <NoElectric/>
-    <DazedImmune/>
-    <StasisImmune/>
-    <StunImmune/>
-    <Enemy/>
-    <Projectile id="0">
-      <ObjectId>Pillar Strike</ObjectId>
-      <Damage>150</Damage>
-      <Speed>500</Speed>
-      <Size>200</Size>
-      <LifetimeMS>800</LifetimeMS>
-      <ParticleTrail intensity="1" lifetimeMS="800">0xFF0000</ParticleTrail>
-    </Projectile>
-    <AnimatedTexture>
-      <File>chars16x16dEncounters2</File>
-      <Index>96</Index>
-    </AnimatedTexture>
-    <Size>200</Size>
-    <MaxHitPoints>50000</MaxHitPoints>
-    <Defense>20</Defense>
-    <DisplayId>Pillar of Gilgor</DisplayId>
-    <HitSound>monster/abyss_demons_hit</HitSound>
-    <DeathSound>monster/dwarf_god_hit</DeathSound>
-  </Object>
+  
 </Objects>
