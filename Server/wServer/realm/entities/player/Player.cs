@@ -288,6 +288,8 @@ namespace wServer.realm.entities.player
         public ushort Dmg { get; private set; }
         public int AshCooldown { get; private set; }
 
+
+
         public void Damage(int dmg, Entity chr)
         {
             if (CheckMantleResurrect())
@@ -620,7 +622,7 @@ namespace wServer.realm.entities.player
                     ApplyConditionEffect(new ConditionEffect
                     {
                         Effect = ConditionEffectIndex.Invulnerable,
-                        DurationMS = 1000000
+                        DurationMS = -1
                     });
 
                     Client.Reconnect(new ReconnectPacket
@@ -887,6 +889,11 @@ namespace wServer.realm.entities.player
                 Pet?.Move(obj.X, obj.X);
                 FameCounter.Teleport();
                 SetNewbiePeriod();
+                ApplyConditionEffect(new ConditionEffect
+                {
+                    Effect = ConditionEffectIndex.Invulnerable,
+                    DurationMS = 5 * 1000
+                });
                 UpdateCount++;
             }
             catch (Exception ex)

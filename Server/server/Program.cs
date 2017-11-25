@@ -38,6 +38,7 @@ namespace server
 
         private static void Main(string[] args)
         {
+            Console.Title = "FSOD Zy's Realm - Server";
             XmlConfigurator.ConfigureAndWatch(new FileInfo("log4net_server.config"));
 
             Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;

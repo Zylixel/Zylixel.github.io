@@ -102,6 +102,7 @@ namespace wServer.networking.handlers
                         ErrorDescription = "Failed to connect."
                     });
                     client.Disconnect();
+                    db.LockAccount(client.Account);
                     Log.Warn(@"Failed to connect.");
                 }
                 else

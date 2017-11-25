@@ -332,6 +332,20 @@ namespace wServer.realm
             if (CheckConfig.IsDebugOn())
                 log.InfoFormat("World {0}({1}) removed.", world.Id, world.Name);
         }
+
+        public void ProtectFromOryx()
+        {
+            foreach (Client i in Clients.Values)
+            { 
+                i.Player.ApplyConditionEffect(new ConditionEffect
+                {
+                    Effect = ConditionEffectIndex.Invulnerable,
+                    DurationMS = 10 * 1000
+                });
+                if (!(i.Player.Owner is GameWorld))
+                    i.Player.SendInfo("Oryx is summoning players to his castle. You have been givin Invulnerablility for 10 seconds.");
+            }
+        }
     }
 
     public class TimeEventArgs : EventArgs

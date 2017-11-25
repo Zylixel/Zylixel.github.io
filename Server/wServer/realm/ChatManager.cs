@@ -4,6 +4,7 @@ using log4net;
 using wServer.networking;
 using wServer.networking.svrPackets;
 using wServer.realm.entities.player;
+using wServer.realm.worlds;
 
 namespace wServer.realm
 {
@@ -12,8 +13,7 @@ namespace wServer.realm
         static ILog log = LogManager.GetLogger(typeof(ChatManager));
 
         RealmManager manager;
-
-        static string saved;
+        
 
         public ChatManager(RealmManager manager)
         {
@@ -49,8 +49,7 @@ namespace wServer.realm
                         Stars = src.Stars,
                         BubbleTime = 10,
                         Recipient = "*Guild*",
-                        Text = text.ToSafeText(),
-                        CleanText = text.ToSafeText()
+                        Text = text.ToSafeText()
                     });
                 }
             }

@@ -27,10 +27,11 @@ namespace wServer
         private static RealmManager manager;
 
         public static DateTime WhiteListTurnOff { get; private set; }
+        public static bool wServerShutdown { get; set; }
 
         private static void Main(string[] args)
         {
-            Console.Title = "Fabiano Swagger of Doom - World Server";
+            Console.Title = "FSOD Zy's Realm - World Server";
             try
             {
                 XmlConfigurator.ConfigureAndWatch(new FileInfo("log4net_wServer.config"));
@@ -67,13 +68,9 @@ namespace wServer
                 if(Settings.GetValue<bool>("broadcastNews", "false") && File.Exists("news.txt"))
                     new Thread(autoBroadcastNews).Start();
                 log.Info("Server initialized.");
-
-                uint key = 0;
-                while ((key = (uint)Console.ReadKey(true).Key) != (uint)ConsoleKey.Escape)
-                {
-                    if (key == (2 | 80))
-                        Settings.Reload();
-                }
+                
+                while (wServerShutdown == false)
+                { }
 
                 log.Info("Terminating...");
                 server.Stop();

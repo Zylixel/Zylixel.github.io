@@ -159,10 +159,13 @@ namespace wServer.realm.commands
                     name = entity.Name;
                     entity.Move(player.X, player.Y);
                     player.Owner.Timers.Add(new WorldTimer(5 * 1000, (world, RealmTime) => player.Owner.EnterWorld(entity)));
-                    player.Owner.Timers.Add(new WorldTimer(35 * 1000, (world, RealmTime) =>
+                    player.Owner.Timers.Add(new WorldTimer(6 * 1000, (world, RealmTime) =>
                     {
-                        entity.Owner.LeaveWorld(entity);
-                        player.Manager.Chat.Say(player, name + " Despawned");
+                        player.Owner.Timers.Add(new WorldTimer(114 * 1000, (w1, t1) =>
+                        {
+                            entity.Owner.LeaveWorld(entity);
+                            player.Manager.Chat.Say(player, name + " Despawned");
+                        }));
                     }));
                 }
                 else
@@ -529,26 +532,6 @@ namespace wServer.realm.commands
         }
     }
 
-    internal class OryxSay : Command
-    {
-        public OryxSay()
-            : base("osay", 2)
-        {
-        }
-
-        protected override bool Process(Player player, RealmTime time, string[] args)
-        {
-            if (args.Length == 0)
-            {
-                player.SendHelp("Usage: /oryxsay <saytext>");
-                return false;
-            }
-            string saytext = string.Join(" ", args);
-            player.SendEnemy("Oryx the Mad God", saytext);
-            return true;
-        }
-    }
-
     internal class SWhoCommand : Command //get all players from all worlds (this may become too large!)
     {
         public SWhoCommand()
@@ -598,17 +581,8 @@ namespace wServer.realm.commands
                 return false;
             }
             string saytext = string.Join(" ", args);
-
-            foreach (Client i in player.Manager.Clients.Values)
-            {
-                i.SendPacket(new TextPacket
-                {
-                    BubbleTime = 0,
-                    Stars = -1,
-                    Name = "@ANNOUNCEMENT",
-                    Text = " " + saytext
-                });
-            }
+            
+            player.Manager.Chat.Announce(saytext);
             return true;
         }
     }
@@ -660,30 +634,6 @@ namespace wServer.realm.commands
 
                     i.Value.SendPacket(pkt);
 
-                    return true;
-                }
-            }
-            player.SendError(string.Format("Player '{0}' could not be found!", args));
-            return false;
-        }
-    }
-
-    internal class KillPlayerCommand : Command
-    {
-        public KillPlayerCommand()
-            : base("kill", 3)
-        {
-        }
-
-        protected override bool Process(Player player, RealmTime time, string[] args)
-        {
-            foreach (Client i in player.Manager.Clients.Values)
-            {
-                if (i.Account.Name.EqualsIgnoreCase(args[0]))
-                {
-                    i.Player.HP = 0;
-                    i.Player.Death("Admin");
-                    player.SendInfo("Player killed!");
                     return true;
                 }
             }
@@ -753,14 +703,24 @@ namespace wServer.realm.commands
             {
                 foreach (Client i in player.Manager.Clients.Values)
                 {
+                    if (i.Account.Name.Equals(player.Name))
+                    {
+                        player.SendInfo("You are shutting down the server. You will be disconnected in 12 seconds");
+                        i.Player.Owner.Timers.Add(new WorldTimer(12 * 1000, (world, RealmTime) => {
+                            player.Client.Disconnect();
+                            Program.wServerShutdown = true;
+                        }));
+                    }
+                    else
                     {
                         i.SendPacket(new TextPacket
                         {
                             BubbleTime = 0,
                             Stars = -1,
                             Name = "@ANNOUNCEMENT",
-                            Text = "Server restarting soon. Please be ready to disconnect. Estimated server down time: 30 Seconds - 1 Minute"
+                            Text = "Server restarting soon. You will be disconnected in 10 seconds"
                         });
+                        i.Player.Owner.Timers.Add(new WorldTimer(10 * 1000, (world, RealmTime) => player.Client.Disconnect()));
                     }
                 }
             }
@@ -1034,7 +994,7 @@ namespace wServer.realm.commands
     internal class GodCommand : Command
     {
         public GodCommand()
-        : base("god", 2)
+        : base("god", 1)
         {
         }
 
@@ -1061,35 +1021,7 @@ namespace wServer.realm.commands
             return true;
         }
     }
-    internal class StarsCommand : Command
-    {
-        public StarsCommand()
-        : base("stars", 2)
-        {
-        }
 
-        protected override bool Process(Player player, RealmTime time, string[] args)
-        {
-            try
-            {
-                if (args.Length == 0)
-                {
-                    player.SendHelp("Use /stars <ammount>");
-                }
-                else if (args.Length == 1)
-                {
-                    player.Client.Player.Stars = int.Parse(args[0]);
-                    player.UpdateCount++;
-                    player.SendInfo("Success Setting Stars!");
-                }
-            }
-            catch
-            {
-                player.SendError("Error!");
-            }
-            return true;
-        }
-    }
     internal class CFameCommand : Command
     {
         public CFameCommand()
@@ -1123,6 +1055,7 @@ namespace wServer.realm.commands
             return true;
         }
     }
+
     internal class AccIdCommand : Command
     {
         public AccIdCommand()
@@ -1140,6 +1073,7 @@ namespace wServer.realm.commands
             return true;
         }
     }
+
     internal class CloseRealmCmd : Command
     {
         public CloseRealmCmd()
@@ -1152,6 +1086,24 @@ namespace wServer.realm.commands
             {
                 var gw = player.Owner as GameWorld;
                 gw.Overseer.InitCloseRealm();
+                return true;
+            }
+            return false;
+        }
+    }
+
+    internal class quickcloserealm : Command
+    {
+        public quickcloserealm()
+            : base("quickcloserealm", 3)
+        {
+        }
+        protected override bool Process(Player player, RealmTime time, string[] args)
+        {
+            if (player.Owner is GameWorld)
+            {
+                var gw = player.Owner as GameWorld;
+                gw.Overseer.CloseRealm();
                 return true;
             }
             return false;
@@ -1179,10 +1131,6 @@ namespace wServer.realm.commands
         }
         protected override bool Process(Player player, RealmTime time, string[] args)
         {
-            {
-                player.SendError("Selling is currently Disabled");
-                return false;
-            }
             using (var db = new Database())
             {
                 if (args.Length < 2)
@@ -1197,7 +1145,7 @@ namespace wServer.realm.commands
                 }
                 if (Convert.ToInt32(args[1]) < 0)
                 {
-                    player.SendError("Do you know how an economy works?");
+                    player.SendError("Fame must be more than 0");
                     return false;
                 }
                 int slot = Convert.ToInt32(args[0]) + 3;
@@ -1214,8 +1162,6 @@ namespace wServer.realm.commands
                                             if (!checker.Contains("Tarot"))
                                                 if (!checker.Contains("Gunball"))
                                                         {
-
-                                                    
                                                     MySqlCommand cmd = db.CreateQuery();
                                                     cmd.CommandText = "INSERT INTO market(itemID, fame, id) VALUES(@itemID, @fame, @playerID)";
                                                     cmd.Parameters.AddWithValue("@itemID", Convert.ToInt32(itemID));
@@ -1229,10 +1175,10 @@ namespace wServer.realm.commands
                                                         player.SaveToCharacter();
                                                         player.Client.Save();
                                                         player.UpdateCount++;
-                                                        if (logic.CheckConfig.IsDebugOn())
-                                                            log.Error("Requesting Update for Item | " + itemID);
-                                                        Merchants.RefreshMerchants = itemID;
-                                                        Merchants.RefreshMerchantsCooldown = 100;
+                                                        //if (logic.CheckConfig.IsDebugOn())
+                                                            //log.Error("Requesting Update for Item | " + itemID);
+                                                        // Merchants.RefreshMerchants = itemID;
+                                                        //Merchants.RefreshMerchantsCooldown = 100;
                                                     }
                                                     catch (Exception e)
                                                     {
@@ -1246,33 +1192,7 @@ namespace wServer.realm.commands
 
         }
         }
-
-    internal class ReviveCommand : Command
-    {
-        public ReviveCommand() : base("revive", 1) { }
-        protected override bool Process(Player player, RealmTime time, string[] args)
-        {
-            if (string.IsNullOrEmpty(args[0]))
-            {
-                player.SendHelp("Usage: /revive <accId> <fame>");
-                return false;
-            }
-            player.Manager.Database.DoActionAsync(db =>
-            {
-                var cmd = db.CreateQuery();
-                cmd.CommandText = "UPDATE characters SET dead=0 WHERE accId=@accId AND fame=@base";
-                cmd.Parameters.AddWithValue("@base", args[1]);
-                cmd.Parameters.AddWithValue("@accId", args[0]);
-                if (cmd.ExecuteNonQuery() == 0)
-                {
-                    player.SendInfo("Could not revive. Make sure you wrote it right.");
-                }
-                else
-                    player.SendInfo("Character Successfully Revived");
-            });
-            return true;
-        }
-    }
+    
     internal class VisitCommand : Command
     {
         public VisitCommand()
@@ -1283,7 +1203,7 @@ namespace wServer.realm.commands
         protected override bool Process(Player player, RealmTime time, string[] args)
         {
             foreach (KeyValuePair<string, Client> i in player.Manager.Clients)
-                if (i.Value.Player.Owner is PetYard)
+                if (i.Value.Player.Owner is PetYard || i.Value.Player.Owner is Vault)
                 {
                     player.SendInfo("You cant visit players in that world.");
                     return false;
@@ -1318,14 +1238,79 @@ namespace wServer.realm.commands
                         });
                         player.SendInfo("You are visiting " + i.Value.Player.Owner.Id);
                     }
-
-
                     return true;
-
                 }
             }
             player.SendError(string.Format("Player '{0}' could not be found!", args));
             return false;
+        }
+    }
+    internal class RankCommand : Command
+    {
+        public RankCommand() : base("rank", 1) { }
+        protected override bool Process(Player player, RealmTime time, string[] args)
+        {
+            #region check length
+            if (string.IsNullOrEmpty(args[0]) || args.Length < 2)
+            {
+                player.SendHelp("Usage: /rank <Player> <Mod/Admin/All>");
+                return false;
+            }
+            #endregion
+
+            #region check player
+            var plr = player.Manager.FindPlayer(args[0]);
+            if (plr == null)
+            {
+                player.SendError("Player not found, are they online?");
+                return false;
+            }
+            #endregion
+
+            #region check rank
+            var Rank = ParseRank(args[1].ToLower());
+            if (Rank == 0)
+            {
+                player.SendError("Invalid Rank, Usage: /rank <Player> <Mod/Admin/All>");
+                return false;
+            }
+            if (Rank > player.Client.Account.Rank)
+            {
+                player.SendError("You cannot rank a player up past your own rank!");
+                return false;
+            }
+            if (plr.Client.Account.Rank > player.Client.Account.Rank)
+            {
+                player.SendError("You cannot rank a higher ranked player than you!");
+                return false;
+            }
+            #endregion
+
+            player.Manager.Database.DoActionAsync(db =>
+            {
+                var cmd = db.CreateQuery();
+                cmd.CommandText = "UPDATE accounts SET rank=@rank WHERE Id=@accId";
+                cmd.Parameters.AddWithValue("@rank", Rank);
+                cmd.Parameters.AddWithValue("@accId", (Convert.ToInt32(plr.AccountId)));
+                if (cmd.ExecuteNonQuery() == 0)
+                {
+                    player.SendInfo("An error occured while executing the command query.");
+                }
+                else
+                    player.SendInfo("Character Successfully Ranked");
+            });
+            return true;
+        }
+
+        int ParseRank(string rankInput)
+        {
+            if (rankInput == "mod")
+                return 3;
+            if (rankInput == "admin")
+                return 4;
+            if (rankInput == "all")
+                return 5;
+            return 0;
         }
     }
 }
