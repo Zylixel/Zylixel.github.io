@@ -713,6 +713,7 @@
     <EmbeddedResource Include="realm\worlds\maps\shaitansmap.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\LairofShaitan.jm" />
     <EmbeddedResource Include="realm\worlds\maps\icecave.jm" />
+    <EmbeddedResource Include="realm\worlds\maps\GodsNexus.jm" />
     <None Include="wServer.cfg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
