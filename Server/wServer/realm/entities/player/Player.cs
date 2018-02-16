@@ -1127,9 +1127,11 @@ namespace wServer.realm.entities.player
                         time = 5 * 60 * 1000;
                     }
                     break;
-
             }
-
+            var obj = new StaticObject(Manager, objType, time, true, time != null, false);
+            obj.Move(X, Y);
+            obj.Name = Name;
+            Owner.EnterWorld(obj);
         }
 
         private void HandleRegen(RealmTime time)

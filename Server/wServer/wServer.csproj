@@ -414,6 +414,7 @@
     <Compile Include="realm\entities\Decoy.cs" />
     <Compile Include="realm\entities\Enemy.cs" />
     <Compile Include="realm\entities\GuildMerchant.cs" />
+    <Compile Include="realm\entities\merchant\Merchant.cs" />
     <Compile Include="realm\entities\merchant\MerchantLists.cs" />
     <Compile Include="realm\entities\merchant\Merchants.cs" />
     <Compile Include="realm\entities\OneWayContainer.cs" />

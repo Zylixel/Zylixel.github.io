@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="93f28b12-1fe2-4634-a4f6-ac52cc653dc2" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Server/wServer/realm/worlds/Nexus.cs" afterPath="$PROJECT_DIR$/../Server/wServer/realm/worlds/Nexus.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Server/wServer/wServer.csproj" afterPath="$PROJECT_DIR$/../Server/wServer/wServer.csproj" />
-    </list>
+    <list default="true" id="93f28b12-1fe2-4634-a4f6-ac52cc653dc2" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -29,16 +26,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WebMain.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/WebMain.as">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="18" column="25" lean-forward="false" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ArenaTimer.as" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/arena/view/ArenaTimer.as">
           <provider selected="true" editor-type-id="text-editor">
@@ -54,6 +41,16 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="357">
               <caret line="27" column="55" lean-forward="false" selection-start-line="27" selection-start-column="55" selection-end-line="27" selection-end-column="55" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ZySetup.as" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/servers/Production/ZySetup.as">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="8" column="45" lean-forward="false" selection-start-line="8" selection-start-column="45" selection-end-line="8" selection-end-column="45" />
               <folding />
             </state>
           </provider>
@@ -109,7 +106,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MECommandMenu.as" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MECommandMenu.as" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/assembleegameclient/mapeditor/MECommandMenu.as">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="197">
@@ -233,7 +230,6 @@
         <option value="$PROJECT_DIR$/src/kabam/rotmg/messaging/impl/GameServerConnectionConcrete.as" />
         <option value="$PROJECT_DIR$/src/com/company/assembleegameclient/objects/Merchant.as" />
         <option value="$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedData_GroundCXML.dat" />
-        <option value="$PROJECT_DIR$/src/kabam/rotmg/servers/Production/ZySetup.as" />
         <option value="$PROJECT_DIR$/src/com/company/assembleegameclient/parameters/Parameters.as" />
         <option value="$PROJECT_DIR$/src/com/company/assembleegameclient/screens/CharacterSelectionAndNewsScreen.as" />
         <option value="$PROJECT_DIR$/src/com/company/assembleegameclient/screens/CharacterList.as" />
@@ -241,6 +237,7 @@
         <option value="$PROJECT_DIR$/src/com/company/assembleegameclient/screens/charrects/CurrentCharacterRect.as" />
         <option value="$PROJECT_DIR$/src/kabam/rotmg/assets/EmbeddedData_EquipCXML.dat" />
         <option value="$PROJECT_DIR$/src/com/company/assembleegameclient/game/GameSprite.as" />
+        <option value="$PROJECT_DIR$/src/kabam/rotmg/servers/Production/ZySetup.as" />
       </list>
     </option>
   </component>
@@ -251,7 +248,7 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
+    <option name="x" value="-1928" />
     <option name="y" value="-8" />
     <option name="width" value="1936" />
     <option name="height" value="1056" />
@@ -304,6 +301,7 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -489,7 +487,6 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -501,7 +498,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="js.eslint.eslintPackage" value="" />
-    <property name="SearchEverywhereHistoryKey" value="Arena&#9;null&#9;null&#10;arena&#9;null&#9;null&#10;eq&#9;FILE&#9;file://D:/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/assets/EmbeddedData_EquipCXML.dat&#10;nexus&#9;null&#9;null&#10;characterse&#9;FILE&#9;file://D:/Dropbox/Zylixel.github.io/Client/src/com/company/assembleegameclient/screens/CharacterSelectionAndNewsScreen.as&#10;char&#9;null&#9;null&#10;equip&#9;FILE&#9;file://D:/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/assets/EmbeddedData_EquipCXML.dat&#10;zy&#9;null&#9;null&#10;param&#9;FILE&#9;file://D:/Dropbox/Zylixel.github.io/Client/src/com/company/assembleegameclient/parameters/Parameters.as&#10;button&#9;null&#9;null&#10;EQUIP&#9;FILE&#9;file://D:/Dropbox/Zylixel.github.io/No Looky/Client/src/kabam/rotmg/assets/EmbeddedData_EquipCXML.dat&#10;CXML&#9;FILE&#9;file://D:/Dropbox/Zylixel.github.io/No Looky/Client/src/kabam/rotmg/assets/EmbeddedData_AbyssOfDemonsCXML.dat&#10;ground&#9;FILE&#9;file://D:/Dropbox/Zylixel.github.io/No Looky/Client/src/kabam/rotmg/assets/EmbeddedData_GroundCXML.dat&#10;equi&#9;FILE&#9;file://D:/Dropbox/Zylixel.github.io/No Looky/Client/src/kabam/rotmg/assets/EmbeddedData_EquipCXML.dat&#10;equi[&#9;null&#9;null&#10;potion&#9;FILE&#9;file://D:/Dropbox/Zylixel.github.io/No Looky/Client/src/kabam/rotmg/ui/view/components/PotionSlotView.as&#10;bluesi&#9;null&#9;null&#10;backgr&#9;FILE&#9;file://D:/Dropbox/Zylixel.github.io/No Looky/Client/src/kabam/rotmg/ui/view/CharacterWindowBackground.as&#10;equ&#9;FILE&#9;file://D:/Dropbox/Zylixel.github.io/No Looky/Client/src/kabam/rotmg/assets/EmbeddedData_EquipCXML.dat&#10;gra&#9;null&#9;null&#10;parse&#9;null&#9;null&#10;map&#9;null&#9;null&#10;camera&#9;null&#9;null&#10;para&#9;null&#9;null&#10;characterwindow&#9;null&#9;null&#10;BuyCharacterRect&#9;FILE&#9;file://D:/Dropbox/Zylixel.github.io/No Looky/Client/src/com/company/assembleegameclient/screens/charrects/BuyCharacterRect.as&#10;buych&#9;FILE&#9;file://D:/Dropbox/Zylixel.github.io/No Looky/Client/src/kabam/rotmg/account/core/BuyCharacterSlotCommand.as&#10;buy&#9;FILE&#9;file://D:/Dropbox/Zylixel.github.io/No Looky/Client/src/kabam/rotmg/account/core/services/BuyCharacterSlotTask.as&#10;Zy&#9;null&#9;null&#10;Iconfi&#9;FILE&#9;file://C:/Users/mason/Downloads/flex_sdk_4.9.1/flex_sdk_4.9.1/frameworks/projects/textLayout/3.0.33/src/flashx/textLayout/elements/IConfiguration.as&#10;Iconfig&#9;FILE&#9;file://C:/Users/mason/Downloads/flex_sdk_4.9.1/flex_sdk_4.9.1/frameworks/projects/textLayout/3.0.33/src/flashx/textLayout/elements/IConfiguration.as&#10;Icon&#9;FILE&#9;file://D:/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/ui/UIConfig.as&#10;produ&#9;FILE&#9;file://D:/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/application/impl/ProductionSetup.as&#10;parameters&#9;null&#9;null&#10;pro&#9;FILE&#9;file://D:/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/application/impl/ProductionSetup.as&#10;Button&#9;FILE&#9;file://D:/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/ui/view/ButtonFactory.as&#10;characterS&#9;null&#9;null&#10;CharacterSlotNeed&#9;null&#9;null&#10;characterSlotNee&#9;FILE&#9;file://D:/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/ui/view/CharacterSlotNeedFameMediator.as&#10;charR&#9;null&#9;null&#10;buycha&#9;FILE&#9;file://D:/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/account/core/services/BuyCharacterSlotTask.as&#10;PlayerMO&#9;FILE&#9;file://D:/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/core/model/PlayerModel.as&#10;BuyCharacterRect.as&#9;FILE&#9;file://D:/Dropbox/Zylixel.github.io/Client/src/com/company/assembleegameclient/screens/charrects/BuyCharacterRect.as&#10;mask&#9;FILE&#9;file://C:/Users/mason/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/assets/EmbeddedAssets_playersSkinsMaskEmbed2_.as&#10;player&#9;FILE&#9;file://C:/Users/mason/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/assets/EmbeddedAssets_playersSkinsEmbed2_.as&#10;skins&#9;FILE&#9;file://C:/Users/mason/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/assets/EmbeddedData_SkinsCXML.dat&#10;informer&#9;FILE&#9;file://C:/Users/mason/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/arena/view/InformerPanel2.as&#10;asset&#9;null&#9;null&#10;lofi6&#9;null&#9;null&#10;lofiobj&#9;null&#9;null" />
+    <property name="SearchEverywhereHistoryKey" value="setup&#9;FILE&#9;file://D:/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/servers/Production/ZySetup.as&#10;Arena&#9;null&#9;null&#10;arena&#9;null&#9;null&#10;eq&#9;FILE&#9;file://D:/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/assets/EmbeddedData_EquipCXML.dat&#10;nexus&#9;null&#9;null&#10;characterse&#9;FILE&#9;file://D:/Dropbox/Zylixel.github.io/Client/src/com/company/assembleegameclient/screens/CharacterSelectionAndNewsScreen.as&#10;char&#9;null&#9;null&#10;equip&#9;FILE&#9;file://D:/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/assets/EmbeddedData_EquipCXML.dat&#10;zy&#9;null&#9;null&#10;param&#9;FILE&#9;file://D:/Dropbox/Zylixel.github.io/Client/src/com/company/assembleegameclient/parameters/Parameters.as&#10;button&#9;null&#9;null&#10;EQUIP&#9;FILE&#9;file://D:/Dropbox/Zylixel.github.io/No Looky/Client/src/kabam/rotmg/assets/EmbeddedData_EquipCXML.dat&#10;CXML&#9;FILE&#9;file://D:/Dropbox/Zylixel.github.io/No Looky/Client/src/kabam/rotmg/assets/EmbeddedData_AbyssOfDemonsCXML.dat&#10;ground&#9;FILE&#9;file://D:/Dropbox/Zylixel.github.io/No Looky/Client/src/kabam/rotmg/assets/EmbeddedData_GroundCXML.dat&#10;equi&#9;FILE&#9;file://D:/Dropbox/Zylixel.github.io/No Looky/Client/src/kabam/rotmg/assets/EmbeddedData_EquipCXML.dat&#10;equi[&#9;null&#9;null&#10;potion&#9;FILE&#9;file://D:/Dropbox/Zylixel.github.io/No Looky/Client/src/kabam/rotmg/ui/view/components/PotionSlotView.as&#10;bluesi&#9;null&#9;null&#10;backgr&#9;FILE&#9;file://D:/Dropbox/Zylixel.github.io/No Looky/Client/src/kabam/rotmg/ui/view/CharacterWindowBackground.as&#10;equ&#9;FILE&#9;file://D:/Dropbox/Zylixel.github.io/No Looky/Client/src/kabam/rotmg/assets/EmbeddedData_EquipCXML.dat&#10;gra&#9;null&#9;null&#10;parse&#9;null&#9;null&#10;map&#9;null&#9;null&#10;camera&#9;null&#9;null&#10;para&#9;null&#9;null&#10;characterwindow&#9;null&#9;null&#10;BuyCharacterRect&#9;FILE&#9;file://D:/Dropbox/Zylixel.github.io/No Looky/Client/src/com/company/assembleegameclient/screens/charrects/BuyCharacterRect.as&#10;buych&#9;FILE&#9;file://D:/Dropbox/Zylixel.github.io/No Looky/Client/src/kabam/rotmg/account/core/BuyCharacterSlotCommand.as&#10;buy&#9;FILE&#9;file://D:/Dropbox/Zylixel.github.io/No Looky/Client/src/kabam/rotmg/account/core/services/BuyCharacterSlotTask.as&#10;Zy&#9;null&#9;null&#10;Iconfi&#9;FILE&#9;file://C:/Users/mason/Downloads/flex_sdk_4.9.1/flex_sdk_4.9.1/frameworks/projects/textLayout/3.0.33/src/flashx/textLayout/elements/IConfiguration.as&#10;Iconfig&#9;FILE&#9;file://C:/Users/mason/Downloads/flex_sdk_4.9.1/flex_sdk_4.9.1/frameworks/projects/textLayout/3.0.33/src/flashx/textLayout/elements/IConfiguration.as&#10;Icon&#9;FILE&#9;file://D:/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/ui/UIConfig.as&#10;produ&#9;FILE&#9;file://D:/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/application/impl/ProductionSetup.as&#10;parameters&#9;null&#9;null&#10;pro&#9;FILE&#9;file://D:/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/application/impl/ProductionSetup.as&#10;Button&#9;FILE&#9;file://D:/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/ui/view/ButtonFactory.as&#10;characterS&#9;null&#9;null&#10;CharacterSlotNeed&#9;null&#9;null&#10;characterSlotNee&#9;FILE&#9;file://D:/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/ui/view/CharacterSlotNeedFameMediator.as&#10;charR&#9;null&#9;null&#10;buycha&#9;FILE&#9;file://D:/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/account/core/services/BuyCharacterSlotTask.as&#10;PlayerMO&#9;FILE&#9;file://D:/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/core/model/PlayerModel.as&#10;BuyCharacterRect.as&#9;FILE&#9;file://D:/Dropbox/Zylixel.github.io/Client/src/com/company/assembleegameclient/screens/charrects/BuyCharacterRect.as&#10;mask&#9;FILE&#9;file://C:/Users/mason/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/assets/EmbeddedAssets_playersSkinsMaskEmbed2_.as&#10;player&#9;FILE&#9;file://C:/Users/mason/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/assets/EmbeddedAssets_playersSkinsEmbed2_.as&#10;skins&#9;FILE&#9;file://C:/Users/mason/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/assets/EmbeddedData_SkinsCXML.dat&#10;informer&#9;FILE&#9;file://C:/Users/mason/Dropbox/Zylixel.github.io/Client/src/kabam/rotmg/arena/view/InformerPanel2.as&#10;asset&#9;null&#9;null&#10;lofi6&#9;null&#9;null" />
   </component>
   <component name="RecentsManager">
     <key name="CreateActionScriptClassDialog.DESTINATION_PACKAGE_RECENT_KEY">
@@ -1134,44 +1131,45 @@
       <workItem from="1510534467996" duration="150000" />
       <workItem from="1510801921494" duration="1157000" />
       <workItem from="1512148280353" duration="794000" />
+      <workItem from="1518645372376" duration="1015000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="272155000" />
+    <option name="totallyTimeSpent" value="273170000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <frame x="-1928" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32502708" sideWeight="0.26492536" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32502708" sideWeight="0.7361407" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34541577" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3491471" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32936078" sideWeight="0.4936034" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.4936034" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32502708" sideWeight="0.26492536" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Thumbnails" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980973" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
     </layout>
@@ -1318,13 +1316,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="544">
           <caret line="40" column="49" lean-forward="false" selection-start-line="40" selection-start-column="49" selection-end-line="40" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/servers/Production/ZySetup.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="21" column="5" lean-forward="false" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -1479,7 +1470,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="3" column="13" lean-forward="false" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1487,7 +1477,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="8" column="22" lean-forward="false" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1495,7 +1484,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1503,7 +1491,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1535,14 +1522,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="248">
           <caret line="5215" column="29" lean-forward="false" selection-start-line="5215" selection-start-column="29" selection-end-line="5215" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/arena/view/ArenaTimerMediator.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="27" column="55" lean-forward="false" selection-start-line="27" selection-start-column="55" selection-end-line="27" selection-end-column="55" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1578,6 +1557,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/assembleegameclient/mapeditor/MECommandMenu.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="21" column="76" lean-forward="false" selection-start-line="21" selection-start-column="76" selection-end-line="21" selection-end-column="76" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$USER_HOME$/Downloads/flex_sdk_4.9.1/flex_sdk_4.9.1/frameworks/projects/framework/src/mx/core/BitmapAsset.as">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="503">
@@ -1586,10 +1573,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/assembleegameclient/mapeditor/MECommandMenu.as">
+    <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/arena/view/ArenaTimerMediator.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="21" column="76" lean-forward="false" selection-start-line="21" selection-start-column="76" selection-end-line="21" selection-end-column="76" />
+        <state relative-caret-position="357">
+          <caret line="27" column="55" lean-forward="false" selection-start-line="27" selection-start-column="55" selection-end-line="27" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/kabam/rotmg/servers/Production/ZySetup.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="8" column="45" lean-forward="false" selection-start-line="8" selection-start-column="45" selection-end-line="8" selection-end-column="45" />
           <folding />
         </state>
       </provider>

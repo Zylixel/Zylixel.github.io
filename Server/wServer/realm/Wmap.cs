@@ -310,11 +310,10 @@ namespace wServer.realm
                 WmapTile tile = new WmapTile();
                 tile.TileId = (ushort)reader.ReadInt16();
                 string obj = reader.ReadString();
-                try
+                if (data.IdToObjectType.ContainsKey(obj))
                 {
                     tile.ObjType = string.IsNullOrEmpty(obj) ? (ushort)0 : data.IdToObjectType[obj];
                 }
-                catch (Exception ex) { log.Error(ex); }
                 tile.Name = reader.ReadString();
                 tile.Terrain = (WmapTerrain)reader.ReadByte();
                 tile.Region = (TileRegion)reader.ReadByte();

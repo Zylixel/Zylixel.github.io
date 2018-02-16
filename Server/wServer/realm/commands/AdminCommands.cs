@@ -1149,43 +1149,30 @@ namespace wServer.realm.commands
                     return false;
                 }
                 int slot = Convert.ToInt32(args[0]) + 3;
-                int itemID = player.Inventory[slot].ObjectType;
-                string checker = player.Manager.GameData.ObjectTypeToId[player.Inventory[slot].ObjectType];
+                Item item = player.Inventory[slot];
 
-                if (!checker.Contains("Egg"))
-                    if (!checker.Contains("Skin"))
-                        if (!checker.Contains("Cloth"))
-                            if (!checker.Contains("Dye"))
-                                if (!checker.Contains("Tincture"))
-                                    if (!checker.Contains("Effusion"))
-                                        if (!checker.Contains("Elixir"))
-                                            if (!checker.Contains("Tarot"))
-                                                if (!checker.Contains("Gunball"))
-                                                        {
-                                                    MySqlCommand cmd = db.CreateQuery();
-                                                    cmd.CommandText = "INSERT INTO market(itemID, fame, id) VALUES(@itemID, @fame, @playerID)";
-                                                    cmd.Parameters.AddWithValue("@itemID", Convert.ToInt32(itemID));
-                                                    cmd.Parameters.AddWithValue("@fame", args[1]);
-                                                    var plr = player.Manager.FindPlayer(player.Name);
-                                                    cmd.Parameters.AddWithValue("@playerID", plr.AccountId);
-                                                    try
-                                                    {
-                                                        cmd.ExecuteNonQuery();
-                                                        player.Inventory[slot] = null;
-                                                        player.SaveToCharacter();
-                                                        player.Client.Save();
-                                                        player.UpdateCount++;
-                                                        //if (logic.CheckConfig.IsDebugOn())
-                                                            //log.Error("Requesting Update for Item | " + itemID);
-                                                        // Merchants.RefreshMerchants = itemID;
-                                                        //Merchants.RefreshMerchantsCooldown = 100;
-                                                    }
-                                                    catch (Exception e)
-                                                    {
-                                                        Console.WriteLine("[" + DateTime.Now.ToString("h:mm:ss tt") + "] " + e);
-                                                    }
-                                                    return true;
-                                                }
+                if (Merchant.checkItem(player.Inventory[slot]))
+                {
+                    MySqlCommand cmd = db.CreateQuery();
+                    cmd.CommandText = "INSERT INTO market(itemID, fame, playerid) VALUES(@itemID, @fame, @playerID)";
+                    cmd.Parameters.AddWithValue("@itemID", Convert.ToInt32(item.ObjectType));
+                    cmd.Parameters.AddWithValue("@fame", args[1]);
+                    var plr = player.Manager.FindPlayer(player.Name);
+                    cmd.Parameters.AddWithValue("@playerID", plr.AccountId);
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                        player.Inventory[slot] = null;
+                        player.Client.Save();
+                        player.UpdateCount++;
+                        MerchantLists.AddItem(item, Convert.ToInt32(args[1]));
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("[" + DateTime.Now.ToString("h:mm:ss tt") + "] " + e);
+                    }
+                    return true;
+                }
             }
         player.SendError("You cannot sell this item!");
         return false;

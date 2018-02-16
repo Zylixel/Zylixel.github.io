@@ -796,30 +796,46 @@ SELECT MAX(chestId) FROM vaults WHERE accId = @accId;";
         {
             int accId;
             if (IsDebugOn())
-                Log.Error("Attemping to find player to give fame to: " + mType + " | " + price);
+                Log.Info("Attemping to find player to give fame to: " + mType + " | " + price);
             var cmd = CreateQuery();
-            cmd.CommandText = "SELECT id FROM market WHERE itemid=@itemID AND fame=@fame";
+            cmd.CommandText = "SELECT playerid FROM market WHERE itemid=@itemID AND fame=@fame";
             cmd.Parameters.AddWithValue("@itemID", mType);
             cmd.Parameters.AddWithValue("@fame", price);
             using (var rdr = cmd.ExecuteReader())
             {
                 if (!rdr.HasRows) return 0;
                 rdr.Read();
-                accId = rdr.GetInt32("id");
+                accId = rdr.GetInt32("playerid");
             }
             return accId;
         }
 
+        public int GetMarketItemCount(int mType, int price)
+        {
+            int count;
+            if (IsDebugOn())
+                Log.Info("Getting Item count for Item: " + mType);
+            var cmd = CreateQuery();
+            cmd.CommandText = "SELECT COUNT(*) FROM market WHERE itemid=@itemID";
+            cmd.Parameters.AddWithValue("@itemID", mType);
+            using (var rdr = cmd.ExecuteReader())
+            {
+                if (!rdr.HasRows) return 0;
+                rdr.Read();
+                count = rdr.GetInt32("COUNT(*)");
+            }
+            return count;
+        }
 
-        public int GetMarketInfo(int id, int type)
+        public int GetMarketPrice(Item item)
         {
             var cmd = CreateQuery();
             cmd.CommandText = "SELECT MIN( fame ) FROM market WHERE itemid=@itemid LIMIT 1";
-            cmd.Parameters.AddWithValue("@itemid", id);
+            cmd.Parameters.AddWithValue("@itemid", item.ObjectType);
             using (var rdr = cmd.ExecuteReader())
             {
                 if (IsDebugOn())
-                    Log.Info("GetMarketInfo | Attemping to call ItemID: " + id);
+                    Log.Info("GetMarketInfo | Attemping to call ItemID: " + item.ObjectId);
                 rdr.Read();
                 if (!rdr.HasRows)
                 {
@@ -830,14 +846,44 @@ SELECT MAX(chestId) FROM vaults WHERE accId = @accId;";
                 if (rdr.IsDBNull(ordinal))
                 {
                     if (IsDebugOn())
-                        Log.Info("GetMarketInfo | " + 0);
+                       Log.Info("GetMarketInfo | " + 0);
+                    return 0;
+                }
+                var price = rdr.GetInt32("MIN( fame )");
+                if (IsDebugOn())
+                    Log.Info("GetMarketInfo | " + price);
+                return price;
+            }
+        }
+
+        public int GetMarketPrice(int id)
+        {
+            var cmd = CreateQuery();
+            cmd.CommandText = "SELECT MIN( fame ) FROM market WHERE itemid=@itemid LIMIT 1";
+            cmd.Parameters.AddWithValue("@itemid", id);
+            using (var rdr = cmd.ExecuteReader())
+            {
+                if (IsDebugOn())
+                    Log.Info("GetMarketPrice | Attemping to call ItemID: " + id);
+                rdr.Read();
+                if (!rdr.HasRows)
+                {
+                    Log.Error("GetMarketPrice | Missing ID ");
+                    return 0;
+                }
+                var ordinal = rdr.GetOrdinal("MIN( fame )");
+                if (rdr.IsDBNull(ordinal))
+                {
+                    if (IsDebugOn())
+                        Log.Info("GetMarketPrice | " + 0);
                     return 0;
                 }
                 if (IsDebugOn())
-                    Log.Info("GetMarketInfo | " + rdr.GetInt32("MIN( fame )"));
+                    Log.Info("GetMarketPrice | " + rdr.GetInt32("MIN( fame )"));
                 return rdr.GetInt32("MIN( fame )");
             }
         }
+
 
         public int GetPetSize(int id, int pet)
         {

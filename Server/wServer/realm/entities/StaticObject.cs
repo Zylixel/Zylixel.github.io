@@ -48,6 +48,10 @@ namespace wServer.realm.entities
         private static bool IsInteractive(RealmManager manager, ushort objType)
         {
             ObjectDesc desc;
+            if (manager == null || objType == 0)
+            {
+                return false;
+            }
             if (manager.GameData.ObjectDescs.TryGetValue(objType, out desc))
             {
                 if(desc.Class != null)

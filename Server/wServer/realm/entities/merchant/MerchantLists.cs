@@ -15,11 +15,11 @@ namespace wServer.realm.entities.merchant
     internal class MerchantLists
     {
         public static int[] ZyList;
+        public static List<int> zyList = new List<int>();
+
+        public static Dictionary<int, int> price = new Dictionary<int, int>();
 
         public static XmlData PublicData;
-
-        public static Dictionary<int, Tuple<int, CurrencyType>> Prices = new Dictionary<int, Tuple<int, CurrencyType>>()
-            ;
 
         public static int[] Store10List = {0xb41, 0xbab, 0xbad, 0xbac};
         public static int[] Store11List = {0xb41, 0xbab, 0xbad, 0xbac};
@@ -99,87 +99,66 @@ namespace wServer.realm.entities.merchant
             "XP Booster Test", "Gravel"
         };
 
-        public static int HandleRequest(int item)
-        {
-            {
-                using (var db = new Database())
-                {
-                    return db.GetMarketInfo(item, 1);
-                }
-            }
-        }
-
-
         public static void InitMerchatLists(XmlData data)
         {
             if (CheckConfig.IsDebugOn())
                 Log.Info("Loading merchant lists...");
-            var zyList = new List<int>();
+            zyList = new List<int>();
             PublicData = data;
             foreach (var item in data.Items.Where(_ => NoShopItems.All(i => i != _.Value.ObjectId)))
             {
-                if (!item.Value.ObjectId.Contains("Egg"))
-                    if (!item.Value.ObjectId.Contains("Skin"))
-                        if (!item.Value.ObjectId.Contains("Cloth"))
-                            if (!item.Value.ObjectId.Contains("Dye"))
-                                if (!item.Value.ObjectId.Contains("Tincture"))
-                                    if (!item.Value.ObjectId.Contains("Effusion"))
-                                        if (!item.Value.ObjectId.Contains("Elixir"))
-                                            if (!item.Value.ObjectId.Contains("Tarot"))
-                                                if (!item.Value.ObjectId.Contains("Gunball"))
-                                                    if (item.Value.Tier == -1 || item.Value.Tier >= 4)
-                                                        if (item.Value.Treasure == false)
-                                                            using (var db = new Database())
-                                                            {
-                                                                if (db.GetMarketInfo(item.Value.ObjectType, 1) > 0)
-                                                                {
-                                                                    Prices.Add(item.Value.ObjectType,
-                                                                        new Tuple<int, CurrencyType>(item.Value.ObjectType, CurrencyType.Fame));
-                                                                    zyList.Add(item.Value.ObjectType);
-                                                                    if (CheckConfig.IsDebugOn())
-                                                                        Log.Info("Loading: " + item.Value.ObjectId);
-                                                                }
-                                                            }
+                if (Merchant.checkItem(item.Value))
+                {
+                    using (var db = new Database())
+                    {
+                        var _price = db.GetMarketPrice(item.Value);
+                        if (_price > 0)
+                        {
+                            if (CheckConfig.IsDebugOn())
+                                Log.Info("Loading " + item.Value.ObjectId);
+                            zyList.Add(item.Value.ObjectType);
+                            price.Add(item.Value.ObjectType, _price);
+                        }
+                    }
+                }
             }
             ZyList = zyList.ToArray();
             if (CheckConfig.IsDebugOn())
                 Log.Info("Merchat lists added.");
+           
         }
 
-        public static void RefreshMerchatLists()
+        public static void RemoveItem(int Item)
         {
             if (CheckConfig.IsDebugOn())
-                Log.Info("Reloading merchant lists...");
-            var zyList = new List<int>();
-            foreach (var item in PublicData.Items.Where(_ =>
-                NoShopItems.All(i => i != _.Value.ObjectId)))
-                if (!item.Value.ObjectId.Contains("Egg"))
-                    if (!item.Value.ObjectId.Contains("Skin"))
-                        if (!item.Value.ObjectId.Contains("Cloth"))
-                            if (!item.Value.ObjectId.Contains("Dye"))
-                                if (!item.Value.ObjectId.Contains("Tincture"))
-                                    if (!item.Value.ObjectId.Contains("Effusion"))
-                                        if (!item.Value.ObjectId.Contains("Elixir"))
-                                            if (!item.Value.ObjectId.Contains("Tarot"))
-                                                if (!item.Value.ObjectId.Contains("Gunball"))
-                                                    if (item.Value.Tier == -1 || item.Value.Tier >= 4)
-                                                        if (item.Value.Treasure == false)
-                                                            using (var db = new Database())
-                                                            {
-                                                                if (db.GetMarketInfo(item.Value.ObjectType, 1) != 0)
-                                                                {
-                                                                    Prices.Add(item.Value.ObjectType,
-                                                                        new Tuple<int, CurrencyType>(
-                                                                            item.Value.ObjectType,
-                                                                            CurrencyType.Fame));
-                                                                    zyList.Add(item.Value.ObjectType);
-                                                                    if (CheckConfig.IsDebugOn())
-                                                                        Log.Info("Loading: " + item.Value.ObjectId);
-                                                                }
-                                                            }
+                Log.Info("Removing " + Item + " from List");
+
+            zyList.Remove(Item);
             ZyList = zyList.ToArray();
+        }
+
+        public static void AddItem(Item Item, int Price)
+        {
+            var _oldPrice = 0;
             if (CheckConfig.IsDebugOn())
-                Log.Info("Merchat lists Reloaded.");
+                Log.Info("Adding Item " + Item.ObjectId + " to List");
+
+            if (price.ContainsKey(Item.ObjectType))
+            {
+                _oldPrice = price[Item.ObjectType];
+            }
+
+            var _newPrice = Price;
+            
+            if (_oldPrice > _newPrice || _oldPrice == 0) {
+                Merchant.updatePrice(Item.ObjectType, _newPrice);
+            }
+
+            if (!zyList.Contains(Item.ObjectType))
+            {
+                zyList.Add(Item.ObjectType);
+                ZyList = zyList.ToArray();
+            }
         }
     }
 }
