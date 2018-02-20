@@ -160,7 +160,7 @@ namespace wServer.networking.handlers
             }
             catch (Exception ex)
             {
-                Log.Error(ex);
+                Console.WriteLine(ex);
                 client.Player.SendError("Internal server error: " + ex.Message);
             }
         }

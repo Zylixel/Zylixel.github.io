@@ -8,7 +8,6 @@ using System.Linq;
 using System.Reflection;
 using System.Xml.Linq;
 using System.Xml.XPath;
-using log4net;
 
 #endregion
 
@@ -16,7 +15,6 @@ namespace db.data
 {
     public class XmlData : IDisposable
     {
-        private static readonly ILog log = LogManager.GetLogger(typeof (XmlData));
         private readonly XElement addition;
 
         private readonly Dictionary<string, ushort> id2type_obj;
@@ -78,23 +76,23 @@ namespace db.data
             assign = new AutoAssign(this);
 
             string basePath = Path.Combine(AssemblyDirectory, path);
-            log.InfoFormat("Loading game data from '{0}'...", basePath);
+            Console.WriteLine("Loading game data from '{0}'...", basePath);
             string[] xmls = Directory.EnumerateFiles(basePath, "*.xml", SearchOption.AllDirectories).ToArray();
             for (int i = 0; i < xmls.Length; i++)
             {
                 if (CheckConfig.IsDebugOn())
-                    log.InfoFormat("Loading '{0}'({1}/{2})...", xmls[i], i + 1, xmls.Length);
+                    Console.WriteLine("Loading '{0}'({1}/{2})...", xmls[i], i + 1, xmls.Length);
                 using (Stream stream = File.OpenRead(xmls[i]))
                     ProcessXml(XElement.Load(stream));
             }
             if (CheckConfig.IsDebugOn())
             {
-                log.Info("Finish loading game data.");
-                log.InfoFormat("{0} Items", items.Count);
-                log.InfoFormat("{0} Tiles", tiles.Count);
-                log.InfoFormat("{0} Objects", objDescs.Count);
-                log.InfoFormat("{0} Portals", portals.Count);
-                log.InfoFormat("{0} Additions", addition.Elements().Count());
+                Console.WriteLine("Finish loading game data.");
+                Console.WriteLine("{0} Items", items.Count);
+                Console.WriteLine("{0} Tiles", tiles.Count);
+                Console.WriteLine("{0} Objects", objDescs.Count);
+                Console.WriteLine("{0} Portals", portals.Count);
+                Console.WriteLine("{0} Additions", addition.Elements().Count());
             }
         }
 
@@ -177,9 +175,9 @@ namespace db.data
                 if (cls == "PetBehavior" || cls == "PetAbility") continue;
 
                 if (type2id_obj.ContainsKey(type))
-                    log.WarnFormat("'{0}' and '{1}' has the same ID of 0x{2:x4}!", id, type2id_obj[type], type);
+                    Console.WriteLine("'{0}' and '{1}' has the same ID of 0x{2:x4}!", id, type2id_obj[type], type);
                 if (id2type_obj.ContainsKey(id))
-                    log.WarnFormat("0x{0:x4} and 0x{1:x4} has the same name of {2}!", type, id2type_obj[id], id);
+                    Console.WriteLine("0x{0:x4} and 0x{1:x4} has the same name of {2}!", type, id2type_obj[id], id);
 
                 type2id_obj[type] = id;
                 id2type_obj[id] = type;
@@ -244,9 +242,9 @@ namespace db.data
                     type = (ushort)Utils.FromString(typeAttr.Value);
 
                 if (type2id_tile.ContainsKey(type))
-                    log.WarnFormat("'{0}' and '{1}' has the same ID of 0x{2:x4}!", id, type2id_tile[type], type);
+                    Console.WriteLine("'{0}' and '{1}' has the same ID of 0x{2:x4}!", id, type2id_tile[type], type);
                 if (id2type_tile.ContainsKey(id))
-                    log.WarnFormat("0x{0:x4} and 0x{1:x4} has the same name of {2}!", type, id2type_tile[id], id);
+                    Console.WriteLine("0x{0:x4} and 0x{1:x4} has the same name of {2}!", type, id2type_tile[id], id);
 
                 type2id_tile[type] = id;
                 id2type_tile[id] = type;
@@ -313,7 +311,7 @@ namespace db.data
                         SetValue("nextSigned", nextSignedId.ToString());
                     }
                     SetValue(id, type.ToString());
-                    log.InfoFormat("Auto assigned '{0}' to 0x{1:x4}", id, type);
+                    Console.WriteLine("Auto assigned '{0}' to 0x{1:x4}", id, type);
                 }
                 return type;
             }

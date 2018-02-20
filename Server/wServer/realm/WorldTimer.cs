@@ -1,7 +1,6 @@
 ﻿#region
 
 using System;
-using log4net;
 
 #endregion
 
@@ -9,7 +8,6 @@ namespace wServer.realm
 {
     public class WorldTimer
     {
-        private static readonly ILog log = LogManager.GetLogger(typeof(WorldTimer));
         private readonly Action<World, RealmTime> cb;
         private readonly int total;
         private int remain;
@@ -54,7 +52,7 @@ namespace wServer.realm
                 }
                 catch (Exception ex)
                 {
-                    log.Error(ex);
+                    Console.WriteLine(ex);
                 }
                 return true;
             }

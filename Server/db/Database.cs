@@ -7,7 +7,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using db.data;
-using log4net;
 using MySql.Data.MySqlClient;
 
 #endregion
@@ -17,7 +16,6 @@ namespace db
     public partial class Database : IDisposable
     {
         private static readonly List<string> Emails = new List<string>();
-        private static readonly ILog Log = LogManager.GetLogger(typeof(Database));
 
         private static readonly string[] Names =
         {
@@ -226,11 +224,7 @@ AND characters.charId=death.chrId;";
                 }
             }
             DateTime converted;
-            if (TimeZoneInfo.Local.Id != TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time").Id)
-                converted = TimeZoneInfo.ConvertTime(DateTime.Now,
-                    TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time"));
-            else
-                converted = DateTime.Now;
+            converted = DateTime.Now;
             var fixedTime = new DateTime(converted.Year, converted.Month, converted.Day, 17, 0, 0, 0,
                 DateTimeKind.Unspecified);
             if (quest == null || converted.Hour >= 17 && converted.Day - 1 == quest.Time.Day ||
@@ -796,7 +790,7 @@ SELECT MAX(chestId) FROM vaults WHERE accId = @accId;";
         {
             int accId;
             if (IsDebugOn())
-                Log.Info("Attemping to find player to give fame to: " + mType + " | " + price);
+                Console.WriteLine("Attemping to find player to give fame to: " + mType + " | " + price);
             var cmd = CreateQuery();
             cmd.CommandText = "SELECT playerid FROM market WHERE itemid=@itemID AND fame=@fame";
             cmd.Parameters.AddWithValue("@itemID", mType);
@@ -810,23 +804,6 @@ SELECT MAX(chestId) FROM vaults WHERE accId = @accId;";
             return accId;
         }
 
-        public int GetMarketItemCount(int mType, int price)
-        {
-            int count;
-            if (IsDebugOn())
-                Log.Info("Getting Item count for Item: " + mType);
-            var cmd = CreateQuery();
-            cmd.CommandText = "SELECT COUNT(*) FROM market WHERE itemid=@itemID";
-            cmd.Parameters.AddWithValue("@itemID", mType);
-            using (var rdr = cmd.ExecuteReader())
-            {
-                if (!rdr.HasRows) return 0;
-                rdr.Read();
-                count = rdr.GetInt32("COUNT(*)");
-            }
-            return count;
-        }
-
         public int GetMarketPrice(Item item)
         {
             var cmd = CreateQuery();
@@ -835,56 +812,20 @@ SELECT MAX(chestId) FROM vaults WHERE accId = @accId;";
             using (var rdr = cmd.ExecuteReader())
             {
                 if (IsDebugOn())
-                    Log.Info("GetMarketInfo | Attemping to call ItemID: " + item.ObjectId);
+                    Console.WriteLine("GetMarketPrice | Calling: " + item.ObjectId);
                 rdr.Read();
-                if (!rdr.HasRows)
-                {
-                    Log.Error("GetMarketInfo | Missing ID ");
-                    return 0;
-                }
                 var ordinal = rdr.GetOrdinal("MIN( fame )");
-                if (rdr.IsDBNull(ordinal))
+                if (!rdr.HasRows || rdr.IsDBNull(ordinal))
                 {
-                    if (IsDebugOn())
-                       Log.Info("GetMarketInfo | " + 0);
                     return 0;
                 }
                 var price = rdr.GetInt32("MIN( fame )");
                 if (IsDebugOn())
-                    Log.Info("GetMarketInfo | " + price);
+                    Console.WriteLine("GetMarketPrice | " + price);
                 return price;
             }
         }
-
-        public int GetMarketPrice(int id)
-        {
-            var cmd = CreateQuery();
-            cmd.CommandText = "SELECT MIN( fame ) FROM market WHERE itemid=@itemid LIMIT 1";
-            cmd.Parameters.AddWithValue("@itemid", id);
-            using (var rdr = cmd.ExecuteReader())
-            {
-                if (IsDebugOn())
-                    Log.Info("GetMarketPrice | Attemping to call ItemID: " + id);
-                rdr.Read();
-                if (!rdr.HasRows)
-                {
-                    Log.Error("GetMarketPrice | Missing ID ");
-                    return 0;
-                }
-                var ordinal = rdr.GetOrdinal("MIN( fame )");
-                if (rdr.IsDBNull(ordinal))
-                {
-                    if (IsDebugOn())
-                        Log.Info("GetMarketPrice | " + 0);
-                    return 0;
-                }
-                if (IsDebugOn())
-                    Log.Info("GetMarketPrice | " + rdr.GetInt32("MIN( fame )"));
-                return rdr.GetInt32("MIN( fame )");
-            }
-        }
-
-
+        
         public int GetPetSize(int id, int pet)
         {
             var cmd = CreateQuery();
@@ -894,11 +835,11 @@ SELECT MAX(chestId) FROM vaults WHERE accId = @accId;";
             using (var rdr = cmd.ExecuteReader())
             {
                 if (IsDebugOn())
-                    Log.Info("Checking PetSize with accId: " + id + " and petId: " + pet);
+                    Console.WriteLine("Checking PetSize with accId: " + id + " and petId: " + pet);
                 rdr.Read();
                 if (!rdr.HasRows)
                 {
-                    Log.Error("Error in database, pet is missing a size");
+                    Console.WriteLine("Error in database, pet is missing a size");
                     return 0;
                 }
                 var ordinal = rdr.GetOrdinal("size");
@@ -1446,30 +1387,6 @@ VALUES(@accId, @petId, @objType, @skinName, @skin, @rarity, @maxLevel, @abilitie
             cmd.CommandText = "UPDATE accounts SET accountInUse=0 WHERE id=@accId;";
             cmd.Parameters.AddWithValue("@accId", acc.AccountId);
             cmd.ExecuteScalar();
-        }
-
-        private string GenerateGiftCode(int blocks, int blockLength)
-        {
-            var builder = new StringBuilder();
-            var rand = new Random();
-            for (var i = 0; i < blocks; i++)
-            {
-                builder.Append(GenerateRandomString(blockLength, rand));
-                if (i < blocks - 1)
-                    builder.Append("-");
-            }
-            return builder.ToString();
-        }
-
-        private bool GiftCodeExists(string code)
-        {
-            var cmd = CreateQuery();
-            cmd.CommandText = "SELECT code FROM giftCodes WHERE code=@code";
-            cmd.Parameters.AddWithValue("@code", code);
-            using (var rdr = cmd.ExecuteReader())
-            {
-                return rdr.HasRows;
-            }
         }
 
         public bool SaveChars(string oldAccId, Chars oldChars, Chars chrs, XmlData data)

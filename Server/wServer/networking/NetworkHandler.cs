@@ -3,14 +3,12 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
-using log4net;
 
 namespace wServer.networking
 {
     internal class NetworkHandler
     {
         public const int BufferSize = 0x10000;
-        private static readonly ILog Log = LogManager.GetLogger(typeof(NetworkHandler));
         private readonly Client _parent;
         private readonly ConcurrentQueue<Packet> _pendingPackets = new ConcurrentQueue<Packet>();
         private readonly object _sendLock = new object();
@@ -95,7 +93,7 @@ namespace wServer.networking
                         int len = ((ReceiveToken) e.UserToken).Length =
                             IPAddress.NetworkToHostOrder(BitConverter.ToInt32(e.Buffer, 0)) - 5;
                         if (len < 0 || len > BufferSize)
-                            Log.ErrorFormat("Buffer not large enough!");
+                            Console.WriteLine("Buffer not large enough!");
                         ((ReceiveToken) e.UserToken).PacketBody = new byte[len];
                         ((ReceiveToken) e.UserToken).Id = (PacketID)e.Buffer[4];
 
@@ -174,7 +172,7 @@ namespace wServer.networking
 
         private void OnError(Exception ex)
         {
-            Log.Error("Socket error.", ex);
+            Console.WriteLine("Socket error.", ex);
             _parent.Disconnect();
         }
 

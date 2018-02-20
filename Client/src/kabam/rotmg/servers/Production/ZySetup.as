@@ -6,7 +6,7 @@ import kabam.rotmg.application.ApplicationConfig;
 
 public class ZySetup implements ApplicationSetup {
 
-    private const SERVER:String = "127.0.0.1";
+    private const SERVER:String = "45.56.162.7:8080";
     private const UNENCRYPTED:String = ("http://" + SERVER);
     private const ENCRYPTED:String = ("http://" + SERVER);
     private const BUILD_LABEL:String = "RotMG #{VERSION}.{MINOR}";

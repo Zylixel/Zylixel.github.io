@@ -3,7 +3,6 @@
 using System;
 using System.Net;
 using System.Net.Sockets;
-using log4net;
 using wServer.logic;
 
 #endregion
@@ -12,7 +11,6 @@ namespace wServer.networking
 {
     internal class PolicyServer
     {
-        private static readonly ILog Log = LogManager.GetLogger(typeof (PolicyServer));
 
         private readonly TcpListener _listener;
         private bool _started;
@@ -44,14 +42,14 @@ namespace wServer.networking
             catch (ObjectDisposedException) { }
             catch (Exception ex)
             {
-                Log.Error(ex);
+                Console.WriteLine(ex);
             }
         }
 
         public void Start()
         {
             if (CheckConfig.IsDebugOn())
-                Log.Info("Starting policy server...");
+                Console.WriteLine("Starting policy server...");
             try
             {
                 _listener.Start();
@@ -61,8 +59,8 @@ namespace wServer.networking
             catch (ObjectDisposedException) { }
             catch (Exception ex)
             {
-                Log.Error(ex);
-                Log.Warn("Could not start Socket Policy Server, is port 843 occupied?");
+                Console.WriteLine(ex);
+                Console.WriteLine("Could not start Socket Policy Server, is port 843 occupied?");
                 _started = false;
             }
         }
@@ -71,7 +69,7 @@ namespace wServer.networking
         {
             if (CheckConfig.IsDebugOn())
                 if (!_started) return;
-            Log.Info("Stopping policy server...");
+            Console.WriteLine("Stopping policy server...");
             _listener.Stop();
         }
     }

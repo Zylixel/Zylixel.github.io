@@ -25,7 +25,7 @@ namespace server.picture
                 string path = Path.GetFullPath("texture/" + id + ".png");
                 if (!File.Exists(path))
                 {
-                    Program.Logger.Warn($"RemoteTexture not found: {id}");
+                    Console.WriteLine($"RemoteTexture not found: {id}");
                     byte[] status = Encoding.UTF8.GetBytes("<Error>Invalid ID.</Error>");
                     Context.Response.OutputStream.Write(status, 0, status.Length);
                     return;

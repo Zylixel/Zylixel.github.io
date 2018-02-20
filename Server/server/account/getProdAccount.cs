@@ -60,7 +60,7 @@ namespace server.account
                         }
                         catch (Exception e)
                         {
-                            Program.Logger.Error(e);
+                            Console.WriteLine(e);
                         }
                     }
                     else

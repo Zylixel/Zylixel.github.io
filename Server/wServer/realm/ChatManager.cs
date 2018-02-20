@@ -1,17 +1,13 @@
-﻿using System.Windows.Forms;
-using db;
-using log4net;
+﻿using db;
 using wServer.networking;
 using wServer.networking.svrPackets;
 using wServer.realm.entities.player;
-using wServer.realm.worlds;
+using System;
 
 namespace wServer.realm
 {
     public class ChatManager
     {
-        static ILog log = LogManager.GetLogger(typeof(ChatManager));
-
         RealmManager manager;
         
 
@@ -32,7 +28,7 @@ namespace wServer.realm
                 Text = text.ToSafeText(),
                 CleanText = text.ToSafeText()
             }, p => !p.Ignored.Contains(src.AccountId));
-            log.InfoFormat("[{0}({1})] <{2}> {3}", src.Owner.Name, src.Owner.Id, src.Name, text);
+            Console.WriteLine("[{0}({1})] <{2}> {3}", src.Owner.Name, src.Owner.Id, src.Name, text);
             src.Owner.ChatReceived(text);
         }
 
@@ -66,7 +62,7 @@ namespace wServer.realm
                     Text = text.ToSafeText()
                 });
             if (CheckConfig.IsDebugOn())
-                log.InfoFormat("<Zylixel News> {0}", text);
+                Console.WriteLine("<Zylixel News> {0}", text);
         }
 
         public void Announce(string text)
@@ -79,7 +75,7 @@ namespace wServer.realm
                     Name = "@Announcement",
                     Text = text.ToSafeText()
                 });
-                log.InfoFormat("<Announcement> {0}", text);
+                Console.WriteLine("<Announcement> {0}", text);
         }
         
         public void Oryx(World world, string text)
@@ -92,7 +88,7 @@ namespace wServer.realm
                 Text = text.ToSafeText()
             }, null);
             if (CheckConfig.IsDebugOn())
-                log.InfoFormat("[{0}({1})] <Oryx the Mad God> {2}", world.Name, world.Id, text);
+                Console.WriteLine("[{0}({1})] <Oryx the Mad God> {2}", world.Name, world.Id, text);
         }
     }
 }

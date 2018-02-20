@@ -4,7 +4,6 @@ using System;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using log4net;
 using wServer.logic;
 using wServer.realm;
 
@@ -14,8 +13,6 @@ namespace wServer.networking
 {
     internal class Server
     {
-        private static readonly ILog Log = LogManager.GetLogger(typeof (Server));
-
         public Server(RealmManager manager)
         {
             Socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -28,7 +25,7 @@ namespace wServer.networking
         public void Start()
         {
             if (CheckConfig.IsDebugOn())
-                Log.Info("Starting server...");
+                Console.WriteLine("Starting server...");
             Socket.Bind(new IPEndPoint(IPAddress.Any, Program.Settings.GetValue<int>("port")));
             Socket.Listen(0xff);
             Socket.BeginAccept(Listen, null);
@@ -58,7 +55,7 @@ namespace wServer.networking
         public async void Stop()
         {
             if (CheckConfig.IsDebugOn())
-                Log.Info("Stoping server...");
+                Console.WriteLine("Stoping server...");
             foreach (Client i in Manager.Clients.Values.ToArray())
             {
                 await i.Save();

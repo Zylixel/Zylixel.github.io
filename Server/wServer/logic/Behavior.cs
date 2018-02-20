@@ -1,7 +1,6 @@
 ﻿#region
 
 using System;
-using log4net;
 using wServer.realm;
 
 #endregion
@@ -13,7 +12,6 @@ namespace wServer.logic
         [ThreadStatic]
         private static Random rand;
         private static int randomCount;
-        public static ILog log = LogManager.GetLogger(typeof(Behavior));
 
         protected static Random Random
         {
@@ -47,7 +45,7 @@ namespace wServer.logic
             }
             catch (Exception e)
             {
-                log.ErrorFormat("BehaviorException:\nHost: {0}\nState: {1}\nInternalExeption:\n{2}",
+                Console.WriteLine("BehaviorException:\nHost: {0}\nState: {1}\nInternalExeption:\n{2}",
                     host.Manager.GameData.ObjectTypeToId[host.ObjectType], state, e);
             }
         }

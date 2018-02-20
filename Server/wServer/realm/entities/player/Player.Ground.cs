@@ -45,7 +45,7 @@ namespace wServer.realm.entities.player
             }
             catch (Exception ex)
             {
-                Log.Error(ex);
+                Console.WriteLine(ex);
             }
         }
     }

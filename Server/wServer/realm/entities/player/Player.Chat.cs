@@ -116,6 +116,7 @@ namespace wServer.realm.entities.player
                 Text = text
             });
         }
+
         public void GuildRecieved(int objId, int stars, string from, string text)
         {
             Client.SendPacket(new TextPacket

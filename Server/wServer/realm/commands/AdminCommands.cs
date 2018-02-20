@@ -683,7 +683,7 @@ namespace wServer.realm.commands
             catch(Exception ex)
             {
                 player.SendError("Error!");
-                log.Error(ex);
+                Console.WriteLine(ex);
                 return false;
             }
             return true;
@@ -707,8 +707,8 @@ namespace wServer.realm.commands
                     {
                         player.SendInfo("You are shutting down the server. You will be disconnected in 12 seconds");
                         i.Player.Owner.Timers.Add(new WorldTimer(12 * 1000, (world, RealmTime) => {
-                            player.Client.Disconnect();
                             Program.wServerShutdown = true;
+                            player.Client.Disconnect();
                         }));
                     }
                     else

@@ -282,7 +282,7 @@ namespace wServer.realm.worlds
                     }
                     catch (Exception ex)
                     {
-                        Log.Error(ex);
+                        Console.WriteLine(ex);
                     }
                 }
             }

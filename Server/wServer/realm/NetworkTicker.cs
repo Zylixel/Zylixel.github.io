@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Threading;
-using log4net;
 using wServer.logic;
 using wServer.networking;
 
@@ -10,8 +9,6 @@ namespace wServer.realm
     using Work = Tuple<Client, PacketID, byte[]>;
     public class NetworkTicker
     {
-        ILog log = LogManager.GetLogger(typeof(NetworkTicker));
-
         public RealmManager Manager { get; private set; }
         public NetworkTicker(RealmManager manager)
         {
@@ -29,7 +26,7 @@ namespace wServer.realm
         public void TickLoop()
         {
             if (CheckConfig.IsDebugOn())
-                log.Info("Procces: Starting network loop.");
+                Console.WriteLine("Procces: Starting network loop.");
             Work work;
             while (true)
             {
@@ -64,7 +61,7 @@ namespace wServer.realm
                     loopLock.SpinOnce();
             }
             if (CheckConfig.IsDebugOn())
-                log.Info("Procces: Stopping network loop.");
+                Console.WriteLine("Procces: Stopping network loop.");
         }
     }
 }

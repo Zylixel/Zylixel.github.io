@@ -2,10 +2,7 @@
 
 using System;
 using System.Collections.Generic;
-using log4net;
-using wServer.networking.svrPackets;
 using wServer.realm.entities.player;
-using wServer.realm.worlds;
 
 #endregion
 
@@ -13,8 +10,6 @@ namespace wServer.realm.commands
 {
     public abstract class Command
     {
-        protected static readonly ILog log = LogManager.GetLogger(typeof(Command));
-
         public Command(string name, int permLevel = 0)
         {
             CommandName = name;
@@ -60,7 +55,7 @@ namespace wServer.realm.commands
             }
             catch (Exception ex)
             {
-                log.Error("Error when executing the command.", ex);
+                Console.WriteLine("Error when executing the command.", ex);
                 player.SendError("Error when executing the command.");
                 return false;
             }
@@ -69,8 +64,6 @@ namespace wServer.realm.commands
 
     public class CommandManager
     {
-        private static readonly ILog log = LogManager.GetLogger(typeof(CommandManager));
-
         private readonly Dictionary<string, Command> cmds;
 
         private RealmManager manager;
@@ -105,7 +98,7 @@ namespace wServer.realm.commands
                 player.SendError("Unknown command!");
                 return false;
             }
-            log.InfoFormat("[Command] <{0}> {1}", player.Name, text);
+            Console.WriteLine("[Command] <{0}> {1}", player.Name, text);
             return command.Execute(player, time, args);
         }
     }

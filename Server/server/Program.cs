@@ -12,8 +12,6 @@ using System.Net.NetworkInformation;
 using System.Threading;
 using db;
 using db.data;
-using log4net;
-using log4net.Config;
 using server.sfx;
 using System.Text;
 using MailKit.Net.Smtp;
@@ -32,14 +30,12 @@ namespace server
         internal static SimpleSettings Settings { get; set; }
         internal static XmlData GameData { get; set; }
         internal static Database Database { get; set; }
-        internal static ILog Logger { get; } = LogManager.GetLogger("Server");
 
         internal static string InstanceId { get; set; }
 
         private static void Main(string[] args)
         {
             Console.Title = "FSOD Zy's Realm - Server";
-            XmlConfigurator.ConfigureAndWatch(new FileInfo("log4net_server.config"));
 
             Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
             Thread.CurrentThread.Name = "Entry";
@@ -64,14 +60,14 @@ namespace server
                 listener.Start();
 
                 listener.BeginGetContext(ListenerCallback, null);
-                Logger.Info($"Listening at port {port}...");
+                Console.WriteLine($"Listening at port {port}...");
             }
             else
-                Logger.Error($"Port {port} is occupied. Can't start listening...\nPress ESC to exit.");
+                Console.WriteLine($"Port {port} is occupied. Can't start listening...\nPress ESC to exit.");
 
             while (Console.ReadKey(true).Key != ConsoleKey.Escape);
 
-            Logger.Info("Terminating...");
+            Console.WriteLine("Terminating...");
             //To prevent a char/list account in use if
             //both servers are closed at the same time
             while (currentRequests.Count > 0);
@@ -99,7 +95,7 @@ namespace server
         {
             try
             {
-                Logger.InfoFormat("Request \"{0}\" from: {1}", 
+                Console.WriteLine("Request \"{0}\" from: {1}", 
                     context.Request.Url.LocalPath, context.Request.RemoteEndPoint);
 
                 if (context.Request.Url.LocalPath.Contains("sfx") || context.Request.Url.LocalPath.Contains("music"))
@@ -161,7 +157,7 @@ namespace server
                 currentRequests.Remove(context);
                 using (var wtr = new StreamWriter(context.Response.OutputStream))
                     wtr.Write(e.ToString());
-                Logger.Error(e);
+                Console.WriteLine(e);
             }
 
             context.Response.Close();
@@ -304,7 +300,7 @@ namespace server
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Console.WriteLine(ex);
             }
         }
     }

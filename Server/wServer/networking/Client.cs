@@ -4,8 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Threading.Tasks;
-using log4net;
-using log4net.Core;
 using wServer.networking.cliPackets;
 using wServer.networking.svrPackets;
 using wServer.realm;
@@ -27,8 +25,6 @@ namespace wServer.networking
     {
         public const string ServerVersion = "27.7.X2";
         private bool _disposed;
-
-        private static readonly ILog Log = LogManager.GetLogger(typeof (Client));
 
         public uint UpdateAckCount = 0;
 
@@ -66,7 +62,7 @@ namespace wServer.networking
 
         public void BeginProcess()
         {
-            Log.InfoFormat($"Received client @ {Socket.RemoteEndPoint}.");
+            Console.WriteLine($"Received client @ {Socket.RemoteEndPoint}.");
             _handler = new NetworkHandler(this, Socket);
             _handler.BeginHandling();
         }
@@ -92,18 +88,16 @@ namespace wServer.networking
         {
             try
             {
-                Log.Logger.Log(typeof (Client), Level.Verbose,
-                   $"Handling packet '{pkt}'...", null);
                 if (pkt.Id == (PacketID) 255) return;
                 IPacketHandler handler;
                 if (!PacketHandlers.Handlers.TryGetValue(pkt.Id, out handler))
-                    Log.Warn($"Unhandled packet '{pkt.Id}'.");
+                    Console.WriteLine($"Unhandled packet '{pkt.Id}'.");
                 else
                     handler.Handle(this, (ClientPacket) pkt);
             }
             catch (Exception e)
             {
-                Log.Error($"Error when handling packet '{pkt}'...", e);
+                Console.WriteLine($"Error when handling packet '{pkt}'...", e);
                 Disconnect();
             }
         }
@@ -121,7 +115,7 @@ namespace wServer.networking
             }
             catch (Exception e)
             {
-                Log.Error(e);
+                Console.WriteLine(e);
             }
         }
 
@@ -152,7 +146,7 @@ namespace wServer.networking
                 }
                 catch (Exception ex)
                 {
-                    Log.Fatal("SaveException", ex);
+                    Console.WriteLine("SaveException", ex);
                 }
             });
         }

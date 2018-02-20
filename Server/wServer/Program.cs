@@ -3,12 +3,8 @@
 using System;
 using System.Globalization;
 using System.IO;
-using System.Net;
-using System.Net.Mail;
 using System.Threading;
 using db;
-using log4net;
-using log4net.Config;
 using wServer.networking;
 using wServer.realm;
 
@@ -23,19 +19,16 @@ namespace wServer
         public static bool DebugMode { get; private set; }
         internal static SimpleSettings Settings;
 
-        private static readonly ILog log = LogManager.GetLogger("Server");
         private static RealmManager manager;
 
         public static DateTime WhiteListTurnOff { get; private set; }
-        public static bool wServerShutdown { get; set; }
+        public static bool wServerShutdown;
 
         private static void Main(string[] args)
         {
-            Console.Title = "FSOD Zy's Realm - World Server";
+            Console.Title = "Zy's Realm - World Server";
             try
             {
-                XmlConfigurator.ConfigureAndWatch(new FileInfo("log4net_wServer.config"));
-
                 Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
                 Thread.CurrentThread.Name = "Entry";
 
@@ -65,22 +58,23 @@ namespace wServer
 
                 policy.Start();
                 server.Start();
-                if(Settings.GetValue<bool>("broadcastNews", "false") && File.Exists("news.txt"))
+                if (Settings.GetValue<bool>("broadcastNews", "false") && File.Exists("news.txt"))
                     new Thread(autoBroadcastNews).Start();
-                log.Info("Server initialized.");
-                
-                while (wServerShutdown == false)
-                { }
+                Console.WriteLine("Server initialized.");
 
-                log.Info("Terminating...");
-                server.Stop();
-                policy.Stop();
-                manager.Stop();
-                log.Info("Server terminated.");
+
+                if (isStopped())
+                {
+                    Console.WriteLine("Terminating...");
+                    server.Stop();
+                    policy.Stop();
+                    manager.Stop();
+                    Console.WriteLine("Server terminated.");
+                }
             }
             catch (Exception e)
             {
-                log.Fatal(e);
+                Console.WriteLine(e);
 
                 foreach (var c in manager.Clients)
                 {
@@ -88,6 +82,18 @@ namespace wServer
                 }
                 Console.ReadLine();
             }
+        }
+
+        private static bool isStopped()
+        {
+            while (!Console.KeyAvailable)
+            {
+                if (wServerShutdown)
+                    return true;
+            }
+            if (Console.ReadKey(true).Key == ConsoleKey.Escape)
+                return true;
+            return isStopped();
         }
 
         private static void autoBroadcastNews()

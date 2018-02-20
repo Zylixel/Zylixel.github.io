@@ -142,7 +142,7 @@ namespace wServer.realm.entities.player
             }
             catch (Exception ex)
             {
-                Log.Error(ex);
+                Console.WriteLine(ex);
             }
             return ret;
         }
@@ -347,7 +347,7 @@ namespace wServer.realm.entities.player
                     }
                     catch (Exception ex)
                     {
-                        Log.Error(ex);
+                        Console.WriteLine(ex);
                     }
                 }
             }

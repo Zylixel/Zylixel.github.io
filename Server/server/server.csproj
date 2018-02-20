@@ -91,10 +91,6 @@
     <Reference Include="GoogleMaps.LocationServices">
       <HintPath>..\packages\GoogleMaps.LocationServices.0.9.8.5\lib\net40\GoogleMaps.LocationServices.dll</HintPath>
     </Reference>
-    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
-    </Reference>
     <Reference Include="MailKit">
       <HintPath>..\packages\MailKit.0.97.0.0\lib\net45\MailKit.dll</HintPath>
     </Reference>
@@ -171,10 +167,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="account\register.cs" />
-    <None Include="log4net_server.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
     </None>
-    <None Include="packages.config" />
     <None Include="php\dev\php5ts.lib">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

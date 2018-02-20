@@ -66,7 +66,7 @@ namespace wServer.realm.entities
                     if (TryDeduct(player))
                     {
                         VaultChest chest = db.CreateChest(player.Client.Account);
-                        db.UpdateCredit(player.Client.Account, -Price);
+                        db.UpdateFame(player.Client.Account, -Price);
                         (Owner as Vault).AddChest(chest, this);
                         player.Client.SendPacket(new BuyResultPacket
                         {
@@ -79,7 +79,7 @@ namespace wServer.realm.entities
                         player.Client.SendPacket(new BuyResultPacket
                         {
                             Result = BUY_NO_GOLD,
-                            Message = "{\"key\":\"server.not_enough_gold\"}"
+                            Message = "Not Enough Fame"
                         });
                     }
                 }

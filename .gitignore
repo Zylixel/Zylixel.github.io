@@ -218,5 +218,5 @@ pip-log.txt
 
 Server/.dropbox
 Server/.vs
-Server/packages/
 Client/src/kabam/rotmg/application/impl/ProductionSetup.as
+Server/packages/

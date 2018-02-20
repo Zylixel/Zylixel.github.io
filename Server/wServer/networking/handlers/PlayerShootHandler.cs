@@ -35,12 +35,12 @@ namespace wServer.networking.handlers
 
                 if (client.Player.SlotTypes[stype] != item.SlotType && client.Account.Rank < 2)
                 {
-                    Log.FatalFormat("{0} is trying to cheat (Weapon doesnt match the slot type)", client.Player.Name);
-                    client.Player.SendError("This cheating attempt has beed logged and a message was send to all online admins.");
+                    Console.WriteLine($"{client.Player.Name} is trying to cheat (Weapon doesnt match the slot type)");
+                    client.Player.SendError("This cheating attempt has been logged and a message was send to all online admins.");
                     client.Disconnect();
                     foreach (Player player in client.Player.Owner.Players.Values)
                         if (player.Client.Account.Rank >= 2)
-                            player.SendInfo(String.Format("Player {0} is shooting with a weapon that doesnt match the class slot type.", client.Player.Name));
+                            player.SendInfo($"Player {client.Player.Name} is shooting with a weapon that doesnt match the class slot type.");
                     return;
                 }
                 ProjectileDesc prjDesc = item.Projectiles[0]; //Assume only one

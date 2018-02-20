@@ -97,8 +97,8 @@ namespace wServer.networking.handlers
                     }
                     catch (Exception ex)
                     {
-                        Log.Error(ex);
-                        Log.InfoFormat(client.Player.Name + " just attempted to dupe.");
+                        Console.WriteLine(ex);
+                        Console.WriteLine(client.Player.Name + " just attempted to dupe.");
                     }
                 }
             }, PendingPriority.Networking);

@@ -6,7 +6,6 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 using db.data;
-using log4net;
 using wServer.logic.loot;
 using wServer.realm;
 using wServer.realm.entities;
@@ -18,7 +17,6 @@ namespace wServer.logic
     public partial class BehaviorDb
     {
         private static wRandom rand = new wRandom();
-        private static readonly ILog log = LogManager.GetLogger(typeof (BehaviorDb));
 
         private static int initializing;
         internal static BehaviorDb InitDb;
@@ -41,7 +39,7 @@ namespace wServer.logic
         public BehaviorDb(RealmManager manager)
         {
             if (CheckConfig.IsDebugOn())
-                log.Info("Initializing Behavior Database...");
+                Console.WriteLine("Initializing Behavior Database...");
 
             Manager = manager;
 
@@ -49,7 +47,7 @@ namespace wServer.logic
 
             if (Interlocked.Exchange(ref initializing, 1) == 1)
             {
-                log.Error("Attempted to initialize multiple BehaviorDb at the same time.");
+                Console.WriteLine("Attempted to initialize multiple BehaviorDb at the same time.");
                 throw new InvalidOperationException("Attempted to initialize multiple BehaviorDb at the same time.");
             }
             InitDb = this;
@@ -62,7 +60,7 @@ namespace wServer.logic
             {
                 FieldInfo field = fields[i];
                 if (CheckConfig.IsDebugOn())
-                    log.InfoFormat("Loading behavior for '{0}'({1}/{2})...", field.Name, i + 1, fields.Length);
+                    Console.WriteLine("Loading behavior for '{0}'({1}/{2})...", field.Name, i + 1, fields.Length);
                 ((_) field.GetValue(this))();
                 field.SetValue(this, null);
             }
@@ -71,7 +69,7 @@ namespace wServer.logic
             initializing = 0;
 
             if (CheckConfig.IsDebugOn())
-                log.Info("Behavior Database initialized...");
+                Console.WriteLine("Behavior Database initialized...");
         }
 
         public RealmManager Manager { get; private set; }

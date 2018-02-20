@@ -5,14 +5,13 @@ using DungeonGenerator.Templates;
 using DungeonGenerator.Templates.Abyss;
 using DungeonGenerator.Templates.Lab;
 using DungeonGenerator.Templates.PirateCave;
-using log4net;
 using wServer.logic;
+using System;
 
 namespace wServer
 {
     public static class GeneratorCache
     {
-        private static readonly ILog log = LogManager.GetLogger(typeof(GeneratorCache)); 
         private static Dictionary<string, List<string>> cachedMaps;
 
         public static void Init()
@@ -31,7 +30,7 @@ namespace wServer
         {
             var map = cachedMaps[key][0];
             cachedMaps[key].RemoveAt(0);
-            log.Info($"Generating new map for dungeon: {key}");
+            Console.WriteLine($"Generating new map for dungeon: {key}");
             Task.Factory.StartNew(() => cachedMaps[key].Add(generateNext(seed, template)));
             return map;
         }
@@ -46,7 +45,7 @@ namespace wServer
         private static void createCache(string key, DungeonTemplate template)
         {
             if (CheckConfig.IsDebugOn())
-                log.Info($"Generating cache for dungeon: {key}");
+                Console.WriteLine($"Generating cache for dungeon: {key}");
             cachedMaps.Add(key, new List<string>());
             for (var i = 0; i < 3; i++) //Keep at least 3 maps in cache
                 cachedMaps[key].Add(generateNext(0, template));

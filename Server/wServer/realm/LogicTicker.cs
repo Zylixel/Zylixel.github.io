@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
-using log4net;
 using wServer.logic;
 using wServer.realm.entities.player;
 
@@ -16,7 +15,6 @@ namespace wServer.realm
 {
     public class LogicTicker
     {
-        private static readonly ILog log = LogManager.GetLogger(typeof (LogicTicker));
         public static RealmTime CurrentTime;
         private readonly ConcurrentQueue<Action<RealmTime>>[] pendings;
 
@@ -49,7 +47,7 @@ namespace wServer.realm
         public void TickLoop()
         {
             if (CheckConfig.IsDebugOn())
-                log.Info("Logic loop started.");
+                Console.WriteLine("Logic loop started.");
             Stopwatch watch = new Stopwatch();
             long dt = 0;
             long count = 0;
@@ -68,7 +66,7 @@ namespace wServer.realm
 
                 count += times;
                 if (times > 3)
-                    log.Warn("LAGGED!| time:" + times + " dt:" + dt + " count:" + count + " time:" + b + " tps:" +
+                    Console.WriteLine("LAGGED!| time:" + times + " dt:" + dt + " count:" + count + " time:" + b + " tps:" +
                              count/(b/1000.0));
 
                 t.tickTimes = b;
@@ -87,7 +85,7 @@ namespace wServer.realm
                         }
                         catch (Exception ex)
                         {
-                            log.Error(ex);
+                            Console.WriteLine(ex);
                         }
                     }
                 }
@@ -107,13 +105,13 @@ namespace wServer.realm
                 }
                 catch (Exception ex)
                 {
-                    log.Error(ex);
+                    Console.WriteLine(ex);
                 }
 
                 Thread.Sleep(MsPT);
                 dt += Math.Max(0, watch.ElapsedMilliseconds - b - MsPT);
             } while (true);
-            log.Info("Logic loop stopped.");
+            Console.WriteLine("Logic loop stopped.");
         }
 
         private void TickWorlds1(RealmTime t) //Continous simulation

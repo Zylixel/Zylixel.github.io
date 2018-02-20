@@ -2,7 +2,6 @@
 
 using System;
 using System.Collections.Generic;
-using log4net;
 using wServer.networking.cliPackets;
 using wServer.realm;
 using FailurePacket = wServer.networking.svrPackets.FailurePacket;
@@ -19,19 +18,13 @@ namespace wServer.networking
 
     internal abstract class PacketHandlerBase<T> : IPacketHandler where T : ClientPacket
     {
-        protected ILog Log;
         private Client _client;
-
-        public PacketHandlerBase()
-        {
-            Log = LogManager.GetLogger(GetType());
-        }
 
         public abstract PacketID Id { get; }
 
         public void Handle(Client client, ClientPacket packet)
         {
-            this._client = client;
+            _client = client;
             HandlePacket(client, (T) packet);
         }
 

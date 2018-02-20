@@ -4,14 +4,11 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using db;
-using log4net;
 
 namespace wServer.realm
 {
     public class DatabaseTicker
     {
-        private static readonly ILog log = LogManager.GetLogger(typeof(DatabaseTicker));
-
         private readonly DatabaseCollection databases;
 
         public DatabaseTicker()
@@ -30,7 +27,7 @@ namespace wServer.realm
                 }
                 catch (Exception ex)
                 {
-                    log.Error(ex);
+                    Console.WriteLine(ex);
                 }
                 finally
                 {
@@ -108,7 +105,7 @@ namespace wServer.realm
 //
 //        public void TickLoop()
 //        {  
-//            log.Info("Database loop started.");
+//            Console.WriteLine("Database loop started.");
 //            do
 //            {
 //                try
@@ -129,23 +126,23 @@ namespace wServer.realm
 //                                }
 //                                catch (Exception ex)
 //                                {
-//                                    log.Error(ex);
+//                                    Console.WriteLine(ex);
 //                                }
 //                                db.Dispose();
 //                            });
 //                        }
 //                        catch (Exception ex)
 //                        {
-//                            log.Error(ex);
+//                            Console.WriteLine(ex);
 //                        }
 //                    }
 //                }
 //                catch (Exception ex)
 //                {
-//                    log.Error(ex);
+//                    Console.WriteLine(ex);
 //                }
 //            } while (true);
-//            log.Info("Database loop stopped.");
+//            Console.WriteLine("Database loop stopped.");
 //        }
 //    }
 //}

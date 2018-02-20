@@ -337,7 +337,7 @@ namespace wServer.realm.terrain
             return enCount;
         }
 
-        public IEnumerable<Entity> InstantiateEntities(RealmManager manager)
+        /*public IEnumerable<Entity> InstantiateEntities(RealmManager manager)
         {
             foreach (Tuple<IntPoint, ushort, string> i in entities)
             {
@@ -365,22 +365,16 @@ namespace wServer.realm.terrain
                             case "mtype":
                                 (entity as Merchants).MType = Utils.FromString(kv[1]);
                                 break;
-                                //case "mcount":
-                                //    entity.Stats[StatsType.MerchantRemainingCount] = Utils.FromString(kv[1]); break;    NOT NEEDED FOR NOW
-                                //case "mtime":
-                                //    entity.Stats[StatsType.MerchantRemainingMinute] = Utils.FromString(kv[1]); break;
                             case "mcost":
                                 (entity as SellableObject).Price = Utils.FromString(kv[1]);
                                 break;
                             case "mcur":
                                 (entity as SellableObject).Currency = (CurrencyType) Utils.FromString(kv[1]);
                                 break;
-                                //case "nstar":
-                                //    entity.Stats[StatsType.NameChangerStar] = Utils.FromString(kv[1]); break;
                         }
                     }
                 yield return entity;
             }
-        }
+        }*/
     }
 }

@@ -5,12 +5,10 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using db;
 using db.data;
-using log4net;
 using wServer.logic;
 using wServer.networking;
 using wServer.realm.commands;
@@ -53,8 +51,6 @@ namespace wServer.realm
         };
 
         public static List<string> CurrentRealmNames = new List<string>();
-
-        private static readonly ILog log = LogManager.GetLogger(typeof(RealmManager));
 
         private Thread logic;
         private Thread network;
@@ -189,7 +185,7 @@ namespace wServer.realm
         public void Initialize()
         {
             if (CheckConfig.IsDebugOn())
-                log.Info("Initializing Realm Manager...");
+                Console.WriteLine("Initializing Realm Manager...");
             GameData = new XmlData();
             Behaviors = new BehaviorDb(this);
             GeneratorCache.Init();
@@ -204,7 +200,7 @@ namespace wServer.realm
             Chat = new ChatManager(this);
             Commands = new CommandManager(this);
             if (CheckConfig.IsDebugOn())
-                log.Info("Realm Manager initialized.");
+                Console.WriteLine("Realm Manager initialized.");
         }
 
         public Vault PlayerVault(Client processor)
@@ -238,7 +234,7 @@ namespace wServer.realm
                 }
                 catch (Exception e)
                 {
-                    log.Fatal(e);
+                    Console.WriteLine(e);
                 }
                 return true;
             }
@@ -248,7 +244,7 @@ namespace wServer.realm
         public void Run()
         {
             if (CheckConfig.IsDebugOn())
-                log.Info("Starting Realm Manager...");
+                Console.WriteLine("Starting Realm Manager...");
             Network = new NetworkTicker(this);
             Logic = new LogicTicker(this);
             Database = new DatabaseTicker();
@@ -266,13 +262,13 @@ namespace wServer.realm
             logic.Start();
             network.Start();
             if (CheckConfig.IsDebugOn())
-                log.Info("Realm Manager started.");
+                Console.WriteLine("Realm Manager started.");
         }
 
         public void Stop()
         {
             if (CheckConfig.IsDebugOn())
-                log.Info("Stopping Realm Manager...");
+                Console.WriteLine("Stopping Realm Manager...");
             Terminating = true;
             var saveAccountUnlock = new List<Client>();
             foreach (var c in Clients.Values)
@@ -290,7 +286,7 @@ namespace wServer.realm
             logic.Join();
             network.Join();
             if (CheckConfig.IsDebugOn())
-                log.Info("Realm Manager stopped.");
+                Console.WriteLine("Realm Manager stopped.");
         }
 
         public bool TryConnect(Client psr)
@@ -321,7 +317,7 @@ namespace wServer.realm
             if (world is CourtOfBereavement)
                 CurrentCourtId = world.Id;
             if (CheckConfig.IsDebugOn())
-                log.InfoFormat("World {0}({1}) added.", world.Id, world.Name);
+                Console.WriteLine("World {0}({1}) added.", world.Id, world.Name);
         }
 
         private void OnWorldRemoved(World world)
@@ -330,7 +326,7 @@ namespace wServer.realm
             if (world is GameWorld)
                 Monitor.WorldRemoved(world);
             if (CheckConfig.IsDebugOn())
-                log.InfoFormat("World {0}({1}) removed.", world.Id, world.Name);
+                Console.WriteLine("World {0}({1}) removed.", world.Id, world.Name);
         }
 
         public void ProtectFromOryx()

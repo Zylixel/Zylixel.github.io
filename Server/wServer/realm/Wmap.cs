@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.IO;
 using db.data;
 using Ionic.Zlib;
-using log4net;
 using wServer.realm.entities;
 
 #endregion
@@ -172,8 +171,6 @@ namespace wServer.realm
 
     public class Wmap : IDisposable
     {
-        private static readonly ILog log = LogManager.GetLogger(typeof(Wmap));
-
         private readonly XmlData data;
         private Tuple<IntPoint, ushort, string>[] entities;
         private WmapTile[,] tiles;

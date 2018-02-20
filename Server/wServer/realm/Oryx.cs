@@ -4,14 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using log4net;
 using wServer.logic;
 using wServer.networking.svrPackets;
 using wServer.realm.entities;
 using wServer.realm.entities.player;
 using wServer.realm.setpieces;
 using wServer.realm.worlds;
-using wServer.networking;
 
 #endregion
 
@@ -20,7 +18,6 @@ namespace wServer.realm
     //The mad god who look after the realm
     internal class Oryx : IDisposable
     {
-        private static readonly ILog log = LogManager.GetLogger(typeof(Oryx));
         private readonly int[] enemyCounts = new int[1200000];
         private readonly int[] enemyMaxCounts = new int[1200000];
 
@@ -285,7 +282,7 @@ namespace wServer.realm
                 }
                 catch (Exception ex)
                 {
-                    log.Error(ex);
+                    Console.WriteLine(ex);
                 }
             }
             return world.Enemies.Count(i => enemyList.Contains(i.Value.ObjectType));
@@ -294,7 +291,7 @@ namespace wServer.realm
         public void TimedSpawn()
         {
             if (CheckConfig.IsDebugOn())
-                log.Info("Players in Realm: " + world.Players.Count); //checks players in realm
+                Console.WriteLine("Players in Realm: " + world.Players.Count); //checks players in realm
             if (world.Players.Count > 0) //Makes sure player is in the realm
             {
                 var evt = events[rand.Next(0, events.Count)];
@@ -323,7 +320,7 @@ namespace wServer.realm
         public void Init()
         {
             if (CheckConfig.IsDebugOn())
-                log.InfoFormat("Oryx is controlling world {0}({1})...", world.Id, world.Name);
+                Console.WriteLine("Oryx is controlling world {0}({1})...", world.Id, world.Name);
             var w = world.Map.Width;
             var h = world.Map.Height;
             var stats = new int[12];
@@ -335,7 +332,7 @@ namespace wServer.realm
                         stats[(int)tile.Terrain - 1]++;
                 }
             if (CheckConfig.IsDebugOn())
-                log.Info("Spawning minions...");
+                Console.WriteLine("Spawning minions...");
             foreach (var i in spawn)
             {
                 var terrain = i.Key;
@@ -353,13 +350,13 @@ namespace wServer.realm
                 }
             }
             if (CheckConfig.IsDebugOn())
-                log.Info("Oryx is done.");
+                Console.WriteLine("Oryx is done.");
         }
 
         public void InitCloseRealm()
         {
             if (CheckConfig.IsDebugOn())
-                log.InfoFormat("Oryx has closed realm {0}...", world.Name);
+                Console.WriteLine("Oryx has closed realm {0}...", world.Name);
             ClosingStarted = true;
             foreach (var i in world.Players.Values)
             {
@@ -410,7 +407,7 @@ namespace wServer.realm
         private void EnsurePopulation()
         {
             if (CheckConfig.IsDebugOn())
-                log.Info("Oryx is controlling population...");
+                Console.WriteLine("Oryx is controlling population...");
             RecalculateEnemyCount();
             var state = new int[12];
             var diff = new int[12];
@@ -470,7 +467,7 @@ namespace wServer.realm
 
             GC.Collect();
             if (CheckConfig.IsDebugOn())
-                log.Info("Oryx is back to sleep.");
+                Console.WriteLine("Oryx is back to sleep.");
         }
 
         private ushort GetRandomObjType(Tuple<string, double>[] dat)
@@ -610,7 +607,7 @@ namespace wServer.realm
             pt.Y -= (setpiece.Size - 1) / 2;
             setpiece.RenderSetPiece(world, pt);
             if (CheckConfig.IsDebugOn())
-                log.InfoFormat("Oryx spawned {0} at ({1}, {2}).", name, pt.X, pt.Y);
+                Console.WriteLine("Oryx spawned {0} at ({1}, {2}).", name, pt.X, pt.Y);
         }
 
         private struct TauntData

@@ -3,7 +3,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using log4net;
 using wServer.logic;
 using wServer.networking;
 using wServer.networking.cliPackets;
@@ -107,7 +106,7 @@ namespace wServer.realm.entities.player
                 }
                 catch (Exception ex)
                 {
-                    Log.Error(ex);
+                    Console.WriteLine(ex);
                 }
 
                 if (HasBackpack)
@@ -177,7 +176,7 @@ namespace wServer.realm.entities.player
             }
             catch (Exception e)
             {
-                Log.Error(e);
+                Console.WriteLine(e);
             }
         }
 
@@ -313,12 +312,18 @@ namespace wServer.realm.entities.player
                     HasConditionEffect(ConditionEffectIndex.Invincible))
                     return;
 
+                var _oldHP = HP;
+
                 dmg = (int)StatsManager.GetDefenseDamage(dmg, false);
                 if (!HasConditionEffect(ConditionEffectIndex.Invulnerable))
                     HP -= dmg;
+
+                if (_oldHP <= HP && dmg > 0)
+                    Client.Disconnect();
+
                 UpdateCount++;
 
-        Owner.BroadcastPacket(new DamagePacket
+                Owner.BroadcastPacket(new DamagePacket
                 {
                     TargetId = Id,
                     Effects = 0,
@@ -329,12 +334,15 @@ namespace wServer.realm.entities.player
                 }, this);
                 SaveToCharacter();
 
+                if (_oldHP <= HP && dmg > 0)
+                    Client.Disconnect();
+
                 if (HP <= 0)
                     Death(chr.ObjectDesc.DisplayId, chr.ObjectDesc);
             }
             catch (Exception e)
             {
-                Log.Error("Error while processing playerDamage: ", e);
+                Console.WriteLine("Error while processing playerDamage: ", e);
             }
         }
 
@@ -465,17 +473,62 @@ namespace wServer.realm.entities.player
                 : Name.Split(' ')[1].ToLower().StartsWith(rn);
         }
 
+        private void announceDeath(string killer, ObjectDesc desc)
+        {
+            int maxed = (from i in Manager.GameData.ObjectTypeToElement[ObjectType].Elements("LevelIncrease") let xElement = Manager.GameData.ObjectTypeToElement[ObjectType].Element(i.Value) where xElement != null let limit = int.Parse(xElement.Attribute("max").Value) let idx = StatsManager.StatsNameToIndex(i.Value) where Stats[idx] >= limit select limit).Count();
+            string _class = Manager.GameData.ObjectTypeToId[(ushort)Client.Character.ObjectType];
+            bool firstBorn;
+            string finalFame = Client.Character.FameStats.CalculateTotal(Manager.GameData, Client.Account, Client.Character, Client.Character.CurrentFame, out firstBorn).ToString();
+            string deathMessage;
+
+            if (maxed > 0)
+            {
+                deathMessage = (Name + ", the " + maxed.ToString() + "/8 " + _class + " has died to " + desc.ObjectId + " with " + finalFame + " fame");
+            }
+            else
+            {
+                deathMessage = (Name + ", the level " + Level + " " + _class + " has died to " + desc.ObjectId);
+            }
+
+            long pGuild = Client.Account.Guild.Id;
+
+            if (maxed >= 6 || Fame >= 1000)
+            {
+
+                foreach (var w in Manager.Worlds.Values)
+                    foreach (var p in w.Players.Values)
+                        p.SendHelp(deathMessage);
+
+            }
+            else if (pGuild > 0)
+            {
+                foreach (var i in Owner.Players.Values)
+                    if (i.Client.Account.Guild.Id != pGuild)
+                        i.SendInfo(deathMessage);
+
+                foreach (var w in Manager.Worlds.Values)
+                    foreach (var p in w.Players.Values)
+                        if (p.Client.Account.Guild.Id == pGuild)
+                            p.SendHelp(deathMessage);
+            }
+            else
+            {
+                foreach (var i in Owner.Players.Values)
+                    i.SendInfo(deathMessage);
+            }
+        }
+
         public void Death(string killer, ObjectDesc desc = null)
         {
             if (CheckBrokenAmulet(MathsUtils.GenerateProb(100)))
                 return;
-            if (CheckNotBrokenAmulet(MathsUtils.GenerateProb(100)))
+            if (CheckNotBrokenAmulet())
                 return;
             if (_dying) return;
             _dying = true;
             var killPlayer = true;
-            /*switch (Owner.Name)
 
+            switch (Owner.Name)
             {
                 case "Arena":
                     {
@@ -491,7 +544,7 @@ namespace wServer.realm.entities.player
                         });
                         return;
                     }
-            }*/
+            }
 
 
             if (Client.Stage == ProtocalStage.Disconnected || _resurrecting)
@@ -504,7 +557,9 @@ namespace wServer.realm.entities.player
                 Client.Disconnect();
                 return;
             }
+
             GenerateGravestone();
+
             if (desc != null)
                 killer = desc.DisplayId;
             switch (killer)
@@ -515,13 +570,7 @@ namespace wServer.realm.entities.player
                     break;
 
                 default:
-                    Owner.BroadcastPacket(new TextPacket
-                    {
-                        BubbleTime = 0,
-                        Stars = -1,
-                        Name = "",
-                        Text = "{\"key\":\"server.death\",\"tokens\":{\"player\":\"" + Name + "\",\"level\":\"" + Level + "\",\"enemy\":\"" + killer + "\"}}"
-                    }, null);
+                    announceDeath(killer, desc);
                     break;
             }
 
@@ -536,7 +585,7 @@ namespace wServer.realm.entities.player
                         db.SaveCharacter(Client.Account, Client.Character);
                         db.Death(Manager.GameData, Client.Account, Client.Character, killer);
                     });
-                    if (Owner.Id != -6)
+                    if (Owner.Id != World.TEST_ID)
                     {
                         Client.SendPacket(new DeathPacket
                         {
@@ -554,7 +603,7 @@ namespace wServer.realm.entities.player
                 }
                 catch (Exception e)
                 {
-                    Log.Error(e);
+                    Console.WriteLine(e);
                 }
             }
             else
@@ -604,42 +653,37 @@ namespace wServer.realm.entities.player
             return false;
         }
 
-        private bool CheckNotBrokenAmulet(bool doesRevive)
+        private bool CheckNotBrokenAmulet()
         {
             for (int i = 0; i < 11; i++)
             {
                 Item item = Inventory[i];
 
                 if (item == null || !item.NotBrokenResurrect) continue;
-
-                if (doesRevive)
-                {
-                    HP = Stats[0] + Stats[0];
-                    MP = Stats[1] + Stats[1];
-                    foreach (Player player in Owner.Players.Values)
-                        player.SendInfo($"{Name}'s {item.ObjectId} successfully saved him from death... No surprise since hes a cheater");
-
-                    ApplyConditionEffect(new ConditionEffect
-                    {
-                        Effect = ConditionEffectIndex.Invulnerable,
-                        DurationMS = -1
-                    });
-
-                    Client.Reconnect(new ReconnectPacket
-                    {
-                        Host = "",
-                        Port = 2050,
-                        GameId = World.NEXUS_ID,
-                        Name = "Nexus",
-                        Key = Empty<byte>.Array
-                    });
-                    _newbieTime += 1000;
-
-                    _resurrecting = true;
-                    return true;
-                }
+                
+                HP = Stats[0] + Stats[0];
+                MP = Stats[1] + Stats[1];
                 foreach (Player player in Owner.Players.Values)
-                    player.SendInfo($"{Name}'s {item.ObjectId} fortunately did not save him from death. CHEATER!");
+                    player.SendInfo($"{Name}'s {item.ObjectId} successfully saved him from death... No surprise since hes a cheater");
+
+                ApplyConditionEffect(new ConditionEffect
+                {
+                    Effect = ConditionEffectIndex.Invulnerable,
+                    DurationMS = -1
+                });
+
+                Client.Reconnect(new ReconnectPacket
+                {
+                    Host = "",
+                    Port = 2050,
+                    GameId = World.NEXUS_ID,
+                    Name = "Nexus",
+                    Key = Empty<byte>.Array
+                });
+                _newbieTime += 1000;
+
+                _resurrecting = true;
+                return true;
             }
             return false;
         }
@@ -685,21 +729,6 @@ namespace wServer.realm.entities.player
             }
             return false;
         }
-  //      private bool CheckAshRobe(bool doesWork)
-  //      {
-  //          for (int i = 0; i < 4; i++)
-  //          {
-  //              Item item = Inventory[i];
-//
-//               if (item == null || !item.AshRobe) continue;
-//                {
-//                    Mp = Mp + 5;
-//                   return true;
-//                }
-//            }
-//            return false;
-//        }
-    
 
         public void GivePet(PetItem petInfo)
         {
@@ -898,7 +927,7 @@ namespace wServer.realm.entities.player
             }
             catch (Exception ex)
             {
-                Log.Error(ex);
+                Console.WriteLine(ex);
                 SendError("player.cannotTeleportTo");
                 return;
             }
@@ -949,7 +978,7 @@ namespace wServer.realm.entities.player
             }
             catch (Exception e)
             {
-                Log.Error(e);
+                Console.WriteLine(e);
             }
 
             if (Stats != null && Boost != null)
@@ -982,7 +1011,7 @@ namespace wServer.realm.entities.player
                     SendUpdate(time);
                     if (!Owner.IsPassable((int)X, (int)Y))
                     {
-                        Log.Fatal($"Player {Name} No-Clipped at position: {X}, {Y}");
+                        Console.WriteLine($"Player {Name} No-Clipped at position: {X}, {Y}");
                         Client.Player.SendError("Uhhh, No. Don't Noclip");
                         Client.Reconnect(new ReconnectPacket
                         {
@@ -998,7 +1027,7 @@ namespace wServer.realm.entities.player
 
             catch (Exception e)
             {
-                Log.Error(e);
+                Console.WriteLine(e);
             }
             try
             {
@@ -1006,7 +1035,7 @@ namespace wServer.realm.entities.player
             }
             catch (Exception e)
             {
-                Log.Error(e);
+                Console.WriteLine(e);
             }
 
             if (HP < 0 && !_dying)

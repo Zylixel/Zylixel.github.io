@@ -200,7 +200,7 @@ namespace wServer.realm.entities.player
             }
             catch (Exception e)
             {
-                Log.Error(e);
+                Console.WriteLine(e);
             }
             if (Quest != null &&
                 (!_lastUpdate.ContainsKey(Quest) || Quest.UpdateCount > _lastUpdate[Quest]))

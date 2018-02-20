@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using db;
 using db.data;
-using log4net;
 using CheckConfig = wServer.logic.CheckConfig;
 
 #endregion
@@ -90,8 +89,6 @@ namespace wServer.realm.entities.merchant
         // rings
         public static int[] Store9List = {0xb41, 0xbab, 0xbad, 0xbac};
 
-        private static readonly ILog Log = LogManager.GetLogger(typeof(MerchantLists));
-
         private static readonly string[] NoShopItems =
         {
             "Crown", "Muscat", "Cabernet", "Vial of Pure Darkness", "Omnipotence Ring", "Draconis Potion",
@@ -102,7 +99,7 @@ namespace wServer.realm.entities.merchant
         public static void InitMerchatLists(XmlData data)
         {
             if (CheckConfig.IsDebugOn())
-                Log.Info("Loading merchant lists...");
+                Console.WriteLine("Loading merchant lists...");
             zyList = new List<int>();
             PublicData = data;
             foreach (var item in data.Items.Where(_ => NoShopItems.All(i => i != _.Value.ObjectId)))
@@ -115,7 +112,7 @@ namespace wServer.realm.entities.merchant
                         if (_price > 0)
                         {
                             if (CheckConfig.IsDebugOn())
-                                Log.Info("Loading " + item.Value.ObjectId);
+                                Console.WriteLine("Loading " + item.Value.ObjectId);
                             zyList.Add(item.Value.ObjectType);
                             price.Add(item.Value.ObjectType, _price);
                         }
@@ -124,14 +121,14 @@ namespace wServer.realm.entities.merchant
             }
             ZyList = zyList.ToArray();
             if (CheckConfig.IsDebugOn())
-                Log.Info("Merchat lists added.");
+                Console.WriteLine("Merchat lists added.");
            
         }
 
         public static void RemoveItem(int Item)
         {
             if (CheckConfig.IsDebugOn())
-                Log.Info("Removing " + Item + " from List");
+                Console.WriteLine("Removing " + Item + " from List");
 
             zyList.Remove(Item);
             ZyList = zyList.ToArray();
@@ -141,7 +138,7 @@ namespace wServer.realm.entities.merchant
         {
             var _oldPrice = 0;
             if (CheckConfig.IsDebugOn())
-                Log.Info("Adding Item " + Item.ObjectId + " to List");
+                Console.WriteLine("Adding Item " + Item.ObjectId + " to List");
 
             if (price.ContainsKey(Item.ObjectType))
             {

@@ -3,7 +3,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using log4net;
 using wServer.logic;
 
 #endregion
@@ -12,8 +11,6 @@ namespace wServer.realm.setpieces
 {
     internal class SetPieces
     {
-        private static readonly ILog log = LogManager.GetLogger(typeof (SetPieces));
-
         private static readonly List<Tuple<ISetPiece, int, int, WmapTerrain[]>> setPieces = new List
             <Tuple<ISetPiece, int, int, WmapTerrain[]>>
         {
@@ -81,7 +78,7 @@ namespace wServer.realm.setpieces
         public static void ApplySetPieces(World world)
         {
             if (CheckConfig.IsDebugOn())
-                log.InfoFormat("Applying set pieces to world {0}({1}).", world.Id, world.Name);
+                Console.WriteLine("Applying set pieces to world {0}({1}).", world.Id, world.Name);
 
             Wmap map = world.Map;
             int w = map.Width, h = map.Height;
@@ -113,7 +110,7 @@ namespace wServer.realm.setpieces
                 }
             }
             if (CheckConfig.IsDebugOn())
-                log.Info("Set pieces applied.");
+                Console.WriteLine("Set pieces applied.");
         }
 
         private struct Rect

@@ -39,7 +39,7 @@ namespace wServer.networking.handlers
                 }
                 catch (Exception ex)
                 {
-                    Log.Error(ex);
+                    Console.WriteLine(ex);
                 }
             }, PendingPriority.Networking);
         }

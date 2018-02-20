@@ -3,7 +3,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using log4net;
 using wServer.logic;
 using wServer.realm.entities;
 using wServer.realm.worlds;
@@ -14,7 +13,6 @@ namespace wServer.realm
 {
     public class RealmPortalMonitor
     {
-        private static readonly ILog log = LogManager.GetLogger(typeof (RealmPortalMonitor));
 
         private readonly RealmManager manager;
         private readonly Nexus nexus;
@@ -25,7 +23,7 @@ namespace wServer.realm
         public RealmPortalMonitor(RealmManager manager)
         {
             if (CheckConfig.IsDebugOn())
-                log.Info("Initalizing Portal Monitor...");
+                Console.WriteLine("Initalizing Portal Monitor...");
             this.manager = manager;
             nexus = manager.Worlds[World.NEXUS_ID] as Nexus;
             lock (worldLock)
@@ -35,7 +33,7 @@ namespace wServer.realm
                         WorldAdded(i.Value);
                 }
             if (CheckConfig.IsDebugOn())
-                log.Info("Portal Monitor initialized.");
+                Console.WriteLine("Portal Monitor initialized.");
         }
 
         private Position GetRandPosition()
@@ -66,7 +64,7 @@ namespace wServer.realm
                 nexus.EnterWorld(portal);
                 portals.Add(world, portal);
                 if (CheckConfig.IsDebugOn())
-                    log.InfoFormat("World {0}({1}) added to monitor.", world.Id, world.Name);
+                    Console.WriteLine("World {0}({1}) added to monitor.", world.Id, world.Name);
             }
         }
 
@@ -82,7 +80,7 @@ namespace wServer.realm
                     RealmManager.CurrentRealmNames.Remove(portal.PortalName);
                     portals.Remove(world);
                     if (CheckConfig.IsDebugOn())
-                        log.InfoFormat("World {0}({1}) removed from monitor.", world.Id, world.Name);
+                        Console.WriteLine("World {0}({1}) removed from monitor.", world.Id, world.Name);
                 }
             }
         }
@@ -95,7 +93,7 @@ namespace wServer.realm
                 nexus.LeaveWorld(portal);
                 portals.Remove(world);
                 if (CheckConfig.IsDebugOn())
-                    log.InfoFormat("World {0}({1}) closed.", world.Id, world.Name);
+                    Console.WriteLine("World {0}({1}) closed.", world.Id, world.Name);
             }
         }
 
@@ -114,7 +112,7 @@ namespace wServer.realm
                 nexus.EnterWorld(portal);
                 portals.Add(world, portal);
                 if (CheckConfig.IsDebugOn())
-                    log.InfoFormat("World {0}({1}) opened.", world.Id, world.Name);
+                    Console.WriteLine("World {0}({1}) opened.", world.Id, world.Name);
             }
         }
 

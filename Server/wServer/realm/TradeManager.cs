@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using log4net;
 using wServer.networking.cliPackets;
 using wServer.networking.svrPackets;
 using wServer.realm.entities.player;
@@ -11,7 +10,6 @@ namespace wServer.realm
 {
     public class TradeManager
     {
-        private readonly static ILog log = LogManager.GetLogger(typeof(TradeManager));
         public static List<KeyValuePair<Player, Player>> CurrentRequests { get; }
         public static List<Player> TradingPlayers { get; }
 
@@ -178,7 +176,7 @@ namespace wServer.realm
             }
             catch (Exception ex)
             {
-                log.Error(ex);
+                Console.WriteLine(ex);
             }
         }
 

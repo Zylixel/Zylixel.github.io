@@ -1,10 +1,4 @@
 ﻿using db;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using wServer.realm.entities.player;
 
 namespace wServer.realm.entities.merchant
 {
@@ -31,12 +25,12 @@ namespace wServer.realm.entities.merchant
             return false;
         }
 
-        public static void updatePrice(int ItemType)
+        public static void updatePrice(int ItemType, RealmManager Manager)
         {
             MerchantLists.price.Remove(ItemType);
             using (var db = new Database())
             {
-                var _price = db.GetMarketPrice(ItemType);
+                var _price = db.GetMarketPrice(Manager.GameData.Items[(ushort) ItemType]);
                 if (_price == 0) {
                     MerchantLists.RemoveItem(ItemType);
                 }

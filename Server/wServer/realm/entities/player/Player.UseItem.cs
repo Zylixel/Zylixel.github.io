@@ -211,7 +211,7 @@ namespace wServer.realm.entities.player
             }
             catch (Exception ex)
             {
-                Log.Error(ex);
+                Console.WriteLine(ex);
             }
         }
 
@@ -219,13 +219,18 @@ namespace wServer.realm.entities.player
         {
             var endMethod = false;
             var target = pkt.ItemUsePos;
+            
+            if (MP < item.MpCost) // Quick hack fix
+                return false;
+
             Mp -= item.MpCost;
+            
             var con = Owner.GetEntity(pkt.SlotObject.ObjectId) as IContainer;
             if (con == null) return true;
             if (pkt.SlotObject.SlotId != 255 && pkt.SlotObject.SlotId != 254 &&
                 con.Inventory[pkt.SlotObject.SlotId] != item)
             {
-                Log.FatalFormat("Cheat engine detected for player {0},\nItem should be {1}, but its {2}.",
+                Console.WriteLine("Cheat engine detected for player {0},\nItem should be {1}, but its {2}.",
                     Name, Inventory[pkt.SlotObject.SlotId].ObjectId, item.ObjectId);
                 foreach (var player in Owner.Players.Values)
                     if (player.Client.Account.Rank >= 2)
@@ -796,12 +801,12 @@ namespace wServer.realm.entities.player
                             }
                             catch (Exception ex)
                             {
-                                Log.ErrorFormat("Poison ShowEffect:\n{0}", ex);
+                                Console.WriteLine("Poison ShowEffect:\n{0}", ex);
                             }
                         }
                         catch (Exception ex)
                         {
-                            Log.ErrorFormat("Poisons General:\n{0}", ex);
+                            Console.WriteLine("Poisons General:\n{0}", ex);
                         }
                     }
                         break;
@@ -919,7 +924,7 @@ namespace wServer.realm.entities.player
                                 }
                                 catch (Exception ex)
                                 {
-                                    Log.ErrorFormat($"Couldn't despawn portal.\n{ex}");
+                                    Console.WriteLine($"Couldn't despawn portal.\n{ex}");
                                 }
                             }));
                     }
@@ -1253,7 +1258,7 @@ namespace wServer.realm.entities.player
                                 }
                                 catch (Exception ex)
                                 {
-                                    Log.ErrorFormat("Couldn't despawn portal.\n{0}", ex);
+                                    Console.WriteLine("Couldn't despawn portal.\n{0}", ex);
                                 }
                             }));
                         break;
