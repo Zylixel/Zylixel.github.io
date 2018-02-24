@@ -80611,7 +80611,7 @@ The solid honey on this ring renews its wearer with incredible energy.
     <BagType>6</BagType>
     <FameBonus>6</FameBonus>
     <feedPower>800</feedPower>
-    <AshRobe />
+    <MpGiveBack/>
     <DisplayId>Mantle of Ash</DisplayId>
 ///Credit to User Scorchmist On Realmeye.com/forums
  </Object>
@@ -80772,7 +80772,7 @@ The solid honey on this ring renews its wearer with incredible energy.
     <feedPower>145</feedPower>
     <DisplayId>Inner Sanctum Key</DisplayId>
   </Object>
-  <Object id="Zylixel">
+  <Object id="Zylixel" type="0xc358">
     <Class>Character</Class>
        <Texture>
          <File>lofiObj5</File>
@@ -81932,7 +81932,7 @@ The solid honey on this ring renews its wearer with incredible energy.
     <ActivateOnEquip stat="28" amount="4">IncrementStat</ActivateOnEquip>
     <ActivateOnEquip stat="0" amount="40">IncrementStat</ActivateOnEquip>
     <ActivateOnEquip stat="3" amount="40">IncrementStat</ActivateOnEquip>
-    <BrokenResurrect />
+    <BrokenResurrect/>
     <BagType>4</BagType>
   </Object>
   <Object type="0x6204" id="Amulet of Broken Resurrection">
@@ -81952,7 +81952,7 @@ The solid honey on this ring renews its wearer with incredible energy.
     <ActivateOnEquip stat="28" amount="4">IncrementStat</ActivateOnEquip>
     <ActivateOnEquip stat="0" amount="40">IncrementStat</ActivateOnEquip>
     <ActivateOnEquip stat="3" amount="40">IncrementStat</ActivateOnEquip>
-    <NotBrokenResurrect />
+    <NotBrokenResurrect/>
     <BagType>4</BagType>
   </Object>
   <Object type="0x6205" id="Oryx the Mad God 3">

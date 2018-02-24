@@ -105,8 +105,6 @@ namespace wServer.realm
 
         public int TPS { get; }
 
-        //public Database Database { get; private set; }
-
         public World AddWorld(int id, World world)
         {
             if (world.Manager != null)
@@ -176,11 +174,6 @@ namespace wServer.realm
             if (ret.Id == 0) return null;
             return ret;
         }
-
-        //public List<Player> GuildMembersOf(string guild)
-        //{
-        //    return (from i in Worlds where i.Key != 0 from e in i.Value.Players where String.Equals(e.Value.Guild, guild, StringComparison.CurrentCultureIgnoreCase) select e.Value).ToList();
-        //}
 
         public void Initialize()
         {

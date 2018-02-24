@@ -2,7 +2,7 @@
 using wServer.realm;
 using wServer.realm.entities;
 
-namespace wServer.logic.behaviors.Drakes
+namespace wServer.logic.behaviors
 {
     internal class BeesAttack : Behavior
     {

@@ -219,8 +219,8 @@ namespace wServer.realm.entities.player
         {
             var endMethod = false;
             var target = pkt.ItemUsePos;
-            
-            if (MP < item.MpCost) // Quick hack fix
+
+            if (Mp < item.MpCost)
                 return false;
 
             Mp -= item.MpCost;

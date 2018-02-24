@@ -293,18 +293,17 @@ namespace wServer.realm.entities.player
         {
             if (CheckMantleResurrect())
                return;
-            // if (CheckAshRobe(MathsUtils.GenerateProb(100)))
-            //    return;
-            //  if (CheckPendantHP(MathsUtils.GenerateProb(100)))
-            //    return;
+
             for (int i = 0; i < 4; i++)
             {
                 Item item = Inventory[i];
-                if (item == null || !item.AshRobe) continue;
+                if (item == null || !item.MpGiveBack) continue;
                 {
                     Mp += dmg / 3;
+                    break;
                 }
             }
+
             try
             {
                 if (HasConditionEffect(ConditionEffectIndex.Paused) ||
@@ -473,21 +472,21 @@ namespace wServer.realm.entities.player
                 : Name.Split(' ')[1].ToLower().StartsWith(rn);
         }
 
-        private void announceDeath(string killer, ObjectDesc desc)
+        private void announceDeath(string killer)
         {
             int maxed = (from i in Manager.GameData.ObjectTypeToElement[ObjectType].Elements("LevelIncrease") let xElement = Manager.GameData.ObjectTypeToElement[ObjectType].Element(i.Value) where xElement != null let limit = int.Parse(xElement.Attribute("max").Value) let idx = StatsManager.StatsNameToIndex(i.Value) where Stats[idx] >= limit select limit).Count();
             string _class = Manager.GameData.ObjectTypeToId[(ushort)Client.Character.ObjectType];
             bool firstBorn;
             string finalFame = Client.Character.FameStats.CalculateTotal(Manager.GameData, Client.Account, Client.Character, Client.Character.CurrentFame, out firstBorn).ToString();
             string deathMessage;
-
+            
             if (maxed > 0)
             {
-                deathMessage = (Name + ", the " + maxed.ToString() + "/8 " + _class + " has died to " + desc.ObjectId + " with " + finalFame + " fame");
+                deathMessage = (Name + ", the " + maxed.ToString() + "/8 " + _class + " has died to " + killer + " with " + finalFame + " fame");
             }
             else
             {
-                deathMessage = (Name + ", the level " + Level + " " + _class + " has died to " + desc.ObjectId);
+                deathMessage = (Name + ", the level " + Level + " " + _class + " has died to " + killer);
             }
 
             long pGuild = Client.Account.Guild.Id;
@@ -570,7 +569,7 @@ namespace wServer.realm.entities.player
                     break;
 
                 default:
-                    announceDeath(killer, desc);
+                    announceDeath(killer);
                     break;
             }
 
@@ -696,7 +695,7 @@ namespace wServer.realm.entities.player
 
                 if (item == null || !item.MantleResurrect) continue;
 
-                if (_pendantReady == 1)
+                if (_pendantReady)
                 {
 
                     if (HP < MaxHp / 5)
@@ -709,7 +708,6 @@ namespace wServer.realm.entities.player
                             DurationMS = 1500
 
                         });
-
                         ApplyConditionEffect(new ConditionEffect
                         {
                             Effect = ConditionEffectIndex.Paralyzed,
@@ -722,7 +720,7 @@ namespace wServer.realm.entities.player
                             DurationMS = 1500
 
                         });
-                        _pendantReady = 0;
+                        _pendantReady = false;
                         return true;
                     }
                 }
@@ -989,7 +987,7 @@ namespace wServer.realm.entities.player
 
             if (!KeepAlive(time)) return;
 
-            if (HP > MaxHp /2) _pendantReady = 1;          
+            if (HP == MaxHp) _pendantReady = true;          
 
             if (Boost == null) CalcBoost();
 
@@ -1050,10 +1048,6 @@ namespace wServer.realm.entities.player
                     Key = Empty<byte>.Array
                 });
                 return;
-            }
-            if (HP >= MaxHp / 2)
-            {
-                AshCooldown = 0;
             }
             
             base.Tick(time);

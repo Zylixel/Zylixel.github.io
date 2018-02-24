@@ -12,7 +12,7 @@ namespace wServer.realm.entities.player
         private float _bleeding;
         private float _healing;
         private int _newbieTime;
-        private int _pendantReady;
+        private bool _pendantReady;
 
         public bool IsVisibleToEnemy()
         {

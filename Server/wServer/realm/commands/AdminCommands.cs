@@ -79,7 +79,7 @@ namespace wServer.realm.commands
     {
 
         public SpawnCommand()
-            : base("spawn")
+            : base("spawn", 1)
         {
         }
 
@@ -108,26 +108,18 @@ namespace wServer.realm.commands
                     return false;
                 }
                 int c = int.Parse(args[0]);
-                if (player.Client.Account.Rank < 1)
+                if (c > 20)
                 {
-                    player.SendError("Unranked Users can not spawn multiple entities");
+                    player.SendError("Maximum spawn count is set to 20!");
                     return false;
                 }
-                else
-                {
-                    if (c > 20)
-                    {
-                        player.SendError("Maximum spawn count is set to 20!");
-                        return false;
-                    }
 
-                    for (int i = 0; i < num; i++)
-                    {
-                        Entity entity = Entity.Resolve(player.Manager, objType);
-                        name = entity.Name;
-                        entity.Move(player.X, player.Y);
-                        player.Owner.Timers.Add(new WorldTimer(5 * 1000, (world, RealmTime) => player.Owner.EnterWorld(entity)));
-                    }
+                for (int i = 0; i < num; i++)
+                {
+                    Entity entity = Entity.Resolve(player.Manager, objType);
+                    name = entity.Name;
+                    entity.Move(player.X, player.Y);
+                    player.Owner.Timers.Add(new WorldTimer(5 * 1000, (world, RealmTime) => player.Owner.EnterWorld(entity)));
                 }
                 player.Manager.Chat.Say(player, "Spawning " + c + " " + name + " in 5 seconds...");
             }
@@ -147,34 +139,10 @@ namespace wServer.realm.commands
                     player.SendHelp("Usage: /spawn <entityname>");
                     return false;
                 }
-                if (player.Client.Account.Rank < 1)
-                {
-                    string checkName = name.ToLower();
-                    if (checkName.Contains("gift") || checkName.Contains("balloon"))
-                    {
-                        player.SendError("Entity not allowed for Unranked users!");
-                        return false;
-                    }
-                    Entity entity = Entity.Resolve(player.Manager, objType);
-                    name = entity.Name;
-                    entity.Move(player.X, player.Y);
-                    player.Owner.Timers.Add(new WorldTimer(5 * 1000, (world, RealmTime) => player.Owner.EnterWorld(entity)));
-                    player.Owner.Timers.Add(new WorldTimer(6 * 1000, (world, RealmTime) =>
-                    {
-                        player.Owner.Timers.Add(new WorldTimer(114 * 1000, (w1, t1) =>
-                        {
-                            entity.Owner.LeaveWorld(entity);
-                            player.Manager.Chat.Say(player, name + " Despawned");
-                        }));
-                    }));
-                }
-                else
-                {
-                    Entity entity = Entity.Resolve(player.Manager, objType);
-                    name = entity.Name;
-                    entity.Move(player.X, player.Y);
-                    player.Owner.Timers.Add(new WorldTimer(5 * 1000, (world, RealmTime) => player.Owner.EnterWorld(entity)));
-                }
+                Entity entity = Entity.Resolve(player.Manager, objType);
+                name = entity.Name;
+                entity.Move(player.X, player.Y);
+                player.Owner.Timers.Add(new WorldTimer(5 * 1000, (world, RealmTime) => player.Owner.EnterWorld(entity)));
                 player.Manager.Chat.Say(player, "Spawning " + name + " in 5 seconds...");
                 #endregion
             }
@@ -699,35 +667,58 @@ namespace wServer.realm.commands
 
         protected override bool Process(Player player, RealmTime time, string[] args)
         {
-            try
+            player.Owner.Timers.Add(new WorldTimer(11 * 1000, (world, RealmTime) => {
+                Program.wServerShutdown = true;
+            }));
+            foreach (Client i in player.Manager.Clients.Values)
             {
+                i.SendPacket(new TextPacket
+                {
+                    BubbleTime = 0,
+                    Stars = -1,
+                    Name = "@ANNOUNCEMENT",
+                    Text = "Server restarting soon. You will be disconnected in 10 seconds"
+                });
+                i.Player.Owner.Timers.Add(new WorldTimer(10 * 1000, (world, RealmTime) => player.Client.Disconnect()));
+            }
+            return true;
+        }
+    }
+
+    internal class SlowRestartCommand : Command
+    {
+        public SlowRestartCommand()
+            : base("slowrestart", 3)
+        {
+        }
+
+        protected override bool Process(Player player, RealmTime time, string[] args)
+        {
+            player.Owner.Timers.Add(new WorldTimer(290 * 1000, (world, RealmTime) => {
+                player.Owner.Timers.Add(new WorldTimer(11 * 1000, (world1, RealmTime1) => {
+                    Program.wServerShutdown = true;
+                }));
                 foreach (Client i in player.Manager.Clients.Values)
                 {
-                    if (i.Account.Name.Equals(player.Name))
+                    i.SendPacket(new TextPacket
                     {
-                        player.SendInfo("You are shutting down the server. You will be disconnected in 12 seconds");
-                        i.Player.Owner.Timers.Add(new WorldTimer(12 * 1000, (world, RealmTime) => {
-                            Program.wServerShutdown = true;
-                            player.Client.Disconnect();
-                        }));
-                    }
-                    else
-                    {
-                        i.SendPacket(new TextPacket
-                        {
-                            BubbleTime = 0,
-                            Stars = -1,
-                            Name = "@ANNOUNCEMENT",
-                            Text = "Server restarting soon. You will be disconnected in 10 seconds"
-                        });
-                        i.Player.Owner.Timers.Add(new WorldTimer(10 * 1000, (world, RealmTime) => player.Client.Disconnect()));
-                    }
+                        BubbleTime = 0,
+                        Stars = -1,
+                        Name = "@ANNOUNCEMENT",
+                        Text = "Server restarting soon. You will be disconnected in 10 seconds"
+                    });
+                    i.Player.Owner.Timers.Add(new WorldTimer(10 * 1000, (world1, RealmTime1) => player.Client.Disconnect()));
                 }
-            }
-            catch
+            }));
+            foreach (Client i in player.Manager.Clients.Values)
             {
-                player.SendError("Cannot say that in announcement!");
-                return false;
+                i.SendPacket(new TextPacket
+                {
+                    BubbleTime = 0,
+                    Stars = -1,
+                    Name = "@ANNOUNCEMENT",
+                    Text = "Server restarting in 5 minutes..."
+                });
             }
             return true;
         }
@@ -1118,7 +1109,7 @@ namespace wServer.realm.commands
         }
         protected override bool Process(Player player, RealmTime time, string[] args)
         {
-            player.TryUpgrade("force");
+            player.TryUpgrade(false);
             return true;
         }
     }

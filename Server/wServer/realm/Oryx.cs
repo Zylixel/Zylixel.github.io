@@ -311,7 +311,7 @@ namespace wServer.realm
                 {
                     var arr = dat.Value.spawn;
                     var msg = arr[rand.Next(0, arr.Length)];
-                    BroadcastMsg(msg); //Taunt that bish
+                    BroadcastMsg(msg); //Taunt
                 }  
             }
             world.Timers.Add(new WorldTimer(300000, (ww, tt) => { TimedSpawn(); })); //New Event every 5 minutes
@@ -321,6 +321,7 @@ namespace wServer.realm
         {
             if (CheckConfig.IsDebugOn())
                 Console.WriteLine("Oryx is controlling world {0}({1})...", world.Id, world.Name);
+
             var w = world.Map.Width;
             var h = world.Map.Height;
             var stats = new int[12];
@@ -333,6 +334,7 @@ namespace wServer.realm
                 }
             if (CheckConfig.IsDebugOn())
                 Console.WriteLine("Spawning minions...");
+
             foreach (var i in spawn)
             {
                 var terrain = i.Key;
@@ -420,12 +422,11 @@ namespace wServer.realm
                     diff[i] = enemyCounts[i] - enemyMaxCounts[i];
                     c++;
                 }
-               /* else if (enemyCounts[i] < enemyMaxCounts[i] * 0.75) //Add some
+                else if (enemyCounts[i] < enemyMaxCounts[i] * 0.75) //Add some
                 {
                     state[i] = 2;
                     diff[i] = enemyMaxCounts[i] - enemyCounts[i];
                 }
-                */
                 else
                 {
                     state[i] = 0;
@@ -449,7 +450,7 @@ namespace wServer.realm
                 if (c == 0) break;
             }
 
-            /*int w = world.Map.Width, h = world.Map.Height;
+            int w = world.Map.Width, h = world.Map.Height;
             for (var i = 0; i < state.Length; i++)  //Add
             {
                 if (state[i] != 2) continue;
@@ -462,7 +463,7 @@ namespace wServer.realm
 
                     j += Spawn(world.Manager.GameData.ObjectDescs[objType], t, w, h);
                 }
-            }*/
+            }
             RecalculateEnemyCount();
 
             GC.Collect();

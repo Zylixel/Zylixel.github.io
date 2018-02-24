@@ -147,9 +147,9 @@
     <Compile Include="logic\behaviors\Charge.cs" />
     <Compile Include="logic\behaviors\Drakes\BeesC.cs" />
     <Compile Include="logic\behaviors\Drakes\KeeperGodRandom.cs" />
-    <Compile Include="logic\behaviors\Drakes\BeesR.cs" />
+    <Compile Include="logic\behaviors\Drakes\RandomLive.cs" />
     <Compile Include="logic\behaviors\Drakes\Bees.cs" />
-    <Compile Include="logic\behaviors\Drakes\Beesorbit.cs" />
+    <Compile Include="logic\behaviors\PlayerOrbit.cs" />
     <Compile Include="logic\behaviors\OpenGate.cs" />
     <Compile Include="logic\behaviors\NexusHealMp.cs" />
     <Compile Include="logic\behaviors\ConditionalEffect.cs" />

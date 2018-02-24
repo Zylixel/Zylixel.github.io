@@ -162,7 +162,7 @@ namespace wServer.realm.entities.player
             Quest = newQuest;
         }
 
-        public void TryUpgrade(string arg = "Random")
+        public void TryUpgrade(bool random = true)
         {
             ushort[] levelable =
             {
@@ -210,47 +210,25 @@ namespace wServer.realm.entities.player
                 "Wand"
             };
 
-            bool upgraded = false;
-            double r = 0;
-            int i = 0;
-
-            if (arg == "force")
-                r = 1;
-            else
+            if (Random.Next(1, 10) != 1 && random) return;
+            
+            for (int i = 0; i < levelable.Length; i++)
             {
-                r = Random.Next(1, 10);
-            }
-
-            i = Random.Next(1, 4);
-
-            if (r == 1)
-            {
-                for (int q = 0; q < levelable.Length; q++)
+                if (Inventory[0] == Manager.GameData.Items[levelable[i]])
                 {
-                    if (upgraded == false)
+                    Owner.BroadcastPacket(new NotificationPacket
                     {
-                        if (Inventory[i] == Manager.GameData.Items[levelable[q]])
-                        {
-                            Owner.BroadcastPacket(new NotificationPacket
-                            {
-                                ObjectId = Id,
-                                Color = new ARGB(0xFF6600),
-                                Text = "{\"key\":\"blank\",\"tokens\":{\"data\":\"" + type[q] + " Piece Found!\"}}"
-                            }, null);
-                            Inventory[i] = Manager.GameData.Items[tolevel[q]];
-                            UpdateCount++;
-                            SaveToCharacter();
-                            upgraded = true;
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        return;
-                    }
-
+                        ObjectId = Id,
+                        Color = new ARGB(0xFF6600),
+                        Text = "{\"key\":\"blank\",\"tokens\":{\"data\":\"" + type[i] + " Piece Found!\"}}"
+                    }, null);
+                    Inventory[0] = Manager.GameData.Items[tolevel[i]];
+                    UpdateCount++;
+                    SaveToCharacter();
+                    return;
                 }
             }
+            return;
         }
 
         private void CalculateFame()

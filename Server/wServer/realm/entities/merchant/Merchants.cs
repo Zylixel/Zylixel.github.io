@@ -16,7 +16,9 @@ namespace wServer.realm.entities.merchant
     {
         private const int BuyNoFame = 6;
         private const int MerchantSize = 100;
+        private const int ClothPrice = 50;
 
+        private bool _playerMarket;
         private int _tickcount;
         private int _accId;
         private int _itemChange;
@@ -79,15 +81,14 @@ namespace wServer.realm.entities.merchant
                                      player.SlotTypes[i] == Convert.ToInt16(ist.Element("SlotType").Value)))
                                 {
                                     player.Inventory[i] = Manager.GameData.Items[(ushort)MType];
-                                    
+
                                     player.CurrentFame =
                                         player.Client.Account.Stats.Fame =
                                             db.UpdateFame(player.Client.Account, -Price);
 
-                                    {
+                                    if (_playerMarket) {
                                         _accId = db.GetMarketCharId(MType, Price);
-                                    }
-                                    {
+
                                         if (logic.CheckConfig.IsDebugOn())
                                             Console.WriteLine("Attempted to give Player " + _accId + ", " + Price + " fame");
                                         MySqlCommand cmd = db.CreateQuery();
@@ -95,17 +96,18 @@ namespace wServer.realm.entities.merchant
                                         cmd.Parameters.AddWithValue("@accId", _accId);
                                         cmd.Parameters.AddWithValue("@Price", Price);
                                         cmd.ExecuteNonQuery();
-                                    }
-                                    {
+
                                         if (logic.CheckConfig.IsDebugOn())
                                             Console.WriteLine("Attemping to delete item from database: " + MType + " | " + Price);
-                                        MySqlCommand cmd = db.CreateQuery();
                                         cmd.CommandText = "DELETE FROM market WHERE itemid=@itemid AND fame=@fame AND playerid=@id";
                                         cmd.Parameters.AddWithValue("@itemid", MType);
                                         cmd.Parameters.AddWithValue("@fame", Price);
                                         cmd.Parameters.AddWithValue("@id", _accId);
                                         cmd.ExecuteNonQuery();
+                                        
+                                        Merchant.updatePrice(MType, Manager);
                                     }
+
                                     player.Client.SendPacket(new BuyResultPacket
                                     {
                                         Result = 0,
@@ -114,9 +116,6 @@ namespace wServer.realm.entities.merchant
                                     player.Client.Save();
                                     player.UpdateCount++;
                                     UpdateCount++;
-
-                                    Merchant.updatePrice(MType, Manager);
-
                                     return;
                                 }
                             }
@@ -133,16 +132,11 @@ namespace wServer.realm.entities.merchant
                     }
                     else
                     {
-                        switch (Currency)
+                        player.Client.SendPacket(new BuyResultPacket
                         {
-                            case CurrencyType.Fame:
-                                player.Client.SendPacket(new BuyResultPacket
-                                {
-                                    Result = BuyNoFame,
-                                    Message = "{\"key\":\"server.not_enough_fame\"}"
-                                });
-                                break;
-                        }
+                            Result = BuyNoFame,
+                            Message = "{\"key\":\"server.not_enough_fame\"}"
+                        });
                     }
                 }
             });
@@ -152,30 +146,31 @@ namespace wServer.realm.entities.merchant
         {
             try
             {
-                if (MType == -1)
+                if (_playerMarket)
                 {
-                    Owner?.LeaveWorld(this);
-                }
-                else if (MTime == -1 && Owner != null || !MerchantLists.ZyList.Contains(MType))
-                {
-                    Recreate(this, false);
-                    UpdateCount++;
-                }
-                else if (Price != MerchantLists.price[MType])
-                {
-                    Recreate(this, true);
-                    UpdateCount++;
+                    if (MType == -1)
+                    {
+                        Owner?.LeaveWorld(this);
+                    }
+                    else if (MTime == -1 && Owner != null || !MerchantLists.ZyList.Contains(MType))
+                    {
+                        Recreate(this, false);
+                        UpdateCount++;
+                    }
+                    else if (Price != MerchantLists.price[MType])
+                    {
+                        Recreate(this, true);
+                        UpdateCount++;
+                    }
+
+                    _tickcount++;
+                    if (_tickcount % (Manager?.TPS * 60) == 0) //once per minute after spawning
+                    {
+                        MTime--;
+                        UpdateCount++;
+                    }
                 }
                 
-                _tickcount++;
-                if (_tickcount % (Manager?.TPS * 60) == 0) //once per minute after spawning
-                {
-                    MTime--;
-                    UpdateCount++;
-                } 
-
-                
-
                 base.Tick(time);
             }
             catch (Exception ex)
@@ -202,7 +197,26 @@ namespace wServer.realm.entities.merchant
         {
             MType = -1;
             var list = MerchantLists.ZyList;
-            
+            if (Owner.Map[(int)X, (int)Y].Region == TileRegion.Store_12)
+                list = MerchantLists.AccessoryDyeList;
+            else if (Owner.Map[(int)X, (int)Y].Region == TileRegion.Store_13)
+                list = MerchantLists.ClothingClothList;
+            else if (Owner.Map[(int)X, (int)Y].Region == TileRegion.Store_14)
+                list = MerchantLists.AccessoryClothList;
+            else if (Owner.Map[(int)X, (int)Y].Region == TileRegion.Store_15)
+                list = MerchantLists.ClothingDyeList;
+            else if (Owner.Map[(int)X, (int)Y].Region == TileRegion.Store_21)
+                list = MerchantLists.AccessoryClothList;
+            else if (Owner.Map[(int)X, (int)Y].Region == TileRegion.Store_22)
+                list = MerchantLists.AccessoryDyeList;
+            else if (Owner.Map[(int)X, (int)Y].Region == TileRegion.Store_23)
+                list = MerchantLists.ClothingClothList;
+            else if (Owner.Map[(int)X, (int)Y].Region == TileRegion.Store_24)
+                list = MerchantLists.ClothingDyeList;
+
+            if (list == MerchantLists.ZyList)
+                _playerMarket = true;
+
             list.Shuffle();
             foreach (var t1 in list)
             {
@@ -222,8 +236,8 @@ namespace wServer.realm.entities.merchant
                 }
 
                 MTime = Random.Next(2, 5);
-                
-                Price = MerchantLists.price[MType];
+
+                Price = _playerMarket ? MerchantLists.price[MType] : ClothPrice;
                 Currency = CurrencyType.Fame;
                 
                 UpdateCount++;

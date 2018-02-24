@@ -478,7 +478,7 @@ public class Item : IFeedable
             Description = elem.Element("Description").Value;
             BrokenResurrect = elem.Element("BrokenResurrect") != null;
             NotBrokenResurrect = elem.Element("NotBrokenResurrect") != null;
-            AshRobe = elem.Element("AshRobe") != null;
+            MpGiveBack = elem.Element("MpGiveBack") != null;
             MantleResurrect = elem.Element("MantleResurrect") != null;
             RateOfFire = (n = elem.Element("RateOfFire")) != null ? float.Parse(n.Value, NumberStyles.Any, ci) : 1;
             Usable = elem.Element("Usable") != null;
@@ -583,7 +583,7 @@ public class Item : IFeedable
     public bool BrokenResurrect { get; set; }
     public bool NotBrokenResurrect { get; set; }
     public bool MantleResurrect { get; set; }
-    public bool AshRobe { get; set; }
+    public bool MpGiveBack { get; set; }
     public bool Treasure { get; set; }
     public bool Maxy { get; set; }
     public ushort FeedPower { get; set; }

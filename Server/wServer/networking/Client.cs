@@ -23,7 +23,7 @@ namespace wServer.networking
 
     public class Client : IDisposable
     {
-        public const string ServerVersion = "27.7.X2";
+        public const string ServerVersion = "28.8.X3";
         private bool _disposed;
 
         public uint UpdateAckCount = 0;

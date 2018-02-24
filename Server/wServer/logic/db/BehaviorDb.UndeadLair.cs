@@ -8,46 +8,6 @@ namespace wServer.logic
     partial class BehaviorDb
     {
         private _ UndeadLair = () => Behav()
-        .Init("EH Ability Bee 1",
-                new State(
-                    new State("start",
-                         new BeesAttack(),
-                         new BeesOrbit(0.9, 1.2 , target: "Tomb Boss Anchor", playerCircle: 1),
-                         new TimedTransition(6000, "die")
-                    ),
-                    new State("die",
-                        new Suicide()
-                    )
-                )
-            )
-        .Init("EH Ability Bee 2",
-                new State(
-                    new State("start",
-                         new BeesRandom(),
-                         new TimedTransition(1, "init")
-                    ),
-                    new State("init",
-                        new BeesOrbit(0.9, 1.2, target: "Tomb Boss Anchor", playerCircle: 1),
-                        new BeesAttackCurse(),
-                        new TimedTransition(5700, "die")
-                    ),
-                    new State("die",
-                        new Suicide()
-                    )
-                )
-            )
-            .Init("EH Ability Bee 3",
-                new State(
-                    new State("start",
-                         new BeesOrbit(0.9, 1.2, target: "Tomb Boss Anchor", playerCircle: 1),
-                         new BeesAttack(),
-                         new TimedTransition(6000, "die")
-                    ),
-                    new State("die",
-                        new Suicide()
-                    )
-                )
-            )
             .Init("Septavius the Ghost God",
                 new State(
                     new DropPortalOnDeath("Realm Portal", 100),

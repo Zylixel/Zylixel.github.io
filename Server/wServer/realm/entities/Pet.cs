@@ -40,13 +40,12 @@ namespace wServer.realm.entities
                     ThirdPetLevel = new PetLevel(AbilityType.Third,
                         Utils.GetEnumByName<Ability>(Utils.GetEnumName<Ability>(petData.Abilities[2].Type)),
                         petData.Abilities[2].Points, petData.Abilities[2].Power, this);
+
                     if (playerOwner != null)
                     {
                         using (Database db = new Database())
                             Size = db.GetPetSize(Convert.ToInt32(PlayerOwner.AccountId), petData.InstanceId);
                     }
-                    else
-                        Size = 0;
 
                     if (Size == 0)
                         Size = manager.GameData.TypeToPet[(ushort)petData.Type].Size;
@@ -142,7 +141,6 @@ namespace wServer.realm.entities
                     stats[StatsType.PetAbilityType0] = (int)FirstPetLevel.Ability;
                     stats[StatsType.PetAbilityType1] = (int)SecondPetLevel.Ability;
                     stats[StatsType.PetAbilityType2] = (int)ThirdPetLevel.Ability;
-                    UpdateNeeded = false;
                 }
             }
             else
