@@ -1007,10 +1007,10 @@ namespace wServer.realm.entities.player
                 if (Owner != null)
                 {
                     SendUpdate(time);
-                    if (!Owner.IsPassable((int)X, (int)Y))
+                    if (!Owner.IsPassable((int)X, (int)Y) && Owner.Name != "The Other Side")
                     {
                         Console.WriteLine($"Player {Name} No-Clipped at position: {X}, {Y}");
-                        Client.Player.SendError("Uhhh, No. Don't Noclip");
+                        Client.Player.SendError("Our server detected that you were Out-Of-Bounds.");
                         Client.Reconnect(new ReconnectPacket
                         {
                             Host = "",

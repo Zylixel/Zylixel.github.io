@@ -5,7 +5,7 @@
         public TheOtherSide()
         {
             Name = "The Other Side";
-            ClientWorldName = "The Other Side ";
+            ClientWorldName = "The Other Side";
             Background = 0;
             Difficulty = 5;
             AllowTeleport = false;

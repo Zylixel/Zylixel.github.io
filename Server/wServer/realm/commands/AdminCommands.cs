@@ -22,7 +22,7 @@ namespace wServer.realm.commands
     internal class posCmd : Command
     {
         public posCmd()
-            : base("p", 1)
+            : base("p", 4)
         {
         }
 
@@ -36,7 +36,7 @@ namespace wServer.realm.commands
     internal class BanCommand : Command
     {
         public BanCommand() : 
-            base("ban", 1)
+            base("ban", 3)
         {
         }
 
@@ -63,7 +63,7 @@ namespace wServer.realm.commands
     internal class AddWorldCommand : Command
     {
         public AddWorldCommand()
-            : base("addworld", 1)
+            : base("addworld", 4)
         {
         }
 
@@ -154,7 +154,7 @@ namespace wServer.realm.commands
     internal class AddEffCommand : Command
     {
         public AddEffCommand()
-            : base("addeff", 1)
+            : base("addeff", 2)
         {
         }
 
@@ -188,7 +188,7 @@ namespace wServer.realm.commands
     internal class RemoveEffCommand : Command
     {
         public RemoveEffCommand()
-            : base("remeff", 1)
+            : base("remeff", 2)
         {
         }
 
@@ -220,7 +220,7 @@ namespace wServer.realm.commands
     internal class GiveCommand : Command
     {
         public GiveCommand()
-            : base("give", 0) //Todo Fix this
+            : base("give", 2) //Todo Fix this
         {
         }
 
@@ -254,7 +254,7 @@ namespace wServer.realm.commands
             }
             if (!player.Manager.GameData.Items[objType].Secret || player.Client.Account.Rank >= 4)
             {
-                for (int i = 0; i < player.Inventory.Length; i++)
+                for (int i = 4; i < player.Inventory.Length; i++)
                     if (player.Inventory[i] == null)
                     {
                         player.Inventory[i] = player.Manager.GameData.Items[objType];
@@ -277,7 +277,7 @@ namespace wServer.realm.commands
     internal class TpCommand : Command
     {
         public TpCommand()
-            : base("tp", 1)
+            : base("tp", 4)
         {
         }
 
@@ -320,7 +320,7 @@ namespace wServer.realm.commands
 
     class KillAll : Command
     {
-        public KillAll() : base("killAll", 2) { }
+        public KillAll() : base("killAll", 3) { }
         
         protected override bool Process(Player player, RealmTime time, string[] args)
         {
@@ -349,7 +349,7 @@ namespace wServer.realm.commands
 
     class WhosAlive : Command
     {
-        public WhosAlive() : base("WhosAlive", 1) { }
+        public WhosAlive() : base("WhosAlive", 4) { }
 
         protected override bool Process(Player player, RealmTime time, string[] args)
         {
@@ -366,7 +366,7 @@ namespace wServer.realm.commands
     internal class Kick : Command
     {
         public Kick()
-            : base("kick", 1)
+            : base("kick", 2)
         {
         }
 
@@ -400,7 +400,7 @@ namespace wServer.realm.commands
     internal class Mute : Command
     {
         public Mute()
-            : base("mute", 1)
+            : base("mute", 2)
         {
         }
 
@@ -435,7 +435,7 @@ namespace wServer.realm.commands
     internal class Max : Command
     {
         public Max()
-            : base("max", 1)
+            : base("max", 4)
         {
         }
 
@@ -468,7 +468,7 @@ namespace wServer.realm.commands
     internal class UnMute : Command
     {
         public UnMute()
-            : base("unmute", 1)
+            : base("unmute", 2)
         {
         }
 
@@ -537,7 +537,7 @@ namespace wServer.realm.commands
     internal class Announcement : Command
     {
         public Announcement()
-            : base("announce", 1)
+            : base("announce", 3)
         {
         }
 
@@ -558,7 +558,7 @@ namespace wServer.realm.commands
     internal class Summon : Command
     {
         public Summon()
-            : base("summon", 1)
+            : base("summon", 3)
         {
         }
 
@@ -613,7 +613,7 @@ namespace wServer.realm.commands
     internal class PetSizeCommand : Command
     {
         public PetSizeCommand()
-            : base("PetSize", 2)
+            : base("PetSize", 4)
         {
         }
 
@@ -661,7 +661,7 @@ namespace wServer.realm.commands
     internal class RestartCommand : Command
     {
         public RestartCommand()
-            : base("restart", 3)
+            : base("restart", 4)
         {
         }
 
@@ -688,7 +688,7 @@ namespace wServer.realm.commands
     internal class SlowRestartCommand : Command
     {
         public SlowRestartCommand()
-            : base("slowrestart", 3)
+            : base("slowrestart", 4)
         {
         }
 
@@ -759,7 +759,7 @@ namespace wServer.realm.commands
     internal class LevelCommand : Command
     {
         public LevelCommand()
-            : base("level", 2)
+            : base("level", 4)
         {
         }
 
@@ -792,7 +792,7 @@ namespace wServer.realm.commands
     internal class SetCommand : Command
     {
         public SetCommand()
-            : base("setStat", 1)
+            : base("setStat", 2)
         {
         }
 
@@ -863,7 +863,7 @@ namespace wServer.realm.commands
             }
             if (args.Length == 3)
             {
-                if (player.Client.Account.Rank < 5)
+                if (player.Client.Account.Rank < 3)
                 {
                     player.SendError("Only higher ranked admins can set other players stats");
                     return false;
@@ -943,7 +943,7 @@ namespace wServer.realm.commands
     internal class SetpieceCommand : Command
     {
         public SetpieceCommand()
-            : base("setpiece", 2)
+            : base("setpiece", 4)
         {
         }
 
@@ -958,7 +958,7 @@ namespace wServer.realm.commands
 
     internal class ListCommands : Command
     {
-        public ListCommands() : base("commands", permLevel: 1) { }
+        public ListCommands() : base("commands") { }
 
         protected override bool Process(Player player, RealmTime time, string[] args)
         {
@@ -985,7 +985,7 @@ namespace wServer.realm.commands
     internal class GodCommand : Command
     {
         public GodCommand()
-        : base("god", 1)
+        : base("god", 2)
         {
         }
 
@@ -1013,44 +1013,10 @@ namespace wServer.realm.commands
         }
     }
 
-    internal class CFameCommand : Command
-    {
-        public CFameCommand()
-        : base("cfame", 5)
-        {
-        }
-
-        protected override bool Process(Player player, RealmTime time, string[] args)
-        {
-            if (args[0] == "")
-            {
-                player.SendHelp("Usage: /cfame <Fame Amount>");
-                return false;
-            }
-            try
-            {
-                int newFame = Convert.ToInt32(args[0]);
-                int newXP = Convert.ToInt32(newFame + "000");
-                player.Fame = newFame;
-                player.Experience = newXP;
-                player.SaveToCharacter();
-                player.Client.Save();
-                player.UpdateCount++;
-                player.SendInfo("Updated Character Fame To: " + newFame);
-            }
-            catch
-            {
-                player.SendInfo("Error Setting Fame");
-                return false;
-            }
-            return true;
-        }
-    }
-
     internal class AccIdCommand : Command
     {
         public AccIdCommand()
-            : base("accid", 1) { }
+            : base("accid", 2) { }
 
         protected override bool Process(Player player, RealmTime time, string[] args)
         {
@@ -1068,7 +1034,7 @@ namespace wServer.realm.commands
     internal class CloseRealmCmd : Command
     {
         public CloseRealmCmd()
-            : base("closerealm", 1)
+            : base("closerealm", 4)
         {
         }
         protected override bool Process(Player player, RealmTime time, string[] args)
@@ -1083,28 +1049,10 @@ namespace wServer.realm.commands
         }
     }
 
-    internal class quickcloserealm : Command
-    {
-        public quickcloserealm()
-            : base("quickcloserealm", 3)
-        {
-        }
-        protected override bool Process(Player player, RealmTime time, string[] args)
-        {
-            if (player.Owner is GameWorld)
-            {
-                var gw = player.Owner as GameWorld;
-                gw.Overseer.CloseRealm();
-                return true;
-            }
-            return false;
-        }
-    }
-
     internal class ForceUp : Command
     {
         public ForceUp()
-            : base("AdminForceUp", 3)
+            : base("AdminForceUp", 4)
         {
         }
         protected override bool Process(Player player, RealmTime time, string[] args)
@@ -1167,14 +1115,13 @@ namespace wServer.realm.commands
             }
         player.SendError("You cannot sell this item!");
         return false;
-
         }
-        }
+    }
     
     internal class VisitCommand : Command
     {
         public VisitCommand()
-            : base("visit", 2)
+            : base("visit", 3)
         {
         }
 
@@ -1183,7 +1130,7 @@ namespace wServer.realm.commands
             foreach (KeyValuePair<string, Client> i in player.Manager.Clients)
                 if (i.Value.Player.Owner is PetYard || i.Value.Player.Owner is Vault)
                 {
-                    player.SendInfo("You cant visit players in that world.");
+                    player.SendInfo($"You cant visit players in world: {i.Value.Player.Owner}");
                     return false;
                 }
             foreach (KeyValuePair<string, Client> i in player.Manager.Clients)
@@ -1231,7 +1178,7 @@ namespace wServer.realm.commands
             #region check length
             if (string.IsNullOrEmpty(args[0]) || args.Length < 2)
             {
-                player.SendHelp("Usage: /rank <Player> <Mod/Admin/All>");
+                player.SendHelp("Usage: /rank <Player> <Helper/Mod/Admin/All>");
                 return false;
             }
             #endregion
@@ -1249,17 +1196,17 @@ namespace wServer.realm.commands
             var Rank = ParseRank(args[1].ToLower());
             if (Rank == 0)
             {
-                player.SendError("Invalid Rank, Usage: /rank <Player> <Mod/Admin/All>");
+                player.SendError("Invalid Rank, Usage: /rank <Player> <Helper/Mod/Admin/All>");
                 return false;
             }
-            if (Rank > player.Client.Account.Rank)
+            if (Rank >= player.Client.Account.Rank)
             {
-                player.SendError("You cannot rank a player up past your own rank!");
+                player.SendError("You cannot rank a player up to your own rank!");
                 return false;
             }
             if (plr.Client.Account.Rank > player.Client.Account.Rank)
             {
-                player.SendError("You cannot rank a higher ranked player than you!");
+                player.SendError("You cannot change a higher ranked player than you!");
                 return false;
             }
             #endregion
@@ -1282,12 +1229,14 @@ namespace wServer.realm.commands
 
         int ParseRank(string rankInput)
         {
+            if (rankInput == "helper")
+                return 1;
             if (rankInput == "mod")
-                return 3;
+                return 2;
             if (rankInput == "admin")
-                return 4;
+                return 3;
             if (rankInput == "all")
-                return 5;
+                return 4;
             return 0;
         }
     }

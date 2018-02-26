@@ -14,7 +14,7 @@
 
         protected override void Init()
         {
-            LoadMap("wServer.realm.worlds.maps.bazzar.wmap", MapType.Wmap);
+            LoadMap("wServer.realm.worlds.maps.ClothBazaar.jm", MapType.Json);
         }
     }
 }

@@ -92,17 +92,18 @@ namespace wServer.networking.handlers
                         return;
                     }
                 }
-                Console.WriteLine("Client trying to connect!");
+                Console.WriteLine(@"Client trying to connect!");
                 client.ConnectedBuild = packet.BuildVersion;
                 if (!client.Manager.TryConnect(client))
                 {
                     db.LockAccount(client.Account);
+                    client.Account = null;
                     client.SendPacket(new FailurePacket
                     {
                         ErrorDescription = "Failed to connect."
                     });
                     client.Disconnect();
-                    Console.WriteLine("Failed to connect.");
+                    Console.WriteLine(@"Failed to connect.");
                 }
                 else
                 {

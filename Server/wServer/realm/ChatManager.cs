@@ -18,9 +18,18 @@ namespace wServer.realm
 
         public void Say(Player src, string text)
         {
+            string prefix = "";
+            switch (src.Client.Account.Rank)
+            {
+                case 1: prefix = "!"; break;
+                case 2: prefix = "@"; break;
+                case 3: prefix = "#"; break;
+                case 4: prefix = "$"; break;
+            }
+
             src.Owner.BroadcastPacketSync(new TextPacket
             {
-                Name = (src.Client.Account.Rank == 3 ? "!" : src.Client.Account.Rank == 4 ? "$" : src.Client.Account.Rank == 5 ? "%" : src.Client.Account.Rank >= 1 ? "#" : "") + src.Name,
+                Name = prefix + src.Name,
                 ObjectId = src.Id,
                 Stars = src.Stars,
                 BubbleTime = 10,

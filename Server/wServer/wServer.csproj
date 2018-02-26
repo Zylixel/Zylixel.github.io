@@ -668,7 +668,6 @@
     <EmbeddedResource Include="realm\worlds\maps\PetYard_Divine.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\PetYard_Rare.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\PetYard_Uncommon.wmap" />
-    <EmbeddedResource Include="realm\worlds\maps\bazzar.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\beachzone.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\ghall0.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\ghall1.wmap" />
@@ -702,11 +701,12 @@
     <EmbeddedResource Include="realm\worlds\maps\ceme3.jm" />
     <EmbeddedResource Include="realm\worlds\maps\cemefinal.jm" />
     <EmbeddedResource Include="realm\worlds\maps\woodlandlabyrinth.jm" />
-    <EmbeddedResource Include="realm\worlds\maps\crawling.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\shaitansmap.wmap" />
     <EmbeddedResource Include="realm\worlds\maps\LairofShaitan.jm" />
     <EmbeddedResource Include="realm\worlds\maps\icecave.jm" />
     <EmbeddedResource Include="realm\worlds\maps\GodsNexus.jm" />
+    <EmbeddedResource Include="realm\worlds\maps\CrawlingDepths.jm" />
+    <EmbeddedResource Include="realm\worlds\maps\ClothBazaar.jm" />
     <None Include="wServer.cfg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

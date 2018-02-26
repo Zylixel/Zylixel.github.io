@@ -17,7 +17,7 @@ namespace wServer.realm.worlds
 
         protected override void Init()
         {
-            LoadMap("wServer.realm.worlds.maps.crawling.wmap", MapType.Wmap);
+            LoadMap("wServer.realm.worlds.maps.CrawlingDepths.jm", MapType.Json);
         }
     }
 }

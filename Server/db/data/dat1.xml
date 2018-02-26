@@ -77109,7 +77109,7 @@
       <File>lofiObj3</File>
       <Index>0x570</Index>
     </Texture>
-    <SlotType>10</SlotType>F
+    <SlotType>10</SlotType>
     <Description>A key that Opens the entrance to Zylixel's Arena</Description>
     <Sound>use_key</Sound>
     <Consumable/>
@@ -79782,32 +79782,32 @@ Many Rogues have tried to use this to escape their asylum. All have failed.
 <feedPower>1300</feedPower>
 </Object>
 <Object type="0x109f" id="EH Queen's Stinger Dagger">
-<DisplayId>Queen's Stinger Dagger</DisplayId>
-<Class>Equipment</Class>
-<Item/>
-<Texture>
-<File>lofiObj9</File>
-<Index>0x21</Index>
-</Texture>
-<SlotType>2</SlotType>
-<RateOfFire>1</RateOfFire>
-<Description>
-The blade of this dagger was once the enormous Killer Bee Queen's stinger. It remains exceptionally sharp, and could easily cut through even the heaviest of armor in a single strike.
-</Description>
-<OldSound>bladeSwing</OldSound>
-<Projectile>
-<ObjectId>EH Dagger Shot</ObjectId>
-<Speed>140</Speed>
-<MinDamage>65</MinDamage>
-<MaxDamage>155</MaxDamage>
-<LifetimeMS>357</LifetimeMS>
-<Size>100</Size>
-<MultiHit/>
-<ArmorPiercing/>
-</Projectile>
-<BagType>6</BagType>
-<FameBonus>6</FameBonus>
-<feedPower>1000</feedPower>
+  <DisplayId>Queen's Stinger Dagger</DisplayId>
+  <Class>Equipment</Class>
+  <Item/>
+  <Texture>
+  <File>lofiObj9</File>
+  <Index>0x21</Index>
+  </Texture>
+  <SlotType>2</SlotType>
+  <RateOfFire>1</RateOfFire>
+  <Description>
+  The blade of this dagger was once the enormous Killer Bee Queen's stinger. It remains exceptionally sharp, and could easily cut through even the heaviest of armor in a single strike.
+  </Description>
+  <OldSound>bladeSwing</OldSound>
+  <Projectile>
+    <ObjectId>EH Dagger Shot</ObjectId>
+    <Speed>140</Speed>
+    <MinDamage>65</MinDamage>
+    <MaxDamage>155</MaxDamage>
+    <LifetimeMS>357</LifetimeMS>
+    <Size>100</Size>
+    <MultiHit/>
+    <ArmorPiercing/>
+  </Projectile>
+  <BagType>6</BagType>
+  <FameBonus>6</FameBonus>
+  <feedPower>1000</feedPower>
 </Object>
 <Object type="0x08b1" id="EH Hivemaster Helm">
 <DisplayId>Hivemaster Helm</DisplayId>
@@ -80564,7 +80564,7 @@ The solid honey on this ring renews its wearer with incredible energy.
     <Size>250</Size>
     <Quest/>
     <ShadowSize>0</ShadowSize>
-    <MaxHitPoints>750000</MaxHitPoints>
+    <MaxHitPoints>250000</MaxHitPoints>
     <Defense>40</Defense>
     <DisplayId>Giglor Keeper of the Realm</DisplayId>
     <HitSound>monster/abyss_demons_hit</HitSound>
