@@ -372,7 +372,7 @@ namespace wServer.realm
 
         public void OnPlayerEntered(Player player)
         {
-            player.SendInfo("Welcome to Zy's Realm!");
+            player.SendInfo("Welcome to Frostz's Realm!");
         }
 
         public void Tick(RealmTime time)

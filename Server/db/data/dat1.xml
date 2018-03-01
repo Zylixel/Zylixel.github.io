@@ -29809,6 +29809,7 @@
       <OldSound>bladeSwing</OldSound>
       <feedPower>0</feedPower>
       <DisplayId>{equip.Sword_of_Majesty}</DisplayId>
+      <Secret/>
    </Object>
    <Object type="0xa03" id="Crystal Sword">
       <Class>Equipment</Class>
@@ -30295,6 +30296,7 @@
       <OldSound>magicShoot</OldSound>
       <feedPower>0</feedPower>
       <DisplayId>{equip.Wand_of_Retribution}</DisplayId>
+      <Secret/>
    </Object>
    <Object type="0xb3f" id="Crystal Wand">
       <Class>Equipment</Class>
@@ -30910,6 +30912,7 @@
       <BagType>4</BagType>
       <FameBonus>6</FameBonus>
       <feedPower>0</feedPower>
+     <Secret/>
       <DisplayId>{equip.Leviathan_Armor}</DisplayId>
    </Object>
    <Object type="0xa7b" id="Iron Mail">
@@ -31143,6 +31146,7 @@
       <BagType>4</BagType>
       <FameBonus>6</FameBonus>
       <feedPower>0</feedPower>
+     <Secret/>
       <DisplayId>{equip.Annihilation_Armor}</DisplayId>
    </Object>
    <Object type="0xa14" id="Steel Dagger">
@@ -31533,6 +31537,7 @@
       <FameBonus>6</FameBonus>
       <OldSound>daggerSwing</OldSound>
       <feedPower>0</feedPower>
+     <Secret/>
       <DisplayId>{equip.Dagger_of_Dire_Hatred}</DisplayId>
    </Object>
    <Object type="0xc0a" id="Dirk of Cronus">
@@ -31948,6 +31953,7 @@
       <NumProjectiles>3</NumProjectiles>
       <OldSound>arrowShoot</OldSound>
       <feedPower>0</feedPower>
+     <Secret/>
       <DisplayId>{equip.Bow_of_Deep_Enchantment}</DisplayId>
    </Object>
    <Object type="0xc02" id="Doom Bow">
@@ -34781,6 +34787,7 @@
       <BagType>4</BagType>
       <FameBonus>6</FameBonus>
       <feedPower>0</feedPower>
+     <Secret/>
       <DisplayId>{equip.Robe_of_the_Ancient_Intellect}</DisplayId>
    </Object>
    <Object type="0xa61" id="Magic Quiver">
@@ -35635,6 +35642,7 @@
       <ArcGap>0</ArcGap>
       <OldSound>magicShoot</OldSound>
       <feedPower>0</feedPower>
+     <Secret/>
       <DisplayId>{equip.Staff_of_the_Fundamental_Core}</DisplayId>
    </Object>
    <Object type="0xc03" id="Staff of Extreme Prejudice">
@@ -36668,6 +36676,7 @@
       </Projectile>
       <BagType>6</BagType>
       <feedPower>100000</feedPower>
+     <Secret/>
       <DisplayId>{equip.Admin_Sword}</DisplayId>
    </Object>
    <Object type="0x701" id="Undead Lair Key">
@@ -37266,6 +37275,7 @@
       <ActivateOnEquip stat="22" amount="20">IncrementStat</ActivateOnEquip>
       <BagType>6</BagType>
       <feedPower>0</feedPower>
+     <Secret/>
       <DisplayId>{equip.Crown}</DisplayId>
    </Object>
    <Object type="0xc27" id="Captain's Ring">
@@ -38809,6 +38819,7 @@
       <ArcGap>0</ArcGap>
       <OldSound>magicShoot</OldSound>
       <feedPower>50000</feedPower>
+     <Secret/>
       <DisplayId>{equip.Admin_Staff}</DisplayId>
    </Object>
    <Object type="0x9d2" id="Strike Amulet">
@@ -78730,6 +78741,7 @@ A power crystal will show me the right way. Forward to victory!\n\nSkin Class: S
       <Maxy/>
       <BagType>5</BagType>
       <feedPower>100000</feedPower>
+      <Secret/>
    </Object>
 <Object type="0x08b2" id="EH Ability Bee 1">
 <Class>Character</Class>
@@ -80146,6 +80158,7 @@ The solid honey on this ring renews its wearer with incredible energy.
   <FameBonus>6</FameBonus>
   <OldSound>bladeSwing</OldSound>
   <Soulbound/>
+  <Secret/>
   <feedPower>950</feedPower>
 </Object>
 <Object type="0x3007" id="Mystical Energy Arrow">
@@ -81933,6 +81946,7 @@ The solid honey on this ring renews its wearer with incredible energy.
     <ActivateOnEquip stat="0" amount="40">IncrementStat</ActivateOnEquip>
     <ActivateOnEquip stat="3" amount="40">IncrementStat</ActivateOnEquip>
     <BrokenResurrect/>
+    <Secret/>
     <BagType>4</BagType>
   </Object>
   <Object type="0x6204" id="Amulet of Broken Resurrection">
@@ -81953,6 +81967,7 @@ The solid honey on this ring renews its wearer with incredible energy.
     <ActivateOnEquip stat="0" amount="40">IncrementStat</ActivateOnEquip>
     <ActivateOnEquip stat="3" amount="40">IncrementStat</ActivateOnEquip>
     <NotBrokenResurrect/>
+    <Secret/>
     <BagType>4</BagType>
   </Object>
   <Object type="0x6205" id="Oryx the Mad God 3">

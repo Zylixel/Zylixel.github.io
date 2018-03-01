@@ -197,97 +197,6 @@ namespace wServer.realm.commands
                 return false;
             }
 
-            /*if (playername.ToLower() == "muledump")
-            {
-                if (msg.ToLower() == "private muledump")
-                {
-                    player.Client.SendPacket(new TextPacket //echo to self
-                    {
-                        ObjectId = player.Id,
-                        BubbleTime = 10,
-                        Stars = player.Stars,
-                        Name = player.Name,
-                        Recipient = "Muledump",
-                        Text = msg.ToSafeText(),
-                        CleanText = ""
-                    });
-
-                    player.Manager.Database.DoActionAsync(db =>
-                    {
-                        var cmd = db.CreateQuery();
-                        cmd.CommandText = "UPDATE accounts SET publicMuledump=0 WHERE id=@accId;";
-                        cmd.Parameters.AddWithValue("@accId", player.AccountId);
-                        cmd.ExecuteNonQuery();
-                        player.Client.SendPacket(new TextPacket
-                        {
-                            ObjectId = -1,
-                            BubbleTime = 10,
-                            Stars = 70,
-                            Name = "Muledump",
-                            Recipient = player.Name,
-                            Text = "Your muledump is now hidden, only you can view it now.",
-                            CleanText = ""
-                        });
-                    });
-                }
-                else if (msg.ToLower() == "public muledump")
-                {
-                    player.Client.SendPacket(new TextPacket //echo to self
-                    {
-                        ObjectId = player.Id,
-                        BubbleTime = 10,
-                        Stars = player.Stars,
-                        Name = player.Name,
-                        Recipient = "Muledump",
-                        Text = msg.ToSafeText(),
-                        CleanText = ""
-                    });
-                    player.Manager.Database.DoActionAsync(db =>
-                    {
-                        var cmd = db.CreateQuery();
-                        cmd.CommandText = "UPDATE accounts SET publicMuledump=1 WHERE id=@accId;";
-                        cmd.Parameters.AddWithValue("@accId", player.AccountId);
-                        cmd.ExecuteNonQuery();
-
-                        player.Client.SendPacket(new TextPacket
-                        {
-                            ObjectId = -1,
-                            BubbleTime = 10,
-                            Stars = 70,
-                            Name = "Muledump",
-                            Recipient = player.Name,
-                            Text = "Your muledump is now public, anyone can view it now.",
-                            CleanText = ""
-                        });
-                    });
-                }
-                else
-                {
-                    player.Client.SendPacket(new TextPacket //echo to self
-                    {
-                        ObjectId = player.Id,
-                        BubbleTime = 10,
-                        Stars = player.Stars,
-                        Name = player.Name,
-                        Recipient = "Muledump",
-                        Text = msg.ToSafeText(),
-                        CleanText = ""
-                    });
-
-                    player.Client.SendPacket(new TextPacket
-                    {
-                        ObjectId = -1,
-                        BubbleTime = 10,
-                        Stars = 70,
-                        Name = "Muledump",
-                        Recipient = player.Name,
-                        Text = "U WOT M8, 1v1 IN THE GARAGE!!!!111111oneoneoneeleven",
-                        CleanText = ""
-                    });
-                }
-                return true;
-            }*/
-
             foreach (var i in player.Manager.Clients.Values)
             {
                 if (i.Account.NameChosen && i.Account.Name.EqualsIgnoreCase(playername))
@@ -300,7 +209,6 @@ namespace wServer.realm.commands
                         Name = player.Name,
                         Recipient = i.Account.Name,
                         Text = msg.ToSafeText(),
-                        CleanText = ""
                     });
 
                     i.SendPacket(new TextPacket //echo to /tell player
@@ -311,7 +219,6 @@ namespace wServer.realm.commands
                         Name = player.Name,
                         Recipient = i.Account.Name,
                         Text = msg.ToSafeText(),
-                        CleanText = ""
                     });
                     return true;
                 }
@@ -354,7 +261,7 @@ namespace wServer.realm.commands
                 Host = "",
                 Port = 2050,
                 GameId = RealmManager.CurrentWorldId,
-                Name = "Zy's Realm",
+                Name = "Frostz's Realm",
                 Key = Empty<byte>.Array
             });
             return true;

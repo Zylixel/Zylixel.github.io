@@ -164,68 +164,41 @@ namespace wServer.realm.entities.player
 
         public void TryUpgrade(bool random = true)
         {
-            ushort[] levelable =
-            {
-                0x611c,
-                0x611d,
-                0x611e,
-                0x611f,
-                0x6123,
-                0x6124,
-                0x6125,
-                0x6126,
-                0x6129,
-                0x612a,
-                0x612b,
-                0x612c
-            };
-            ushort[] tolevel =
-            {
-                0x611d,
-                0x611e,
-                0x611f,
-                0x6121,
-                0x6124,
-                0x6125,
-                0x6126,
-                0x6127,
-                0x612a,
-                0x612b,
-                0x612c,
-                0x612d
-            };
-            string[] type =
-            {
-                "Dagger",
-                "Dagger",
-                "Dagger",
-                "Dagger",
-                "Sword",
-                "Sword",
-                "Sword",
-                "Sword",
-                "Wand",
-                "Wand",
-                "Wand",
-                "Wand"
-            };
+            var upgradables = new Dictionary<ushort, Tuple<ushort, string>>();
+
+            upgradables.Add(0x611c, new Tuple<ushort, string>(0x611d, "Dagger"));
+            upgradables.Add(0x611d, new Tuple<ushort, string>(0x611e, "Dagger"));
+            upgradables.Add(0x611e, new Tuple<ushort, string>(0x611f, "Dagger"));
+            upgradables.Add(0x611f, new Tuple<ushort, string>(0x6121, "Dagger"));
+            upgradables.Add(0x6123, new Tuple<ushort, string>(0x6124, "Sword"));
+            upgradables.Add(0x6124, new Tuple<ushort, string>(0x6125, "Sword"));
+            upgradables.Add(0x6125, new Tuple<ushort, string>(0x6126, "Sword"));
+            upgradables.Add(0x6126, new Tuple<ushort, string>(0x6127, "Sword"));
+            upgradables.Add(0x6129, new Tuple<ushort, string>(0x612a, "Wand"));
+            upgradables.Add(0x612a, new Tuple<ushort, string>(0x612b, "Wand") );
+            upgradables.Add(0x612b, new Tuple<ushort, string>(0x612c, "Wand"));
+            upgradables.Add(0x612c, new Tuple<ushort, string>(0x612d, "Wand"));
 
             if (Random.Next(1, 10) != 1 && random) return;
-            
-            for (int i = 0; i < levelable.Length; i++)
+
+            foreach (var item in upgradables)
             {
-                if (Inventory[0] == Manager.GameData.Items[levelable[i]])
+                if (upgradables.ContainsKey(Inventory[0].ObjectType)) //Only Weapons
                 {
-                    Owner.BroadcastPacket(new NotificationPacket
+                    Tuple<ushort, string> data;
+                    if (upgradables.TryGetValue(Inventory[0].ObjectType, out data))
                     {
-                        ObjectId = Id,
-                        Color = new ARGB(0xFF6600),
-                        Text = "{\"key\":\"blank\",\"tokens\":{\"data\":\"" + type[i] + " Piece Found!\"}}"
-                    }, null);
-                    Inventory[0] = Manager.GameData.Items[tolevel[i]];
-                    UpdateCount++;
-                    SaveToCharacter();
-                    return;
+                        Owner.BroadcastPacket(new NotificationPacket
+                        {
+                            ObjectId = Id,
+                            Color = new ARGB(0xFF6600),
+                            Text = "{\"key\":\"blank\",\"tokens\":{\"data\":\"" + data.Item2 + " Piece Found!\"}}"
+                        }, null);
+                        Inventory[0] = Manager.GameData.Items[data.Item1];
+                        UpdateCount++;
+                        SaveToCharacter();
+                        return;
+                    }
                 }
             }
             return;

@@ -22,9 +22,9 @@ namespace wServer.realm
             switch (src.Client.Account.Rank)
             {
                 case 1: prefix = "!"; break;
-                case 2: prefix = "@"; break;
-                case 3: prefix = "#"; break;
-                case 4: prefix = "$"; break;
+                case 2: prefix = "$"; break;
+                case 3: prefix = "%"; break;
+                case 4: prefix = "^"; break;
             }
 
             src.Owner.BroadcastPacketSync(new TextPacket

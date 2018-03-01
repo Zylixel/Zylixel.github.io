@@ -220,7 +220,7 @@ namespace wServer.realm.commands
     internal class GiveCommand : Command
     {
         public GiveCommand()
-            : base("give", 2) //Todo Fix this
+            : base("give", 2)
         {
         }
 
@@ -236,13 +236,6 @@ namespace wServer.realm.commands
             ushort objType;
 
 
-            if (player.Client.Account.Rank < 2)
-                if (!(name.Contains("Key") || name.Contains("key")))
-                {
-                    player.SendError("No Permission! You may only give yourself keys!");
-                    return false;
-                }
-
             //creates a new case insensitive dictionary based on the XmlDatas
                 Dictionary<string, ushort> icdatas = new Dictionary<string, ushort>(player.Manager.GameData.IdToObjectType,
                 StringComparer.OrdinalIgnoreCase);
@@ -252,7 +245,7 @@ namespace wServer.realm.commands
                 player.SendError("Unknown type!");
                 return false;
             }
-            if (!player.Manager.GameData.Items[objType].Secret || player.Client.Account.Rank >= 4)
+            if (!player.Manager.GameData.Items[objType].Secret || player.Client.Account.Rank >= 3)
             {
                 for (int i = 4; i < player.Inventory.Length; i++)
                     if (player.Inventory[i] == null)
@@ -320,7 +313,7 @@ namespace wServer.realm.commands
 
     class KillAll : Command
     {
-        public KillAll() : base("killAll", 3) { }
+        public KillAll() : base("killAll", 2) { }
         
         protected override bool Process(Player player, RealmTime time, string[] args)
         {
@@ -667,20 +660,10 @@ namespace wServer.realm.commands
 
         protected override bool Process(Player player, RealmTime time, string[] args)
         {
-            player.Owner.Timers.Add(new WorldTimer(11 * 1000, (world, RealmTime) => {
+            player.Owner.Timers.Add(new WorldTimer(10 * 1000, (world, RealmTime) => {
                 Program.wServerShutdown = true;
             }));
-            foreach (Client i in player.Manager.Clients.Values)
-            {
-                i.SendPacket(new TextPacket
-                {
-                    BubbleTime = 0,
-                    Stars = -1,
-                    Name = "@ANNOUNCEMENT",
-                    Text = "Server restarting soon. You will be disconnected in 10 seconds"
-                });
-                i.Player.Owner.Timers.Add(new WorldTimer(10 * 1000, (world, RealmTime) => player.Client.Disconnect()));
-            }
+            player.Manager.Chat.Announce("Server restarting soon. You will be disconnected in 10 seconds");
             return true;
         }
     }
@@ -695,31 +678,12 @@ namespace wServer.realm.commands
         protected override bool Process(Player player, RealmTime time, string[] args)
         {
             player.Owner.Timers.Add(new WorldTimer(290 * 1000, (world, RealmTime) => {
-                player.Owner.Timers.Add(new WorldTimer(11 * 1000, (world1, RealmTime1) => {
+                player.Owner.Timers.Add(new WorldTimer(10 * 1000, (world1, RealmTime1) => {
                     Program.wServerShutdown = true;
                 }));
-                foreach (Client i in player.Manager.Clients.Values)
-                {
-                    i.SendPacket(new TextPacket
-                    {
-                        BubbleTime = 0,
-                        Stars = -1,
-                        Name = "@ANNOUNCEMENT",
-                        Text = "Server restarting soon. You will be disconnected in 10 seconds"
-                    });
-                    i.Player.Owner.Timers.Add(new WorldTimer(10 * 1000, (world1, RealmTime1) => player.Client.Disconnect()));
-                }
+                player.Manager.Chat.Announce("Server restarting soon. You will be disconnected in 10 seconds");
             }));
-            foreach (Client i in player.Manager.Clients.Values)
-            {
-                i.SendPacket(new TextPacket
-                {
-                    BubbleTime = 0,
-                    Stars = -1,
-                    Name = "@ANNOUNCEMENT",
-                    Text = "Server restarting in 5 minutes..."
-                });
-            }
+            player.Manager.Chat.Announce("Server restarting soon. You will be disconnected in 5 minutes");
             return true;
         }
     }

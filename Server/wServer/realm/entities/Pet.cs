@@ -53,8 +53,8 @@ namespace wServer.realm.entities
                     PetRarity = (Rarity)petData.Rarity;
                     PetFamily = manager.GameData.TypeToPet[(ushort)petData.Type].PetFamily;
                     MaximumLevel = petData.MaxAbilityPower;
-                    UpdateNeeded = true;
                 }
+                UpdateNeeded = true;
                 Skin = petData.SkinName;
                 SkinId = petData.Skin;
                 PetId = petData.InstanceId;
@@ -74,6 +74,7 @@ namespace wServer.realm.entities
         public string Skin { get; private set; }
 
         public bool UpdateNeeded { get; set; }
+        public int UpdateCounter = 0;
 
         public PetItem Info { get; }
         public PetLevel FirstPetLevel { get; }
@@ -141,6 +142,13 @@ namespace wServer.realm.entities
                     stats[StatsType.PetAbilityType0] = (int)FirstPetLevel.Ability;
                     stats[StatsType.PetAbilityType1] = (int)SecondPetLevel.Ability;
                     stats[StatsType.PetAbilityType2] = (int)ThirdPetLevel.Ability;
+                    if (UpdateCounter >= 1)
+                    {
+                        UpdateCounter = 0;
+                        UpdateNeeded = false;
+                    }
+                    else
+                        UpdateCounter++;
                 }
             }
             else

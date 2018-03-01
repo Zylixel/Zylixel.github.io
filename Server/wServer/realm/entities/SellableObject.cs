@@ -11,7 +11,6 @@ namespace wServer.realm.entities
 {
     public class SellableObject : StaticObject
     {
-        private const int BUY_NO_GOLD = 3;
 
         public SellableObject(RealmManager manager, ushort objType)
             : base(manager, objType, null, true, false, false)
@@ -78,8 +77,8 @@ namespace wServer.realm.entities
                     {
                         player.Client.SendPacket(new BuyResultPacket
                         {
-                            Result = BUY_NO_GOLD,
-                            Message = "Not Enough Fame"
+                            Result = 6,
+                            Message = "{\"key\":\"server.not_enough_fame\"}"
                         });
                     }
                 }

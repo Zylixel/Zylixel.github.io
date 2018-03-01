@@ -451,7 +451,7 @@ public class PortalDesc
 
 public class Item : IFeedable
 {
-    private const bool DISABLE_SOULBOUND_UT = false;
+    private const bool DISABLE_SOULBOUND_UT = true;
 
     public Item(ushort type, XElement elem)
     {
