@@ -129,11 +129,15 @@ namespace wServer.realm.worlds
         };
         private readonly string[] _high =
         {
-            "Tomb of the Ancients Key", "Ocean Trench Key", "Shatters Key", "The Other Side Key", "Zylixel's Arena Key"//, "Quest Chest Item"
+            "Tomb of the Ancients Key", "Ocean Trench Key", "Shatters Key", "The Other Side Key", "Zylixel's Arena Key", "Quest Chest Item"
         };
         private readonly string[] _insane =
         {
-            "Crystal Dagger of Evolution 1", "Crystal Blade of Evolution 1", "Crystal Wand of Evolution 1", "Court of Bereavement Key", "Mystery Pet Stone"//, "Epic Quest Chest Item"
+            "Crystal Dagger of Evolution 1", "Crystal Blade of Evolution 1", "Crystal Wand of Evolution 1", "Court of Bereavement Key", "Mystery Pet Stone", "Epic Quest Chest Item"
+        };
+        private readonly string[] _what =
+        {
+            "Ice Crown", "Doom Katana", "Prism of Fallen Chaos", "Marble Seal", "EH Hivemaster Helm"
         };
 
         private void giftItems(Player i, string[] list)
@@ -176,9 +180,10 @@ namespace wServer.realm.worlds
                                 case 5: giftItems(i.Value, _low); break;
                                 case 10: SendMsg(i.Value, "Let's kick the difficulty up a notch!", "^Court Overseer"); break;
                                 case 15: giftItems(i.Value, _medium); break;
-                                case 20: SendMsg(i.Value, "Let's kick the difficulty up even more shall we?", "^Court Overseer"); break;
-                                case 25: giftItems(i.Value, _high); break;
+                                case 20: giftItems(i.Value, _high); break;
+                                case 25: SendMsg(i.Value, "Let's kick the difficulty up even more shall we?", "^Court Overseer"); break;
                                 case 30: giftItems(i.Value, _insane); break;
+                                case 40: giftItems(i.Value, _what); break;
                             }
                             SendMsg(i.Value, "The next wave will start in 5 seconds", "^Court Overseer");
                         }
@@ -211,7 +216,7 @@ namespace wServer.realm.worlds
                 List<string> enems = new List<string>();
                 Random r = new Random();
 
-                for (int i = 0; i < Wave/1.4 + 1; i++)
+                for (int i = 0; i < Wave/1.5 + 1; i++)
                 {
                     enems.Add(_gods[r.Next(0, _gods.Length)]);
                 }
@@ -230,7 +235,7 @@ namespace wServer.realm.worlds
 
                 if (Wave < 10)
                     SpawnBoss(_bosses);
-                else if (Wave >= 10 && Wave < 20)
+                else if (Wave >= 10 && Wave < 25)
                     SpawnBoss(_bosses10);
                 else
                     SpawnBoss(_bosses20);

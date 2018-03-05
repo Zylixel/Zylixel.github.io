@@ -78740,7 +78740,7 @@ A power crystal will show me the right way. Forward to victory!\n\nSkin Class: S
       <Potion/>
       <Maxy/>
       <BagType>5</BagType>
-      <feedPower>100000</feedPower>
+      <feedPower>1000</feedPower>
       <Secret/>
    </Object>
 <Object type="0x08b2" id="EH Ability Bee 1">

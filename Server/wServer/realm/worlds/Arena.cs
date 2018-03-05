@@ -144,7 +144,7 @@ namespace wServer.realm.worlds
                                 case 5: giftItems(_low); break;
                                 case 10: SendMsg(i, "Let's kick the difficulty up a notch!", "^Arena Overseer"); break;
                                 case 15: giftItems(_medium); break;
-                                case 20: SendMsg(i, "Let's kick the difficulty up even more shall we?", "^Arena Overseer"); break;
+                                case 25: SendMsg(i, "Let's kick the difficulty up even more shall we?", "^Arena Overseer"); break;
                             }
                             SendMsg(i, "The next wave will start in 5 seconds", "^Arena Overseer");
                         }
@@ -196,7 +196,7 @@ namespace wServer.realm.worlds
 
                 if (Wave < 10)
                     SpawnBoss(_bosses);
-                else if (Wave >= 10 && Wave < 20)
+                else if (Wave >= 10 && Wave < 25)
                     SpawnBoss(_bosses10);
                 else
                     SpawnBoss(_bosses20);

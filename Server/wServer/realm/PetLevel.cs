@@ -16,6 +16,7 @@ namespace wServer.realm
 
     public class PetLevel
     {
+        public int multiplier = 4;
         private static readonly Dictionary<int, int> LevelCap = new Dictionary<int, int>(100)
         {
             {1, 20},
@@ -146,12 +147,12 @@ namespace wServer.realm
 
         public void Incease(IFeedable petFoodNOMNOMNOM)
         {
-            int remaining = petFoodNOMNOMNOM.FeedPower;
+            int remaining = petFoodNOMNOMNOM.FeedPower * multiplier;
 
             if (type == AbilityType.Second)
-                remaining = (int)(petFoodNOMNOMNOM.FeedPower * 0.702025);
+                remaining = (int)(petFoodNOMNOMNOM.FeedPower * 0.702025 * multiplier);
             if (type == AbilityType.Third)
-                remaining = (int)(petFoodNOMNOMNOM.FeedPower * 0.3240117);
+                remaining = (int)(petFoodNOMNOMNOM.FeedPower * 0.3240117 * multiplier);
 
             if (Level == pet.MaximumLevel || Level == 100) return;
 

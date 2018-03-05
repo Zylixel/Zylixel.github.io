@@ -184,19 +184,32 @@ namespace wServer.realm
         {
             if (player1.Client.Account.Rank == 2 || player2.Client.Account.Rank == 2)
             {
-                DialogPacket packet = new DialogPacket
-                {
-                    Title = "Trade Error",
-                    Description = $"Moderators cannot trade with other players"
-                };
-
-                finished = true;
-                TradingPlayers.Remove(player1);
-                TradingPlayers.Remove(player2);
-
-                player1.Client.SendPacket(packet);
-                player2.Client.SendPacket(packet);
+                TradeError("Moderators cannot trade with other players");
                 return;
+            }
+
+            for (int i = 0; i < player1Trades.Length; i++)
+            {
+                if (player1Trades[i])
+                {
+                    if (player1.Inventory[i].Secret)
+                    {
+                        TradeError($"You cannot trade {player1.Inventory[i].ObjectId}");
+                        return;
+                    }
+                }
+            }
+
+            for (int i = 0; i < player2Trades.Length; i++)
+            {
+                if (player2Trades[i])
+                {
+                    if (player2.Inventory[i].Secret)
+                    { 
+                    TradeError($"You cannot trade {player2.Inventory[i].ObjectId}");
+                    return;
+                    }
+                }
             }
 
             if (!InventoryFull())
@@ -264,12 +277,12 @@ namespace wServer.realm
             });
         }
 
-        private void TradeError()
+        private void TradeError(string text = "Unknown Error")
         {
-            TradeDonePacket packet = new TradeDonePacket
+            DialogPacket packet = new DialogPacket
             {
-                Result = 1,
-                Message = "{\"key\":\"server.trade_error\"}"
+                Title = "Trade Error",
+                Description = text
             };
 
             finished = true;

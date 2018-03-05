@@ -1059,6 +1059,11 @@ namespace wServer.realm.commands
                 }
                 int slot = Convert.ToInt32(args[0]) + 3;
                 Item item = player.Inventory[slot];
+                if (item.Secret)
+                {
+                    player.SendDialogError($"Cannot Sell {item.ObjectId}");
+                    return false;
+                }
 
                 if (Merchant.checkItem(player.Inventory[slot]))
                 {
@@ -1082,9 +1087,9 @@ namespace wServer.realm.commands
                     }
                     return true;
                 }
+                player.SendDialogError($"Cannot Sell {item.ObjectId}");
+                return false;
             }
-        player.SendDialogError("You cannot sell this item!");
-        return false;
         }
     }
     

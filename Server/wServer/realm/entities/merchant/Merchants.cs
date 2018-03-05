@@ -17,7 +17,7 @@ namespace wServer.realm.entities.merchant
         private const int BuyNoFame = 6;
         private const int BuyNoGold = 9;
         private const int MerchantSize = 100;
-        private const int ClothPrice = 50;
+        private const int ClothPrice = 25;
 
         private bool _playerMarket;
         private int _tickcount;

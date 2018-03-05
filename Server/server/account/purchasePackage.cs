@@ -33,7 +33,8 @@ namespace server.account
                     }
 
                     JsonSerializer s = new JsonSerializer();
-                    var contents = s.Deserialize<PackageContent>(new JsonTextReader(new StringReader(package.Contents)));
+                    //var contents = s.Deserialize<PackageContent>(new JsonTextReader(new StringReader(package.Contents)));
+                    var contents = package.Contents;
 
                     Account acc = db.Verify(Query["guid"], Query["password"], Program.GameData);
 
@@ -44,47 +45,39 @@ namespace server.account
                             wtr.Write("<Error>Not enough gold.<Error/>");
                             return;
                         }
+                        
+                        string hasGifts = "";
+                        Dictionary<string, int> itemDic = new Dictionary<string, int>();
+                        List<int> gifts = acc.Gifts;
+                        gifts.Add(Convert.ToInt32(contents));
 
                         var cmd = db.CreateQuery();
-
-                        if (contents.items?.Count > 0)
+                        cmd.CommandText = "SELECT gifts FROM accounts WHERE id=@accId;";
+                        cmd.Parameters.AddWithValue("@accId", acc.AccountId);
+                        using (var rdr = cmd.ExecuteReader())
                         {
-                            foreach (var i in contents.items)
+                            if (rdr.HasRows)
                             {
-                                Dictionary<string, int> itemDic = new Dictionary<string, int>();
-                                List<int> gifts = acc.Gifts;
-                                gifts.Add(i);
-
-                                cmd = db.CreateQuery();
-                                cmd.CommandText =
-                                    "UPDATE accounts SET gifts=@gifts WHERE uuid=@uuid AND password=SHA1(@password);";
-                                cmd.Parameters.AddWithValue("@gifts", Utils.GetCommaSepString<int>(gifts.ToArray()));
-                                cmd.Parameters.AddWithValue("@uuid", Query["guid"]);
-                                cmd.Parameters.AddWithValue("@password", Query["password"]);
-                                cmd.ExecuteNonQuery();
+                                rdr.Read();
+                                hasGifts = rdr.GetString("gifts");
+                                if (!hasGifts.IsNullOrWhiteSpace())
+                                {
+                                    //Already has package
+                                    return;
+                                }
+                                rdr.Close();
                             }
-                        }
-
-                        if (contents.charSlots > 0)
-                        {
                             cmd = db.CreateQuery();
                             cmd.CommandText =
-                                "UPDATE accounts SET maxCharSlot=maxCharSlot + @amount WHERE uuid=@uuid AND password=SHA1(@password);";
-                            cmd.Parameters.AddWithValue("@amount", contents.charSlots);
+                                "UPDATE accounts SET gifts=@gifts WHERE uuid=@uuid AND password=SHA1(@password);";
+                            cmd.Parameters.AddWithValue("@gifts", Utils.GetCommaSepString<int>(gifts.ToArray()));
                             cmd.Parameters.AddWithValue("@uuid", Query["guid"]);
                             cmd.Parameters.AddWithValue("@password", Query["password"]);
-                            if (cmd.ExecuteNonQuery() == 0)
-                                return;
-                        }
+                            cmd.ExecuteNonQuery();
 
-                        if (contents.vaultChests > 0)
-                        {
-                            for (int j = 0; j < contents.vaultChests; j++)
-                                db.CreateChest(acc);
+                            db.UpdateCredit(acc, -package.Price);
+                            wtr.Write("<Success/>");
                         }
-
-                        db.UpdateCredit(acc, -package.Price);
-                        wtr.Write("<Success/>");
                     }
                 }
             }
