@@ -211,6 +211,7 @@ namespace wServer.realm.entities.player
             else newFame = 200 + (Experience - 200*1000)/1000;
             if (newFame == Fame) return;
             TryUpgrade();
+            Credits += 2 * (newFame - Fame);
             Fame = newFame;
             int newGoal;
             var state =
@@ -274,6 +275,7 @@ namespace wServer.realm.entities.player
 
         public bool EnemyKilled(Enemy enemy, int exp, bool killer)
         {
+            exp *= 2;
             if (enemy == Quest)
                 Owner.BroadcastPacket(new NotificationPacket
                 {

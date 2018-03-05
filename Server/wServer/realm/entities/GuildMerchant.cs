@@ -63,7 +63,6 @@ namespace wServer.realm.entities
                         }
                         else
                         {
-                            player.SendHelp("FUCK");
                             player.Client.SendPacket(new BuyResultPacket
                             {
                                 Message = "{\"key\":\"server.not_enough_fame\"}",

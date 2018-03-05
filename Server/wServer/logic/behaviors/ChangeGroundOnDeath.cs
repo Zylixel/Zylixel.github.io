@@ -34,7 +34,7 @@ namespace wServer.logic.behaviors
                 var w = e.Host.Owner;
                 var pos = new IntPoint((int) e.Host.X - (dist/2), (int) e.Host.Y - (dist/2));
                 if (w == null) return;
-                if (w is CourtOfBereavement) return;
+                if (w is CourtOfBereavement || w is Arena) return;
                 for (int x = 0; x < dist; x++)
                 {
                     for (int y = 0; y < dist; y++)

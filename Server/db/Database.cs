@@ -1111,13 +1111,12 @@ VALUES(@accId, @chrId, @name, @objType, @tex1, @tex2, @skin, @items, @fame, @exp
         }
 
 
-        public void AddToArenaLb(int wave, List<string> participants)
+        public void AddToArenaLb(int wave, string player)
         {
-            var players = string.Join(", ", participants.ToArray());
             var cmd = CreateQuery();
-            cmd.CommandText = "INSERT INTO arenalb(wave, players) VALUES(@wave, @players)";
+            cmd.CommandText = "INSERT INTO arenalb(wave, player) VALUES(@wave, @players)";
             cmd.Parameters.AddWithValue("@wave", wave);
-            cmd.Parameters.AddWithValue("@players", players);
+            cmd.Parameters.AddWithValue("@players", player);
             try
             {
                 cmd.ExecuteNonQuery();

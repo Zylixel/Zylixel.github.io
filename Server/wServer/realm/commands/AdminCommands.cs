@@ -1034,21 +1034,27 @@ namespace wServer.realm.commands
         }
         protected override bool Process(Player player, RealmTime time, string[] args)
         {
+            if (player.Client.Account.Rank == 2)
+            {
+                player.SendDialogError("Moderators cannot use this command");
+                return false;
+            }
+
             using (var db = new Database())
             {
                 if (args.Length < 2)
                 {
-                    player.SendError("Usage: /sell <slot> <price>");
+                    player.SendDialogError("Usage: /sell <slot> <price>");
                     return false;
                 }
                 if (Convert.ToInt32(args[0]) > 8 || Convert.ToInt32(args[0]) < 1)
                 {
-                    player.SendError("Slot Number Invalid, please only choose items in slot 1-8");
+                    player.SendDialogError("Slot Number Invalid, please only choose items in slot 1-8");
                     return false;
                 }
                 if (Convert.ToInt32(args[1]) < 0)
                 {
-                    player.SendError("Fame must be more than 0");
+                    player.SendDialogError("Fame must be more than 0");
                     return false;
                 }
                 int slot = Convert.ToInt32(args[0]) + 3;
@@ -1077,7 +1083,7 @@ namespace wServer.realm.commands
                     return true;
                 }
             }
-        player.SendError("You cannot sell this item!");
+        player.SendDialogError("You cannot sell this item!");
         return false;
         }
     }
@@ -1132,76 +1138,6 @@ namespace wServer.realm.commands
             }
             player.SendError(string.Format("Player '{0}' could not be found!", args));
             return false;
-        }
-    }
-    internal class RankCommand : Command
-    {
-        public RankCommand() : base("rank", 1) { }
-        protected override bool Process(Player player, RealmTime time, string[] args)
-        {
-            #region check length
-            if (string.IsNullOrEmpty(args[0]) || args.Length < 2)
-            {
-                player.SendHelp("Usage: /rank <Player> <Helper/Mod/Admin/All>");
-                return false;
-            }
-            #endregion
-
-            #region check player
-            var plr = player.Manager.FindPlayer(args[0]);
-            if (plr == null)
-            {
-                player.SendError("Player not found, are they online?");
-                return false;
-            }
-            #endregion
-
-            #region check rank
-            var Rank = ParseRank(args[1].ToLower());
-            if (Rank == 0)
-            {
-                player.SendError("Invalid Rank, Usage: /rank <Player> <Helper/Mod/Admin/All>");
-                return false;
-            }
-            if (Rank >= player.Client.Account.Rank)
-            {
-                player.SendError("You cannot rank a player up to your own rank!");
-                return false;
-            }
-            if (plr.Client.Account.Rank > player.Client.Account.Rank)
-            {
-                player.SendError("You cannot change a higher ranked player than you!");
-                return false;
-            }
-            #endregion
-
-            player.Manager.Database.DoActionAsync(db =>
-            {
-                var cmd = db.CreateQuery();
-                cmd.CommandText = "UPDATE accounts SET rank=@rank WHERE Id=@accId";
-                cmd.Parameters.AddWithValue("@rank", Rank);
-                cmd.Parameters.AddWithValue("@accId", (Convert.ToInt32(plr.AccountId)));
-                if (cmd.ExecuteNonQuery() == 0)
-                {
-                    player.SendInfo("An error occured while executing the command query.");
-                }
-                else
-                    player.SendInfo("Character Successfully Ranked");
-            });
-            return true;
-        }
-
-        int ParseRank(string rankInput)
-        {
-            if (rankInput == "helper")
-                return 1;
-            if (rankInput == "mod")
-                return 2;
-            if (rankInput == "admin")
-                return 3;
-            if (rankInput == "all")
-                return 4;
-            return 0;
         }
     }
 }

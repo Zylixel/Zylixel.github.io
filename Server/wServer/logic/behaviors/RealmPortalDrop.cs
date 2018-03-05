@@ -25,7 +25,7 @@ namespace wServer.logic.behaviors
 
         protected override void OnStateEntry(Entity host, RealmTime time, ref object state)
         {
-            if (host.Owner is CourtOfBereavement) return;
+            if (host.Owner is CourtOfBereavement || host.Owner is Arena) return;
             if (host.GetNearestEntity(100, 0x5e4b) != null) return;
             Entity opener = Entity.Resolve(host.Manager, "Realm Portal Opener");
             host.Owner.EnterWorld(opener);

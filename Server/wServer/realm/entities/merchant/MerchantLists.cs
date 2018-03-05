@@ -17,11 +17,13 @@ namespace wServer.realm.entities.merchant
         public static int[] AccessoryDyeList;
         public static int[] ClothingClothList;
         public static int[] ClothingDyeList;
+        public static int[] KeyList;
         public static int[] ZyList;
         public static List<int> accessoryDyeList = new List<int>();
         public static List<int> clothingDyeList = new List<int>();
         public static List<int> accessoryClothList = new List<int>();
         public static List<int> clothingClothList = new List<int>();
+        public static List<int> keyList = new List<int>();
         public static List<int> zyList = new List<int>();
 
         public static Dictionary<int, int> price = new Dictionary<int, int>();
@@ -92,12 +94,17 @@ namespace wServer.realm.entities.merchant
                 {
                     accessoryClothList.Add(item.Value.ObjectType);
                 }
+                if (item.Value.ObjectId.Contains("Key") && item.Value.Class == "Equipment" && !item.Value.DisplayId.Contains("Fragment") && !item.Value.ObjectId.Contains("Mystery"))
+                {
+                    keyList.Add(item.Value.ObjectType);
+                }
             }
 
             ClothingDyeList = clothingDyeList.ToArray();
             ClothingClothList = clothingClothList.ToArray();
             AccessoryClothList = accessoryClothList.ToArray();
             AccessoryDyeList = accessoryDyeList.ToArray();
+            KeyList = keyList.ToArray();
             ZyList = zyList.ToArray();
             if (CheckConfig.IsDebugOn())
                 Console.WriteLine("Merchat lists added.");

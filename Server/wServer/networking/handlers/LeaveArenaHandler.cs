@@ -28,7 +28,7 @@ namespace wServer.networking.handlers
                 Host = "",
                 Port = Program.Settings.GetValue<int>("port"),
                 GameId = World.NEXUS_ID,
-                Name = "nexus.Nexus",
+                Name = "Nexus",
                 Key = Empty<byte>.Array
             });
         }

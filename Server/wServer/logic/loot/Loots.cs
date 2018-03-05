@@ -55,7 +55,7 @@ namespace wServer.logic.loot
 
         public void Handle(Enemy enemy, RealmTime time)
         {
-            //if (enemy.Owner.Name == "Arena") return;
+            if (enemy.Owner.Name == "Arena") return;
             List<LootDef> consideration = new List<LootDef>();
 
             List<Item> sharedLoots = new List<Item>();

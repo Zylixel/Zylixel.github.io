@@ -277,7 +277,7 @@ namespace wServer.realm.commands
 
         protected override bool Process(Player player, RealmTime time, string[] args)
         {
-            if (CourtOfBereavement.canJoin)
+            if (CourtOfBereavement._waitforplayers)
             {
                 player.Client.Reconnect(new ReconnectPacket
                 {

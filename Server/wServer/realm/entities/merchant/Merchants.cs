@@ -15,6 +15,7 @@ namespace wServer.realm.entities.merchant
     public class Merchants : SellableObject
     {
         private const int BuyNoFame = 6;
+        private const int BuyNoGold = 9;
         private const int MerchantSize = 100;
         private const int ClothPrice = 50;
 
@@ -59,7 +60,10 @@ namespace wServer.realm.entities.merchant
 
         protected override bool TryDeduct(Player player)
         {
-            return player.Client.Account.Stats.Fame >= Price;
+            if (Currency == CurrencyType.Fame)
+                return player.Client.Account.Stats.Fame >= Price;
+            else
+                return player.Client.Account.Credits >= Price;
         }
 
         public override void Buy(Player player)
@@ -82,9 +86,10 @@ namespace wServer.realm.entities.merchant
                                 {
                                     player.Inventory[i] = Manager.GameData.Items[(ushort)MType];
 
-                                    player.CurrentFame =
-                                        player.Client.Account.Stats.Fame =
-                                            db.UpdateFame(player.Client.Account, -Price);
+                                    if (Currency == CurrencyType.Fame)
+                                        player.CurrentFame = player.Client.Account.Stats.Fame = db.UpdateFame(player.Client.Account, -Price);
+                                    else
+                                        player.Credits = player.Client.Account.Credits = db.UpdateCredit(player.Client.Account, -Price);
 
                                     if (_playerMarket) {
                                         _accId = db.GetMarketCharId(MType, Price);
@@ -132,11 +137,18 @@ namespace wServer.realm.entities.merchant
                     }
                     else
                     {
-                        player.Client.SendPacket(new BuyResultPacket
-                        {
-                            Result = BuyNoFame,
-                            Message = "{\"key\":\"server.not_enough_fame\"}"
-                        });
+                        if (Currency == CurrencyType.Fame)
+                            player.Client.SendPacket(new BuyResultPacket
+                            {
+                                Result = BuyNoFame,
+                                Message = "{\"key\":\"server.not_enough_fame\"}"
+                            });
+                        else
+                            player.Client.SendPacket(new BuyResultPacket
+                            {
+                                Result = BuyNoGold,
+                                Message = "{\"key\":\"server.not_enough_fame\"}"
+                            });
                     }
                 }
             });
@@ -197,7 +209,9 @@ namespace wServer.realm.entities.merchant
         {
             MType = -1;
             var list = MerchantLists.ZyList;
-            if (Owner.Map[(int)X, (int)Y].Region == TileRegion.Store_12)
+            if (Owner.Map[(int)X, (int)Y].Region == TileRegion.Store_1)
+                list = MerchantLists.KeyList;
+            else if (Owner.Map[(int)X, (int)Y].Region == TileRegion.Store_12)
                 list = MerchantLists.AccessoryDyeList;
             else if (Owner.Map[(int)X, (int)Y].Region == TileRegion.Store_13)
                 list = MerchantLists.ClothingClothList;
@@ -238,7 +252,7 @@ namespace wServer.realm.entities.merchant
                 MTime = Random.Next(2, 5);
 
                 Price = _playerMarket ? MerchantLists.price[MType] : ClothPrice;
-                Currency = CurrencyType.Fame;
+                Currency = list == MerchantLists.KeyList ? CurrencyType.Gold : CurrencyType.Fame;
                 
                 UpdateCount++;
                 return;

@@ -16,7 +16,7 @@ namespace wServer.logic.behaviors
 
         protected override void OnStateEntry(Entity host, RealmTime time, ref object state)
         {
-            if (host.Owner is CourtOfBereavement) return;
+            if (host.Owner is CourtOfBereavement || host.Owner is Arena) return;
             var piece = (ISetPiece)Activator.CreateInstance(Type.GetType(
                 "wServer.realm.setpieces." + name, true, true));
             piece.RenderSetPiece(host.Owner, new IntPoint((int)host.X, (int)host.Y));

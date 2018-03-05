@@ -87,7 +87,7 @@ namespace wServer.realm.entities
                     player.Client.SendPacket(new BuyResultPacket
                     {
                         Result = 9,
-                        Message = "{\"key\":\"server.not_enough_game\"}"
+                        Message = "{\"key\":\"server.not_enough_fame\"}"
                     });
                 }
             });

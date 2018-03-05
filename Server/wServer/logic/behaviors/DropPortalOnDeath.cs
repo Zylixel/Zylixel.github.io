@@ -46,8 +46,7 @@ namespace wServer.logic.behaviors
         {
             parent.Death += (sender, e) =>
             {
-                if (e.Host.Owner.Name == "Arena") return;
-                if (e.Host.Owner is CourtOfBereavement) return;
+                if (e.Host.Owner is CourtOfBereavement || e.Host.Owner is Arena) return;
                 if (new Random().Next(1, 100) <= percent)
                 {
                     Portal entity = objType == 0

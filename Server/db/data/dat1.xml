@@ -79421,37 +79421,6 @@ A power crystal will show me the right way. Forward to victory!\n\nSkin Class: S
 </Texture>
 <ShadowSize>0</ShadowSize>
 </Object>
-<Object type="0x977" id="Void Key">
-<DisplayId>Void Key</DisplayId>
-<Class>Equipment</Class>
-<Item/>
-<Texture>
-<File>lofiObj10</File>
-<Index>0x1e</Index>
-</Texture>
-<SlotType>10</SlotType>
-<Description>
-A key which opens the way to The Void. For testing purposes only!
-</Description>
-<Sound>use_key</Sound>
-<Consumable/>
-</Object>
-<Object type="0x0245" id="Cult Key">
-<DisplayId>Cult Key</DisplayId>
-<Class>Equipment</Class>
-<Item/>
-<Texture>
-<File>lofiObj10</File>
-<Index>0x1f</Index>
-</Texture>
-<SlotType>10</SlotType>
-<Description>
-A key which opens the way to the Cultist Hideout. For testing purposes only!
-</Description>
-<Sound>use_key</Sound>
-<Consumable/>
-<Activate id="LH Cult Portal">Create</Activate>
-</Object>
 <Object type="0x0244" id="Staff of Unholy Sacrifice">
 <Class>Equipment</Class>
 <Item/>
@@ -82112,28 +82081,28 @@ The solid honey on this ring renews its wearer with incredible energy.
     <Consumable/>
     <DisplayId>5000 Fame</DisplayId>
   </Object>
-  <Object type="0x620a" id="Death Arena Portal" ext="true">
+  <Object type="0x620a" id="Court of Bereavement Portal">
     <Class>Portal</Class>
     <IntergamePortal/>
     <DungeonName>Court Of Bereavement</DungeonName>
     <Texture>
-      <File>lofiObjBig</File>
-      <Index>0x139</Index>
+      <File>lofiObj9</File>
+      <Index>0x87</Index>
     </Texture>
     <DisplayId>Court Of Bereavement Portal</DisplayId>
   </Object>
-  <Object type="0x620b" id="Death Arena Key"  ext="true">
+  <Object type="0x620b" id="Court of Bereavement Key">
     <Class>Equipment</Class>
     <Item/>
     <Texture>
-      <File>lofiObj3</File>
-      <Index>0x3af</Index>
+      <File>lofiObj9</File>
+      <Index>0x88</Index>
     </Texture>
     <SlotType>10</SlotType>
     <Description>A key which opens a portal to the Court Of Bereavement</Description>
     <Sound>use_key</Sound>
     <Consumable/>
-    <Activate id="Death Arena Portal">Create</Activate>
+    <Activate id="Court of Bereavement Portal">Create</Activate>
     <feedPower>100</feedPower>
     <DisplayId>Court Of Bereavement Key</DisplayId>
   </Object>
@@ -82183,5 +82152,72 @@ The solid honey on this ring renews its wearer with incredible energy.
     <Friendly/>
     <NoMiniMap/>
   </Object>
-  
+  <Object type="0xd8c" id="Quest Chest Item">
+    <DisplayId>Quest Chest</DisplayId>
+    <Class>Equipment</Class>
+    <Item/>
+    <Texture>
+    <File>d3LofiObjEmbed</File>
+    <Index>0x10</Index>
+    </Texture>
+    <SlotType>10</SlotType>
+    <Description>
+    An old looking chest from the Tinkerer's vault. It contains valuable items.
+    </Description>
+    <Consumable/>
+    <Soulbound/>
+    <Activate objectId="Quest Chest">CreateChest</Activate>
+    <ExtraTooltipData>
+    <EffectInfo name="Info" description="Only usable in the Vault. Use to spawn a destructible chest containing rewards."/>
+    </ExtraTooltipData>
+    <feedPower>200</feedPower>
+    <BagType>8</BagType>
+  </Object>
+<Object type="0xd8e" id="Epic Quest Chest Item">
+    <DisplayId>Epic Quest Chest</DisplayId>
+    <Class>Equipment</Class>
+    <Item/>
+    <Texture>
+    <File>d3LofiObjEmbed</File>
+    <Index>0x12</Index>
+    </Texture>
+    <SlotType>10</SlotType>
+    <Description>
+    A rich looking chest from the Tinkerer's vault. It contains wonderful items.
+    </Description>
+    <Consumable/>
+    <Soulbound/>
+    <Activate objectId="Epic Quest Chest" onlyInVault="1">CreateChest</Activate>
+    <ExtraTooltipData>
+    <EffectInfo name="Info" description="Only usable in the Vault. Use to spawn a destructible chest containing rewards."/>
+    </ExtraTooltipData>
+    <feedPower>200</feedPower>
+    <BagType>8</BagType>
+  </Object>
+  <Object type="0xd8d" id="Quest Chest">
+    <DisplayId>Quest Chest</DisplayId>
+    <Class>Character</Class>
+    <Enemy/>
+    <Texture>
+    <File>d3LofiObjEmbed</File>
+    <Index>0x11</Index>
+    </Texture>
+    <MaxHitPoints>2500</MaxHitPoints>
+    <Defense>0</Defense>
+    <Size>140</Size>
+    <XpMult>51.2821</XpMult>
+  </Object>
+  <Object type="0xd8f" id="Epic Quest Chest">
+    <DisplayId>Quest Chest</DisplayId>
+    <Class>Character</Class>
+    <Enemy/>
+    <Texture>
+    <File>d3LofiObjEmbed</File>
+    <Index>0x13</Index>
+    </Texture>
+    <MaxHitPoints>5000</MaxHitPoints>
+    <Defense>0</Defense>
+    <Size>140</Size>
+    <XpMult>153.8462</XpMult>
+  </Object>
 </Objects>

@@ -115,7 +115,7 @@ namespace wServer.realm
 
         public void AcceptTrade(Player sender, AcceptTradePacket pkt)
         {
-            if(sender == player1)
+            if (sender == player1)
             {
                 if (pkt.MyOffers.SequenceEqual(player1Trades) && pkt.YourOffers.SequenceEqual(player2Trades))
                 {
@@ -182,6 +182,23 @@ namespace wServer.realm
 
         private async void Trade()
         {
+            if (player1.Client.Account.Rank == 2 || player2.Client.Account.Rank == 2)
+            {
+                DialogPacket packet = new DialogPacket
+                {
+                    Title = "Trade Error",
+                    Description = $"Moderators cannot trade with other players"
+                };
+
+                finished = true;
+                TradingPlayers.Remove(player1);
+                TradingPlayers.Remove(player2);
+
+                player1.Client.SendPacket(packet);
+                player2.Client.SendPacket(packet);
+                return;
+            }
+
             if (!InventoryFull())
             {
                 List<Item> toTakeFromPlayer1 = new List<Item>();

@@ -20,17 +20,7 @@ namespace wServer.networking.handlers
             {
                 if (packet.Currency == 1)
                 {
-                    client.Player.CurrentFame = client.Account.Stats.Fame = db.UpdateFame(client.Account, -500);
-                    client.Player.UpdateCount++;
-                }
-                else
-                {
-                    client.Player.Credits = client.Account.Credits = db.UpdateCredit(client.Account, -50);
-                    client.SendPacket(new BuyResultPacket
-                    {
-                        Result = 0,
-                        Message = "{server.buy_success}"
-                    });
+                    client.Player.CurrentFame = client.Account.Stats.Fame = db.UpdateFame(client.Account, -50);
                     client.Player.UpdateCount++;
                 }
             }

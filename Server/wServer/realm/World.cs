@@ -52,9 +52,9 @@ namespace wServer.realm
             ShowDisplays = true;
             MaxPlayers = -1;
 
-            //Mark world for removal after 2 minutes if the 
+            //Mark world for removal after 1 minute if the 
             //world is a dungeon and if no players in there;
-            Timers.Add(new WorldTimer(120 * 1000, (w, t) =>
+            Timers.Add(new WorldTimer(60 * 1000, (w, t) =>
             {
                 canBeClosed = true;
                 if (NeedsPortalKey)
@@ -209,29 +209,6 @@ namespace wServer.realm
             }
         }
 
-        //public void FromJsonMap(string file)
-        //{
-        //    if (File.Exists(file))
-        //    {
-        //        var wmap = Json2Wmap.Convert(File.ReadAllText(file));
-
-        //        FromWorldMap(new MemoryStream(wmap));
-        //    }
-        //    else
-        //    {
-        //        throw new FileNotFoundException("Json file not found!", file);
-        //    }
-        //}
-
-        //public void FromJsonStream(Stream dat)
-        //{
-        //    byte[] data = { };
-        //    dat.Read(data, 0, (int)dat.Length);
-        //    var json = Encoding.ASCII.GetString(data);
-        //    var wmap = Json2Wmap.Convert(json);
-        //    FromWorldMap(new MemoryStream(wmap));
-        //} //not working
-
         public virtual int EnterWorld(Entity entity)
         {
             var player = entity as Player;
@@ -239,6 +216,7 @@ namespace wServer.realm
             {
                 try
                 {
+                    player.canChangePetSkin = true;
                     player.Id = GetNextEntityId();
                     entity.Init(this);
                     Players.TryAdd(player.Id, player);
@@ -504,6 +482,22 @@ namespace wServer.realm
             Timers.Clear();
             EnemiesCollision = null;
             PlayersCollision = null;
+        }
+
+        public int trueRandom() //Not really 'true' but semi-patches a bug where spamming items gives the same seed
+        { //Uses Variables such as players in world, players X and Y, items in inventorys, and time
+            float ret = Players.Count;
+            foreach (KeyValuePair<int, Player> i in Players)
+            {
+                ret += i.Value.X + i.Value.Y;
+                for (var j = 0; j < i.Value.Inventory.Length; j++)
+                {
+                    if (i.Value.Inventory[j] != null)
+                        ret += i.Value.Inventory[j].ObjectType;
+                }
+            }
+            ret /= DateTime.Now.Millisecond;
+            return (int)ret;
         }
     }
 

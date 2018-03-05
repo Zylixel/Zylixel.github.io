@@ -382,6 +382,7 @@
     <Compile Include="networking\NetworkHandler.cs" />
     <Compile Include="networking\svrPackets\ArenaDeathPacket.cs" />
     <Compile Include="networking\svrPackets\ArenaNextWavePacket.cs" />
+    <Compile Include="networking\svrPackets\DialogPacket.cs" />
     <Compile Include="networking\svrPackets\PasswordPromtPacket.cs" />
     <Compile Include="networking\svrPackets\QuestFetchResponsePacket.cs" />
     <Compile Include="networking\svrPackets\QuestRedeemResponsePacket.cs" />
@@ -707,6 +708,8 @@
     <EmbeddedResource Include="realm\worlds\maps\GodsNexus.jm" />
     <EmbeddedResource Include="realm\worlds\maps\CrawlingDepths.jm" />
     <EmbeddedResource Include="realm\worlds\maps\ClothBazaar.jm" />
+    <EmbeddedResource Include="realm\worlds\maps\arena1.jm" />
+    <EmbeddedResource Include="realm\worlds\maps\arena2.jm" />
     <None Include="wServer.cfg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

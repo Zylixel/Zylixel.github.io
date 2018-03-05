@@ -7,6 +7,7 @@ using wServer.logic;
 using wServer.networking;
 using wServer.networking.cliPackets;
 using wServer.networking.svrPackets;
+using wServer.realm.worlds;
 using FailurePacket = wServer.networking.svrPackets.FailurePacket;
 
 #endregion
@@ -519,32 +520,28 @@ namespace wServer.realm.entities.player
 
         public void Death(string killer, ObjectDesc desc = null)
         {
-            if (CheckBrokenAmulet(MathsUtils.GenerateProb(100)))
-                return;
-            if (CheckNotBrokenAmulet())
-                return;
             if (_dying) return;
             _dying = true;
-            var killPlayer = true;
 
             switch (Owner.Name)
             {
                 case "Arena":
                     {
-                        Client.SendPacket(new ArenaDeathPacket
-                        {
-                            RestartPrice = 100
-                        });
                         HP = Client.Character.MaxHitPoints;
-                        ApplyConditionEffect(new ConditionEffect
+                        Client.Reconnect(new ReconnectPacket
                         {
-                            Effect = ConditionEffectIndex.Invulnerable,
-                            DurationMS = -1
+                            Host = "",
+                            Port = Program.Settings.GetValue<int>("port"),
+                            GameId = World.NEXUS_ID,
+                            Name = "Nexus",
+                            Key = Empty<byte>.Array
                         });
                         return;
                     }
             }
 
+            if (CheckBrokenAmulet(MathsUtils.GenerateProb(100)) || CheckNotBrokenAmulet())
+                return;
 
             if (Client.Stage == ProtocalStage.Disconnected || _resurrecting)
                 return;
@@ -565,49 +562,43 @@ namespace wServer.realm.entities.player
             {
                 case "":
                 case "Unknown":
-                    killPlayer = false;
-                    break;
-
+                    Client.Disconnect();
+                    return;
                 default:
-                    announceDeath(killer);
+                    if (desc != null)
+                        announceDeath(desc.ObjectId);
+                    else
+                        announceDeath(killer);
                     break;
             }
-
-            if (killPlayer)
+            try
             {
-                try
+                Manager.Database.DoActionAsync(db =>
                 {
-                    Manager.Database.DoActionAsync(db =>
+                    Client.Character.Dead = true;
+                    SaveToCharacter();
+                    db.SaveCharacter(Client.Account, Client.Character);
+                    db.Death(Manager.GameData, Client.Account, Client.Character, killer);
+                });
+                if (Owner.Id != World.TEST_ID)
+                {
+                    Client.SendPacket(new DeathPacket
                     {
-                        Client.Character.Dead = true;
-                        SaveToCharacter();
-                        db.SaveCharacter(Client.Account, Client.Character);
-                        db.Death(Manager.GameData, Client.Account, Client.Character, killer);
+                        AccountId = AccountId,
+                        CharId = Client.Character.CharacterId,
+                        Killer = killer,
+                        Obf0 = -1,
+                        Obf1 = -1
                     });
-                    if (Owner.Id != World.TEST_ID)
-                    {
-                        Client.SendPacket(new DeathPacket
-                        {
-                            AccountId = AccountId,
-                            CharId = Client.Character.CharacterId,
-                            Killer = killer,
-                            Obf0 = -1,
-                            Obf1 = -1
-                        });
-                        Owner.Timers.Add(new WorldTimer(1000, (w, t) => Client.Disconnect()));
-                        Owner.LeaveWorld(this);
-                    }
-                    else
-                        Client.Disconnect();
+                    Owner.Timers.Add(new WorldTimer(1000, (w, t) => Client.Disconnect()));
+                    Owner.LeaveWorld(this);
                 }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                }
+                else
+                    Client.Disconnect();
             }
-            else
+            catch (Exception e)
             {
-                Client.Disconnect();
+                Console.WriteLine(e);
             }
         }
 

@@ -14,11 +14,11 @@ namespace wServer.realm.worlds
 {
     public class CourtOfBereavement : World
     {
-        private bool _ready;
-        private bool _waitforplayers = true;
+        public static bool _waitforplayers = true;
         private bool _waiting;
-        public int Wave = 1;
-        public static bool canJoin = true;
+        public int Wave = 0;
+        private List<IntPoint> _outerSpawn = new List<IntPoint>();
+        private List<IntPoint> _centralSpawn = new List<IntPoint>();
 
         public CourtOfBereavement()
         {
@@ -29,17 +29,38 @@ namespace wServer.realm.worlds
 
         protected override void Init()
         {
-            LoadMap("wServer.realm.worlds.maps.arena.wmap", MapType.Wmap);
+            LoadMap($"wServer.realm.worlds.maps.arena{new Random().Next(1, 2)}.jm", MapType.Json);
+            Wave = 0;
+            _waitforplayers = true;
 
-            canJoin = true;
+            // setup spawn regions
+            for (int x = 0; x < Map.Width; x++)
+                for (int y = 0; y < Map.Height; y++)
+                {
+                    if (Map[x, y].Region == TileRegion.Arena_Central_Spawn)
+                        _centralSpawn.Add(new IntPoint(x, y));
 
-            Timers.Add(new WorldTimer(60000, (world, t) =>
+                    if (Map[x, y].Region == TileRegion.Arena_Edge_Spawn)
+                        _outerSpawn.Add(new IntPoint(x, y));
+                }
+
+            Timers.Add(new WorldTimer(30000, (world, t) =>
             {
                 _waitforplayers = false;
-                canJoin = false;
             }));
             
-            InformPlayers(true);
+            foreach (Client i in Manager.Clients.Values)
+            {
+                i.SendPacket(new TextPacket
+                {
+                    BubbleTime = 0,
+                    Stars = -1,
+                    Name = "@ANNOUNCEMENT",
+                    Text = "A interdimensional portal to the Court Of Bereavement has opened! Type /court to join!"
+                });
+            }
+
+            InformPlayers();
         }
 
         private readonly string[] _gods =
@@ -51,15 +72,15 @@ namespace wServer.realm.worlds
             "Archdemon Malphas", "Limon the Sprite God",
             "Lord Ruthven", "Septavius the Ghost God", "Stheno the Snake Queen", "Arachna the Spider Queen", "Oryx the Mad God 1"
         };
-        private readonly string[] _bosses2 =
+        private readonly string[] _bosses10 =
         {
             "Tomb Defender", "Tomb Attacker", "Tomb Support", "Crystal Prisoner", "Grand Sphinx", 
             "Oryx the Mad God 2", "Thessal the Mermaid Goddess"
         };
-        private readonly string[] _bosses3 =
+        private readonly string[] _bosses20 =
         {
             "shtrs the forgotten king", "shtrs Bridge Sentinel", "Murderous Megamoth", "Son of Arachna",
-            "Oryx the Mad God 3", //"Keeper Boss Anchor"
+            "Oryx the Mad God 3"
         };
 
         public bool OutOfBounds(float x, float y)
@@ -69,54 +90,80 @@ namespace wServer.realm.worlds
             return true;
         }
         
-        public void InformPlayers(bool firstTime)
+        public void InformPlayers()
         {
-            if (firstTime)
-            {
-                foreach (Client i in Manager.Clients.Values)
-                {
-                    i.SendPacket(new TextPacket
-                    {
-                        BubbleTime = 0,
-                        Stars = -1,
-                        Name = "@ANNOUNCEMENT",
-                        Text = "A interdimensional portal to the Court Of Bereavement has opened! Type /court to join!"
-                    });
-                }
-            }
-
             if (_waitforplayers)
             {
                 foreach (KeyValuePair<int, Player> i in Players)
                 {
-                    i.Value.Client.SendPacket(new TextPacket
-                    {
-                        BubbleTime = 0,
-                        Stars = -1,
-                        Name = "Court Overseer",
-                        Text = "The battle will soon commence once the dungeon has closed"
-                    });
+                    SendMsg(i.Value, "The Battle will commence once the portal to this world has closed", "^Court Overseer");
                 }
+                Timers.Add(new WorldTimer(10000, (world, t) =>
+                {
+                    InformPlayers();
+                }));
             }
-            Timers.Add(new WorldTimer(15000, (world, t) =>
+        }
+
+        private void SendMsg(Player player, string message, string src = "")
+        {
+            player.Client.SendPacket(new TextPacket
             {
-                InformPlayers(false);
-            }));
+                Name = src,
+                ObjectId = -1,
+                Stars = -1,
+                BubbleTime = 0,
+                Recipient = "",
+                Text = message,
+                CleanText = ""
+            });
+        }
+
+        private readonly string[] _low =
+        {
+            "Undead Lair Key", "Snake Pit Key", "Sprite World Key", "Lab Key", "Abyss of Demons Key"
+        };
+        private readonly string[] _medium =
+        {
+            "Candy Key", "Cemetery Key", "Bella's Key", "Davy's Key", "Woodland Labyrinth Key", "The Crawling Depths Key"
+        };
+        private readonly string[] _high =
+        {
+            "Tomb of the Ancients Key", "Ocean Trench Key", "Shatters Key", "The Other Side Key", "Zylixel's Arena Key"//, "Quest Chest Item"
+        };
+        private readonly string[] _insane =
+        {
+            "Crystal Dagger of Evolution 1", "Crystal Blade of Evolution 1", "Crystal Wand of Evolution 1", "Court of Bereavement Key", "Mystery Pet Stone"//, "Epic Quest Chest Item"
+        };
+
+        private void giftItems(Player i, string[] list)
+        {
+            for (var r = 4; r < i.Inventory.Length; r++)
+            {
+                if (i.Inventory[r] == null)
+                {
+                    ushort Item = i.Manager.GameData.IdToObjectType[list[new Random(trueRandom()).Next(0, list.Length)]];
+                    i.Inventory[r] = i.Manager.GameData.Items[Item];
+                    SendMsg(i, "Congratulations on making it this far, here's a reward for you!", "^Court Overseer");
+                    break;
+                }
+                if (r == i.Inventory.Length-1)
+                    SendMsg(i, "Although you made it this far, I couldn't give you a reward because your inventory was full!", "^Court Overseer");
+            }
         }
 
         public override void Tick(RealmTime time)
         {
             base.Tick(time);
             CheckOutOfBounds();
-
+            
             if (!_waitforplayers)
             {
                 if (Enemies.Count == 0)
                 {
-                    if (_ready)
+                    if (!_waiting)
                     {
-                        if (_waiting) return;
-                        _ready = false;
+                        _waiting = true;
                         Wave++;
                         foreach (KeyValuePair<int, Player> i in Players)
                         {
@@ -124,25 +171,37 @@ namespace wServer.realm.worlds
                             {
                                 Type = Wave
                             });
-                            i.Value.Client.SendPacket(new TextPacket
+                            switch (Wave)
                             {
-                                BubbleTime = 0,
-                                Stars = -1,
-                                Name = "Court Overseer",
-                                Text = "The next wave will start in 5 seconds"
-                            });
+                                case 5: giftItems(i.Value, _low); break;
+                                case 10: SendMsg(i.Value, "Let's kick the difficulty up a notch!", "^Court Overseer"); break;
+                                case 15: giftItems(i.Value, _medium); break;
+                                case 20: SendMsg(i.Value, "Let's kick the difficulty up even more shall we?", "^Court Overseer"); break;
+                                case 25: giftItems(i.Value, _high); break;
+                                case 30: giftItems(i.Value, _insane); break;
+                            }
+                            SendMsg(i.Value, "The next wave will start in 5 seconds", "^Court Overseer");
                         }
-                        _waiting = true;
                         Timers.Add(new WorldTimer(5000, (world, t) =>
                         {
-                            _ready = false;
                             Spawn();
                             _waiting = false;
                         }));
                     }
-                    _ready = true;
                 }
             }
+        }
+
+        private void SpawnBoss(string[] list)
+        {
+            Random r = new Random();
+            ushort id = Manager.GameData.IdToObjectType[list[r.Next(0, list.Length)]];
+            var pos = _centralSpawn[r.Next(0, _centralSpawn.Count)];
+            var xloc = pos.X + 0.5f;
+            var yloc = pos.Y + 0.5f;
+            Entity enemy = Entity.Resolve(Manager, id);
+            enemy.Move(xloc, yloc);
+            EnterWorld(enemy);
         }
 
         private void Spawn()
@@ -152,7 +211,7 @@ namespace wServer.realm.worlds
                 List<string> enems = new List<string>();
                 Random r = new Random();
 
-                for (int i = 0; i < Wave/2 + 1; i++)
+                for (int i = 0; i < Wave/1.4 + 1; i++)
                 {
                     enems.Add(_gods[r.Next(0, _gods.Length)]);
                 }
@@ -161,52 +220,20 @@ namespace wServer.realm.worlds
                 foreach (string i in enems)
                 {
                     ushort id = Manager.GameData.IdToObjectType[i];
-                    int xloc = r2.Next(10, Map.Width) - 6;
-                    int yloc = r2.Next(10, Map.Height) - 6;
+                    var pos = _outerSpawn[r.Next(0, _outerSpawn.Count)];
+                    var xloc = pos.X + 0.5f;
+                    var yloc = pos.Y + 0.5f;
                     Entity enemy = Entity.Resolve(Manager, id);
                     enemy.Move(xloc, yloc);
                     EnterWorld(enemy);
                 }
 
-                if (Wave < 11)
-                {
-                    List<string> boss = new List<string> { _bosses[r.Next(0, _bosses.Length)] };
-                    foreach (string i in boss)
-                    {
-                        ushort id = Manager.GameData.IdToObjectType[i];
-                        int xloc = Map.Width / 2;
-                        int yloc = Map.Height / 2;
-                        Entity enemy = Entity.Resolve(Manager, id);
-                        enemy.Move(xloc, yloc);
-                        EnterWorld(enemy);
-                    }
-                }
-                if (Wave > 10 && Wave < 20)
-                {
-                    List<string> boss = new List<string> {_bosses2[r.Next(0, _bosses2.Length)]};
-                    foreach (string i in boss)
-                    {
-                        ushort id = Manager.GameData.IdToObjectType[i];
-                        int xloc = Map.Width / 2;
-                        int yloc = Map.Height / 2;
-                        Entity enemy = Entity.Resolve(Manager, id);
-                        enemy.Move(xloc, yloc);
-                        EnterWorld(enemy);
-                    }
-                }
-                if (Wave >= 20)
-                {
-                    List<string> boss = new List<string> { _bosses3[r.Next(0, _bosses3.Length)] };
-                    foreach (string i in boss)
-                    {
-                        ushort id = Manager.GameData.IdToObjectType[i];
-                        int xloc = Map.Width / 2;
-                        int yloc = Map.Height / 2;
-                        Entity enemy = Entity.Resolve(Manager, id);
-                        enemy.Move(xloc, yloc);
-                        EnterWorld(enemy);
-                    }
-                }
+                if (Wave < 10)
+                    SpawnBoss(_bosses);
+                else if (Wave >= 10 && Wave < 20)
+                    SpawnBoss(_bosses10);
+                else
+                    SpawnBoss(_bosses20);
 
             }
             catch (Exception ex)

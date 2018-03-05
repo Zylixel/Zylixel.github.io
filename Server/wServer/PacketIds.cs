@@ -94,6 +94,7 @@ namespace wServer
         QUESTREDEEMRESPONSE = 93, //slotid: 90
         PET_CHANGE_FORM_MSG = 42,
         KEY_INFO_REQUEST = 66,
-        KEY_INFO_RESPONSE = 19
+        KEY_INFO_RESPONSE = 19,
+        DIALOG = 70
     }
 }

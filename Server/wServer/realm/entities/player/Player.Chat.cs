@@ -65,6 +65,14 @@ namespace wServer.realm.entities.player
                 Text = text
             });
         }
+        public void SendDialogError(string text)
+        {
+            Client.SendPacket(new DialogPacket
+            {
+                Title = "An Error has Occured",
+                Description = text
+            });
+        }
         public void SendpsrText(string text)
         {
             Client.SendPacket(new TextPacket

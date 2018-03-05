@@ -61,7 +61,7 @@ namespace wServer.networking.handlers
                 if (item != null)
                 {
                     Container container;
-                    if (item.Soulbound)
+                    if (item.Soulbound || Client.Account.Rank == 2)
                     {
                         container = new Container(client.Player.Manager, soulBag, 1000*30, true)
                         {

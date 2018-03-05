@@ -92,14 +92,14 @@ namespace wServer.realm.entities.player
                 DurationMS = 0
             }
         };
-
-        public string TreasureFind;
-
+        
         public static int Oldstat { get; set; }
 
         public static Position Targetlink { get; set; }
         public int PetIdLookup { get; private set; }
         public Entity Ground { get; private set; }
+        
+        public bool canChangePetSkin;
 
         public static void ActivateHealHp(Player player, int amount, List<Packet> pkts)
         {
@@ -970,7 +970,7 @@ namespace wServer.realm.entities.player
                     }
                         break;
                     case ActivateEffects.RandomPetStone:
-                        int[] items =
+                        ushort[] items =
                         {
                             0x6073, //Gigacorn
                             0x6075, //Gship
@@ -984,59 +984,38 @@ namespace wServer.realm.entities.player
                             0x6118, //Bridge Sentinal
                             0x6119 //Twilight Archmage
                         };
-                        var succeed = false;
-                        for (var i = 5; i < Client.Player.Inventory.Length; i++)
-                            if (Client.Player.Inventory[i] == null)
-                            {
-                                Client.Player.Inventory[i] =
-                                    Client.Player.Manager.GameData.Items[
-                                        (ushort) items[new Random().Next(0, items.Length)]];
-                                succeed = true;
-                                endMethod = false;
-                                break;
-                            }
-                        if (succeed == false)
-                        {
-                            SendInfo("Please have one open slot to use this item.");
-                            endMethod = true;
-                        }
-                        Client.Player.UpdateCount++;
+                        Owner.Timers.Add(new WorldTimer(1, (w, t) => { //Delay so it won't delete it
+                            Inventory[pkt.SlotObject.SlotId] = Manager.GameData.Items[items[new Random(trueRandom(pkt)).Next(0, items.Length)]]; //Generates some very random numbers so you can't abuse the item
+                            Client.Save();
+                            UpdateCount++;
+                        }));
                         break;
                     case ActivateEffects.TreasureFind:
-                        var foundTreasure = false;
-                        var treasureItems = new List<int>();
-                        int[] treasureItemsExe;
-                        string[] noItems = { };
-                        foreach (var treasureitem in data.Items.Where(_ =>
-                            noItems.All(i => i != _.Value.ObjectId)))
+                        List<ushort> treasureItems = new List<ushort>();
+                        string TreasureFind = "The Marked Spot"; //Default
+                        foreach (var treasureitem in data.Items)
                         {
                             if (eff.treaureTier == 1) //Recieves Treasure Tier (Common, Uncommon, etc)
                             {
-                                TreasureFind = "The Marked Spot";
-
                                 #region ItemData
 
-                                if (treasureitem.Value.Tier <= 7 && treasureitem.Value.SlotType <= 3) //sword, dag, bow
+                                if (treasureitem.Value.Tier == -1 || treasureitem.Value.Tier > 7 || treasureitem.Value.SetType != -1) //No Uts or high level gear or STs
+                                    continue;
+                                if (treasureitem.Value.SlotType <= 3) //sword, dag, bow
                                     treasureItems.Add(treasureitem.Value.ObjectType);
-                                if (treasureitem.Value.Tier <= 7 && treasureitem.Value.SlotType == 8) //wand
+                                if (treasureitem.Value.SlotType >= 6 && treasureitem.Value.SlotType >= 8) //Leather, wand, Armor
                                     treasureItems.Add(treasureitem.Value.ObjectType);
-                                if (treasureitem.Value.Tier <= 7 && treasureitem.Value.SlotType == 17) //staff
+                                if (treasureitem.Value.SlotType == 17) //staff
                                     treasureItems.Add(treasureitem.Value.ObjectType);
-                                if (treasureitem.Value.Tier <= 7 && treasureitem.Value.SlotType == 24) //Katana
+                                if (treasureitem.Value.SlotType == 24) //Katana
                                     treasureItems.Add(treasureitem.Value.ObjectType);
                                 if (treasureitem.Value.Tier <= 4)
                                     if (treasureitem.Value.Usable && treasureitem.Value.MpCost >= 1) //Abilites
                                         treasureItems.Add(treasureitem.Value.ObjectType);
                                 if (treasureitem.Value.Tier <= 4 && treasureitem.Value.SlotType == 11) //Rings
                                     treasureItems.Add(treasureitem.Value.ObjectType);
-                                if (treasureitem.Value.Tier <= 7 && treasureitem.Value.SlotType == 6) //Leather
+                                if (treasureitem.Value.SlotType == 14) //Robe
                                     treasureItems.Add(treasureitem.Value.ObjectType);
-                                if (treasureitem.Value.Tier <= 7 && treasureitem.Value.SlotType == 7) //Armor
-                                    treasureItems.Add(treasureitem.Value.ObjectType);
-                                if (treasureitem.Value.Tier <= 7 && treasureitem.Value.SlotType == 14) //Robe
-                                    treasureItems.Add(treasureitem.Value.ObjectType);
-                                if (treasureitem.Value.Tier == -1)
-                                    treasureItems.Remove(treasureitem.Value.ObjectType); //No Uts
 
                                 #endregion
                             }
@@ -1044,27 +1023,23 @@ namespace wServer.realm.entities.player
                             {
                                 #region ItemData
 
-                                if (treasureitem.Value.Tier <= 11 && treasureitem.Value.SlotType <= 3) //sword, dag, bow
+                                if (treasureitem.Value.Tier == -1 || treasureitem.Value.Tier > 11 || treasureitem.Value.SetType != -1) //No Uts or high level gear or STs
+                                    continue;
+                                if (treasureitem.Value.SlotType <= 3) //sword, dag, bow
                                     treasureItems.Add(treasureitem.Value.ObjectType);
-                                if (treasureitem.Value.Tier <= 11 && treasureitem.Value.SlotType == 8) //wand
+                                if (treasureitem.Value.SlotType >= 6 && treasureitem.Value.SlotType >= 8) //Leather, wand, Armor
                                     treasureItems.Add(treasureitem.Value.ObjectType);
-                                if (treasureitem.Value.Tier <= 11 && treasureitem.Value.SlotType == 17) //staff
+                                if (treasureitem.Value.SlotType == 17) //staff
                                     treasureItems.Add(treasureitem.Value.ObjectType);
-                                if (treasureitem.Value.Tier <= 11 && treasureitem.Value.SlotType == 24) //Katana
+                                if (treasureitem.Value.SlotType == 24) //Katana
                                     treasureItems.Add(treasureitem.Value.ObjectType);
                                 if (treasureitem.Value.Tier <= 5)
                                     if (treasureitem.Value.Usable && treasureitem.Value.MpCost >= 1) //Abilites
                                         treasureItems.Add(treasureitem.Value.ObjectType);
-                                if (treasureitem.Value.Tier <= 11 && treasureitem.Value.SlotType == 11) //Rings
+                                if (treasureitem.Value.Tier <= 5 && treasureitem.Value.SlotType == 11) //Rings
                                     treasureItems.Add(treasureitem.Value.ObjectType);
-                                if (treasureitem.Value.Tier <= 11 && treasureitem.Value.SlotType == 6) //Leather
+                                if (treasureitem.Value.SlotType == 14) //Robe
                                     treasureItems.Add(treasureitem.Value.ObjectType);
-                                if (treasureitem.Value.Tier <= 11 && treasureitem.Value.SlotType == 7) //Armor
-                                    treasureItems.Add(treasureitem.Value.ObjectType);
-                                if (treasureitem.Value.Tier <= 11 && treasureitem.Value.SlotType == 14) //Robe
-                                    treasureItems.Add(treasureitem.Value.ObjectType);
-                                if (treasureitem.Value.Tier == -1)
-                                    treasureItems.Remove(treasureitem.Value.ObjectType); //No Uts
 
                                 #endregion
 
@@ -1086,42 +1061,24 @@ namespace wServer.realm.entities.player
                                 TreasureFind = "The Shatters Marked Spot";
                             }
                         }
-                        treasureItemsExe = treasureItems.ToArray();
+
                         var ground =
                             this.GetNearestEntity(3, Manager.GameData.IdToObjectType[TreasureFind]); //find treasure
                         if (ground == null) //If no treasure in sight
                         {
-                            SendInfo("Can't find any treasure...");
-                            break;
-                        }
-                        treasureItemsExe.Shuffle();
-                        foreach (var t1 in treasureItemsExe) //chooses item
-                        {
-                            for (var i = 3;
-                                i < Client.Player.Inventory.Length;
-                                i++) //Checks all open slots in inventory (not weapon slots)
+                            Client.SendPacket(new DialogPacket
                             {
-                                endMethod = false;
-                                if (Client.Player.Inventory[i] == null) //Nothing in inventory slot
-                                {
-                                    Owner.Timers.Add(new WorldTimer(1,
-                                        (w, t) => w.LeaveWorld(ground))); //Remove Treasure
-                                    Client.Player.Inventory[i] =
-                                        Client.Player.Manager.GameData.Items[(ushort) t1]; //Give Item
-                                    Client.Player.UpdateCount++; //Update Stuff
-                                    Client.Player.SaveToCharacter();
-                                    Client.Player.Client.Save();
-                                    foundTreasure = true; //Won't Send Open Slot Info
-                                    break; //Stops Checking Inventory
-                                }
-                            }
-                            if (!foundTreasure)
-                            {
-                                SendInfo("Please have one open slot to use this item.");
-                                endMethod = true; //Give Item Back
-                            }
-                            break;
+                                Title = "Can't find any treasure...",
+                                Description = $"You may have to move closer to {TreasureFind} or make sure you have the right shovel."
+                            });
+                            return true;
                         }
+
+                        Owner.LeaveWorld(ground); //Remove Ground
+                        Owner.Timers.Add(new WorldTimer(1, (w, t) => { //Delay so it won't delete it
+                            Inventory[pkt.SlotObject.SlotId] = Manager.GameData.Items[treasureItems[new Random(trueRandom(pkt)).Next(0, treasureItems.Count)]]; //Give Item
+                            Client.Save();
+                        }));
                         break;
                     case ActivateEffects.UnlockSkin:
                         if (!Client.Account.OwnedSkins.Contains(item.ActivateEffects[0].SkinType))
@@ -1155,16 +1112,40 @@ namespace wServer.realm.entities.player
                         Owner.EnterWorld(en);
                         Owner.Timers.Add(new WorldTimer(30 * 1000, (w, t) => { w.LeaveWorld(en); }));
                         break;
+                    case ActivateEffects.CreateChest:
+                        var chest = Resolve(Manager, eff.ObjectId);
+                        chest.Move(X, Y);
+                        Owner.EnterWorld(chest);
+                        break;
                     case ActivateEffects.PetSkin:
-                        SetPlayerOwner(this);
+                        if (!canChangePetSkin) {
+                            Client.SendPacket(new DialogPacket
+                            {
+                                Title = "Pet Stone Failed",
+                                Description = $"Please enter a new world before applying this Pet Stone."
+                            });
+                            return true;
+                        }
+                        if (Pet == null)
+                        {
+                            Client.SendPacket(new DialogPacket
+                            {
+                                Title = "Pet Stone Failed",
+                                Description = $"Please equip a pet before applying this Pet Stone"
+                            });
+                            return true;
+                        }
+                        canChangePetSkin = false;
+                        string newPetName = Inventory[pkt.SlotObject.SlotId].ObjectId.Replace(" Pet Stone", "");
                         Manager.Database.DoActionAsync(db =>
                         {
                             var cmd = db.CreateQuery();
                             cmd.CommandText =
-                                "Update pets SET skin=@petStone WHERE accId=@id AND petId=@petId";
-                            cmd.Parameters.AddWithValue("@petId", Client.Player.Pet.PetId);
+                                "Update pets SET skin=@petStone WHERE accId=@id AND petId=@petId; Update pets SET skinName=@skinName WHERE accId=@id AND petId=@petId;";
+                            cmd.Parameters.AddWithValue("@petId", Pet.PetId);
                             cmd.Parameters.AddWithValue("@id", AccountId);
                             cmd.Parameters.AddWithValue("@petStone", eff.PetType);
+                            cmd.Parameters.AddWithValue("@skinName", newPetName);
                             cmd.ExecuteNonQuery();
                         });
                         if (eff.newSize != 0)
@@ -1173,22 +1154,27 @@ namespace wServer.realm.entities.player
                                 var cmd = db.CreateQuery();
                                 cmd.CommandText =
                                     "Update pets SET size=@size WHERE accId=@id AND petId=@petId";
-                                cmd.Parameters.AddWithValue("@petId", Client.Player.Pet.PetId);
+                                cmd.Parameters.AddWithValue("@petId", Pet.PetId);
                                 cmd.Parameters.AddWithValue("@id", AccountId);
                                 cmd.Parameters.AddWithValue("@size", eff.newSize);
                                 cmd.ExecuteNonQuery();
                             });
-                        SendInfo(
-                            "Pet Skin activated! Enter a new world (Or relog) to see it!");
+                        Owner.LeaveWorld(Pet);
+                        Pet.Info.Skin = eff.PetType;
+                        Owner.Timers.Add(new WorldTimer(1, (w, t) => { //Delay so it loads correctly
+                            var pet = new Pet(Manager, Pet.Info, this);
+                            Owner.EnterWorld(pet);
+                            Client.SendPacket(new DialogPacket
+                            {
+                                Title = "Pet Stone Activated!",
+                                Description = $"Your pet changed into a {newPetName}"
+                            });
+                        }));
                         break;
                     case ActivateEffects.AddFame:
                         Manager.Database.DoActionAsync(db =>
                             db.UpdateFame(Client.Account, eff.Amount));
-                        Manager.Database.DoActionAsync(db =>
-                            db.SaveCharacter(Client.Account, Client.Character));
-                        Client.Player.UpdateCount++; //Update Stuff
-                        Client.Player.SaveToCharacter();
-                        Client.Player.Client.Save();
+                        Client.Save();
                         UpdateCount++;
                         break;
                     case ActivateEffects.CreatePet:
@@ -1223,7 +1209,6 @@ namespace wServer.realm.entities.player
                             "Deadwater Docks",
                             "Woodland Labyrinth",
                             "The Crawling Depths",
-                            "Treasure Cave Portal",
                             "Battle Nexus Portal",
                             "Belladonna's Garden Portal",
                             "Lair of Shaitan Portal"
@@ -1309,6 +1294,18 @@ namespace wServer.realm.entities.player
             if (n - (int) n * m >= 1 / Math.Pow(10, offset) * m)
                 return (int) (n * 10) / 10.0f;
             return (int) n;
+        }
+
+        public int trueRandom(UseItemPacket pkt) //Not really 'true' but semi-patches a bug where spamming items gives the same seed
+        { //Uses Variables such as mouse pos, object activated, players in world, player X and Y, items in inventory, and time
+            float ret = pkt.ItemUsePos.X + pkt.ItemUsePos.Y + pkt.SlotObject.ObjectId + Owner.Players.Count + X + Y;
+            for (var i = 0; i < Inventory.Length; i++)
+            {
+                if (Inventory[i] != null)
+                    ret += Inventory[i].ObjectType;
+            }
+            ret /= DateTime.Now.Millisecond;
+            return (int)ret;
         }
 
         private static bool IsSpecial(ushort objType)

@@ -325,7 +325,8 @@ public enum ActivateEffects
     PetSkin,
     RandomPetStone,
     TreasureFind,
-    UncommonTreasureFind
+    UncommonTreasureFind,
+    CreateChest
 }
 
 public class ActivateEffect
