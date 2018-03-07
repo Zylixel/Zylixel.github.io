@@ -30,6 +30,18 @@ namespace db
             "Vorck", "Vorv", "Yangu", "Yimi", "Zhiar"
         };
 
+        private static readonly int[] _Skins =
+        {
+            913, 846, 29809, 839, 899, 914, 837, 849, 852, 838, 853, 840, 854, 841, 842, 843, 844, 835, 855, 888, 29790, 845, 847, 848, 836, 0, 9013, 8976, 8855,
+            29771, 8969, 917, 8979, 9014, 29817, 8968, 9026, 29815, 8977, 9027, 29789, 29801, 29810, 898, 9028, 29770, 9029, 912, 29791, 29799, 29814, 9030,
+            29800, 903, 902, 8964, 29818, 883, 8965, 8967, 9032, 29811, 915, 885, 29816, 850, 905, 884, 9012, 29813, 916, 8966, 9031, 29808, 872, 904, 834,
+            5860, 901, 5861, 5866, 5865, 5864, 5863, 5862, 24728, 24729, 10959, 24868, 24849, 24864, 24865, 24850, 24855, 24854, 24856, 24857, 24867, 24852,
+            24853, 24866, 24851, 24858, 24880, 24872, 24882, 24873, 24871, 24881, 24883, 24884, 24885, 24886, 24887, 24888, 24869, 24870, 24833, 24836, 5859,
+            24839, 24840, 24841, 24848, 24834, 24835, 24832, 24837, 24889, 24838, 19385, 19152, 19153, 19154, 19155, 19158, 19157, 19156, 19159, 19370, 19371,
+            19372, 19373, 19374, 19375
+        };
+        private static readonly List<int> Skins = _Skins.ToList();
+
         private static string _host, _databaseName, _user, _password;
 
         private readonly SimpleSettings _settings = new SimpleSettings("wServer");
@@ -180,7 +192,7 @@ AND characters.charId=death.chrId;";
                     Chests = new List<VaultChest>()
                 },
                 Gifts = new List<int>(),
-                OwnedSkins = new List<int>(),
+                OwnedSkins = Skins,
                 IsGuestAccount = true
             };
         }
@@ -266,7 +278,7 @@ AND characters.charId=death.chrId;";
             if ((int) (long) cmd.ExecuteScalar() > 0) return null;
             cmd = CreateQuery();
             cmd.CommandText =
-                "INSERT INTO accounts(uuid, password, name, rank, namechosen, verified, guild, guildRank, guildFame, vaultCount, maxCharSlot, regTime, guest, banned, locked, ignored, gifts, isAgeVerified, ownedSkins, authToken) VALUES(@uuid, SHA1(@password), @randomName, @rank, 0, 0, 0, 0, 0, 1, 25, @regTime, @guest, 0, @empty, @empty, @empty, 1, '913, 846, 29809, 839, 899, 914, 837, 849, 852, 838, 853, 840, 854, 841, 842, 843, 844, 835, 855, 888, 29790, 845, 847, 848, 836, 0, 9013, 8976, 8855, 29771, 8969, 917, 8979, 9014, 29817, 8968, 9026, 29815, 8977, 9027, 29789, 29801, 29810, 898, 9028, 29770, 9029, 912, 29791, 29799, 29814, 9030, 29800, 903, 902, 8964, 29818, 883, 8965, 8967, 9032, 29811, 915, 885, 29816, 850, 905, 884, 9012, 29813, 916, 8966, 9031, 29808, 872, 904, 834, 5860, 901, 5861, 5866, 5865, 5864, 5863, 5862, 24728, 24729, 10959, 24868, 24849, 24864, 24865, 24850, 24855, 24854, 24856, 24857, 24867, 24852, 24853, 24866, 24851, 24858, 24880, 24872, 24882, 24873, 24871, 24881, 24883, 24884, 24885, 24886, 24887, 24888, 24869, 24870, 24833, 24836, 5859, 24839, 24840, 24841, 24848, 24834, 24835, 24832, 24837, 24889, 24838, 19385, 19152, 19153, 19154, 19155, 19158, 19157, 19156, 19159, 19370, 19371, 19372, 19373, 19374, 19375', @authToken);";
+                "INSERT INTO accounts(uuid, password, name, rank, namechosen, verified, guild, guildRank, guildFame, vaultCount, maxCharSlot, regTime, guest, banned, locked, ignored, gifts, isAgeVerified, ownedSkins, authToken) VALUES(@uuid, SHA1(@password), @randomName, @rank, 0, 0, 0, 0, 0, 1, 3, @regTime, @guest, 0, @empty, @empty, @empty, 1, '913, 846, 29809, 839, 899, 914, 837, 849, 852, 838, 853, 840, 854, 841, 842, 843, 844, 835, 855, 888, 29790, 845, 847, 848, 836, 0, 9013, 8976, 8855, 29771, 8969, 917, 8979, 9014, 29817, 8968, 9026, 29815, 8977, 9027, 29789, 29801, 29810, 898, 9028, 29770, 9029, 912, 29791, 29799, 29814, 9030, 29800, 903, 902, 8964, 29818, 883, 8965, 8967, 9032, 29811, 915, 885, 29816, 850, 905, 884, 9012, 29813, 916, 8966, 9031, 29808, 872, 904, 834, 5860, 901, 5861, 5866, 5865, 5864, 5863, 5862, 24728, 24729, 10959, 24868, 24849, 24864, 24865, 24850, 24855, 24854, 24856, 24857, 24867, 24852, 24853, 24866, 24851, 24858, 24880, 24872, 24882, 24873, 24871, 24881, 24883, 24884, 24885, 24886, 24887, 24888, 24869, 24870, 24833, 24836, 5859, 24839, 24840, 24841, 24848, 24834, 24835, 24832, 24837, 24889, 24838, 19385, 19152, 19153, 19154, 19155, 19158, 19157, 19156, 19159, 19370, 19371, 19372, 19373, 19374, 19375', @authToken);";
             cmd.Parameters.AddWithValue("@uuid", uuid);
             cmd.Parameters.AddWithValue("@randomName", Names[new Random().Next(0, Names.Length)]);
             cmd.Parameters.AddWithValue("@password", password);
@@ -420,7 +432,7 @@ AND characters.charId=death.chrId;";
                     IsAgeVerified = rdr.GetString("isAgeVerified").ToLower() == "true" ? 1 : 0,
                     AuthToken = rdr.GetString("authToken"),
                     NotAcceptedNewTos = rdr.GetInt32("acceptedNewTos") == 1 ? null : string.Empty,
-                    OwnedSkins = Utils.FromCommaSepString32(rdr.GetString("ownedSkins")).ToList()
+                    OwnedSkins = Skins
                 };
             }
             ReadStats(ret);

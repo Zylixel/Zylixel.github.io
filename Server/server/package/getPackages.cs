@@ -101,6 +101,7 @@ namespace server.package
         public string BgURL { get; set; }
         public DateTime EndDate { get; set; }
         public string Contents { get; set; }
+        public string usersClaimed { get; set; }
 
         internal static Package GetPackage(int id)
         {
@@ -125,7 +126,8 @@ namespace server.package
                         PackageId = rdr.GetInt32("id"),
                         Price = rdr.GetInt32("price"),
                         Quantity = rdr.GetInt32("quantity"),
-                        Contents = rdr.GetString("contents")
+                        Contents = rdr.GetString("contents"),
+                        usersClaimed = rdr.GetString("usersClaimed")
                     };
                 }
             }

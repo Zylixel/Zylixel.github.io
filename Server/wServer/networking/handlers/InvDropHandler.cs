@@ -54,6 +54,13 @@ namespace wServer.networking.handlers
                     if (con.Inventory[packet.SlotObject.SlotId] == null) return;
 
                     item = con.Inventory[packet.SlotObject.SlotId];
+                    if (item.Secret || Client.Account.Rank == 2)
+                    {
+                        client.Player.SendDialogError($"Cannot Drop {item.ObjectId} to prevent abuse");
+                        client.Save();
+                        client.Player.UpdateCount++;
+                        return;
+                    }
                     con.Inventory[packet.SlotObject.SlotId] = null;
                 }
                 entity.UpdateCount++;
@@ -61,17 +68,7 @@ namespace wServer.networking.handlers
                 if (item != null)
                 {
                     Container container;
-                    if (item.Secret || Client.Account.Rank == 2)
-                    {
-                        container = new Container(client.Player.Manager, soulBag, 1000*30, true)
-                        {
-                            BagOwners = new string[1] { client.Player.AccountId }
-                        };
-                    }
-                    else
-                    {
-                        container = new Container(client.Player.Manager, normBag, 1000*30, true);
-                    }
+                    container = new Container(client.Player.Manager, normBag, 1000*30, true);
                     float bagx = entity.X + (float) ((_invRand.NextDouble()*2 - 1)*0.5);
                     float bagy = entity.Y + (float) ((_invRand.NextDouble()*2 - 1)*0.5);
                     try

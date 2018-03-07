@@ -111,6 +111,8 @@ namespace wServer.realm.worlds
                     {
                         ushort Item = i.Value.Manager.GameData.IdToObjectType[list[new Random(trueRandom()).Next(0, list.Length)]];
                         i.Value.Inventory[r] = i.Value.Manager.GameData.Items[Item];
+                        i.Value.Client.Save();
+                        i.Value.UpdateCount++;
                         SendMsg(i, "Congratulations on making it this far, here's a reward for you!", "^Arena Overseer");
                         break;
                     }
@@ -177,7 +179,7 @@ namespace wServer.realm.worlds
                 List<string> enems = new List<string>();
                 Random r = new Random();
 
-                for (int i = 0; i < Wave + 1; i++)
+                for (int i = 0; i < Wave/2 + 1; i++)
                 {
                     enems.Add(_gods[r.Next(0, _gods.Length)]);
                 }

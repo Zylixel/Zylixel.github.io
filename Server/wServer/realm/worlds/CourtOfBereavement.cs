@@ -80,7 +80,7 @@ namespace wServer.realm.worlds
         private readonly string[] _bosses20 =
         {
             "shtrs the forgotten king", "shtrs Bridge Sentinel", "Murderous Megamoth", "Son of Arachna",
-            "Oryx the Mad God 3"
+            "Oryx the Mad God 3", "Zylixel"
         };
 
         public bool OutOfBounds(float x, float y)
@@ -148,6 +148,8 @@ namespace wServer.realm.worlds
                 {
                     ushort Item = i.Manager.GameData.IdToObjectType[list[new Random(trueRandom()).Next(0, list.Length)]];
                     i.Inventory[r] = i.Manager.GameData.Items[Item];
+                    i.Client.Save();
+                    i.UpdateCount++;
                     SendMsg(i, "Congratulations on making it this far, here's a reward for you!", "^Court Overseer");
                     break;
                 }
@@ -183,7 +185,7 @@ namespace wServer.realm.worlds
                                 case 20: giftItems(i.Value, _high); break;
                                 case 25: SendMsg(i.Value, "Let's kick the difficulty up even more shall we?", "^Court Overseer"); break;
                                 case 30: giftItems(i.Value, _insane); break;
-                                case 40: giftItems(i.Value, _what); break;
+                                //case 40: giftItems(i.Value, _what); break;
                             }
                             SendMsg(i.Value, "The next wave will start in 5 seconds", "^Court Overseer");
                         }

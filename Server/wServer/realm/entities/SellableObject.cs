@@ -62,8 +62,14 @@ namespace wServer.realm.entities
             {
                 if (ObjectType == 0x0505) //Vault chest
                 {
+                    if (player._buyCooldown > 0)
+                    {
+                        player.SendDialogError("You are buying vaults too fast, please slow down and re-enter the world if needed");
+                        return;
+                    }
                     if (TryDeduct(player))
                     {
+                        player._buyCooldown = 15;
                         VaultChest chest = db.CreateChest(player.Client.Account);
                         db.UpdateFame(player.Client.Account, -Price);
                         (Owner as Vault).AddChest(chest, this);

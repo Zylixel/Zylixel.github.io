@@ -173,12 +173,12 @@ namespace server.@char
                             "INSERT INTO unlockedclasses(accId, class, available) VALUES(@accId, @class, @restricted);";
                         xcmd.Parameters.AddWithValue("@accId", acc.AccountId);
                         xcmd.Parameters.AddWithValue("@class", s);
-                        xcmd.Parameters.AddWithValue("@restricted", s == "Wizard" ? "unrestricted" : "restricted");
+                        xcmd.Parameters.AddWithValue("@restricted", "unrestricted");
                         xcmd.ExecuteNonQuery();
                         ret.Add(new ClassAvailabilityItem
                         {
                             Class = s,
-                            Restricted = s == "Wizard" ? "unrestricted" : "restricted"
+                            Restricted = "unrestricted"
                         });
                     }
                 }

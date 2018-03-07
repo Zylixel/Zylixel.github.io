@@ -202,7 +202,6 @@
     <Compile Include="logic\db\BehaviorDb.Items.cs" />
     <Compile Include="logic\db\BehaviorDbShaitan.cs" />
     <Compile Include="logic\db\BehaviorDbBattleoftheNexus.cs" />
-    <Compile Include="logic\db\NexusGreeter.cs" />
     <Compile Include="logic\transitions\ChatTransition.cs" />
     <Compile Include="logic\transitions\EntitiesNotExistsTransition.cs" />
     <Compile Include="logic\behaviors\RealmPortalDrop.cs" />

@@ -113,6 +113,16 @@ namespace wServer.realm.entities.player
                 Text = text
             });
         }
+        public void SendStarText(string sender, int stars, string text)
+        {
+            Client.SendPacket(new TextPacket
+            {
+                BubbleTime = 0,
+                Stars = stars,
+                Name = sender,
+                Text = text
+            });
+        }
         public void SendGuild(string text)
         {
             Client.SendPacket(new TextPacket

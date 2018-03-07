@@ -42,7 +42,7 @@ namespace wServer.realm.commands
 
         protected override bool Process(Player player, RealmTime time, string[] args)
         {
-            var p = player.Manager.FindPlayer(args[1]);
+            var p = player.Manager.FindPlayer(args[0]);
             if (p == null)
             {
                 player.SendError("Player not found");
@@ -58,7 +58,6 @@ namespace wServer.realm.commands
             return true;
         }
     }
-
 
     internal class AddWorldCommand : Command
     {
@@ -1143,6 +1142,53 @@ namespace wServer.realm.commands
             }
             player.SendError(string.Format("Player '{0}' could not be found!", args));
             return false;
+        }
+    }
+    class LinkCommand : Command
+    {
+        public LinkCommand() : base("link", 2) { }
+
+        protected override bool Process(Player player, RealmTime time, string[] args)
+        {
+            if (player?.Owner == null)
+                return false;
+
+            var world = player.Owner;
+            if (world.Id < 0)
+            {
+                player.SendError("You cannot link this world.");
+                return false;
+            }
+
+            if (!player.Manager.Monitor.AddPortal(world))
+            {
+                player.SendError("Link already exists.");
+            }
+            return world.isLinked;
+        }
+    }
+    class UnLinkCommand : Command
+    {
+        public UnLinkCommand() : base("unlink", 2) { }
+
+        protected override bool Process(Player player, RealmTime time, string[] args)
+        {
+            if (player?.Owner == null)
+                return false;
+
+            var world = player.Owner;
+            if (world.Id < 0)
+            {
+                player.SendError("You cannot unlink this world.");
+                return false;
+            }
+            
+            if (!player.Manager.Monitor.RemovePortal(player.Owner))
+                player.SendError("Link not found.");
+            else
+                player.SendInfo("Link removed.");
+
+            return !world.isLinked;
         }
     }
 }

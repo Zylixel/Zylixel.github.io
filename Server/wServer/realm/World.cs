@@ -84,6 +84,7 @@ namespace wServer.realm
         public byte[] PortalKey { get; private set; }
         public bool PortalKeyExpired { get; private set; }
         public uint Seed { get; private set; }
+        public bool isLinked = false;
 
         public virtual bool NeedsPortalKey => false;
 
@@ -420,7 +421,7 @@ namespace wServer.realm
                 foreach (var i in Projectiles)
                     i.Value.Tick(time);
 
-                if (Players.Count != 0 || !canBeClosed || !IsDungeon()) return;
+                if (Players.Count != 0 || !canBeClosed || !IsDungeon() || isLinked) return;
                 var vault = this as Vault;
                 if (vault != null) Manager.RemoveVault(vault.AccountId);
                 Manager.RemoveWorld(this);

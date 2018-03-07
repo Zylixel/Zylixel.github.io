@@ -22,7 +22,6 @@ namespace wServer.logic.loot
 
     public class ItemLoot : ILootDef
     {
-        public int multiplier = 2;
         private readonly string item;
         private double probability;
 
@@ -37,7 +36,7 @@ namespace wServer.logic.loot
         public void Populate(RealmManager manager, Enemy enemy, Tuple<Player, int> playerDat,
             Random rand, string lootState, IList<LootDef> lootDefs)
         {
-            probability = 2 * probability;
+            probability = probability;
             if (probability > 1)
                 probability = 1;
             Lootstate = lootState;
@@ -113,7 +112,6 @@ namespace wServer.logic.loot
 
     public class TierLoot : ILootDef
     {
-        public int multiplier = 2;
         public static readonly int[] WeaponT = {1, 2, 3, 8, 17, 24};
         public static readonly int[] AbilityT = {4, 5, 11, 12, 13, 15, 16, 18, 19, 20, 21, 22, 23, 25};
         public static readonly int[] ArmorT = {6, 7, 14};
@@ -155,9 +153,6 @@ namespace wServer.logic.loot
         public void Populate(RealmManager manager, Enemy enemy, Tuple<Player, int> playerDat,
             Random rand, string lootState, IList<LootDef> lootDefs)
         {
-            probability = 2 * probability;
-            if (probability > 1)
-                probability = 1;
             Lootstate = lootState;
             if (playerDat != null) return;
             Item[] candidates = manager.GameData.Items

@@ -36,7 +36,7 @@ namespace wServer.realm.entities.merchant
             "Sauvignon Blanc", "Snake Oil", "Pollen Powder",
             "XP Booster Test", "Gravel"
         };
-        private static readonly string[] noShopCloths =
+        private static readonly string[] noShopStatic =
         {
             "Large Ivory Dragon Scale Cloth", "Small Ivory Dragon Scale Cloth",
             "Large Green Dragon Scale Cloth", "Small Green Dragon Scale Cloth",
@@ -48,7 +48,7 @@ namespace wServer.realm.entities.merchant
             "Large Mosaic Cloth", "Small Mosaic Cloth",
             "Large Spooky Cloth", "Small Spooky Cloth",
             "Large Flame Cloth", "Small Flame Cloth",
-            "Large Heavy Chainmail Cloth", "Small Heavy Chainmail Cloth",
+            "Large Heavy Chainmail Cloth", "Small Heavy Chainmail Cloth", "The Other Side Key", "Zylixel's Arena Key", "Court of Bereavement Key", "Ivory Wyvern Key"
         };
 
         public static void InitMerchatLists(XmlData data)
@@ -74,7 +74,7 @@ namespace wServer.realm.entities.merchant
                     }
                 }
             }
-            foreach (var item in data.Items)
+            foreach (var item in data.Items.Where(_ => noShopStatic.All(i => i != _.Value.ObjectId)))
             {
                 if (item.Value.Texture1 != 0 && item.Value.ObjectId.Contains("Clothing") && item.Value.Class == "Dye")
                 {

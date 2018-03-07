@@ -109,7 +109,7 @@ namespace wServer.logic
                     new State("begin"
                         ),
                     new State("die",
-                        new Suicide()
+                        new Decay()
                     )
                     )
             )
@@ -118,7 +118,7 @@ namespace wServer.logic
                     new State("begin"
                         ),
                     new State("die",
-                        new Suicide()
+                        new Decay()
                     )
                     )
             )
@@ -127,7 +127,7 @@ namespace wServer.logic
                     new State("begin"
                         ),
                     new State("die",
-                        new Suicide()
+                        new Decay()
                     )
                     )
             )

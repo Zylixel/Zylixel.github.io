@@ -50,7 +50,7 @@ namespace wServer.realm
             "Zylixel's Realm"
         };
 
-        public static List<string> CurrentRealmNames = new List<string>();
+        public static List<string> CurrentPortalNames = new List<string>();
 
         private Thread logic;
         private Thread network;

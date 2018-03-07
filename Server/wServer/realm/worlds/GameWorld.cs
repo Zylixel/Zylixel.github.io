@@ -22,8 +22,8 @@ namespace wServer.realm.worlds
             ClientWorldName = name;
             Background = 0;
             Difficulty = -1;
-            this._oryxPresent = oryxPresent;
-            this._mapId = mapId;
+            _oryxPresent = oryxPresent;
+            _mapId = mapId;
         }
 
         public Oryx Overseer { get; private set; }
@@ -46,7 +46,7 @@ namespace wServer.realm.worlds
         {
             string name = RealmManager.Realms[new Random().Next(RealmManager.Realms.Count)];
             RealmManager.Realms.Remove(name);
-            RealmManager.CurrentRealmNames.Add(name);
+            RealmManager.CurrentPortalNames.Add(name);
             return new GameWorld(mapId, name, oryxPresent);
         }
 

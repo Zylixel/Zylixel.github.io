@@ -59,12 +59,12 @@ namespace wServer.realm.worlds
         {
             foreach (var i in Manager.Monitor.portals)
             {
-                foreach (var j in RealmManager.CurrentRealmNames)
+                foreach (var j in RealmManager.CurrentPortalNames)
                 {
                     if (i.Value.Name.StartsWith(j))
                     {
                         if (i.Value.Name == j) i.Value.PortalName = i.Value.Name;
-                        i.Value.Name = j + " (" + i.Key.Players.Count + "/" + RealmManager.MAX_REALM_PLAYERS + ")";
+                        i.Value.Name = j + " (" + i.Key.Players.Count + ")";
                         i.Value.UpdateCount++;
                         break;
                     }

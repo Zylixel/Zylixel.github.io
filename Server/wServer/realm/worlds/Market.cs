@@ -6,7 +6,7 @@
         {
             Id = FMARKET;
             Name = "Market";
-            ClientWorldName = "Market";
+            ClientWorldName = "Player Market";
             Background = 2;
             AllowTeleport = true;
             Difficulty = -1;

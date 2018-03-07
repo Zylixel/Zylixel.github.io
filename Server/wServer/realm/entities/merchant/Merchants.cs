@@ -17,7 +17,7 @@ namespace wServer.realm.entities.merchant
         private const int BuyNoFame = 6;
         private const int BuyNoGold = 9;
         private const int MerchantSize = 100;
-        private const int ClothPrice = 25;
+        private const int ClothPrice = 50;
 
         private bool _playerMarket;
         private int _tickcount;
@@ -72,6 +72,11 @@ namespace wServer.realm.entities.merchant
             {
                 if (ObjectType == 0x01ca) //Merchant
                 {
+                    if (player._buyCooldown > 0)
+                    {
+                        player.SendDialogError("You are buying items too fast, please slow down and re-enter the world if needed");
+                        return;
+                    }
                     if (TryDeduct(player))
                     {
                         for (var i = 0; i < player.Inventory.Length; i++)

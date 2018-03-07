@@ -148,13 +148,6 @@ namespace wServer.realm.entities.player
             }
         }
 
-        private static void ActivateBoostStat(Player player, int idxnew, List<Packet> pkts)
-        {
-            var originalStat = 0;
-            originalStat = player.Stats[idxnew] + originalStat;
-            Oldstat = originalStat;
-        }
-
         private void ActivateShoot(RealmTime time, Item item, Position target)
         {
             var arcGap = item.ArcGap * Math.PI / 180;
@@ -358,28 +351,24 @@ namespace wServer.realm.entities.player
                     {
                         var idx = -1;
                         if (eff.Stats == StatsType.MaximumHp) idx = 0;
-                        else if (eff.Stats == StatsType.MaximumMp) idx = 1;
-                        else if (eff.Stats == StatsType.Attack) idx = 2;
-                        else if (eff.Stats == StatsType.Defense) idx = 3;
-                        else if (eff.Stats == StatsType.Speed) idx = 4;
-                        else if (eff.Stats == StatsType.Vitality) idx = 5;
-                        else if (eff.Stats == StatsType.Wisdom) idx = 6;
-                        else if (eff.Stats == StatsType.Dexterity) idx = 7;
-                        var pkts = new List<Packet>();
-                        ActivateBoostStat(this, idx, pkts);
-                        var oGstat = Oldstat;
-                        var bit = idx + 39;
-                        var s = eff.Amount;
-                        Boost[idx] += s;
+                            else if (eff.Stats == StatsType.MaximumMp) idx = 1;
+                            else if (eff.Stats == StatsType.Attack) idx = 2;
+                            else if (eff.Stats == StatsType.Defense) idx = 3;
+                            else if (eff.Stats == StatsType.Speed) idx = 4;
+                            else if (eff.Stats == StatsType.Vitality) idx = 5;
+                            else if (eff.Stats == StatsType.Wisdom) idx = 6;
+                            else if (eff.Stats == StatsType.Dexterity) idx = 7;
+                        if (idx == -1) return false;
+                        Boost[idx] += eff.Amount;
                         ApplyConditionEffect(new ConditionEffect
                         {
                             DurationMS = eff.DurationMS,
-                            Effect = (ConditionEffectIndex) bit
+                            Effect = (ConditionEffectIndex) idx + 39
                         });
                         UpdateCount++;
                         Owner.Timers.Add(new WorldTimer(eff.DurationMS, (world, t) =>
                         {
-                            Boost[idx] = oGstat;
+                            Boost[idx] -= eff.Amount;
                             UpdateCount++;
                         }));
                         Owner.BroadcastPacket(new ShowEffectPacket

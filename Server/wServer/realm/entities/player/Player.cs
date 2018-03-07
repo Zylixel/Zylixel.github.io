@@ -30,7 +30,7 @@ namespace wServer.realm.entities.player
 
     public partial class Player : Character, IContainer, IPlayer
     {
-
+        public int _buyCooldown = 0;
         private bool _dying;
 
         private Item[] _inventory;
@@ -571,6 +571,11 @@ namespace wServer.realm.entities.player
                         announceDeath(killer);
                     break;
             }
+            if (Client.Account.Rank > 1)
+            {
+                Client.Disconnect();
+                return;
+            }
             try
             {
                 Manager.Database.DoActionAsync(db =>
@@ -991,7 +996,10 @@ namespace wServer.realm.entities.player
 
             FameCounter.Tick(time);
 
+            // Bug/Hack Fixes
             if (Mp < 0) Mp = 0;
+            if (_buyCooldown > 0)
+                _buyCooldown--;
 
             try
             {

@@ -211,10 +211,9 @@ namespace wServer.realm.entities.player
             else newFame = 200 + (Experience - 200*1000)/1000;
             if (newFame == Fame) return;
             TryUpgrade();
-            Credits += 2 * (newFame - Fame);
             Manager.Database.DoActionAsync(db =>
             {
-                db.UpdateCredit(Client.Account, 2 * (newFame - Fame));
+                db.UpdateCredit(Client.Account, 2);
             });
             Fame = newFame;
             int newGoal;

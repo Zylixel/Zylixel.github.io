@@ -16,7 +16,7 @@ namespace wServer.realm
 
     public class PetLevel
     {
-        public int multiplier = 4;
+        public int multiplier = 1;
         private static readonly Dictionary<int, int> LevelCap = new Dictionary<int, int>(100)
         {
             {1, 20},
