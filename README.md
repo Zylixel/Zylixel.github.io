@@ -1,5 +1,5 @@
-# Welcome to the Thalia Realm Development Page
-## Thalia Realm might not have been here thanks to these people:
+# Welcome to the Zy's Realm Development Page
+## Zy's Realm might not have been here thanks to these people:
 
 - ossimc82/Fabian Fischer
 - C453
@@ -17,6 +17,6 @@
 - MikeRaarupBirk
 - thenired
 
-Thalia Realm is based off of FSOD, a RotMG private server source
+Zy's Realm is based off of FSOD, a RotMG private server source
 
-Thalia Realm's official server is [Frostz' Realm](https://discord.gg/HtdwsAc)
+Official server : [Frostz' Realm](https://discord.gg/HtdwsAc)
