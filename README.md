@@ -1,4 +1,5 @@
-Zy's Realm has been influenced greatly by these kind people:
+# Welcome to the Zy's Realm Development Page
+## Zy's Realm might not have been here thanks to these people:
 
 - ossimc82/Fabian Fischer
 - C453
@@ -16,4 +17,6 @@ Zy's Realm has been influenced greatly by these kind people:
 - MikeRaarupBirk
 - thenired
 
-Without them, this project would be seemingly impossible
+Zy's Realm is based off of FSOD, a RotMG private server source
+
+Official server : [Frostz' Realm](https://discord.gg/HtdwsAc)
