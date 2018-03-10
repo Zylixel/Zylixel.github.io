@@ -1,5 +1,6 @@
 ﻿#region
 
+using db;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,6 @@ using wServer.logic;
 using wServer.networking;
 using wServer.networking.cliPackets;
 using wServer.networking.svrPackets;
-using wServer.realm.worlds;
 using FailurePacket = wServer.networking.svrPackets.FailurePacket;
 
 #endregion
@@ -16,7 +16,7 @@ namespace wServer.realm.entities.player
 {
     internal interface IPlayer
     {
-        void Damage(int dmg, Entity chr);
+        void Damage(int dmg, Entity chr, bool forgiveHealthViolation);
         bool IsVisibleToEnemy();
     }
 
@@ -39,9 +39,11 @@ namespace wServer.realm.entities.player
         private float _mpRegenCounter;
         private bool _resurrecting;
 
-        public int CheckForDex = 0;
-        public int LastShootTime = -1;
-        public int ShootCounter = 0;
+        public int healthViolation = 0;
+
+        public int checkForDex = 0;
+        public int lastShootTime = Environment.TickCount;
+        public int shootCounter = 0;
 
         private byte[,] _tiles;
         private int _pingSerial;
@@ -287,11 +289,18 @@ namespace wServer.realm.entities.player
         public int MaximumHp { get; private set; }
         public ushort Dmg { get; private set; }
         public int AshCooldown { get; private set; }
-
-
-
-        public void Damage(int dmg, Entity chr)
+        
+        public bool isInvincible()
         {
+            if (HasConditionEffect(ConditionEffectIndex.Paused) || HasConditionEffect(ConditionEffectIndex.Stasis) || HasConditionEffect(ConditionEffectIndex.Invincible))
+                return true;
+            return false;
+        }
+        
+        public void Damage(int dmg, Entity chr, bool forgiveHealthViolation)
+        {
+            if (forgiveHealthViolation)
+                healthViolation = 0; // If the player recieves a damage function then the server has taken it's course, and we forgive the player
             if (CheckMantleResurrect())
                return;
 
@@ -996,36 +1005,8 @@ namespace wServer.realm.entities.player
 
             FameCounter.Tick(time);
 
-            // Bug/Hack Fixes
-            if (Mp < 0) Mp = 0;
-            if (_buyCooldown > 0)
-                _buyCooldown--;
+            checkforCheats(time);
 
-            try
-            {
-                if (Owner != null)
-                {
-                    SendUpdate(time);
-                    if (!Owner.IsPassable((int)X, (int)Y) && Owner.Name != "The Other Side")
-                    {
-                        Console.WriteLine($"Player {Name} No-Clipped at position: {X}, {Y}");
-                        Client.Player.SendError("Our server detected that you were Out-Of-Bounds.");
-                        Client.Reconnect(new ReconnectPacket
-                        {
-                            Host = "",
-                            Port = Program.Settings.GetValue<int>("port"),
-                            GameId = World.NEXUS_ID,
-                            Name = "Nexus",
-                            Key = Empty<byte>.Array
-                        });
-                    }
-                }
-            }
-
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
             try
             {
                 SendNewTick(time);

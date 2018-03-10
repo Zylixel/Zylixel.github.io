@@ -15,6 +15,35 @@ namespace wServer.networking.handlers
     {
         public override PacketID Id => PacketID.PLAYERSHOOT;
 
+        public void CheckShootSpeed(Item item)
+        {
+            if (Client.Player.Stats[7] > 110) return; //Becomes Unstable at that point
+            Client.Player.shootCounter++;
+
+            float diff = (Environment.TickCount - Client.Player.lastShootTime);
+            if (diff < Client.Player.Stats[7] * 1.75)
+            {
+                if (Client.Player.shootCounter > (item.NumProjectiles * item.RateOfFire))
+                {
+                    Client.Player.shootCounter = 0;
+                    Client.Player.checkForDex++;
+                    Client.Player.Owner.Timers.Add(new WorldTimer(200, (world, t) =>
+                    {
+                        if (Client.Player == null) return;
+                        if (Client.Player.checkForDex > 0)
+                            Client.Player.checkForDex--;
+                        return;
+                    }));
+                }
+            }
+            else
+            {
+                Client.Player.shootCounter = 0;
+                Client.Player.checkForDex--;
+                Client.Player.lastShootTime = Environment.TickCount;
+            }
+        }
+
         protected override void HandlePacket(Client client, PlayerShootPacket packet)
         {
             client.Manager.Logic.AddPendingAction(t =>
@@ -43,6 +72,8 @@ namespace wServer.networking.handlers
                             player.SendInfo($"Player {client.Player.Name} is shooting with a weapon that doesnt match the class slot type.");
                     return;
                 }
+                CheckShootSpeed(item);
+                    
                 ProjectileDesc prjDesc = item.Projectiles[0]; //Assume only one
                 Projectile prj = client.Player.PlayerShootProjectile(
                     packet.BulletId, prjDesc, item.ObjectType,
