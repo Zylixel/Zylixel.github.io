@@ -29,6 +29,7 @@ namespace wServer.realm.entities
         public new byte ProjectileId { get; set; }
         public short Container { get; set; }
         public int Damage { get; set; }
+        public Position pos { get; set; }
 
         public long BeginTime { get; set; }
         public Position BeginPos { get; set; }
@@ -118,8 +119,24 @@ namespace wServer.realm.entities
 
         private bool TickCore(long elapsedTicks, RealmTime time)
         {
-            Position pos = GetPosition(elapsedTicks);
+            pos = GetPosition(elapsedTicks);
             Move(pos.X, pos.Y);
+
+            // God Hack fix
+            foreach (var i in Manager.Clients.Values)
+            {
+                if (i.Player.X.InRange(pos.X, pos.X + 0.75f) && i.Player.Y.InRange(pos.Y, pos.Y + 0.75f) && !i.Player.isInvincible())
+                {
+                    var oldHp = i.Player.HP;
+                    Owner.Timers.Add(new WorldTimer(250, (world, RealmTime) => {
+                        if (i.Player == null) return;
+                        if (oldHp == i.Player.HP)
+                        {
+                            i.Player.healthViolation++;
+                        }
+                    }));
+                }
+            }
 
             if (pos.X < 0 || pos.X > Owner.Map.Width)
             {
@@ -161,7 +178,6 @@ namespace wServer.realm.entities
                     hitted.Add(entity);
                 else
                     Destroy(true);
-                ProjectileOwner.Self.ProjectileHit(this, entity);
             }
         }
     }
