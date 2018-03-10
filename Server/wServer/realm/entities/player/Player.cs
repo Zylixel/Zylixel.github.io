@@ -16,7 +16,7 @@ namespace wServer.realm.entities.player
 {
     internal interface IPlayer
     {
-        void Damage(int dmg, Entity chr);
+        void Damage(int dmg, Entity chr, bool forgiveHealthViolation);
         bool IsVisibleToEnemy();
     }
 
@@ -297,7 +297,7 @@ namespace wServer.realm.entities.player
             return false;
         }
         
-        public void Damage(int dmg, Entity chr, bool forgiveHealthViolation)
+        public void Damage(int dmg, Entity chr, bool forgiveHealthViolation = false)
         {
             if (forgiveHealthViolation)
                 healthViolation = 0; // If the player recieves a damage function then the server has taken it's course, and we forvie the player
