@@ -1,5 +1,6 @@
 ﻿#region
 
+using db;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,6 @@ using wServer.logic;
 using wServer.networking;
 using wServer.networking.cliPackets;
 using wServer.networking.svrPackets;
-using wServer.realm.worlds;
 using FailurePacket = wServer.networking.svrPackets.FailurePacket;
 
 #endregion
@@ -39,9 +39,11 @@ namespace wServer.realm.entities.player
         private float _mpRegenCounter;
         private bool _resurrecting;
 
-        public int CheckForDex = 0;
-        public int LastShootTime = -1;
-        public int ShootCounter = 0;
+        public int healthViolation = 0;
+
+        public int checkForDex = 0;
+        public int lastShootTime = Environment.TickCount;
+        public int shootCounter = 0;
 
         private byte[,] _tiles;
         private int _pingSerial;
@@ -287,11 +289,18 @@ namespace wServer.realm.entities.player
         public int MaximumHp { get; private set; }
         public ushort Dmg { get; private set; }
         public int AshCooldown { get; private set; }
-
-
-
-        public void Damage(int dmg, Entity chr)
+        
+        public bool isInvincible()
         {
+            if (HasConditionEffect(ConditionEffectIndex.Paused) || HasConditionEffect(ConditionEffectIndex.Stasis) || HasConditionEffect(ConditionEffectIndex.Invincible))
+                return true;
+            return false;
+        }
+        
+        public void Damage(int dmg, Entity chr, bool forgiveHealthViolation)
+        {
+            if (forgiveHealthViolation)
+                healthViolation = 0; // If the player recieves a damage function then the server has taken it's course, and we forvie the player
             if (CheckMantleResurrect())
                return;
 
@@ -1000,6 +1009,26 @@ namespace wServer.realm.entities.player
             if (Mp < 0) Mp = 0;
             if (_buyCooldown > 0)
                 _buyCooldown--;
+            
+            if (checkForDex >= 5)
+            {
+                SendError("Kicked for dexterity hacks or lag");
+                Client.Save();
+                Client.Disconnect();
+                foreach (var i in Manager.Clients.Values)
+                    if (i.Account.Rank > 0)
+                        i.Player.SendError($"Player {Client.Player.Name} has just been kicked for dexterity hacks");
+            }
+            
+            if (healthViolation >= 5)
+            {
+                SendError("Kicked for god hacks");
+                Client.Save();
+                Client.Disconnect();
+                foreach (var i in Manager.Clients.Values)
+                    if (i.Account.Rank > 0)
+                        i.Player.SendError($"Player {Client.Player.Name} has just been kicked for god hacks");
+            }
 
             try
             {
