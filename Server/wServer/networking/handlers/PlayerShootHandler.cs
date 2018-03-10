@@ -14,6 +14,31 @@ namespace wServer.networking.handlers
     internal class PlayerShootPacketHandler : PacketHandlerBase<PlayerShootPacket>
     {
         public override PacketID Id => PacketID.PLAYERSHOOT;
+        
+        public void CheckShootSpeed(OldItem item)
+        {
+            Client.Player.shootCounter++;
+
+            float diff = (Environment.TickCount - Client.Player.lastShootTime);
+            if (diff < 100 / Client.Player.Stats[7])
+            {
+                if (Client.Player.shootCounter > (item.NumProjectiles * item.RateOfFire))
+                {
+                    Client.Player.shootCounter = 0;
+                    Client.Player.checkForDex++;
+                    Client.Player.Owner.Timers.Add(new WorldTimer(2000, (world, t) =>
+                    {
+                        Client.Player.checkForDex--;
+                        return;
+                    }));
+                }
+            }
+            else
+            {
+                Client.Player.shootCounter = 0;
+                Client.Player.lastShootTime = Environment.TickCount;
+            }
+        }
 
         protected override void HandlePacket(Client client, PlayerShootPacket packet)
         {
@@ -43,6 +68,9 @@ namespace wServer.networking.handlers
                             player.SendInfo($"Player {client.Player.Name} is shooting with a weapon that doesnt match the class slot type.");
                     return;
                 }
+                if (client.Account.Rank < 2)
+                    CheckShootSpeed(item);
+                    
                 ProjectileDesc prjDesc = item.Projectiles[0]; //Assume only one
                 Projectile prj = client.Player.PlayerShootProjectile(
                     packet.BulletId, prjDesc, item.ObjectType,
