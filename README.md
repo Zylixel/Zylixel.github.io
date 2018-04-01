@@ -20,4 +20,4 @@
 
 Zy's Realm is based off of FSOD, a RotMG private server source
 
-Official server : [Frostz' Realm](https://discord.gg/HtdwsAc)
+Official server: [Frostz' Realm](https://discord.gg/HtdwsAc)
