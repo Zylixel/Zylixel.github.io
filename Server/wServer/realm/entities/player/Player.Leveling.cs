@@ -1,5 +1,6 @@
 ﻿#region
 
+using db;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,6 +49,7 @@ namespace wServer.realm.entities.player
                 {"Cube God", Tuple.Create(20, 15, 1000)},
                 {"Grand Sphinx", Tuple.Create(20, 15, 1000)},
                 {"Lord of the Lost Lands", Tuple.Create(20, 15, 1000)},
+                {"Hype Beast", Tuple.Create(20, 15, 1000)},
                 {"Hermit God", Tuple.Create(20, 15, 1000)},
                 {"Ghost Ship", Tuple.Create(20, 15, 1000)},
                 {"Unknown Giant Golem", Tuple.Create(16, 15, 1000)},
@@ -164,6 +166,7 @@ namespace wServer.realm.entities.player
 
         public void TryUpgrade(bool random = true)
         {
+            if (Inventory[0] == null) return;
             var upgradables = new Dictionary<ushort, Tuple<ushort, string>>();
 
             upgradables.Add(0x611c, new Tuple<ushort, string>(0x611d, "Dagger"));
@@ -194,7 +197,7 @@ namespace wServer.realm.entities.player
                             Color = new ARGB(0xFF6600),
                             Text = "{\"key\":\"blank\",\"tokens\":{\"data\":\"" + data.Item2 + " Piece Found!\"}}"
                         }, null);
-                        Inventory[0] = Manager.GameData.Items[data.Item1];
+                        Inventory[0].ObjectType = data.Item1;
                         UpdateCount++;
                         SaveToCharacter();
                         return;
@@ -278,6 +281,9 @@ namespace wServer.realm.entities.player
 
         public bool EnemyKilled(Enemy enemy, int exp, bool killer)
         {
+            if (Level > 15 && enemy.Name == "XP Gift All")
+                return false;
+
             exp *= 2;
             if (enemy == Quest)
                 Owner.BroadcastPacket(new NotificationPacket
@@ -288,10 +294,7 @@ namespace wServer.realm.entities.player
                 }, null);
             if (exp > 0)
             {
-                if(XpBoosted)
-                    Experience += exp * 2;
-                else
-                    Experience += exp;
+                Experience += XpBoosted ? exp * 2 : exp;
                 UpdateCount++;
                 foreach (var i in Owner.PlayersCollision.HitTest(X, Y, 16).Where(i => i != this).OfType<Player>())
                 {

@@ -146,8 +146,8 @@ namespace wServer.realm.worlds
             {
                 if (i.Inventory[r] == null)
                 {
-                    ushort Item = i.Manager.GameData.IdToObjectType[list[new Random(trueRandom()).Next(0, list.Length)]];
-                    i.Inventory[r] = i.Manager.GameData.Items[Item];
+                    ushort Item = Manager.GameData.IdToObjectType[list[new Random(trueRandom()).Next(0, list.Length)]];
+                    i.Inventory[r] = Manager.CreateSerial(Manager.GameData.Items[Item], DroppedIn: Name.Replace("'", ""));
                     i.Client.Save();
                     i.UpdateCount++;
                     SendMsg(i, "Congratulations on making it this far, here's a reward for you!", "^Court Overseer");

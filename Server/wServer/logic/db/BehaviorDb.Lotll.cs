@@ -9,7 +9,7 @@ namespace wServer.logic
         private _ LordOfTheLostLands = () => Behav()
             .Init("Lord of the Lost Lands",
                 new State(
-                    new DropPortalOnDeath("Inner sanctum Portal", 10),
+                    new DropPortalOnDeath("Ice Cave Portal", 10),
                     new HpLessTransition(0.15, "IMDONELIKESOOOODONE!"),
                     new State("timetogeticey",
                         new PlayerWithinTransition(8, "startupandfireup")
@@ -76,6 +76,9 @@ namespace wServer.logic
                 ),
                 new Threshold(0.05,
                     new ItemLoot("Shield of Ogmur", 0.005),
+                    new ItemLoot("Great Sword Of Ogmur", 0.01),
+                    new ItemLoot("Olden Lands Armor", 0.01),
+                    new ItemLoot("Ogmurs Hope", 0.01),
                     new TierLoot(8, ItemType.Weapon, 0.2),
                     new TierLoot(9, ItemType.Weapon, 0.175),
                     new TierLoot(10, ItemType.Weapon, 0.125),

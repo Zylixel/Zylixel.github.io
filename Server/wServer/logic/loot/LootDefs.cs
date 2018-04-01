@@ -36,13 +36,16 @@ namespace wServer.logic.loot
         public void Populate(RealmManager manager, Enemy enemy, Tuple<Player, int> playerDat,
             Random rand, string lootState, IList<LootDef> lootDefs)
         {
-            probability = probability;
             if (probability > 1)
                 probability = 1;
             Lootstate = lootState;
             if (playerDat != null) return;
             XmlData dat = manager.GameData;
-            lootDefs.Add(new LootDef(dat.Items[dat.IdToObjectType[item]], probability, lootState));
+            string DroppedIn = "Error";
+            if (enemy != null)
+                DroppedIn = enemy.Owner.Name;
+            DroppedIn = DroppedIn.Replace("'", "");
+            lootDefs.Add(new LootDef(manager.CreateSerial(dat.Items[dat.IdToObjectType[item]], insert: false, DroppedIn: DroppedIn), probability, lootState));
         }
     }
 
@@ -100,13 +103,17 @@ namespace wServer.logic.loot
         {
             Lootstate = lootState;
             if (playerDat != null) return;
-            Item[] candidates = manager.GameData.Items
+            OldItem[] candidates = manager.GameData.Items
                 .Where(item => item.Value.SlotType == 26)
                 .Where(item => item.Value.Tier == (int)rarity)
                 .Select(item => item.Value)
                 .ToArray();
-            foreach (Item i in candidates)
-                lootDefs.Add(new LootDef(i, probability / candidates.Length, lootState));
+            string DroppedIn = "Error";
+            if (enemy != null)
+                DroppedIn = enemy.Owner.Name;
+            DroppedIn = DroppedIn.Replace("'", "");
+            foreach (OldItem i in candidates)
+                lootDefs.Add(new LootDef(manager.CreateSerial(i, insert: false, DroppedIn: DroppedIn), probability / candidates.Length, lootState));
         }
     }
 
@@ -155,13 +162,17 @@ namespace wServer.logic.loot
         {
             Lootstate = lootState;
             if (playerDat != null) return;
-            Item[] candidates = manager.GameData.Items
+            OldItem[] candidates = manager.GameData.Items
                 .Where(item => Array.IndexOf(types, item.Value.SlotType) != -1)
                 .Where(item => item.Value.Tier == tier)
                 .Select(item => item.Value)
                 .ToArray();
-            foreach (Item i in candidates)
-                lootDefs.Add(new LootDef(i, probability/candidates.Length, lootState));
+            string DroppedIn = "Error";
+            if (enemy != null)
+                DroppedIn = enemy.Owner.Name;
+            DroppedIn = DroppedIn.Replace("'", "");
+            foreach (OldItem i in candidates)
+                lootDefs.Add(new LootDef(manager.CreateSerial(i, insert: false, DroppedIn: DroppedIn), probability / candidates.Length, lootState));
         }
     }
 
@@ -190,13 +201,17 @@ namespace wServer.logic.loot
             {
                 Lootstate = lootState;
                 if (playerDat != null) return;
-                Item[] candidates = manager.GameData.Items
+                OldItem[] candidates = manager.GameData.Items
                     .Where(item => item.Value.Description == "A shovel that digs deep into the sand to find hidden treasure.")
                     .Select(item => item.Value)
                     .ToArray();
-                foreach (Item i in candidates)
+                string DroppedIn = "Error";
+                if (enemy != null)
+                    DroppedIn = enemy.Owner.Name;
+                DroppedIn = DroppedIn.Replace("'", "");
+                foreach (OldItem i in candidates)
                     if (i.Tier != -1)
-                        lootDefs.Add(new LootDef(i, (i.Tier * -2 + 10) * 0.0005, lootState));
+                        lootDefs.Add(new LootDef(manager.CreateSerial(i, insert: false, DroppedIn: DroppedIn), (i.Tier * -2 + 10) * 0.0005, lootState));
             }
         }
     }

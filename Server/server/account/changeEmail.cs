@@ -17,7 +17,6 @@ namespace server.account
 
                 if (CheckAccount(acc, db))
                 {
-                    if (acc.VerifiedEmail || !Program.Settings.GetValue<bool>("verifyEmail")) return;
                     string authKey = Database.GenerateRandomString(128);
                     var cmd = db.CreateQuery();
                     cmd.CommandText = "UPDATE accounts SET uuid=@newGuid, authToken=@newAuthToken WHERE uuid=@oldGuid;";

@@ -91,6 +91,7 @@ namespace wServer.logic
                 new TierLoot(4, ItemType.Ability, 0.02),
                 new Threshold(0.18,
                     new ItemLoot("Potion of Attack", 0.1),
+                    new ItemLoot("Staff Of Galactic Calamitys", 0.002),
                     new EggLoot(EggRarity.Common, 0.01),
                     new EggLoot(EggRarity.Uncommon, 0.005)
                     )
@@ -199,6 +200,7 @@ namespace wServer.logic
                 new TierLoot(4, ItemType.Ring, 0.005),
                 new Threshold(0.18,
                     new ItemLoot("Potion of Defense", 0.05),
+                    new ItemLoot("Dagger of the Eye", 0.002),
                     new EggLoot(EggRarity.Common, 0.01),
                     new EggLoot(EggRarity.Uncommon, 0.005)
                     )
@@ -544,6 +546,7 @@ namespace wServer.logic
                 new TierLoot(6, ItemType.Weapon, 0.01),
                 new ItemLoot("Health Potion", 0.04),
                 new ItemLoot("Magic Potion", 0.01),
+                new ItemLoot("Levitation Leather", 0.002),
                     new Threshold(0.18,
                     new ItemLoot("Potion of Defense", 0.05)
                         )

@@ -72,6 +72,10 @@ namespace wServer.logic.behaviors
             {
                 if (host.HasConditionEffect(ConditionEffectIndex.Stunned)) return;
 
+                var count = this.count;
+                    if (host.HasConditionEffect(ConditionEffectIndex.Dazed))
+                        count = Math.Max(1, count / 2);
+
                 Entity player = host.GetNearestEntity(radius, null);
                 if (player != null || defaultAngle != null || fixedAngle != null)
                 {

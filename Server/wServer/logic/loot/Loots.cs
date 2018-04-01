@@ -88,12 +88,12 @@ namespace wServer.logic.loot
                 {
                     if (i.LootState == enemy.LootState || i.LootState == null)
                     {
-                        double prob = dat.Item1.LootDropBoost ? i.Probabilty * 1.5 : i.Probabilty;
+                        double prob = dat.Item1.LootDropBoost ? i.Probabilty * 3 : i.Probabilty * 1.5; //Usually 1.5 and 0 
                         if (rand.NextDouble() < prob)
                         {
-                            if (dat.Item1.LootTierBoost)
-                                playerLoot.Add(IncreaseTier(enemy.Manager, i.Item, consideration));
-                            else
+                            //if (dat.Item1.LootTierBoost)
+                                //playerLoot.Add(IncreaseTier(enemy.Manager, i.Item, consideration)); disabled for now
+                            //else
                                 playerLoot.Add(i.Item);
                         }
                     }
@@ -103,17 +103,17 @@ namespace wServer.logic.loot
             AddBagsToWorld(enemy, sharedLoots, loots);
         }
 
-        private Item IncreaseTier(RealmManager manager, Item item, List<LootDef> consideration)
+        /*private OldItem IncreaseTier(RealmManager manager, OldItem item, List<LootDef> consideration)
         {
             if (item.SlotType == 10) return item;
-            Item[] tier = manager.GameData.Items
+            OldItem[] tier = manager.GameData.Items
                  .Where(i => item.SlotType == i.Value.SlotType)
                  .Where(i => i.Value.Tier >= item.Tier + 3)
                  .Where(i => consideration.Select(_ => _.Item).Contains(i.Value))
                  .Select(i => i.Value).ToArray();
 
             return tier.Length > 0 ? tier[rand.Next(1, tier.Length)] : item;
-        }
+        }*/
 
         private void AddBagsToWorld(Enemy enemy, IList<Item> shared, IDictionary<Player, IList<Item>> soulbound)
         {

@@ -66,8 +66,6 @@ namespace wServer.realm.entities.merchant
                         var _price = db.GetMarketPrice(item.Value);
                         if (_price > 0)
                         {
-                            if (CheckConfig.IsDebugOn())
-                                Console.WriteLine("Loading " + item.Value.ObjectId);
                             zyList.Add(item.Value.ObjectType);
                             price.Add(item.Value.ObjectType, _price);
                         }
@@ -113,9 +111,6 @@ namespace wServer.realm.entities.merchant
 
         public static void RemoveItem(int Item)
         {
-            if (CheckConfig.IsDebugOn())
-                Console.WriteLine("Removing " + Item + " from List");
-
             zyList.Remove(Item);
             ZyList = zyList.ToArray();
         }
@@ -123,8 +118,6 @@ namespace wServer.realm.entities.merchant
         public static void AddItem(Item Item, int Price)
         {
             var _oldPrice = 0;
-            if (CheckConfig.IsDebugOn())
-                Console.WriteLine("Adding Item " + Item.ObjectId + " to List");
 
             if (price.ContainsKey(Item.ObjectType))
             {

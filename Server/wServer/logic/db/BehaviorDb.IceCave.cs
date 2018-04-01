@@ -55,13 +55,12 @@ namespace wServer.logic
                         ))
 
               )
-        
 
-        //ESBEN LETS GOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO!
+
+             //ESBEN LETS GOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO!
              .Init("ic Esben the Unwilling",
                 new State(
                     new RealmPortalDrop(),
-                    new TransformOnDeath("ic Loot Balloon"),
                     new State("Esben1",
                         new Taunt(0.40, "Your souls will soon nourish me."),
                         new Taunt(0.35, "Icicles, rend their flesh."),
@@ -182,41 +181,52 @@ namespace wServer.logic
                          new SetAltTexture(4),
                          new Spawn("ic boss manager", initialSpawn: 1, maxChildren: 1, coolDown: 10000),
                         new TimedTransition(10, "Esben1")
-
                         )
-
-                    )
+                    ),
+                    new MostDamagers(2,
+                        new TierLoot(2, ItemType.Potion, 1)
+                        ),
+                    new Threshold(0.01,
+                        new TierLoot(12, ItemType.Weapon, 0.05),
+                        new TierLoot(11, ItemType.Weapon, 0.1),
+                        new TierLoot(10, ItemType.Weapon, 0.2),
+                        new TierLoot(13, ItemType.Armor, 0.05),
+                        new TierLoot(12, ItemType.Armor, 0.1),
+                        new ItemLoot("Potion of Mana", 0.5),
+                        new ItemLoot("Staff of Esben", 0.02),
+                        new ItemLoot("Skullish Remains of Esben", 0.02)
+                )
             )
             .Init("ic boss spawner live",
                 new State(
                     new DropPortalOnDeath("Inner Sanctum Portal", 100),
-                    new EntitiesNotExistsTransition(99, "die", "Big Yeti", "Snow Bat Mama"),
+                    new EntitiesNotExistsTransition(999, "die", "Big Yeti", "Snow Bat Mama"),
                     new State("beABum"),
                     new State("die",
+                        new Taunt(true, "Innocent souls. So delicious. You have sated me. Now come i shall give you your reward."),
                         new Suicide()
                     )
                 )
             )
-                       .Init("ic Loot Balloon",
+            .Init("ic boss purifier",
                 new State(
-                    new State("Idle",
-                        new ConditionalEffect(ConditionEffectIndex.Invulnerable),
-                        new TimedTransition(5000, "UnsetEffect")
-                    ),
-                    new State("UnsetEffect")
-                ),
-                new MostDamagers(2,
-                    new TierLoot(2, ItemType.Potion, 1)
-                    ),
-                new Threshold(0.01,
-                    new TierLoot(12, ItemType.Weapon, 0.05),
-                    new TierLoot(11, ItemType.Weapon, 0.1),
-                    new TierLoot(10, ItemType.Weapon, 0.2),
-                    new TierLoot(13, ItemType.Armor, 0.05),
-                    new TierLoot(12, ItemType.Armor, 0.1),
-                    new ItemLoot("Potion of Mana", 0.5),
-                    new ItemLoot("Staff of Esben", 0.01),
-                    new ItemLoot("Skullish Remains of Esben", 0.01)
+                    new State("spawnDemBois",
+                        new Spawn("ic Whirlwind", maxChildren: 2, coolDown: 5000),
+                        new Reproduce("ic whirlwind", 10, 3, 4000),
+                        new Shoot(5, coolDown: 1500)
+                    )
+                )
+            )
+            .Init("ic Whirlwind",
+                new State(
+                    new State("fight",
+                        new Prioritize(
+                            new Follow(1.2, 10, 3),
+                            new Wander(1.2)
+                            ),
+                        new Shoot(5, 6, coolDown: 4000),
+                        new Shoot(5, 6, projectileIndex: 1, coolDownOffset: 2000, coolDown: 4000)
+                    )
                 )
             );
     }

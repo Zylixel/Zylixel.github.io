@@ -196,7 +196,7 @@ namespace wServer.realm.entities
             base.Tick(time);
         }
 
-        public static async void Create(RealmManager manager, Player player, Item egg)
+        public static async void Create(RealmManager manager, Player player, OldItem egg)
         {
             await manager.Database.DoActionAsync(db =>
             {
@@ -290,7 +290,7 @@ namespace wServer.realm.entities
 
 
 
-        private static List<AbilityItem> GetPetAbilites(Item egg, PetStruct petStruct)
+        private static List<AbilityItem> GetPetAbilites(OldItem egg, PetStruct petStruct)
         {
             List<Ability> abilities = new List<Ability>
             {

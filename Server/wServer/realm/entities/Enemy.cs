@@ -1,5 +1,6 @@
 ﻿#region
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using wServer.logic;
@@ -98,7 +99,7 @@ namespace wServer.realm.entities
                         TargetId = Id,
                         Effects = 0,
                         Damage = (ushort)dmg,
-                        Killed = HP < 0,
+                        Killed = false,
                         BulletId = 0,
                         ObjectId = from.Id
                     }, null);
@@ -112,7 +113,7 @@ namespace wServer.realm.entities
                         TargetId = Id,
                         Effects = 0,
                         Damage = (ushort)dmg,
-                        Killed = HP < 0,
+                        Killed = false,
                         BulletId = 0,
                         ObjectId = -1
                     }, null);

@@ -13,9 +13,7 @@ namespace server.sfx
         protected override void HandleRequest()
         {
             string file = Context.Request.Url.LocalPath.StartsWith("/music") ? "sfx/" + Context.Request.Url.LocalPath : Context.Request.Url.LocalPath;
-
-            //context.Response.Redirect("http://realmofthemadgod.appspot.com/" + file);
-
+            
             if (File.Exists(file))
             {
                 using (FileStream i = File.OpenRead(file))

@@ -5,6 +5,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
 using db.data;
+using db;
 
 #endregion
 
@@ -211,7 +212,9 @@ public class FameStats
         for (int i = 0; i < 4; i++)         //Well Equipped
         {
             if (chr.Equipment[i] == -1) continue;
-            var b = data.Items[(ushort)chr.Equipment[i]].FameBonus;
+            int b;
+            using (Database db = new Database())
+                b = db.getSerialInfo(chr.Equipment[i], data).FameBonus;
             if (b > 0)
                 eq += (baseFame + Math.Floor(bonus)) * b / 100;
         }
@@ -478,7 +481,9 @@ public class FameStats
         for (int i = 0; i < 4; i++) //Well Equipped
         {
             if (chr.Equipment[i] == -1) continue;
-            int b = data.Items[(ushort)chr.Equipment[i]].FameBonus;
+            int b;
+            using (Database db = new Database())
+                b = db.getSerialInfo(chr.Equipment[i], data).FameBonus;
             if (b > 0)
                 bo += (baseFame + Math.Floor(bonus)) * b / 100;
         }

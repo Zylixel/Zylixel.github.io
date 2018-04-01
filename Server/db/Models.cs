@@ -41,10 +41,6 @@ public class Chars
     public List<ServerItem> Servers { get; set; }
 
     public string OwnedSkins { get; set; }
-    [XmlElement("TOSPopup")]
-    public string TOSPopup { get; set; }
-    public string Lat { get; set; }
-    public string Long { get; set; }
 
     [XmlArray("ClassAvailabilityList")]
     [XmlArrayItem("ClassAvailability")]
@@ -142,9 +138,6 @@ public class Account
     public string AccountId { get; set; }
     public string Name { get; set; }
 
-    [XmlIgnore]
-    public bool IsProdAccount { get; set; }
-
     [XmlElement("NameChosen")]
     public string _NameChosen { get; set; }
 
@@ -187,9 +180,6 @@ public class Account
     public string Password { get; set; }
 
     [XmlIgnore]
-    public bool VisibleMuledump { get; set; }
-
-    [XmlIgnore]
     public bool Banned
     {
         get { return _Banned != null; }
@@ -198,27 +188,8 @@ public class Account
 
     [XmlIgnore]
     public string AuthToken { get; set; }
-    [XmlIgnore]
-    public string NotAcceptedNewTos { get; set; }
 
-    [XmlElement("VerifiedEmail")]
-    public string _VerifiedEmail
-    {
-        get { return VerifiedEmail ? "" : null; }
-        set { VerifiedEmail = value == null ? false : true; }
-    }
-
-    [XmlIgnore]
-    public bool VerifiedEmail { get; set; }
-
-    //[XmlIgnore]
-    //public bool VerifiedEmail
-    //{
-    //    get { return _VerifiedEmail != null; }
-    //    set { _VerifiedEmail = value ? "True" : null; }
-    //}
-
-    [XmlIgnore] //[XmlElement("StarredAccounts")]
+[XmlIgnore] //[XmlElement("StarredAccounts")]
     public string _StarredAccounts { get; set; }
 
     [XmlIgnore]
@@ -301,7 +272,6 @@ public class Account
     public int PetYardType { get; set; }
     public int ArenaTickets { get; set; }
     public QuestItem DailyQuest { get; set; }
-    public int IsAgeVerified { get; set; }
     public Stats Stats { get; set; }
 
     [XmlIgnore]
@@ -405,20 +375,6 @@ public class ServerItem
 {
     public string Name { get; set; }
     public string DNS { get; set; }
-    public double Lat { get; set; }
-    public double Long { get; set; }
-    public double Usage { get; set; }
-    public int RankRequired { get; set; }
-
-    [XmlElement("AdminOnly")]
-    private string _AdminOnly { get; set; }
-
-    [XmlIgnore]
-    public bool AdminOnly
-    {
-        get { return _AdminOnly != null; }
-        set { _AdminOnly = value ? "True" : null; }
-    }
 }
 
 [Serializable, XmlRoot("Char")]

@@ -69,7 +69,7 @@ namespace wServer.realm.entities
                     }
                     if (TryDeduct(player))
                     {
-                        player._buyCooldown = 15;
+                        player._buyCooldown = 10;
                         VaultChest chest = db.CreateChest(player.Client.Account);
                         db.UpdateFame(player.Client.Account, -Price);
                         (Owner as Vault).AddChest(chest, this);

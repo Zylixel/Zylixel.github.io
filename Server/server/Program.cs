@@ -35,7 +35,7 @@ namespace server
 
         private static void Main(string[] args)
         {
-            Console.Title = "FSOD Zy's Realm - Server";
+            Console.Title = "Zy's Realm - Server";
 
             Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
             Thread.CurrentThread.Name = "Entry";
@@ -168,7 +168,6 @@ namespace server
             {"{URL}", "PROPERTYCALL:RawUrl"},
             {"{GAMECLIENT}", "PATH:game/version.txt"},
             {"{TESTINGCLIENT}", "PATH:game/testingVersion.txt"},
-            {"{TRANSFERENGINEVERSION}", account.getProdAccount.TRANSFERENGINEVERSION},
         };
 
         public static void SendFile(string path, HttpListenerContext context)

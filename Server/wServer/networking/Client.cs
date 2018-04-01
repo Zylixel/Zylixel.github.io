@@ -23,10 +23,11 @@ namespace wServer.networking
 
     public class Client : IDisposable
     {
-        public const string ServerVersion = "27.7.X3";
+        public const string ServerVersion = "3.0";
         private bool _disposed;
 
         public uint UpdateAckCount = 0;
+        public int lastUpdated = 0;
 
         private NetworkHandler _handler;
 
@@ -91,13 +92,13 @@ namespace wServer.networking
                 if (pkt.Id == (PacketID) 255) return;
                 IPacketHandler handler;
                 if (!PacketHandlers.Handlers.TryGetValue(pkt.Id, out handler))
-                    Console.WriteLine($"Unhandled packet '{pkt.Id}'.");
+                    Program.writeWarning($"Unhandled packet '{pkt.Id}'.");
                 else
                     handler.Handle(this, (ClientPacket) pkt);
             }
             catch (Exception e)
             {
-                Console.WriteLine($"Error when handling packet '{pkt}'...", e);
+                Program.writeWarning($"Error when handling packet '{pkt}'... {e}");
                 Disconnect();
             }
         }
@@ -111,7 +112,7 @@ namespace wServer.networking
                 if (Account != null)
                     DisconnectFromRealm();
 
-                Socket.Close();
+                Socket?.Close();
             }
             catch (Exception e)
             {
@@ -121,6 +122,9 @@ namespace wServer.networking
 
         public Task Save()
         {
+            if (Manager == null)
+                return null;
+
             return Manager.Database.DoActionAsync(db =>
             {
                 try
@@ -129,7 +133,7 @@ namespace wServer.networking
                     if (Player != null)
                     {
                         Player.SaveToCharacter();
-                        if (Player.Owner != null)
+                        if (Player?.Owner != null)
                         {
                             if (Player.Owner.Id == -6) return;
                             w = Player.Owner.Name;
@@ -146,7 +150,7 @@ namespace wServer.networking
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("SaveException", ex);
+                    Program.writeError($"SaveException, {ex}");
                 }
             });
         }

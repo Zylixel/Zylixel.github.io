@@ -7,10 +7,7 @@ using wServer.logic.transitions;
 #endregion
 
 
-//FULLY SHATTERS
-//BEHAVIORS
-//MADE BY
-//MIKE (Qkm)
+//Full Shatters behav made by Mike
 
 namespace wServer.logic
 {
@@ -403,7 +400,6 @@ namespace wServer.logic
                                 ),
                         new State("Death",
                             new ConditionalEffect(ConditionEffectIndex.Invulnerable),
-                            new CopyDamageOnDeath("shtrs Loot Balloon Bridge"),
                             new Taunt("I tried to protect you... I have failed. You release a great evil upon this realm...."),
                             new TimedTransition(2000, "Suicide")
                             ),
@@ -413,6 +409,18 @@ namespace wServer.logic
                             new Order(46, "shtrs Spawn Bridge", "Open"),
                             new Suicide()
                     )
+                ),
+                new Threshold(0.01,
+                    new TierLoot(11, ItemType.Weapon, 0.5),
+                    new TierLoot(12, ItemType.Weapon, 0.3),
+                    new TierLoot(6, ItemType.Ability, 0.3),
+                    new TierLoot(12, ItemType.Armor, 0.6),
+                    new TierLoot(13, ItemType.Armor, 0.3),
+                    new TierLoot(6, ItemType.Ring, 0.3),
+                    new ItemLoot("Shatters Treasure Shovel", 0.03),
+                    new ItemLoot("Potion of Attack", 1),
+                    new ItemLoot("Potion of Defense", 1),
+                    new ItemLoot("Bracer of the Guardian", 0.01)
                 )
             )
         #endregion 1stboss
@@ -605,7 +613,6 @@ namespace wServer.logic
                         new State("Death",
                             new ConditionalEffect(ConditionEffectIndex.Invulnerable),
                             new Taunt("IM..POSSI...BLE!"),
-                            new CopyDamageOnDeath("shtrs Loot Balloon Mage"),
                             new Order(1, "shtrs Chest Spawner 2", "Open"),
                             new TimedTransition(2000, "Suicide")
                             ),
@@ -613,6 +620,17 @@ namespace wServer.logic
                             new Shoot(35, projectileIndex: 0, count: 30),
                             new Suicide()
                     )
+                ),
+                new Threshold(0.01,
+                    new TierLoot(11, ItemType.Weapon, 0.5),
+                    new TierLoot(12, ItemType.Weapon, 0.3),
+                    new TierLoot(6, ItemType.Ability, 0.3),
+                    new TierLoot(12, ItemType.Armor, 0.6),
+                    new TierLoot(13, ItemType.Armor, 0.3),
+                    new TierLoot(6, ItemType.Ring, 0.3),
+                    new ItemLoot("Shatters Treasure Shovel", 0.03),
+                    new ItemLoot("Potion of Mana", 0.5),
+                    new ItemLoot("The Twilight Gemstone", 0.01)
                 )
             )
         #endregion 2ndboss
@@ -703,51 +721,6 @@ namespace wServer.logic
                 )
             )
         #endregion birds
-        #region 1stbosschest
-            .Init("shtrs Loot Balloon Bridge",
-                new State(
-                    new State("Idle",
-                        new ConditionalEffect(ConditionEffectIndex.Invulnerable),
-                        new TimedTransition(5000, "Bridge")
-                    ),
-                    new State("Bridge")
-                ),
-                new Threshold(0.01,
-                    new TierLoot(11, ItemType.Weapon, 0.5),
-                    new TierLoot(12, ItemType.Weapon, 0.3),
-                    new TierLoot(6, ItemType.Ability, 0.3),
-                    new TierLoot(12, ItemType.Armor, 0.6),
-                    new TierLoot(13, ItemType.Armor, 0.3),
-                    new TierLoot(6, ItemType.Ring, 0.3),
-                    new ItemLoot("Shatters Treasure Shovel", 0.1),
-                    new ItemLoot("Potion of Attack", 1),
-                    new ItemLoot("Potion of Defense", 1),
-                    new ItemLoot("Bracer of the Guardian", 0.025)
-                    )
-            )
-        #endregion 1stbosschest
-        #region 2ndbosschest
-            .Init("shtrs Loot Balloon Mage",
-                new State(
-                    new State("Idle",
-                        new ConditionalEffect(ConditionEffectIndex.Invulnerable),
-                        new TimedTransition(5000, "Mage")
-                    ),
-                    new State("Mage")
-                ),
-                new Threshold(0.01,
-                    new TierLoot(11, ItemType.Weapon, 0.5),
-                    new TierLoot(12, ItemType.Weapon, 0.3),
-                    new TierLoot(6, ItemType.Ability, 0.3),
-                    new TierLoot(12, ItemType.Armor, 0.6),
-                    new TierLoot(13, ItemType.Armor, 0.3),
-                    new TierLoot(6, ItemType.Ring, 0.3),
-                    new ItemLoot("Shatters Treasure Shovel", 0.2),
-                    new ItemLoot("Potion of Mana", 0.5),
-                    new ItemLoot("The Twilight Gemstone", 0.025)
-                    )
-            )
-        #endregion 2ndbosschest
         #region BridgeStatues
             .Init("shtrs Bridge Obelisk A",
                 new State(
@@ -1510,7 +1483,6 @@ namespace wServer.logic
                 new State(
                     new RealmPortalDrop(),
                     new HpLessTransition(0.1, "Death"),
-                    new CopyLootState("shtrs Loot Balloon King", 20),
                     new State("Idle",
                         new ConditionalEffect(ConditionEffectIndex.Invincible),
                         new ConditionalEffect(ConditionEffectIndex.Invisible),
@@ -1918,7 +1890,6 @@ namespace wServer.logic
                             ),
                         new State("Death",
                             new ConditionalEffect(ConditionEffectIndex.Invulnerable),
-                            new CopyDamageOnDeath("shtrs Loot Balloon King"),
                             new Order(1, "shtrs Chest Spawner 3", "Open"),
                             new Taunt("Impossible..........IMPOSSIBLE!"),
                             new TimedTransition(2000, "Suicide")
@@ -1927,7 +1898,21 @@ namespace wServer.logic
                             new Shoot(35, projectileIndex: 0, count: 30),
                             new Suicide()
                     )
-                )
+                ),
+                    new Threshold(0.01,
+                    new TierLoot(11, ItemType.Weapon, 0.5),
+                    new TierLoot(12, ItemType.Weapon, 0.3),
+                    new TierLoot(6, ItemType.Ability, 0.3),
+                    new TierLoot(12, ItemType.Armor, 0.6),
+                    new TierLoot(13, ItemType.Armor, 0.3),
+                    new TierLoot(6, ItemType.Ring, 0.3),
+                    new TierLoot(7, ItemType.Ring, 0.2),
+                    new TierLoot(14, ItemType.Armor, 0.1),
+                    new TierLoot(13, ItemType.Weapon, 0.1),
+                    new ItemLoot("Shatters Treasure Shovel", 0.03),
+                    new ItemLoot("Potion of Life", 0.5),
+                    new ItemLoot("The Forgotten Crown", 0.01)
+                    )
             )
             .Init("shtrs Royal Guardian J",
                 new State(
@@ -2034,32 +2019,6 @@ namespace wServer.logic
                 )
             )
         #endregion 3rdboss
-        #region 3rdbosschest
-            .Init("shtrs Loot Balloon King",
-                new State(
-                    new State("Idle",
-                        new ConditionalEffect(ConditionEffectIndex.Invulnerable),
-                        new TimedTransition(5000, "Crown")
-                    ),
-                    new State("Crown")
-                ),
-                new Threshold(0.01,
-                    new TierLoot(11, ItemType.Weapon, 0.5),
-                    new TierLoot(12, ItemType.Weapon, 0.3),
-                    new TierLoot(6, ItemType.Ability, 0.3),
-                    new TierLoot(7, ItemType.Ability, 0.1),
-                    new TierLoot(12, ItemType.Armor, 0.6),
-                    new TierLoot(13, ItemType.Armor, 0.3),
-                    new TierLoot(6, ItemType.Ring, 0.3),
-                    new TierLoot(7, ItemType.Ring, 0.2),
-                    new TierLoot(14, ItemType.Armor, 0.2),
-                    new TierLoot(13, ItemType.Weapon, 0.2),
-                    new ItemLoot("Shatters Treasure Shovel", 0.3),
-                    new ItemLoot("Potion of Life", 0.5),
-                    new ItemLoot("The Forgotten Crown", 0.025)
-                    )
-            )
-        #endregion 3rdbosschest
         // Use this for other stuff.
         #region NotInUse
         //      .Init("shtrs Spawn Bridge 6",
@@ -2102,44 +2061,6 @@ namespace wServer.logic
         //              )
         //          )
         #endregion NotInUse
-        #region MISC
-        .Init("shtrs Chest Spawner 1",
-            new State(
-                new State("Idle",
-                    new ConditionalEffect(ConditionEffectIndex.Invincible, true),
-                    new EntityNotExistsTransition("shtrs Bridge Sentinel", 500, "Open")
-                    ),
-                new State("Open",
-                    new TransformOnDeath("shtrs Loot Balloon Bridge"),
-                    new Suicide()
-                    )
-                )
-            )
-        .Init("shtrs Chest Spawner 2",
-            new State(
-                new State("Idle",
-                    new ConditionalEffect(ConditionEffectIndex.Invincible, true),
-                    new EntityNotExistsTransition("shtrs Twilight Archmage", 500, "Open")
-                    ),
-                new State("Open",
-                    new TransformOnDeath("shtrs Loot Balloon Mage"),
-                    new Suicide()
-                    )
-                )
-            )
-        .Init("shtrs Chest Spawner 3",
-            new State(
-                new State("Idle",
-                    new ConditionalEffect(ConditionEffectIndex.Invincible, true),
-                    new EntitiesNotExistsTransition(30, "Open", "shtrs The Cursed Crown", "shtrs The Forgotten King")
-                    ),
-                new State("Open",
-                    new TransformOnDeath("shtrs Loot Balloon King"),
-                    new Suicide()
-                    )
-                )
-            )
-        #endregion MISC
             ;
     }
 }

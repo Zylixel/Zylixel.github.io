@@ -335,7 +335,151 @@ namespace wServer.realm
                     i.Player.SendInfo("Oryx is summoning players to his castle. You have been givin Invulnerablility for 10 seconds.");
             }
         }
+
+        public Item CreateSerial(OldItem item, string DroppedIn, bool soulbound = false, bool insert = true, int _id = -1)
+        {
+            int id;
+            if (insert && _id == -1)
+                using (var db = new Database())
+                {
+                    id = db.GetNextSerialId();
+                }
+            else
+                id = _id;
+            Item ret = new Item
+            {
+                serialId = id,
+                ObjectType = item.ObjectType,
+                firstUser = -1,
+                currentUser = -1,
+                droppedIn = DroppedIn,
+                Soulbound = soulbound,
+                banned = 0,
+                ObjectId = item.ObjectId,
+                SlotType = item.SlotType,
+                Tier = item.Tier,
+                Description = item.Description,
+                RateOfFire = item.RateOfFire,
+                Usable = item.Usable,
+                BagType = item.BagType,
+                MpCost = item.MpCost,
+                FameBonus = item.FameBonus,
+                NumProjectiles = item.NumProjectiles,
+                ArcGap = item.ArcGap,
+                Consumable = item.Consumable,
+                Potion = item.Potion,
+                DisplayId = item.DisplayId,
+                SuccessorId = item.SuccessorId,
+                Cooldown = item.Cooldown,
+                Resurrects = item.Resurrects,
+                Texture1 = item.Texture1,
+                Texture2 = item.Texture2,
+                Secret = item.Secret,
+                IsBackpack = item.IsBackpack,
+                Rarity = item.Rarity,
+                Family = item.Family,
+                Class = item.Class,
+                Doses = item.Doses,
+                StatsBoost = item.StatsBoost,
+                ActivateEffects = item.ActivateEffects,
+                Projectiles = item.Projectiles,
+                MpEndCost = item.MpEndCost,
+                Timer = item.Timer,
+                XpBooster = item.XpBooster,
+                LootDropBooster = item.LootDropBooster,
+                LootTierBooster = item.LootTierBooster,
+                SetType = item.SetType,
+                BrokenResurrect = item.BrokenResurrect,
+                NotBrokenResurrect = item.NotBrokenResurrect,
+                MantleResurrect = item.MantleResurrect,
+                MpGiveBack = item.MpGiveBack,
+                Treasure = item.Treasure,
+                Maxy = item.Maxy,
+                FeedPower = item.FeedPower
+            };
+            if (insert)
+                using (var db = new Database())
+                {
+                    db.InsertSerial(ret);
+                }
+            return ret;
+        }
+
+        public Item[] CreateSerial(OldItem[] items, string DroppedIn, bool soulbound = false, bool insert = true)
+        {
+            List<Item> ret = new List<Item>();
+            int id;
+            foreach (var item in items)
+            {
+                if (insert)
+                    using (var db = new Database())
+                    {
+                        id = db.GetNextSerialId();
+                    }
+                else
+                    id = -1;
+                ret.Add(new Item
+                {
+                    serialId = id,
+                    ObjectType = item.ObjectType,
+                    firstUser = 0,
+                    currentUser = 0,
+                    Soulbound = soulbound,
+                    droppedIn = DroppedIn,
+                    banned = 0,
+                    ObjectId = item.ObjectId,
+                    SlotType = item.SlotType,
+                    Tier = item.Tier,
+                    Description = item.Description,
+                    RateOfFire = item.RateOfFire,
+                    Usable = item.Usable,
+                    BagType = item.BagType,
+                    MpCost = item.MpCost,
+                    FameBonus = item.FameBonus,
+                    NumProjectiles = item.NumProjectiles,
+                    ArcGap = item.ArcGap,
+                    Consumable = item.Consumable,
+                    Potion = item.Potion,
+                    DisplayId = item.DisplayId,
+                    SuccessorId = item.SuccessorId,
+                    Cooldown = item.Cooldown,
+                    Resurrects = item.Resurrects,
+                    Texture1 = item.Texture1,
+                    Texture2 = item.Texture2,
+                    Secret = item.Secret,
+                    IsBackpack = item.IsBackpack,
+                    Rarity = item.Rarity,
+                    Family = item.Family,
+                    Class = item.Class,
+                    Doses = item.Doses,
+                    StatsBoost = item.StatsBoost,
+                    ActivateEffects = item.ActivateEffects,
+                    Projectiles = item.Projectiles,
+                    MpEndCost = item.MpEndCost,
+                    Timer = item.Timer,
+                    XpBooster = item.XpBooster,
+                    LootDropBooster = item.LootDropBooster,
+                    LootTierBooster = item.LootTierBooster,
+                    SetType = item.SetType,
+                    BrokenResurrect = item.BrokenResurrect,
+                    NotBrokenResurrect = item.NotBrokenResurrect,
+                    MantleResurrect = item.MantleResurrect,
+                    MpGiveBack = item.MpGiveBack,
+                    Treasure = item.Treasure,
+                    Maxy = item.Maxy,
+                    FeedPower = item.FeedPower
+                });
+                if (insert)
+                    using (var db = new Database())
+                    {
+                        db.InsertSerial(ret.LastOrDefault());
+                    }
+            }
+            return ret.ToArray();
+        }
     }
+
+    
 
     public class TimeEventArgs : EventArgs
     {

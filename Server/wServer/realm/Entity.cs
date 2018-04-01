@@ -120,6 +120,7 @@ namespace wServer.realm
 
         Projectile[] IProjectileOwner.Projectiles => projectiles;
 
+
         public void SwitchTo(State state)
         {
             var origState = CurrentState;
@@ -279,6 +280,255 @@ namespace wServer.realm
                 posHistory[posIdx++] = new Position { X = X, Y = Y };
             if (effects == null) return;
             ProcessConditionEffects(time);
+        }
+
+        class FPoint
+        {
+            public float X;
+            public float Y;
+        }
+
+        public void ValidateAndMove(float x, float y)
+        {
+            if (Owner == null)
+                return;
+
+            var pos = new FPoint();
+            ResolveNewLocation(x, y, pos);
+            Move(pos.X, pos.Y);
+        }
+
+        private void ResolveNewLocation(float x, float y, FPoint pos)
+        {
+            if (HasConditionEffect(ConditionEffects.Paralyzed) ||
+                HasConditionEffect(ConditionEffects.Petrify))
+            {
+                pos.X = X;
+                pos.Y = Y;
+                return;
+            }
+
+            var dx = x - X;
+            var dy = y - Y;
+
+            const float colSkipBoundary = .4f;
+            if (dx < colSkipBoundary &&
+                dx > -colSkipBoundary &&
+                dy < colSkipBoundary &&
+                dy > -colSkipBoundary)
+            {
+                CalcNewLocation(x, y, pos);
+                return;
+            }
+
+            var ds = colSkipBoundary / Math.Max(Math.Abs(dx), Math.Abs(dy));
+            var tds = 0f;
+
+            pos.X = X;
+            pos.Y = Y;
+
+            var done = false;
+            while (!done)
+            {
+                if (tds + ds >= 1)
+                {
+                    ds = 1 - tds;
+                    done = true;
+                }
+
+                CalcNewLocation(pos.X + dx * ds, pos.Y + dy * ds, pos);
+                tds = tds + ds;
+            }
+        }
+
+        private void CalcNewLocation(float x, float y, FPoint pos)
+        {
+            float fx = 0;
+            float fy = 0;
+
+            var isFarX = (X % .5f == 0 && x != X) || (int)(X / .5f) != (int)(x / .5f);
+            var isFarY = (Y % .5f == 0 && y != Y) || (int)(Y / .5f) != (int)(y / .5f);
+
+            if ((!isFarX && !isFarY) || RegionUnblocked(x, y))
+            {
+                pos.X = x;
+                pos.Y = y;
+                return;
+            }
+
+            if (isFarX)
+            {
+                fx = (x > X) ? (int)(x * 2) / 2f : (int)(X * 2) / 2f;
+                if ((int)fx > (int)X)
+                    fx = fx - 0.01f;
+            }
+
+            if (isFarY)
+            {
+                fy = (y > Y) ? (int)(y * 2) / 2f : (int)(Y * 2) / 2f;
+                if ((int)fy > (int)Y)
+                    fy = fy - 0.01f;
+            }
+
+            if (!isFarX)
+            {
+                pos.X = x;
+                pos.Y = fy;
+                return;
+            }
+
+            if (!isFarY)
+            {
+                pos.X = fx;
+                pos.Y = y;
+                return;
+            }
+
+            var ax = (x > X) ? x - fx : fx - x;
+            var ay = (y > Y) ? y - fy : fy - y;
+            if (ax > ay)
+            {
+                if (RegionUnblocked(x, fy))
+                {
+                    pos.X = x;
+                    pos.Y = fy;
+                    return;
+                }
+
+                if (RegionUnblocked(fx, y))
+                {
+                    pos.X = fx;
+                    pos.Y = y;
+                    return;
+                }
+            }
+            else
+            {
+                if (RegionUnblocked(fx, y))
+                {
+                    pos.X = fx;
+                    pos.Y = y;
+                    return;
+                }
+
+                if (RegionUnblocked(x, fy))
+                {
+                    pos.X = x;
+                    pos.Y = fy;
+                    return;
+                }
+            }
+
+            pos.X = fx;
+            pos.Y = fy;
+        }
+
+        private bool RegionUnblocked(float x, float y)
+        {
+            if (TileOccupied(x, y))
+                return false;
+
+            var xFrac = x - (int)x;
+            var yFrac = y - (int)y;
+
+            if (xFrac < 0.5)
+            {
+                if (TileFullOccupied(x - 1, y))
+                    return false;
+
+                if (yFrac < 0.5)
+                {
+                    if (TileFullOccupied(x, y - 1) || TileFullOccupied(x - 1, y - 1))
+                        return false;
+                }
+                else
+                {
+                    if (yFrac > 0.5)
+                        if (TileFullOccupied(x, y + 1) || TileFullOccupied(x - 1, y + 1))
+                            return false;
+                }
+
+                return true;
+            }
+
+            if (xFrac > 0.5)
+            {
+                if (TileFullOccupied(x + 1, y))
+                    return false;
+
+                if (yFrac < 0.5)
+                {
+                    if (TileFullOccupied(x, y - 1) || TileFullOccupied(x + 1, y - 1))
+                        return false;
+                }
+                else
+                {
+                    if (yFrac > 0.5)
+                        if (TileFullOccupied(x, y + 1) || TileFullOccupied(x + 1, y + 1))
+                            return false;
+                }
+
+                return true;
+            }
+
+            if (yFrac < 0.5)
+            {
+                if (TileFullOccupied(x, y - 1))
+                    return false;
+
+                return true;
+            }
+
+            if (yFrac > 0.5)
+                if (TileFullOccupied(x, y + 1))
+                    return false;
+
+            return true;
+        }
+
+        public bool TileOccupied(float x, float y)
+        {
+            var x_ = (int)x;
+            var y_ = (int)y;
+
+            var map = Owner.Map;
+
+            if (!map.Contains(x_, y_))
+                return true;
+
+            var tile = map[x_, y_];
+
+            var tileDesc = Manager.GameData.Tiles[tile.TileId];
+            if (tileDesc?.NoWalk == true)
+                return true;
+
+            if (tile.ObjType != 0)
+            {
+                var objDesc = Manager.GameData.ObjectDescs[tile.ObjType];
+                if (objDesc?.EnemyOccupySquare == true)
+                    return true;
+            }
+
+            return false;
+        }
+
+        public bool TileFullOccupied(float x, float y)
+        {
+            var xx = (int)x;
+            var yy = (int)y;
+
+            if (!Owner.Map.Contains(xx, yy))
+                return true;
+
+            var tile = Owner.Map[xx, yy];
+
+            if (tile.ObjType != 0)
+            {
+                var objDesc = Manager.GameData.ObjectDescs[tile.ObjType];
+                if (objDesc?.FullOccupy == true)
+                    return true;
+            }
+            return false;
         }
 
         public Position? TryGetHistory(long timeAgo)
@@ -517,7 +767,7 @@ namespace wServer.realm
             if (effect == ConditionEffectIndex.Dazed &&
                 HasConditionEffect(ConditionEffects.DazedImmune))
                 return false;
-
+            
             return effect != ConditionEffectIndex.Slowed || !HasConditionEffect(ConditionEffects.SlowedImmune);
         }
 

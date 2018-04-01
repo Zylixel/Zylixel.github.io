@@ -5,7 +5,7 @@ using wServer.logic.transitions;
 using wServer.logic.behaviors;
 
 #endregion
-// by Fade
+// Thanks Fade
 namespace wServer.logic
 {
     partial class BehaviorDb

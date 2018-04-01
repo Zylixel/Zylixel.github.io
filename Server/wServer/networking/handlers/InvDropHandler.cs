@@ -21,6 +21,7 @@ namespace wServer.networking.handlers
         protected override void HandlePacket(Client client, InvDropPacket packet)
         {
             if (client.Player.Owner == null) return;
+            if (packet.SlotObject.ObjectId != client.Player.Id) return;
 
             if (client.Player.Owner is PetYard)
             {
@@ -42,25 +43,17 @@ namespace wServer.networking.handlers
                 if (packet.SlotObject.SlotId == 254)
                 {
                     client.Player.HealthPotions--;
-                    item = client.Player.Manager.GameData.Items[0xa22];
+                    item = client.Player.Manager.CreateSerial(client.Player.Manager.GameData.Items[0xa22], client.Player.Owner.Name.Replace("'", ""), false);
                 }
                 else if (packet.SlotObject.SlotId == 255)
                 {
                     client.Player.MagicPotions--;
-                    item = client.Player.Manager.GameData.Items[0xa23];
+                    item = client.Player.Manager.CreateSerial(client.Player.Manager.GameData.Items[0xa23], client.Player.Owner.Name.Replace("'", ""), false);
                 }
                 else
                 {
                     if (con.Inventory[packet.SlotObject.SlotId] == null) return;
-
                     item = con.Inventory[packet.SlotObject.SlotId];
-                    if (item.Secret || Client.Account.Rank == 2)
-                    {
-                        client.Player.SendDialogError($"Cannot Drop {item.ObjectId} to prevent abuse");
-                        client.Save();
-                        client.Player.UpdateCount++;
-                        return;
-                    }
                     con.Inventory[packet.SlotObject.SlotId] = null;
                 }
                 entity.UpdateCount++;
@@ -68,7 +61,17 @@ namespace wServer.networking.handlers
                 if (item != null)
                 {
                     Container container;
-                    container = new Container(client.Player.Manager, normBag, 1000*30, true);
+                    if (item.Soulbound)
+                    {
+                        container = new Container(client.Player.Manager, soulBag, 1000 * 30, true)
+                        {
+                            BagOwners = new string[1] { client.Player.AccountId }
+                        };
+                    }
+                    else
+                    {
+                        container = new Container(client.Player.Manager, normBag, 1000 * 30, true);
+                    }
                     float bagx = entity.X + (float) ((_invRand.NextDouble()*2 - 1)*0.5);
                     float bagy = entity.Y + (float) ((_invRand.NextDouble()*2 - 1)*0.5);
                     try

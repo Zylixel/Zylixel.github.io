@@ -7,6 +7,8 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using wServer.networking;
+using wServer.networking.cliPackets;
+using wServer.networking.svrPackets;
 using wServer.realm.entities;
 using wServer.realm.entities.player;
 using wServer.realm.terrain;
@@ -119,20 +121,38 @@ namespace wServer.realm
             return null;
         }
 
-        public bool IsPassable(int x, int y)
+        public bool IsPassable(double x, double y)
         {
-            var tile = Map[x, y];
-            ObjectDesc desc;
-            if (Manager.GameData.Tiles[tile.TileId].NoWalk)
+            int x_ = (int)x;
+            int y_ = (int)y;
+
+            if (!Map.Contains(x_, y_))
                 return false;
-            if (Manager.GameData.ObjectDescs.TryGetValue(tile.ObjType, out desc))
-            {
-                //if (!desc.Static)
-                    //return false;
-                if (desc.OccupySquare || desc.EnemyOccupySquare || desc.FullOccupy)
-                    return false;
+
+            TileDesc tile = Manager.GameData.Tiles[Map[x_, y_].TileId];
+            ObjectDesc desc;
+
+            if (tile.NoWalk)
+                return false;
+
+            if (Manager.GameData.ObjectDescs.TryGetValue(tile.ObjectType, out desc)) {
+                if (tile.ObjectType != 0 && desc != null)
+                {
+                    if (desc.FullOccupy || desc.EnemyOccupySquare || (desc.OccupySquare))
+                        return false;
+                }
             }
+
             return true;
+        }
+        public TileDesc getCurrentTile(Entity entity)
+        {
+            return getCurrentTile(entity.X, entity.Y);
+        }
+
+        public TileDesc getCurrentTile(float X, float Y)
+        {
+            return Manager.GameData.Tiles[Map[(int)X, (int)Y].TileId];
         }
 
         public int GetNextEntityId()
@@ -222,6 +242,10 @@ namespace wServer.realm
                     entity.Init(this);
                     Players.TryAdd(player.Id, player);
                     PlayersCollision.Insert(player);
+                    Timers.Add(new WorldTimer(5 * 1000, (w, RealmTime) => {
+                        if (player != null)
+                            player.detectGodExploit = true;
+                    }));
                 }
                 catch (Exception e)
                 {
@@ -286,6 +310,15 @@ namespace wServer.realm
 
         public virtual void LeaveWorld(Entity entity)
         {
+            if (!(entity is Pet || entity is Portal))
+                if (entity is Wall && entity.ObjectDesc != null && entity.ObjectDesc.FullOccupy || entity.ObjectDesc.OccupySquare || entity.ObjectDesc.EnemyOccupySquare)
+                {
+                    WmapTile tile = Map[(int)entity.X, (int)entity.Y].Clone();
+                    tile.TileId = Map[(int)entity.X, (int)entity.Y].TileId;
+                    tile.ObjType = 0;
+                    tile.ObjectDesc = null;
+                    Map[(int)entity.X, (int)entity.Y] = tile;
+                }
             if (entity is Player)
             {
                 Player dummy;
@@ -436,7 +469,12 @@ namespace wServer.realm
 
         public bool IsDungeon()
         {
-            return !(this is Nexus) && !(this is Market) && !(this is GameWorld) && !(this is ClothBazaar) && !(this is Test) && !(this is GuildHall) && !(this is Tutorial) && !(this is DailyQuestRoom) && !IsLimbo;
+            return !(this is TheInnerSanctum) && !(this is Nexus) && !(this is Market) && !(this is GameWorld) && !(this is ClothBazaar) && !(this is Test) && !(this is GuildHall) && !(this is Tutorial) && !(this is DailyQuestRoom) && !IsLimbo;
+        }
+
+        public bool IsBlocked()
+        {
+            return !(this is PetYard) && !(this is Vault) && !(this is OryxCastle) && !(this is TheInnerSanctum) && !(this is Nexus) && !(this is Market) && !(this is GameWorld) && !(this is ClothBazaar) && !(this is Test) && !(this is GuildHall) && !(this is Tutorial) && !(this is DailyQuestRoom) && !IsLimbo;
         }
 
         protected void LoadMap(string embeddedResource, MapType type)

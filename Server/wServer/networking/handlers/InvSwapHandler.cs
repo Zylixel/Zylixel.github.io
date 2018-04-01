@@ -98,13 +98,19 @@ namespace wServer.networking.handlers
                     return;
                 }
 
+                if (en1 is Player && en2 is Player & en1.Id != en2.Id)
+                {
+                    client.Player.kickforCheats(Player.possibleExploit.ITEM_STEAL);
+                    return;
+                };
+
                 if (!IsValid(item1, item2, con1, con2, packet, client))
                 {
                     client.Disconnect();
                     return;
                 }
 
-                if (con2 is OneWayContainer)
+                if (con2 is OneWayContainer || (en2.ObjectType == 0x0504 && Client.Player.Owner.Name != "Vault" && item1.Soulbound))
                 {
                     con1.Inventory[packet.SlotObject1.SlotId] = null;
                     con2.Inventory[packet.SlotObject2.SlotId] = null;
@@ -144,7 +150,6 @@ namespace wServer.networking.handlers
                     con1.Inventory[packet.SlotObject1.SlotId] = null;
                     con2.Inventory[packet.SlotObject2.SlotId] = item1;
                     (en2 as Player).CalcBoost();
-                    client.Player.SaveToCharacter();
                     client.Save();
                     en1.UpdateCount++;
                     en2.UpdateCount++;
@@ -152,15 +157,15 @@ namespace wServer.networking.handlers
                     return;
                 }
 
-                if (en1 is Player && en2 is Player & en1.Id != en2.Id)
-                {
-                    client.Manager.Chat.Announce($"{en1.Name} just tried to steal items from {en2.Name}'s inventory, GTFO YOU GOD DAMN FEGIT!!!!11111oneoneoneeleven");
-                    return;
-                };
-
                 con1.Inventory[packet.SlotObject1.SlotId] = item2;
+                if (item1 != null && item1.serialId == -1 && item1.firstUser == -1) //When players pick up items from mob drops
+                {
+                    Item newItem = Manager.CreateSerial((en2 as Player).SerialConvert(item1), DroppedIn: item1.droppedIn);
+                    newItem.firstUser = Convert.ToInt32((en2 as Player).AccountId);
+                    con2.Inventory[packet.SlotObject2.SlotId] = newItem;
+                } else
                 con2.Inventory[packet.SlotObject2.SlotId] = item1;
-
+                
                 if (item2 != null)
                 {
                     if (publicbags.Contains(en1.ObjectType) && item2.Soulbound)
@@ -199,8 +204,7 @@ namespace wServer.networking.handlers
                 if (client.Player.Owner is Vault)
                     if ((client.Player.Owner as Vault).PlayerOwnerName == client.Account.Name)
                         return;
-
-                client.Player.SaveToCharacter();
+                
                 client.Save();
             }, PendingPriority.Networking);
         }
@@ -220,10 +224,7 @@ namespace wServer.networking.handlers
                 {
                     Console.WriteLine("Cheat engine detected for player {0},\nInvalid InvSwap. {1} instead of {2}",
                             client.Player.Name, client.Manager.GameData.Items[packet.SlotObject1.ObjectType].ObjectId, item1.ObjectId);
-                    foreach (Player player in client.Player.Owner.Players.Values)
-                        if (player.Client.Account.Rank >= 2)
-                            player.SendInfo(String.Format("Cheat engine detected for player {0},\nInvalid InvSwap. {1} instead of {2}",
-                                client.Player.Name, client.Manager.GameData.Items[packet.SlotObject1.ObjectType].ObjectId, item1.ObjectId));
+                    client.Player.kickforCheats(Player.possibleExploit.INAVLID_INVSWAP);
                 }
             }
             if (con1 is Player && con2 is Player)
@@ -234,10 +235,7 @@ namespace wServer.networking.handlers
                 {
                     Console.WriteLine("Cheat engine detected for player {0},\nInvalid InvSwap. {1} instead of {2}",
                             client.Player.Name, item1.ObjectId, client.Manager.GameData.Items[packet.SlotObject2.ObjectType].ObjectId);
-                    foreach (Player player in client.Player.Owner.Players.Values)
-                        if (player.Client.Account.Rank >= 2)
-                            player.SendInfo(String.Format("Cheat engine detected for player {0},\nInvalid InvSwap. {1} instead of {2}",
-                                client.Player.Name, item1.ObjectId, client.Manager.GameData.Items[packet.SlotObject2.ObjectType].ObjectId));
+                    client.Player.kickforCheats(Player.possibleExploit.INAVLID_INVSWAP);
                 }
             }
 

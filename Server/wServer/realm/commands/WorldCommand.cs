@@ -21,7 +21,7 @@ namespace wServer.realm.commands
         {
         }
 
-        protected override bool Process(Player player, RealmTime time, string[] args)
+        protected override Tuple<bool, string>Process (Player player, RealmTime time, string[] args)
         {
             player.Client.Reconnect(new ReconnectPacket
             {
@@ -31,7 +31,7 @@ namespace wServer.realm.commands
                 Name = "Tutorial",
                 Key = Empty<byte>.Array
             });
-            return true;
+            return Tuple.Create(true, "Success");
         }
     }
 
@@ -42,18 +42,16 @@ namespace wServer.realm.commands
         {
         }
 
-        protected override bool Process(Player player, RealmTime time, string[] args)
+        protected override Tuple<bool, string>Process (Player player, RealmTime time, string[] args)
         {
             if(string.IsNullOrWhiteSpace(args[0]))
-            {
-                player.SendInfo("Usage: /trade <player name>");
-                return false;
-            }
+                return Tuple.Create(false, "Usage: /trade <player name>");
+
             player.RequestTrade(time, new RequestTradePacket
             {
                 Name = args[0]
             });
-            return true;
+            return Tuple.Create(true, "");
         }
     }
 
@@ -65,7 +63,7 @@ namespace wServer.realm.commands
         {
         }
 
-        protected override bool Process(Player player, RealmTime time, string[] args)
+        protected override Tuple<bool, string>Process (Player player, RealmTime time, string[] args)
         {
             StringBuilder sb = new StringBuilder("Players online: ");
             Player[] copy = player.Owner.Players.Values.ToArray();
@@ -74,23 +72,18 @@ namespace wServer.realm.commands
                 if (i != 0) sb.Append(", ");
                 sb.Append(copy[i].Name);
             }
-
-            player.SendInfo(sb.ToString());
-            return true;
+            return Tuple.Create(true, sb.ToString());
         }
     }
 
     internal class ServerCommand : Command
     {
-        public ServerCommand()
-            : base("server")
-        {
-        }
+        public ServerCommand() : base("server") {}
 
-        protected override bool Process(Player player, RealmTime time, string[] args)
+        protected override Tuple<bool, string>Process (Player player, RealmTime time, string[] args)
         {
             player.SendInfo(player.Owner.Name);
-            return true;
+            return Tuple.Create(true, "Success");
         }
     }
 
@@ -101,7 +94,7 @@ namespace wServer.realm.commands
         {
         }
 
-        protected override bool Process(Player player, RealmTime time, string[] args)
+        protected override Tuple<bool, string> Process (Player player, RealmTime time, string[] args)
         {
             if (player.HasConditionEffect(ConditionEffectIndex.Paused))
             {
@@ -110,26 +103,22 @@ namespace wServer.realm.commands
                     Effect = ConditionEffectIndex.Paused,
                     DurationMS = 0
                 });
-                player.SendInfo("Game resumed.");
+                return Tuple.Create(true, "Game resumed.");
             }
             else
             {
                 foreach (Enemy i in player.Owner.EnemiesCollision.HitTest(player.X, player.Y, 8).OfType<Enemy>())
                 {
                     if (i.ObjectDesc.Enemy)
-                    {
-                        player.SendInfo("Not safe to pause.");
-                        return false;
-                    }
+                        return Tuple.Create(false, "Not safe to pause.");
                 }
                 player.ApplyConditionEffect(new ConditionEffect
                 {
                     Effect = ConditionEffectIndex.Paused,
                     DurationMS = -1
                 });
-                player.SendInfo("Game paused.");
+                return Tuple.Create(true, "Game paused.");
             }
-            return true;
         }
     }
 
@@ -140,14 +129,13 @@ namespace wServer.realm.commands
         {
         }
 
-        protected override bool Process(Player player, RealmTime time, string[] args)
+        protected override Tuple<bool, string> Process (Player player, RealmTime time, string[] args)
         {
             try
             {
                 if (String.Equals(player.Name.ToLower(), args[0].ToLower()))
                 {
-                    player.SendInfo("You are already at yourself, and always will be!");
-                    return false;
+                    return Tuple.Create(false, "You are already at yourself, and always will be!");
                 }
 
                 foreach (KeyValuePair<int, Player> i in player.Owner.Players)
@@ -158,16 +146,16 @@ namespace wServer.realm.commands
                         {
                             ObjectId = i.Value.Id
                         });
-                        return true;
+                        return Tuple.Create(true, "Success");
                     }
                 }
-                player.SendInfo($"Cannot teleport, {args[0].Trim()} not found!");
+                return Tuple.Create(false, "Cannot teleport, {args[0].Trim()} not found!");
             }
             catch
             {
-                player.SendHelp("Usage: /teleport <player name>");
+                return Tuple.Create(false, "Usage: /teleport <player name>");
             }
-            return false;
+
         }
     }
 
@@ -175,27 +163,19 @@ namespace wServer.realm.commands
     {
         public TellCommand() : base("tell") { }
 
-        protected override bool Process(Player player, RealmTime time, string[] args)
+        protected override Tuple<bool, string> Process (Player player, RealmTime time, string[] args)
         {
             if (!player.NameChosen)
-            {
-                player.SendError("Choose a name!");
-                return false;
-            }
+                return Tuple.Create(false, "Choose a name!");
+
             if (args.Length < 2)
-            {
-                player.SendError("Usage: /tell <player name> <text>");
-                return false;
-            }
+                return Tuple.Create(false, "Usage: /tell <player name> <text>");
 
             string playername = args[0].Trim();
             string msg = string.Join(" ", args, 1, args.Length - 1);
 
             if (string.Equals(player.Name.ToLower(), playername.ToLower()))
-            {
-                player.SendInfo("Quit telling yourself!");
-                return false;
-            }
+                return Tuple.Create(false, "Quit telling yourself!");
 
             foreach (var i in player.Manager.Clients.Values)
             {
@@ -204,11 +184,10 @@ namespace wServer.realm.commands
                     player.SendStarText("*To: " + i.Player.Name, player.Stars, msg.ToSafeText());
                     i.Player.SendStarText("*" + player.Name, player.Stars, msg.ToSafeText());
                     
-                    return true;
+                    return Tuple.Create(true, "Success");
                 }
             }
-            player.SendError($"{playername} not found.");
-            return false;
+            return Tuple.Create(false, $"{playername} not found.");
         }
     }
     internal class TpMarket : Command
@@ -218,7 +197,7 @@ namespace wServer.realm.commands
         {
         }
 
-        protected override bool Process(Player player, RealmTime time, string[] args)
+        protected override Tuple<bool, string>Process (Player player, RealmTime time, string[] args)
         {
             player.Client.Reconnect(new ReconnectPacket
             {
@@ -228,7 +207,7 @@ namespace wServer.realm.commands
                 Name = "Market",
                 Key = Empty<byte>.Array
             });
-            return true;
+            return Tuple.Create(true, "Success");
         }
     }
     internal class TpRealm : Command
@@ -238,7 +217,7 @@ namespace wServer.realm.commands
         {
         }
 
-        protected override bool Process(Player player, RealmTime time, string[] args)
+        protected override Tuple<bool, string>Process (Player player, RealmTime time, string[] args)
         {
             player.Client.Reconnect(new ReconnectPacket
             {
@@ -248,18 +227,15 @@ namespace wServer.realm.commands
                 Name = "Frostz's Realm",
                 Key = Empty<byte>.Array
             });
-            return true;
+            return Tuple.Create(true, "Success");
         }
     }
 
     internal class TpCourt : Command
     {
-        public TpCourt()
-            : base("Court")
-        {
-        }
+        public TpCourt() : base("Court") {}
 
-        protected override bool Process(Player player, RealmTime time, string[] args)
+        protected override Tuple<bool, string>Process (Player player, RealmTime time, string[] args)
         {
             if (CourtOfBereavement._waitforplayers)
             {
@@ -271,27 +247,31 @@ namespace wServer.realm.commands
                     Name = "Court of Bereavement",
                     Key = Empty<byte>.Array
                 });
-                return true;
+                return Tuple.Create(true, "Success");
             }
-            player.SendError("No Court available to join!");
-            return false;
+            return Tuple.Create(false, "No Court available to join!");
+        }
+    }
+
+    internal class GetSerial : Command
+    {
+        public GetSerial() : base("Serial") {}
+
+        protected override Tuple<bool, string>Process (Player player, RealmTime time, string[] args)
+        {
+            return Tuple.Create(true, "Serial Number is " + player.Inventory[Convert.ToInt32(args[0])].serialId);
         }
     }
 
     internal class Godland : Command
     {
-        public Godland()
-            : base("gland")
-        {
-        }
+        public Godland() : base("gland") {}
 
-        protected override bool Process(Player player, RealmTime time, string[] args)
+        protected override Tuple<bool, string>Process (Player player, RealmTime time, string[] args)
         {
             if (!(player.Owner is GameWorld))
-            {
-                player.SendError("That command can't be used here!");
-                return false;
-            }
+                return Tuple.Create(false, "That command can't be used here!");
+
             player.Move(1000 + 0.5f, 1000 + 0.5f);
             if (player.Pet != null)
                 player.Pet.Move(1000 + 0.5f, 1000 + 0.5f);
@@ -310,8 +290,7 @@ namespace wServer.realm.commands
                     Y = player.Y
                 }
             }, null);
-            player.SendInfo("Success!");
-            return true;
+            return Tuple.Create(true, "Success!");
         }
     }
 }

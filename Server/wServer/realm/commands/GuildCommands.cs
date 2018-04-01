@@ -13,7 +13,7 @@ namespace wServer.realm.commands
     {
         public GuildChatCommand() : base("guild") { }
 
-        protected override bool Process(Player player, RealmTime time, string[] args)
+        protected override Tuple<bool, string> Process(Player player, RealmTime time, string[] args)
         {
             if (!player.Guild.IsDefault)
             {
@@ -21,24 +21,19 @@ namespace wServer.realm.commands
                 {
                     var saytext = string.Join(" ", args);
 
-                    if (String.IsNullOrWhiteSpace(saytext))
-                    {
-                        player.SendHelp("Usage: /guild <text>");
-                        return false;
-                    }
+                    if (string.IsNullOrWhiteSpace(saytext))
+                        return Tuple.Create(false, "Usage: /guild <text>");
                     {
                         player.Guild.Chat(player, saytext.ToSafeText());
-                        return true;
+                        return Tuple.Create(true, "");
                     }
                 }
                 catch
                 {
-                    player.SendInfo("Cannot guild chat!");
-                    return false;
+                    return Tuple.Create(false, "Cannot guild chat!");
                 }
             }
-            player.SendInfo("You need to be in a guild to use guild chat!");
-            return false;
+            return Tuple.Create(false, "You need to be in a guild to use guild chat!");
         }
     }
 
@@ -46,30 +41,27 @@ namespace wServer.realm.commands
     {
         public GChatCommand() : base("g") { }
 
-        protected override bool Process(Player player, RealmTime time, string[] args)
+        protected override Tuple<bool, string> Process(Player player, RealmTime time, string[] args)
         {
-            if(!player.Guild.IsDefault)
+            if (!player.Guild.IsDefault)
             {
                 try
                 {
                     var saytext = string.Join(" ", args);
 
                     if (string.IsNullOrWhiteSpace(saytext))
+                        return Tuple.Create(false, "Usage: /guild <text>");
                     {
-                        player.SendHelp("Usage: /g <text>");
-                        return false;
+                        player.Guild.Chat(player, saytext.ToSafeText());
+                        return Tuple.Create(true, "");
                     }
-                    player.Guild.Chat(player, saytext.ToSafeText());
-                    return true;
                 }
                 catch
                 {
-                    player.SendInfo("Cannot guild chat!");
-                    return false;
+                    return Tuple.Create(false, "Cannot guild chat!");
                 }
             }
-            player.SendInfo("You need to be in a guild to use guild chat!");
-            return false;
+            return Tuple.Create(false, "You need to be in a guild to use guild chat!");
         }
     }
 
@@ -77,13 +69,10 @@ namespace wServer.realm.commands
     {
         public GuildInviteCommand() : base("invite") { }
 
-        protected override bool Process(Player player, RealmTime time, string[] args)
+        protected override Tuple<bool, string> Process(Player player, RealmTime time, string[] args)
         {
             if (string.IsNullOrWhiteSpace(args[0]))
-            {
-                player.SendInfo("Usage: /invite <player name>");
-                return false;
-            }
+                return Tuple.Create(false, "Usage: /invite <player name>");
 
             if (player.Guild[player.AccountId].Rank >= 20)
             {
@@ -94,12 +83,12 @@ namespace wServer.realm.commands
                     if (target == null)
                     {
                         player.SendInfoWithTokens("server.invite_notfound", new KeyValuePair<string, object>("player", args[0]));
-                        return false;
+                        return Tuple.Create(false, "");
                     }
                     if (!target.NameChosen || player.Dist(target) > 20)
                     {
                         player.SendInfoWithTokens("server.invite_notfound", new KeyValuePair<string, object>("player", args[0]));
-                        return false;
+                        return Tuple.Create(false, "");
                     }
 
                     if (target.Guild.IsDefault)
@@ -111,23 +100,14 @@ namespace wServer.realm.commands
                         });
                         target.Invited = true;
                         player.SendInfoWithTokens("server.invite_succeed", new KeyValuePair<string, object>("player", args[0]), new KeyValuePair<string, object>("guild", player.Guild[player.AccountId].Name));
-                        return true;
+                        return Tuple.Create(true, "");
                     }
-                    player.SendError("Player is already in a guild!");
-                    return false;
+                    return Tuple.Create(false, "Player is already in a guild!");
                 }
             }
             else
-            {
-                player.Client.SendPacket(new TextPacket
-                {
-                    BubbleTime = 0,
-                    Stars = -1,
-                    Name = "",
-                    Text = "Members and initiates cannot invite!"
-                });
-            }
-            return false;
+                return Tuple.Create(false, "Members and initiates cannot invite!");
+            return Tuple.Create(true, "Success");
         }
     }
 
@@ -135,18 +115,17 @@ namespace wServer.realm.commands
     {
         public GuildJoinCommand() : base("join") { }
 
-        protected override bool Process(Player player, RealmTime time, string[] args)
+        protected override Tuple<bool, string> Process(Player player, RealmTime time, string[] args)
         {
-            if(String.IsNullOrWhiteSpace(args[0]))
-            {
-                player.SendInfo("Usage: /join <guild name>");
-                return false;
-            }
+            if(string.IsNullOrWhiteSpace(args[0]))
+                return Tuple.Create(false, "Usage: /join <guild name>");
+
             if (!player.Invited)
             {
                 player.SendInfoWithTokens("server.guild_not_invited", new KeyValuePair<string, object>("guild", args[0]));
-                return false;
+                return Tuple.Create(false, "");
             }
+
             player.Manager.Database.DoActionAsync(db =>
             {
                 var gStruct = db.GetGuild(args[0]);
@@ -168,7 +147,7 @@ namespace wServer.realm.commands
                     player.SendInfoWithTokens("server.guild_join_fail", new KeyValuePair<string, object>("error", "Guild does not exist"));
                 }
             });
-            return true;
+            return Tuple.Create(true, "Success");
         }
     }
 }

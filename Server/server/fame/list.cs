@@ -3,6 +3,7 @@
 using db;
 using MySql.Data.MySqlClient;
 using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Xml;
 
@@ -89,7 +90,24 @@ namespace server.fame
                             skinElem.InnerText = rdr.GetString("skin");
                             elem.AppendChild(skinElem);
                             XmlElement equElem = doc.CreateElement("Equipment");
-                            equElem.InnerText = rdr.GetString("items");
+                            string beforeItems = rdr.GetString("items");
+                            List<int> Items = new List<int>();
+                            foreach (int code in Utils.FromCommaSepString32(beforeItems))
+                            {
+                                Item item = null;
+                                using (Database db2 = new Database())
+                                    item = db2.getSerialInfo(code, Program.GameData);
+
+                                if (item != null)
+                                {
+                                    Items.Add(item.ObjectType);
+                                }
+                                else
+                                {
+                                    Items.Add(-1);
+                                }
+                            }
+                            equElem.InnerText = Utils.GetCommaSepString(Items.ToArray());
                             elem.AppendChild(equElem);
                             XmlElement fameElem = doc.CreateElement("TotalFame");
                             fameElem.InnerText = rdr.GetString("totalFame");

@@ -20,10 +20,12 @@ namespace wServer.realm.entities
         private readonly float speed;
         private Vector2 direction;
         private bool exploded;
+        private int explode;
 
-        public Decoy(RealmManager manager, Player player, int duration, float tps, int random)
+        public Decoy(RealmManager manager, Player player, int duration, float tps, int random, int explode)
             : base(manager, 0x0715, duration, true, true, true)
         {
+            this.explode = explode;
             this.player = player;
             this.duration = duration;
             speed = tps;
@@ -68,7 +70,7 @@ namespace wServer.realm.entities
         {
             if (HP > duration / 2)
             {
-                this.ValidateAndMove(
+                ValidateAndMove(
                     X + direction.X * speed * time.thisTickTimes / 1000,
                     Y + direction.Y * speed * time.thisTickTimes / 1000
                 );
@@ -76,6 +78,9 @@ namespace wServer.realm.entities
             if (HP < 250 && !exploded)
             {
                 exploded = true;
+                Entity entity = Resolve(player.Manager, 0x6148);
+                entity.Move(X, Y);
+                Owner.EnterWorld(entity);
                 Owner.BroadcastPacket(new ShowEffectPacket
                 {
                     EffectType = EffectType.AreaBlast,

@@ -21,7 +21,6 @@ namespace wServer.realm.entities.merchant
 
         private bool _playerMarket;
         private int _tickcount;
-        private int _accId;
         private int _itemChange;
 
         public static Random Random { get; private set; }
@@ -41,11 +40,17 @@ namespace wServer.realm.entities.merchant
         
         public int MType { get; set; }
         public int MTime { get; set; }
+        public int MRemaining { get; set; }
+        public int Discount { get; set; }
 
         protected override void ExportStats(IDictionary<StatsType, object> stats)
         {
             stats[StatsType.MerchantMerchandiseType] = MType;
+            stats[StatsType.MerchantRemainingCount] = MRemaining;
+            stats[StatsType.MerchantRemainingMinute] = MTime;
+            stats[StatsType.MerchantDiscount] = Discount;
             stats[StatsType.SellablePrice] = Price;
+            stats[StatsType.SellableRankRequirement] = RankReq;
             stats[StatsType.SellablePriceCurrency] = Currency;
 
             base.ExportStats(stats);
@@ -89,33 +94,31 @@ namespace wServer.realm.entities.merchant
                                     (player.SlotTypes[i] == 10 ||
                                      player.SlotTypes[i] == Convert.ToInt16(ist.Element("SlotType").Value)))
                                 {
-                                    player.Inventory[i] = Manager.GameData.Items[(ushort)MType];
-
                                     if (Currency == CurrencyType.Fame)
                                         player.CurrentFame = player.Client.Account.Stats.Fame = db.UpdateFame(player.Client.Account, -Price);
                                     else
                                         player.Credits = player.Client.Account.Credits = db.UpdateCredit(player.Client.Account, -Price);
 
                                     if (_playerMarket) {
-                                        _accId = db.GetMarketCharId(MType, Price);
-
-                                        if (logic.CheckConfig.IsDebugOn())
-                                            Console.WriteLine("Attempted to give Player " + _accId + ", " + Price + " fame");
+                                        var item = db.GetMarketInfo(MType, Price, player.Manager.GameData);
+                                        
                                         MySqlCommand cmd = db.CreateQuery();
                                         cmd.CommandText = "UPDATE stats SET fame = fame + @Price WHERE accId=@accId";
-                                        cmd.Parameters.AddWithValue("@accId", _accId);
+                                        cmd.Parameters.AddWithValue("@accId", item.currentUser);
                                         cmd.Parameters.AddWithValue("@Price", Price);
                                         cmd.ExecuteNonQuery();
 
-                                        if (logic.CheckConfig.IsDebugOn())
-                                            Console.WriteLine("Attemping to delete item from database: " + MType + " | " + Price);
-                                        cmd.CommandText = "DELETE FROM market WHERE itemid=@itemid AND fame=@fame AND playerid=@id";
-                                        cmd.Parameters.AddWithValue("@itemid", MType);
-                                        cmd.Parameters.AddWithValue("@fame", Price);
-                                        cmd.Parameters.AddWithValue("@id", _accId);
+                                        cmd.CommandText = "DELETE FROM market WHERE serialid=@id";
+                                        cmd.Parameters.AddWithValue("@id", item.serialId);
                                         cmd.ExecuteNonQuery();
-                                        
+
+                                        player.Inventory[i] = item;
+
                                         Merchant.updatePrice(MType, Manager);
+                                    }
+                                    else
+                                    {
+                                        player.Inventory[i] = Manager.CreateSerial(Manager.GameData.Items[(ushort)MType], "Nexus Merchant");
                                     }
 
                                     player.Client.SendPacket(new BuyResultPacket
@@ -166,9 +169,7 @@ namespace wServer.realm.entities.merchant
                 if (_playerMarket)
                 {
                     if (MType == -1)
-                    {
                         Owner?.LeaveWorld(this);
-                    }
                     else if (MTime == -1 && Owner != null || !MerchantLists.ZyList.Contains(MType))
                     {
                         Recreate(this, false);
@@ -181,13 +182,13 @@ namespace wServer.realm.entities.merchant
                     }
 
                     _tickcount++;
-                    if (_tickcount % (Manager?.TPS * 60) == 0) //once per minute after spawning
-                    {
-                        MTime--;
-                        UpdateCount++;
-                    }
                 }
-                
+                if (_tickcount % (Manager?.TPS * 60) == 0) //once per minute after spawning
+                {
+                    MTime--;
+                    UpdateCount++;
+                }
+
                 base.Tick(time);
             }
             catch (Exception ex)
@@ -214,24 +215,14 @@ namespace wServer.realm.entities.merchant
         {
             MType = -1;
             var list = MerchantLists.ZyList;
-            if (Owner.Map[(int)X, (int)Y].Region == TileRegion.Store_1)
-                list = MerchantLists.KeyList;
-            else if (Owner.Map[(int)X, (int)Y].Region == TileRegion.Store_12)
-                list = MerchantLists.AccessoryDyeList;
-            else if (Owner.Map[(int)X, (int)Y].Region == TileRegion.Store_13)
-                list = MerchantLists.ClothingClothList;
-            else if (Owner.Map[(int)X, (int)Y].Region == TileRegion.Store_14)
-                list = MerchantLists.AccessoryClothList;
-            else if (Owner.Map[(int)X, (int)Y].Region == TileRegion.Store_15)
-                list = MerchantLists.ClothingDyeList;
-            else if (Owner.Map[(int)X, (int)Y].Region == TileRegion.Store_21)
-                list = MerchantLists.AccessoryClothList;
-            else if (Owner.Map[(int)X, (int)Y].Region == TileRegion.Store_22)
-                list = MerchantLists.AccessoryDyeList;
-            else if (Owner.Map[(int)X, (int)Y].Region == TileRegion.Store_23)
-                list = MerchantLists.ClothingClothList;
-            else if (Owner.Map[(int)X, (int)Y].Region == TileRegion.Store_24)
-                list = MerchantLists.ClothingDyeList;
+            switch (Owner.Map[(int)X, (int)Y].Region)
+            {
+                case TileRegion.Store_1: list = MerchantLists.KeyList; break;
+                case TileRegion.Store_12: list = MerchantLists.AccessoryDyeList; break;
+                case TileRegion.Store_13: list = MerchantLists.ClothingClothList; break;
+                case TileRegion.Store_14: list = MerchantLists.AccessoryClothList; break;
+                case TileRegion.Store_15: list = MerchantLists.ClothingDyeList; break;
+            }
 
             if (list == MerchantLists.ZyList)
                 _playerMarket = true;
@@ -240,21 +231,14 @@ namespace wServer.realm.entities.merchant
             foreach (var t1 in list)
             {
                 if (_itemChange != -1)
-                {
                     MType = _itemChange;
-                    if (logic.CheckConfig.IsDebugOn())
-                        Console.WriteLine("Refreshing Merchant " + MType);
-                }
                 else
-                {
-                    {
-                        MType = t1;
-                        if (logic.CheckConfig.IsDebugOn())
-                            Console.WriteLine("Randomizing Merchant to be " + t1);
-                    }
-                }
+                    MType = t1;
 
-                MTime = Random.Next(2, 5);
+                if (MType == -1)
+                    Owner?.LeaveWorld(this);
+
+                MTime = Random.Next(2, 3);
 
                 Price = _playerMarket ? MerchantLists.price[MType] : ClothPrice;
                 Currency = list == MerchantLists.KeyList ? CurrencyType.Gold : CurrencyType.Fame;

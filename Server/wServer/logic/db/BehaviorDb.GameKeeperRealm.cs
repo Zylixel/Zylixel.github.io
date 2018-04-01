@@ -422,7 +422,7 @@ namespace wServer.logic
                         ),
                     new State("shootTomb2",
                         new Shoot(100, 1, projectileIndex: 0, shootAngle: 200, fixedAngle: 200, coolDown: 10000000),
-                        new TimedTransition(500, "kill2")
+                        new TimedTransition(200, "kill2")
                         ),
                     new State("kill2",
                         new Order(999, "Keeper Defender", "die"),
@@ -668,7 +668,7 @@ namespace wServer.logic
                     new ItemLoot("Sword of the Realm", 0.01),
                     new ItemLoot("Helm of Unadulterated Evil", 0.01),
                     new ItemLoot("Armor Of Gilgor", 0.01),
-                    new ItemLoot("Amulet of the Gods", 0.01)
+                    new ItemLoot("Amulet of Gods", 0.01)
                 )
             )
         ;

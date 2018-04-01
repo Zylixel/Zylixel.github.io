@@ -21,20 +21,30 @@ namespace server.account
             {
                 string authKey = Database.GenerateRandomString(128);
                 var cmd = db.CreateQuery();
-                cmd.CommandText = "UPDATE accounts SET authToken=@authToken WHERE uuid=@email;";
-                cmd.Parameters.AddWithValue("@authToken", authKey);
+                cmd.CommandText = "UPDATE accounts SET authToken=@auth WHERE uuid=@email;";
+                cmd.Parameters.AddWithValue("@auth", authKey);
                 cmd.Parameters.AddWithValue("@email", Query["guid"]);
                 if (cmd.ExecuteNonQuery() == 1)
                 {
+                    var username = "";
+                    cmd = db.CreateQuery();
+                    cmd.CommandText = "SELECT name from accounts Where uuid=@email;";
+                    cmd.Parameters.AddWithValue("@email", Query["guid"]);
+                    using (var rdr = cmd.ExecuteReader())
+                        if (rdr.HasRows)
+                        {
+                            rdr.Read();
+                            username = rdr.GetString("name");
+                            rdr.Close();
+                        }
+
                     MailMessage message = new MailMessage();
                     message.To.Add(Query["guid"]);
-                    message.Subject = "Forgot Password";
-                    message.From = new MailAddress(Program.Settings.GetValue<string>("serverEmail", ""), "Forgot Passowrd");
-                    message.Body = emailBody.
-                        Replace("{RPLINK}", String.Format("{0}/{1}{2}", Program.Settings.GetValue<string>("serverDomain", "localhost"), "account/resetPassword?authToken=", authKey)).
-                        Replace("{SUPPORTLINK}", String.Format("{0}", Program.Settings.GetValue<string>("supportLink", "localhost"))).
-                        Replace("{SERVERDOMAIN}", Program.Settings.GetValue<string>("serverDomain", "localhost"));
-
+                    message.Subject = "New Password Requested";
+                    message.From = new MailAddress(Program.Settings.GetValue<string>("serverEmail", ""), "Frostz' Realm Staff");
+                    message.Body = emailBody.Replace("{PASSWORDLINK}", Program.Settings.GetValue<string>("serverDomain", "Error") + "/account/resetPassword?authtoken=" + authKey)
+                                            .Replace("{USERNAME}", username);
+                   
                     Program.SendEmail(message, true);
                 }
                 else
@@ -43,21 +53,17 @@ namespace server.account
             }
         }
 
-        const string emailBody = @"Hello,
+        const string emailBody = @"Hello {USERNAME},
 
-If your wish to reset your password in Fabiano Swagger of Doom, please use the 
-link below:
+Your password for Frostz' Realm was requested to be reset. 
 
-{RPLINK}
+Get your new password here:
+{PASSWORDLINK}
 
-If you do NOT wish to reset your password, do nothing.
+If you did not request this, ignore this email.
+Do not reply to this email, it will not be read.
 
-Do not reply to this email, it will not be read. If you need support, go 
-here:
-
-{SUPPORTLINK}
-
-- Fabiano Swagger of Doom Team
-{SERVERDOMAIN}";
+- Frostz' Realm Staff";
     }
 }
+//If you did not do this please contact a staff member here: https://discord.gg/HtdwsAc

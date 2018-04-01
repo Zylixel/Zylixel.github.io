@@ -182,17 +182,11 @@ namespace wServer.realm
 
         private async void Trade()
         {
-            if (player1.Client.Account.Rank == 2 || player2.Client.Account.Rank == 2)
-            {
-                TradeError("Moderators cannot trade with other players");
-                return;
-            }
-
             for (int i = 0; i < player1Trades.Length; i++)
             {
                 if (player1Trades[i])
                 {
-                    if (player1.Inventory[i].Secret)
+                    if (player1.Inventory[i].Soulbound)
                     {
                         TradeError($"You cannot trade {player1.Inventory[i].ObjectId}");
                         return;
@@ -204,7 +198,7 @@ namespace wServer.realm
             {
                 if (player2Trades[i])
                 {
-                    if (player2.Inventory[i].Secret)
+                    if (player2.Inventory[i].Soulbound)
                     { 
                     TradeError($"You cannot trade {player2.Inventory[i].ObjectId}");
                     return;

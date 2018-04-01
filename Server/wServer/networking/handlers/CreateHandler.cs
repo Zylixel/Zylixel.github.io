@@ -2,6 +2,8 @@
 
 using db;
 using MySql.Data.MySqlClient;
+using System;
+using System.Linq;
 using wServer.networking.cliPackets;
 using wServer.networking.svrPackets;
 using wServer.realm.entities.player;
@@ -40,7 +42,7 @@ namespace wServer.networking.handlers
                         return;
                     }
                 }
-                client.Character = Database.CreateCharacter(client.Manager.GameData, (ushort) packet.ClassType,
+                client.Character = dbx.CreateCharacter(client.Manager.GameData, (ushort) packet.ClassType,
                     nextCharId);
 
                 int[] stats = {

@@ -17,6 +17,8 @@ namespace wServer.networking.handlers
             {
                 if (client.Player?.Owner == null) return;
 
+                client.Player.CheckPosition(packet.Position.X, packet.Position.Y);
+
                 client.Player.Flush();
 
                 if (client.Player.HasConditionEffect(ConditionEffectIndex.Paralyzed)) return;

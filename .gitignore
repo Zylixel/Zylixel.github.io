@@ -216,7 +216,6 @@ pip-log.txt
 .mr.developer.cfg
 
 
-Server/.dropbox
-Server/.vs
-Client/src/kabam/rotmg/application/impl/ProductionSetup.as
+.dropbox/
+.vs/
 Server/packages/

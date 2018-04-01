@@ -16,6 +16,118 @@
     <feedPower>350</feedPower>
     <DisplayId>{equip.Ring_of_Decades}</DisplayId>
   </Object>
+  <Object type="0x6066" id="Ring of Hartrees">
+    <Class>Equipment</Class>
+    <Item/>
+    <Texture>
+      <File>lofiObj3</File>
+      <Index>0x565</Index>
+    </Texture>
+    <SlotType>9</SlotType>
+    <Tier>7</Tier>
+    <Description>Cut from a fallen moon, a deep yellow emanates an unearthly glow, hinting at the power fused within.</Description>
+    <ActivateOnEquip stat="3" amount="190">IncrementStat</ActivateOnEquip>
+    <BagType>4</BagType>
+    <FameBonus>5</FameBonus>
+    <feedPower>350</feedPower>
+    <DisplayId>Ring of Hartrees</DisplayId>
+  </Object>
+  <Object type="0x6067" id="Ring of Sthènes">
+    <Class>Equipment</Class>
+    <Item/>
+    <Texture>
+      <File>lofiObj3</File>
+      <Index>0x566</Index>
+    </Texture>
+    <SlotType>9</SlotType>
+    <Tier>7</Tier>
+    <Description>Cut from a fallen meteor, a deep pink emanates an unearthly glow, hinting at the power fused within.</Description>
+    <ActivateOnEquip stat="20" amount="10">IncrementStat</ActivateOnEquip>
+    <BagType>4</BagType>
+    <FameBonus>5</FameBonus>
+    <feedPower>350</feedPower>
+    <DisplayId>Ring of Sthènes</DisplayId>
+  </Object>
+  <Object type="0x6068" id="Ring of Graves">
+    <Class>Equipment</Class>
+    <Item/>
+    <Texture>
+      <File>lofiObj3</File>
+      <Index>0x567</Index>
+    </Texture>
+    <SlotType>9</SlotType>
+    <Tier>7</Tier>
+    <Description>Cut from a fallen meteor, a deep gray emanates an unearthly glow, hinting at the power fused within.</Description>
+    <ActivateOnEquip stat="21" amount="10">IncrementStat</ActivateOnEquip>
+    <BagType>4</BagType>
+    <FameBonus>5</FameBonus>
+    <feedPower>350</feedPower>
+    <DisplayId>Ring of Graves</DisplayId>
+  </Object>
+  <Object type="0x6069" id="Ring of Lightyears">
+    <Class>Equipment</Class>
+    <Item/>
+    <Texture>
+      <File>lofiObj3</File>
+      <Index>0x568</Index>
+    </Texture>
+    <SlotType>9</SlotType>
+    <Tier>7</Tier>
+    <Description>Cut from a fallen comet, a deep green emanates an unearthly glow, hinting at the power fused within.</Description>
+    <ActivateOnEquip stat="22" amount="10">IncrementStat</ActivateOnEquip>
+    <BagType>4</BagType>
+    <FameBonus>5</FameBonus>
+    <feedPower>350</feedPower>
+    <DisplayId>Ring of Lightyears</DisplayId>
+  </Object>
+  <Object type="0x6070" id="Ring of Acres">
+    <Class>Equipment</Class>
+    <Item/>
+    <Texture>
+      <File>lofiObj3</File>
+      <Index>0x569</Index>
+    </Texture>
+    <SlotType>9</SlotType>
+    <Tier>7</Tier>
+    <Description>Cut from a fallen meteor, a deep orange emanates an unearthly glow, hinting at the power fused within.</Description>
+    <ActivateOnEquip stat="28" amount="10">IncrementStat</ActivateOnEquip>
+    <BagType>4</BagType>
+    <FameBonus>5</FameBonus>
+    <feedPower>350</feedPower>
+    <DisplayId>Ring of Acres</DisplayId>
+  </Object>
+  <Object type="0x6071" id="Ring of Octaves">
+    <Class>Equipment</Class>
+    <Item/>
+    <Texture>
+      <File>lofiObj3</File>
+      <Index>0x56a</Index>
+    </Texture>
+    <SlotType>9</SlotType>
+    <Tier>7</Tier>
+    <Description>Cut from a fallen meteor, a deep red emanates an unearthly glow, hinting at the power fused within.</Description>
+    <ActivateOnEquip stat="26" amount="10">IncrementStat</ActivateOnEquip>
+    <BagType>4</BagType>
+    <FameBonus>5</FameBonus>
+    <feedPower>350</feedPower>
+    <DisplayId>Ring of Octaves</DisplayId>
+  </Object>
+  <Object type="0x6072" id="Ring of Rankines">
+    <Class>Equipment</Class>
+    <Item/>
+    <Texture>
+      <File>lofiObj3</File>
+      <Index>0x56b</Index>
+    </Texture>
+    <SlotType>9</SlotType>
+    <Tier>7</Tier>
+    <Description>Cut from a fallen meteor, a deep blue emanates an unearthly glow, hinting at the power fused within.</Description>
+    <ActivateOnEquip stat="27" amount="10">IncrementStat</ActivateOnEquip>
+    <BagType>4</BagType>
+    <FameBonus>5</FameBonus>
+    <feedPower>350</feedPower>
+    <DisplayId>Ring of Rankines</DisplayId>
+  </Object>
   <Object id="Cloak of Utter Rage" type="0x6026">
     <Class>Equipment</Class>
     <Item />
@@ -39,7 +151,7 @@
     <feedPower>850</feedPower>
     <DisplayId>Cloak of Utter Rage</DisplayId>
   </Object>
-  <Object id="Mantle of Ash" setType="0x2aa2" setName="Royal Dragon Set" ext="true" type="0x6025">
+  <Object id="Mantle of Ash" setType="0x2aa2" setName="Royal Dragon Set" type="0x6025">
     <Class>Equipment</Class>
     <Item />
     <Texture>
@@ -104,7 +216,7 @@
     <feedPower>800</feedPower>
     <DisplayId>Dragonbreath Scepter</DisplayId>
   </Object>
-  <Object id="Pendant of the Dusk Talon" setType="0x2aa2" setName="Royal Dragon Set" ext="true" type="0x6022">
+  <Object id="Pendant of the Dusk Talon" setType="0x2aa2" setName="Royal Dragon Set" type="0x6022">
     <Class>Equipment</Class>
     <Item />
     <Texture>
@@ -219,21 +331,6 @@
     <feedPower>500</feedPower>
     <DisplayId>Eye of Osiris</DisplayId>
   </Object>
-  <Object id="Inner Sanctum Key" type="0x6021">
-    <Class>Equipment</Class>
-    <Item />
-    <Texture>
-      <File>lofiObj3</File>
-      <Index>0x54E</Index>
-    </Texture>
-    <SlotType>10</SlotType>
-    <Description>Not Your Average Ice Cave!</Description>
-    <Sound>use_key</Sound>
-    <Consumable />
-    <Activate id="Inner Sanctum Portal">Create</Activate>
-    <feedPower>145</feedPower>
-    <DisplayId>Inner Sanctum Key</DisplayId>
-  </Object>
   <Object id="Zylixel" type="0xc358">
     <Class>Character</Class>
     <Texture>
@@ -291,22 +388,6 @@
     <FameBonus>6</FameBonus>
     <feedPower>750</feedPower>
     <DisplayId>{equip.Void_Blade}</DisplayId>
-  </Object>
-  <Object type="0x6027" id="Ring of Insane Attack">
-    <Class>Equipment</Class>
-    <Item />
-    <Texture>
-      <File>lofiObj3</File>
-      <Index>0x478</Index>
-    </Texture>
-    <SlotType>9</SlotType>
-    <Tier>7</Tier>
-    <Description>An extraordinary ring brought to you by the mad god himself.</Description>
-    <ActivateOnEquip stat="20" amount="10">IncrementStat</ActivateOnEquip>
-    <BagType>4</BagType>
-    <FameBonus>5</FameBonus>
-    <feedPower>425</feedPower>
-    <DisplayId>Ring of Insane Attack</DisplayId>
   </Object>
   <Object type="0x6028" id="Void Star">
     <Class>Projectile</Class>
@@ -889,118 +970,6 @@
     <MpCost>95</MpCost>
     <Activate totalDamage="260" maxTargets="10">Lightning</Activate>
   </Object>
-  <Object type="0x6066" id="Ring of Hartrees">
-    <Class>Equipment</Class>
-    <Item />
-    <Texture>
-      <File>lofiObj3</File>
-      <Index>0x565</Index>
-    </Texture>
-    <SlotType>9</SlotType>
-    <Tier>7</Tier>
-    <Description>Cut from a fallen moon, a deep yellow emanates an unearthly glow, hinting at the power fused within.</Description>
-    <ActivateOnEquip stat="3" amount="190">IncrementStat</ActivateOnEquip>
-    <BagType>4</BagType>
-    <FameBonus>5</FameBonus>
-    <feedPower>350</feedPower>
-    <DisplayId>Ring of Hartrees</DisplayId>
-  </Object>
-  <Object type="0x6067" id="Ring of Sthènes">
-    <Class>Equipment</Class>
-    <Item />
-    <Texture>
-      <File>lofiObj3</File>
-      <Index>0x566</Index>
-    </Texture>
-    <SlotType>9</SlotType>
-    <Tier>7</Tier>
-    <Description>Cut from a fallen meteor, a deep pink emanates an unearthly glow, hinting at the power fused within.</Description>
-    <ActivateOnEquip stat="20" amount="10">IncrementStat</ActivateOnEquip>
-    <BagType>4</BagType>
-    <FameBonus>5</FameBonus>
-    <feedPower>350</feedPower>
-    <DisplayId>Ring of Sthènes</DisplayId>
-  </Object>
-  <Object type="0x6068" id="Ring of Graves">
-    <Class>Equipment</Class>
-    <Item />
-    <Texture>
-      <File>lofiObj3</File>
-      <Index>0x567</Index>
-    </Texture>
-    <SlotType>9</SlotType>
-    <Tier>7</Tier>
-    <Description>Cut from a fallen meteor, a deep gray emanates an unearthly glow, hinting at the power fused within.</Description>
-    <ActivateOnEquip stat="21" amount="10">IncrementStat</ActivateOnEquip>
-    <BagType>4</BagType>
-    <FameBonus>5</FameBonus>
-    <feedPower>350</feedPower>
-    <DisplayId>Ring of Graves</DisplayId>
-  </Object>
-  <Object type="0x6069" id="Ring of Lightyears">
-    <Class>Equipment</Class>
-    <Item />
-    <Texture>
-      <File>lofiObj3</File>
-      <Index>0x568</Index>
-    </Texture>
-    <SlotType>9</SlotType>
-    <Tier>7</Tier>
-    <Description>Cut from a fallen comet, a deep green emanates an unearthly glow, hinting at the power fused within.</Description>
-    <ActivateOnEquip stat="22" amount="10">IncrementStat</ActivateOnEquip>
-    <BagType>4</BagType>
-    <FameBonus>5</FameBonus>
-    <feedPower>350</feedPower>
-    <DisplayId>Ring of Lightyears</DisplayId>
-  </Object>
-  <Object type="0x6070" id="Ring of Acres">
-    <Class>Equipment</Class>
-    <Item />
-    <Texture>
-      <File>lofiObj3</File>
-      <Index>0x569</Index>
-    </Texture>
-    <SlotType>9</SlotType>
-    <Tier>7</Tier>
-    <Description>Cut from a fallen meteor, a deep orange emanates an unearthly glow, hinting at the power fused within.</Description>
-    <ActivateOnEquip stat="28" amount="10">IncrementStat</ActivateOnEquip>
-    <BagType>4</BagType>
-    <FameBonus>5</FameBonus>
-    <feedPower>350</feedPower>
-    <DisplayId>Ring of Acres</DisplayId>
-  </Object>
-  <Object type="0x6071" id="Ring of Octaves">
-    <Class>Equipment</Class>
-    <Item />
-    <Texture>
-      <File>lofiObj3</File>
-      <Index>0x56a</Index>
-    </Texture>
-    <SlotType>9</SlotType>
-    <Tier>7</Tier>
-    <Description>Cut from a fallen meteor, a deep red emanates an unearthly glow, hinting at the power fused within.</Description>
-    <ActivateOnEquip stat="26" amount="10">IncrementStat</ActivateOnEquip>
-    <BagType>4</BagType>
-    <FameBonus>5</FameBonus>
-    <feedPower>350</feedPower>
-    <DisplayId>Ring of Octaves</DisplayId>
-  </Object>
-  <Object type="0x6072" id="Ring of Rankines">
-    <Class>Equipment</Class>
-    <Item />
-    <Texture>
-      <File>lofiObj3</File>
-      <Index>0x56b</Index>
-    </Texture>
-    <SlotType>9</SlotType>
-    <Tier>7</Tier>
-    <Description>Cut from a fallen meteor, a deep blue emanates an unearthly glow, hinting at the power fused within.</Description>
-    <ActivateOnEquip stat="27" amount="10">IncrementStat</ActivateOnEquip>
-    <BagType>4</BagType>
-    <FameBonus>5</FameBonus>
-    <feedPower>350</feedPower>
-    <DisplayId>Ring of Rankines</DisplayId>
-  </Object>
   <Object type="0x6073" id="Gigacorn Pet Stone">
     <Class>Equipment</Class>
     <Item />
@@ -1012,7 +981,7 @@
     <Description>Consume this Item to turn change the skin of your current pet\n\nThis Result is permanent</Description>
     <Consumable />
     <BagType>0</BagType>
-    <Activate>PetSkin</Activate>
+    <Activate petType="24692">PetSkin</Activate>
     <feedPower>5000</feedPower>
     <DisplayId>Gigacorn Pet Stone</DisplayId>
   </Object>
@@ -1657,8 +1626,8 @@
     </Texture>
     <SlotType>22</SlotType>
     <Description>Seemingly bleak at first, this prism has erratic magical properties looming inside, which affect the light it scatters in unforeseen ways.</Description>
-    <Projectile>
-      <ObjectId>Dire Blast</ObjectId>
+    <Projectile id = "0">
+      <ObjectId>Dire Shot</ObjectId>
       <Speed>60</Speed>
       <MinDamage>200</MinDamage>
       <MaxDamage>320</MaxDamage>
@@ -1673,19 +1642,24 @@
     <FameBonus>6</FameBonus>
     <MpCost>80</MpCost>
     <Activate duration="3" explode="1" bullet="12">Decoy</Activate>
-    <Activate objectId="Dire Blast">Pet</Activate>
     <feedPower>900</feedPower>
   </Object>
   <Object type="0x6148" id="Dire Blast">
     <Class>Character</Class>
     <Texture>
-      <File>d3LofiObjEmbed</File>
-      <Index>0x1c</Index>
+      <File>invisible</File>
+      <Index>0x00</Index>
     </Texture>
-    <NoMiniMap />
-    <Sound id="0">weapon/fire_wand</Sound>
-    <ShadowSize>70</ShadowSize>
-    <Size>100</Size>
+    <Projectile id="0">
+      <ObjectId>Dire Shot</ObjectId>
+      <Speed>60</Speed>
+      <MinDamage>200</MinDamage>
+      <MaxDamage>320</MaxDamage>
+      <LifetimeMS>700</LifetimeMS>
+      <Size>80</Size>
+    </Projectile>
+    <NoMiniMap/>
+    <ShadowSize>0</ShadowSize>
     <DisplayId>Dire Blast</DisplayId>
   </Object>
   <Object type="0x0d43" id="Spiteful Scutum">
@@ -3243,6 +3217,7 @@
     </Texture>
     <SlotType>24</SlotType>
     <Tier>14</Tier>
+    <Secret/>
     <Description>An awe-inspiring sword gifted to only the most worthy mortals from the heavens themselves.</Description>
     <RateOfFire>1</RateOfFire>
     <Sound>weapon/long_sword</Sound>
@@ -4382,31 +4357,6 @@
     <feedPower>1250</feedPower>
     <DisplayId>Crystal Wand of Evolution</DisplayId>
   </Object>
-  <Object type="0x7001" id="Test Spell">
-    <Class>Equipment</Class>
-    <Item />
-    <Texture>
-      <File>lofiObj6</File>
-      <Index>0x5a</Index>
-    </Texture>
-    <SlotType>11</SlotType>
-    <Description>{equip.A_spell_that_shoots_fire_in_all_directions.}</Description>
-    <Sound>spell/fire_spray</Sound>
-    <Projectile>
-      <ObjectId>Fire Bolt</ObjectId>
-      <Speed>160</Speed>
-      <MinDamage>100</MinDamage>
-      <MaxDamage>250</MaxDamage>
-      <LifetimeMS>1000</LifetimeMS>
-    </Projectile>
-    <Usable />
-    <BagType>6</BagType>
-    <MpCost>95</MpCost>
-    <Activate effect="Berserk" duration="4">ConditionEffectSelf</Activate>
-    <Activate>BulletNova</Activate>
-    <feedPower>5000</feedPower>
-    <DisplayId>Test Spell</DisplayId>
-  </Object>
   <Object type="0x613e" id="Treasure Shovel">
     <Class>Equipment</Class>
     <Item />
@@ -4712,48 +4662,6 @@
       <ConditionEffect duration="2">Weak</ConditionEffect>
     </Projectile>
   </Object>
-  <Object type="0x6200" id="Other Side Key 1">
-    <Class>Equipment</Class>
-    <Item />
-    <Texture>
-      <File>lofiObj9</File>
-      <Index>0x6f</Index>
-    </Texture>
-    <SlotType>10</SlotType>
-    <Description>A fragment of the Other Side Key, find 2 others to make a whole</Description>
-    <Sound>use_key</Sound>
-    <BagType>4</BagType>
-    <feedPower>250</feedPower>
-    <DisplayId>Fragment of the Other Side Key</DisplayId>
-  </Object>
-  <Object type="0x6201" id="Other Side Key 2">
-    <Class>Equipment</Class>
-    <Item />
-    <Texture>
-      <File>lofiObj9</File>
-      <Index>0x7e</Index>
-    </Texture>
-    <SlotType>10</SlotType>
-    <Description>A fragment of the Other Side Key, find 2 others to make a whole</Description>
-    <Sound>use_key</Sound>
-    <BagType>4</BagType>
-    <feedPower>250</feedPower>
-    <DisplayId>Fragment of the Other Side Key</DisplayId>
-  </Object>
-  <Object type="0x6202" id="Other Side Key 3">
-    <Class>Equipment</Class>
-    <Item />
-    <Texture>
-      <File>lofiObj9</File>
-      <Index>0x7f</Index>
-    </Texture>
-    <SlotType>10</SlotType>
-    <Description>A fragment of the Other Side Key, find 2 others to make a whole</Description>
-    <Sound>use_key</Sound>
-    <BagType>4</BagType>
-    <feedPower>250</feedPower>
-    <DisplayId>Fragment of the Other Side Key</DisplayId>
-  </Object>
   <Object type="0x6203" id="Amulet of Actual Resurrection">
     <Class>Equipment</Class>
     <Item />
@@ -4992,7 +4900,7 @@
     <Description>An old looking chest from the Tinkerer's vault. It contains valuable items.</Description>
     <Consumable />
     <Soulbound />
-    <Activate id="Quest Chest" onlyInVault="1">Create</Activate>
+    <Activate id="Quest Chest" onlyInVault="1">CreateChest</Activate>
     <ExtraTooltipData>
       <EffectInfo name="Info" description="Only usable in the Vault. Use to spawn a destructible chest containing rewards." />
     </ExtraTooltipData>
@@ -5011,7 +4919,7 @@
     <Description>A rich looking chest from the Tinkerer's vault. It contains wonderful items.</Description>
     <Consumable />
     <Soulbound />
-    <Activate id="Epic Quest Chest" onlyInVault="1">Create</Activate>
+    <Activate id="Epic Quest Chest" onlyInVault="1">CreateChest</Activate>
     <ExtraTooltipData>
       <EffectInfo name="Info" description="Only usable in the Vault. Use to spawn a destructible chest containing rewards." />
     </ExtraTooltipData>
@@ -5079,5 +4987,327 @@
     </Texture>
     <ShadowSize>0</ShadowSize>
     <DisplayId>Player Market Portal</DisplayId>
+  </Object>
+  <Object type="0x6300" id="Nexus Particles">
+    <Class>Character</Class>
+    <Texture>
+      <File>invisible</File>
+      <Index>0</Index>
+    </Texture>
+    <Size>0</Size>
+    <ShadowSize>0</ShadowSize>
+    <NoMiniMap/>
+    <StasisImmune/>
+    <Effect color="0x3F5F7F" rate="20" life="2" lifeVariance=".5" speed="0" speedVariance="0.2" size="6" rise="-.6" riseVariance="0" rangeX="20" rangeY="20">CustomParticles</Effect>
+    <DisplayId>Nexus Particles</DisplayId>
+  </Object>
+  <Object type="0x6301" id="XP Gift All">
+    <Group>Evaluators</Group>
+    <Enemy/>
+    <Class>Character</Class>
+    <Texture>
+      <File>lofiChar8x8</File>
+      <Index>0xcd</Index>
+    </Texture>
+    <HitSound>monster/chicken_hit</HitSound>
+    <DeathSound>monster/chicken_death</DeathSound>
+    <MaxHitPoints>300</MaxHitPoints>
+    <Size>150</Size>
+    <Defense>0</Defense>
+    <XpMult>50000</XpMult>
+  </Object>
+  <Object type="0x6302" id="Great Sword Of Ogmur">
+    <Class>Equipment</Class>
+    <Item/>
+    <Texture>
+      <File>lofiObj9</File>
+      <Index>0x8a</Index>
+    </Texture>
+    <SlotType>1</SlotType>
+    <Description>Description Pending...\n\nItem Credits: DexTras\nSprite Credits: Kith</Description>
+    <RateOfFire>1</RateOfFire>
+    <Sound>weapon/blunt_sword</Sound>
+    <Projectile>
+      <ObjectId>Darkness Bolt</ObjectId>
+      <Speed>100</Speed>
+      <MinDamage>175</MinDamage>
+      <MaxDamage>250</MaxDamage>
+      <LifetimeMS>350</LifetimeMS>
+      <Frequency>1</Frequency>
+      <Size>100</Size>
+      <ConditionEffect duration="0.5">Slowed</ConditionEffect>
+    </Projectile>
+    <NumProjectiles>1</NumProjectiles>
+    <ArcGap>11</ArcGap>
+    <BagType>6</BagType>
+    <FameBonus>5</FameBonus>
+    <feedPower>600</feedPower>
+    <DisplayId>Great Sword Of Ogmur</DisplayId>
+  </Object>
+  <Object type="0x6303" id="Olden Lands Armor">
+    <Class>Equipment</Class>
+    <Item/>
+    <Description>Description Pending...\n\nItem Credits: DexTras\nSprite Credits: Kith</Description>
+    <ExtraTooltipData>
+      <EffectInfo name="" description="Immune to Armor Break"/>
+    </ExtraTooltipData>
+    <Texture>
+      <File>lofiObj9</File>
+      <Index>0x8b</Index>
+    </Texture>
+    <SlotType>7</SlotType>
+    <ActivateOnEquip stat="21" amount="19">IncrementStat</ActivateOnEquip>
+    <ActivateOnEquip stat="0" amount="30">IncrementStat</ActivateOnEquip>
+    <ActivateOnEquip stat="26" amount="3">IncrementStat</ActivateOnEquip>
+    <BagType>6</BagType>
+    <FameBonus>4</FameBonus>
+    <feedPower>400</feedPower>
+    <DisplayId>Olden Lands Armor</DisplayId>
+  </Object>
+  <Object type="0x6304" id="Ogmurs Hope">
+    <Class>Equipment</Class>
+    <Item/>
+    <Texture>
+      <File>lofiObj9</File>
+      <Index>0x8c</Index>
+    </Texture>
+    <SlotType>9</SlotType>
+    <Description>Description Pending...\n\nItem Credits: DexTras\nSprite Credits: Kith</Description>
+    <ExtraTooltipData>
+      <EffectInfo name="" description="Weapon has 5% chance to Armor Pierce"/>
+    </ExtraTooltipData>
+    <ActivateOnEquip stat="0" amount="60">IncrementStat</ActivateOnEquip>
+    <ActivateOnEquip stat="20" amount="5">IncrementStat</ActivateOnEquip>
+    <ActivateOnEquip stat="22" amount="3">IncrementStat</ActivateOnEquip>
+    <BagType>6</BagType>
+    <FameBonus>5</FameBonus>
+    <feedPower>500</feedPower>
+    <DisplayId>Ogmur's Hope</DisplayId>
+  </Object>
+  <Object type="0x6305" id="Hype Beast">
+    <DisplayId>Hype Beast</DisplayId>
+    <Enemy/>
+    <Class>Character</Class>
+    <AnimatedTexture>
+      <File>d3LofiCharHuge</File>
+      <Index>0x00</Index>
+    </AnimatedTexture>
+    <Projectile id="0">
+         <ObjectId>Rainbow Magic Star</ObjectId>
+         <Damage>100</Damage>
+         <Speed>100</Speed>
+         <Size>100</Size>
+         <LifetimeMS>1500</LifetimeMS>
+          <ConditionEffect duration="4">Weak</ConditionEffect>
+    </Projectile>
+    <Projectile id="1">
+         <ObjectId>Fire Bust Shot</ObjectId>
+         <Damage>150</Damage>
+         <Speed>200</Speed>
+         <Size>120</Size>
+         <LifetimeMS>600</LifetimeMS>
+     </Projectile>
+    <Projectile id="2">
+         <ObjectId>Rainbow Blaster</ObjectId>
+         <Damage>120</Damage>
+         <Speed>90</Speed>
+         <Size>80</Size>
+         <LifetimeMS>2500</LifetimeMS>
+          <ConditionEffect duration="4">Blind</ConditionEffect>
+         <MultiHit/>
+      </Projectile>
+    <Projectile id="3">
+         <ObjectId>Fire Bust Shot</ObjectId>
+         <Damage>50</Damage>
+         <Speed>100</Speed>
+         <Size>100</Size>
+         <LifetimeMS>150</LifetimeMS>
+         <ConditionEffect duration="4">Blind</ConditionEffect>
+     </Projectile>
+    <HitSound>monster/oryx_hit</HitSound>
+    <DeathSound>monster/oryx_death</DeathSound>
+    <Size>120</Size>
+    <MaxHitPoints>50000</MaxHitPoints>
+    <Defense>30</Defense>
+    <Quest/>
+    <God/>
+    <StasisImmune />
+    <XpMult>10000</XpMult>
+  </Object>
+  <Object type="0x6306" id="Beastly Garment">
+    <Class>Equipment</Class>
+    <Item/>
+    <Texture>
+      <File>lofiObj5</File>
+      <Index>0x6f</Index>
+    </Texture>
+    <SlotType>6</SlotType>
+    <Description>Nobody knows why this garment is so popular, but it is definitely worth the price</Description>
+    <ActivateOnEquip stat="21" amount="18">IncrementStat</ActivateOnEquip>
+    <ActivateOnEquip stat="28" amount="5">IncrementStat</ActivateOnEquip>
+    <ExtraTooltipData>
+      <EffectInfo name="" description="-500 Dollars"/>
+      <EffectInfo name="" description="+20 Clout"/>
+    </ExtraTooltipData>
+    <BagType>6</BagType>
+    <FameBonus>7</FameBonus>
+    <feedPower>700</feedPower>
+    <DisplayId>Beastly Garment</DisplayId>
+  </Object>
+  <Object type="0x6307" id="Goggles of Clout">
+    <Class>Equipment</Class>
+    <Item/>
+    <Texture>
+      <File>lofiObj5</File>
+      <Index>0x7f</Index>
+    </Texture>
+    <SlotType>9</SlotType>
+    <Description>Yeah it may make things hard to see, but if you can't see gods then they can't see you</Description>
+    <ActivateOnEquip stat="1" amount="90">IncrementStat</ActivateOnEquip>
+    <ActivateOnEquip stat="21" amount="8">IncrementStat</ActivateOnEquip>
+    <BagType>6</BagType>
+    <FameBonus>7</FameBonus>
+    <feedPower>700</feedPower>
+    <DisplayId>Goggles of Clout</DisplayId>
+  </Object>
+  <Object type="0x6308" id="Staff Of Galactic Calamitys">
+    <Class>Equipment</Class>
+    <Item/>
+    <Texture>
+      <File>lofiObj9</File>
+      <Index>0x8d</Index>
+    </Texture>
+    <SlotType>17</SlotType>
+    <Description>A singular shot infused with the power of Limon's Children\n\nSprite Credits: DexTras</Description>
+    <RateOfFire>1</RateOfFire>
+    <Sound>weapon/sprite_wand</Sound>
+    <Projectile>
+      <ObjectId>Calamity Shot</ObjectId>
+      <Speed>200</Speed>
+      <MinDamage>100</MinDamage>
+      <MaxDamage>150</MaxDamage>
+      <LifetimeMS>450</LifetimeMS>
+      <Amplitude>0.5</Amplitude>
+      <Frequency>2</Frequency>
+    </Projectile>
+    <BagType>6</BagType>
+    <FameBonus>5</FameBonus>
+    <NumProjectiles>1</NumProjectiles>
+    <OldSound>magicShoot</OldSound>
+    <feedPower>900</feedPower>
+  </Object>
+  <Object type="0x6309" id="Calamity Shot">
+    <Class>Projectile</Class>
+    <Texture>
+      <File>lofiProjs</File>
+      <Index>0x7d</Index>
+    </Texture>
+    <AngleCorrection>1</AngleCorrection>
+  </Object>
+  <Object type="0x630a" id="Dire Shot">
+    <Class>Projectile</Class>
+    <Texture>
+      <File>d3LofiObjEmbed</File>
+      <Index>0x1c</Index>
+    </Texture>
+    <AngleCorrection>1</AngleCorrection>
+  </Object>
+  <Object type="0x630b" id="Dagger of the Eye">
+    <Class>Equipment</Class>
+    <Item/>
+    <Texture>
+      <File>lofiObj9</File>
+      <Index>0x8e</Index>
+    </Texture>
+    <SlotType>2</SlotType>
+    <Description>Careful with this one, a single wrong step and you'll poke your eye out\n\nSpirte Credits: wyyyyyy</Description>
+    <RateOfFire>0.75</RateOfFire>
+    <Sound>weapon/fire_dagger</Sound>
+    <Projectile>
+      <ObjectId>Eye Dagger Shot</ObjectId>
+      <Speed>140</Speed>
+      <MinDamage>150</MinDamage>
+      <MaxDamage>200</MaxDamage>
+      <LifetimeMS>400</LifetimeMS>
+      <Frequency>1</Frequency>
+      <Size>80</Size>
+      <Wavy/>
+    </Projectile>
+    <ArcGap>11</ArcGap>
+    <BagType>6</BagType>
+    <FameBonus>5</FameBonus>
+    <feedPower>600</feedPower>
+    <DisplayId>Dagger of the Eye</DisplayId>
+  </Object>
+  <Object type="0x630c" id="Eye Dagger Shot">
+    <Class>Projectile</Class>
+    <Texture>
+      <File>lofiProjs</File>
+      <Index>0x7e</Index>
+    </Texture>
+    <AngleCorrection>1</AngleCorrection>
+  </Object>
+  <Object type="0x630d" id="Levitation Leather">
+    <Class>Equipment</Class>
+    <Item/>
+    <Texture>
+      <File>lofiObj9</File>
+      <Index>0x8f</Index>
+    </Texture>
+    <SlotType>6</SlotType>
+    <Description>You seem to grow faster with this armor equipped, perhaps that's how the leviathan moves so quickly</Description>
+    <ActivateOnEquip stat="21" amount="13">IncrementStat</ActivateOnEquip>
+    <ActivateOnEquip stat="28" amount="2">IncrementStat</ActivateOnEquip>
+    <ActivateOnEquip stat="22" amount="8">IncrementStat</ActivateOnEquip>
+    <BagType>6</BagType>
+    <FameBonus>5</FameBonus>
+    <feedPower>600</feedPower>
+    <DisplayId>Levitation Leather</DisplayId>
+  </Object>
+  <Object type="0x630e" id="Dynastic Star">
+    <Class>Equipment</Class>
+    <Item/>
+    <Texture>
+      <File>lofiObj9</File>
+      <Index>0x6f</Index>
+    </Texture>
+    <SlotType>25</SlotType>
+    <Tier>7</Tier>
+    <Description>{equip.An_ancient_weapon_that_spells_destruction_for_all_who_oppos}</Description>
+    <ActivateOnEquip stat="26" amount="3">IncrementStat</ActivateOnEquip>
+    <ActivateOnEquip stat="27" amount="3">IncrementStat</ActivateOnEquip>
+    <Sound>spell/fire_spray</Sound>
+    <ExtraTooltipData>
+      <EffectInfo name="{equip.While_Key_Held}" description=""/>
+      <EffectInfo name="" description="{equip.Speedy_on_self}"/>
+      <EffectInfo name="" description="{equip.Drain_10_MP/sec}"/>
+      <EffectInfo name="{equip.When_Key_Released}" description=""/>
+    </ExtraTooltipData>
+    <Projectile>
+      <ObjectId>Dynastic Projectile</ObjectId>
+      <Speed>150</Speed>
+      <MinDamage>950</MinDamage>
+      <MaxDamage>1050</MaxDamage>
+      <LifetimeMS>1000</LifetimeMS>
+      <Size>120</Size>
+      <PassesCover/>
+    </Projectile>
+    <Usable/>
+    <BagType>4</BagType>
+    <FameBonus>4</FameBonus>
+    <MpCost>0</MpCost>
+    <MpEndCost>105</MpEndCost>
+    <MultiPhase/>
+    <Activate>ShurikenAbility</Activate>
+    <feedPower>450</feedPower>
+    <DisplayId>Dynastic Star</DisplayId>
+  </Object>
+  <Object type="0x630f" id="Dynastic Projectile">
+    <Class>Projectile</Class>
+    <Texture>
+      <File>lofiObj9</File>
+      <Index>0x6f</Index>
+    </Texture>
+    <Rotation>80</Rotation>
   </Object>
 </Objects>

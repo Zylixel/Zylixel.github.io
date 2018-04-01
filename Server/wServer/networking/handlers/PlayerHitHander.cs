@@ -39,6 +39,8 @@ namespace wServer.networking.handlers
                                 client.Player.ApplyConditionEffect(effect);
                         }
                         client.Player.Damage(proj.Damage, proj.ProjectileOwner.Self);
+                        if (Client?.Player != null)
+                            Client.Player.forgiveHealthViolations = true;
                     }
                     else
                         Console.WriteLine("Can't register playerhit." + packet.ObjectId + " - " + packet.BulletId);

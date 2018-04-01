@@ -11,6 +11,11 @@ namespace wServer.logic
     partial class BehaviorDb
     {
         private _ Lowland = () => Behav()
+            .Init("XP Gift All",
+                new State(
+                    new Wander(0.5)
+                    )
+                )
             .Init("Hobbit Mage",
                 new State(
                     new DropPortalOnDeath("Forest Maze Portal", 20, PortalDespawnTimeSec: 100),

@@ -1,14 +1,10 @@
-﻿#region
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using db.data;
 using Ionic.Zlib;
 using wServer.realm.entities;
+using db.data;
 using wServer.realm.entities.merchant;
-
-#endregion
 
 namespace wServer.realm.terrain
 {
@@ -73,68 +69,44 @@ namespace wServer.realm.terrain
         ShoreSand,
         ShorePlains
     }
-
     public struct WmapTile
     {
-        public byte Elevation;
-        public string Name;
-        public int ObjId;
-        public ushort ObjType;
-        public TileRegion Region;
-        public WmapTerrain Terrain;
-        public byte TileId;
         public byte UpdateCount;
+        public ushort TileId;
+        public string Name;
+        public ushort ObjType;
+        public WmapTerrain Terrain;
+        public TileRegion Region;
+        public byte Elevation;
+        public int ObjId;
+        public ObjectDesc ObjectDesc;
 
         public ObjectDef ToDef(int x, int y)
         {
             List<KeyValuePair<StatsType, object>> stats = new List<KeyValuePair<StatsType, object>>();
             if (!string.IsNullOrEmpty(Name))
-                foreach (string item in Name.Split(';'))
+                foreach (var item in Name.Split(';'))
                 {
                     string[] kv = item.Split(':');
                     switch (kv[0])
                     {
                         case "name":
-                            stats.Add(new KeyValuePair<StatsType, object>(StatsType.Name, kv[1]));
-                            break;
+                            stats.Add(new KeyValuePair<StatsType, object>(StatsType.Name, kv[1])); break;
                         case "size":
-                            stats.Add(new KeyValuePair<StatsType, object>(StatsType.Size, Utils.FromString(kv[1])));
-                            break;
+                            stats.Add(new KeyValuePair<StatsType, object>(StatsType.Size, Utils.FromString(kv[1]))); break;
                         case "eff":
-                            stats.Add(new KeyValuePair<StatsType, object>(StatsType.Effects, Utils.FromString(kv[1])));
-                            break;
+                            stats.Add(new KeyValuePair<StatsType, object>(StatsType.Effects, Utils.FromString(kv[1]))); break;
                         case "conn":
-                            stats.Add(new KeyValuePair<StatsType, object>(StatsType.ObjectConnection,
-                                Utils.FromString(kv[1])));
-                            break;
-                        case "hp":
-                            stats.Add(new KeyValuePair<StatsType, object>(StatsType.Hp, Utils.FromString(kv[1])));
-                            break;
-                        case "mcost":
-                            stats.Add(new KeyValuePair<StatsType, object>(StatsType.SellablePrice,
-                                Utils.FromString(kv[1])));
-                            break;
-                        case "mcur":
-                            stats.Add(new KeyValuePair<StatsType, object>(StatsType.SellablePriceCurrency,
-                                Utils.FromString(kv[1])));
-                            break;
-                            //case "mtype":
-                            //    stats.Add(new KeyValuePair<StatsType, object>(StatsType.MerchantMerchandiseType, Utils.FromString(kv[1]))); break;
-                            //case "mcount":
-                            //    stats.Add(new KeyValuePair<StatsType, object>(StatsType.MerchantRemainingCount, Utils.FromString(kv[1]))); break;
-                            //case "mtime":
-                            //    stats.Add(new KeyValuePair<StatsType, object>(StatsType.MerchantRemainingMinute, Utils.FromString(kv[1]))); break;
-                            //case "nstar":
-                            //    entity.Stats[StatsType.NameChangerStar] = Utils.FromString(kv[1]); break;
+                            stats.Add(new KeyValuePair<StatsType, object>(StatsType.ObjectConnection, Utils.FromString(kv[1]))); break;
                     }
                 }
-            return new ObjectDef
+            return new ObjectDef()
             {
                 ObjectType = ObjType,
-                Stats = new ObjectStats
+                Stats = new ObjectStats()
                 {
                     Id = ObjId,
-                    Position = new Position
+                    Position = new Position()
                     {
                         X = x + 0.5f,
                         Y = y + 0.5f
@@ -146,64 +118,64 @@ namespace wServer.realm.terrain
 
         public WmapTile Clone()
         {
-            return new WmapTile
+            return new WmapTile()
             {
-                UpdateCount = (byte) (UpdateCount + 1),
+                UpdateCount = (byte)(UpdateCount + 1),
                 TileId = TileId,
                 Name = Name,
                 ObjType = ObjType,
                 Terrain = Terrain,
                 Region = Region,
-                ObjId = ObjId
+                ObjId = ObjId,
+                ObjectDesc = ObjectDesc
             };
         }
     }
-
     public class Wmap
     {
-        private readonly XmlData data;
-        private Tuple<IntPoint, ushort, string>[] entities;
-        private WmapTile[,] tiles;
-
-        public Wmap(XmlData data)
+        XmlData dat;
+        public Wmap(XmlData dat)
         {
-            this.data = data;
+            this.dat = dat;
         }
 
         public int Width { get; set; }
         public int Height { get; set; }
 
+        WmapTile[,] tiles;
         public WmapTile this[int x, int y]
         {
             get { return tiles[x, y]; }
             set { tiles[x, y] = value; }
         }
 
+        Tuple<IntPoint, ushort, string>[] entities;
         public int Load(Stream stream, int idBase)
         {
             int ver = stream.ReadByte();
             using (BinaryReader rdr = new BinaryReader(new ZlibStream(stream, CompressionMode.Decompress)))
             {
                 if (ver == 0) return LoadV0(rdr, idBase);
-                if (ver == 1) return LoadV1(rdr, idBase);
-                if (ver == 2) return LoadV2(rdr, idBase);
-                throw new NotSupportedException("WMap version " + ver);
+                else if (ver == 1) return LoadV1(rdr, idBase);
+                else if (ver == 2) return LoadV2(rdr, idBase);
+                else throw new NotSupportedException("WMap version " + ver);
             }
         }
 
-        private int LoadV0(BinaryReader reader, int idBase)
+        int LoadV0(BinaryReader reader, int idBase)
         {
             List<WmapTile> dict = new List<WmapTile>();
-            ushort c = (ushort)reader.ReadInt16();
-            for (ushort i = 0; i < c; i++)
+            short c = reader.ReadInt16();
+            for (short i = 0; i < c; i++)
             {
                 WmapTile tile = new WmapTile();
-                tile.TileId = (byte) reader.ReadInt16();
+                tile.TileId = reader.ReadUInt16();
                 string obj = reader.ReadString();
-                tile.ObjType = string.IsNullOrEmpty(obj) ? (ushort) 0 : data.IdToObjectType[obj];
+                tile.ObjType = string.IsNullOrEmpty(obj) ? (ushort)0 : dat.IdToObjectType[obj];
                 tile.Name = reader.ReadString();
-                tile.Terrain = (WmapTerrain) reader.ReadByte();
-                tile.Region = (TileRegion) reader.ReadByte();
+                tile.Terrain = (WmapTerrain)reader.ReadByte();
+                tile.Region = (TileRegion)reader.ReadByte();
+                dat.ObjectDescs.TryGetValue(tile.ObjType, out tile.ObjectDesc);
                 dict.Add(tile);
             }
             Width = reader.ReadInt32();
@@ -217,10 +189,8 @@ namespace wServer.realm.terrain
                     WmapTile tile = dict[reader.ReadInt16()];
                     tile.UpdateCount = 1;
 
-                    ObjectDesc desc;
-                    if (tile.ObjType != 0 &&
-                        (!data.ObjectDescs.TryGetValue(tile.ObjType, out desc) ||
-                         !desc.Static || desc.Enemy))
+                    var desc = tile.ObjectDesc;
+                    if (tile.ObjType != 0 && (desc == null || !desc.Static || desc.Enemy))
                     {
                         entities.Add(new Tuple<IntPoint, ushort, string>(new IntPoint(x, y), tile.ObjType, tile.Name));
                         tile.ObjType = 0;
@@ -239,20 +209,21 @@ namespace wServer.realm.terrain
             return enCount;
         }
 
-        private int LoadV1(BinaryReader reader, int idBase)
+        int LoadV1(BinaryReader reader, int idBase)
         {
             List<WmapTile> dict = new List<WmapTile>();
-            ushort c = (ushort)reader.ReadInt16();
-            for (ushort i = 0; i < c; i++)
+            short c = reader.ReadInt16();
+            for (short i = 0; i < c; i++)
             {
                 WmapTile tile = new WmapTile();
-                tile.TileId = (byte) reader.ReadInt16();
+                tile.TileId = reader.ReadUInt16();
                 string obj = reader.ReadString();
-                tile.ObjType = string.IsNullOrEmpty(obj) ? (ushort) 0 : data.IdToObjectType[obj];
+                tile.ObjType = string.IsNullOrEmpty(obj) ? (ushort)0 : dat.IdToObjectType[obj];
                 tile.Name = reader.ReadString();
-                tile.Terrain = (WmapTerrain) reader.ReadByte();
-                tile.Region = (TileRegion) reader.ReadByte();
+                tile.Terrain = (WmapTerrain)reader.ReadByte();
+                tile.Region = (TileRegion)reader.ReadByte();
                 tile.Elevation = reader.ReadByte();
+                dat.ObjectDescs.TryGetValue(tile.ObjType, out tile.ObjectDesc);
                 dict.Add(tile);
             }
             Width = reader.ReadInt32();
@@ -266,10 +237,8 @@ namespace wServer.realm.terrain
                     WmapTile tile = dict[reader.ReadInt16()];
                     tile.UpdateCount = 1;
 
-                    ObjectDesc desc;
-                    if (tile.ObjType != 0 &&
-                        (!data.ObjectDescs.TryGetValue(tile.ObjType, out desc) ||
-                         !desc.Static || desc.Enemy))
+                    var desc = tile.ObjectDesc;
+                    if (tile.ObjType != 0 && (desc == null || !desc.Static || desc.Enemy))
                     {
                         entities.Add(new Tuple<IntPoint, ushort, string>(new IntPoint(x, y), tile.ObjType, tile.Name));
                         tile.ObjType = 0;
@@ -288,19 +257,20 @@ namespace wServer.realm.terrain
             return enCount;
         }
 
-        private int LoadV2(BinaryReader reader, int idBase)
+        int LoadV2(BinaryReader reader, int idBase)
         {
             List<WmapTile> dict = new List<WmapTile>();
-            ushort c = (ushort)reader.ReadInt16();
-            for (ushort i = 0; i < c; i++)
+            short c = reader.ReadInt16();
+            for (short i = 0; i < c; i++)
             {
                 WmapTile tile = new WmapTile();
-                tile.TileId = (byte) reader.ReadInt16();
+                tile.TileId = reader.ReadUInt16();
                 string obj = reader.ReadString();
-                tile.ObjType = string.IsNullOrEmpty(obj) ? (ushort) 0 : data.IdToObjectType[obj];
+                tile.ObjType = string.IsNullOrEmpty(obj) ? (ushort)0 : dat.IdToObjectType[obj];
                 tile.Name = reader.ReadString();
-                tile.Terrain = (WmapTerrain) reader.ReadByte();
-                tile.Region = (TileRegion) reader.ReadByte();
+                tile.Terrain = (WmapTerrain)reader.ReadByte();
+                tile.Region = (TileRegion)reader.ReadByte();
+                dat.ObjectDescs.TryGetValue(tile.ObjType, out tile.ObjectDesc);
                 dict.Add(tile);
             }
             Width = reader.ReadInt32();
@@ -315,10 +285,8 @@ namespace wServer.realm.terrain
                     tile.UpdateCount = 1;
                     tile.Elevation = reader.ReadByte();
 
-                    ObjectDesc desc;
-                    if (tile.ObjType != 0 &&
-                        (!data.ObjectDescs.TryGetValue(tile.ObjType, out desc) ||
-                         !desc.Static || desc.Enemy))
+                    var desc = tile.ObjectDesc;
+                    if (tile.ObjType != 0 && (desc == null || !desc.Static || desc.Enemy))
                     {
                         entities.Add(new Tuple<IntPoint, ushort, string>(new IntPoint(x, y), tile.ObjType, tile.Name));
                         tile.ObjType = 0;
@@ -337,7 +305,7 @@ namespace wServer.realm.terrain
             return enCount;
         }
 
-        /*public IEnumerable<Entity> InstantiateEntities(RealmManager manager)
+        public IEnumerable<Entity> InstantiateEntities(RealmManager manager)
         {
             foreach (Tuple<IntPoint, ushort, string> i in entities)
             {
@@ -375,6 +343,6 @@ namespace wServer.realm.terrain
                     }
                 yield return entity;
             }
-        }*/
+        }
     }
 }

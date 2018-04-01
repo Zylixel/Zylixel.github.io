@@ -9,7 +9,7 @@ namespace wServer.realm.worlds
 {
     public class Nexus : World
     {
-        public const string Resource = "wServer.realm.worlds.maps.GodsNexus.jm";
+        public const string Resource = "wServer.realm.worlds.maps.GodsNexusNoMerchant.jm";
 
         public Nexus()
         {

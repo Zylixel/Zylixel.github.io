@@ -172,7 +172,7 @@ namespace wServer.networking
 
         private void OnError(Exception ex)
         {
-            Console.WriteLine("Socket error.", ex);
+            Program.writeWarning($"Socket error. {ex}");
             _parent.Disconnect();
         }
 

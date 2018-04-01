@@ -99,7 +99,6 @@ public enum ConditionEffects : ulong
     VitBoost = (ulong) 1 << 44,
     WisBoost = (ulong) 1 << 45,
     DexBoost = (ulong) 1 << 46,
-    TimeFreeze = 1 << 47
 }
 
 public enum ConditionEffectIndex
@@ -275,7 +274,7 @@ public class ProjectileDesc
 
     public bool MultiHit { get; }
     public bool PassesCover { get; }
-    public bool ArmorPiercing { get; }
+    public bool ArmorPiercing { get; set; }
     public bool ParticleTrail { get; }
     public bool Wavy { get; }
     public bool Parametric { get; }
@@ -395,6 +394,8 @@ public class ActivateEffect
             random = (int) float.Parse(elem.Attribute("random").Value, NumberStyles.Any, ci);
         if (elem.Attribute("treaureTier") != null)
             treaureTier = Utils.FromString(elem.Attribute("treaureTier").Value);
+        if (elem.Attribute("explode") != null)
+            explode = Utils.FromString(elem.Attribute("explode").Value);
     }
 
     public ActivateEffects Effect { get; }
@@ -426,6 +427,7 @@ public class ActivateEffect
     public uint? Color { get; }
     public int random { get; } //Used for prism of fallen chaos
     public int treaureTier { get; } //Treasure Chest Stuff
+    public int explode { get; } //Used for dire instability
 }
 
 public class PortalDesc
@@ -450,11 +452,11 @@ public class PortalDesc
     public bool NexusPortal { get; }
 }
 
-public class Item : IFeedable
+public class OldItem : IFeedable
 {
     private const bool DISABLE_SOULBOUND_UT = true;
 
-    public Item(ushort type, XElement elem)
+    public OldItem(ushort type, XElement elem)
     {
         try
         {
@@ -581,6 +583,61 @@ public class Item : IFeedable
     public bool LootDropBooster { get; }
     public bool LootTierBooster { get; }
     public int SetType { get; }
+    public bool BrokenResurrect { get; set; }
+    public bool NotBrokenResurrect { get; set; }
+    public bool MantleResurrect { get; set; }
+    public bool MpGiveBack { get; set; }
+    public bool Treasure { get; set; }
+    public bool Maxy { get; set; }
+    public ushort FeedPower { get; set; }
+}
+
+public class Item : IFeedable
+{
+    public ushort ObjectType { get; set; }
+    public int serialId { get; set; }
+    public int firstUser { get; set; }
+    public int currentUser { get; set; }
+    public string droppedIn { get; set; }
+    public bool Soulbound { get; set; }
+    public int banned { get; set; }
+    public string ObjectId { get; set; }
+    public int SlotType { get; set; }
+    public int Tier { get; set; }
+    public string Description { get; set; }
+    public float RateOfFire { get; set; }
+    public bool Usable { get; set; }
+    public int BagType { get; set; }
+    public int MpCost { get; set; }
+    public int FameBonus { get; set; }
+    public int NumProjectiles { get; set; }
+    public float ArcGap { get; set; }
+    public bool Consumable { get; set; }
+    public bool Potion { get; set; }
+    public string DisplayId { get; set; }
+    public string SuccessorId { get; set; }
+    public float Cooldown { get; set; }
+    public bool Resurrects { get; set; }
+    public int Texture1 { get; set; }
+    public int Texture2 { get; set; }
+    public bool Secret { get; set; }
+    public bool IsBackpack { get; set; }
+    public Rarity? Rarity { get; set; }
+    public Family? Family { get; set; }
+    public string Class { get; set; }
+
+    public int Doses { get; set; }
+
+    public KeyValuePair<int, int>[] StatsBoost { get; set; }
+    public ActivateEffect[] ActivateEffects { get; set; }
+    public ProjectileDesc[] Projectiles { get; set; }
+
+    public int? MpEndCost { get; set; }
+    public float? Timer { get; set; }
+    public bool XpBooster { get; set; }
+    public bool LootDropBooster { get; set; }
+    public bool LootTierBooster { get; set; }
+    public int SetType { get; set; }
     public bool BrokenResurrect { get; set; }
     public bool NotBrokenResurrect { get; set; }
     public bool MantleResurrect { get; set; }

@@ -21,7 +21,7 @@ namespace wServer.networking.handlers
             {
                 if (client.Player.Owner == null) return;
 
-                Item item = client.Player.Manager.GameData.Items[(ushort)packet.ContainerType];
+                OldItem item = client.Player.Manager.GameData.Items[(ushort)packet.ContainerType];
                 int stype = 0;
 
                 for (int i = 0; i < 4; i++)
@@ -33,17 +33,23 @@ namespace wServer.networking.handlers
                     }
                 }
 
-                if (client.Player.SlotTypes[stype] != item.SlotType && client.Account.Rank < 2)
+                if (item == Client.Player.SerialConvert(Client.Player.Inventory[1]))
+                    return; // ability shoot handled by useitem implement ability check
+
+                if (client.Player.SlotTypes[stype] != item.SlotType)
                 {
-                    Console.WriteLine($"{client.Player.Name} is trying to cheat (Weapon doesnt match the slot type)");
-                    client.Player.SendError("This cheating attempt has been logged and a message was send to all online admins.");
-                    client.Disconnect();
-                    foreach (Player player in client.Player.Owner.Players.Values)
-                        if (player.Client.Account.Rank >= 2)
-                            player.SendInfo($"Player {client.Player.Name} is shooting with a weapon that doesnt match the class slot type.");
+                    Client.Player.kickforCheats(Player.possibleExploit.DIFF_WEAPON);
                     return;
                 }
+                if ((Client.Stage != ProtocalStage.Disconnected) && (!Client.Player.CheckShootSpeed(item)))
+                {
+                    return;
+                }
+                if (Client.Stage == ProtocalStage.Disconnected)
+                    return;
+                
                 ProjectileDesc prjDesc = item.Projectiles[0]; //Assume only one
+    
                 Projectile prj = client.Player.PlayerShootProjectile(
                     packet.BulletId, prjDesc, item.ObjectType,
                     packet.Time, packet.Position, packet.Angle);

@@ -45,12 +45,18 @@ namespace wServer.logic
             )
             .Init("Great Temple Snake",
                 new State(
-                    new Prioritize(
-                        new Follow(0.6),
-                        new Wander(0.4)
+                    new State("doYourThing",
+                        new TimedTransition(15000, "diediedie"),
+                        new Prioritize(
+                            new Follow(0.6),
+                            new Wander(0.4)
+                            ),
+                        new Shoot(10, 2, 7, 0, coolDown: 1000, coolDownOffset: 0),
+                        new Shoot(10, 6, 60, 1, coolDown: 2000, coolDownOffset: 600)
                         ),
-                    new Shoot(10, 2, 7, 0, coolDown: 1000, coolDownOffset: 0),
-                    new Shoot(10, 6, 60, 1, coolDown: 2000, coolDownOffset: 600)
+                    new State("diediedie",
+                        new Suicide()
+                        )
                     )
             )
             ;

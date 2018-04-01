@@ -90,7 +90,7 @@ namespace wServer.logic
 
             ),
             new State("Cycle2",
-            new ApplySetpiece("OneBlockEmpty")
+            new Decay(1)
             )
         //248, 305
         )

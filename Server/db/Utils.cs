@@ -174,7 +174,7 @@ public static class Utils
         }
         return ret;
     }
-
+    
     public static int[] FromCommaSepString32(string x)
     {
         if (IsNullOrWhiteSpace(x)) return new int[0];
@@ -223,7 +223,7 @@ public static class Utils
         //eqpSlots.RemoveRange(4, 8);
         return eqpSlots.ToArray();
     }
-
+    
     public static T GetEnumByName<T>(string value)
     {
         return (T) Enum.Parse(typeof (T), value, true);

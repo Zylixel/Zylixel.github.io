@@ -9,7 +9,7 @@ namespace wServer.realm.entities.merchant
             "Egg", "Skin", "Cloth", "Dye", "Tincture", "Effusion", "Elixer", "Tarot", "Gumball", "Pail"
         };
 
-        public static bool checkItem(Item item)
+        public static bool checkItem(OldItem item)
         {
             for (var i = 0; i < NoShopContains.Length; i++)
             {
@@ -37,6 +37,7 @@ namespace wServer.realm.entities.merchant
                 MerchantLists.price.Add(ItemType, _price);
             }
         }
+
         public static void updatePrice(int ItemType, int Price)
         {
             MerchantLists.price.Remove(ItemType);

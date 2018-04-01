@@ -12,17 +12,21 @@ namespace wServer.realm.entities.player
         private const int PingPeriod = 1000;
 
         private int _updateLastSeen;
-
-        private static bool KeepAlive(RealmTime time)
+        private int curClientTime;
+        private int oldClientTime;
+        private int first5;
+        
+        public void ClientTick(RealmTime time, MovePacket packet)
         {
-            return true;
+            oldClientTime = curClientTime;
+            curClientTime = packet.Time;
+            if (first5 < 5) first5++;
         }
 
         internal void Pong(int time, PongPacket pkt)
         {
             try
             {
-
                 _updateLastSeen++;
 
                 if (_updateLastSeen >= 60)
@@ -38,32 +42,6 @@ namespace wServer.realm.entities.player
             {
                 Console.WriteLine(e);
             }
-        }
-
-
-
-        public void ClientTick(RealmTime time, MovePacket packet)
-        {
-            //oldClientTime = curClientTime;
-            //curClientTime = packet.Time;
-            //if (first5 < 5) first5++;
-            //if (oldClientTime == 0 || first5 < 5) return;
-
-            //if (curClientTime - oldClientTime >= 500 || curClientTime - oldClientTime <= 100)
-            //{
-            //    Client.Disconnect();
-            //    Owner.BroadcastPacket(new TextPacket
-            //    {
-            //        Name = "@ANNOUNCEMENT",
-            //        BubbleTime = 0,
-            //        CleanText = "",
-            //        ObjectId = 0,
-            //        Recipient = "",
-            //        Stars = -1,
-            //        Text = String.Format("{0} just tried to speedhack!\ntimedifference: {1}", Name, curClientTime - oldClientTime)
-            //    }, null);
-            //}
-            //SendInfo((curClientTime - oldClientTime).ToString());
         }
     }
 }

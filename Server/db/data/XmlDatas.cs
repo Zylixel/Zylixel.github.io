@@ -21,7 +21,7 @@ namespace db.data
 
         private readonly Dictionary<string, ushort> id2type_tile;
 
-        private readonly Dictionary<ushort, Item> items;
+        private readonly Dictionary<ushort, OldItem> items;
         private readonly Dictionary<ushort, ObjectDesc> objDescs;
         private readonly Dictionary<ushort, PortalDesc> portals;
         private readonly Dictionary<ushort, TileDesc> tiles;
@@ -58,8 +58,8 @@ namespace db.data
 
             Tiles = new ReadOnlyDictionary<ushort, TileDesc>(
                 tiles = new Dictionary<ushort, TileDesc>());
-            Items = new ReadOnlyDictionary<ushort, Item>(
-                items = new Dictionary<ushort, Item>());
+            Items = new ReadOnlyDictionary<ushort, OldItem>(
+                items = new Dictionary<ushort, OldItem>());
             ObjectDescs = new ReadOnlyDictionary<ushort, ObjectDesc>(
                 objDescs = new Dictionary<ushort, ObjectDesc>());
             Portals = new ReadOnlyDictionary<ushort, PortalDesc>(
@@ -76,24 +76,21 @@ namespace db.data
             assign = new AutoAssign(this);
 
             string basePath = Path.Combine(AssemblyDirectory, path);
-            Console.WriteLine("Loading game data from '{0}'...", basePath);
+            Console.WriteLine($"Loading game data from '{basePath}'...");
             string[] xmls = Directory.EnumerateFiles(basePath, "*.xml", SearchOption.AllDirectories).ToArray();
             for (int i = 0; i < xmls.Length; i++)
             {
-                if (CheckConfig.IsDebugOn())
-                    Console.WriteLine("Loading '{0}'({1}/{2})...", xmls[i], i + 1, xmls.Length);
+                Console.WriteLine("Loading '{0}'({1}/{2})...", xmls[i], i + 1, xmls.Length);
                 using (Stream stream = File.OpenRead(xmls[i]))
                     ProcessXml(XElement.Load(stream));
             }
-            if (CheckConfig.IsDebugOn())
-            {
-                Console.WriteLine("Finish loading game data.");
-                Console.WriteLine("{0} Items", items.Count);
-                Console.WriteLine("{0} Tiles", tiles.Count);
-                Console.WriteLine("{0} Objects", objDescs.Count);
-                Console.WriteLine("{0} Portals", portals.Count);
-                Console.WriteLine("{0} Additions", addition.Elements().Count());
-            }
+            Console.WriteLine("Finish loading game data.");
+            Console.WriteLine($"{items.Count} Items");
+            Console.WriteLine($"{tiles.Count} Tiles");
+            Console.WriteLine($"{objDescs.Count} Objects");
+            Console.WriteLine($"{portals.Count} Portals");
+            if (addition.Elements().Count() > 0) //Don't have additions... please
+                Console.WriteLine($"{addition.Elements().Count()} Additions");
         }
 
         private static string AssemblyDirectory
@@ -113,7 +110,7 @@ namespace db.data
         public IDictionary<string, ushort> IdToTileType { get; private set; }
 
         public IDictionary<ushort, TileDesc> Tiles { get; private set; }
-        public IDictionary<ushort, Item> Items { get; private set; }
+        public IDictionary<ushort, OldItem> Items { get; private set; }
         public IDictionary<ushort, ObjectDesc> ObjectDescs { get; private set; }
         public IDictionary<ushort, PortalDesc> Portals { get; private set; }
         public IDictionary<ushort, PetStruct> TypeToPet { get; private set; }
@@ -187,7 +184,7 @@ namespace db.data
                 {
                     case "Equipment":
                     case "Dye":
-                        items[type] = new Item(type, elem);
+                        items[type] = new OldItem(type, elem);
                         break;
                     case "Portal":
                     case "GuildHallPortal":

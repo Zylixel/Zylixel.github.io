@@ -179,7 +179,6 @@ AND characters.charId=death.chrId;";
                 },
                 NameChosen = false,
                 NextCharSlotPrice = 0,
-                VerifiedEmail = false,
                 Stats = new Stats
                 {
                     BestCharFame = 0,
@@ -278,7 +277,7 @@ AND characters.charId=death.chrId;";
             if ((int) (long) cmd.ExecuteScalar() > 0) return null;
             cmd = CreateQuery();
             cmd.CommandText =
-                "INSERT INTO accounts(uuid, password, name, rank, namechosen, verified, guild, guildRank, guildFame, vaultCount, maxCharSlot, regTime, guest, banned, locked, ignored, gifts, isAgeVerified, ownedSkins, authToken) VALUES(@uuid, SHA1(@password), @randomName, @rank, 0, 0, 0, 0, 0, 1, 3, @regTime, @guest, 0, @empty, @empty, @empty, 1, '913, 846, 29809, 839, 899, 914, 837, 849, 852, 838, 853, 840, 854, 841, 842, 843, 844, 835, 855, 888, 29790, 845, 847, 848, 836, 0, 9013, 8976, 8855, 29771, 8969, 917, 8979, 9014, 29817, 8968, 9026, 29815, 8977, 9027, 29789, 29801, 29810, 898, 9028, 29770, 9029, 912, 29791, 29799, 29814, 9030, 29800, 903, 902, 8964, 29818, 883, 8965, 8967, 9032, 29811, 915, 885, 29816, 850, 905, 884, 9012, 29813, 916, 8966, 9031, 29808, 872, 904, 834, 5860, 901, 5861, 5866, 5865, 5864, 5863, 5862, 24728, 24729, 10959, 24868, 24849, 24864, 24865, 24850, 24855, 24854, 24856, 24857, 24867, 24852, 24853, 24866, 24851, 24858, 24880, 24872, 24882, 24873, 24871, 24881, 24883, 24884, 24885, 24886, 24887, 24888, 24869, 24870, 24833, 24836, 5859, 24839, 24840, 24841, 24848, 24834, 24835, 24832, 24837, 24889, 24838, 19385, 19152, 19153, 19154, 19155, 19158, 19157, 19156, 19159, 19370, 19371, 19372, 19373, 19374, 19375', @authToken);";
+                "INSERT INTO accounts(uuid, password, name, rank, namechosen, guild, guildRank, guildFame, vaultCount, maxCharSlot, regTime, guest, banned, locked, ignored, gifts, ownedSkins, authToken) VALUES(@uuid, SHA1(@password), @randomName, @rank, 0, 0, 0, 0, 1, 3, @regTime, @guest, 0, @empty, @empty, @empty, '913, 846, 29809, 839, 899, 914, 837, 849, 852, 838, 853, 840, 854, 841, 842, 843, 844, 835, 855, 888, 29790, 845, 847, 848, 836, 0, 9013, 8976, 8855, 29771, 8969, 917, 8979, 9014, 29817, 8968, 9026, 29815, 8977, 9027, 29789, 29801, 29810, 898, 9028, 29770, 9029, 912, 29791, 29799, 29814, 9030, 29800, 903, 902, 8964, 29818, 883, 8965, 8967, 9032, 29811, 915, 885, 29816, 850, 905, 884, 9012, 29813, 916, 8966, 9031, 29808, 872, 904, 834, 5860, 901, 5861, 5866, 5865, 5864, 5863, 5862, 24728, 24729, 10959, 24868, 24849, 24864, 24865, 24850, 24855, 24854, 24856, 24857, 24867, 24852, 24853, 24866, 24851, 24858, 24880, 24872, 24882, 24873, 24871, 24881, 24883, 24884, 24885, 24886, 24887, 24888, 24869, 24870, 24833, 24836, 5859, 24839, 24840, 24841, 24848, 24834, 24835, 24832, 24837, 24889, 24838, 19385, 19152, 19153, 19154, 19155, 19158, 19157, 19156, 19159, 19370, 19371, 19372, 19373, 19374, 19375', @authToken);";
             cmd.Parameters.AddWithValue("@uuid", uuid);
             cmd.Parameters.AddWithValue("@randomName", Names[new Random().Next(0, Names.Length)]);
             cmd.Parameters.AddWithValue("@password", password);
@@ -406,13 +405,11 @@ AND characters.charId=death.chrId;";
                     Admin = rdr.GetInt32("rank") >= 2,
                     Email = uuid ?? rdr.GetString("uuid"),
                     Password = password ?? rdr.GetString("password"),
-                    VisibleMuledump = rdr.GetInt32("publicMuledump") == 1,
                     Rank = rdr.GetInt32("rank"),
                     Banned = rdr.GetBoolean("banned"),
                     BeginnerPackageTimeLeft = 0,
                     PetYardType = rdr.GetInt32("petYardType"),
                     Converted = false,
-                    IsProdAccount = rdr.GetInt32("prodAcc") == 1,
                     Guild = new Guild
                     {
                         Id = rdr.GetInt64("guild"),
@@ -425,13 +422,10 @@ AND characters.charId=death.chrId;";
                         : rdr.GetInt32("maxCharSlot") == 2
                             ? 800
                             : 1000,
-                    VerifiedEmail = rdr.GetBoolean("verified"),
                     Locked = rdr.GetString("locked").Split(',').ToList(),
                     Ignored = rdr.GetString("ignored").Split(',').ToList(),
                     _Gifts = rdr.GetString("gifts"),
-                    IsAgeVerified = rdr.GetString("isAgeVerified").ToLower() == "true" ? 1 : 0,
                     AuthToken = rdr.GetString("authToken"),
-                    NotAcceptedNewTos = rdr.GetInt32("acceptedNewTos") == 1 ? null : string.Empty,
                     OwnedSkins = Skins
                 };
             }
@@ -562,6 +556,192 @@ SELECT credits FROM stats WHERE accId=@accId;";
             return ret;
         }
 
+        public Item getSerialInfo(int id, XmlData data)
+        {
+            var cmd = CreateQuery();
+            cmd.CommandText = "SELECT * FROM seriallist WHERE id=@id;";
+            cmd.Parameters.AddWithValue("@id", id);
+            using (var rdr = cmd.ExecuteReader())
+            {
+                if (!rdr.HasRows) return null;
+                rdr.Read();
+                var ObjectType = (ushort)rdr.GetInt32("type");
+                var ret = new Item
+                {
+                    serialId = id,
+                    ObjectType = ObjectType,
+                    firstUser = rdr.GetInt32("firstUser"),
+                    currentUser = rdr.GetInt32("currentUser"),
+                    Soulbound = rdr.GetInt32("soulbound") == 1,
+                    banned = rdr.GetInt32("banned"),
+                    droppedIn = rdr.GetString("droppedIn"),
+                    ObjectId = data.Items[ObjectType].ObjectId,
+                    SlotType = data.Items[ObjectType].SlotType,
+                    Tier = data.Items[ObjectType].Tier,
+                    Description = data.Items[ObjectType].Description,
+                    RateOfFire = data.Items[ObjectType].RateOfFire,
+                    Usable = data.Items[ObjectType].Usable,
+                    BagType = data.Items[ObjectType].BagType,
+                    MpCost = data.Items[ObjectType].MpCost,
+                    FameBonus = data.Items[ObjectType].FameBonus,
+                    NumProjectiles = data.Items[ObjectType].NumProjectiles,
+                    ArcGap = data.Items[ObjectType].ArcGap,
+                    Consumable = data.Items[ObjectType].Consumable,
+                    Potion = data.Items[ObjectType].Potion,
+                    DisplayId = data.Items[ObjectType].DisplayId,
+                    SuccessorId = data.Items[ObjectType].SuccessorId,
+                    Cooldown = data.Items[ObjectType].Cooldown,
+                    Resurrects = data.Items[ObjectType].Resurrects,
+                    Texture1 = data.Items[ObjectType].Texture1,
+                    Texture2 = data.Items[ObjectType].Texture2,
+                    Secret = data.Items[ObjectType].Secret,
+                    IsBackpack = data.Items[ObjectType].IsBackpack,
+                    Rarity = data.Items[ObjectType].Rarity,
+                    Family = data.Items[ObjectType].Family,
+                    Class = data.Items[ObjectType].Class,
+                    Doses = data.Items[ObjectType].Doses,
+                    StatsBoost = data.Items[ObjectType].StatsBoost,
+                    ActivateEffects = data.Items[ObjectType].ActivateEffects,
+                    Projectiles = data.Items[ObjectType].Projectiles,
+                    MpEndCost = data.Items[ObjectType].MpEndCost,
+                    Timer = data.Items[ObjectType].Timer,
+                    XpBooster = data.Items[ObjectType].XpBooster,
+                    LootDropBooster = data.Items[ObjectType].LootDropBooster,
+                    LootTierBooster = data.Items[ObjectType].LootTierBooster,
+                    SetType = data.Items[ObjectType].SetType,
+                    BrokenResurrect = data.Items[ObjectType].BrokenResurrect,
+                    NotBrokenResurrect = data.Items[ObjectType].NotBrokenResurrect,
+                    MantleResurrect = data.Items[ObjectType].MantleResurrect,
+                    MpGiveBack = data.Items[ObjectType].MpGiveBack,
+                    Treasure = data.Items[ObjectType].Treasure,
+                    Maxy = data.Items[ObjectType].Maxy,
+                    FeedPower = data.Items[ObjectType].FeedPower,
+                };
+                rdr.Close();
+                return ret;
+            }
+        }
+
+        public Item[] getSerialInfo(int[] id, XmlData data)
+        {
+            List<Item> ret = new List<Item>();
+            foreach (var item in id)
+            {
+                var cmd = CreateQuery();
+                cmd.CommandText = "SELECT * FROM seriallist WHERE id=@id;";
+                cmd.Parameters.AddWithValue("@id", item);
+                using (var rdr = cmd.ExecuteReader())
+                {
+                    if (!rdr.HasRows)
+                    {
+                        ret.Add(null);
+                        continue;
+                    }
+                    rdr.Read();
+                    var ObjectType = (ushort)rdr.GetInt32("type");
+                    ret.Add(new Item
+                    {
+                        serialId = item,
+                        ObjectType = ObjectType,
+                        firstUser = rdr.GetInt32("firstUser"),
+                        currentUser = rdr.GetInt32("currentUser"),
+                        droppedIn = rdr.GetString("droppedIn"),
+                        Soulbound = rdr.GetInt32("soulbound") == 1,
+                        banned = rdr.GetInt32("banned"),
+                        ObjectId = data.Items[ObjectType].ObjectId,
+                        SlotType = data.Items[ObjectType].SlotType,
+                        Tier = data.Items[ObjectType].Tier,
+                        Description = data.Items[ObjectType].Description,
+                        RateOfFire = data.Items[ObjectType].RateOfFire,
+                        Usable = data.Items[ObjectType].Usable,
+                        BagType = data.Items[ObjectType].BagType,
+                        MpCost = data.Items[ObjectType].MpCost,
+                        FameBonus = data.Items[ObjectType].FameBonus,
+                        NumProjectiles = data.Items[ObjectType].NumProjectiles,
+                        ArcGap = data.Items[ObjectType].ArcGap,
+                        Consumable = data.Items[ObjectType].Consumable,
+                        Potion = data.Items[ObjectType].Potion,
+                        DisplayId = data.Items[ObjectType].DisplayId,
+                        SuccessorId = data.Items[ObjectType].SuccessorId,
+                        Cooldown = data.Items[ObjectType].Cooldown,
+                        Resurrects = data.Items[ObjectType].Resurrects,
+                        Texture1 = data.Items[ObjectType].Texture1,
+                        Texture2 = data.Items[ObjectType].Texture2,
+                        Secret = data.Items[ObjectType].Secret,
+                        IsBackpack = data.Items[ObjectType].IsBackpack,
+                        Rarity = data.Items[ObjectType].Rarity,
+                        Family = data.Items[ObjectType].Family,
+                        Class = data.Items[ObjectType].Class,
+                        Doses = data.Items[ObjectType].Doses,
+                        StatsBoost = data.Items[ObjectType].StatsBoost,
+                        ActivateEffects = data.Items[ObjectType].ActivateEffects,
+                        Projectiles = data.Items[ObjectType].Projectiles,
+                        MpEndCost = data.Items[ObjectType].MpEndCost,
+                        Timer = data.Items[ObjectType].Timer,
+                        XpBooster = data.Items[ObjectType].XpBooster,
+                        LootDropBooster = data.Items[ObjectType].LootDropBooster,
+                        LootTierBooster = data.Items[ObjectType].LootTierBooster,
+                        SetType = data.Items[ObjectType].SetType,
+                        BrokenResurrect = data.Items[ObjectType].BrokenResurrect,
+                        NotBrokenResurrect = data.Items[ObjectType].NotBrokenResurrect,
+                        MantleResurrect = data.Items[ObjectType].MantleResurrect,
+                        MpGiveBack = data.Items[ObjectType].MpGiveBack,
+                        Treasure = data.Items[ObjectType].Treasure,
+                        Maxy = data.Items[ObjectType].Maxy,
+                        FeedPower = data.Items[ObjectType].FeedPower,
+                    });
+                    rdr.Close();
+                }
+            }
+            return ret.ToArray();
+        }
+
+        public int[] formatSerial(int[] _old, XmlData data)
+        {
+            List<int> _new = new List<int>();
+            foreach (var item in _old)
+            {
+                if (item == -1)
+                {
+                    _new.Add(item);
+                    continue;
+                }
+                var info = getSerialInfo(item, data);
+                if (info != null)
+                    _new.Add(info.ObjectType);
+                else
+                    _new.Add(-1);
+            }
+            return _new.ToArray();
+        }
+
+        public int GetNextSerialId()
+        {
+            var cmd = CreateQuery();
+            cmd.CommandText = "SELECT IFNULL(MAX(id), 0) + 1 FROM seriallist;";
+            return (int)(long) cmd.ExecuteScalar();
+        }
+
+        public void InsertSerial(Item item)
+        {
+            var sb = item.Soulbound ? 1 : 0;
+            var cmd = CreateQuery();
+            cmd.CommandText = $"INSERT INTO `rotmgprod`.`seriallist` (`id`, `type`, `firstUser`, `currentUser`, `droppedIn`, `soulbound`, `banned`) VALUES('{item.serialId}', '{item.ObjectType}', '{item.firstUser}', '{item.currentUser}', '{item.droppedIn}', '{sb}', '{item.banned}');";
+            cmd.ExecuteNonQuery();
+        }
+
+        public void UpdateSerial(Item item)
+        {
+            var cmd = CreateQuery();
+            var sb = item.Soulbound ? 1 : 0;
+            if (item.banned == 1) //Server cannot unban an item
+                cmd.CommandText = $"UPDATE seriallist SET type = '{item.ObjectType}', banned = '{item.banned}', firstUser = '{item.firstUser}', currentUser = '{item.currentUser}', droppedIn = '{item.droppedIn}', soulbound = '{sb}' WHERE id = @id;";
+            else
+                cmd.CommandText = $"UPDATE seriallist SET type = '{item.ObjectType}', firstUser = '{item.firstUser}', currentUser = '{item.currentUser}', droppedIn = '{item.droppedIn}', soulbound = '{sb}' WHERE id = @id;";
+            cmd.Parameters.AddWithValue("@id", item.serialId);
+            cmd.ExecuteNonQuery();
+        }
+
         public VaultData ReadVault(Account acc)
         {
             var cmd = CreateQuery();
@@ -631,7 +811,7 @@ SELECT MAX(chestId) FROM vaults WHERE accId = @accId;";
             return ret;
         }
 
-        public void LoadCharacters(Account acc, Chars chrs)
+        public void LoadCharacters(Account acc, Chars chrs, XmlData data)
         {
             var cmd = CreateQuery();
             cmd.CommandText = "SELECT * FROM characters WHERE accId=@accId AND dead = FALSE;";
@@ -643,7 +823,7 @@ SELECT MAX(chestId) FROM vaults WHERE accId = @accId;";
                     var stats = Utils.FromCommaSepString32(rdr.GetString("stats"));
                     chrs.Characters.Add(new Char
                     {
-                        ObjectType = (ushort) rdr.GetInt32("charType"),
+                        ObjectType = (ushort)rdr.GetInt32("charType"),
                         CharacterId = rdr.GetInt32("charId"),
                         Level = rdr.GetInt32("level"),
                         Exp = rdr.GetInt32("exp"),
@@ -672,8 +852,24 @@ SELECT MAX(chestId) FROM vaults WHERE accId = @accId;";
                 }
             }
             foreach (var i in chrs.Characters)
+            {
+                List<int> Items = new List<int>();
+                foreach (int code in Utils.FromCommaSepString32(i._Equipment))
+                {
+                    var item = getSerialInfo(code, data);
+                    if (item != null)
+                    {
+                        Items.Add(item.ObjectType);
+                    }
+                    else
+                    {
+                        Items.Add(-1);
+                    }
+                }
+                i._Equipment = Utils.GetCommaSepString(Items.ToArray());
                 if (i.HasBackpack == 1)
                     i._Equipment += ", " + Utils.GetCommaSepString(GetBackpack(i, acc));
+            }
         }
 
         public PetItem GetPet(int petId, Account acc)
@@ -716,38 +912,116 @@ SELECT MAX(chestId) FROM vaults WHERE accId = @accId;";
             return ret;
         }
 
-        public static Char CreateCharacter(XmlData data, ushort type, int chrId)
+        public Item CreateSerial(OldItem item, bool soulbound = false, bool insert = true, string DroppedIn = "", int _id = -1)
         {
-            var cls = data.ObjectTypeToElement[type];
-            if (cls == null) return null;
-            var ret = new Char
+            int id;
+            if (insert && _id == -1)
+                id = GetNextSerialId();
+            else
+                id = _id;
+            Item ret = new Item
             {
-                ObjectType = type,
-                CharacterId = chrId,
-                Level = 1,
-                Exp = 0,
-                CurrentFame = 0,
-                HasBackpack = 0,
-                _Equipment = cls.Element("Equipment").Value.Replace("0xa22", "-1"),
-                MaxHitPoints = int.Parse(cls.Element("MaxHitPoints").Value),
-                HitPoints = int.Parse(cls.Element("MaxHitPoints").Value),
-                MaxMagicPoints = int.Parse(cls.Element("MaxMagicPoints").Value),
-                MagicPoints = int.Parse(cls.Element("MaxMagicPoints").Value),
-                Attack = int.Parse(cls.Element("Attack").Value),
-                Defense = int.Parse(cls.Element("Defense").Value),
-                Speed = int.Parse(cls.Element("Speed").Value),
-                Dexterity = int.Parse(cls.Element("Dexterity").Value),
-                HpRegen = int.Parse(cls.Element("HpRegen").Value),
-                MpRegen = int.Parse(cls.Element("MpRegen").Value),
-                HealthStackCount = 1,
-                Tex1 = 0,
-                Tex2 = 0,
-                Dead = false,
-                PCStats = "",
-                FameStats = new FameStats(),
-                Pet = null,
-                Skin = 0
+                serialId = id,
+                ObjectType = item.ObjectType,
+                firstUser = -1,
+                currentUser = -1,
+                droppedIn = DroppedIn,
+                Soulbound = soulbound,
+                banned = 0,
+                ObjectId = item.ObjectId,
+                SlotType = item.SlotType,
+                Tier = item.Tier,
+                Description = item.Description,
+                RateOfFire = item.RateOfFire,
+                Usable = item.Usable,
+                BagType = item.BagType,
+                MpCost = item.MpCost,
+                FameBonus = item.FameBonus,
+                NumProjectiles = item.NumProjectiles,
+                ArcGap = item.ArcGap,
+                Consumable = item.Consumable,
+                Potion = item.Potion,
+                DisplayId = item.DisplayId,
+                SuccessorId = item.SuccessorId,
+                Cooldown = item.Cooldown,
+                Resurrects = item.Resurrects,
+                Texture1 = item.Texture1,
+                Texture2 = item.Texture2,
+                Secret = item.Secret,
+                IsBackpack = item.IsBackpack,
+                Rarity = item.Rarity,
+                Family = item.Family,
+                Class = item.Class,
+                Doses = item.Doses,
+                StatsBoost = item.StatsBoost,
+                ActivateEffects = item.ActivateEffects,
+                Projectiles = item.Projectiles,
+                MpEndCost = item.MpEndCost,
+                Timer = item.Timer,
+                XpBooster = item.XpBooster,
+                LootDropBooster = item.LootDropBooster,
+                LootTierBooster = item.LootTierBooster,
+                SetType = item.SetType,
+                BrokenResurrect = item.BrokenResurrect,
+                NotBrokenResurrect = item.NotBrokenResurrect,
+                MantleResurrect = item.MantleResurrect,
+                MpGiveBack = item.MpGiveBack,
+                Treasure = item.Treasure,
+                Maxy = item.Maxy,
+                FeedPower = item.FeedPower
             };
+            if (insert)
+                InsertSerial(ret);
+            return ret;
+        }
+
+        public Char CreateCharacter(XmlData data, ushort type, int chrId)
+        {
+            Char ret = null;
+            try
+            {
+                var cls = data.ObjectTypeToElement[type];
+                if (cls == null) return null;
+                var firstItems = Utils.FromCommaSepString32(cls.Element("Equipment").Value.Replace("0xa22", "-1"));
+                int[] newFirsts = { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 };
+                for (var i = 0; i < firstItems.Length; i++)
+                {
+                    if (firstItems[i] == -1) continue;
+                    newFirsts[i] = (CreateSerial(data.Items[(ushort)firstItems[i]], DroppedIn: "New Player").serialId);
+                }
+                ret = new Char
+                {
+                    ObjectType = type,
+                    CharacterId = chrId,
+                    Level = 1,
+                    Exp = 0,
+                    CurrentFame = 0,
+                    HasBackpack = 0,
+                    _Equipment = Utils.GetCommaSepString(newFirsts),
+                    MaxHitPoints = int.Parse(cls.Element("MaxHitPoints").Value),
+                    HitPoints = int.Parse(cls.Element("MaxHitPoints").Value),
+                    MaxMagicPoints = int.Parse(cls.Element("MaxMagicPoints").Value),
+                    MagicPoints = int.Parse(cls.Element("MaxMagicPoints").Value),
+                    Attack = int.Parse(cls.Element("Attack").Value),
+                    Defense = int.Parse(cls.Element("Defense").Value),
+                    Speed = int.Parse(cls.Element("Speed").Value),
+                    Dexterity = int.Parse(cls.Element("Dexterity").Value),
+                    HpRegen = int.Parse(cls.Element("HpRegen").Value),
+                    MpRegen = int.Parse(cls.Element("MpRegen").Value),
+                    HealthStackCount = 1,
+                    Tex1 = 0,
+                    Tex2 = 0,
+                    Dead = false,
+                    PCStats = "",
+                    FameStats = new FameStats(),
+                    Pet = null,
+                    Skin = 0
+                };
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
             return ret;
         }
 
@@ -798,33 +1072,30 @@ SELECT MAX(chestId) FROM vaults WHERE accId = @accId;";
             }
         }
 
-        public int GetMarketCharId(int mType, int price)
+        public Item GetMarketInfo(int mType, int price, XmlData data)
         {
-            int accId;
-            if (IsDebugOn())
-                Console.WriteLine("Attemping to find player to give fame to: " + mType + " | " + price);
+            int serialid;
             var cmd = CreateQuery();
-            cmd.CommandText = "SELECT playerid FROM market WHERE itemid=@itemID AND fame=@fame";
+            cmd.CommandText = "SELECT serialid FROM market WHERE itemid=@itemID AND fame=@fame";
             cmd.Parameters.AddWithValue("@itemID", mType);
             cmd.Parameters.AddWithValue("@fame", price);
             using (var rdr = cmd.ExecuteReader())
             {
-                if (!rdr.HasRows) return 0;
+                if (!rdr.HasRows) return null;
                 rdr.Read();
-                accId = rdr.GetInt32("playerid");
+                serialid = rdr.GetInt32("serialid");
+                rdr.Close();
             }
-            return accId;
+            return getSerialInfo(serialid, data);
         }
 
-        public int GetMarketPrice(Item item)
+        public int GetMarketPrice(OldItem item)
         {
             var cmd = CreateQuery();
             cmd.CommandText = "SELECT MIN( fame ) FROM market WHERE itemid=@itemid LIMIT 1";
             cmd.Parameters.AddWithValue("@itemid", item.ObjectType);
             using (var rdr = cmd.ExecuteReader())
             {
-                if (IsDebugOn())
-                    Console.WriteLine("GetMarketPrice | Calling: " + item.ObjectId);
                 rdr.Read();
                 var ordinal = rdr.GetOrdinal("MIN( fame )");
                 if (!rdr.HasRows || rdr.IsDBNull(ordinal))
@@ -832,8 +1103,6 @@ SELECT MAX(chestId) FROM vaults WHERE accId = @accId;";
                     return 0;
                 }
                 var price = rdr.GetInt32("MIN( fame )");
-                if (IsDebugOn())
-                    Console.WriteLine("GetMarketPrice | " + price);
                 return price;
             }
         }
@@ -846,8 +1115,6 @@ SELECT MAX(chestId) FROM vaults WHERE accId = @accId;";
             cmd.Parameters.AddWithValue("@petId", pet);
             using (var rdr = cmd.ExecuteReader())
             {
-                if (IsDebugOn())
-                    Console.WriteLine("Checking PetSize with accId: " + id + " and petId: " + pet);
                 rdr.Read();
                 if (!rdr.HasRows)
                 {

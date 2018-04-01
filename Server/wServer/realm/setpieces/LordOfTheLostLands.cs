@@ -6,9 +6,9 @@
 
         public void RenderSetPiece(World world, IntPoint pos)
         {
-            Entity cube = Entity.Resolve(world.Manager, "Lord of the Lost Lands");
-            cube.Move(pos.X + 2.5f, pos.Y + 2.5f);
-            world.EnterWorld(cube);
+            Entity lotl = Entity.Resolve(world.Manager, "Lord of the Lost Lands");
+            lotl.Move(pos.X + 2.5f, pos.Y + 2.5f);
+            world.EnterWorld(lotl);
         }
     }
 }

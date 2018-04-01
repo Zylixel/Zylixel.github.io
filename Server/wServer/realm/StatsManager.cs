@@ -19,8 +19,6 @@ namespace wServer.realm
 
         public DamageRandom Random { get; }
 
-        //from wiki
-
         public int GetStats(int id)
         {
             return player.Stats[id] + player.Boost[id];
@@ -117,6 +115,21 @@ namespace wServer.realm
             if (player.HasConditionEffect(ConditionEffectIndex.Quiet))
                 return 4;
             return 0.5f + 0.06f * MP;
+        }
+
+        private const float MinAttackFreq = 0.020f;
+        private const float MaxAttackFreq = 0.010f;
+        public float GetAttackFrequency()
+        {
+            if (player.HasConditionEffect(ConditionEffects.Dazed))
+                return MinAttackFreq;
+
+            var rof = MinAttackFreq + (GetStats(7) / 75f) * (MaxAttackFreq - MinAttackFreq);
+
+            if (player.HasConditionEffect(ConditionEffects.Berserk))
+                rof *= 1.5f;
+
+            return rof;
         }
 
         public float GetDex()

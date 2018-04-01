@@ -12,7 +12,7 @@ namespace wServer.realm.entities
     {
         Projectile[] Projectiles { get; }
         Entity Self { get; }
-    }
+}
 
     public class Projectile : Entity
     {
@@ -29,6 +29,7 @@ namespace wServer.realm.entities
         public new byte ProjectileId { get; set; }
         public short Container { get; set; }
         public int Damage { get; set; }
+        public Position pos { get; set; }
 
         public long BeginTime { get; set; }
         public Position BeginPos { get; set; }
@@ -118,7 +119,7 @@ namespace wServer.realm.entities
 
         private bool TickCore(long elapsedTicks, RealmTime time)
         {
-            Position pos = GetPosition(elapsedTicks);
+            pos = GetPosition(elapsedTicks);
             Move(pos.X, pos.Y);
 
             if (pos.X < 0 || pos.X > Owner.Map.Width)
@@ -137,7 +138,7 @@ namespace wServer.realm.entities
                 return false;
             }
             bool penetrateObsta = Descriptor.PassesCover;
-
+            
             ushort objId = Owner.Map[(int)pos.X, (int)pos.Y].ObjType;
             if (objId != 0 &&
                 Manager.GameData.ObjectDescs[objId].OccupySquare &&
@@ -146,6 +147,34 @@ namespace wServer.realm.entities
                 Destroy(true);
                 return false;
             }
+
+            // God Hack fix
+            if (ProjectileOwner is Enemy)
+            {
+                foreach (var i in Owner.Players.Values)
+                {
+                    if (!i.isInvincible() && i.X.InRange(pos.X - 0f, pos.X + 0.5f) && i.Y.InRange(pos.Y - 0f, pos.Y + 0.5f) && i.clientEntities.Contains(ProjectileOwner.Self))
+                    {
+                        var oldHp = i.HP;
+                        Owner.Timers.Add(new WorldTimer(200, (world, RealmTime) =>
+                        {
+                            if (i == null) return;
+                            if (oldHp == i.HP)
+                            {
+                                i.healthViolation++;
+                                if (Owner != null)
+                                    Owner.Timers.Add(new WorldTimer(10000, (world1, RealmTime1) =>
+                                    {
+                                        if (i == null) return;
+                                        if (i.healthViolation > 0)
+                                            i.healthViolation--;
+                                    }));
+                            }
+                        }));
+                    }
+                }
+            }
+
             return true;
         }
 
@@ -161,7 +190,6 @@ namespace wServer.realm.entities
                     hitted.Add(entity);
                 else
                     Destroy(true);
-                ProjectileOwner.Self.ProjectileHit(this, entity);
             }
         }
     }

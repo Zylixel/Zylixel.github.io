@@ -148,7 +148,7 @@ namespace wServer.realm.entities.player
             }
         }
 
-        private void ActivateShoot(RealmTime time, Item item, Position target)
+        private void ActivateShoot(RealmTime time, OldItem item, Position target)
         {
             var arcGap = item.ArcGap * Math.PI / 180;
             var startAngle = Math.Atan2(target.Y - Y, target.X - X) - (item.NumProjectiles - 1) / 2 * arcGap;
@@ -208,7 +208,7 @@ namespace wServer.realm.entities.player
             }
         }
 
-        public bool Activate(RealmTime time, Item item, UseItemPacket pkt, XmlData data)
+        public bool Activate(RealmTime time, OldItem item, UseItemPacket pkt, XmlData data)
         {
             var endMethod = false;
             var target = pkt.ItemUsePos;
@@ -221,20 +221,17 @@ namespace wServer.realm.entities.player
             var con = Owner.GetEntity(pkt.SlotObject.ObjectId) as IContainer;
             if (con == null) return true;
             if (pkt.SlotObject.SlotId != 255 && pkt.SlotObject.SlotId != 254 &&
-                con.Inventory[pkt.SlotObject.SlotId] != item)
+                con.Inventory[pkt.SlotObject.SlotId].ObjectType != item.ObjectType)
             {
                 Console.WriteLine("Cheat engine detected for player {0},\nItem should be {1}, but its {2}.",
                     Name, Inventory[pkt.SlotObject.SlotId].ObjectId, item.ObjectId);
-                foreach (var player in Owner.Players.Values)
-                    if (player.Client.Account.Rank >= 2)
-                        player.SendInfo(string.Format(
-                            "Cheat engine detected for player {0},\nItem should be {1}, but its {2}.",
-                            Name, Inventory[pkt.SlotObject.SlotId].ObjectId, item.ObjectId));
-                Client.Disconnect();
+                kickforCheats(possibleExploit.DIFF_ITEM);
                 return true;
             }
             if (item.Maxy)
             {
+                if (Client?.Player?.Stats == null)
+                    return true;
                 Client.Player.Stats[0] = Client.Player.ObjectDesc.MaxHitPoints;
                 Client.Player.Stats[1] = Client.Player.ObjectDesc.MaxMagicPoints;
                 Client.Player.Stats[2] = Client.Player.ObjectDesc.MaxAttack;
@@ -359,16 +356,18 @@ namespace wServer.realm.entities.player
                             else if (eff.Stats == StatsType.Wisdom) idx = 6;
                             else if (eff.Stats == StatsType.Dexterity) idx = 7;
                         if (idx == -1) return false;
-                        Boost[idx] += eff.Amount;
+                        tempBoost[idx] += eff.Amount;
                         ApplyConditionEffect(new ConditionEffect
                         {
                             DurationMS = eff.DurationMS,
                             Effect = (ConditionEffectIndex) idx + 39
                         });
+                        CalcBoost();
                         UpdateCount++;
                         Owner.Timers.Add(new WorldTimer(eff.DurationMS, (world, t) =>
                         {
-                            Boost[idx] -= eff.Amount;
+                            tempBoost[idx] -= eff.Amount;
+                            CalcBoost();
                             UpdateCount++;
                         }));
                         Owner.BroadcastPacket(new ShowEffectPacket
@@ -410,11 +409,11 @@ namespace wServer.realm.entities.player
                                 DurationMS = durationSba,
                                 Effect = (ConditionEffectIndex) bit
                             });
-                            (player as Player).Boost[idx] += amountSba;
+                            (player as Player).tempBoost[idx] += amountSba;
                             player.UpdateCount++;
                             Owner.Timers.Add(new WorldTimer(durationSba, (world, t) =>
                             {
-                                (player as Player).Boost[idx] -= amountSba;
+                                (player as Player).tempBoost[idx] -= amountSba;
                                 player.UpdateCount++;
                             }));
                         });
@@ -695,7 +694,7 @@ namespace wServer.realm.entities.player
                         break;
                     case ActivateEffects.Decoy:
                     {
-                        var decoy = new Decoy(Manager, this, eff.DurationMS, StatsManager.GetSpeed(), eff.random);
+                        var decoy = new Decoy(Manager, this, eff.DurationMS, StatsManager.GetSpeed(), eff.random, eff.explode);
                         decoy.Move(X, Y);
                         Owner.EnterWorld(decoy);
                     }
@@ -973,8 +972,9 @@ namespace wServer.realm.entities.player
                             0x6118, //Bridge Sentinal
                             0x6119 //Twilight Archmage
                         };
+                        bool sb = Inventory[pkt.SlotObject.SlotId].Soulbound;
                         Owner.Timers.Add(new WorldTimer(1, (w, t) => { //Delay so it won't delete it
-                            Inventory[pkt.SlotObject.SlotId] = Manager.GameData.Items[items[new Random(trueRandom(pkt)).Next(0, items.Length)]]; //Generates some very random numbers so you can't abuse the item
+                            Inventory[pkt.SlotObject.SlotId] = Manager.CreateSerial(Manager.GameData.Items[items[new Random(trueRandom(pkt)).Next(0, items.Length)]], DroppedIn: Owner.Name.Replace("'", ""), soulbound: sb); //Generates some very random numbers so you can't abuse the item
                             Client.Save();
                             UpdateCount++;
                         }));
@@ -982,13 +982,15 @@ namespace wServer.realm.entities.player
                     case ActivateEffects.TreasureFind:
                         List<ushort> treasureItems = new List<ushort>();
                         string TreasureFind = "The Marked Spot"; //Default
+                        int Chance = 100;
+
                         foreach (var treasureitem in data.Items)
                         {
                             if (eff.treaureTier == 1) //Recieves Treasure Tier (Common, Uncommon, etc)
                             {
                                 #region ItemData
 
-                                if (treasureitem.Value.Tier == -1 || treasureitem.Value.Tier > 7 || treasureitem.Value.SetType != -1) //No Uts or high level gear or STs
+                                if (treasureitem.Value.Tier == -1 || treasureitem.Value.Tier > 8 || treasureitem.Value.SetType != -1) //No Uts or high level gear or STs
                                     continue;
                                 if (treasureitem.Value.SlotType <= 3) //sword, dag, bow
                                     treasureItems.Add(treasureitem.Value.ObjectType);
@@ -1012,7 +1014,7 @@ namespace wServer.realm.entities.player
                             {
                                 #region ItemData
 
-                                if (treasureitem.Value.Tier == -1 || treasureitem.Value.Tier > 11 || treasureitem.Value.SetType != -1) //No Uts or high level gear or STs
+                                if (treasureitem.Value.Tier == -1 || treasureitem.Value.Tier > 10 || treasureitem.Value.SetType != -1) //No Uts or high level gear or STs
                                     continue;
                                 if (treasureitem.Value.SlotType <= 3) //sword, dag, bow
                                     treasureItems.Add(treasureitem.Value.ObjectType);
@@ -1031,8 +1033,57 @@ namespace wServer.realm.entities.player
                                     treasureItems.Add(treasureitem.Value.ObjectType);
 
                                 #endregion
-
                                 TreasureFind = "The Uncommon Marked Spot";
+                            }
+                            if (eff.treaureTier == 3) //Recieves Treasure Tier (Common, Uncommon, etc)
+                            {
+                                #region ItemData
+
+                                if (treasureitem.Value.Tier == -1 || treasureitem.Value.Tier > 12 || treasureitem.Value.SetType != -1) //No Uts or high level gear or STs
+                                    continue;
+                                if (treasureitem.Value.SlotType <= 3) //sword, dag, bow
+                                    treasureItems.Add(treasureitem.Value.ObjectType);
+                                if (treasureitem.Value.SlotType >= 6 && treasureitem.Value.SlotType >= 8) //Leather, wand, Armor
+                                    treasureItems.Add(treasureitem.Value.ObjectType);
+                                if (treasureitem.Value.SlotType == 17) //staff
+                                    treasureItems.Add(treasureitem.Value.ObjectType);
+                                if (treasureitem.Value.SlotType == 24) //Katana
+                                    treasureItems.Add(treasureitem.Value.ObjectType);
+                                if (treasureitem.Value.Tier <= 6)
+                                    if (treasureitem.Value.Usable && treasureitem.Value.MpCost >= 1) //Abilites
+                                        treasureItems.Add(treasureitem.Value.ObjectType);
+                                if (treasureitem.Value.Tier <= 6 && treasureitem.Value.SlotType == 11) //Rings
+                                    treasureItems.Add(treasureitem.Value.ObjectType);
+                                if (treasureitem.Value.SlotType == 14) //Robe
+                                    treasureItems.Add(treasureitem.Value.ObjectType);
+
+                                #endregion
+                                TreasureFind = "The Rare Marked Spot";
+                            }
+                            if (eff.treaureTier == 4) //Recieves Treasure Tier (Common, Uncommon, etc)
+                            {
+                                #region ItemData
+
+                                if (treasureitem.Value.Tier == -1 || treasureitem.Value.Tier > 13 || treasureitem.Value.SetType != -1) //No Uts or high level gear or STs
+                                    continue;
+                                if (treasureitem.Value.SlotType <= 3) //sword, dag, bow
+                                    treasureItems.Add(treasureitem.Value.ObjectType);
+                                if (treasureitem.Value.SlotType >= 6 && treasureitem.Value.SlotType >= 8) //Leather, wand, Armor
+                                    treasureItems.Add(treasureitem.Value.ObjectType);
+                                if (treasureitem.Value.SlotType == 17) //staff
+                                    treasureItems.Add(treasureitem.Value.ObjectType);
+                                if (treasureitem.Value.SlotType == 24) //Katana
+                                    treasureItems.Add(treasureitem.Value.ObjectType);
+                                if (treasureitem.Value.Tier <= 6)
+                                    if (treasureitem.Value.Usable && treasureitem.Value.MpCost >= 1) //Abilites
+                                        treasureItems.Add(treasureitem.Value.ObjectType);
+                                if (treasureitem.Value.Tier <= 6 && treasureitem.Value.SlotType == 11) //Rings
+                                    treasureItems.Add(treasureitem.Value.ObjectType);
+                                if (treasureitem.Value.SlotType == 14) //Robe
+                                    treasureItems.Add(treasureitem.Value.ObjectType);
+
+                                #endregion
+                                TreasureFind = "The Legendary Marked Spot";
                             }
                             if (eff.treaureTier == 5) //Recieves Treasure Tier (Shatters)
                             {
@@ -1046,13 +1097,15 @@ namespace wServer.realm.entities.player
                                     treasureItems.Add(treasureitem.Value.ObjectType);
 
                                 #endregion
-
+                                Chance = 5;
                                 TreasureFind = "The Shatters Marked Spot";
                             }
                         }
 
                         var ground =
                             this.GetNearestEntity(3, Manager.GameData.IdToObjectType[TreasureFind]); //find treasure
+                        if (!(Chance >= Random.Next(0, 100))) //Failure
+                            Client.Player.SendError("You did not find any treasure");
                         if (ground == null) //If no treasure in sight
                         {
                             Client.SendPacket(new DialogPacket
@@ -1064,8 +1117,9 @@ namespace wServer.realm.entities.player
                         }
 
                         Owner.LeaveWorld(ground); //Remove Ground
+                        sb = Inventory[pkt.SlotObject.SlotId].Soulbound;
                         Owner.Timers.Add(new WorldTimer(1, (w, t) => { //Delay so it won't delete it
-                            Inventory[pkt.SlotObject.SlotId] = Manager.GameData.Items[treasureItems[new Random(trueRandom(pkt)).Next(0, treasureItems.Count)]]; //Give Item
+                            Inventory[pkt.SlotObject.SlotId] = Manager.CreateSerial(Manager.GameData.Items[treasureItems[new Random(trueRandom(pkt)).Next(0, treasureItems.Count)]], DroppedIn: Owner.Name.Replace("'", ""), soulbound: sb); //Give Item
                             Client.Save();
                         }));
                         break;
@@ -1102,7 +1156,12 @@ namespace wServer.realm.entities.player
                         Owner.Timers.Add(new WorldTimer(30 * 1000, (w, t) => { w.LeaveWorld(en); }));
                         break;
                     case ActivateEffects.CreateChest:
-                        var chest = Resolve(Manager, eff.ObjectId);
+                        if (Owner.Name != "Vault")
+                        {
+                            Client.Player.SendError("Can only be used in the vault");
+                            return true;
+                        }
+                        var chest = Resolve(Manager, eff.Id);
                         chest.Move(X, Y);
                         Owner.EnterWorld(chest);
                         break;

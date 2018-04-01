@@ -16,7 +16,7 @@
 
         protected override void Init()
         {
-            LoadMap("wServer.realm.worlds.maps.innersanctum.wmap", MapType.Wmap);
+            LoadMap("wServer.realm.worlds.maps.innersanctum.jm", MapType.Json);
         }
     }
 }

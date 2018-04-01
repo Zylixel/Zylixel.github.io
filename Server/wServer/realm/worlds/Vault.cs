@@ -7,6 +7,7 @@ using System.Linq;
 using MySql.Data.MySqlClient;
 using wServer.networking;
 using wServer.realm.entities;
+using db;
 
 #endregion
 
@@ -92,7 +93,10 @@ namespace wServer.realm.worlds
                     {
                         if (c.Items.Count < 8)
                         {
-                            c.Items.Add(Manager.GameData.Items[(ushort)gifts[i]]);
+                            Manager.Database.DoActionAsync(db =>
+                            {
+                                c.Items.Add(db.getSerialInfo(gifts[i], Manager.GameData));
+                            });
                             wasLastElse = false;
                         }
                         else
@@ -100,7 +104,10 @@ namespace wServer.realm.worlds
                             giftChests.Add(c);
                             c = new GiftChest();
                             c.Items = new List<Item>(8);
-                            c.Items.Add(Manager.GameData.Items[(ushort)gifts[i]]);
+                            Manager.Database.DoActionAsync(db =>
+                            {
+                                c.Items.Add(db.getSerialInfo(gifts[i], Manager.GameData));
+                            });
                             wasLastElse = true;
                         }
                     }
@@ -127,15 +134,11 @@ namespace wServer.realm.worlds
             {
                 if (vaultChestPosition.Count == 0) break;
                 Container con = new Container(Manager, 0x0504, null, false);
-                Item[] inv =
-                    t.Items.Select(
-                        _ =>
-                            _ == -1
-                                ? null
-                                : (Manager.GameData.Items.ContainsKey((ushort) _)
-                                    ? Manager.GameData.Items[(ushort) _]
-                                    : null))
-                        .ToArray();
+                Item[] inv;
+                using (Database db = new Database())
+                {
+                    inv = db.getSerialInfo(t.Items, Manager.GameData);
+                };
                 for (int j = 0; j < 8; j++)
                     con.Inventory[j] = inv[j];
                 con.Move(vaultChestPosition[0].X + 0.5f, vaultChestPosition[0].Y + 0.5f);
@@ -211,15 +214,7 @@ namespace wServer.realm.worlds
                 foreach (VaultChest t in chests)
                 {
                     Container con = new Container(Manager, 0x0504, null, false);
-                    Item[] inv =
-                        t.Items.Select(
-                            _ =>
-                                _ == -1
-                                    ? null
-                                    : (Manager.GameData.Items.ContainsKey((ushort)_)
-                                        ? Manager.GameData.Items[(ushort)_]
-                                        : null))
-                            .ToArray();
+                    Item[] inv = db.getSerialInfo(t.Items, Manager.GameData);
                     for (int j = 0; j < 8; j++)
                         con.Inventory[j] = inv[j];
                     con.Move(vaultChestPosition[0].X + 0.5f, vaultChestPosition[0].Y + 0.5f);
@@ -240,13 +235,11 @@ namespace wServer.realm.worlds
         public void AddChest(VaultChest chest, Entity original)
         {
             Container con = new Container(Manager, 0x0504, null, false);
-            Item[] inv =
-                chest.Items.Select(
-                    _ =>
-                        _ == -1
-                            ? null
-                            : (Manager.GameData.Items.ContainsKey((ushort) _) ? Manager.GameData.Items[(ushort) _] : null))
-                    .ToArray();
+            Item[] inv;
+            using (Database db = new Database())
+            {
+                inv = db.getSerialInfo(chest.Items, Manager.GameData);
+            };
             for (int j = 0; j < 8; j++)
                 con.Inventory[j] = inv[j];
             con.Move(original.X, original.Y);
@@ -275,7 +268,7 @@ namespace wServer.realm.worlds
                         {
                             i.Key.Item2._Items =
                                 Utils.GetCommaSepString(
-                                    i.Key.Item1.Inventory.Take(8).Select(_ => _ == null ? -1 : _.ObjectType).ToArray());
+                                    i.Key.Item1.Inventory.Take(8).Select(_ => _ == null ? -1 : _.serialId).ToArray());
                             db.SaveChest(AccountId, i.Key.Item2);
                             _vaultChests[i.Key] = i.Key.Item1.UpdateCount;
                         });

@@ -25,7 +25,7 @@ namespace wServer.networking.handlers
             {
                 var container = client.Player.Owner.GetEntity(packet.SlotObject.ObjectId) as IContainer;
                 if(container == null) return;
-                Item item;
+                OldItem item;
                 switch (packet.SlotObject.SlotId)
                 {
                     case 254:
@@ -35,11 +35,7 @@ namespace wServer.networking.handlers
                         {
                             Console.WriteLine("Cheat engine detected for player {0},\nItem should be a Health Potion, but its {1}.",
                                 client.Player.Name, item.ObjectId);
-                            foreach (Player player in client.Player.Owner.Players.Values)
-                                if (player.Client.Account.Rank >= 2)
-                                    player.SendInfo(String.Format("Cheat engine detected for player {0},\nItem should be a Health Potion, but its {1}.",
-                                        client.Player.Name, item.ObjectId));
-                            client.Disconnect();
+                            client.Player.kickforCheats(Player.possibleExploit.INAVLID_INVSWAP);
                             return;
                         }
 
@@ -138,9 +134,7 @@ namespace wServer.networking.handlers
                         {
                             Console.WriteLine("Cheat engine detected for player {0},\nItem should be a Magic Potion, but its {1}.",
                                 client.Player.Name, item.ObjectId);
-                            foreach (var player in client.Player.Owner.Players.Values.Where(player => player.Client.Account.Rank >= 2))
-                                player.SendInfo($"Cheat engine detected for player {client.Player.Name},\nItem should be a Magic Potion, but its {item.ObjectId}.");
-                            client.Disconnect();
+                            client.Player.kickforCheats(Player.possibleExploit.INAVLID_INVSWAP);
                             return;
                         }
 
@@ -231,7 +225,7 @@ namespace wServer.networking.handlers
                         }
                         break;
                     default:
-                        item = container.Inventory[packet.SlotObject.SlotId];
+                        item = client.Player.Manager.GameData.Items[packet.SlotObject.ObjectType];
                         break;
                 }
                 if (item != null)
@@ -247,8 +241,8 @@ namespace wServer.networking.handlers
                                     if (packet.SlotObject.SlotId != 254 && packet.SlotObject.SlotId != 255)
                                     {
                                         container.Inventory[packet.SlotObject.SlotId] =
-                                            client.Player.Manager.GameData.Items[
-                                                client.Player.Manager.GameData.IdToObjectType[item.SuccessorId]];
+                                            client.Player.Manager.CreateSerial(client.Player.Manager.GameData.Items[
+                                                client.Player.Manager.GameData.IdToObjectType[item.SuccessorId]], client.Player.Owner.Name.Replace("'", ""));
                                         client.Player.Owner.GetEntity(packet.SlotObject.ObjectId).UpdateCount++;
                                     }
                                 }

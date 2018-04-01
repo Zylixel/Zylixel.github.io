@@ -39,12 +39,12 @@ namespace wServer.networking.handlers
             {
                 if ((client.Account = db.Verify(packet.Guid, packet.Password, Manager.GameData)) == null)
                 {
-                    Console.WriteLine(@"Account not verified.");
+                    Program.writeNotable(@"Account not verified.");
                     client.Account = Database.CreateGuestAccount(packet.Guid);
 
                     if (client.Account == null)
                     {
-                        Console.WriteLine(@"Account is null!");
+                        Program.writeNotable(@"Account is null!");
                         client.SendPacket(new FailurePacket
                         {
                             ErrorDescription = "Invalid account."
@@ -56,19 +56,16 @@ namespace wServer.networking.handlers
                 if (!client.Account.IsGuestAccount)
                 {
                     int? timeout = null;
-
-                    if (DateTime.Now <= Program.WhiteListTurnOff)
+                    
+                    if (!IsWhiteListed(client.Account.Rank))
                     {
-                        if (!IsWhiteListed(client.Account.Rank))
+                        client.SendPacket(new FailurePacket
                         {
-                            client.SendPacket(new FailurePacket
-                            {
-                                ErrorId = 0,
-                                ErrorDescription = "You are not whitelisted!"
-                            });
-                            client.Disconnect();
-                            return;
-                        }
+                            ErrorId = 0,
+                            ErrorDescription = "You are not whitelisted!"
+                        });
+                        client.Disconnect();
+                        return;
                     }
                     if (db.CheckAccountInUse(client.Account, ref timeout))
                     {
@@ -103,12 +100,10 @@ namespace wServer.networking.handlers
                         ErrorDescription = "Failed to connect."
                     });
                     client.Disconnect();
-                    Console.WriteLine(@"Failed to connect.");
+                    Program.writeError("Client Failed to connect.");
                 }
                 else
                 {
-                    if (CheckConfig.IsDebugOn())
-                        Console.WriteLine(@"Client loading world");
                     if (packet.GameId == World.NEXUS_LIMBO) packet.GameId = World.NEXUS_ID;
                     World world = client.Manager.GetWorld(packet.GameId);
                     if (world == null && packet.GameId == World.TUT_ID) world = client.Manager.AddWorld(new Tutorial(false));

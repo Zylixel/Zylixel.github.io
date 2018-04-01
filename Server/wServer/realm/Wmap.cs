@@ -84,6 +84,7 @@ namespace wServer.realm
         public WmapTerrain Terrain;
         public ushort TileId;
         public byte UpdateCount;
+        public ObjectDesc ObjectDesc;
 
         public ObjectDef ToDef(int x, int y)
         {
@@ -164,7 +165,8 @@ namespace wServer.realm
                 ObjType = ObjType,
                 Terrain = Terrain,
                 Region = Region,
-                ObjId = ObjId
+                ObjId = ObjId,
+                ObjectDesc = ObjectDesc
             };
         }
     }
@@ -187,6 +189,15 @@ namespace wServer.realm
         {
             get { try { return tiles[x, y]; } catch { return new WmapTile(); } }
             set { tiles[x, y] = value; }
+        }
+
+        public bool Contains(int x, int y)
+        {
+            if (x < 0 || x >= Width ||
+                y < 0 || y >= Height)
+                return false;
+
+            return true;
         }
 
         public int Load(Stream stream, int idBase)
@@ -214,6 +225,7 @@ namespace wServer.realm
                 tile.Name = reader.ReadString();
                 tile.Terrain = (WmapTerrain) reader.ReadByte();
                 tile.Region = (TileRegion) reader.ReadByte();
+                data.ObjectDescs.TryGetValue(tile.ObjType, out tile.ObjectDesc);
                 dict.Add(tile);
             }
             Width = reader.ReadInt32();
@@ -227,10 +239,8 @@ namespace wServer.realm
                     WmapTile tile = dict[reader.ReadInt16()];
                     tile.UpdateCount = 1;
 
-                    ObjectDesc desc;
-                    if (tile.ObjType != 0 &&
-                        (!data.ObjectDescs.TryGetValue(tile.ObjType, out desc) ||
-                         !desc.Static || desc.Enemy))
+                    ObjectDesc desc = tile.ObjectDesc;
+                    if (tile.ObjType != 0 && (desc == null || !desc.Static || desc.Enemy))
                     {
                         entities.Add(new Tuple<IntPoint, ushort, string>(new IntPoint(x, y), tile.ObjType, tile.Name));
                         tile.ObjType = 0;
@@ -263,6 +273,7 @@ namespace wServer.realm
                 tile.Terrain = (WmapTerrain) reader.ReadByte();
                 tile.Region = (TileRegion) reader.ReadByte();
                 tile.Elevation = reader.ReadByte();
+                data.ObjectDescs.TryGetValue(tile.ObjType, out tile.ObjectDesc);
                 dict.Add(tile);
             }
             Width = reader.ReadInt32();
@@ -276,10 +287,8 @@ namespace wServer.realm
                     WmapTile tile = dict[reader.ReadInt16()];
                     tile.UpdateCount = 1;
 
-                    ObjectDesc desc;
-                    if (tile.ObjType != 0 &&
-                        (!data.ObjectDescs.TryGetValue(tile.ObjType, out desc) ||
-                         !desc.Static || desc.Enemy))
+                    ObjectDesc desc = tile.ObjectDesc;
+                    if (tile.ObjType != 0 && (desc == null || !desc.Static || desc.Enemy))
                     {
                         entities.Add(new Tuple<IntPoint, ushort, string>(new IntPoint(x, y), tile.ObjType, tile.Name));
                         tile.ObjType = 0;
@@ -314,6 +323,7 @@ namespace wServer.realm
                 tile.Name = reader.ReadString();
                 tile.Terrain = (WmapTerrain)reader.ReadByte();
                 tile.Region = (TileRegion)reader.ReadByte();
+                data.ObjectDescs.TryGetValue(tile.ObjType, out tile.ObjectDesc);
                 dict.Add(tile);                
             }
             Width = reader.ReadInt32();
@@ -328,10 +338,8 @@ namespace wServer.realm
                     tile.UpdateCount = 1;
                     tile.Elevation = reader.ReadByte();
 
-                    ObjectDesc desc;
-                    if (tile.ObjType != 0 &&
-                        (!data.ObjectDescs.TryGetValue(tile.ObjType, out desc) || isGuildMerchant(tile.ObjType) ||
-                         !desc.Static || desc.Enemy))
+                    ObjectDesc desc = tile.ObjectDesc;
+                    if (tile.ObjType != 0 && (desc == null || !desc.Static || desc.Enemy))
                     {
                         entities.Add(new Tuple<IntPoint, ushort, string>(new IntPoint(x, y), tile.ObjType, tile.Name));
                         tile.ObjType = 0;

@@ -11,7 +11,7 @@ namespace wServer.logic
     partial class BehaviorDb
     {
         private _ Events = () => Behav()
-            #region Skull Shrine
+        #region Skull Shrine
 
             .Init("Skull Shrine",
                 new State(
@@ -60,9 +60,9 @@ namespace wServer.logic
                     new Shoot(15, 2, 5, 0, predictive: 1, coolDown: 750)
                     )
             )
-            #endregion
+        #endregion
 
-            #region Hermit God
+        #region Hermit God
 
             .Init("Hermit God",
                 new State(
@@ -186,7 +186,59 @@ namespace wServer.logic
                 new Threshold(0.05,
                     new ItemLoot("Helm of the Juggernaut", 0.005)
                 )
+            )
+        #endregion
+
+            .Init("Hype Beast",
+                new State(
+                    new State("fightem",
+                            new Prioritize(
+                                new Follow(1.5, range: 0.2, acquireRange: 2),
+                                new Follow(0.8, range: 1.8, acquireRange: 10.5, duration: 3000, coolDown: 5000),
+                                new Wander(0.5)
+                            ),
+                            new Shoot(25, 3, 30, coolDown: 3000),
+                            new Shoot(25, 1, coolDown: 3000, predictive: 1, projectileIndex: 2, coolDownOffset: 1500),
+                            new TimedTransition(9000, "spookem"),
+                            new HpLessTransition(0.25, "rage")
+                        ),
+                    new State("spookem",
+                        new Flash(0xfFF0000, 0.5, 6),
+                        new TimedTransition(3000, "megaspook")
+                        ),
+                    new State("megaspook",
+                        new Follow(5, range: 0.1, acquireRange: 10.5),
+                        new Shoot(25, 8, coolDown: 100, projectileIndex: 3),
+                        new TimedTransition(2000, "fightem")
+                        ),
+                    new State("rage",
+                        new Prioritize(
+                                new Follow(1.2, range: 0.2, acquireRange: 2),
+                                new Follow(1.2, range: 1.8, acquireRange: 10.5, duration: 3000, coolDown: 5000),
+                                new Wander(1.1)
+                            ),
+                        new Shoot(25, 5, 20, coolDown: 1500),
+                        new Shoot(25, 1, coolDown: 1500, predictive: 1, projectileIndex: 2, coolDownOffset: 750),
+                        new Shoot(25, 10, coolDown: 500, projectileIndex: 1)
+                        )
+                    ),
+                    new MostDamagers(3,
+                        LootTemplates.StatIncreasePotionsLoot()
+                    ),
+                    new Threshold(0.05,
+                        new TierLoot(9, ItemType.Weapon, 0.4),
+                        new TierLoot(10, ItemType.Weapon, 0.2),
+                        new TierLoot(11, ItemType.Weapon, 0.1),
+                        new TierLoot(4, ItemType.Ring, 0.2),
+                        new TierLoot(5, ItemType.Ring, 0.1),
+                        new TierLoot(9, ItemType.Armor, 0.4),
+                        new TierLoot(10, ItemType.Armor, 0.2),
+                        new TierLoot(11, ItemType.Armor, 0.1),
+                        new TierLoot(4, ItemType.Ability, 0.2),
+                        new TierLoot(5, ItemType.Ability, 0.1),
+                        new ItemLoot("Beastly Garment", 0.01),
+                        new ItemLoot("Goggles of Clout", 0.01)
+                    )
             );
-            #endregion
     }
 }

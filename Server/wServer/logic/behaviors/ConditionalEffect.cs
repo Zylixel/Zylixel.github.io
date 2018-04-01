@@ -6,14 +6,14 @@ using wServer.realm;
 
 namespace wServer.logic.behaviors
 {
-    public class ConditionalEffect : Behavior
+    public class RemoveConditionalEffect : Behavior
     {
         //State storage: none
 
         private readonly ConditionEffectIndex effect;
         private readonly bool perm;
 
-        public ConditionalEffect(ConditionEffectIndex effect, bool perm = false)
+        public RemoveConditionalEffect(ConditionEffectIndex effect, bool perm = false)
         {
             this.effect = effect;
             this.perm = perm;
@@ -24,20 +24,8 @@ namespace wServer.logic.behaviors
             host.ApplyConditionEffect(new ConditionEffect
             {
                 Effect = effect,
-                DurationMS = -1
+                DurationMS = 0
             });
-        }
-
-        protected override void OnStateExit(Entity host, RealmTime time, ref object state)
-        {
-            if (!perm)
-            {
-                host.ApplyConditionEffect(new ConditionEffect
-                {
-                    Effect = effect,
-                    DurationMS = 0
-                });
-            }
         }
 
         protected override void TickCore(Entity host, RealmTime time, ref object state)

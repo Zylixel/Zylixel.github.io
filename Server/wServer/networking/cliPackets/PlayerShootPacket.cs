@@ -1,4 +1,6 @@
-﻿namespace wServer.networking.cliPackets
+﻿using System;
+
+namespace wServer.networking.cliPackets
 {
     public class PlayerShootPacket : ClientPacket
     {

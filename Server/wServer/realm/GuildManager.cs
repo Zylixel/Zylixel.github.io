@@ -155,11 +155,14 @@ namespace wServer.realm
             if (player.Name == sender.Name)
                 foreach (Player p in this)
                     p.SendInfo(sender.Name + " has left " + Name);
-
             else
                 foreach (Player p in this)
                     p.SendInfo(sender.Name + " removed " + player.Name + " from " + Name);
 
+            player.Manager.Database.DoActionAsync(db =>
+            {
+                db.EditGuild(player.Name, (int)player.Guild.Id, 0, 0, true);
+            });
             player.Guild = GetDefaultGuild();
             Remove(player);
             player.UpdateCount++;

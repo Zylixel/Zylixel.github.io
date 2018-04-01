@@ -1,5 +1,6 @@
 ﻿#region
 
+using db;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -184,27 +185,12 @@ namespace wServer.realm
             }
             return ret;
         }
-
+        
         public static float GetSpeed(this Entity entity, float spd)
         {
             if (entity.HasConditionEffect(ConditionEffectIndex.Slowed))
                 return 2.22f * spd + 0.74f;
-            return 5.55f*spd + 0.74f;
-        }
-
-        public static bool ValidateAndMove(this Entity entity, float x, float y)
-        {
-            if (entity.Owner == null ||
-                entity.HasConditionEffect(ConditionEffectIndex.Paralyzed)) return false;
-            if (entity.Validate(x, y))
-                entity.Move(x, y);
-            else if (entity.Validate(entity.X, y))
-                entity.Move(entity.X, y);
-            else if (entity.Validate(x, entity.Y))
-                entity.Move(x, entity.Y);
-            else
-                return false;
-            return true;
+            return 5.55f * spd + 0.74f;
         }
 
         public static bool Validate(this Entity entity, float x, float y)
@@ -288,7 +274,7 @@ namespace wServer.realm
         public static bool AuditItem(this IContainer container, Item item, int slot)
         {
             if (container is Container || container is OneWayContainer) return true;
-            return item == null || container.SlotTypes[slot] == 10 || item.SlotType == container.SlotTypes[slot];
+            return item == null || container.SlotTypes[slot] == 10 ||  item.SlotType == container.SlotTypes[slot];
         }
     }
 }

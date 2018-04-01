@@ -1,6 +1,7 @@
 ﻿#region
 
 using System;
+using System.Collections.Generic;
 
 #endregion
 
@@ -69,6 +70,13 @@ namespace wServer.realm.entities.player
                 Y + (float) ((_invRand.NextDouble()*2 - 1)*0.5));
             container.Size = 75;
             Owner.EnterWorld(container);
+        }
+
+        public OldItem SerialConvert(Item _old)
+        {
+            if (_old == null)
+                return null;
+            return Manager.GameData.Items[_old.ObjectType];
         }
     }
 }

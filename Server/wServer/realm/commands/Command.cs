@@ -19,7 +19,7 @@ namespace wServer.realm.commands
         public string CommandName { get; private set; }
         public int PermissionLevel { get; private set; }
 
-        protected abstract bool Process(Player player, RealmTime time, string[] args);
+        protected abstract Tuple<bool, string> Process(Player player, RealmTime time, string[] args);
 
         private static int GetPermissionLevel(Player player)
         {
@@ -44,11 +44,19 @@ namespace wServer.realm.commands
             try
             {
                 string[] a = args.Split(' ');
-                return Process(player, time, a);
+                Tuple<bool, string> result = Process(player, time, a);
+                if (!string.IsNullOrWhiteSpace(result.Item2))
+                {
+                    if (result.Item1)
+                        player.SendInfo(result.Item2);
+                    else
+                        player.SendError(result.Item2);
+                }
+                return result.Item1;
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error when executing the command.", ex);
+                Console.WriteLine("Error when executing the command." + ex);
                 player.SendError("Error when executing the command.");
                 return false;
             }

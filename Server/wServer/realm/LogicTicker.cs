@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using wServer.logic;
+using wServer.networking;
 using wServer.realm.entities.player;
 
 #endregion
@@ -51,6 +52,7 @@ namespace wServer.realm
             Stopwatch watch = new Stopwatch();
             long dt = 0;
             long count = 0;
+            long good = 0;
 
             watch.Start();
             RealmTime t = new RealmTime();
@@ -66,8 +68,30 @@ namespace wServer.realm
 
                 count += times;
                 if (times > 3)
-                    Console.WriteLine("LAGGED!| time:" + times + " dt:" + dt + " count:" + count + " time:" + b + " tps:" +
-                             count/(b/1000.0));
+                {
+                    Program.writeNotable("LAGGED!| time:" + times + " dt:" + dt + " count:" + count + " time:" + b + " tps:" +
+                             count / (b / 1000.0));
+                    if (dt > 2000)
+                        foreach(Client i in Manager.Clients.Values)
+                        {
+                            i.Player.ApplyConditionEffect(new ConditionEffect
+                            {
+                                Effect = ConditionEffectIndex.Invulnerable,
+                                DurationMS = 5 * 1000
+                            });
+                            i.Player.SendInfo("Lag Detected, giving Invulnerability to prevent death");
+                        }
+                    foreach (Client i in Manager.Clients.Values)
+                        if (i.Player != null)
+                            i.Player.dexShotViolation = 0;
+                    Program.isLagging = true;
+                    good = 0;
+                }
+                if (good > 100)
+                {
+                    Program.isLagging = false;
+                }
+                good++;
 
                 t.tickTimes = b;
                 t.tickCount = count;

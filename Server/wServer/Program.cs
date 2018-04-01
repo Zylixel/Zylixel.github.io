@@ -17,6 +17,7 @@ namespace wServer
         public static bool WhiteList { get; private set; }
         public static bool Verify { get; private set; }
         public static bool DebugMode { get; private set; }
+        public static bool isLagging { get; set; }
         internal static SimpleSettings Settings;
 
         private static RealmManager manager;
@@ -44,9 +45,7 @@ namespace wServer
                     Settings.GetValue<int>("tps", "20"));
 
                 WhiteList = Settings.GetValue<bool>("whiteList", "false");
-                Verify = Settings.GetValue<bool>("verifyEmail", "false");
                 DebugMode = Settings.GetValue<bool>("debugMode", "false");
-                WhiteListTurnOff = Settings.GetValue<DateTime>("whitelistTurnOff");
 
                 manager.Initialize();
                 manager.Run();
@@ -98,14 +97,39 @@ namespace wServer
 
         private static void autoBroadcastNews()
         {
-                var news = File.ReadAllLines("news.txt");
-                do
-                {
-                    ChatManager cm = new ChatManager(manager);
-                    cm.News(news[new Random().Next(news.Length)]);
-                    Thread.Sleep(300000); //5 min
+            var news = File.ReadAllLines("news.txt");
+            do
+            {
+                ChatManager cm = new ChatManager(manager);
+                cm.News(news[new Random().Next(news.Length)]);
+                Thread.Sleep(300000); //5 min
             }
-                while (true);
-            }
+            while (true);
+        }
+
+        public static void writeNotable(string text)
+        {
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine(text);
+            Console.ForegroundColor = ConsoleColor.Gray;
+        }
+        public static void writeWarning(string text)
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine(text);
+            Console.ForegroundColor = ConsoleColor.Gray;
+        }
+        public static void writeError(string text)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(text);
+            Console.ForegroundColor = ConsoleColor.Gray;
+        }
+        public static void writeImportant(string text)
+        {
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine(text);
+            Console.ForegroundColor = ConsoleColor.Gray;
+        }
     }
 }

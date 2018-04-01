@@ -235,8 +235,6 @@ namespace wServer.logic
                 new TierLoot(11, ItemType.Armor, 0.05),
                 new ItemLoot("Potion of Attack", 1.00),
                 new ItemLoot("Harlequin Armor", 0.014),
-                new ItemLoot("Puppet Master Skin", 0.02),
-                new ItemLoot("Jester Skin", 0.02),
                 new ItemLoot("Large Jester Argyle Cloth", 0.05),
                 new ItemLoot("Small Jester Argyle Cloth", 0.05),
                 new ItemLoot("The Fool Tarot Card", 0.045)

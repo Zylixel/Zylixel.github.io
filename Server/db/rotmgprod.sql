@@ -1,32 +1,12 @@
--- phpMyAdmin SQL Dump
--- version 4.0.2
--- http://www.phpmyadmin.net
---
--- Host: localhost
--- Erstellungszeit: 10. Mai 2015 um 10:43
--- Server Version: 5.5.16
--- PHP-Version: 5.3.8
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
---
--- Datenbank: `rotmgprod`
---
-CREATE DATABASE IF NOT EXISTS `rotmgprod` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `rotmgprod`;
 
--- --------------------------------------------------------
-
---
--- Tabellenstruktur für Tabelle `accounts`
---
+CREATE DATABASE IF NOT EXISTS `rotmg` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `rotmg`;
 
 CREATE TABLE IF NOT EXISTS `accounts` (
   `id` bigint(255) NOT NULL AUTO_INCREMENT,
@@ -41,7 +21,7 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   `guildFame` int(11) NOT NULL DEFAULT '0',
   `lastip` varchar(128) NOT NULL DEFAULT '',
   `vaultCount` int(11) NOT NULL DEFAULT '1',
-  `maxCharSlot` int(11) NOT NULL DEFAULT '2',
+  `maxCharSlot` int(11) NOT NULL DEFAULT '3',
   `regTime` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `guest` tinyint(1) NOT NULL DEFAULT '0',
   `banned` tinyint(1) NOT NULL DEFAULT '0',
@@ -53,19 +33,13 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   `gifts` varchar(10000) NOT NULL DEFAULT '',
   `isAgeVerified` tinyint(1) NOT NULL DEFAULT '0',
   `petYardType` int(11) NOT NULL DEFAULT '1',
-  `ownedSkins` varchar(2048) NOT NULL,
+  `ownedSkins` varchar(2048) NOT NULL DEFAULT '913, 846, 29809, 839, 899, 914, 837, 849, 852, 838, 853, 840, 854, 841, 842, 843, 844, 835, 855, 888, 29790, 845, 847, 848, 836, 0, 9013, 8976, 8855, 29771, 8969, 917, 8979, 9014, 29817, 8968, 9026, 29815, 8977, 9027, 29789, 29801, 29810, 898, 9028, 29770, 9029, 912, 29791, 29799, 29814, 9030, 29800, 903, 902, 8964, 29818, 883, 8965, 8967, 9032, 29811, 915, 885, 29816, 850, 905, 884, 9012, 29813, 916, 8966, 9031, 29808, 872, 904, 834, 5860, 901, 5861, 5866, 5865, 5864, 5863, 5862, 24728, 24729, 10959, 24868, 24849, 24864, 24865, 24850, 24855, 24854, 24856, 24857, 24867, 24852, 24853, 24866, 24851, 24858, 24880, 24872, 24882, 24873, 24871, 24881, 24883, 24884, 24885, 24886, 24887, 24888, 24869, 24870, 24833, 24836, 5859, 24839, 24840, 24841, 24848, 24834, 24835, 24832, 24837, 24889, 24838, 19385, 19152, 19153, 19154, 19155, 19158, 19157, 19156, 19159, 19370, 19371, 19372, 19373, 19374, 19375',
   `authToken` varchar(128) NOT NULL DEFAULT '',
   `acceptedNewTos` tinyint(1) NOT NULL DEFAULT '1',
   `lastSeen` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `accountInUse` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`,`uuid`,`guild`,`lastip`,`banned`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Tabellenstruktur für Tabelle `arenalb`
---
+) ENGINE=MyISAM AUTO_INCREMENT=53 DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `arenalb` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -76,13 +50,7 @@ CREATE TABLE IF NOT EXISTS `arenalb` (
   `time` varchar(256) NOT NULL,
   `date` datetime NOT NULL,
   PRIMARY KEY (`id`,`wave`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Tabellenstruktur für Tabelle `backpacks`
---
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `backpacks` (
   `accId` int(11) NOT NULL,
@@ -91,23 +59,11 @@ CREATE TABLE IF NOT EXISTS `backpacks` (
   PRIMARY KEY (`accId`,`charId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Tabellenstruktur für Tabelle `boards`
---
-
 CREATE TABLE IF NOT EXISTS `boards` (
   `guildId` int(11) NOT NULL,
   `text` varchar(1024) NOT NULL,
   PRIMARY KEY (`guildId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Tabellenstruktur für Tabelle `characters`
---
 
 CREATE TABLE IF NOT EXISTS `characters` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -140,13 +96,7 @@ CREATE TABLE IF NOT EXISTS `characters` (
   `lastSeen` datetime NOT NULL,
   `lastLocation` varchar(128) NOT NULL,
   PRIMARY KEY (`id`,`accId`,`dead`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Tabellenstruktur für Tabelle `classstats`
---
+) ENGINE=MyISAM AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `classstats` (
   `accId` int(11) NOT NULL,
@@ -156,12 +106,6 @@ CREATE TABLE IF NOT EXISTS `classstats` (
   PRIMARY KEY (`accId`,`objType`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Tabellenstruktur für Tabelle `dailyquests`
---
-
 CREATE TABLE IF NOT EXISTS `dailyquests` (
   `accId` int(11) NOT NULL,
   `goals` varchar(512) NOT NULL,
@@ -169,12 +113,6 @@ CREATE TABLE IF NOT EXISTS `dailyquests` (
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`accId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Tabellenstruktur für Tabelle `death`
---
 
 CREATE TABLE IF NOT EXISTS `death` (
   `accId` int(11) NOT NULL,
@@ -195,24 +133,11 @@ CREATE TABLE IF NOT EXISTS `death` (
   PRIMARY KEY (`accId`,`chrId`,`time`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Tabellenstruktur für Tabelle `giftcodes`
---
-
 CREATE TABLE IF NOT EXISTS `giftcodes` (
   `code` varchar(128) NOT NULL,
   `content` varchar(512) NOT NULL,
-  `accId` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`code`)
+  `accId` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Tabellenstruktur für Tabelle `globalnews`
---
 
 CREATE TABLE IF NOT EXISTS `globalnews` (
   `slot` int(11) NOT NULL,
@@ -227,12 +152,6 @@ CREATE TABLE IF NOT EXISTS `globalnews` (
   PRIMARY KEY (`slot`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
---
--- Tabellenstruktur für Tabelle `guilds`
---
-
 CREATE TABLE IF NOT EXISTS `guilds` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(128) NOT NULL DEFAULT 'DEFAULT_GUILD',
@@ -241,13 +160,13 @@ CREATE TABLE IF NOT EXISTS `guilds` (
   `totalGuildFame` int(11) NOT NULL,
   `level` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`,`members`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Tabellenstruktur für Tabelle `mysteryboxes`
---
+CREATE TABLE IF NOT EXISTS `market` (
+  `itemid` int(11) DEFAULT NULL,
+  `fame` int(11) DEFAULT NULL,
+  `playerid` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `mysteryboxes` (
   `id` int(11) NOT NULL,
@@ -267,12 +186,6 @@ CREATE TABLE IF NOT EXISTS `mysteryboxes` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
---
--- Tabellenstruktur für Tabelle `news`
---
-
 CREATE TABLE IF NOT EXISTS `news` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `icon` varchar(16) NOT NULL DEFAULT 'info',
@@ -281,13 +194,7 @@ CREATE TABLE IF NOT EXISTS `news` (
   `link` varchar(256) NOT NULL DEFAULT 'http://mmoe.net/',
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`,`text`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Tabellenstruktur für Tabelle `packages`
---
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `packages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -299,20 +206,15 @@ CREATE TABLE IF NOT EXISTS `packages` (
   `price` int(11) NOT NULL,
   `quantity` int(11) NOT NULL DEFAULT '-1',
   `endDate` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `usersClaimed` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Tabellenstruktur für Tabelle `pets`
---
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `pets` (
   `accId` int(11) NOT NULL,
   `petId` int(11) NOT NULL AUTO_INCREMENT,
   `objType` smallint(5) NOT NULL,
-  `skinName` varchar(128) NOT NULL,
+  `skinName` varchar(50) NOT NULL,
   `skin` int(11) NOT NULL,
   `family` int(11) NOT NULL,
   `rarity` int(11) NOT NULL,
@@ -320,14 +222,20 @@ CREATE TABLE IF NOT EXISTS `pets` (
   `abilities` varchar(128) NOT NULL,
   `levels` varchar(128) NOT NULL,
   `xp` varchar(128) NOT NULL DEFAULT '0, 0, 0',
+  `size` int(11) NOT NULL,
   PRIMARY KEY (`accId`,`petId`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Tabellenstruktur für Tabelle `stats`
---
+CREATE TABLE IF NOT EXISTS `seriallist` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `type` varchar(50) NOT NULL,
+  `firstUser` int(11) NOT NULL,
+  `currentUser` int(11) NOT NULL,
+  `droppedIn` text NOT NULL,
+  `soulbound` tinyint(4) NOT NULL,
+  `banned` tinyint(4) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=525 DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `stats` (
   `accId` int(11) NOT NULL,
@@ -339,12 +247,6 @@ CREATE TABLE IF NOT EXISTS `stats` (
   `totalFortuneTokens` int(11) NOT NULL,
   PRIMARY KEY (`accId`,`fame`,`totalFame`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Tabellenstruktur für Tabelle `thealchemist`
---
 
 CREATE TABLE IF NOT EXISTS `thealchemist` (
   `id` int(11) NOT NULL,
@@ -361,42 +263,21 @@ CREATE TABLE IF NOT EXISTS `thealchemist` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
---
--- Tabellenstruktur für Tabelle `unlockedclasses`
---
-
 CREATE TABLE IF NOT EXISTS `unlockedclasses` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `accId` int(11) NOT NULL,
   `class` varchar(128) NOT NULL,
-  `available` varchar(128) NOT NULL,
+  `available` varchar(128) NOT NULL DEFAULT 'unrestricted',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Tabellenstruktur für Tabelle `vaults`
---
+) ENGINE=InnoDB AUTO_INCREMENT=687 DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `vaults` (
   `accId` int(11) NOT NULL,
   `chestId` int(11) NOT NULL AUTO_INCREMENT,
   `items` varchar(128) NOT NULL,
   PRIMARY KEY (`accId`,`chestId`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `market` (
-	`itemid` INT(11) NOT NULL,
-	`fame` INT(11) NOT NULL,
-	`playerid` INT(11) NOT NULL
-)
-COLLATE='latin1_swedish_ci'
-ENGINE=InnoDB ;
-
-
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

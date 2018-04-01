@@ -67,11 +67,9 @@ namespace wServer.realm
                 {
                     BubbleTime = 0,
                     Stars = -1,
-                    Name = "#Zylixel News",
+                    Name = "#Server News",
                     Text = text.ToSafeText()
                 });
-            if (CheckConfig.IsDebugOn())
-                Console.WriteLine("<Zylixel News> {0}", text);
         }
 
         public void Announce(string text)
@@ -96,8 +94,6 @@ namespace wServer.realm
                 Name = "#Oryx the Mad God",
                 Text = text.ToSafeText()
             }, null);
-            if (CheckConfig.IsDebugOn())
-                Console.WriteLine("[{0}({1})] <Oryx the Mad God> {2}", world.Name, world.Id, text);
         }
     }
 }

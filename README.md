@@ -16,6 +16,7 @@
 - Omniraptyr
 - MikeRaarupBirk
 - thenired
+- DrFade
 
 Zy's Realm is based off of FSOD, a RotMG private server source
 

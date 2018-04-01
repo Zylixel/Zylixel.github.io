@@ -6,7 +6,7 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{C400FDD3-6250-4F9B-9516-B3463D6761F5}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>terrain</RootNamespace>
     <AssemblyName>terrain</AssemblyName>
@@ -124,7 +124,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="TerrainTile.cs" />
-    <Compile Include="Test.cs" />
     <Compile Include="TileType.cs" />
     <Compile Include="WorldMapExporter.cs" />
   </ItemGroup>

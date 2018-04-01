@@ -35,9 +35,9 @@ namespace wServer.realm.entities
             if (eq != null)
             {
                 Item[] inv =
-                    Utils.FromCommaSepString16(eq.Value)
+                    manager.CreateSerial(Utils.FromCommaSepString16(eq.Value)
                         .Select(_ => _ == -1 ? null : manager.GameData.Items[(ushort)_])
-                        .ToArray();
+                        .ToArray(), insert: false, DroppedIn: Owner.Name);
                 Array.Resize(ref inv, 8);
                 Inventory = inv;
             }

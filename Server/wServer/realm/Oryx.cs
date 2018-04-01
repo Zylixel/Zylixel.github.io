@@ -30,7 +30,8 @@ namespace wServer.realm
             Tuple.Create("Hermit God", (ISetPiece) new Hermit()),
             Tuple.Create("Ghost Ship", (ISetPiece) new GhostShip()),
             Tuple.Create("Cube God", (ISetPiece) new CubeGod()),
-            Tuple.Create("Avatar", (ISetPiece) new Avatar())
+            Tuple.Create("Avatar", (ISetPiece) new Avatar()),
+            Tuple.Create("Hype Beast", (ISetPiece) new HypeBeast())
         };
 
         private readonly Random rand = new Random();
@@ -63,27 +64,30 @@ namespace wServer.realm
                             Tuple.Create("Pirate", 0.2),
                             Tuple.Create("Piratess", 0.1),
                             Tuple.Create("Snake", 0.3),
-                            Tuple.Create("Scorpion Queen", 0.30),
-                            Tuple.Create("The Marked Spot", 0.1)
+                            Tuple.Create("Scorpion Queen", 0.2),
+                            Tuple.Create("The Marked Spot", 0.1),
+                            Tuple.Create("XP Gift All", 0.1)
                         })
                 },
                 {
                     WmapTerrain.ShorePlains, Tuple.Create(
                         150, new[]
                         {
-                            Tuple.Create("Bandit Leader", 0.4),
+                            Tuple.Create("Bandit Leader", 0.3),
                             Tuple.Create("Red Gelatinous Cube", 0.2),
                             Tuple.Create("Purple Gelatinous Cube", 0.2),
-                            Tuple.Create("Green Gelatinous Cube", 0.2)
+                            Tuple.Create("Green Gelatinous Cube", 0.2),
+                            Tuple.Create("XP Gift All", 0.1)
                         })
                 },
                 {
                     WmapTerrain.LowPlains, Tuple.Create(
                         200, new[]
                         {
-                            Tuple.Create("Hobbit Mage", 0.5),
+                            Tuple.Create("Hobbit Mage", 0.4),
                             Tuple.Create("Undead Hobbit Mage", 0.4),
-                            Tuple.Create("Sumo Master", 0.1)
+                            Tuple.Create("Sumo Master", 0.1),
+                            Tuple.Create("XP Gift All", 0.1)
                         })
                 },
                 {
@@ -92,25 +96,27 @@ namespace wServer.realm
                         {
                             Tuple.Create("Elf Wizard", 0.2),
                             Tuple.Create("Goblin Mage", 0.2),
-                            Tuple.Create("Easily Enraged Bunny", 0.3),
-                            Tuple.Create("Forest Nymph", 0.3)
+                            Tuple.Create("Easily Enraged Bunny", 0.25),
+                            Tuple.Create("Forest Nymph", 0.25),
+                            Tuple.Create("XP Gift All", 0.1)
                         })
                 },
                 {
                     WmapTerrain.LowSand, Tuple.Create(
                         200, new[]
                         {
-                            Tuple.Create("Sandsman King", 0.4),
+                            Tuple.Create("Sandsman King", 0.35),
                             Tuple.Create("Giant Crab", 0.2),
-                            Tuple.Create("Sand Devil", 0.4)
+                            Tuple.Create("Sand Devil", 0.35),
+                            Tuple.Create("XP Gift All", 0.1)
                         })
                 },
                 {
                     WmapTerrain.MidPlains, Tuple.Create(
                         150, new[]
                         {
-                            Tuple.Create("Fire Sprite", 0.1),
-                            Tuple.Create("Ice Sprite", 0.1),
+                            Tuple.Create("Fire Sprite", 0.05),
+                            Tuple.Create("Ice Sprite", 0.05),
                             Tuple.Create("Magic Sprite", 0.1),
                             Tuple.Create("Pink Blob", 0.07),
                             Tuple.Create("Gray Blob", 0.07),
@@ -118,34 +124,40 @@ namespace wServer.realm
                             Tuple.Create("Paper Golem", 0.04),
                             Tuple.Create("Big Green Slime", 0.08),
                             Tuple.Create("Swarm", 0.05),
-                            Tuple.Create("Wasp Queen", 0.2),
+                            Tuple.Create("Wasp Queen", 0.1),
                             Tuple.Create("Shambling Sludge", 0.03),
-                            Tuple.Create("Orc King", 0.06)
+                            Tuple.Create("Orc King", 0.06),
+                            Tuple.Create("The Uncommon Marked Spot", 0.1),
+                            Tuple.Create("XP Gift All", 0.1)
                         })
                 },
                 {
                     WmapTerrain.MidForest, Tuple.Create(
                         150, new[]
                         {
-                            Tuple.Create("Dwarf King", 0.3),
+                            Tuple.Create("Dwarf King", 0.25),
                             Tuple.Create("Metal Golem", 0.05),
                             Tuple.Create("Clockwork Golem", 0.05),
                             Tuple.Create("Werelion", 0.1),
-                            Tuple.Create("Horned Drake", 0.3),
+                            Tuple.Create("Horned Drake", 0.15),
                             Tuple.Create("Red Spider", 0.1),
-                            Tuple.Create("Black Bat", 0.1)
+                            Tuple.Create("Black Bat", 0.1),
+                            Tuple.Create("The Uncommon Marked Spot", 0.1),
+                            Tuple.Create("XP Gift All", 0.1)
                         })
                 },
                 {
                     WmapTerrain.MidSand, Tuple.Create(
                         300, new[]
                         {
-                            Tuple.Create("Desert Werewolf", 0.25),
+                            Tuple.Create("Desert Werewolf", 0.15),
                             Tuple.Create("Fire Golem", 0.1),
                             Tuple.Create("Darkness Golem", 0.1),
-                            Tuple.Create("Sand Phantom", 0.2),
-                            Tuple.Create("Nomadic Shaman", 0.25),
-                            Tuple.Create("Great Lizard", 0.1)
+                            Tuple.Create("Sand Phantom", 0.15),
+                            Tuple.Create("Nomadic Shaman", 0.2),
+                            Tuple.Create("Great Lizard", 0.1),
+                            Tuple.Create("The Uncommon Marked Spot", 0.1),
+                            Tuple.Create("XP Gift All", 0.1)
                         })
                 },
                 {
@@ -191,7 +203,7 @@ namespace wServer.realm
                         Tuple.Create("Djinn", 0.09),
                         Tuple.Create("Leviathan", 0.04), //-0.5
                         Tuple.Create("Arena Headless Horseman", 0.01),
-                        Tuple.Create("The Uncommon Marked Spot", 0.1) 
+                        Tuple.Create("The Rare Marked Spot", 0.1)
                     })
                 }
             };
@@ -270,7 +282,7 @@ namespace wServer.realm
             }
             world.Timers.Add(new WorldTimer(10000, (w, t) => w.Manager.RemoveWorld(w)));
         }
-        
+
         public int CountEnemies(params string[] enemies)
         {
             var enemyList = new List<ushort>();
@@ -290,13 +302,11 @@ namespace wServer.realm
 
         public void TimedSpawn()
         {
-            if (CheckConfig.IsDebugOn())
-                Console.WriteLine("Players in Realm: " + world.Players.Count); //checks players in realm
             if (world.Players.Count > 0) //Makes sure player is in the realm
             {
                 var evt = events[rand.Next(0, events.Count)];
                 SpawnEvent(evt.Item1, evt.Item2);
-                
+
                 TauntData? dat = null;
                 dat = null;
                 foreach (var i in criticalEnemies)
@@ -312,15 +322,14 @@ namespace wServer.realm
                     var arr = dat.Value.spawn;
                     var msg = arr[rand.Next(0, arr.Length)];
                     BroadcastMsg(msg); //Taunt
-                }  
+                }
             }
             world.Timers.Add(new WorldTimer(300000, (ww, tt) => { TimedSpawn(); })); //New Event every 5 minutes
         }
 
         public void Init()
         {
-            if (CheckConfig.IsDebugOn())
-                Console.WriteLine("Oryx is controlling world {0}({1})...", world.Id, world.Name);
+            //Console.WriteLine("Oryx is controlling world {0}({1})...", world.Id, world.Name);
 
             var w = world.Map.Width;
             var h = world.Map.Height;
@@ -332,8 +341,7 @@ namespace wServer.realm
                     if (tile.Terrain != WmapTerrain.None)
                         stats[(int)tile.Terrain - 1]++;
                 }
-            if (CheckConfig.IsDebugOn())
-                Console.WriteLine("Spawning minions...");
+            //Console.WriteLine("Spawning minions...");
 
             foreach (var i in spawn)
             {
@@ -351,14 +359,12 @@ namespace wServer.realm
                     if (enemyCounts[idx] >= enemyCount) break;
                 }
             }
-            if (CheckConfig.IsDebugOn())
-                Console.WriteLine("Oryx is done.");
+            //Console.WriteLine("Oryx is done.");
         }
 
         public void InitCloseRealm()
         {
-            if (CheckConfig.IsDebugOn())
-                Console.WriteLine("Oryx has closed realm {0}...", world.Name);
+            //Console.WriteLine("Oryx has closed realm {0}...", world.Name);
             ClosingStarted = true;
             foreach (var i in world.Players.Values)
             {
@@ -408,8 +414,7 @@ namespace wServer.realm
 
         private void EnsurePopulation()
         {
-            if (CheckConfig.IsDebugOn())
-                Console.WriteLine("Oryx is controlling population...");
+            //Console.WriteLine("Oryx is controlling population...");
             RecalculateEnemyCount();
             var state = new int[12];
             var diff = new int[12];
@@ -456,7 +461,7 @@ namespace wServer.realm
                 if (state[i] != 2) continue;
                 var x = diff[i];
                 var t = (WmapTerrain)(i + 1);
-                for (var j = 0; j < x; )
+                for (var j = 0; j < x;)
                 {
                     var objType = GetRandomObjType(spawn[t].Item2);
                     if (objType == 0) continue;
@@ -467,8 +472,7 @@ namespace wServer.realm
             RecalculateEnemyCount();
 
             GC.Collect();
-            if (CheckConfig.IsDebugOn())
-                Console.WriteLine("Oryx is back to sleep.");
+            //Console.WriteLine("Oryx is back to sleep.");
         }
 
         private ushort GetRandomObjType(Tuple<string, double>[] dat)
@@ -620,7 +624,7 @@ namespace wServer.realm
         }
 
         #region "Taunt data"
-        
+
         private static readonly Tuple<string, TauntData>[] criticalEnemies =
         {
             Tuple.Create("Lich", new TauntData
@@ -811,15 +815,6 @@ namespace wServer.realm
                     "Pathetic fools! My Lord of the Lost Lands will crush you all!",
                     "My Lord of the Lost Lands will make short work of you!"
                 },
-                //numberOfEnemies = new string[] {
-                //    "You dull-spirited apes! You shall pose no challenge for {COUNT} Grand Sphinxes!",
-                //    "Regret your choices, blasphemers! My {COUNT} Grand Sphinxes will teach you respect!",
-                //    "My Grand Sphinxes will bewitch you with their beauty!"
-                //},
-                //final = new string[] {
-                //    "You festering rat-catchers! A Grand Sphinx will make you doubt your purpose!",
-                //    "Gaze upon the beauty of the Grand Sphinx and feel your last hopes drain away."
-                //},
                 killed = new[]
                 {
                     "How dare you foul-mouthed hooligans treat my Lord of the Lost Lands with such indignity!",
@@ -832,19 +827,21 @@ namespace wServer.realm
                 {
                     "My Hermit God's thousand tentacles shall drag you to a watery grave!"
                 },
-                //numberOfEnemies = new string[] {
-                //    "You dull-spirited apes! You shall pose no challenge for {COUNT} Grand Sphinxes!",
-                //    "Regret your choices, blasphemers! My {COUNT} Grand Sphinxes will teach you respect!",
-                //    "My Grand Sphinxes will bewitch you with their beauty!"
-                //},
-                //final = new string[] {
-                //    "You festering rat-catchers! A Grand Sphinx will make you doubt your purpose!",
-                //    "Gaze upon the beauty of the Grand Sphinx and feel your last hopes drain away."
-                //},
                 killed = new[]
                 {
                     "My Hermit God was more than you'll ever be, {PLAYER}. I will kill you myself!",
                     "You naive imbecile, {PLAYER}! Without my Hermit God, Dreadstump is free to roam the seas without fear!"
+                }
+            }),
+            Tuple.Create("Hype Beast", new TauntData
+            {
+                spawn = new[]
+                {
+                    "My Hype Beast will reign Supreme over you!"
+                },
+                killed = new[]
+                {
+                    "{PLAYER}, You idiotic scum, you will pay for killing my Hype Beast",
                 }
             }),
             Tuple.Create("Ghost Ship", new TauntData
@@ -854,15 +851,6 @@ namespace wServer.realm
                     "My Ghost Ship will terrorize you pathetic peasants!",
                     "A Ghost Ship has entered the Realm."
                 },
-                //numberOfEnemies = new string[] {
-                //    "You dull-spirited apes! You shall pose no challenge for {COUNT} Grand Sphinxes!",
-                //    "Regret your choices, blasphemers! My {COUNT} Grand Sphinxes will teach you respect!",
-                //    "My Grand Sphinxes will bewitch you with their beauty!"
-                //},
-                //final = new string[] {
-                //    "You festering rat-catchers! A Grand Sphinx will make you doubt your purpose!",
-                //    "Gaze upon the beauty of the Grand Sphinx and feel your last hopes drain away."
-                //},
                 killed = new[]
                 {
                     "How could a creature like {PLAYER} defeat my dreaded Ghost Ship?!",

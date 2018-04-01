@@ -26,6 +26,8 @@ namespace wServer.networking
         {
             _client = client;
             HandlePacket(client, (T) packet);
+            if (client.Player != null)
+                client.Player.isLagging = false;
         }
 
         public RealmManager Manager { get { return _client.Manager; } }
