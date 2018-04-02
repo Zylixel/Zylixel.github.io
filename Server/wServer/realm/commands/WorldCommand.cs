@@ -181,10 +181,28 @@ namespace wServer.realm.commands
             {
                 if (i.Account.NameChosen && i.Account.Name.EqualsIgnoreCase(playername))
                 {
-                    player.SendStarText("*To: " + i.Player.Name, player.Stars, msg.ToSafeText());
-                    i.Player.SendStarText("*" + player.Name, player.Stars, msg.ToSafeText());
-                    
-                    return Tuple.Create(true, "Success");
+                    player.Client.SendPacket(new TextPacket() //echo to self
+                    {
+                        ObjectId = player.Id,
+                        BubbleTime = 10,
+                        Stars = player.Stars,
+                        Name = player.Name,
+                        Recipient = i.Account.Name,
+                        Text = msg.ToSafeText(),
+                        CleanText = ""
+                    });
+
+                    i.SendPacket(new TextPacket() //echo to /tell player
+                    {
+                        ObjectId = i.Player.Owner.Id == player.Owner.Id ? player.Id : -1,
+                        BubbleTime = 10,
+                        Stars = player.Stars,
+                        Name = player.Name,
+                        Recipient = i.Account.Name,
+                        Text = msg.ToSafeText(),
+                        CleanText = ""
+                    });
+                    return Tuple.Create(true, "");
                 }
             }
             return Tuple.Create(false, $"{playername} not found.");

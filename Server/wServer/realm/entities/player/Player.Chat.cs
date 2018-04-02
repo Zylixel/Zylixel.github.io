@@ -123,6 +123,7 @@ namespace wServer.realm.entities.player
                 Text = text
             });
         }
+
         public void SendGuild(string text)
         {
             Client.SendPacket(new TextPacket

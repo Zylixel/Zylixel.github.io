@@ -173,12 +173,12 @@ namespace wServer.realm.entities.player
         {
             if (!(oldClientTime == 0 || first5 < 5 || Program.isLagging))
             {
-                if (curClientTime - oldClientTime <= 2 && !isLagging)
+                /*if (curClientTime - oldClientTime <= 2 && !isLagging)
                 {
                     isLagging = true;
                     SendInfo("Lag Detected, giving Invulnerability to prevent death");
                     Program.writeNotable($"{Name} Is lagging, making invulnerable");
-                }
+                }*/
                 if (curClientTime - oldClientTime >= 400)
                     FPScount++;
                 else

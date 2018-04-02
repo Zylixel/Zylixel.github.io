@@ -112,7 +112,7 @@ namespace wServer.networking
                 if (Account != null)
                     DisconnectFromRealm();
 
-                Socket?.Close();
+                Socket.Close();
             }
             catch (Exception e)
             {
@@ -133,7 +133,7 @@ namespace wServer.networking
                     if (Player != null)
                     {
                         Player.SaveToCharacter();
-                        if (Player?.Owner != null)
+                        if (Player.Owner != null)
                         {
                             if (Player.Owner.Id == -6) return;
                             w = Player.Owner.Name;

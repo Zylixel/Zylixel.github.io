@@ -38,7 +38,7 @@ namespace server
             HandleRequest();
         }
 
-        public bool CheckAccount(Account acc, Database db, bool checkAccInUse=true)
+        public bool CheckAccount(Account acc, Database db, bool checkAccInUse = true)
         {
             if (acc == null && !String.IsNullOrWhiteSpace(Query["password"]))
             {
@@ -80,19 +80,26 @@ namespace server
     {
         internal static readonly Dictionary<string, RequestHandler> Handlers = new Dictionary<string, RequestHandler>
         {
+     //       {"/crossdomain.xml", new Crossdomain()},
             {"/mysterybox/getBoxes", new mysterybox.getBoxes()},
-            //{"/package/getPackages", new packages.getPackages()},
-            //{"/arena/getPersonalBest", new ArenaPersonalBest()},
-            //{"/arena/getRecords", new ArenaRecords()},
-            //{"/app/globalNews", new app.globalNews()},
-            //{"/app/getLanguageStrings", new app.languageSettings()},
+   //         {"/package/getPackages", new packages.getPackages()},
+  //          {"/arena/getPersonalBest", new ArenaPersonalBest()},
+  //          {"/arena/getRecords", new ArenaRecords()},
+  //          {"/app/globalNews", new app.globalNews()},
+  //          {"/app/getLanguageStrings", new app.languageSettings()},
             {"/app/init", new app.init()},
+  //      {"/clientError/add", new Add()},
+            {"/account/purchaseSkin", new account.purchaseSkin()},
             {"/app/globalNews", new app.globalnews()},
+            {"/account/verifyage", new account.verifyage()},
             {"/account/purchasePackage", new account.purchasePackage()},
+            {"/playerMuledump/view", new playerMuledump.view()},
+            {"/account/acceptTOS", new account.acceptTOS()},
             {"/account/playFortuneGame", new account.playFortuneGame()},
             {"/account/resetPassword", new account.resetPassword()},
             {"/account/changeEmail", new account.changeEmail()},
             {"/account/purchaseMysteryBox", new account.purchaseMysteryBox()},
+            {"/account/getProdAccount", new account.getProdAccount()},
             {"/account/register", new account.register()},
             {"/account/verify", new account.verify()},
             {"/account/forgotPassword", new account.forgotPassword()},
@@ -100,9 +107,13 @@ namespace server
             {"/account/purchaseCharSlot", new account.purchaseCharSlot()},
             {"/account/setName", new account.setName()},
             {"/char/list", new @char.list()},
-            //{"/friends/getList", new friends.list()},
+       //     {"/friends/getList", new friends.list()},
             {"/char/delete", new @char.delete()},
             {"/char/fame", new @char.fame()},
+            {"/credits/getoffers", new credits.getoffers()},
+            {"/credits/add", new credits.add()},
+            {"/credits/kabamadd", new credits.kabamadd()},
+            {"/char/purchaseClassUnlock", new @char.purchaseClassUnlock()},
             {"/fame/list", new fame.list()},
             {"/guild/getBoard", new guild.getBoard()},
             {"/guild/setBoard", new guild.setBoard()},
