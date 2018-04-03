@@ -77,7 +77,7 @@ namespace wServer
 
                 foreach (var c in manager.Clients)
                 {
-                    c.Value.Disconnect();
+                    c.Value.Disconnect("Server Shutdown Error");
                 }
                 Console.ReadLine();
             }
@@ -111,25 +111,25 @@ namespace wServer
         {
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine(text);
-            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.ForegroundColor = ConsoleColor.Blue;
         }
         public static void writeWarning(string text)
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine(text);
-            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.ForegroundColor = ConsoleColor.Blue;
         }
         public static void writeError(string text)
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(text);
-            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.ForegroundColor = ConsoleColor.Blue;
         }
         public static void writeImportant(string text)
         {
             Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.WriteLine(text);
-            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.ForegroundColor = ConsoleColor.Blue;
         }
     }
 }

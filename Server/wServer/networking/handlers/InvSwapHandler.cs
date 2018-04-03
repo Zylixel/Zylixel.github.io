@@ -106,7 +106,7 @@ namespace wServer.networking.handlers
 
                 if (!IsValid(item1, item2, con1, con2, packet, client))
                 {
-                    client.Disconnect();
+                    client.Disconnect("Invalid Invswap");
                     return;
                 }
 

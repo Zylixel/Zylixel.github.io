@@ -11,7 +11,7 @@ namespace wServer.realm.entities.player
         public int UpdatesSend { get; private set; }
         public int UpdatesReceived { get; set; }
 
-        public const int RADIUS = 20;
+        public const int RADIUS = 15;
         const int APPOX_AREA_OF_SIGHT = (int)(Math.PI * RADIUS * RADIUS + 1);
 
         int mapWidth, mapHeight;

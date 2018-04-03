@@ -536,7 +536,7 @@ namespace wServer.realm.entities.player
 
             if (Client.Character.Dead)
             {
-                Client.Disconnect();
+                Client.Disconnect("Character is Dead");
                 return;
             }
 
@@ -548,7 +548,7 @@ namespace wServer.realm.entities.player
             {
                 case "":
                 case "Unknown":
-                    Client.Disconnect();
+                    Client.Disconnect("Unknown Protection");
                     return;
                 default:
                     if (desc != null)
@@ -559,7 +559,7 @@ namespace wServer.realm.entities.player
             }
             if (Client.Account.Rank > 1)
             {
-                Client.Disconnect();
+                Client.Disconnect("Ranked User Protection");
                 return;
             }
             Manager.Database.DoActionAsync(db =>
@@ -579,11 +579,11 @@ namespace wServer.realm.entities.player
                     Obf0 = -1,
                     Obf1 = -1
                 });
-                Owner.Timers.Add(new WorldTimer(1000, (w, t) => Client.Disconnect()));
+                Owner.Timers.Add(new WorldTimer(1000, (w, t) => Client.Disconnect("Death")));
                 Owner.LeaveWorld(this);
             }
             else
-                Client.Disconnect();
+                Client.Disconnect("Testing world death");
             }
             catch (Exception e)
             {
@@ -794,7 +794,7 @@ namespace wServer.realm.entities.player
 
             if (Client.Account.IsGuestAccount)
             {
-                owner.Timers.Add(new WorldTimer(1000, (w, t) => Client.Disconnect()));
+                owner.Timers.Add(new WorldTimer(1000, (w, t) => Client.Disconnect("Guest Account")));
                 Client.SendPacket(new FailurePacket
                 {
                     ErrorId = 8,

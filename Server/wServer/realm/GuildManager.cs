@@ -44,7 +44,7 @@ namespace wServer.realm
                     if (!p.Manager.Clients.ContainsKey(p.AccountId))
                     {
                         if (p.Client != null)
-                            p.Client.Disconnect();
+                            p.Client.Disconnect("GuildTick");
                         else
                             p.Dispose();
                     }

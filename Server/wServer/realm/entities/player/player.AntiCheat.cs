@@ -44,8 +44,8 @@ namespace wServer.realm.entities.player
             SendError($"{cheatInfo[cheat]} exploit detected. ID:{(int)cheat}");
             UpdateCount++;
             Client.Save();
-            Client.Disconnect();
-            Program.writeImportant($"Player {Client.Player.Name} used {cheatInfo[cheat]} exploit. ID: {(int)cheat}");
+            Client.Disconnect("Cheats");
+            Program.writeError($"Player {Client.Player.Name} used {cheatInfo[cheat]} exploit. ID: {(int)cheat}");
             foreach (var i in Manager.Clients.Values)
                 if (i.Account.Rank > 1)
                     i.Player.SendError($"Player {Client.Player.Name} used {cheatInfo[cheat]} exploit. ID: {(int)cheat}");
@@ -57,7 +57,7 @@ namespace wServer.realm.entities.player
             SendError($"{cheatInfo[cheat]} exploit detected. ID:{(int)cheat}");
             UpdateCount++;
             Client.Save();
-            Program.writeImportant($"Player {Client.Player.Name} used {cheatInfo[cheat]} exploit. ID:{(int)cheat}");
+            Program.writeError($"Player {Client.Player.Name} used {cheatInfo[cheat]} exploit. ID:{(int)cheat}");
             foreach (var i in Manager.Clients.Values)
                 if (i.Account.Rank > 1)
                     i.Player.SendError($"Player {Client.Player.Name} used {cheatInfo[cheat]} exploit. ID:{(int)cheat}");
@@ -71,56 +71,6 @@ namespace wServer.realm.entities.player
         public int lastMoveTime = -1;
         public int outOfBoundsCount = 0;
         public int goodCount = 0;
-
-        public void CheckPosition(double newX, double newY)
-        {
-            float TPS = StatsManager.GetSpeed();
-            TileDesc tile = Owner.getCurrentTile(this);
-            float amplifier = tile.Speed;
-
-            if (amplifier != 0)
-                TPS *= amplifier;
-
-            if (lastMoveTime == -1)
-            {
-                lastMoveTime = Environment.TickCount;
-            }
-
-            float diff = (Environment.TickCount - lastMoveTime);
-
-            float actualTPS = (float)Math.Sqrt(Math.Abs(Math.Pow(newX - X, 2) + Math.Pow(newY - Y, 2)));
-
-            actualTPS *= 1000f / diff;
-
-            float threshold = TPS * 1.3f + 70;
-            if (actualTPS > threshold)
-            {
-                outOfBoundsCount++;
-                goodCount = 0;
-                if (outOfBoundsCount >= 6)
-                {
-                    Client.Disconnect();
-                }
-            }
-            else
-            {
-                if (outOfBoundsCount > 0)
-                {
-                    goodCount++;
-                    if (goodCount >= 2)
-                    {
-                        outOfBoundsCount = 0;
-                        goodCount = 0;
-                    }
-                }
-                else
-                {
-                    goodCount = 0;
-                }
-            }
-
-            lastMoveTime = Environment.TickCount;
-        }
 
         public bool CheckShootSpeed(OldItem item)
         {
@@ -179,11 +129,11 @@ namespace wServer.realm.entities.player
                     SendInfo("Lag Detected, giving Invulnerability to prevent death");
                     Program.writeNotable($"{Name} Is lagging, making invulnerable");
                 }*/
-                if (curClientTime - oldClientTime >= 400)
+                if (curClientTime - oldClientTime >= 300)
                     FPScount++;
                 else
                 {
-                    if (FPSgood > 3)
+                    if (FPSgood > 2)
                     {
                         FPScount = 0;
                         goodCount = 0;
@@ -193,7 +143,7 @@ namespace wServer.realm.entities.player
 
             }
 
-            if (FPScount > 3)
+            if (FPScount > 4)
                 return kickforCheats(possibleExploit.FAST_CLIENT);
 
             if (isLagging)
@@ -222,61 +172,64 @@ namespace wServer.realm.entities.player
             bool Bankick = false;
             bool Dupekick = false;
             bool SBkick = false;
-            List<int> serialList = new List<int>(); //This code handles all the serial detections and updates, put it in one place because we call it every tick and want to decrease lag
-            for (var i = 0; i < Inventory.Length; i++)
+            if (UpdateCount % (Manager?.TPS * 3) == 0) //Every 3 Seconds b/c it takes up alot of processing power with many players
             {
-                bool updateSerial = false;
-                bool delItem = false;
-                if (Inventory[i] == null) continue;
-                if (Inventory[i].firstUser == -1)
+                List<int> serialList = new List<int>(); //This code handles all the serial detections and updates, put it in one place because we call it every tick and want to decrease lag
+                for (var i = 0; i < Inventory.Length; i++)
                 {
-                    Inventory[i].firstUser = Convert.ToInt32(AccountId);
-                    updateSerial = true;
-                }
-                if (Inventory[i].currentUser != Convert.ToInt32(AccountId))
-                {
-                    Inventory[i].currentUser = Convert.ToInt32(AccountId);
-                    updateSerial = true;
+                    bool updateSerial = false;
+                    bool delItem = false;
+                    if (Inventory[i] == null) continue;
+                    if (Inventory[i].firstUser == -1)
+                    {
+                        Inventory[i].firstUser = Convert.ToInt32(AccountId);
+                        updateSerial = true;
+                    }
+                    if (Inventory[i].currentUser != Convert.ToInt32(AccountId))
+                    {
+                        Inventory[i].currentUser = Convert.ToInt32(AccountId);
+                        updateSerial = true;
+                    }
+
+                    if (Inventory[i].currentUser != Inventory[i].firstUser && Inventory[i].Soulbound)
+                    {
+                        updateSerial = true;
+                        SBkick = true;
+                        delItem = true;
+                    }
+                    if (Inventory[i].banned == 1)
+                    {
+                        updateSerial = true;
+                        Bankick = true;
+                        delItem = true;
+                    }
+                    if (serialList.Contains(Inventory[i].serialId) || Inventory[i].serialId == -1)
+                    {
+                        updateSerial = true;
+                        Dupekick = true;
+                        delItem = true;
+                    }
+                    else
+                        serialList.Add(Inventory[i].serialId);
+
+                    if (delItem)
+                        Inventory[i].banned = 1;
+
+                    if (updateSerial)
+                        using (Database db = new Database())
+                            db.UpdateSerial(Inventory[i]);
+
+                    if (delItem)
+                        Inventory[i] = null;
                 }
 
-                if (Inventory[i].currentUser != Inventory[i].firstUser && Inventory[i].Soulbound)
-                {
-                    updateSerial = true;
-                    SBkick = true;
-                    delItem = true;
-                }
-                if (Inventory[i].banned == 1)
-                {
-                    updateSerial = true;
-                    Bankick = true;
-                    delItem = true;
-                }
-                if (serialList.Contains(Inventory[i].serialId) || Inventory[i].serialId == -1)
-                {
-                    updateSerial = true;
-                    Dupekick = true;
-                    delItem = true;
-                }
-                else
-                    serialList.Add(Inventory[i].serialId);
-
-                if (delItem)
-                    Inventory[i].banned = 1;
-
-                if (updateSerial)
-                    using (Database db = new Database())
-                        db.UpdateSerial(Inventory[i]);
-
-                if (delItem)
-                    Inventory[i] = null;
+                if (Dupekick)
+                    kickforCheats(possibleExploit.DUPED);
+                if (Bankick)
+                    ReportforCheats(possibleExploit.BANNED_ITEM);
+                if (SBkick)
+                    ReportforCheats(possibleExploit.SB_EXCHANGE);
             }
-
-            if (Dupekick)
-                kickforCheats(possibleExploit.DUPED);
-            if (Bankick)
-                ReportforCheats(possibleExploit.BANNED_ITEM);
-            if (SBkick)
-                ReportforCheats(possibleExploit.SB_EXCHANGE);
 
             return (!SBkick && !Dupekick && !Bankick);
         }

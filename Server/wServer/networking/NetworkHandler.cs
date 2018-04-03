@@ -58,7 +58,7 @@ namespace wServer.networking
 </cross-domain-policy>");
             wtr.Write((byte)'\r');
             wtr.Write((byte)'\n');
-            _parent.Disconnect();
+            _parent.Disconnect("ProcessPolicy");
         }
 
         private void ReceiveCompleted(object sender, SocketAsyncEventArgs e)
@@ -67,7 +67,7 @@ namespace wServer.networking
             {
                 if (!_skt.Connected)
                 {
-                    _parent.Disconnect();
+                    _parent.Disconnect("sktCompleted");
                     return;
                 }
 
@@ -79,7 +79,7 @@ namespace wServer.networking
                     case ReceiveState.ReceivingHdr:
                         if (e.BytesTransferred < 5)
                         {
-                            _parent.Disconnect();
+                            _parent.Disconnect("notEnoughBytes");
                             return;
                         }
 
@@ -105,7 +105,7 @@ namespace wServer.networking
                     case ReceiveState.ReceivingBody:
                         if (e.BytesTransferred < ((ReceiveToken) e.UserToken).Length)
                         {
-                            _parent.Disconnect();
+                            _parent.Disconnect("Bytes under ReceiveToken");
                             return;
                         }
 
@@ -173,7 +173,7 @@ namespace wServer.networking
         private void OnError(Exception ex)
         {
             Program.writeWarning($"Socket error. {ex}");
-            _parent.Disconnect();
+            _parent.Disconnect($"Socket Erorr {ex}");
         }
 
         private bool OnPacketReceived(PacketID id, byte[] pkt)

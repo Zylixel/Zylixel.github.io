@@ -99,15 +99,16 @@ namespace wServer.networking
             catch (Exception e)
             {
                 Program.writeWarning($"Error when handling packet '{pkt}'... {e}");
-                Disconnect();
+                Disconnect("Packet Error");
             }
         }
 
-        public void Disconnect()
+        public void Disconnect(string Reason)
         {
             try
             {
                 if (Stage == ProtocalStage.Disconnected) return;
+                Console.WriteLine($"Disconnecting Client for {Reason}");
                 Stage = ProtocalStage.Disconnected;
                 if (Account != null)
                     DisconnectFromRealm();
@@ -135,7 +136,7 @@ namespace wServer.networking
                         Player.SaveToCharacter();
                         if (Player.Owner != null)
                         {
-                            if (Player.Owner.Id == -6) return;
+                            if (Player.Owner.Id == -6 || Player.Owner.Name == null) return;
                             w = Player.Owner.Name;
                         }
                     }

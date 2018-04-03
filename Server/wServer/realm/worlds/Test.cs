@@ -32,7 +32,7 @@ namespace wServer.realm.worlds
             {
                 if (i.Value.Client.Account.Rank < 2)
                 {
-                    i.Value.Client.Disconnect();
+                    i.Value.Client.Disconnect("Testing Unallowed");
                 }
             }
         }

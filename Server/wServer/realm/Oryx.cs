@@ -258,7 +258,7 @@ namespace wServer.realm
             {
                 foreach (var i in world.Players.Values)
                 {
-                    if (ocWorld == null) i.Client.Disconnect();
+                    if (ocWorld == null) i.Client.Disconnect("Oryx Summon");
                     i.Client.SendPacket(new ReconnectPacket
                     {
                         Host = "",

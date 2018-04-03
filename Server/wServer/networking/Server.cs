@@ -59,7 +59,7 @@ namespace wServer.networking
             foreach (Client i in Manager.Clients.Values.ToArray())
             {
                 await i.Save();
-                i.Disconnect();
+                i.Disconnect("Server Stop");
             }
             Socket.Close();
         }

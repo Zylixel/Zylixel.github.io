@@ -339,7 +339,7 @@ namespace wServer.realm.commands
                 foreach (KeyValuePair<int, Player> i in player.Owner.Players)
                 {
                     if (i.Value.Name.ToLower() == args[0].ToLower().Trim())
-                        i.Value.Client.Disconnect();
+                        i.Value.Client.Disconnect("Kicked");
                 }
             }
             catch

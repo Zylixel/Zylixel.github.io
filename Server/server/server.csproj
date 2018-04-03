@@ -134,7 +134,6 @@
     <Compile Include="char\fame.cs" />
     <Compile Include="char\list.cs" />
     <Compile Include="char\purchaseClassUnlock.cs" />
-    <Compile Include="credits\add.cs" />
     <Compile Include="credits\getoffers.cs" />
     <Compile Include="credits\kabamadd.cs" />
     <Compile Include="crossdomain.cs" />

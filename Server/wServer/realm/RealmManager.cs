@@ -139,7 +139,7 @@ namespace wServer.realm
         {
             if (client == null) return;
             Client dummy;
-            client.Disconnect();
+            client.Disconnect("RealmManager Disconnect");
             await client.Save();
             while (!Clients.TryRemove(client.Account.AccountId, out dummy) &&
                    Clients.ContainsKey(client.Account.AccountId)) ;
@@ -267,7 +267,7 @@ namespace wServer.realm
             foreach (var c in Clients.Values)
             {
                 saveAccountUnlock.Add(c);
-                c.Disconnect();
+                c.Disconnect("Server Closing");
             }
             //To prevent a buggy Account in use.
             using (var db = new Database())
@@ -295,6 +295,8 @@ namespace wServer.realm
                 if (!Clients[acc.AccountId].Socket.Connected)
                     Clients.TryRemove(acc.AccountId, out dummy);
             var ret = Clients.TryAdd(psr.Account.AccountId, psr);
+            if (!ret)
+                Program.writeError($"Returning {ret} whilst adding a client in TryConnect");
             return ret;
         }
         

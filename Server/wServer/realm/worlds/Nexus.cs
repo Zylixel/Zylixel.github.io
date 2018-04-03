@@ -29,30 +29,7 @@ namespace wServer.realm.worlds
         public override void Tick(RealmTime time)
         {
             base.Tick(time); //normal world tick
-
-            CheckDupers();
             UpdatePortals();
-        }
-
-        private void CheckDupers()
-        {
-            foreach (KeyValuePair<int, World> w in Manager.Worlds)
-            {
-                foreach (KeyValuePair<int, World> x in Manager.Worlds)
-                {
-                    foreach (KeyValuePair<int, Player> y in w.Value.Players)
-                    {
-                        foreach (KeyValuePair<int, Player> z in x.Value.Players)
-                        {
-                            if (y.Value.AccountId == z.Value.AccountId && y.Value != z.Value)
-                            {
-                                y.Value.Client.Disconnect();
-                                z.Value.Client.Disconnect();
-                            }
-                        }
-                    }
-                }
-            }
         }
 
         private void UpdatePortals()

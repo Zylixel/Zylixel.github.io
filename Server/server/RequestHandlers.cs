@@ -111,7 +111,6 @@ namespace server
             {"/char/delete", new @char.delete()},
             {"/char/fame", new @char.fame()},
             {"/credits/getoffers", new credits.getoffers()},
-            {"/credits/add", new credits.add()},
             {"/credits/kabamadd", new credits.kabamadd()},
             {"/char/purchaseClassUnlock", new @char.purchaseClassUnlock()},
             {"/fame/list", new fame.list()},
