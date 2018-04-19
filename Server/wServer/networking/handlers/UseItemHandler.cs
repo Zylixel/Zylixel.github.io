@@ -33,8 +33,7 @@ namespace wServer.networking.handlers
 
                         if (item.ObjectId != "Health Potion")
                         {
-                            Console.WriteLine("Cheat engine detected for player {0},\nItem should be a Health Potion, but its {1}.",
-                                client.Player.Name, item.ObjectId);
+                            Console.WriteLine($"Cheat engine detected for player {client.Player.Name},\nItem should be a Health Potion, but its {item.ObjectId}");
                             client.Player.kickforCheats(Player.possibleExploit.INAVLID_INVSWAP);
                             return;
                         }
@@ -132,8 +131,7 @@ namespace wServer.networking.handlers
 
                         if (item.ObjectId != "Magic Potion")
                         {
-                            Console.WriteLine("Cheat engine detected for player {0},\nItem should be a Magic Potion, but its {1}.",
-                                client.Player.Name, item.ObjectId);
+                            Program.writeError($"Cheat engine detected for player {client.Player.Name},\nItem should be a Magic Potion, but its {item.ObjectId}");
                             client.Player.kickforCheats(Player.possibleExploit.INAVLID_INVSWAP);
                             return;
                         }
@@ -279,7 +277,6 @@ namespace wServer.networking.handlers
 
                 ((Entity)container).UpdateCount++;
                 client.Player.UpdateCount++;
-                client.Player.SaveToCharacter();
                 client.Save();
             }, PendingPriority.Networking);
         }

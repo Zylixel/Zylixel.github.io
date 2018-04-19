@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using wServer.networking;
 using wServer.networking.svrPackets;
 using wServer.realm.entities.player;
 using wServer.realm.worlds;
@@ -44,7 +45,7 @@ namespace wServer.realm
                     if (!p.Manager.Clients.ContainsKey(p.AccountId))
                     {
                         if (p.Client != null)
-                            p.Client.Disconnect("GuildTick");
+                            p.Client.Disconnect(Client.DisconnectReason.GUILD_TICK);
                         else
                             p.Dispose();
                     }

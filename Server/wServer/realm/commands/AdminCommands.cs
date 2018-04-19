@@ -238,6 +238,46 @@ namespace wServer.realm.commands
         }
     }
 
+    internal class GivePlayerCommand : Command
+    {
+        public GivePlayerCommand() : base("giveplayer", 4) { }
+
+        protected override Tuple<bool, string> Process(Player player, RealmTime time, string[] args)
+        {
+            {
+                if (args.Length <= 1)
+                    return Tuple.Create(false, "Usage: /giveplayer <Player> <Itemname>");
+
+                string playerName = args[0];
+                ushort objType = (ushort)Convert.ToInt32(args[1]);
+
+                //creates a new case insensitive dictionary based on the XmlDatas
+                Dictionary<string, ushort> icdatas = new Dictionary<string, ushort>(player.Manager.GameData.IdToObjectType,
+                StringComparer.OrdinalIgnoreCase);
+
+                foreach (Client i in player.Manager.Clients.Values)
+                {
+                    if (i.Account.Name.EqualsIgnoreCase(playerName))
+                    {
+                        if (!i.Manager.GameData.Items[objType].Secret || i.Account.Rank >= 3)
+                        {
+                            for (int j = 4; j < player.Inventory.Length; j++)
+                                if (i.Player.Inventory[j] == null)
+                                {
+                                    i.Player.Inventory[j] = player.Manager.CreateSerial(player.Manager.GameData.Items[objType], player.Owner.Name.Replace("'", ""), true);
+                                    i.Player.UpdateCount++;
+                                    i.Player.SaveToCharacter();
+                                    return Tuple.Create(true, "Success");
+                                }
+                        }
+                        return Tuple.Create(false, "Item cannot be given!");
+                    }
+                }
+                return Tuple.Create(false, "Player could no be found!");
+            }
+        }
+    }
+
 
     internal class TpCommand : Command
     {
@@ -339,7 +379,7 @@ namespace wServer.realm.commands
                 foreach (KeyValuePair<int, Player> i in player.Owner.Players)
                 {
                     if (i.Value.Name.ToLower() == args[0].ToLower().Trim())
-                        i.Value.Client.Disconnect("Kicked");
+                        i.Value.Client.Disconnect(Client.DisconnectReason.KICKED);
                 }
             }
             catch

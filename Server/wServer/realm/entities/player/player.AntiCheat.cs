@@ -1,7 +1,6 @@
 ﻿using db;
 using System;
 using System.Collections.Generic;
-using wServer.networking.cliPackets;
 
 namespace wServer.realm.entities.player
 {
@@ -44,7 +43,7 @@ namespace wServer.realm.entities.player
             SendError($"{cheatInfo[cheat]} exploit detected. ID:{(int)cheat}");
             UpdateCount++;
             Client.Save();
-            Client.Disconnect("Cheats");
+            Client.Disconnect(networking.Client.DisconnectReason.EXPLOIT);
             Program.writeError($"Player {Client.Player.Name} used {cheatInfo[cheat]} exploit. ID: {(int)cheat}");
             foreach (var i in Manager.Clients.Values)
                 if (i.Account.Rank > 1)
@@ -115,7 +114,7 @@ namespace wServer.realm.entities.player
         public bool isLagging;
         public int healthViolation;
         public bool forgiveHealthViolations;
-        public bool detectGodExploit = false;
+        public int detectGodExploit = 7000;
         private int FPScount;
         private int FPSgood;
 
@@ -159,8 +158,10 @@ namespace wServer.realm.entities.player
             if (_buyCooldown > 0)
                 _buyCooldown--;
 
-            if (healthViolation >= 3 && !forgiveHealthViolations && detectGodExploit)
+            if (healthViolation >= 3 && !forgiveHealthViolations && detectGodExploit <= 0)
                 return kickforCheats(possibleExploit.GOD);
+
+            detectGodExploit--;
 
             if (dexShotViolation >= 15)
                 return kickforCheats(possibleExploit.DEXTERITY);
@@ -172,13 +173,12 @@ namespace wServer.realm.entities.player
             bool Bankick = false;
             bool Dupekick = false;
             bool SBkick = false;
-            if (UpdateCount % (Manager?.TPS * 3) == 0) //Every 3 Seconds b/c it takes up alot of processing power with many players
+            if (UpdateCount % (Manager?.TPS * 1) == 0) //Every 3 Seconds b/c it takes up alot of processing power with many players
             {
-                List<int> serialList = new List<int>(); //This code handles all the serial detections and updates, put it in one place because we call it every tick and want to decrease lag
+                List<int> serialList = new List<int>(); //This code handles all the serial detections and updates
                 for (var i = 0; i < Inventory.Length; i++)
                 {
                     bool updateSerial = false;
-                    bool delItem = false;
                     if (Inventory[i] == null) continue;
                     if (Inventory[i].firstUser == -1)
                     {
@@ -192,34 +192,24 @@ namespace wServer.realm.entities.player
                     }
 
                     if (Inventory[i].currentUser != Inventory[i].firstUser && Inventory[i].Soulbound)
-                    {
-                        updateSerial = true;
                         SBkick = true;
-                        delItem = true;
-                    }
+
                     if (Inventory[i].banned == 1)
-                    {
-                        updateSerial = true;
                         Bankick = true;
-                        delItem = true;
-                    }
+
                     if (serialList.Contains(Inventory[i].serialId) || Inventory[i].serialId == -1)
-                    {
-                        updateSerial = true;
                         Dupekick = true;
-                        delItem = true;
-                    }
                     else
                         serialList.Add(Inventory[i].serialId);
 
-                    if (delItem)
+                    if (Bankick || Dupekick || SBkick)
                         Inventory[i].banned = 1;
 
-                    if (updateSerial)
+                    if (updateSerial || Bankick || Dupekick || SBkick)
                         using (Database db = new Database())
                             db.UpdateSerial(Inventory[i]);
 
-                    if (delItem)
+                    if (Bankick || Dupekick || SBkick)
                         Inventory[i] = null;
                 }
 

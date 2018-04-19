@@ -536,7 +536,7 @@ namespace wServer.realm.entities.player
 
             if (Client.Character.Dead)
             {
-                Client.Disconnect("Character is Dead");
+                Client.Disconnect(Client.DisconnectReason.REGISTRATION_NEEDED);
                 return;
             }
 
@@ -548,7 +548,7 @@ namespace wServer.realm.entities.player
             {
                 case "":
                 case "Unknown":
-                    Client.Disconnect("Unknown Protection");
+                    Client.Disconnect(Client.DisconnectReason.REGISTRATION_NEEDED);
                     return;
                 default:
                     if (desc != null)
@@ -559,7 +559,7 @@ namespace wServer.realm.entities.player
             }
             if (Client.Account.Rank > 1)
             {
-                Client.Disconnect("Ranked User Protection");
+                Client.Disconnect(Client.DisconnectReason.REGISTRATION_NEEDED);
                 return;
             }
             Manager.Database.DoActionAsync(db =>
@@ -579,11 +579,11 @@ namespace wServer.realm.entities.player
                     Obf0 = -1,
                     Obf1 = -1
                 });
-                Owner.Timers.Add(new WorldTimer(1000, (w, t) => Client.Disconnect("Death")));
+                Owner.Timers.Add(new WorldTimer(1000, (w, t) => Client.Disconnect(Client.DisconnectReason.REGISTRATION_NEEDED)));
                 Owner.LeaveWorld(this);
             }
             else
-                Client.Disconnect("Testing world death");
+                Client.Disconnect(Client.DisconnectReason.REGISTRATION_NEEDED);
             }
             catch (Exception e)
             {
@@ -794,7 +794,7 @@ namespace wServer.realm.entities.player
 
             if (Client.Account.IsGuestAccount)
             {
-                owner.Timers.Add(new WorldTimer(1000, (w, t) => Client.Disconnect("Guest Account")));
+                owner.Timers.Add(new WorldTimer(1000, (w, t) => Client.Disconnect(Client.DisconnectReason.REGISTRATION_NEEDED)));
                 Client.SendPacket(new FailurePacket
                 {
                     ErrorId = 8,
@@ -902,6 +902,7 @@ namespace wServer.realm.entities.player
                 Pet?.Move(obj.X, obj.X);
                 FameCounter.Teleport();
                 SetNewbiePeriod();
+                detectGodExploit = 7000;
                 ApplyConditionEffect(new ConditionEffect
                 {
                     Effect = ConditionEffectIndex.Invulnerable,
@@ -983,9 +984,6 @@ namespace wServer.realm.entities.player
             HandleBoosts();
             FameCounter.Tick(time);
             SendUpdate(time);
-
-            Client.lastUpdated++;
-            //SendInfo("" + Client.lastUpdated);
 
             checkforCheats(time);
             

@@ -264,11 +264,8 @@ namespace wServer.realm
 
             player1.SaveToCharacter();
             player2.SaveToCharacter();
-            await Task.Run(async () =>
-            {
-                await player1.Client.Save();
-                await player2.Client.Save();
-            });
+            player1.Client.Save();
+            player2.Client.Save();
         }
 
         private void TradeError(string text = "Unknown Error")

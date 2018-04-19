@@ -67,7 +67,7 @@ namespace server.account
                         List<int> contents = Utils.FromCommaSepString32(package.Contents).ToList();
                         foreach (int item in contents)
                         {
-                            gifts.Add(item);
+                            gifts.Add(db.CreateSerial(Program.GameData.Items[(ushort)item], true, DroppedIn: "Package").serialId);
                         }
 
                         cmd = db.CreateQuery();

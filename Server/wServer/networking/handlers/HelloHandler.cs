@@ -32,7 +32,7 @@ namespace wServer.networking.handlers
                     ErrorId = 4,
                     ErrorDescription = Client.ServerVersion
                 });
-                client.Disconnect("Incorrect Version");
+                client.Disconnect(Client.DisconnectReason.OUTDATED_CLIENT);
                 return;
             }
             client.Manager.Database.DoActionAsync(db =>
@@ -49,7 +49,7 @@ namespace wServer.networking.handlers
                         {
                             ErrorDescription = "Invalid account."
                         });
-                        client.Disconnect("Invalid account");
+                        client.Disconnect(Client.DisconnectReason.INVALID_ACCOUNT);
                         return;
                     }
                 }
@@ -64,7 +64,7 @@ namespace wServer.networking.handlers
                             ErrorId = 0,
                             ErrorDescription = "You are not whitelisted!"
                         });
-                        client.Disconnect("Whitelist");
+                        client.Disconnect(Client.DisconnectReason.NOT_WHITELISTED);
                         return;
                     }
                     if (db.CheckAccountInUse(client.Account, ref timeout))
@@ -85,7 +85,7 @@ namespace wServer.networking.handlers
                                 ErrorDescription = "Account in use. (" + timeout + " seconds until timeout.)"
                             });
                         }
-                        client.Disconnect("Account in use");
+                        client.Disconnect(Client.DisconnectReason.ACCOUNT_IN_USE);
                         return;
                     }
                 }
@@ -98,7 +98,7 @@ namespace wServer.networking.handlers
                     {
                         ErrorDescription = "Failed to connect."
                     });
-                    client.Disconnect("Failed to connect");
+                    client.Disconnect(Client.DisconnectReason.TRY_CONNECT_ERROR);
                     Program.writeError("Client Failed to connect.");
                 }
                 else
@@ -113,7 +113,7 @@ namespace wServer.networking.handlers
                             ErrorId = 1,
                             ErrorDescription = "Invalid world."
                         });
-                        client.Disconnect("Invalid World");
+                        client.Disconnect(Client.DisconnectReason.INVALID_WORLD);
                         return;
                     }
                     if (world.NeedsPortalKey)
@@ -125,7 +125,7 @@ namespace wServer.networking.handlers
                                 ErrorId = 1,
                                 ErrorDescription = "Invalid Portal Key"
                             });
-                            client.Disconnect("Invalid Portal Key");
+                            client.Disconnect(Client.DisconnectReason.INVALID_PORTAL_KEY);
                             return;
                         }
                         if (world.PortalKeyExpired)
@@ -135,7 +135,7 @@ namespace wServer.networking.handlers
                                 ErrorId = 1,
                                 ErrorDescription = "Portal key expired."
                             });
-                            client.Disconnect("Expired Portal Key");
+                            client.Disconnect(Client.DisconnectReason.EXPIRED_PORTAL_KEY);
                             return;
                         }
                     }

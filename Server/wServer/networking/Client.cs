@@ -1,5 +1,6 @@
 ﻿#region
 
+using db;
 using System;
 using System.Collections.Generic;
 using System.Net.Sockets;
@@ -26,8 +27,33 @@ namespace wServer.networking
         public const string ServerVersion = "3.0";
         private bool _disposed;
 
-        public uint UpdateAckCount = 0;
-        public int lastUpdated = 0;
+        public enum DisconnectReason
+        {
+            FAILED_TO_LOAD_CHARACTER = 1,
+            OUTDATED_CLIENT = 2,
+            PACKET_PROCESS_ERROR = 3,
+            CHAR_OVER_LIMIT = 4,
+            INVALID_ACCOUNT = 5,
+            NOT_WHITELISTED = 6,
+            ACCOUNT_IN_USE = 7,
+            TRY_CONNECT_ERROR = 8,
+            INVALID_WORLD = 9,
+            INVALID_PORTAL_KEY = 10,
+            EXPIRED_PORTAL_KEY = 11,
+            INVALID_INVSWAP = 12,
+            SKT_COMPLETED = 13,
+            NOT_ENOUGH_BYTES = 14,
+            BYTES_UNDER_RECIEVETOKEN = 15,
+            SOCKET_ERROR = 16,
+            STOPPING_SERVER = 17,
+            EXPLOIT = 18,
+            REGISTRATION_NEEDED = 19,
+            GUILD_TICK = 20,
+            REALM_CLOSING = 21,
+            DISCONNECT_FROM_REALM = 22,
+            KICKED = 23,
+            PROCESS_POLICY = 24,
+        }
 
         private NetworkHandler _handler;
 
@@ -99,16 +125,16 @@ namespace wServer.networking
             catch (Exception e)
             {
                 Program.writeWarning($"Error when handling packet '{pkt}'... {e}");
-                Disconnect("Packet Error");
+                Disconnect(DisconnectReason.PACKET_PROCESS_ERROR);
             }
         }
 
-        public void Disconnect(string Reason)
+        public void Disconnect(DisconnectReason r)
         {
             try
             {
                 if (Stage == ProtocalStage.Disconnected) return;
-                Console.WriteLine($"Disconnecting Client for {Reason}");
+                Console.WriteLine($"Disconnecting Client for {r}");
                 Stage = ProtocalStage.Disconnected;
                 if (Account != null)
                     DisconnectFromRealm();
@@ -121,12 +147,12 @@ namespace wServer.networking
             }
         }
 
-        public Task Save()
+        public void Save()
         {
             if (Manager == null)
-                return null;
+                return;
 
-            return Manager.Database.DoActionAsync(db =>
+            using (Database db = new Database())
             {
                 try
                 {
@@ -153,7 +179,7 @@ namespace wServer.networking
                 {
                     Program.writeError($"SaveException, {ex}");
                 }
-            });
+            };
         }
 
         //Following must execute, network loop will discard disconnected client, so logic loop

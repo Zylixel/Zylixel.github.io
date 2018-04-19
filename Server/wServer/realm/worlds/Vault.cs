@@ -87,16 +87,14 @@ namespace wServer.realm.worlds
                 bool wasLastElse = false;
                 int[] gifts = psr.Account.Gifts.ToArray();
                 gifts.Shuffle();
-                for (int i = 0; i < gifts.Count(); i++)
+                using (Database db = new Database())
                 {
-                    if (Manager.GameData.Items.ContainsKey((ushort)gifts[i]))
+                    for (int i = 0; i < gifts.Count(); i++)
                     {
+                        Item newGift = db.getSerialInfo(gifts[i], Manager.GameData);
                         if (c.Items.Count < 8)
                         {
-                            Manager.Database.DoActionAsync(db =>
-                            {
-                                c.Items.Add(db.getSerialInfo(gifts[i], Manager.GameData));
-                            });
+                            c.Items.Add(newGift);
                             wasLastElse = false;
                         }
                         else
@@ -104,10 +102,7 @@ namespace wServer.realm.worlds
                             giftChests.Add(c);
                             c = new GiftChest();
                             c.Items = new List<Item>(8);
-                            Manager.Database.DoActionAsync(db =>
-                            {
-                                c.Items.Add(db.getSerialInfo(gifts[i], Manager.GameData));
-                            });
+                            c.Items.Add(newGift);
                             wasLastElse = true;
                         }
                     }

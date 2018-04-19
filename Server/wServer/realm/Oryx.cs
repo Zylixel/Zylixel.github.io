@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using wServer.logic;
+using wServer.networking;
 using wServer.networking.svrPackets;
 using wServer.realm.entities;
 using wServer.realm.entities.player;
@@ -258,7 +259,7 @@ namespace wServer.realm
             {
                 foreach (var i in world.Players.Values)
                 {
-                    if (ocWorld == null) i.Client.Disconnect("Oryx Summon");
+                    if (ocWorld == null) i.Client.Disconnect(Client.DisconnectReason.REALM_CLOSING);
                     i.Client.SendPacket(new ReconnectPacket
                     {
                         Host = "",

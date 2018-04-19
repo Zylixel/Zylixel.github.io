@@ -69,14 +69,14 @@ namespace wServer.realm.entities.player
             }
         }
 
-        private bool CanHpRegen()
+        public bool CanHpRegen()
         {
             if (HasConditionEffect(ConditionEffectIndex.Sick) || HasConditionEffect(ConditionEffectIndex.Bleeding) || OxygenBar == 0)
                 return false;
             return true;
         }
 
-        private bool CanMpRegen()
+        public bool CanMpRegen()
         {
             if (HasConditionEffect(ConditionEffectIndex.Quiet) || _ninjaShoot)
                 return false;

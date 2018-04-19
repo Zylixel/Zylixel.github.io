@@ -242,10 +242,6 @@ namespace wServer.realm
                     entity.Init(this);
                     Players.TryAdd(player.Id, player);
                     PlayersCollision.Insert(player);
-                    Timers.Add(new WorldTimer(5 * 1000, (w, RealmTime) => {
-                        if (player != null)
-                            player.detectGodExploit = true;
-                    }));
                 }
                 catch (Exception e)
                 {

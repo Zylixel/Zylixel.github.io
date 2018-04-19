@@ -135,12 +135,12 @@ namespace wServer.realm
             Monitor.WorldRemoved(world);
         }
 
-        public async void Disconnect(Client client)
+        public void Disconnect(Client client)
         {
             if (client == null) return;
             Client dummy;
-            client.Disconnect("RealmManager Disconnect");
-            await client.Save();
+            client.Save();
+            client.Disconnect(Client.DisconnectReason.DISCONNECT_FROM_REALM);
             while (!Clients.TryRemove(client.Account.AccountId, out dummy) &&
                    Clients.ContainsKey(client.Account.AccountId)) ;
             client.Dispose();
@@ -267,7 +267,7 @@ namespace wServer.realm
             foreach (var c in Clients.Values)
             {
                 saveAccountUnlock.Add(c);
-                c.Disconnect("Server Closing");
+                c.Disconnect(Client.DisconnectReason.STOPPING_SERVER);
             }
             //To prevent a buggy Account in use.
             using (var db = new Database())

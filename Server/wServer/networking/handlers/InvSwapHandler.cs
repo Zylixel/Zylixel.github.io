@@ -106,7 +106,7 @@ namespace wServer.networking.handlers
 
                 if (!IsValid(item1, item2, con1, con2, packet, client))
                 {
-                    client.Disconnect("Invalid Invswap");
+                    client.Disconnect(Client.DisconnectReason.INVALID_INVSWAP);
                     return;
                 }
 
@@ -134,7 +134,7 @@ namespace wServer.networking.handlers
                         try
                         {
                             Account acc = db.GetAccount(client.Account.AccountId, Manager.GameData);
-                            acc.Gifts.Remove(con1.Inventory[packet.SlotObject1.SlotId].ObjectType);
+                            acc.Gifts.Remove(con1.Inventory[packet.SlotObject1.SlotId].serialId);
 
                             MySqlCommand cmd = db.CreateQuery();
                             cmd.CommandText = @"UPDATE accounts SET gifts=@gifts WHERE id=@accId;";
@@ -222,8 +222,7 @@ namespace wServer.networking.handlers
 
                 if (!ret)
                 {
-                    Console.WriteLine("Cheat engine detected for player {0},\nInvalid InvSwap. {1} instead of {2}",
-                            client.Player.Name, client.Manager.GameData.Items[packet.SlotObject1.ObjectType].ObjectId, item1.ObjectId);
+                    Program.writeError($"Cheat engine detected for player {client.Player.Name},\nInvalid InvSwap. {client.Manager.GameData.Items[packet.SlotObject1.ObjectType].ObjectId} instead of {item1.ObjectId}");
                     client.Player.kickforCheats(Player.possibleExploit.INAVLID_INVSWAP);
                 }
             }
@@ -233,8 +232,7 @@ namespace wServer.networking.handlers
 
                 if (!ret)
                 {
-                    Console.WriteLine("Cheat engine detected for player {0},\nInvalid InvSwap. {1} instead of {2}",
-                            client.Player.Name, item1.ObjectId, client.Manager.GameData.Items[packet.SlotObject2.ObjectType].ObjectId);
+                    Program.writeError($"Cheat engine detected for player {client.Player.Name},\nInvalid InvSwap. {item1.ObjectId} instead of {client.Manager.GameData.Items[packet.SlotObject2.ObjectType].ObjectId}");
                     client.Player.kickforCheats(Player.possibleExploit.INAVLID_INVSWAP);
                 }
             }

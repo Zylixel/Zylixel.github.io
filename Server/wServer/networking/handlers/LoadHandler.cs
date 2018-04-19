@@ -49,7 +49,7 @@ namespace wServer.networking.handlers
                         ErrorId = 0,
                         ErrorDescription = "Failed to Load character."
                     });
-                    client.Disconnect("Couldn't Load Char");
+                    client.Disconnect(Client.DisconnectReason.FAILED_TO_LOAD_CHARACTER);
                 }
             }
         }

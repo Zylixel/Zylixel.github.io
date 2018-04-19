@@ -1764,17 +1764,8 @@
     <SlotType>10</SlotType>
     <Description>It's healthy!\nMaxes any class to 8/8 and adds a Backpack.</Description>
     <Sound>use_potion</Sound>
-    <Activate amount="2000" stat="0">IncrementStat</Activate>
-    <Activate amount="2000" stat="3">IncrementStat</Activate>
-    <Activate amount="2000" stat="20">IncrementStat</Activate>
-    <Activate amount="2000" stat="21">IncrementStat</Activate>
-    <Activate amount="2000" stat="22">IncrementStat</Activate>
-    <Activate amount="2000" stat="26">IncrementStat</Activate>
-    <Activate amount="2000" stat="27">IncrementStat</Activate>
-    <Activate amount="2000" stat="28">IncrementStat</Activate>
     <Consumable />
-    <Backpack />
-    <Potion />
+    <Maxy/>
     <BagType>5</BagType>
     <feedPower>100000</feedPower>
   </Object>

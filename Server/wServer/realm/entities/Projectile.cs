@@ -153,7 +153,7 @@ namespace wServer.realm.entities
             {
                 foreach (var i in Owner.Players.Values)
                 {
-                    if (!i.isInvincible() && i.X.InRange(pos.X - 0f, pos.X + 0.5f) && i.Y.InRange(pos.Y - 0f, pos.Y + 0.5f) && i.clientEntities.Contains(ProjectileOwner.Self))
+                    if (!i.isInvincible() && i.X.InRange(pos.X - 0f, pos.X + 0.5f) && i.Y.InRange(pos.Y - 0f, pos.Y + 0.5f) && i.clientEntities.Contains(ProjectileOwner.Self) && i.CanHpRegen())
                     {
                         var oldHp = i.HP;
                         Owner.Timers.Add(new WorldTimer(200, (world, RealmTime) =>

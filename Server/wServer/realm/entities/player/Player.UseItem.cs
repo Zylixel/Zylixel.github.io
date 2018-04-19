@@ -230,19 +230,35 @@ namespace wServer.realm.entities.player
             }
             if (item.Maxy)
             {
-                if (Client?.Player?.Stats == null)
+                if (Stats == null)
                     return true;
-                Client.Player.Stats[0] = Client.Player.ObjectDesc.MaxHitPoints;
-                Client.Player.Stats[1] = Client.Player.ObjectDesc.MaxMagicPoints;
-                Client.Player.Stats[2] = Client.Player.ObjectDesc.MaxAttack;
-                Client.Player.Stats[3] = Client.Player.ObjectDesc.MaxDefense;
-                Client.Player.Stats[4] = Client.Player.ObjectDesc.MaxSpeed;
-                Client.Player.Stats[5] = Client.Player.ObjectDesc.MaxHpRegen;
-                Client.Player.Stats[6] = Client.Player.ObjectDesc.MaxMpRegen;
-                Client.Player.Stats[7] = Client.Player.ObjectDesc.MaxDexterity;
-                Client.Player.SaveToCharacter();
-                Client.Player.Client.Save();
-                Client.Player.UpdateCount++;
+                Stats[0] = ObjectDesc.MaxHitPoints;
+                Stats[1] = ObjectDesc.MaxMagicPoints;
+                Stats[2] = ObjectDesc.MaxAttack;
+                Stats[3] = ObjectDesc.MaxDefense;
+                Stats[4] = ObjectDesc.MaxSpeed;
+                Stats[5] = ObjectDesc.MaxHpRegen;
+                Stats[6] = ObjectDesc.MaxMpRegen;
+                Stats[7] = ObjectDesc.MaxDexterity;
+                if (!HasBackpack)
+                {
+                    Client.Character.Backpack = new[] { -1, -1, -1, -1, -1, -1, -1, -1 };
+                    HasBackpack = true;
+                    Client.Character.HasBackpack = 1;
+                    Manager.Database.DoActionAsync(db =>
+                        db.SaveBackpacks(Client.Character, Client.Account));
+                    Array.Resize(ref _inventory, 20);
+                    var slotTypes =
+                        Utils.FromCommaSepString32(
+                            Manager.GameData.ObjectTypeToElement[ObjectType].Element("SlotTypes").Value);
+                    Array.Resize(ref slotTypes, 20);
+                    for (var i = 0; i < slotTypes.Length; i++)
+                        if (slotTypes[i] == 0) slotTypes[i] = 10;
+                    SlotTypes = slotTypes;
+                }
+                Client.Save();
+                UpdateCount++;
+                return false;
             }
             if (item.IsBackpack)
             {

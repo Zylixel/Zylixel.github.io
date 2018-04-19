@@ -38,7 +38,7 @@ namespace wServer.networking.handlers
 
                     if (currChar >= maxChar)
                     {
-                        client.Disconnect("Too many Chars");
+                        client.Disconnect(Client.DisconnectReason.CHAR_OVER_LIMIT);
                         return;
                     }
                 }

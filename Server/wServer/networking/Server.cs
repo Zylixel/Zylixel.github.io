@@ -52,14 +52,14 @@ namespace wServer.networking
                 new Client(Manager, skt);
         }
 
-        public async void Stop()
+        public void Stop()
         {
             if (CheckConfig.IsDebugOn())
                 Console.WriteLine("Stoping server...");
             foreach (Client i in Manager.Clients.Values.ToArray())
             {
-                await i.Save();
-                i.Disconnect("Server Stop");
+                i.Save();
+                i.Disconnect(Client.DisconnectReason.STOPPING_SERVER);
             }
             Socket.Close();
         }

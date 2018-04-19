@@ -77,7 +77,7 @@ namespace wServer
 
                 foreach (var c in manager.Clients)
                 {
-                    c.Value.Disconnect("Server Shutdown Error");
+                    c.Value.Disconnect(Client.DisconnectReason.STOPPING_SERVER);
                 }
                 Console.ReadLine();
             }

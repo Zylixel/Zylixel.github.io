@@ -1,6 +1,7 @@
 ﻿#region
 
 using System.Collections.Generic;
+using wServer.networking;
 using wServer.realm.entities.player;
 
 #endregion
@@ -32,7 +33,7 @@ namespace wServer.realm.worlds
             {
                 if (i.Value.Client.Account.Rank < 2)
                 {
-                    i.Value.Client.Disconnect("Testing Unallowed");
+                    i.Value.Client.Disconnect(Client.DisconnectReason.INVALID_PORTAL_KEY);
                 }
             }
         }

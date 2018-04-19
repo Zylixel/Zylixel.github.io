@@ -49,16 +49,17 @@ namespace wServer.networking
                 ReceiveCompleted(this, _receive);
         }
 
-        private void ProcessPolicyFile() //WUT.
+        private void ProcessPolicyFile()
         {
             var s = new NetworkStream(_skt);
             var wtr = new NWriter(s);
-            wtr.WriteNullTerminatedString(@"<cross-domain-policy>
-     <allow-access-from domain=""*"" to-ports=""*"" />
-</cross-domain-policy>");
+            wtr.WriteNullTerminatedString(
+                @"<cross-domain-policy>
+                    <allow-access-from domain=""*"" to-ports=""*"" />
+                </cross-domain-policy>");
             wtr.Write((byte)'\r');
             wtr.Write((byte)'\n');
-            _parent.Disconnect("ProcessPolicy");
+            _parent.Disconnect(Client.DisconnectReason.PROCESS_POLICY);
         }
 
         private void ReceiveCompleted(object sender, SocketAsyncEventArgs e)
@@ -67,7 +68,7 @@ namespace wServer.networking
             {
                 if (!_skt.Connected)
                 {
-                    _parent.Disconnect("sktCompleted");
+                    _parent.Disconnect(Client.DisconnectReason.SKT_COMPLETED);
                     return;
                 }
 
@@ -79,7 +80,7 @@ namespace wServer.networking
                     case ReceiveState.ReceivingHdr:
                         if (e.BytesTransferred < 5)
                         {
-                            _parent.Disconnect("notEnoughBytes");
+                            _parent.Disconnect(Client.DisconnectReason.NOT_ENOUGH_BYTES);
                             return;
                         }
 
@@ -93,7 +94,7 @@ namespace wServer.networking
                         int len = ((ReceiveToken) e.UserToken).Length =
                             IPAddress.NetworkToHostOrder(BitConverter.ToInt32(e.Buffer, 0)) - 5;
                         if (len < 0 || len > BufferSize)
-                            Console.WriteLine("Buffer not large enough!");
+                            Program.writeNotable("Buffer not large enough!");
                         ((ReceiveToken) e.UserToken).PacketBody = new byte[len];
                         ((ReceiveToken) e.UserToken).Id = (PacketID)e.Buffer[4];
 
@@ -105,7 +106,7 @@ namespace wServer.networking
                     case ReceiveState.ReceivingBody:
                         if (e.BytesTransferred < ((ReceiveToken) e.UserToken).Length)
                         {
-                            _parent.Disconnect("Bytes under ReceiveToken");
+                            _parent.Disconnect(Client.DisconnectReason.BYTES_UNDER_RECIEVETOKEN);
                             return;
                         }
 
@@ -173,7 +174,7 @@ namespace wServer.networking
         private void OnError(Exception ex)
         {
             Program.writeWarning($"Socket error. {ex}");
-            _parent.Disconnect($"Socket Erorr {ex}");
+            _parent.Disconnect(Client.DisconnectReason.SOCKET_ERROR);
         }
 
         private bool OnPacketReceived(PacketID id, byte[] pkt)
