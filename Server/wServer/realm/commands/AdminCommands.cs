@@ -392,10 +392,7 @@ namespace wServer.realm.commands
 
     internal class Mute : Command
     {
-        public Mute()
-            : base("mute", 2)
-        {
-        }
+        public Mute() : base("mute", 2) { }
 
         protected override Tuple<bool, string> Process(Player player, RealmTime time, string[] args)
         {
@@ -500,22 +497,20 @@ namespace wServer.realm.commands
                     }
                 }
             }
-            string fixedString = sb.ToString().TrimEnd(',', ' '); //clean up trailing ", "s
-            return Tuple.Create(true, fixedString);
+            return Tuple.Create(true, sb.ToString().TrimEnd(',', ' ')); //Removes trailing ',' at end
         }
     }
 
-    internal class Announcement : Command
+    internal class Announce : Command
     {
-        public Announcement() : base("announce", 3) {}
+        public Announce() : base("announce", 3) {}
 
         protected override Tuple<bool, string> Process(Player player, RealmTime time, string[] args)
         {
             if (args.Length == 0)
-                return Tuple.Create(false, "Usage: /announce <saytext>");
+                return Tuple.Create(false, "Usage: /announce <text>");
 
-            string saytext = string.Join(" ", args);
-            player.Manager.Chat.Announce(saytext);
+            player.Manager.Chat.Announce(args);
             return Tuple.Create(true, "Success");
         }
     }
@@ -527,7 +522,7 @@ namespace wServer.realm.commands
         protected override Tuple<bool, string> Process(Player player, RealmTime time, string[] args)
         {
             if (player.Owner is Vault || player.Owner is PetYard)
-                return Tuple.Create(false, "You cant summon in this world.");
+                return Tuple.Create(false, "You cannot summon players to this world");
 
             foreach (KeyValuePair<string, Client> i in player.Manager.Clients)
             {
@@ -575,14 +570,16 @@ namespace wServer.realm.commands
             if (args.Length < 2)
                 return Tuple.Create(false, "Use /petsize <Player> <Pet Size>");
 
-            if (Convert.ToInt32(args[1]) < 0 || Convert.ToInt32(args[1]) > 1000)
+            int newSize = Convert.ToInt32(args[1]);
+
+            if (newSize < 0 || newSize > 1000)
                 return Tuple.Create(false, "Make sure your Pet Size is a positve integer below 1000");
 
             foreach (Client i in player.Manager.Clients.Values)
             {
                 if (i.Account.Name.EqualsIgnoreCase(args[0]))
                 {
-                    i.Player.Pet.Size = int.Parse(args[1]);
+                    i.Player.Pet.Size = newSize;
                     i.Player.UpdateCount++;
                     i.Player.SendInfo(player.Name + " changed your pets size to " + args[1]);
                     using (Database db = new Database())
@@ -591,7 +588,7 @@ namespace wServer.realm.commands
                 }
             }
             {
-                return Tuple.Create(false, "Cannot Find Account");
+                return Tuple.Create(false, "Cannot Find Player");
             }
         }
     }
@@ -815,10 +812,7 @@ namespace wServer.realm.commands
 
     internal class SetpieceCommand : Command
     {
-        public SetpieceCommand()
-            : base("setpiece", 4)
-        {
-        }
+        public SetpieceCommand() : base("setpiece", 4) { }
 
         protected override Tuple<bool, string> Process(Player player, RealmTime time, string[] args)
         {
@@ -857,10 +851,7 @@ namespace wServer.realm.commands
 
     internal class GodCommand : Command
     {
-        public GodCommand()
-        : base("god", 2)
-        {
-        }
+        public GodCommand() : base("god", 2) { }
 
         protected override Tuple<bool, string> Process(Player player, RealmTime time, string[] args)
         {
@@ -903,10 +894,8 @@ namespace wServer.realm.commands
 
     internal class CloseRealmCmd : Command
     {
-        public CloseRealmCmd()
-            : base("closerealm", 4)
-        {
-        }
+        public CloseRealmCmd() : base("closerealm", 4) { }
+        
         protected override Tuple<bool, string> Process(Player player, RealmTime time, string[] args)
         {
             if (player.Owner is GameWorld)
@@ -922,16 +911,16 @@ namespace wServer.realm.commands
     internal class Sell : Command
     {
         public Sell() : base("Sell") {}
+        
         protected override Tuple<bool, string> Process(Player player, RealmTime time, string[] args)
         {
-
             using (var db = new Database())
             {
                 if (args.Length < 2)
                     return Tuple.Create(false, "Usage: /sell <slot> <price>");
                 
                 int slot = Convert.ToInt32(args[0]) + 3;
-                if (Convert.ToInt32(args[0]) > 8 || Convert.ToInt32(args[0]) < 1)
+                if (slot > 11 || slot < 4)
                     return Tuple.Create(false, "Slot Number Invalid, please only choose items in slot 1-8");
 
                 if (Convert.ToInt32(args[1]) < 0)
